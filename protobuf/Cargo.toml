@@ -1,0 +1,11 @@
+[package]
+name = "steam-vent-proto"
+version = "0.1.0"
+authors = ["Robin Appelman <robin@icewind.nl>"]
+edition = "2018"
+
+[dependencies]
+protobuf = "=2.18.1"
+
+[dev-dependencies]
+steam-vent = { version = "0.1", path = ".." }
