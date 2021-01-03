@@ -42,7 +42,7 @@ static SYSTEM_PUBLIC_KEY: Lazy<RSAPublicKey> = Lazy::new(|| {
 
 /// Verify sha1 signature using the steam "system" public key
 pub fn verify_signature(data: &[u8], signature: &[u8]) -> Result<bool> {
-    match SYSTEM_PUBLIC_KEY.verify(PaddingScheme::new_pkcs1v15_sign(None), data, signature) {
+    match SYSTEM_PUBLIC_KEY.verify(PaddingScheme::new_oaep::<Sha1>(), data, signature) {
         Ok(_) => Ok(true),
         Err(rsa::errors::Error::Verification) => Ok(false),
         Err(err) => Err(CryptError::MalformedSignature(RSAError(err))),
@@ -63,9 +63,9 @@ pub fn generate_session_key(nonce: Option<&[u8; 16]>) -> SessionKeys {
             let mut data = [0; 48];
             data[0..32].copy_from_slice(&plain);
             data[32..48].copy_from_slice(nonce);
-            SYSTEM_PUBLIC_KEY.encrypt(&mut rng, PaddingScheme::PKCS1v15Encrypt, &data)
+            SYSTEM_PUBLIC_KEY.encrypt(&mut rng, PaddingScheme::new_oaep::<Sha1>(), &data)
         }
-        None => SYSTEM_PUBLIC_KEY.encrypt(&mut rng, PaddingScheme::PKCS1v15Encrypt, &plain),
+        None => SYSTEM_PUBLIC_KEY.encrypt(&mut rng, PaddingScheme::new_oaep::<Sha1>(), &plain),
     }
     .expect("Invalid crypt setup");
 
