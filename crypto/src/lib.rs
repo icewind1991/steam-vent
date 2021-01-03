@@ -61,8 +61,8 @@ pub fn generate_session_key(nonce: Option<&[u8; 16]>) -> SessionKeys {
     let encrypted = match nonce {
         Some(nonce) => {
             let mut data = [0; 48];
-            data[0..16].copy_from_slice(nonce);
-            data[16..48].copy_from_slice(&plain);
+            data[0..32].copy_from_slice(&plain);
+            data[32..48].copy_from_slice(nonce);
             SYSTEM_PUBLIC_KEY.encrypt(&mut rng, PaddingScheme::PKCS1v15Encrypt, &data)
         }
         None => SYSTEM_PUBLIC_KEY.encrypt(&mut rng, PaddingScheme::PKCS1v15Encrypt, &plain),
