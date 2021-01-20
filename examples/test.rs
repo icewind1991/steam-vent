@@ -5,7 +5,7 @@ use steam_vent::net::connect;
 async fn main() -> Result<(), Box<dyn Error>> {
     let (_read, _write) = connect("155.133.248.39:27020").await?;
 
-    // dbg!(read.read().await?);
+    println!("Handshake done");
 
     Ok(())
 }

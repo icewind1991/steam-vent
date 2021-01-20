@@ -10,6 +10,7 @@ steam-vent-crypto = { version = "0.1", path = "./crypto" }
 tokio = { version = "1.0", features = ["net", "io-util"] }
 tokio-stream = "0.1"
 binread = "1.4"
+binwrite = "0.2"
 thiserror = "1.0"
 bytes = "1.0"
 protobuf = "=2.18.1"

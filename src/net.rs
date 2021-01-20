@@ -1,4 +1,6 @@
-use crate::message::{ChannelEncryptRequestBody, ChannelEncryptResultBody, NetMessage};
+use crate::message::{
+    ChannelEncryptRequestBody, ChannelEncryptResultBody, ClientEncryptResponse, NetMessage,
+};
 use binread::{BinRead, BinReaderExt};
 use byteorder::{LittleEndian, WriteBytesExt};
 use bytes::BytesMut;
@@ -107,8 +109,6 @@ impl RawSteamReader {
         let header: Header = Cursor::new(&header_bytes[..]).read_le().unwrap();
         header.validate()?;
 
-        dbg!(header);
-
         self.buff.resize(header.length as usize, 0);
         self.tcp.read_exact(self.buff.as_mut()).await?;
         Ok(self.buff.as_ref())
@@ -122,7 +122,7 @@ impl RawSteamReader {
         let raw = self.read().await?;
         if raw.kind == T::KIND {
             let mut reader = Cursor::new(raw.data);
-            Ok(T::try_read_body(&mut reader)?)
+            Ok(T::read_body(&mut reader)?)
         } else {
             Err(NetworkError::DifferentMessage(T::KIND, raw.kind))
         }
@@ -134,18 +134,18 @@ pub struct RawSteamWriter {
 }
 
 impl RawSteamWriter {
-    pub async fn write_buff(&mut self, data: &[u8]) -> Result<()> {
-        // self.tcp.write_u32(data.len() as u32).await?;
-        // self.tcp.write_all(&MAGIC[..]).await?;
-        // self.tcp.write_all(data).await?;
+    pub async fn write_message<T: NetMessage>(&mut self, message: &T) -> Result<()> {
+        let message_size = message.encode_size();
+        let cap = message_size + 8 + 4;
+        let mut buff = Vec::with_capacity(cap);
 
-        let mut full = Vec::with_capacity(data.len() + 8);
-        WriteBytesExt::write_u32::<LittleEndian>(&mut full, data.len() as u32)?;
-        Write::write_all(&mut full, &MAGIC)?;
-        Write::write_all(&mut full, data)?;
+        WriteBytesExt::write_u32::<LittleEndian>(&mut buff, message_size as u32)?;
+        Write::write_all(&mut buff, &MAGIC)?;
 
-        self.tcp.write_all(&full).await?;
+        WriteBytesExt::write_i32::<LittleEndian>(&mut buff, T::KIND.value())?;
+        message.write_body(&mut buff)?;
 
+        self.tcp.write_all(&buff).await?;
         self.tcp.flush().await?;
 
         Ok(())
@@ -169,16 +169,13 @@ pub async fn connect<A: ToSocketAddrs>(addr: A) -> Result<(SteamReader, SteamWri
 
     let key = generate_session_key(Some(&encrypt_request.nonce));
 
-    let mut response_buf = Vec::with_capacity(4 + 8 + 8 + 4 + 4 + key.encrypted.len() + 4 + 4);
     let response = ClientEncryptResponse {
         target_job_id: u64::max_value(),
         source_job_id: u64::max_value(),
         protocol: encrypt_request.protocol,
         encrypted_key: key.encrypted,
     };
-    response.encode(&mut response_buf)?;
-
-    raw_writer.write_buff(&response_buf).await?;
+    raw_writer.write_message(&response).await?;
 
     let encrypt_response = raw_reader.try_read::<ChannelEncryptResultBody>().await?;
 
@@ -196,26 +193,4 @@ pub async fn connect<A: ToSocketAddrs>(addr: A) -> Result<(SteamReader, SteamWri
             key: key.plain,
         },
     ))
-}
-
-struct ClientEncryptResponse {
-    target_job_id: u64,
-    source_job_id: u64,
-    protocol: u32,
-    encrypted_key: Vec<u8>,
-}
-
-impl ClientEncryptResponse {
-    fn encode<W: Write>(&self, mut writer: W) -> std::io::Result<()> {
-        writer.write_i32::<LittleEndian>(EMsg::k_EMsgChannelEncryptResponse.value())?;
-        writer.write_u64::<LittleEndian>(self.target_job_id)?;
-        writer.write_u64::<LittleEndian>(self.source_job_id)?;
-        writer.write_u32::<LittleEndian>(self.protocol)?;
-        writer.write_u32::<LittleEndian>(self.encrypted_key.len() as u32)?;
-        writer.write_all(&self.encrypted_key)?;
-        writer.write_u32::<LittleEndian>(crc::crc32::checksum_ieee(&self.encrypted_key))?;
-        writer.write_u32::<LittleEndian>(0)?;
-
-        Ok(())
-    }
 }
