@@ -1,10 +1,10 @@
+use crate::message::{ChannelEncryptRequestBody, ChannelEncryptResultBody, NetMessage};
 use binread::{BinRead, BinReaderExt};
 use byteorder::{LittleEndian, WriteBytesExt};
 use bytes::BytesMut;
 use protobuf::ProtobufEnum;
 use std::convert::{TryFrom, TryInto};
 use std::io::{Cursor, Write};
-use std::mem::size_of;
 use steam_vent_crypto::generate_session_key;
 use steam_vent_proto::enums_clientserver::EMsg;
 use thiserror::Error;
@@ -20,8 +20,12 @@ pub enum NetworkError {
     InvalidHeader,
     #[error("Invalid message kind {0}")]
     InvalidMessageKind(i32),
-    #[error("Unexpected handshake {0}")]
-    UnexpectedHandshake(&'static str),
+    #[error("Failed to perform crypto handshake")]
+    CryptoHandshakeFailed,
+    #[error("Difference message expected, expected {0:?}, got {1:?}")]
+    DifferentMessage(EMsg, EMsg),
+    #[error("{0}")]
+    MalformedBody(#[from] crate::message::MalformedBody),
 }
 
 pub type Result<T> = std::result::Result<T, NetworkError>;
@@ -113,6 +117,16 @@ impl RawSteamReader {
     pub async fn read<'a>(&'a mut self) -> Result<RawNetMessage<'a>> {
         self.read_buff().await.and_then(RawNetMessage::try_from)
     }
+
+    pub async fn try_read<T: NetMessage>(&mut self) -> Result<T> {
+        let raw = self.read().await?;
+        if raw.kind == T::KIND {
+            let mut reader = Cursor::new(raw.data);
+            Ok(T::try_read_body(&mut reader)?)
+        } else {
+            Err(NetworkError::DifferentMessage(T::KIND, raw.kind))
+        }
+    }
 }
 
 pub struct RawSteamWriter {
@@ -138,57 +152,20 @@ impl RawSteamWriter {
     }
 }
 
-#[derive(Debug, BinRead)]
-struct ChannelEncryptRequestBody {
-    target_job_id: u64,
-    source_job_id: u64,
-    protocol: u32,
-    universe: u32,
-    nonce: [u8; 16],
-}
-
-#[derive(Debug, BinRead)]
-struct ChannelEncryptResultBody {
-    target_job_id: u64,
-    source_job_id: u64,
-    result: u32,
-}
-
 pub struct SteamReader {
-    _raw: RawSteamReader,
-    _key: [u8; 32],
+    raw: RawSteamReader,
+    key: [u8; 32],
 }
 
 pub struct SteamWriter {
-    _raw: RawSteamWriter,
-    _key: [u8; 32],
+    raw: RawSteamWriter,
+    key: [u8; 32],
 }
 
 pub async fn connect<A: ToSocketAddrs>(addr: A) -> Result<(SteamReader, SteamWriter)> {
     let (mut raw_reader, mut raw_writer) = raw_connect(addr).await?;
 
-    let encrypt_request = match raw_reader.read().await? {
-        RawNetMessage {
-            kind: EMsg::k_EMsgChannelEncryptRequest,
-            data,
-            ..
-        } => data,
-        _ => {
-            return Err(NetworkError::UnexpectedHandshake(
-                "Expected encrypt request",
-            ))
-        }
-    };
-
-    if encrypt_request.len() != size_of::<ChannelEncryptRequestBody>() {
-        return Err(NetworkError::UnexpectedHandshake(
-            "Malformed encrypt request",
-        ));
-    }
-
-    let encrypt_request: ChannelEncryptRequestBody = Cursor::new(encrypt_request)
-        .read_le()
-        .map_err(|_| NetworkError::UnexpectedHandshake("Invalid encrypt request body"))?;
+    let encrypt_request = raw_reader.try_read::<ChannelEncryptRequestBody>().await?;
 
     let key = generate_session_key(Some(&encrypt_request.nonce));
 
@@ -203,22 +180,22 @@ pub async fn connect<A: ToSocketAddrs>(addr: A) -> Result<(SteamReader, SteamWri
 
     raw_writer.write_buff(&response_buf).await?;
 
-    let encrypt_response = match raw_reader.read().await? {
-        RawNetMessage {
-            kind: EMsg::k_EMsgChannelEncryptResult,
-            data,
-            ..
-        } => data,
-        _ => return Err(NetworkError::UnexpectedHandshake("Expected encrypt result")),
-    };
+    let encrypt_response = raw_reader.try_read::<ChannelEncryptResultBody>().await?;
 
-    let encrypt_response: ChannelEncryptResultBody = Cursor::new(encrypt_response)
-        .read_le()
-        .map_err(|_| NetworkError::UnexpectedHandshake("Invalid encrypt result body"))?;
+    if encrypt_response.result != 1 {
+        return Err(NetworkError::CryptoHandshakeFailed);
+    }
 
-    dbg!(&encrypt_response);
-
-    panic!()
+    Ok((
+        SteamReader {
+            raw: raw_reader,
+            key: key.plain,
+        },
+        SteamWriter {
+            raw: raw_writer,
+            key: key.plain,
+        },
+    ))
 }
 
 struct ClientEncryptResponse {
