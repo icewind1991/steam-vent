@@ -100,6 +100,11 @@ fn encrypt_message(mut message: Vec<u8>, key: &[u8; 32], plain_iv: &[u8; 16]) ->
     cipher
         .encrypt(&mut message, length)
         .map_err(|_| CryptError::MalformedMessage)?;
+
+    while message.last() == Some(&0) {
+        message.truncate(message.len() - 1);
+    }
+
     Ok(message)
 }
 
