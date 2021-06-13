@@ -15,6 +15,8 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt, BufReader, BufWriter};
 use tokio::net::tcp::{OwnedReadHalf, OwnedWriteHalf};
 use tokio::net::{TcpStream, ToSocketAddrs};
 
+const PROTO_MASK: u32 = 0x80000000;
+
 #[derive(Debug, Error)]
 pub enum NetworkError {
     #[error("{0}")]
@@ -86,8 +88,9 @@ impl<'a> TryFrom<&'a [u8]> for RawNetMessage<'a> {
         );
 
         let is_protobuf = kind < 0;
+        let kind = kind & (!PROTO_MASK) as i32;
 
-        let kind = match steam_vent_proto::enums_clientserver::EMsg::from_i32(kind.abs()) {
+        let kind = match steam_vent_proto::enums_clientserver::EMsg::from_i32(kind) {
             Some(kind) => kind,
             None => return Err(NetworkError::InvalidMessageKind(kind)),
         };
@@ -111,7 +114,7 @@ impl RawSteamReader {
         self.tcp.read_exact(&mut header_bytes).await?;
         let header: Header = Cursor::new(&header_bytes[..]).read_le().unwrap();
         header.validate()?;
-        debug!("got header for packet of {} bytes", header.length);
+        trace!("got header for packet of {} bytes", header.length);
 
         self.buff.resize(header.length as usize, 0);
         self.tcp.read_exact(self.buff.as_mut()).await?;
@@ -183,8 +186,7 @@ pub struct SteamReader {
 
 impl SteamReader {
     pub async fn read<T: NetMessage>(&mut self) -> Result<T> {
-        let raw = self.raw.read_buff().await?;
-        let decrypted = symmetric_decrypt(raw.to_vec(), &self.key)?;
+        let decrypted = self.read_decrypting().await?;
         let raw = RawNetMessage::try_from(decrypted.as_slice())?;
         if raw.kind == T::KIND {
             let mut reader = Cursor::new(raw.data);
@@ -193,14 +195,25 @@ impl SteamReader {
             Err(NetworkError::DifferentMessage(T::KIND, raw.kind))
         }
     }
+
     pub async fn dyn_read(&mut self) -> Result<DynMessage> {
-        let raw = self.raw.read_buff().await?;
-        let decrypted = symmetric_decrypt(raw.to_vec(), &self.key)?;
+        let decrypted = self.read_decrypting().await?;
         let raw = RawNetMessage::try_from(decrypted.as_slice())?;
         Ok(DynMessage {
             kind: raw.kind,
             body: raw.data.to_vec(),
         })
+    }
+
+    async fn read_decrypting(&mut self) -> Result<Vec<u8>> {
+        let raw = self.raw.read_buff().await?;
+        let decrypted = symmetric_decrypt(raw.to_vec(), &self.key)?;
+        trace!(
+            "received decrypted message({} bytes): {:?}",
+            decrypted.len(),
+            decrypted
+        );
+        Ok(decrypted)
     }
 }
 
