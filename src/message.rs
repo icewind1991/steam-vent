@@ -1,9 +1,10 @@
 use binread::BinRead;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use flate2::read::GzDecoder;
+use protobuf::Message;
 use protobuf::ProtobufEnum;
-use protobuf::{parse_from_reader, Message};
 use std::any::type_name;
+use std::fmt::Debug;
 use std::io::{Cursor, Read, Seek, Write};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_base::CMsgMulti;
@@ -25,7 +26,7 @@ pub enum DynMessageError {
     MalformedBody(#[from] crate::message::MalformedBody),
 }
 
-pub trait NetMessage: Sized {
+pub trait NetMessage: Sized + Debug {
     const KIND: EMsg;
 
     fn read_body<R: Read + Seek>(_reader: &mut R) -> Result<Self, MalformedBody> {
@@ -41,6 +42,7 @@ pub trait NetMessage: Sized {
     }
 }
 
+#[derive(Debug)]
 pub struct DynMessage {
     pub kind: EMsg,
     pub body: Vec<u8>,
@@ -115,6 +117,7 @@ impl NetMessage for ClientEncryptResponse {
     }
 }
 
+#[derive(Debug)]
 pub struct Multi {
     messages: Vec<DynMessage>,
 }
@@ -148,7 +151,7 @@ impl Multi {
         reader: &mut R,
     ) -> Result<impl Iterator<Item = Result<DynMessage, MalformedBody>>, MalformedBody> {
         let mut multi =
-            parse_from_reader::<CMsgMulti>(reader).map_err(|_| MalformedBody(Self::KIND))?;
+            CMsgMulti::parse_from_reader(reader).map_err(|_| MalformedBody(Self::KIND))?;
 
         let data = match multi.get_size_unzipped() {
             0 => MaybeZipReader::Raw(Cursor::new(multi.take_message_body())),
@@ -205,7 +208,7 @@ macro_rules! proto_msg {
             }
 
             fn read_body<R: Read + Seek>(reader: &mut R) -> Result<Self, MalformedBody> {
-                parse_from_reader(reader).map_err(|_| MalformedBody(Self::KIND))
+                $ty::parse_from_reader(reader).map_err(|_| MalformedBody(Self::KIND))
             }
         }
     };

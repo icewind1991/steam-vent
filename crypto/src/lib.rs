@@ -167,7 +167,6 @@ pub fn symmetric_decrypt(input: Vec<u8>, key: &[u8; 32]) -> Result<Vec<u8>> {
     let message = input[16..].to_vec();
     let mut message = decrypt_message(message, key, &plain_iv)?;
     let padding = *message.last().unwrap();
-    dbg!(padding);
     message.resize(message.len() - padding as usize, 0);
 
     let hmac_random = &plain_iv[13..];
