@@ -14,7 +14,9 @@ thiserror = "1"
 block-modes = "0.8"
 sha-1 = "0.9"
 hmac = "0.11"
-base64 = "0.13"
 
 [dev-dependencies]
 steam-vent = { version = "0.1", path = ".." }
+
+[build-dependencies]
+base64 = "0.13"

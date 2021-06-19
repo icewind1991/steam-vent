@@ -26,18 +26,10 @@ pub type Result<T> = std::result::Result<T, CryptError>;
 #[error("{0}")]
 pub struct RSAError(rsa::errors::Error);
 
-const SYSTEM_PUBLIC_KEY_BYTES: &str = include_str!("../system.pem");
+const SYSTEM_PUBLIC_KEY_DER_BYTES: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/system.der"));
 
 static SYSTEM_PUBLIC_KEY: Lazy<RSAPublicKey> = Lazy::new(|| {
-    let der_encoded = SYSTEM_PUBLIC_KEY_BYTES
-        .split('\n')
-        .filter(|line| !line.starts_with("-"))
-        .fold(String::new(), |mut data, line| {
-            data.push_str(line);
-            data
-        });
-    let der_bytes = base64::decode(&der_encoded).expect("failed to decode base64 content");
-    RSAPublicKey::from_pkcs8(&der_bytes).expect("Failed to parse public key")
+    RSAPublicKey::from_pkcs8(SYSTEM_PUBLIC_KEY_DER_BYTES).expect("Failed to parse public key")
 });
 
 /// Verify sha1 signature using the steam "system" public key
