@@ -11,6 +11,7 @@ use std::convert::TryFrom;
 use std::io::{Cursor, Seek, SeekFrom, Write};
 use steam_vent_crypto::{generate_session_key, symmetric_decrypt, symmetric_encrypt, CryptError};
 use steam_vent_proto::enums_clientserver::EMsg;
+use steamid_ng::SteamID;
 use thiserror::Error;
 use tokio::io::{AsyncWriteExt, BufReader, BufWriter};
 use tokio::net::tcp::{OwnedReadHalf, OwnedWriteHalf};
@@ -73,10 +74,10 @@ impl Header {
 
 #[derive(Debug, Default)]
 pub struct NetMessageHeader {
-    source_job_id: u64,
-    target_job_id: u64,
-    steam_id: u64,
-    session_id: i32,
+    pub source_job_id: u64,
+    pub target_job_id: u64,
+    pub steam_id: SteamID,
+    pub session_id: i32,
 }
 
 impl From<CMsgProtoBufHeader> for NetMessageHeader {
@@ -84,7 +85,7 @@ impl From<CMsgProtoBufHeader> for NetMessageHeader {
         NetMessageHeader {
             source_job_id: header.get_jobid_source(),
             target_job_id: header.get_jobid_target(),
-            steam_id: header.get_steamid(),
+            steam_id: header.get_steamid().into(),
             session_id: header.get_client_sessionid(),
         }
     }
@@ -96,7 +97,7 @@ impl NetMessageHeader {
         let target_job_id = reader.read_u64::<LittleEndian>()?;
         let source_job_id = reader.read_u64::<LittleEndian>()?;
         reader.seek(SeekFrom::Current(1))?; // header canary (fixed)
-        let steam_id = reader.read_u64::<LittleEndian>()?;
+        let steam_id = reader.read_u64::<LittleEndian>()?.into();
         let session_id = reader.read_i32::<LittleEndian>()?;
         Ok(NetMessageHeader {
             source_job_id,
@@ -122,7 +123,7 @@ impl NetMessageHeader {
             writer.write_u32::<LittleEndian>(kind.value() as u32 | PROTO_MASK)?;
             proto_header.set_jobid_target(self.target_job_id);
             proto_header.set_jobid_source(self.source_job_id);
-            proto_header.set_steamid(self.steam_id);
+            proto_header.set_steamid(self.steam_id.into());
             proto_header.set_client_sessionid(self.session_id);
             writer.write_u32::<LittleEndian>(proto_header.compute_size())?;
             proto_header.write_to_writer(writer)?;
@@ -134,7 +135,7 @@ impl NetMessageHeader {
             writer.write_u64::<LittleEndian>(self.target_job_id)?;
             writer.write_u64::<LittleEndian>(self.source_job_id)?;
             writer.write_u8(239)?;
-            writer.write_u64::<LittleEndian>(self.steam_id)?;
+            writer.write_u64::<LittleEndian>(self.steam_id.into())?;
             writer.write_i32::<LittleEndian>(self.session_id)?;
         }
         Ok(())
@@ -143,10 +144,10 @@ impl NetMessageHeader {
 
 #[derive(Debug)]
 pub struct RawNetMessage<'a> {
-    kind: EMsg,
-    is_protobuf: bool,
-    header: NetMessageHeader,
-    data: &'a [u8],
+    pub kind: EMsg,
+    pub is_protobuf: bool,
+    pub header: NetMessageHeader,
+    pub data: &'a [u8],
 }
 
 impl<'a> TryFrom<&'a [u8]> for RawNetMessage<'a> {
@@ -184,7 +185,7 @@ impl<'a> TryFrom<&'a [u8]> for RawNetMessage<'a> {
                     target_job_id,
                     source_job_id,
                     session_id: 0,
-                    steam_id: 0,
+                    steam_id: SteamID::default(),
                 },
                 &value[4 + 8 + 8..],
             )
@@ -291,7 +292,7 @@ impl SteamReader {
     pub async fn read<T: NetMessage>(&mut self) -> Result<(NetMessageHeader, T)> {
         let decrypted = self.read_decrypting().await?;
         let raw = RawNetMessage::try_from(decrypted.as_slice())?;
-        trace!("message is a {:?}", raw.kind);
+        debug!("reading a {:?}", raw.kind);
         trace!("body: {:?}", raw.data);
         if raw.kind == T::KIND {
             let mut reader = Cursor::new(raw.data);
@@ -304,7 +305,7 @@ impl SteamReader {
     pub async fn dyn_read(&mut self) -> Result<(NetMessageHeader, DynMessage)> {
         let decrypted = self.read_decrypting().await?;
         let raw = RawNetMessage::try_from(decrypted.as_slice())?;
-        trace!("message is a {:?}", raw.kind);
+        debug!("reading a {:?}", raw.kind);
         trace!("body: {:?}", raw.data);
         Ok((
             raw.header,
@@ -333,18 +334,15 @@ pub struct SteamWriter {
 }
 
 impl SteamWriter {
-    pub async fn write<T: NetMessage>(&mut self, message: &T) -> Result<()> {
+    pub async fn write<T: NetMessage>(
+        &mut self,
+        header: &NetMessageHeader,
+        message: &T,
+    ) -> Result<()> {
         debug!("sending {:?} message", T::KIND);
         trace!("  {:#?}", message);
         let message_size = message.encode_size().unwrap_or(128);
         let mut raw = Vec::with_capacity(64 + message_size);
-
-        let header = NetMessageHeader {
-            session_id: 0,
-            source_job_id: u64::MAX,
-            target_job_id: u64::MAX,
-            steam_id: 0,
-        };
 
         header.write(&mut raw, T::KIND, T::IS_PROTOBUF)?;
         message.write_body(&mut raw)?;

@@ -65,7 +65,7 @@ pub enum EResult {
     AccountLogonDenied = 63,
     CannotUseOldPassword = 64,
     InvalidLoginAuthCode = 65,
-    AccountLogonDeniedNoMailSent = 66, // removed renamed to AccountLogonDeniedNoMail
+    // AccountLogonDeniedNoMailSent = 66, // removed renamed to AccountLogonDeniedNoMail
     AccountLogonDeniedNoMail = 66,
     HardwareNotCapableOfIPT = 67,
     IPTInitError = 68,

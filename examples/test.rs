@@ -1,10 +1,12 @@
 use std::error::Error;
 use steam_vent::message::Multi;
-use steam_vent::net::connect;
+use steam_vent::net::{connect, NetMessageHeader};
+use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_base::CMsgIPAddress;
 use steam_vent_proto::steammessages_clientserver_login::{
     CMsgClientLogon, CMsgClientLogonResponse,
 };
+use steamid_ng::{AccountType, Instance, SteamID, Universe};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
@@ -24,13 +26,30 @@ async fn main() -> Result<(), Box<dyn Error>> {
     ip.set_v4(0);
     logon.set_obfuscated_private_ip(ip);
     logon.set_client_language(String::new());
+    logon.set_machine_name(String::new());
     logon.set_steamguard_dont_remember_computer(false);
     logon.set_chat_mode(2);
 
-    write.write(&logon).await.unwrap();
+    let header = NetMessageHeader {
+        session_id: 0,
+        source_job_id: u64::MAX,
+        target_job_id: u64::MAX,
+        steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
+    };
 
-    let (_header, res) = read.read::<CMsgClientLogonResponse>().await?;
-    dbg!(res);
+    write.write(&header, &logon).await.unwrap();
+
+    let (_header, msg) = read.dyn_read().await?;
+    let multi: Multi = msg.try_into()?;
+    for (_, msg) in multi.messages {
+        match msg.kind {
+            EMsg::k_EMsgClientLogOnResponse => {
+                let logon: CMsgClientLogonResponse = msg.try_into()?;
+                dbg!(logon);
+            }
+            _ => (),
+        }
+    }
 
     Ok(())
 }

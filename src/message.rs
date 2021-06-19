@@ -1,11 +1,12 @@
-use crate::net::PROTO_MASK;
+use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use binread::BinRead;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
+use crc::{Crc, CRC_32_ISO_HDLC};
 use flate2::read::GzDecoder;
-use log::trace;
-use protobuf::ProtobufEnum;
+use log::{debug, trace};
 use protobuf::{Message, ProtobufError};
 use std::any::type_name;
+use std::convert::TryFrom;
 use std::fmt::Debug;
 use std::io::{Cursor, Read, Seek, Write};
 use steam_vent_proto::enums_clientserver::EMsg;
@@ -30,6 +31,8 @@ pub enum MessageBodyError {
     IO(#[from] std::io::Error),
     #[error("{0}")]
     Other(String),
+    #[error("malformed child: {0}")]
+    MalformedChild(Box<NetworkError>),
 }
 
 impl From<String> for MessageBodyError {
@@ -70,7 +73,7 @@ pub struct DynMessage {
 }
 
 impl DynMessage {
-    fn try_into<T: NetMessage>(self) -> Result<T, DynMessageError> {
+    pub fn try_into<T: NetMessage>(self) -> Result<T, DynMessageError> {
         if self.kind == T::KIND {
             Ok(T::read_body(&mut Cursor::new(self.body))?)
         } else {
@@ -115,6 +118,8 @@ pub struct ClientEncryptResponse {
     pub encrypted_key: Vec<u8>,
 }
 
+const CRC: Crc<u32> = Crc::<u32>::new(&CRC_32_ISO_HDLC);
+
 impl NetMessage for ClientEncryptResponse {
     const KIND: EMsg = EMsg::k_EMsgChannelEncryptResponse;
 
@@ -125,7 +130,10 @@ impl NetMessage for ClientEncryptResponse {
         writer.write_u32::<LittleEndian>(self.protocol)?;
         writer.write_u32::<LittleEndian>(self.encrypted_key.len() as u32)?;
         writer.write_all(&self.encrypted_key)?;
-        writer.write_u32::<LittleEndian>(crc::crc32::checksum_ieee(&self.encrypted_key))?;
+
+        let mut digest = CRC.digest();
+        digest.update(&self.encrypted_key);
+        writer.write_u32::<LittleEndian>(digest.finalize())?;
         writer.write_u32::<LittleEndian>(0)?;
         Ok(())
     }
@@ -137,7 +145,7 @@ impl NetMessage for ClientEncryptResponse {
 
 #[derive(Debug)]
 pub struct Multi {
-    pub messages: Vec<DynMessage>,
+    pub messages: Vec<(NetMessageHeader, DynMessage)>,
 }
 
 enum MaybeZipReader {
@@ -160,7 +168,11 @@ impl NetMessage for Multi {
     fn read_body<R: Read + Seek>(reader: &mut R) -> Result<Self, MalformedBody> {
         trace!("reading body of {:?} message", Self::KIND);
         Ok(Multi {
-            messages: Self::iter(reader)?.collect::<Result<Vec<_>, MalformedBody>>()?,
+            messages: Self::iter(reader)?
+                .collect::<Result<Vec<_>, NetworkError>>()
+                .map_err(|e| {
+                    MalformedBody(Self::KIND, MessageBodyError::MalformedChild(Box::new(e)))
+                })?,
         })
     }
 }
@@ -168,7 +180,10 @@ impl NetMessage for Multi {
 impl Multi {
     fn iter<R: Read + Seek>(
         reader: &mut R,
-    ) -> Result<impl Iterator<Item = Result<DynMessage, MalformedBody>>, MalformedBody> {
+    ) -> Result<
+        impl Iterator<Item = Result<(NetMessageHeader, DynMessage), NetworkError>>,
+        MalformedBody,
+    > {
         let mut multi = CMsgMulti::parse_from_reader(reader)
             .map_err(|e| MalformedBody(Self::KIND, e.into()))?;
 
@@ -186,7 +201,7 @@ struct MultiBodyIter<R> {
 }
 
 impl<R: Read> Iterator for MultiBodyIter<R> {
-    type Item = Result<DynMessage, MalformedBody>;
+    type Item = Result<(NetMessageHeader, DynMessage), NetworkError>;
 
     fn next(&mut self) -> Option<Self::Item> {
         let size = match self.reader.read_u32::<LittleEndian>() {
@@ -194,33 +209,25 @@ impl<R: Read> Iterator for MultiBodyIter<R> {
             Err(_) => return None,
         };
 
-        let kind = match self.reader.read_i32::<LittleEndian>() {
-            Ok(kind) => kind,
-            Err(e) => return Some(Err(MalformedBody(Multi::KIND, e.into()))),
-        };
-
-        let _is_protobuf = kind < 0;
-        let kind = kind & (!PROTO_MASK) as i32;
-
-        let kind = match steam_vent_proto::enums_clientserver::EMsg::from_i32(kind) {
-            Some(kind) => kind,
-            None => {
-                return Some(Err(MalformedBody(
-                    Multi::KIND,
-                    format!("Unknown child kind {}", kind).into(),
-                )))
-            }
-        };
         let mut msg_data = Vec::with_capacity(size as usize);
         msg_data.resize(size as usize, 0);
         if let Err(e) = self.reader.read_exact(&mut msg_data) {
-            return Some(Err(MalformedBody(Multi::KIND, e.into())));
+            return Some(Err(NetworkError::IO(e)));
         }
+        let raw = match RawNetMessage::try_from(msg_data.as_slice()) {
+            Ok(raw) => raw,
+            Err(e) => return Some(Err(e)),
+        };
 
-        Some(Ok(DynMessage {
-            kind,
-            body: msg_data,
-        }))
+        debug!("Reading child message {:?}", raw.kind);
+
+        Some(Ok((
+            raw.header,
+            DynMessage {
+                kind: raw.kind,
+                body: raw.data.to_vec(),
+            },
+        )))
     }
 }
 
