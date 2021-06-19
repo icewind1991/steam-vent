@@ -7,9 +7,5 @@ description = "Protobuf structs used by the Steam client protocol"
 license = "MIT"
 repository = "https://github.com/icewind1991/steam-vent"
 
-include = [
-    "/src/**",
-]
-
 [dependencies]
 protobuf = "=2.24.1"
