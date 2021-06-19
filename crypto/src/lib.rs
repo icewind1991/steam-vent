@@ -1,5 +1,5 @@
 use aes::cipher::generic_array::GenericArray;
-use aes::{Aes256, BlockCipher, NewBlockCipher};
+use aes::{Aes256, BlockDecrypt, BlockEncrypt, NewBlockCipher};
 use block_modes::block_padding::Pkcs7;
 use block_modes::{BlockMode, Cbc};
 use hmac::{Hmac, Mac, NewMac};
