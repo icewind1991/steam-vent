@@ -2,7 +2,9 @@ use std::error::Error;
 use steam_vent::message::Multi;
 use steam_vent::net::connect;
 use steam_vent_proto::steammessages_base::CMsgIPAddress;
-use steam_vent_proto::steammessages_clientserver_login::CMsgClientLogon;
+use steam_vent_proto::steammessages_clientserver_login::{
+    CMsgClientLogon, CMsgClientLogonResponse,
+};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
@@ -27,14 +29,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     write.write(&logon).await.unwrap();
 
-    let (_header, res) = read.read::<Multi>().await?;
-    println!(
-        "Got expected multi with {} sub messages",
-        res.messages.len()
-    );
-    for sub_message in res.messages {
-        dbg!(sub_message.kind);
-    }
+    let (_header, res) = read.read::<CMsgClientLogonResponse>().await?;
+    dbg!(res);
 
     Ok(())
 }

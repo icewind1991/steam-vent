@@ -48,6 +48,7 @@ pub enum DynMessageError {
 
 pub trait NetMessage: Sized + Debug {
     const KIND: EMsg;
+    const IS_PROTOBUF: bool = false;
 
     fn read_body<R: Read + Seek>(_reader: &mut R) -> Result<Self, MalformedBody> {
         panic!("Reading not implemented for {}", type_name::<Self>())
@@ -227,6 +228,7 @@ macro_rules! proto_msg {
     ($kind:expr => $ty:ident) => {
         impl NetMessage for $ty {
             const KIND: EMsg = $kind;
+            const IS_PROTOBUF: bool = true;
 
             fn write_body<W: Write>(&self, writer: &mut W) -> Result<(), std::io::Error> {
                 trace!("writing body of protobuf message {:?}", Self::KIND);
@@ -242,6 +244,6 @@ macro_rules! proto_msg {
     };
 }
 
-proto_msg!(EMsg::k_EMsgClientLogonGameServer => CMsgClientLogon);
+proto_msg!(EMsg::k_EMsgClientLogon => CMsgClientLogon);
 proto_msg!(EMsg::k_EMsgClientLogOnResponse => CMsgClientLogonResponse);
 proto_msg!(EMsg::k_EMsgClientServersAvailable => CMsgClientServersAvailable);

@@ -105,6 +105,40 @@ impl NetMessageHeader {
             session_id,
         })
     }
+
+    fn write<W: WriteBytesExt>(
+        &self,
+        writer: &mut W,
+        kind: EMsg,
+        proto: bool,
+    ) -> std::io::Result<()> {
+        if kind == EMsg::k_EMsgChannelEncryptResponse {
+            writer.write_u32::<LittleEndian>(kind.value() as u32)?;
+            writer.write_u64::<LittleEndian>(self.target_job_id)?;
+            writer.write_u64::<LittleEndian>(self.source_job_id)?;
+        } else if proto {
+            trace!("writing header for {:?} protobuf message", kind);
+            let mut proto_header = CMsgProtoBufHeader::new();
+            writer.write_u32::<LittleEndian>(kind.value() as u32 | PROTO_MASK)?;
+            proto_header.set_jobid_target(self.target_job_id);
+            proto_header.set_jobid_source(self.source_job_id);
+            proto_header.set_steamid(self.steam_id);
+            proto_header.set_client_sessionid(self.session_id);
+            writer.write_u32::<LittleEndian>(proto_header.compute_size())?;
+            proto_header.write_to_writer(writer)?;
+        } else {
+            trace!("writing header for {:?} message", kind);
+            writer.write_u32::<LittleEndian>(kind.value() as u32)?;
+            writer.write_u8(32)?;
+            writer.write_u16::<LittleEndian>(2)?;
+            writer.write_u64::<LittleEndian>(self.target_job_id)?;
+            writer.write_u64::<LittleEndian>(self.source_job_id)?;
+            writer.write_u8(239)?;
+            writer.write_u64::<LittleEndian>(self.steam_id)?;
+            writer.write_i32::<LittleEndian>(self.session_id)?;
+        }
+        Ok(())
+    }
 }
 
 #[derive(Debug)]
@@ -303,19 +337,18 @@ impl SteamWriter {
         debug!("sending {:?} message", T::KIND);
         trace!("  {:#?}", message);
         let message_size = message.encode_size().unwrap_or(128);
-        let mut raw = Vec::with_capacity(4 + message_size);
+        let mut raw = Vec::with_capacity(64 + message_size);
 
-        WriteBytesExt::write_i32::<LittleEndian>(&mut raw, T::KIND.value())?;
+        let header = NetMessageHeader {
+            session_id: 0,
+            source_job_id: u64::MAX,
+            target_job_id: u64::MAX,
+            steam_id: 0,
+        };
+
+        header.write(&mut raw, T::KIND, T::IS_PROTOBUF)?;
         message.write_body(&mut raw)?;
 
-        // todo
-        let raw = vec![
-            138, 21, 0, 128, 29, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 160, 1, 16, 0, 81, 255, 255, 255,
-            255, 255, 255, 255, 255, 89, 255, 255, 255, 255, 255, 255, 255, 255, 8, 172, 128, 4,
-            24, 15, 50, 0, 56, 181, 254, 255, 255, 15, 64, 0, 90, 5, 13, 0, 0, 0, 0, 136, 2, 2,
-            130, 5, 9, 97, 110, 111, 110, 121, 109, 111, 117, 115, 144, 5, 0, 248, 5, 0, 130, 6, 0,
-            176, 6, 0,
-        ];
         trace!("encoded message({} bytes): {:?}", raw.len(), raw);
 
         let encrypted = symmetric_encrypt(raw, &self.key)?;
