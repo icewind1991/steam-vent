@@ -3,9 +3,13 @@ name = "steam-vent-proto"
 version = "0.1.0"
 authors = ["Robin Appelman <robin@icewind.nl>"]
 edition = "2018"
+description = "Protobuf structs used by the Steam client protocol"
+license = "MIT"
+repository = "https://github.com/icewind1991/steam-vent"
+
+include = [
+    "/src/**",
+]
 
 [dependencies]
 protobuf = "=2.24.1"
-
-[dev-dependencies]
-steam-vent = { version = "0.1", path = ".." }
