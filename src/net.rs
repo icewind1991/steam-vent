@@ -6,7 +6,7 @@ use crate::proto::steammessages_base::CMsgProtoBufHeader;
 use async_stream::try_stream;
 use binread::{BinRead, BinReaderExt};
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
-use bytes::BytesMut;
+use bytes::{Buf, BytesMut};
 use log::{debug, trace};
 use protobuf::{Message, ProtobufEnum};
 use std::convert::TryFrom;
@@ -48,7 +48,6 @@ pub async fn raw_connect<A: ToSocketAddrs>(addr: A) -> Result<(RawSteamReader, R
     Ok((
         RawSteamReader {
             tcp: BufReader::new(read),
-            buff: BytesMut::with_capacity(1024),
         },
         RawSteamWriter {
             tcp: BufWriter::new(write),
@@ -95,7 +94,7 @@ impl From<CMsgProtoBufHeader> for NetMessageHeader {
 }
 
 impl NetMessageHeader {
-    fn read<R: ReadBytesExt + Seek>(reader: &mut R) -> std::io::Result<Self> {
+    fn read<R: ReadBytesExt + Seek>(mut reader: R) -> std::io::Result<Self> {
         reader.seek(SeekFrom::Current(3))?; // 1 byte (fixed) header size, 2 bytes (fixed) header version
         let target_job_id = reader.read_u64::<LittleEndian>()?;
         let source_job_id = reader.read_u64::<LittleEndian>()?;
@@ -146,18 +145,18 @@ impl NetMessageHeader {
 }
 
 #[derive(Debug)]
-pub struct RawNetMessage<'a> {
+pub struct RawNetMessage {
     pub kind: EMsg,
     pub is_protobuf: bool,
     pub header: NetMessageHeader,
-    pub data: &'a [u8],
+    pub data: BytesMut,
 }
 
-impl<'a> TryFrom<&'a [u8]> for RawNetMessage<'a> {
+impl TryFrom<BytesMut> for RawNetMessage {
     type Error = NetworkError;
 
-    fn try_from(value: &'a [u8]) -> Result<Self> {
-        let mut reader = Cursor::new(value);
+    fn try_from(mut value: BytesMut) -> Result<Self> {
+        let mut reader = Cursor::new(&value);
         let kind = reader
             .read_i32::<LittleEndian>()
             .map_err(|_| NetworkError::InvalidHeader)?;
@@ -172,12 +171,12 @@ impl<'a> TryFrom<&'a [u8]> for RawNetMessage<'a> {
 
         trace!("reading header for {:?} message", kind);
 
-        let (header, data) = if is_protobuf {
+        let (header, body_start) = if is_protobuf {
             let header_length = reader.read_u32::<LittleEndian>()?;
             let header =
                 CMsgProtoBufHeader::parse_from_bytes(&value[8..8 + header_length as usize])
                     .map_err(|_| NetworkError::InvalidHeader)?;
-            (header.into(), &value[8 + header_length as usize..])
+            (header.into(), 8 + header_length as usize)
         } else if kind == EMsg::k_EMsgChannelEncryptRequest
             || kind == EMsg::k_EMsgChannelEncryptResult
         {
@@ -190,31 +189,31 @@ impl<'a> TryFrom<&'a [u8]> for RawNetMessage<'a> {
                     session_id: 0,
                     steam_id: SteamID::default(),
                 },
-                &value[4 + 8 + 8..],
+                4 + 8 + 8,
             )
         } else {
             (
                 NetMessageHeader::read(&mut reader)?,
-                &value[4 + 3 + 8 + 8 + 1 + 8 + 4..],
+                4 + 3 + 8 + 8 + 1 + 8 + 4,
             )
         };
 
+        value.advance(body_start);
         Ok(RawNetMessage {
             kind,
             is_protobuf,
             header,
-            data,
+            data: value,
         })
     }
 }
 
 pub struct RawSteamReader {
     tcp: BufReader<OwnedReadHalf>,
-    buff: BytesMut,
 }
 
 impl RawSteamReader {
-    async fn read_buff(&mut self) -> Result<&[u8]> {
+    async fn read_buff(&mut self) -> Result<BytesMut> {
         use tokio::io::AsyncReadExt;
 
         let mut header_bytes = [0; 8];
@@ -223,13 +222,14 @@ impl RawSteamReader {
         header.validate()?;
         trace!("got header for packet of {} bytes", header.length);
 
-        self.buff.resize(header.length as usize, 0);
-        self.tcp.read_exact(self.buff.as_mut()).await?;
-        Ok(self.buff.as_ref())
+        let mut buff = BytesMut::with_capacity(header.length as usize);
+        self.tcp.read_buf(&mut buff).await?;
+        Ok(buff)
     }
 
     pub async fn read<T: NetMessage>(&mut self) -> Result<(NetMessageHeader, T)> {
-        let raw = self.read_buff().await.and_then(RawNetMessage::try_from)?;
+        let buff = self.read_buff().await?;
+        let raw = RawNetMessage::try_from(buff)?;
         if raw.kind == T::KIND {
             let mut reader = Cursor::new(raw.data);
             Ok((raw.header, T::read_body(&mut reader)?))
@@ -293,48 +293,45 @@ pub struct SteamReader {
 
 impl SteamReader {
     pub async fn read<T: NetMessage>(&mut self) -> Result<(NetMessageHeader, T)> {
-        let decrypted = self.read_decrypting().await?;
-        let raw = RawNetMessage::try_from(decrypted.as_slice())?;
+        let raw = self.read_raw().await?;
         debug!("reading a {:?}", raw.kind);
         trace!("body: {:?}", raw.data);
         if raw.kind == T::KIND {
-            let mut reader = Cursor::new(raw.data);
-            Ok((raw.header, T::read_body(&mut reader)?))
+            let reader = Cursor::new(raw.data);
+            Ok((raw.header, T::read_body(reader)?))
         } else {
             Err(NetworkError::DifferentMessage(T::KIND, raw.kind))
         }
     }
 
     pub async fn dyn_read(&mut self) -> Result<(NetMessageHeader, DynMessage)> {
-        let decrypted = self.read_decrypting().await?;
-        let raw = RawNetMessage::try_from(decrypted.as_slice())?;
+        let raw = self.read_raw().await?;
         debug!("reading a {:?}", raw.kind);
         trace!("body: {:?}", raw.data);
         Ok((
             raw.header,
             DynMessage {
                 kind: raw.kind,
-                body: raw.data.to_vec(),
+                body: raw.data,
             },
         ))
     }
 
-    async fn read_decrypting(&mut self) -> Result<Vec<u8>> {
+    async fn read_raw(&mut self) -> Result<RawNetMessage> {
         let raw = self.raw.read_buff().await?;
-        let decrypted = symmetric_decrypt(raw.to_vec(), &self.key)?;
+        let decrypted = symmetric_decrypt(raw, &self.key)?;
         trace!(
             "received decrypted message({} bytes): {:?}",
             decrypted.len(),
             decrypted
         );
-        Ok(decrypted)
+        RawNetMessage::try_from(decrypted)
     }
 
     pub fn stream(mut self) -> impl Stream<Item = Result<(NetMessageHeader, DynMessage)>> {
         try_stream! {
             loop {
-                let decrypted = self.read_decrypting().await?;
-                let raw = RawNetMessage::try_from(decrypted.as_slice())?;
+                let raw = self.read_raw().await?;
                 debug!("reading a {:?}", raw.kind);
                 trace!("body: {:?}", raw.data);
                 match raw.kind {
@@ -350,7 +347,7 @@ impl SteamReader {
                             raw.header,
                             DynMessage {
                                 kind: raw.kind,
-                                body: raw.data.to_vec(),
+                                body: raw.data,
                             },
                         );
                     }

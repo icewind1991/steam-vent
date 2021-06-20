@@ -1,6 +1,7 @@
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use binread::BinRead;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
+use bytes::BytesMut;
 use crc::{Crc, CRC_32_ISO_HDLC};
 use flate2::read::GzDecoder;
 use log::{debug, trace};
@@ -53,11 +54,11 @@ pub trait NetMessage: Sized + Debug {
     const KIND: EMsg;
     const IS_PROTOBUF: bool = false;
 
-    fn read_body<R: Read + Seek>(_reader: &mut R) -> Result<Self, MalformedBody> {
+    fn read_body<R: Read + Seek>(_reader: R) -> Result<Self, MalformedBody> {
         panic!("Reading not implemented for {}", type_name::<Self>())
     }
 
-    fn write_body<W: Write>(&self, _writer: &mut W) -> Result<(), std::io::Error> {
+    fn write_body<W: Write>(&self, _writer: W) -> Result<(), std::io::Error> {
         panic!("Writing not implemented for {}", type_name::<Self>())
     }
 
@@ -69,7 +70,7 @@ pub trait NetMessage: Sized + Debug {
 #[derive(Debug)]
 pub struct DynMessage {
     pub kind: EMsg,
-    pub body: Vec<u8>,
+    pub body: BytesMut,
 }
 
 impl DynMessage {
@@ -92,9 +93,9 @@ pub struct ChannelEncryptRequest {
 impl NetMessage for ChannelEncryptRequest {
     const KIND: EMsg = EMsg::k_EMsgChannelEncryptRequest;
 
-    fn read_body<R: Read + Seek>(reader: &mut R) -> Result<Self, MalformedBody> {
+    fn read_body<R: Read + Seek>(mut reader: R) -> Result<Self, MalformedBody> {
         trace!("reading body of {:?} message", Self::KIND);
-        ChannelEncryptRequest::read(reader).map_err(|e| MalformedBody(Self::KIND, e.into()))
+        ChannelEncryptRequest::read(&mut reader).map_err(|e| MalformedBody(Self::KIND, e.into()))
     }
 }
 
@@ -106,9 +107,9 @@ pub struct ChannelEncryptResult {
 impl NetMessage for ChannelEncryptResult {
     const KIND: EMsg = EMsg::k_EMsgChannelEncryptResult;
 
-    fn read_body<R: Read + Seek>(reader: &mut R) -> Result<Self, MalformedBody> {
+    fn read_body<R: Read + Seek>(mut reader: R) -> Result<Self, MalformedBody> {
         trace!("reading body of {:?} message", Self::KIND);
-        ChannelEncryptResult::read(reader).map_err(|e| MalformedBody(Self::KIND, e.into()))
+        ChannelEncryptResult::read(&mut reader).map_err(|e| MalformedBody(Self::KIND, e.into()))
     }
 }
 
@@ -123,7 +124,7 @@ const CRC: Crc<u32> = Crc::<u32>::new(&CRC_32_ISO_HDLC);
 impl NetMessage for ClientEncryptResponse {
     const KIND: EMsg = EMsg::k_EMsgChannelEncryptResponse;
 
-    fn write_body<W: Write>(&self, writer: &mut W) -> Result<(), std::io::Error> {
+    fn write_body<W: Write>(&self, mut writer: W) -> Result<(), std::io::Error> {
         trace!("writing body of {:?} message", Self::KIND);
         writer.write_u64::<LittleEndian>(u64::MAX)?;
         writer.write_u64::<LittleEndian>(u64::MAX)?;
@@ -165,7 +166,7 @@ impl Read for MaybeZipReader {
 impl NetMessage for Multi {
     const KIND: EMsg = EMsg::k_EMsgMulti;
 
-    fn read_body<R: Read + Seek>(reader: &mut R) -> Result<Self, MalformedBody> {
+    fn read_body<R: Read + Seek>(reader: R) -> Result<Self, MalformedBody> {
         trace!("reading body of {:?} message", Self::KIND);
         Ok(Multi {
             messages: Self::iter(reader)?
@@ -179,7 +180,7 @@ impl NetMessage for Multi {
 
 impl Multi {
     pub fn iter<R: Read + Seek>(
-        reader: &mut R,
+        reader: R,
     ) -> Result<
         impl Iterator<Item = Result<(NetMessageHeader, DynMessage), NetworkError>>,
         MalformedBody,
@@ -193,8 +194,8 @@ struct MultiBodyIter<R> {
 }
 
 impl MultiBodyIter<MaybeZipReader> {
-    pub fn new<R: Read + Seek>(reader: &mut R) -> Result<Self, MalformedBody> {
-        let mut multi = CMsgMulti::parse_from_reader(reader)
+    pub fn new<R: Read + Seek>(mut reader: R) -> Result<Self, MalformedBody> {
+        let mut multi = CMsgMulti::parse_from_reader(&mut reader)
             .map_err(|e| MalformedBody(EMsg::k_EMsgMulti, e.into()))?;
 
         let data = match multi.get_size_unzipped() {
@@ -215,12 +216,12 @@ impl<R: Read> Iterator for MultiBodyIter<R> {
             Err(_) => return None,
         };
 
-        let mut msg_data = Vec::with_capacity(size as usize);
+        let mut msg_data = BytesMut::with_capacity(size as usize);
         msg_data.resize(size as usize, 0);
         if let Err(e) = self.reader.read_exact(&mut msg_data) {
             return Some(Err(NetworkError::IO(e)));
         }
-        let raw = match RawNetMessage::try_from(msg_data.as_slice()) {
+        let raw = match RawNetMessage::try_from(msg_data) {
             Ok(raw) => raw,
             Err(e) => return Some(Err(e)),
         };
@@ -231,7 +232,7 @@ impl<R: Read> Iterator for MultiBodyIter<R> {
             raw.header,
             DynMessage {
                 kind: raw.kind,
-                body: raw.data.to_vec(),
+                body: raw.data,
             },
         )))
     }
@@ -243,15 +244,15 @@ macro_rules! proto_msg {
             const KIND: EMsg = $kind;
             const IS_PROTOBUF: bool = true;
 
-            fn write_body<W: Write>(&self, writer: &mut W) -> Result<(), std::io::Error> {
+            fn write_body<W: Write>(&self, mut writer: W) -> Result<(), std::io::Error> {
                 trace!("writing body of protobuf message {:?}", Self::KIND);
-                self.write_to_writer(writer)
+                self.write_to_writer(&mut writer)
                     .map_err(|_| std::io::Error::from(std::io::ErrorKind::InvalidData))
             }
 
-            fn read_body<R: Read + Seek>(reader: &mut R) -> Result<Self, MalformedBody> {
+            fn read_body<R: Read + Seek>(mut reader: R) -> Result<Self, MalformedBody> {
                 trace!("reading body of protobuf message {:?}", Self::KIND);
-                $ty::parse_from_reader(reader).map_err(|e| MalformedBody(Self::KIND, e.into()))
+                $ty::parse_from_reader(&mut reader).map_err(|e| MalformedBody(Self::KIND, e.into()))
             }
         }
     };

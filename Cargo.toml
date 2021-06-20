@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 steam-vent-proto = { version = "0.1", path = "./protobuf" }
-steam-vent-crypto = { version = "0.1", path = "./crypto" }
+steam-vent-crypto = { version = "0.2", path = "./crypto" }
 tokio = { version = "1", features = ["net", "io-util"] }
 tokio-stream = "0.1"
 binread = "2"
