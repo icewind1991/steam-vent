@@ -7,11 +7,13 @@ use steam_vent_proto::steammessages_clientserver_login::{
     CMsgClientLogon, CMsgClientLogonResponse,
 };
 use steamid_ng::{AccountType, Instance, SteamID, Universe};
+use tokio::pin;
+use tokio_stream::StreamExt;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
     env_logger::init();
-    let (mut read, mut write) = connect("155.133.248.39:27020").await?;
+    let (read, mut write) = connect("155.133.248.39:27020").await?;
 
     println!("Handshake done");
 
@@ -39,15 +41,18 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     write.write(&header, &logon).await.unwrap();
 
-    let (_header, msg) = read.dyn_read().await?;
-    let multi: Multi = msg.try_into()?;
-    for (_, msg) in multi.messages {
+    let read_stream = read.stream();
+    pin!(read_stream);
+    while let Some(result) = read_stream.next().await {
+        let (_header, msg) = result?;
         match msg.kind {
             EMsg::k_EMsgClientLogOnResponse => {
                 let logon: CMsgClientLogonResponse = msg.try_into()?;
                 dbg!(logon);
             }
-            _ => (),
+            _ => {
+                dbg!(msg.kind);
+            }
         }
     }
 

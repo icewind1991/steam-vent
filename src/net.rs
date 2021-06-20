@@ -1,7 +1,9 @@
 use crate::message::{
-    ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, DynMessage, NetMessage,
+    ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, DynMessage, Multi,
+    NetMessage,
 };
 use crate::proto::steammessages_base::CMsgProtoBufHeader;
+use async_stream::try_stream;
 use binread::{BinRead, BinReaderExt};
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::BytesMut;
@@ -16,6 +18,7 @@ use thiserror::Error;
 use tokio::io::{AsyncWriteExt, BufReader, BufWriter};
 use tokio::net::tcp::{OwnedReadHalf, OwnedWriteHalf};
 use tokio::net::{TcpStream, ToSocketAddrs};
+use tokio_stream::Stream;
 
 pub const PROTO_MASK: u32 = 0x80000000;
 
@@ -325,6 +328,25 @@ impl SteamReader {
             decrypted
         );
         Ok(decrypted)
+    }
+
+    pub fn stream(mut self) -> impl Stream<Item = Result<(NetMessageHeader, DynMessage)>> {
+        try_stream! {
+            loop {
+                let (header, msg) =  self.dyn_read().await?;
+                match msg.kind {
+                    EMsg::k_EMsgMulti => {
+                        let multi: Multi = msg.try_into().unwrap();
+                        for (header, msg) in multi.messages {
+                            yield (header, msg);
+                        }
+                    },
+                    _ => {
+                        yield (header, msg);
+                    }
+                }
+            }
+        }
     }
 }
 

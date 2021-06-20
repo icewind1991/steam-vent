@@ -20,6 +20,7 @@ byteorder = "1"
 flate2 = "1"
 log = "0.4"
 steamid-ng = "1"
+async-stream = "0.3"
 
 [dev-dependencies]
 tokio = { version = "1.0", features = ["macros", "rt", "rt-multi-thread"] }
