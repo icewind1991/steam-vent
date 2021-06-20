@@ -2,6 +2,7 @@ use aes::cipher::generic_array::GenericArray;
 use aes::{Aes256, BlockDecrypt, BlockEncrypt, NewBlockCipher};
 use block_modes::block_padding::Pkcs7;
 use block_modes::{BlockMode, Cbc};
+use bytes::BytesMut;
 use hmac::{Hmac, Mac, NewMac};
 use once_cell::sync::Lazy;
 use rand::{random, Rng};
@@ -100,14 +101,16 @@ fn encrypt_message(mut message: Vec<u8>, key: &[u8; 32], plain_iv: &[u8; 16]) ->
     Ok(message)
 }
 
-fn decrypt_message(mut message: Vec<u8>, key: &[u8; 32], plain_iv: &[u8; 16]) -> Result<Vec<u8>> {
+fn decrypt_message(mut message: BytesMut, key: &[u8; 32], plain_iv: &[u8; 16]) -> Result<BytesMut> {
     let cipher = Aes256Cbc::new_fix(
         GenericArray::from_slice(key),
         GenericArray::from_slice(plain_iv),
     );
-    cipher
-        .decrypt(&mut message)
-        .map_err(|_| CryptError::MalformedMessage)?;
+    let len = cipher
+        .decrypt(message.as_mut())
+        .map_err(|_| CryptError::MalformedMessage)?
+        .len();
+    message.truncate(len);
     Ok(message)
 }
 
@@ -148,18 +151,14 @@ pub fn symmetric_encrypt(input: Vec<u8>, key: &[u8; 32]) -> Result<Vec<u8>> {
 
 /// Decrypt the IV stored in the first 16 bytes of `input`
 /// and use it to decrypt the remaining bytes.
-pub fn symmetric_decrypt(input: Vec<u8>, key: &[u8; 32]) -> Result<Vec<u8>> {
-    let encrypted_iv = input
-        .get(0..16)
-        .ok_or(CryptError::MalformedMessage)?
-        .try_into()
-        .unwrap();
+pub fn symmetric_decrypt(mut input: BytesMut, key: &[u8; 32]) -> Result<BytesMut> {
+    let message = input.split_off(16);
+    let encrypted_iv = input.as_ref().try_into().unwrap();
     let plain_iv = decrypt_iv(encrypted_iv, key);
 
-    let message = input[16..].to_vec();
-    let mut message = decrypt_message(message, key, &plain_iv)?;
-    let padding = *message.last().unwrap();
-    message.resize(message.len() - padding as usize, 0);
+    let message = decrypt_message(message, key, &plain_iv)?;
+    // let padding = *message.last().unwrap();
+    // message.resize(message.len() - padding as usize, 0);
 
     let hmac_random = &plain_iv[13..];
 
@@ -187,7 +186,7 @@ fn roundtrip_test() {
 
     let encrypted = symmetric_encrypt(input.clone(), &key).unwrap();
 
-    let decrypted = symmetric_decrypt(encrypted, &key).unwrap();
+    let decrypted = symmetric_decrypt(encrypted.as_slice().into(), &key).unwrap();
 
     assert_eq!(input, decrypted);
 }
