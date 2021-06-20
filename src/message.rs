@@ -178,14 +178,24 @@ impl NetMessage for Multi {
 }
 
 impl Multi {
-    fn iter<R: Read + Seek>(
+    pub fn iter<R: Read + Seek>(
         reader: &mut R,
     ) -> Result<
         impl Iterator<Item = Result<(NetMessageHeader, DynMessage), NetworkError>>,
         MalformedBody,
     > {
+        MultiBodyIter::new(reader)
+    }
+}
+
+struct MultiBodyIter<R> {
+    reader: R,
+}
+
+impl MultiBodyIter<MaybeZipReader> {
+    pub fn new<R: Read + Seek>(reader: &mut R) -> Result<Self, MalformedBody> {
         let mut multi = CMsgMulti::parse_from_reader(reader)
-            .map_err(|e| MalformedBody(Self::KIND, e.into()))?;
+            .map_err(|e| MalformedBody(EMsg::k_EMsgMulti, e.into()))?;
 
         let data = match multi.get_size_unzipped() {
             0 => MaybeZipReader::Raw(Cursor::new(multi.take_message_body())),
@@ -194,10 +204,6 @@ impl Multi {
 
         Ok(MultiBodyIter { reader: data })
     }
-}
-
-struct MultiBodyIter<R> {
-    reader: R,
 }
 
 impl<R: Read> Iterator for MultiBodyIter<R> {

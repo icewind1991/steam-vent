@@ -333,16 +333,26 @@ impl SteamReader {
     pub fn stream(mut self) -> impl Stream<Item = Result<(NetMessageHeader, DynMessage)>> {
         try_stream! {
             loop {
-                let (header, msg) =  self.dyn_read().await?;
-                match msg.kind {
+                let decrypted = self.read_decrypting().await?;
+                let raw = RawNetMessage::try_from(decrypted.as_slice())?;
+                debug!("reading a {:?}", raw.kind);
+                trace!("body: {:?}", raw.data);
+                match raw.kind {
                     EMsg::k_EMsgMulti => {
-                        let multi: Multi = msg.try_into().unwrap();
-                        for (header, msg) in multi.messages {
+                        let mut reader = Cursor::new(raw.data);
+                        for res in Multi::iter(&mut reader)? {
+                            let (header, msg) = res?;
                             yield (header, msg);
                         }
                     },
                     _ => {
-                        yield (header, msg);
+                        yield (
+                            raw.header,
+                            DynMessage {
+                                kind: raw.kind,
+                                body: raw.data.to_vec(),
+                            },
+                        );
                     }
                 }
             }
