@@ -1,6 +1,5 @@
 use crate::message::{
-    ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, DynMessage, Multi,
-    NetMessage,
+    ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, Flatten, NetMessage,
 };
 use crate::proto::steammessages_base::CMsgProtoBufHeader;
 use async_stream::try_stream;
@@ -9,10 +8,13 @@ use bytemuck::{cast, Pod, Zeroable};
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::{Buf, BytesMut};
 use log::{debug, trace};
+use pin_project_lite::pin_project;
 use protobuf::{Message, ProtobufEnum};
 use std::convert::TryFrom;
 use std::convert::TryInto;
 use std::io::{Cursor, Error, Seek, SeekFrom, Write};
+use std::pin::Pin;
+use std::task::{Context, Poll};
 use steam_vent_crypto::{generate_session_key, symmetric_decrypt, symmetric_encrypt, CryptError};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steamid_ng::SteamID;
@@ -20,6 +22,7 @@ use thiserror::Error;
 use tokio::io::{AsyncWriteExt, BufReader, BufWriter};
 use tokio::net::tcp::{OwnedReadHalf, OwnedWriteHalf};
 use tokio::net::{TcpStream, ToSocketAddrs};
+use tokio::pin;
 use tokio_stream::Stream;
 use tokio_stream::StreamExt;
 use tokio_util::codec::{Decoder, FramedRead};
@@ -284,74 +287,45 @@ impl RawSteamWriter {
     }
 }
 
-pub struct SteamReader {
-    raw: FramedRead<OwnedReadHalf, FrameDecoder>,
-    key: [u8; 32],
+pin_project! {
+    pub struct Decrypter<S> {
+        #[pin]
+        raw: S,
+        key: [u8; 32],
+    }
 }
 
-impl SteamReader {
-    pub async fn read<T: NetMessage>(&mut self) -> Result<(NetMessageHeader, T)> {
-        let raw = self.read_raw().await?;
-        debug!("reading a {:?}", raw.kind);
-        trace!("body: {:?}", raw.data);
-        if raw.kind == T::KIND {
-            let reader = Cursor::new(raw.data);
-            Ok((raw.header, T::read_body(reader)?))
-        } else {
-            Err(NetworkError::DifferentMessage(T::KIND, raw.kind))
-        }
-    }
+impl<S: Stream<Item = Result<BytesMut>>> Stream for Decrypter<S> {
+    type Item = Result<BytesMut>;
 
-    pub async fn dyn_read(&mut self) -> Result<(NetMessageHeader, DynMessage)> {
-        let raw = self.read_raw().await?;
-        debug!("reading a {:?}", raw.kind);
-        trace!("body: {:?}", raw.data);
-        Ok((
-            raw.header,
-            DynMessage {
-                kind: raw.kind,
-                body: raw.data,
-            },
-        ))
+    fn poll_next(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
+        self.as_mut().project().raw.poll_next(cx).map(|opt| {
+            opt.map(|raw_result| {
+                raw_result.and_then(|raw| {
+                    let key = self.as_mut().project().key;
+                    symmetric_decrypt(raw, key).map_err(NetworkError::from)
+                })
+            })
+        })
     }
+}
 
-    async fn read_raw(&mut self) -> Result<RawNetMessage> {
-        let raw = self.raw.next().await.ok_or(NetworkError::EOF)??;
-        let decrypted = symmetric_decrypt(raw, &self.key)?;
-        trace!(
-            "received decrypted message({} bytes): {:?}",
-            decrypted.len(),
-            decrypted
-        );
-        RawNetMessage::try_from(decrypted)
+pin_project! {
+    pub struct RawMessageReader<S> {
+        #[pin]
+        raw: S
     }
+}
 
-    pub fn stream(mut self) -> impl Stream<Item = Result<(NetMessageHeader, DynMessage)>> {
-        try_stream! {
-            loop {
-                let raw = self.read_raw().await?;
-                debug!("reading a {:?}", raw.kind);
-                trace!("body: {:?}", raw.data);
-                match raw.kind {
-                    EMsg::k_EMsgMulti => {
-                        let mut reader = Cursor::new(raw.data);
-                        for res in Multi::iter(&mut reader)? {
-                            let (header, msg) = res?;
-                            yield (header, msg);
-                        }
-                    },
-                    _ => {
-                        yield (
-                            raw.header,
-                            DynMessage {
-                                kind: raw.kind,
-                                body: raw.data,
-                            },
-                        );
-                    }
-                }
-            }
-        }
+impl<S: Stream<Item = Result<BytesMut>>> Stream for RawMessageReader<S> {
+    type Item = Result<RawNetMessage>;
+
+    fn poll_next(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
+        self.as_mut()
+            .project()
+            .raw
+            .poll_next(cx)
+            .map(|opt| opt.map(|raw_result| raw_result.and_then(|raw| raw.try_into())))
     }
 }
 
@@ -397,10 +371,7 @@ impl SteamWriter {
 
 pub async fn connect<A: ToSocketAddrs>(
     addr: A,
-) -> Result<(
-    impl Stream<Item = Result<(NetMessageHeader, DynMessage)>>,
-    SteamWriter,
-)> {
+) -> Result<(impl Stream<Item = Result<RawNetMessage>>, SteamWriter)> {
     let stream = TcpStream::connect(addr).await?;
     let (read, write) = stream.into_split();
     let mut raw_reader = FramedRead::new(read, FrameDecoder);
@@ -433,11 +404,12 @@ pub async fn connect<A: ToSocketAddrs>(
     debug!("crypt handshake complete");
 
     Ok((
-        SteamReader {
-            raw: raw_reader,
-            key: key.plain,
-        }
-        .stream(),
+        Flatten::new(RawMessageReader {
+            raw: Decrypter {
+                raw: raw_reader,
+                key: key.plain,
+            },
+        }),
         SteamWriter {
             raw: raw_writer,
             key: key.plain,

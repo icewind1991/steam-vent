@@ -5,11 +5,14 @@ use bytes::BytesMut;
 use crc::{Crc, CRC_32_ISO_HDLC};
 use flate2::read::GzDecoder;
 use log::{debug, trace};
+use pin_project_lite::pin_project;
 use protobuf::{Message, ProtobufError};
 use std::any::type_name;
 use std::convert::TryFrom;
 use std::fmt::Debug;
 use std::io::{Cursor, Read, Seek, Write};
+use std::pin::Pin;
+use std::task::{Context, Poll};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_base::CMsgMulti;
 use steam_vent_proto::steammessages_clientserver::CMsgClientServersAvailable;
@@ -17,6 +20,7 @@ use steam_vent_proto::steammessages_clientserver_login::{
     CMsgClientLogon, CMsgClientLogonResponse,
 };
 use thiserror::Error;
+use tokio_stream::Stream;
 
 #[derive(Error, Debug)]
 #[error("Malformed message body for {0:?}: {1}")]
@@ -42,14 +46,6 @@ impl From<String> for MessageBodyError {
     }
 }
 
-#[derive(Error, Debug)]
-pub enum DynMessageError {
-    #[error("Difference message expected, expected {0:?}, got {1:?}")]
-    InvalidMessageKind(EMsg, EMsg),
-    #[error("{0}")]
-    MalformedBody(#[from] crate::message::MalformedBody),
-}
-
 pub trait NetMessage: Sized + Debug {
     const KIND: EMsg;
     const IS_PROTOBUF: bool = false;
@@ -64,22 +60,6 @@ pub trait NetMessage: Sized + Debug {
 
     fn encode_size(&self) -> Option<usize> {
         None
-    }
-}
-
-#[derive(Debug)]
-pub struct DynMessage {
-    pub kind: EMsg,
-    pub body: BytesMut,
-}
-
-impl DynMessage {
-    pub fn try_into<T: NetMessage>(self) -> Result<T, DynMessageError> {
-        if self.kind == T::KIND {
-            Ok(T::read_body(&mut Cursor::new(self.body))?)
-        } else {
-            Err(DynMessageError::InvalidMessageKind(T::KIND, self.kind))
-        }
     }
 }
 
@@ -146,7 +126,7 @@ impl NetMessage for ClientEncryptResponse {
 
 #[derive(Debug)]
 pub struct Multi {
-    pub messages: Vec<(NetMessageHeader, DynMessage)>,
+    pub messages: Vec<RawNetMessage>,
 }
 
 enum MaybeZipReader {
@@ -181,11 +161,57 @@ impl NetMessage for Multi {
 impl Multi {
     pub fn iter<R: Read + Seek>(
         reader: R,
-    ) -> Result<
-        impl Iterator<Item = Result<(NetMessageHeader, DynMessage), NetworkError>>,
-        MalformedBody,
-    > {
+    ) -> Result<impl Iterator<Item = Result<RawNetMessage, NetworkError>>, MalformedBody> {
         MultiBodyIter::new(reader)
+    }
+}
+
+pin_project! {
+    pub struct Flatten<S> {
+        #[pin]
+        raw: S,
+        multi: Option<MultiBodyIter<MaybeZipReader>>
+    }
+}
+
+impl<S> Flatten<S> {
+    pub fn new(raw: S) -> Self {
+        Flatten { raw, multi: None }
+    }
+}
+
+impl<S: Stream<Item = Result<RawNetMessage, NetworkError>>> Stream for Flatten<S> {
+    type Item = Result<RawNetMessage, NetworkError>;
+
+    fn poll_next(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
+        match self.as_mut().project().multi {
+            Some(multi) => match multi.next() {
+                Some(msg) => Poll::Ready(Some(msg)),
+                None => {
+                    *self.as_mut().project().multi = None;
+                    self.poll_next(cx)
+                }
+            },
+            None => {
+                let next = match self.as_mut().project().raw.poll_next(cx) {
+                    Poll::Pending => return Poll::Pending,
+                    Poll::Ready(None) => return Poll::Ready(None),
+                    Poll::Ready(Some(Err(e))) => return Poll::Ready(Some(Err(e))),
+                    Poll::Ready(Some(Ok(next))) => next,
+                };
+                if next.kind == EMsg::k_EMsgMulti {
+                    let reader = Cursor::new(next.data);
+                    let multi = match MultiBodyIter::new(reader) {
+                        Err(e) => return Poll::Ready(Some(Err(e.into()))),
+                        Ok(iter) => iter,
+                    };
+                    *self.as_mut().project().multi = Some(multi);
+                    self.poll_next(cx)
+                } else {
+                    return Poll::Ready(Some(Ok(next)));
+                }
+            }
+        }
     }
 }
 
@@ -208,7 +234,7 @@ impl MultiBodyIter<MaybeZipReader> {
 }
 
 impl<R: Read> Iterator for MultiBodyIter<R> {
-    type Item = Result<(NetMessageHeader, DynMessage), NetworkError>;
+    type Item = Result<RawNetMessage, NetworkError>;
 
     fn next(&mut self) -> Option<Self::Item> {
         let size = match self.reader.read_u32::<LittleEndian>() {
@@ -228,13 +254,7 @@ impl<R: Read> Iterator for MultiBodyIter<R> {
 
         debug!("Reading child message {:?}", raw.kind);
 
-        Some(Ok((
-            raw.header,
-            DynMessage {
-                kind: raw.kind,
-                body: raw.data,
-            },
-        )))
+        Some(Ok(raw))
     }
 }
 

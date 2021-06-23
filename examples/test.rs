@@ -43,10 +43,10 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     pin!(read);
     while let Some(result) = read.next().await {
-        let (_header, msg) = result?;
+        let msg = result?;
         match msg.kind {
             EMsg::k_EMsgClientLogOnResponse => {
-                let logon: CMsgClientLogonResponse = msg.try_into()?;
+                let (_, logon) = msg.read::<CMsgClientLogonResponse>()?;
                 dbg!(logon);
             }
             _ => {
