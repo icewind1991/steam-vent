@@ -397,7 +397,12 @@ impl SteamWriter {
     }
 }
 
-pub async fn connect<A: ToSocketAddrs>(addr: A) -> Result<(SteamReader, SteamWriter)> {
+pub async fn connect<A: ToSocketAddrs>(
+    addr: A,
+) -> Result<(
+    impl Stream<Item = Result<(NetMessageHeader, DynMessage)>>,
+    SteamWriter,
+)> {
     let (mut raw_reader, mut raw_writer) = raw_connect(addr).await?;
 
     let (_header, encrypt_request) = raw_reader.read::<ChannelEncryptRequest>().await?;
@@ -426,7 +431,8 @@ pub async fn connect<A: ToSocketAddrs>(addr: A) -> Result<(SteamReader, SteamWri
         SteamReader {
             raw: raw_reader,
             key: key.plain,
-        },
+        }
+        .stream(),
         SteamWriter {
             raw: raw_writer,
             key: key.plain,

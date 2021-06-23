@@ -13,7 +13,7 @@ use tokio_stream::StreamExt;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
     env_logger::init();
-    let (read, mut write) = connect("155.133.248.39:27020").await?;
+    let (mut read, mut write) = connect("155.133.248.39:27020").await?;
 
     println!("Handshake done");
 
@@ -41,9 +41,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     write.write(&header, &logon).await.unwrap();
 
-    let read_stream = read.stream();
-    pin!(read_stream);
-    while let Some(result) = read_stream.next().await {
+    pin!(read);
+    while let Some(result) = read.next().await {
         let (_header, msg) = result?;
         match msg.kind {
             EMsg::k_EMsgClientLogOnResponse => {
