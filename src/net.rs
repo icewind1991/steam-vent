@@ -5,12 +5,14 @@ use crate::message::{
 use crate::proto::steammessages_base::CMsgProtoBufHeader;
 use async_stream::try_stream;
 use binread::{BinRead, BinReaderExt};
+use bytemuck::{cast, Pod, Zeroable};
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::{Buf, BytesMut};
 use log::{debug, trace};
 use protobuf::{Message, ProtobufEnum};
 use std::convert::TryFrom;
-use std::io::{Cursor, Seek, SeekFrom, Write};
+use std::convert::TryInto;
+use std::io::{Cursor, Error, Seek, SeekFrom, Write};
 use steam_vent_crypto::{generate_session_key, symmetric_decrypt, symmetric_encrypt, CryptError};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steamid_ng::SteamID;
@@ -19,6 +21,8 @@ use tokio::io::{AsyncWriteExt, BufReader, BufWriter};
 use tokio::net::tcp::{OwnedReadHalf, OwnedWriteHalf};
 use tokio::net::{TcpStream, ToSocketAddrs};
 use tokio_stream::Stream;
+use tokio_stream::StreamExt;
+use tokio_util::codec::{Decoder, FramedRead};
 
 pub const PROTO_MASK: u32 = 0x80000000;
 
@@ -38,26 +42,15 @@ pub enum NetworkError {
     MalformedBody(#[from] crate::message::MalformedBody),
     #[error("Crypto error: {0}")]
     CryptoError(#[from] CryptError),
+    #[error("Unexpected end of stream")]
+    EOF,
 }
 
-pub type Result<T> = std::result::Result<T, NetworkError>;
-
-pub async fn raw_connect<A: ToSocketAddrs>(addr: A) -> Result<(RawSteamReader, RawSteamWriter)> {
-    let stream = TcpStream::connect(addr).await?;
-    let (read, write) = stream.into_split();
-    Ok((
-        RawSteamReader {
-            tcp: BufReader::new(read),
-        },
-        RawSteamWriter {
-            tcp: BufWriter::new(write),
-        },
-    ))
-}
+pub type Result<T, E = NetworkError> = std::result::Result<T, E>;
 
 const MAGIC: [u8; 4] = *b"VT01";
 
-#[derive(Debug, Default, Copy, Clone, BinRead)]
+#[derive(Debug, Default, Copy, Clone, BinRead, Zeroable, Pod)]
 #[repr(C)]
 pub struct Header {
     length: u32,
@@ -208,39 +201,44 @@ impl TryFrom<BytesMut> for RawNetMessage {
     }
 }
 
-pub struct RawSteamReader {
-    tcp: BufReader<OwnedReadHalf>,
-}
-
-impl RawSteamReader {
-    async fn read_buff(&mut self) -> Result<BytesMut> {
-        use tokio::io::AsyncReadExt;
-
-        let mut header_bytes = [0; 8];
-        self.tcp.read_exact(&mut header_bytes).await?;
-        let header: Header = Cursor::new(&header_bytes[..]).read_le().unwrap();
-        header.validate()?;
-        trace!("got header for packet of {} bytes", header.length);
-
-        let mut buff = BytesMut::with_capacity(header.length as usize);
-        self.tcp.read_buf(&mut buff).await?;
-        Ok(buff)
-    }
-
-    pub async fn read<T: NetMessage>(&mut self) -> Result<(NetMessageHeader, T)> {
-        let buff = self.read_buff().await?;
-        let raw = RawNetMessage::try_from(buff)?;
-        if raw.kind == T::KIND {
-            let mut reader = Cursor::new(raw.data);
-            Ok((raw.header, T::read_body(&mut reader)?))
+impl RawNetMessage {
+    pub fn read<T: NetMessage>(self) -> Result<(NetMessageHeader, T)> {
+        if self.kind == T::KIND {
+            let mut reader = Cursor::new(self.data);
+            Ok((self.header, T::read_body(&mut reader)?))
         } else {
-            Err(NetworkError::DifferentMessage(T::KIND, raw.kind))
+            Err(NetworkError::DifferentMessage(T::KIND, self.kind))
         }
     }
 }
 
+struct FrameDecoder;
+
+impl Decoder for FrameDecoder {
+    type Item = BytesMut;
+    type Error = NetworkError;
+
+    fn decode(&mut self, src: &mut BytesMut) -> Result<Option<Self::Item>> {
+        if src.len() < 8 {
+            return Ok(None);
+        }
+
+        let header_bytes = src[0..8].try_into().unwrap();
+        let header = cast::<[u8; 8], Header>(header_bytes);
+        header.validate()?;
+        trace!("got header for packet of {} bytes", header.length);
+
+        if src.len() < 8 + header.length as usize {
+            return Ok(None);
+        }
+
+        src.advance(8);
+        Ok(Some(src.split_to(header.length as usize)))
+    }
+}
+
 pub struct RawSteamWriter {
-    tcp: BufWriter<OwnedWriteHalf>,
+    tcp: OwnedWriteHalf,
 }
 
 impl RawSteamWriter {
@@ -287,7 +285,7 @@ impl RawSteamWriter {
 }
 
 pub struct SteamReader {
-    raw: RawSteamReader,
+    raw: FramedRead<OwnedReadHalf, FrameDecoder>,
     key: [u8; 32],
 }
 
@@ -318,7 +316,7 @@ impl SteamReader {
     }
 
     async fn read_raw(&mut self) -> Result<RawNetMessage> {
-        let raw = self.raw.read_buff().await?;
+        let raw = self.raw.next().await.ok_or(NetworkError::EOF)??;
         let decrypted = symmetric_decrypt(raw, &self.key)?;
         trace!(
             "received decrypted message({} bytes): {:?}",
@@ -403,9 +401,14 @@ pub async fn connect<A: ToSocketAddrs>(
     impl Stream<Item = Result<(NetMessageHeader, DynMessage)>>,
     SteamWriter,
 )> {
-    let (mut raw_reader, mut raw_writer) = raw_connect(addr).await?;
+    let stream = TcpStream::connect(addr).await?;
+    let (read, write) = stream.into_split();
+    let mut raw_reader = FramedRead::new(read, FrameDecoder);
+    let mut raw_writer = RawSteamWriter { tcp: write };
 
-    let (_header, encrypt_request) = raw_reader.read::<ChannelEncryptRequest>().await?;
+    let (_header, encrypt_request) =
+        RawNetMessage::try_from(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
+            .read::<ChannelEncryptRequest>()?;
 
     trace!("using nonce: {:?}", encrypt_request.nonce);
     let key = generate_session_key(None);
@@ -419,7 +422,9 @@ pub async fn connect<A: ToSocketAddrs>(
     };
     raw_writer.write_message(&response).await?;
 
-    let (_header, encrypt_response) = raw_reader.read::<ChannelEncryptResult>().await?;
+    let (_header, encrypt_response) =
+        RawNetMessage::try_from(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
+            .read::<ChannelEncryptResult>()?;
 
     if encrypt_response.result != 1 {
         return Err(NetworkError::CryptoHandshakeFailed);

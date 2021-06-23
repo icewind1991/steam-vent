@@ -8,13 +8,14 @@ edition = "2018"
 steam-vent-proto = { version = "0.1", path = "./protobuf" }
 steam-vent-crypto = { version = "0.2", path = "./crypto" }
 tokio = { version = "1", features = ["net", "io-util"] }
+tokio-util = { version = "0.6", features = ["codec"] }
 tokio-stream = "0.1"
 binread = "2"
 binwrite = "0.2"
 thiserror = "1"
 bytes = "1"
 protobuf = "=2.24.1"
-bytemuck = "1"
+bytemuck = { version = "1", features = ["derive"] }
 crc = "2"
 byteorder = "1"
 flate2 = "1"

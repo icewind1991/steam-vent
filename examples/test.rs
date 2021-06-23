@@ -13,7 +13,7 @@ use tokio_stream::StreamExt;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
     env_logger::init();
-    let (mut read, mut write) = connect("155.133.248.39:27020").await?;
+    let (read, mut write) = connect("155.133.248.39:27020").await?;
 
     println!("Handshake done");
 
