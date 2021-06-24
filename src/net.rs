@@ -1,8 +1,7 @@
 use crate::message::{
-    ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, Flatten, NetMessage,
+    flatten_multi, ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, NetMessage,
 };
 use crate::proto::steammessages_base::CMsgProtoBufHeader;
-use binread::BinRead;
 use bytemuck::{cast, Pod, Zeroable};
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::{Buf, BufMut, BytesMut};
@@ -49,7 +48,7 @@ pub type Result<T, E = NetworkError> = std::result::Result<T, E>;
 
 const MAGIC: [u8; 4] = *b"VT01";
 
-#[derive(Debug, Default, Copy, Clone, BinRead, Zeroable, Pod)]
+#[derive(Debug, Default, Copy, Clone, Zeroable, Pod)]
 #[repr(C)]
 pub struct Header {
     length: u32,
@@ -318,7 +317,7 @@ pub async fn connect<A: ToSocketAddrs>(
     let key = key.plain;
 
     Ok((
-        Flatten::new(
+        flatten_multi(
             raw_reader
                 .map(move |res| {
                     res.and_then(move |encrypted| {

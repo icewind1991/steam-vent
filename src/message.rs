@@ -4,15 +4,17 @@ use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::BytesMut;
 use crc::{Crc, CRC_32_ISO_HDLC};
 use flate2::read::GzDecoder;
+use futures_util::{
+    future::ready,
+    stream::{iter, once},
+    StreamExt,
+};
 use log::{debug, trace};
-use pin_project_lite::pin_project;
 use protobuf::{Message, ProtobufError};
 use std::any::type_name;
 use std::convert::TryFrom;
 use std::fmt::Debug;
 use std::io::{Cursor, Read, Seek, Write};
-use std::pin::Pin;
-use std::task::{Context, Poll};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_base::CMsgMulti;
 use steam_vent_proto::steammessages_clientserver::CMsgClientServersAvailable;
@@ -166,53 +168,20 @@ impl Multi {
     }
 }
 
-pin_project! {
-    pub struct Flatten<S> {
-        #[pin]
-        raw: S,
-        multi: Option<MultiBodyIter<MaybeZipReader>>
-    }
-}
-
-impl<S> Flatten<S> {
-    pub fn new(raw: S) -> Self {
-        Flatten { raw, multi: None }
-    }
-}
-
-impl<S: Stream<Item = Result<RawNetMessage, NetworkError>>> Stream for Flatten<S> {
-    type Item = Result<RawNetMessage, NetworkError>;
-
-    fn poll_next(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
-        match self.as_mut().project().multi {
-            Some(multi) => match multi.next() {
-                Some(msg) => Poll::Ready(Some(msg)),
-                None => {
-                    *self.as_mut().project().multi = None;
-                    self.poll_next(cx)
-                }
-            },
-            None => {
-                let next = match self.as_mut().project().raw.poll_next(cx) {
-                    Poll::Pending => return Poll::Pending,
-                    Poll::Ready(None) => return Poll::Ready(None),
-                    Poll::Ready(Some(Err(e))) => return Poll::Ready(Some(Err(e))),
-                    Poll::Ready(Some(Ok(next))) => next,
-                };
-                if next.kind == EMsg::k_EMsgMulti {
-                    let reader = Cursor::new(next.data);
-                    let multi = match MultiBodyIter::new(reader) {
-                        Err(e) => return Poll::Ready(Some(Err(e.into()))),
-                        Ok(iter) => iter,
-                    };
-                    *self.as_mut().project().multi = Some(multi);
-                    self.poll_next(cx)
-                } else {
-                    return Poll::Ready(Some(Ok(next)));
-                }
-            }
+pub fn flatten_multi<S: Stream<Item = Result<RawNetMessage, NetworkError>>>(
+    source: S,
+) -> impl Stream<Item = Result<RawNetMessage, NetworkError>> {
+    source.flat_map(|res| match res {
+        Ok(next) if next.kind == EMsg::k_EMsgMulti => {
+            let reader = Cursor::new(next.data);
+            let multi = match MultiBodyIter::new(reader) {
+                Err(e) => return once(ready(Err(e.into()))).right_stream(),
+                Ok(iter) => iter,
+            };
+            iter(multi).left_stream()
         }
-    }
+        res => once(ready(res)).right_stream(),
+    })
 }
 
 struct MultiBodyIter<R> {

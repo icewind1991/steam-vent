@@ -21,8 +21,6 @@ byteorder = "1"
 flate2 = "1"
 log = "0.4"
 steamid-ng = "1"
-async-stream = "0.3"
-pin-project-lite = "0.2"
 futures-sink = "0.3"
 futures-util = { version = "0.3", features = ["sink"] }
 
