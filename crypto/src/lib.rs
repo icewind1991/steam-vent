@@ -83,22 +83,20 @@ fn decrypt_iv(iv: [u8; 16], key: &[u8; 32]) -> [u8; 16] {
 
 type Aes256Cbc = Cbc<Aes256, Pkcs7>;
 
-fn encrypt_message(mut message: Vec<u8>, key: &[u8; 32], plain_iv: &[u8; 16]) -> Result<Vec<u8>> {
+fn encrypt_message(mut message: BytesMut, key: &[u8; 32], plain_iv: &[u8; 16]) -> BytesMut {
     let cipher = Aes256Cbc::new_fix(
         GenericArray::from_slice(key),
         GenericArray::from_slice(plain_iv),
     );
     let length = message.len();
     message.resize(length + 16, 0);
-    cipher
+    let len = cipher
         .encrypt(&mut message, length)
-        .map_err(|_| CryptError::MalformedMessage)?;
+        .expect("not enough padding")
+        .len();
 
-    while message.last() == Some(&0) {
-        message.truncate(message.len() - 1);
-    }
-
-    Ok(message)
+    message.truncate(len);
+    message
 }
 
 fn decrypt_message(mut message: BytesMut, key: &[u8; 32], plain_iv: &[u8; 16]) -> Result<BytesMut> {
@@ -114,23 +112,19 @@ fn decrypt_message(mut message: BytesMut, key: &[u8; 32], plain_iv: &[u8; 16]) -
     Ok(message)
 }
 
-fn symmetric_encrypt_with_iv(
-    message: Vec<u8>,
-    key: &[u8; 32],
-    plain_iv: [u8; 16],
-) -> Result<Vec<u8>> {
+fn symmetric_encrypt_with_iv(message: BytesMut, key: &[u8; 32], plain_iv: [u8; 16]) -> BytesMut {
     let encrypted_iv = encrypt_iv(plain_iv, key);
-    let encrypted_message = encrypt_message(message, key, &plain_iv)?;
+    let encrypted_message = encrypt_message(message, key, &plain_iv);
 
-    let mut output = encrypted_iv.to_vec();
+    let mut output = BytesMut::from(&encrypted_iv[..]);
     output.extend(encrypted_message.into_iter());
-    Ok(output)
+    output
 }
 
 type HmacSha1 = Hmac<Sha1>;
 
 /// Generate a random IV and encrypt `input` with it and `key`.
-pub fn symmetric_encrypt(input: Vec<u8>, key: &[u8; 32]) -> Result<Vec<u8>> {
+pub fn symmetric_encrypt(input: BytesMut, key: &[u8; 32]) -> BytesMut {
     let hmac_random: [u8; 3] = random();
 
     let mut hmac_key = [0; 64];
@@ -182,11 +176,104 @@ pub fn symmetric_decrypt(mut input: BytesMut, key: &[u8; 32]) -> Result<BytesMut
 fn roundtrip_test() {
     let key = random();
 
-    let input = vec![55; 16];
+    let input = BytesMut::from(&[55; 16][..]);
 
-    let encrypted = symmetric_encrypt(input.clone(), &key).unwrap();
+    let encrypted = symmetric_encrypt(input.clone(), &key);
 
-    let decrypted = symmetric_decrypt(encrypted.as_slice().into(), &key).unwrap();
+    let decrypted = symmetric_decrypt(encrypted, &key).unwrap();
 
     assert_eq!(input, decrypted);
 }
+
+#[cfg(feature = "stream")]
+mod stream {
+    use crate::{symmetric_decrypt, symmetric_encrypt, CryptError};
+    use bytes::BytesMut;
+    use futures_sink::Sink;
+    use pin_project_lite::pin_project;
+    use std::pin::Pin;
+    use std::task::{Context, Poll};
+    use tokio_stream::Stream;
+
+    pin_project! {
+        pub struct Decrypter<S> {
+            #[pin]
+            source: S,
+            key: [u8; 32],
+        }
+    }
+
+    impl<S> Decrypter<S> {
+        pub fn new(source: S, key: [u8; 32]) -> Self {
+            Decrypter { source, key }
+        }
+    }
+
+    impl<E, S> Stream for Decrypter<S>
+    where
+        S: Stream<Item = Result<BytesMut, E>>,
+        CryptError: Into<E>,
+    {
+        type Item = Result<BytesMut, E>;
+
+        fn poll_next(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
+            self.as_mut().project().source.poll_next(cx).map(|opt| {
+                opt.map(|source_result| {
+                    source_result.and_then(|source| {
+                        let key = self.as_mut().project().key;
+                        symmetric_decrypt(source, key).map_err(CryptError::into)
+                    })
+                })
+            })
+        }
+    }
+
+    pin_project! {
+        pub struct Encrypter<S> {
+            #[pin]
+            target: S,
+            key: [u8; 32],
+        }
+    }
+
+    impl<S> Encrypter<S> {
+        pub fn new(target: S, key: [u8; 32]) -> Self {
+            Encrypter { target, key }
+        }
+    }
+
+    impl<E, S> Sink<BytesMut> for Encrypter<S>
+    where
+        S: Sink<BytesMut, Error = E>,
+    {
+        type Error = E;
+
+        fn poll_ready(
+            mut self: Pin<&mut Self>,
+            cx: &mut Context<'_>,
+        ) -> Poll<Result<(), Self::Error>> {
+            self.as_mut().project().target.poll_ready(cx)
+        }
+
+        fn start_send(mut self: Pin<&mut Self>, item: BytesMut) -> Result<(), Self::Error> {
+            let encrypted = symmetric_encrypt(item, &self.key);
+            self.as_mut().project().target.start_send(encrypted)
+        }
+
+        fn poll_flush(
+            mut self: Pin<&mut Self>,
+            cx: &mut Context<'_>,
+        ) -> Poll<Result<(), Self::Error>> {
+            self.as_mut().project().target.poll_flush(cx)
+        }
+
+        fn poll_close(
+            mut self: Pin<&mut Self>,
+            cx: &mut Context<'_>,
+        ) -> Poll<Result<(), Self::Error>> {
+            self.as_mut().project().target.poll_close(cx)
+        }
+    }
+}
+#[cfg(feature = "stream")]
+pub use stream::{Decrypter, Encrypter};

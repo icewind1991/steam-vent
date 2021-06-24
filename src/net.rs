@@ -6,7 +6,9 @@ use async_stream::try_stream;
 use binread::{BinRead, BinReaderExt};
 use bytemuck::{cast, Pod, Zeroable};
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
-use bytes::{Buf, BytesMut};
+use bytes::{Buf, BufMut, BytesMut};
+use futures_sink::Sink;
+use futures_util::sink::SinkExt;
 use log::{debug, trace};
 use pin_project_lite::pin_project;
 use protobuf::{Message, ProtobufEnum};
@@ -15,7 +17,9 @@ use std::convert::TryInto;
 use std::io::{Cursor, Error, Seek, SeekFrom, Write};
 use std::pin::Pin;
 use std::task::{Context, Poll};
-use steam_vent_crypto::{generate_session_key, symmetric_decrypt, symmetric_encrypt, CryptError};
+use steam_vent_crypto::{
+    generate_session_key, symmetric_decrypt, symmetric_encrypt, CryptError, Decrypter, Encrypter,
+};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steamid_ng::SteamID;
 use thiserror::Error;
@@ -25,7 +29,7 @@ use tokio::net::{TcpStream, ToSocketAddrs};
 use tokio::pin;
 use tokio_stream::Stream;
 use tokio_stream::StreamExt;
-use tokio_util::codec::{Decoder, FramedRead};
+use tokio_util::codec::{Decoder, Encoder, FramedRead, FramedWrite};
 
 pub const PROTO_MASK: u32 = 0x80000000;
 
@@ -113,8 +117,6 @@ impl NetMessageHeader {
     ) -> std::io::Result<()> {
         if kind == EMsg::k_EMsgChannelEncryptResponse {
             writer.write_u32::<LittleEndian>(kind.value() as u32)?;
-            writer.write_u64::<LittleEndian>(self.target_job_id)?;
-            writer.write_u64::<LittleEndian>(self.source_job_id)?;
         } else if proto {
             trace!("writing header for {:?} protobuf message", kind);
             let mut proto_header = CMsgProtoBufHeader::new();
@@ -215,9 +217,9 @@ impl RawNetMessage {
     }
 }
 
-struct FrameDecoder;
+struct FrameCodec;
 
-impl Decoder for FrameDecoder {
+impl Decoder for FrameCodec {
     type Item = BytesMut;
     type Error = NetworkError;
 
@@ -240,74 +242,49 @@ impl Decoder for FrameDecoder {
     }
 }
 
-pub struct RawSteamWriter {
-    tcp: OwnedWriteHalf,
-}
+impl Encoder<BytesMut> for FrameCodec {
+    type Error = NetworkError;
 
-impl RawSteamWriter {
-    pub async fn write_message<T: NetMessage>(&mut self, message: &T) -> Result<()> {
-        debug!("writing raw {:?} message", T::KIND);
-        let buff = match message.encode_size() {
-            Some(message_size) => {
-                let cap = message_size + 8 + 4;
-                let mut buff = Vec::with_capacity(cap);
+    fn encode(&mut self, item: BytesMut, dst: &mut BytesMut) -> Result<(), Self::Error> {
+        dst.reserve(8 + item.len());
 
-                WriteBytesExt::write_u32::<LittleEndian>(&mut buff, message_size as u32 + 4)?; // +4 for the KIND
-                Write::write_all(&mut buff, &MAGIC)?;
-
-                WriteBytesExt::write_i32::<LittleEndian>(&mut buff, T::KIND.value())?;
-                message.write_body(&mut buff)?;
-
-                buff
-            }
-            None => {
-                let mut body = Vec::with_capacity(128);
-                message.write_body(&mut body)?;
-
-                let message_size = body.len();
-
-                let cap = message_size + 8 + 4;
-                let mut buff = Vec::with_capacity(cap);
-
-                WriteBytesExt::write_u32::<LittleEndian>(&mut buff, message_size as u32 + 4)?; // +4 for the KIND
-                Write::write_all(&mut buff, &MAGIC)?;
-
-                WriteBytesExt::write_i32::<LittleEndian>(&mut buff, T::KIND.value())?;
-                Write::write_all(&mut buff, &body)?;
-
-                buff
-            }
-        };
-
-        trace!("encoded raw message({} bytes): {:?}", buff.len(), buff);
-        self.tcp.write_all(&buff).await?;
-        self.tcp.flush().await?;
-
+        dst.extend_from_slice(&u32::to_le_bytes(item.len() as u32));
+        dst.extend_from_slice(&MAGIC);
+        dst.extend_from_slice(item.as_ref());
         Ok(())
     }
 }
 
-pin_project! {
-    pub struct Decrypter<S> {
-        #[pin]
-        raw: S,
-        key: [u8; 32],
-    }
-}
+/// Write a message to a Sink
+pub async fn encode_message<T: NetMessage, S: Sink<BytesMut, Error = NetworkError> + Unpin>(
+    header: &NetMessageHeader,
+    message: &T,
+    dst: &mut S,
+) -> Result<()> {
+    debug!("writing raw {:?} message", T::KIND);
+    let mut buff = BytesMut::new();
+    match message.encode_size() {
+        Some(message_size) => {
+            let cap = message_size + 4;
+            buff.reserve(cap);
+            let mut writer = (&mut buff).writer();
 
-impl<S: Stream<Item = Result<BytesMut>>> Stream for Decrypter<S> {
-    type Item = Result<BytesMut>;
+            header.write(&mut writer, T::KIND, T::IS_PROTOBUF)?;
+            message.write_body(&mut writer)?;
+        }
+        None => {
+            buff.reserve(128);
 
-    fn poll_next(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
-        self.as_mut().project().raw.poll_next(cx).map(|opt| {
-            opt.map(|raw_result| {
-                raw_result.and_then(|raw| {
-                    let key = self.as_mut().project().key;
-                    symmetric_decrypt(raw, key).map_err(NetworkError::from)
-                })
-            })
-        })
-    }
+            let mut writer = (&mut buff).writer();
+            header.write(&mut writer, T::KIND, T::IS_PROTOBUF)?;
+            message.write_body(&mut writer)?;
+        }
+    };
+
+    trace!("encoded message({} bytes): {:?}", buff.len(), buff.as_ref());
+    dst.send(buff).await?;
+
+    Ok(())
 }
 
 pin_project! {
@@ -329,53 +306,58 @@ impl<S: Stream<Item = Result<BytesMut>>> Stream for RawMessageReader<S> {
     }
 }
 
-pub struct SteamWriter {
-    raw: RawSteamWriter,
-    key: [u8; 32],
-}
-
-impl SteamWriter {
-    pub async fn write<T: NetMessage>(
-        &mut self,
-        header: &NetMessageHeader,
-        message: &T,
-    ) -> Result<()> {
-        debug!("sending {:?} message", T::KIND);
-        trace!("  {:#?}", message);
-        let message_size = message.encode_size().unwrap_or(128);
-        let mut raw = Vec::with_capacity(64 + message_size);
-
-        header.write(&mut raw, T::KIND, T::IS_PROTOBUF)?;
-        message.write_body(&mut raw)?;
-
-        trace!("encoded message({} bytes): {:?}", raw.len(), raw);
-
-        let encrypted = symmetric_encrypt(raw, &self.key)?;
-
-        let mut buff = Vec::with_capacity(encrypted.len() + 8);
-
-        WriteBytesExt::write_u32::<LittleEndian>(&mut buff, encrypted.len() as u32)?;
-        Write::write_all(&mut buff, &MAGIC)?;
-        Write::write_all(&mut buff, &encrypted)?;
-
-        trace!("writing raw packet({} bytes): {:?}", buff.len(), buff);
-
-        let wrote = self.raw.tcp.write(&buff).await?;
-        trace!("wrote {} bytes", wrote);
-
-        self.raw.tcp.flush().await?;
-
-        Ok(())
-    }
-}
+// pub struct SteamWriter {
+//     raw: RawSteamWriter,
+//     key: [u8; 32],
+// }
+//
+// impl SteamWriter {
+//     pub async fn write<T: NetMessage>(
+//         &mut self,
+//         header: &NetMessageHeader,
+//         message: &T,
+//     ) -> Result<()> {
+//         debug!("sending {:?} message", T::KIND);
+//         trace!("  {:#?}", message);
+//         let message_size = message.encode_size().unwrap_or(128);
+//         let raw = BytesMut::with_capacity(64 + message_size);
+//
+//         let mut writer = raw.writer();
+//         header.write(&mut writer, T::KIND, T::IS_PROTOBUF)?;
+//         message.write_body(&mut writer)?;
+//         let raw = writer.into_inner();
+//
+//         trace!("encoded message({} bytes): {:?}", raw.len(), raw);
+//
+//         let encrypted = symmetric_encrypt(raw, &self.key)?;
+//
+//         let mut buff = Vec::with_capacity(encrypted.len() + 8);
+//
+//         WriteBytesExt::write_u32::<LittleEndian>(&mut buff, encrypted.len() as u32)?;
+//         Write::write_all(&mut buff, &MAGIC)?;
+//         Write::write_all(&mut buff, &encrypted)?;
+//
+//         trace!("writing raw packet({} bytes): {:?}", buff.len(), buff);
+//
+//         let wrote = self.raw.tcp.write(&buff).await?;
+//         trace!("wrote {} bytes", wrote);
+//
+//         self.raw.tcp.flush().await?;
+//
+//         Ok(())
+//     }
+// }
 
 pub async fn connect<A: ToSocketAddrs>(
     addr: A,
-) -> Result<(impl Stream<Item = Result<RawNetMessage>>, SteamWriter)> {
+) -> Result<(
+    impl Stream<Item = Result<RawNetMessage>>,
+    impl Sink<BytesMut, Error = NetworkError>,
+)> {
     let stream = TcpStream::connect(addr).await?;
     let (read, write) = stream.into_split();
-    let mut raw_reader = FramedRead::new(read, FrameDecoder);
-    let mut raw_writer = RawSteamWriter { tcp: write };
+    let mut raw_reader = FramedRead::new(read, FrameCodec);
+    let mut raw_writer = FramedWrite::new(write, FrameCodec);
 
     let (_header, encrypt_request) =
         RawNetMessage::try_from(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
@@ -391,7 +373,7 @@ pub async fn connect<A: ToSocketAddrs>(
         protocol: encrypt_request.protocol,
         encrypted_key: key.encrypted,
     };
-    raw_writer.write_message(&response).await?;
+    encode_message(&NetMessageHeader::default(), &response, &mut raw_writer).await?;
 
     let (_header, encrypt_response) =
         RawNetMessage::try_from(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
@@ -405,14 +387,8 @@ pub async fn connect<A: ToSocketAddrs>(
 
     Ok((
         Flatten::new(RawMessageReader {
-            raw: Decrypter {
-                raw: raw_reader,
-                key: key.plain,
-            },
+            raw: Decrypter::new(raw_reader, key.plain).map(|res| res.map_err(Into::into)),
         }),
-        SteamWriter {
-            raw: raw_writer,
-            key: key.plain,
-        },
+        Encrypter::new(raw_writer, key.plain),
     ))
 }
