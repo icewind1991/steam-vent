@@ -1,5 +1,4 @@
 use std::error::Error;
-use steam_vent::message::Multi;
 use steam_vent::net::{connect, encode_message, NetMessageHeader};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_base::CMsgIPAddress;

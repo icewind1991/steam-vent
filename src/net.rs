@@ -2,31 +2,23 @@ use crate::message::{
     ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, Flatten, NetMessage,
 };
 use crate::proto::steammessages_base::CMsgProtoBufHeader;
-use async_stream::try_stream;
-use binread::{BinRead, BinReaderExt};
+use binread::BinRead;
 use bytemuck::{cast, Pod, Zeroable};
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::{Buf, BufMut, BytesMut};
 use futures_sink::Sink;
+use futures_util::future::ready;
 use futures_util::sink::SinkExt;
 use log::{debug, trace};
-use pin_project_lite::pin_project;
 use protobuf::{Message, ProtobufEnum};
 use std::convert::TryFrom;
 use std::convert::TryInto;
-use std::io::{Cursor, Error, Seek, SeekFrom, Write};
-use std::pin::Pin;
-use std::task::{Context, Poll};
-use steam_vent_crypto::{
-    generate_session_key, symmetric_decrypt, symmetric_encrypt, CryptError, Decrypter, Encrypter,
-};
+use std::io::{Cursor, Seek, SeekFrom};
+use steam_vent_crypto::{generate_session_key, symmetric_decrypt, symmetric_encrypt, CryptError};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steamid_ng::SteamID;
 use thiserror::Error;
-use tokio::io::{AsyncWriteExt, BufReader, BufWriter};
-use tokio::net::tcp::{OwnedReadHalf, OwnedWriteHalf};
 use tokio::net::{TcpStream, ToSocketAddrs};
-use tokio::pin;
 use tokio_stream::Stream;
 use tokio_stream::StreamExt;
 use tokio_util::codec::{Decoder, Encoder, FramedRead, FramedWrite};
@@ -287,67 +279,6 @@ pub async fn encode_message<T: NetMessage, S: Sink<BytesMut, Error = NetworkErro
     Ok(())
 }
 
-pin_project! {
-    pub struct RawMessageReader<S> {
-        #[pin]
-        raw: S
-    }
-}
-
-impl<S: Stream<Item = Result<BytesMut>>> Stream for RawMessageReader<S> {
-    type Item = Result<RawNetMessage>;
-
-    fn poll_next(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
-        self.as_mut()
-            .project()
-            .raw
-            .poll_next(cx)
-            .map(|opt| opt.map(|raw_result| raw_result.and_then(|raw| raw.try_into())))
-    }
-}
-
-// pub struct SteamWriter {
-//     raw: RawSteamWriter,
-//     key: [u8; 32],
-// }
-//
-// impl SteamWriter {
-//     pub async fn write<T: NetMessage>(
-//         &mut self,
-//         header: &NetMessageHeader,
-//         message: &T,
-//     ) -> Result<()> {
-//         debug!("sending {:?} message", T::KIND);
-//         trace!("  {:#?}", message);
-//         let message_size = message.encode_size().unwrap_or(128);
-//         let raw = BytesMut::with_capacity(64 + message_size);
-//
-//         let mut writer = raw.writer();
-//         header.write(&mut writer, T::KIND, T::IS_PROTOBUF)?;
-//         message.write_body(&mut writer)?;
-//         let raw = writer.into_inner();
-//
-//         trace!("encoded message({} bytes): {:?}", raw.len(), raw);
-//
-//         let encrypted = symmetric_encrypt(raw, &self.key)?;
-//
-//         let mut buff = Vec::with_capacity(encrypted.len() + 8);
-//
-//         WriteBytesExt::write_u32::<LittleEndian>(&mut buff, encrypted.len() as u32)?;
-//         Write::write_all(&mut buff, &MAGIC)?;
-//         Write::write_all(&mut buff, &encrypted)?;
-//
-//         trace!("writing raw packet({} bytes): {:?}", buff.len(), buff);
-//
-//         let wrote = self.raw.tcp.write(&buff).await?;
-//         trace!("wrote {} bytes", wrote);
-//
-//         self.raw.tcp.flush().await?;
-//
-//         Ok(())
-//     }
-// }
-
 pub async fn connect<A: ToSocketAddrs>(
     addr: A,
 ) -> Result<(
@@ -384,11 +315,18 @@ pub async fn connect<A: ToSocketAddrs>(
     }
 
     debug!("crypt handshake complete");
+    let key = key.plain;
 
     Ok((
-        Flatten::new(RawMessageReader {
-            raw: Decrypter::new(raw_reader, key.plain).map(|res| res.map_err(Into::into)),
-        }),
-        Encrypter::new(raw_writer, key.plain),
+        Flatten::new(
+            raw_reader
+                .map(move |res| {
+                    res.and_then(move |encrypted| {
+                        symmetric_decrypt(encrypted, &key).map_err(Into::into)
+                    })
+                })
+                .map(|raw_result| raw_result.and_then(|raw| raw.try_into())),
+        ),
+        raw_writer.with(move |raw| ready(Ok(symmetric_encrypt(raw, &key)))),
     ))
 }

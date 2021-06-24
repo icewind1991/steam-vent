@@ -1,4 +1,4 @@
-use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
+use crate::net::{NetworkError, RawNetMessage};
 use binread::BinRead;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::BytesMut;
