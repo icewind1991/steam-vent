@@ -8,6 +8,7 @@ use bytes::{Buf, BufMut, BytesMut};
 use futures_sink::Sink;
 use futures_util::future::ready;
 use futures_util::sink::SinkExt;
+use futures_util::TryStreamExt;
 use log::{debug, trace};
 use protobuf::{Message, ProtobufEnum};
 use std::convert::TryFrom;
@@ -319,12 +320,10 @@ pub async fn connect<A: ToSocketAddrs>(
     Ok((
         flatten_multi(
             raw_reader
-                .map(move |res| {
-                    res.and_then(move |encrypted| {
-                        symmetric_decrypt(encrypted, &key).map_err(Into::into)
-                    })
+                .and_then(move |encrypted| {
+                    ready(symmetric_decrypt(encrypted, &key).map_err(Into::into))
                 })
-                .map(|raw_result| raw_result.and_then(|raw| raw.try_into())),
+                .and_then(|raw| ready(raw.try_into())),
         ),
         raw_writer.with(move |raw| ready(Ok(symmetric_encrypt(raw, &key)))),
     ))
