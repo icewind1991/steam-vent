@@ -112,19 +112,30 @@ fn decrypt_message(mut message: BytesMut, key: &[u8; 32], plain_iv: &[u8; 16]) -
     Ok(message)
 }
 
-fn symmetric_encrypt_with_iv(message: BytesMut, key: &[u8; 32], plain_iv: [u8; 16]) -> BytesMut {
+fn symmetric_encrypt_with_iv(
+    mut iv_buff: BytesMut,
+    message: BytesMut,
+    key: &[u8; 32],
+    plain_iv: [u8; 16],
+) -> BytesMut {
     let encrypted_iv = encrypt_iv(plain_iv, key);
+    iv_buff[0..16].copy_from_slice(&encrypted_iv);
     let encrypted_message = encrypt_message(message, key, &plain_iv);
 
-    let mut output = BytesMut::from(&encrypted_iv[..]);
-    output.extend(encrypted_message.into_iter());
-    output
+    iv_buff.unsplit(encrypted_message);
+    iv_buff
 }
 
 type HmacSha1 = Hmac<Sha1>;
 
-/// Generate a random IV and encrypt `input` with it and `key`.
-pub fn symmetric_encrypt(input: BytesMut, key: &[u8; 32]) -> BytesMut {
+/// Generate a random IV and encrypt `input` with it and `key` with a buffer for storing the iv.
+///
+/// The `iv_buff` has to be 16 bytes large should come from a split slice in front of the input buffer
+pub fn symmetric_encrypt_with_iv_buffer(
+    iv_buff: BytesMut,
+    input: BytesMut,
+    key: &[u8; 32],
+) -> BytesMut {
     let hmac_random: [u8; 3] = random();
 
     let mut hmac_key = [0; 64];
@@ -140,7 +151,12 @@ pub fn symmetric_encrypt(input: BytesMut, key: &[u8; 32]) -> BytesMut {
     iv[0..13].copy_from_slice(&hmac[0..13]);
     iv[13..].copy_from_slice(&hmac_random);
 
-    symmetric_encrypt_with_iv(input, key, iv)
+    symmetric_encrypt_with_iv(iv_buff, input, key, iv)
+}
+
+/// Generate a random IV and encrypt `input` with it and `key`.
+pub fn symmetric_encrypt(input: BytesMut, key: &[u8; 32]) -> BytesMut {
+    symmetric_encrypt_with_iv_buffer(BytesMut::from(&[0; 16][..]), input, key)
 }
 
 /// Decrypt the IV stored in the first 16 bytes of `input`

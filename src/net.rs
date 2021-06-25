@@ -14,7 +14,9 @@ use protobuf::{Message, ProtobufEnum};
 use std::convert::TryFrom;
 use std::convert::TryInto;
 use std::io::{Cursor, Seek, SeekFrom};
-use steam_vent_crypto::{generate_session_key, symmetric_decrypt, symmetric_encrypt, CryptError};
+use steam_vent_crypto::{
+    generate_session_key, symmetric_decrypt, symmetric_encrypt_with_iv_buffer, CryptError,
+};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steamid_ng::SteamID;
 use thiserror::Error;
@@ -168,6 +170,21 @@ impl NetMessageHeader {
         }
         Ok(())
     }
+
+    fn encode_size(&self, kind: EMsg, proto: bool) -> usize {
+        if kind == EMsg::k_EMsgChannelEncryptResponse {
+            4
+        } else if proto {
+            let mut proto_header = CMsgProtoBufHeader::new();
+            proto_header.set_jobid_target(0);
+            proto_header.set_jobid_source(0);
+            proto_header.set_steamid(0);
+            proto_header.set_client_sessionid(0);
+            4 + proto_header.compute_size() as usize
+        } else {
+            4 + 3 + 8 + 8 + 1 + 8 + 4
+        }
+    }
 }
 
 #[derive(Debug)]
@@ -176,17 +193,13 @@ pub struct RawNetMessage {
     pub is_protobuf: bool,
     pub header: NetMessageHeader,
     pub data: BytesMut,
-    pre_buffer: Option<BytesMut>,
+    frame_header_buffer: Option<BytesMut>,
+    iv_buffer: Option<BytesMut>,
     header_buffer: BytesMut,
 }
 
 impl RawNetMessage {
     pub fn read(mut value: BytesMut) -> Result<Self> {
-        // trace!(
-        //     "reading message({} bytes): {:?}",
-        //     value.len(),
-        //     value.as_ref()
-        // );
         let mut reader = Cursor::new(&value);
         let kind = reader
             .read_i32::<LittleEndian>()
@@ -217,20 +230,26 @@ impl RawNetMessage {
             is_protobuf,
             header,
             data: value,
-            pre_buffer: None,
+            frame_header_buffer: None,
+            iv_buffer: None,
             header_buffer,
         })
     }
 
     pub fn from_message<T: NetMessage>(header: NetMessageHeader, message: T) -> Result<Self> {
         debug!("writing raw {:?} message", T::KIND);
-        let mut buff = BytesMut::with_capacity(64);
 
-        // allocate the buffer with 8 extra bytes and split those off
-        // this allows later re-joining the bytes and use the space for the frame header
+        // allocate the buffer with extra bytes and split those off
+        // this allows later re-joining the bytes and use the space for the frame header and iv
         // without having to copy the message again
-        buff.extend([0; 8]);
-        let pre_buffer = buff.split_to(8);
+        //
+        // 8 byte frame header, 16 byte iv, header, body, 16 byte encryption padding, 4 byte who knows what
+        let mut buff = BytesMut::with_capacity(
+            8 + 16 + header.encode_size(T::KIND, T::IS_PROTOBUF) + message.encode_size() + 16 + 4,
+        );
+        buff.extend([0; 8 + 16]);
+        let frame_header_buffer = buff.split_to(8);
+        let iv_buffer = buff.split_to(16);
 
         {
             let mut writer = (&mut buff).writer();
@@ -238,8 +257,6 @@ impl RawNetMessage {
         }
 
         let header_buffer = buff.split();
-
-        buff.reserve(message.encode_size().unwrap_or(128));
         let mut writer = (&mut buff).writer();
         message.write_body(&mut writer)?;
 
@@ -248,7 +265,8 @@ impl RawNetMessage {
             is_protobuf: T::IS_PROTOBUF,
             header,
             data: buff,
-            pre_buffer: Some(pre_buffer),
+            frame_header_buffer: Some(frame_header_buffer),
+            iv_buffer: Some(iv_buffer),
             header_buffer,
         })
     }
@@ -315,6 +333,13 @@ struct RawMessageEncoder {
     key: [u8; 32],
 }
 
+/// Assert that two BytesMut can be unsplit without allocations
+#[track_caller]
+fn assert_can_unsplit(head: &BytesMut, tail: &BytesMut) {
+    let ptr = unsafe { head.as_ref().as_ptr().add(head.len()) };
+    assert_eq!(ptr, tail.as_ref().as_ptr());
+}
+
 impl Encoder<RawNetMessage> for RawMessageEncoder {
     type Error = NetworkError;
 
@@ -322,6 +347,8 @@ impl Encoder<RawNetMessage> for RawMessageEncoder {
         let header_len = item.header_buffer.len();
         let body_len = item.data.len();
         let mut raw = item.header_buffer;
+
+        assert_can_unsplit(&raw, &item.data);
         raw.unsplit(item.data);
 
         trace!(
@@ -332,20 +359,26 @@ impl Encoder<RawNetMessage> for RawMessageEncoder {
             raw.as_ref()
         );
 
-        let encrypted = symmetric_encrypt(raw, &self.key);
+        let iv_buffer = item
+            .iv_buffer
+            .unwrap_or_else(|| BytesMut::from(&[0; 16][..]));
+        assert_eq!(16, iv_buffer.len());
+
+        let encrypted = symmetric_encrypt_with_iv_buffer(iv_buffer, raw, &self.key);
 
         let mut buf = item
-            .pre_buffer
+            .frame_header_buffer
             .unwrap_or_else(|| BytesMut::from(&[0; 8][..]));
         assert_eq!(8, buf.len());
         buf.clear();
         buf.extend_from_slice(&u32::to_le_bytes(encrypted.len() as u32));
         buf.extend_from_slice(&MAGIC);
 
+        assert_can_unsplit(&buf, &encrypted);
         buf.unsplit(encrypted);
 
-        dst.extend_from_slice(&buf);
-        // *dst = buf;
+        // dst.extend_from_slice(&buf);
+        *dst = buf;
 
         Ok(())
     }
@@ -360,7 +393,7 @@ pub async fn encode_message<T: NetMessage, S: Sink<BytesMut, Error = NetworkErro
     debug!("writing raw {:?} message", T::KIND);
     let mut buff = BytesMut::new();
 
-    buff.reserve(message.encode_size().map(|size| size + 4).unwrap_or(128));
+    buff.reserve(message.encode_size() + 4);
 
     let mut writer = (&mut buff).writer();
     header.write(&mut writer, T::KIND, T::IS_PROTOBUF)?;

@@ -59,8 +59,8 @@ pub trait NetMessage: Sized + Debug {
         panic!("Writing not implemented for {}", type_name::<Self>())
     }
 
-    fn encode_size(&self) -> Option<usize> {
-        None
+    fn encode_size(&self) -> usize {
+        panic!("Writing not implemented for {}", type_name::<Self>())
     }
 }
 
@@ -120,8 +120,8 @@ impl NetMessage for ClientEncryptResponse {
         Ok(())
     }
 
-    fn encode_size(&self) -> Option<usize> {
-        Some(8 + 8 + 4 + 4 + self.encrypted_key.len() + 4 + 4)
+    fn encode_size(&self) -> usize {
+        8 + 8 + 4 + 4 + self.encrypted_key.len() + 4 + 4
     }
 }
 
@@ -241,6 +241,10 @@ macro_rules! proto_msg {
             fn read_body<R: Read + Seek>(mut reader: R) -> Result<Self, MalformedBody> {
                 trace!("reading body of protobuf message {:?}", Self::KIND);
                 $ty::parse_from_reader(&mut reader).map_err(|e| MalformedBody(Self::KIND, e.into()))
+            }
+
+            fn encode_size(&self) -> usize {
+                self.compute_size() as usize
             }
         }
     };
