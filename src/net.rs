@@ -176,15 +176,17 @@ pub struct RawNetMessage {
     pub is_protobuf: bool,
     pub header: NetMessageHeader,
     pub data: BytesMut,
+    pre_buffer: Option<BytesMut>,
+    header_buffer: BytesMut,
 }
 
 impl RawNetMessage {
     pub fn read(mut value: BytesMut) -> Result<Self> {
-        trace!(
-            "reading message({} bytes): {:?}",
-            value.len(),
-            value.as_ref()
-        );
+        // trace!(
+        //     "reading message({} bytes): {:?}",
+        //     value.len(),
+        //     value.as_ref()
+        // );
         let mut reader = Cursor::new(&value);
         let kind = reader
             .read_i32::<LittleEndian>()
@@ -204,14 +206,50 @@ impl RawNetMessage {
             if is_protobuf { "protobuf " } else { "" }
         );
 
+        let header_start = reader.position() as usize;
         let (header, body_start) = NetMessageHeader::read(&mut reader, kind, is_protobuf)?;
 
-        value.advance(body_start);
+        value.advance(header_start);
+        let header_buffer = value.split_to(body_start - header_start);
+
         Ok(RawNetMessage {
             kind,
             is_protobuf,
             header,
             data: value,
+            pre_buffer: None,
+            header_buffer,
+        })
+    }
+
+    pub fn from_message<T: NetMessage>(header: NetMessageHeader, message: T) -> Result<Self> {
+        debug!("writing raw {:?} message", T::KIND);
+        let mut buff = BytesMut::with_capacity(64);
+
+        // allocate the buffer with 8 extra bytes and split those off
+        // this allows later re-joining the bytes and use the space for the frame header
+        // without having to copy the message again
+        buff.extend([0; 8]);
+        let pre_buffer = buff.split_to(8);
+
+        {
+            let mut writer = (&mut buff).writer();
+            header.write(&mut writer, T::KIND, T::IS_PROTOBUF)?;
+        }
+
+        let header_buffer = buff.split();
+
+        buff.reserve(message.encode_size().unwrap_or(128));
+        let mut writer = (&mut buff).writer();
+        message.write_body(&mut writer)?;
+
+        Ok(RawNetMessage {
+            kind: T::KIND,
+            is_protobuf: T::IS_PROTOBUF,
+            header,
+            data: buff,
+            pre_buffer: Some(pre_buffer),
+            header_buffer,
         })
     }
 }
@@ -273,6 +311,46 @@ impl Encoder<BytesMut> for FrameCodec {
     }
 }
 
+struct RawMessageEncoder {
+    key: [u8; 32],
+}
+
+impl Encoder<RawNetMessage> for RawMessageEncoder {
+    type Error = NetworkError;
+
+    fn encode(&mut self, item: RawNetMessage, dst: &mut BytesMut) -> Result<(), Self::Error> {
+        let header_len = item.header_buffer.len();
+        let body_len = item.data.len();
+        let mut raw = item.header_buffer;
+        raw.unsplit(item.data);
+
+        trace!(
+            "sending raw message({} byte header + {} byte body = {} bytes): {:?}",
+            header_len,
+            body_len,
+            raw.len(),
+            raw.as_ref()
+        );
+
+        let encrypted = symmetric_encrypt(raw, &self.key);
+
+        let mut buf = item
+            .pre_buffer
+            .unwrap_or_else(|| BytesMut::from(&[0; 8][..]));
+        assert_eq!(8, buf.len());
+        buf.clear();
+        buf.extend_from_slice(&u32::to_le_bytes(encrypted.len() as u32));
+        buf.extend_from_slice(&MAGIC);
+
+        buf.unsplit(encrypted);
+
+        dst.extend_from_slice(&buf);
+        // *dst = buf;
+
+        Ok(())
+    }
+}
+
 /// Write a message to a Sink
 pub async fn encode_message<T: NetMessage, S: Sink<BytesMut, Error = NetworkError> + Unpin>(
     header: &NetMessageHeader,
@@ -298,7 +376,7 @@ pub async fn connect<A: ToSocketAddrs>(
     addr: A,
 ) -> Result<(
     impl Stream<Item = Result<RawNetMessage>>,
-    impl Sink<BytesMut, Error = NetworkError>,
+    impl Sink<RawNetMessage, Error = NetworkError>,
 )> {
     let stream = TcpStream::connect(addr).await?;
     let (read, write) = stream.into_split();
@@ -340,6 +418,6 @@ pub async fn connect<A: ToSocketAddrs>(
                 })
                 .and_then(|raw| ready(RawNetMessage::read(raw))),
         ),
-        raw_writer.with(move |raw| ready(Ok(symmetric_encrypt(raw, &key)))),
+        FramedWrite::new(raw_writer.into_inner(), RawMessageEncoder { key }),
     ))
 }

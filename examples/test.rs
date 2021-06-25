@@ -1,5 +1,6 @@
+use futures_util::SinkExt;
 use std::error::Error;
-use steam_vent::net::{connect, encode_message, NetMessageHeader};
+use steam_vent::net::{connect, NetMessageHeader, RawNetMessage};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_base::CMsgIPAddress;
 use steam_vent_proto::steammessages_clientserver_login::{
@@ -38,7 +39,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
         steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
     };
 
-    encode_message(&header, &logon, &mut write).await.unwrap();
+    let msg = RawNetMessage::from_message(header, logon)?;
+    write.send(msg).await?;
 
     pin!(read);
     while let Some(result) = read.next().await {
