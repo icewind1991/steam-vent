@@ -93,9 +93,17 @@ impl NetMessageHeader {
     ) -> Result<(Self, usize)> {
         if is_protobuf {
             let header_length = reader.read_u32::<LittleEndian>()?;
-            let header = CMsgProtoBufHeader::parse_from_reader(&mut reader)
-                .map_err(|_| NetworkError::InvalidHeader)?;
-            Ok((header.into(), 8 + header_length as usize))
+            trace!("reading protobuf header of {} bytes", header_length);
+            let header = if header_length > 0 {
+                let mut bytes = vec![0; header_length as usize];
+                reader.read(&mut bytes)?;
+                CMsgProtoBufHeader::parse_from_bytes(&bytes)
+                    .map_err(|_| NetworkError::InvalidHeader)?
+                    .into()
+            } else {
+                NetMessageHeader::default()
+            };
+            Ok((header, 8 + header_length as usize))
         } else if kind == EMsg::k_EMsgChannelEncryptRequest
             || kind == EMsg::k_EMsgChannelEncryptResult
         {
@@ -172,6 +180,11 @@ pub struct RawNetMessage {
 
 impl RawNetMessage {
     pub fn read(mut value: BytesMut) -> Result<Self> {
+        trace!(
+            "reading message({} bytes): {:?}",
+            value.len(),
+            value.as_ref()
+        );
         let mut reader = Cursor::new(&value);
         let kind = reader
             .read_i32::<LittleEndian>()
@@ -185,7 +198,11 @@ impl RawNetMessage {
             None => return Err(NetworkError::InvalidMessageKind(kind)),
         };
 
-        trace!("reading header for {:?} message", kind);
+        trace!(
+            "reading header for {:?} {}message",
+            kind,
+            if is_protobuf { "protobuf " } else { "" }
+        );
 
         let (header, body_start) = NetMessageHeader::read(&mut reader, kind, is_protobuf)?;
 
