@@ -255,23 +255,12 @@ pub async fn encode_message<T: NetMessage, S: Sink<BytesMut, Error = NetworkErro
 ) -> Result<()> {
     debug!("writing raw {:?} message", T::KIND);
     let mut buff = BytesMut::new();
-    match message.encode_size() {
-        Some(message_size) => {
-            let cap = message_size + 4;
-            buff.reserve(cap);
-            let mut writer = (&mut buff).writer();
 
-            header.write(&mut writer, T::KIND, T::IS_PROTOBUF)?;
-            message.write_body(&mut writer)?;
-        }
-        None => {
-            buff.reserve(128);
+    buff.reserve(message.encode_size().map(|size| size + 4).unwrap_or(128));
 
-            let mut writer = (&mut buff).writer();
-            header.write(&mut writer, T::KIND, T::IS_PROTOBUF)?;
-            message.write_body(&mut writer)?;
-        }
-    };
+    let mut writer = (&mut buff).writer();
+    header.write(&mut writer, T::KIND, T::IS_PROTOBUF)?;
+    message.write_body(&mut writer)?;
 
     trace!("encoded message({} bytes): {:?}", buff.len(), buff.as_ref());
     dst.send(buff).await?;
