@@ -12,7 +12,6 @@ use futures_util::{
 use log::{debug, trace};
 use protobuf::{Message, ProtobufError};
 use std::any::type_name;
-use std::convert::TryFrom;
 use std::fmt::Debug;
 use std::io::{Cursor, Read, Seek, Write};
 use steam_vent_proto::enums_clientserver::EMsg;
@@ -216,7 +215,7 @@ impl<R: Read> Iterator for MultiBodyIter<R> {
         if let Err(e) = self.reader.read_exact(&mut msg_data) {
             return Some(Err(NetworkError::IO(e)));
         }
-        let raw = match RawNetMessage::try_from(msg_data) {
+        let raw = match RawNetMessage::read(msg_data) {
             Ok(raw) => raw,
             Err(e) => return Some(Err(e)),
         };

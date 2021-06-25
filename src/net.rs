@@ -86,19 +86,47 @@ impl From<CMsgProtoBufHeader> for NetMessageHeader {
 }
 
 impl NetMessageHeader {
-    fn read<R: ReadBytesExt + Seek>(mut reader: R) -> std::io::Result<Self> {
-        reader.seek(SeekFrom::Current(3))?; // 1 byte (fixed) header size, 2 bytes (fixed) header version
-        let target_job_id = reader.read_u64::<LittleEndian>()?;
-        let source_job_id = reader.read_u64::<LittleEndian>()?;
-        reader.seek(SeekFrom::Current(1))?; // header canary (fixed)
-        let steam_id = reader.read_u64::<LittleEndian>()?.into();
-        let session_id = reader.read_i32::<LittleEndian>()?;
-        Ok(NetMessageHeader {
-            source_job_id,
-            target_job_id,
-            steam_id,
-            session_id,
-        })
+    fn read<R: ReadBytesExt + Seek>(
+        mut reader: R,
+        kind: EMsg,
+        is_protobuf: bool,
+    ) -> Result<(Self, usize)> {
+        if is_protobuf {
+            let header_length = reader.read_u32::<LittleEndian>()?;
+            let header = CMsgProtoBufHeader::parse_from_reader(&mut reader)
+                .map_err(|_| NetworkError::InvalidHeader)?;
+            Ok((header.into(), 8 + header_length as usize))
+        } else if kind == EMsg::k_EMsgChannelEncryptRequest
+            || kind == EMsg::k_EMsgChannelEncryptResult
+        {
+            let target_job_id = reader.read_u64::<LittleEndian>()?;
+            let source_job_id = reader.read_u64::<LittleEndian>()?;
+            Ok((
+                NetMessageHeader {
+                    target_job_id,
+                    source_job_id,
+                    session_id: 0,
+                    steam_id: SteamID::default(),
+                },
+                4 + 8 + 8,
+            ))
+        } else {
+            reader.seek(SeekFrom::Current(3))?; // 1 byte (fixed) header size, 2 bytes (fixed) header version
+            let target_job_id = reader.read_u64::<LittleEndian>()?;
+            let source_job_id = reader.read_u64::<LittleEndian>()?;
+            reader.seek(SeekFrom::Current(1))?; // header canary (fixed)
+            let steam_id = reader.read_u64::<LittleEndian>()?.into();
+            let session_id = reader.read_i32::<LittleEndian>()?;
+            Ok((
+                NetMessageHeader {
+                    source_job_id,
+                    target_job_id,
+                    steam_id,
+                    session_id,
+                },
+                4 + 3 + 8 + 8 + 1 + 8 + 4,
+            ))
+        }
     }
 
     fn write<W: WriteBytesExt>(
@@ -142,10 +170,8 @@ pub struct RawNetMessage {
     pub data: BytesMut,
 }
 
-impl TryFrom<BytesMut> for RawNetMessage {
-    type Error = NetworkError;
-
-    fn try_from(mut value: BytesMut) -> Result<Self> {
+impl RawNetMessage {
+    pub fn read(mut value: BytesMut) -> Result<Self> {
         let mut reader = Cursor::new(&value);
         let kind = reader
             .read_i32::<LittleEndian>()
@@ -161,32 +187,7 @@ impl TryFrom<BytesMut> for RawNetMessage {
 
         trace!("reading header for {:?} message", kind);
 
-        let (header, body_start) = if is_protobuf {
-            let header_length = reader.read_u32::<LittleEndian>()?;
-            let header =
-                CMsgProtoBufHeader::parse_from_bytes(&value[8..8 + header_length as usize])
-                    .map_err(|_| NetworkError::InvalidHeader)?;
-            (header.into(), 8 + header_length as usize)
-        } else if kind == EMsg::k_EMsgChannelEncryptRequest
-            || kind == EMsg::k_EMsgChannelEncryptResult
-        {
-            let target_job_id = reader.read_u64::<LittleEndian>()?;
-            let source_job_id = reader.read_u64::<LittleEndian>()?;
-            (
-                NetMessageHeader {
-                    target_job_id,
-                    source_job_id,
-                    session_id: 0,
-                    steam_id: SteamID::default(),
-                },
-                4 + 8 + 8,
-            )
-        } else {
-            (
-                NetMessageHeader::read(&mut reader)?,
-                4 + 3 + 8 + 8 + 1 + 8 + 4,
-            )
-        };
+        let (header, body_start) = NetMessageHeader::read(&mut reader, kind, is_protobuf)?;
 
         value.advance(body_start);
         Ok(RawNetMessage {
@@ -198,8 +199,16 @@ impl TryFrom<BytesMut> for RawNetMessage {
     }
 }
 
+impl<T: NetMessage> TryFrom<RawNetMessage> for (NetMessageHeader, T) {
+    type Error = NetworkError;
+
+    fn try_from(value: RawNetMessage) -> Result<Self, Self::Error> {
+        value.into_message()
+    }
+}
+
 impl RawNetMessage {
-    pub fn read<T: NetMessage>(self) -> Result<(NetMessageHeader, T)> {
+    pub fn into_message<T: NetMessage>(self) -> Result<(NetMessageHeader, T)> {
         if self.kind == T::KIND {
             let mut reader = Cursor::new(self.data);
             Ok((self.header, T::read_body(&mut reader)?))
@@ -280,8 +289,8 @@ pub async fn connect<A: ToSocketAddrs>(
     let mut raw_writer = FramedWrite::new(write, FrameCodec);
 
     let (_header, encrypt_request) =
-        RawNetMessage::try_from(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
-            .read::<ChannelEncryptRequest>()?;
+        RawNetMessage::read(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
+            .into_message::<ChannelEncryptRequest>()?;
 
     trace!("using nonce: {:?}", encrypt_request.nonce);
     let key = generate_session_key(None);
@@ -296,8 +305,8 @@ pub async fn connect<A: ToSocketAddrs>(
     encode_message(&NetMessageHeader::default(), &response, &mut raw_writer).await?;
 
     let (_header, encrypt_response) =
-        RawNetMessage::try_from(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
-            .read::<ChannelEncryptResult>()?;
+        RawNetMessage::read(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
+            .into_message::<ChannelEncryptResult>()?;
 
     if encrypt_response.result != 1 {
         return Err(NetworkError::CryptoHandshakeFailed);
@@ -312,7 +321,7 @@ pub async fn connect<A: ToSocketAddrs>(
                 .and_then(move |encrypted| {
                     ready(symmetric_decrypt(encrypted, &key).map_err(Into::into))
                 })
-                .and_then(|raw| ready(raw.try_into())),
+                .and_then(|raw| ready(RawNetMessage::read(raw))),
         ),
         raw_writer.with(move |raw| ready(Ok(symmetric_encrypt(raw, &key)))),
     ))

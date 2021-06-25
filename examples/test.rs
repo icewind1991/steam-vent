@@ -45,7 +45,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         let msg = result?;
         match msg.kind {
             EMsg::k_EMsgClientLogOnResponse => {
-                let (_, logon) = msg.read::<CMsgClientLogonResponse>()?;
+                let (_, logon) = msg.into_message::<CMsgClientLogonResponse>()?;
                 dbg!(logon);
             }
             _ => {
