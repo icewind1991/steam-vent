@@ -1,4 +1,5 @@
-use crate::net::{NetworkError, RawNetMessage};
+use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
+use crate::service_method::ServiceMethodRequest;
 use binread::BinRead;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::BytesMut;
@@ -62,6 +63,8 @@ pub trait NetMessage: Sized + Debug {
     fn encode_size(&self) -> usize {
         panic!("Writing not implemented for {}", type_name::<Self>())
     }
+
+    fn process_header(&self, _header: &mut NetMessageHeader) {}
 }
 
 #[derive(Debug, BinRead)]
@@ -223,6 +226,35 @@ impl<R: Read> Iterator for MultiBodyIter<R> {
         debug!("Reading child message {:?}", raw.kind);
 
         Some(Ok(raw))
+    }
+}
+
+// #[derive(Debug)]
+// struct ServiceMethodRequestMessage<Request: ServiceMethodRequest> {
+//
+// }
+
+impl<Request: ServiceMethodRequest> NetMessage for Request {
+    const KIND: EMsg = EMsg::k_EMsgServiceMethodCallFromClient;
+    const IS_PROTOBUF: bool = true;
+
+    fn read_body<R: Read + Seek>(mut reader: R) -> Result<Self, MalformedBody> {
+        trace!("reading body of protobuf message {:?}", Self::KIND);
+        Request::parse_from_reader(&mut reader).map_err(|e| MalformedBody(Self::KIND, e.into()))
+    }
+
+    fn write_body<W: Write>(&self, mut writer: W) -> Result<(), std::io::Error> {
+        trace!("writing body of protobuf message {:?}", Self::KIND);
+        self.write_to_writer(&mut writer)
+            .map_err(|_| std::io::Error::from(std::io::ErrorKind::InvalidData))
+    }
+
+    fn encode_size(&self) -> usize {
+        self.compute_size() as usize
+    }
+
+    fn process_header(&self, header: &mut NetMessageHeader) {
+        header.target_job_name = Some(Request::NAME.into())
     }
 }
 

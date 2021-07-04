@@ -1,5 +1,5 @@
 use crate::message::{
-    flatten_multi, ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, NetMessage,
+    ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, NetMessage,
 };
 use crate::proto::steammessages_base::CMsgProtoBufHeader;
 use bytemuck::{cast, Pod, Zeroable};
@@ -11,6 +11,7 @@ use futures_util::sink::SinkExt;
 use futures_util::TryStreamExt;
 use log::{debug, trace};
 use protobuf::{Message, ProtobufEnum};
+use std::borrow::Cow;
 use std::convert::TryFrom;
 use std::convert::TryInto;
 use std::io::{Cursor, Seek, SeekFrom};
@@ -74,6 +75,7 @@ pub struct NetMessageHeader {
     pub target_job_id: u64,
     pub steam_id: SteamID,
     pub session_id: i32,
+    pub target_job_name: Option<Cow<'static, str>>,
 }
 
 impl From<CMsgProtoBufHeader> for NetMessageHeader {
@@ -83,6 +85,9 @@ impl From<CMsgProtoBufHeader> for NetMessageHeader {
             target_job_id: header.get_jobid_target(),
             steam_id: header.get_steamid().into(),
             session_id: header.get_client_sessionid(),
+            target_job_name: header
+                .has_target_job_name()
+                .then(|| header.get_target_job_name().to_string().into()),
         }
     }
 }
@@ -117,6 +122,7 @@ impl NetMessageHeader {
                     source_job_id,
                     session_id: 0,
                     steam_id: SteamID::default(),
+                    target_job_name: None,
                 },
                 4 + 8 + 8,
             ))
@@ -133,6 +139,7 @@ impl NetMessageHeader {
                     target_job_id,
                     steam_id,
                     session_id,
+                    target_job_name: None,
                 },
                 4 + 3 + 8 + 8 + 1 + 8 + 4,
             ))
@@ -155,6 +162,9 @@ impl NetMessageHeader {
             proto_header.set_jobid_source(self.source_job_id);
             proto_header.set_steamid(self.steam_id.into());
             proto_header.set_client_sessionid(self.session_id);
+            if let Some(target_job_name) = self.target_job_name.as_deref() {
+                proto_header.set_target_job_name(target_job_name.into());
+            }
             writer.write_u32::<LittleEndian>(proto_header.compute_size())?;
             proto_header.write_to_writer(writer)?;
         } else {
@@ -180,6 +190,9 @@ impl NetMessageHeader {
             proto_header.set_jobid_source(0);
             proto_header.set_steamid(0);
             proto_header.set_client_sessionid(0);
+            if let Some(target_job_name) = self.target_job_name.as_deref() {
+                proto_header.set_target_job_name(target_job_name.into());
+            }
             4 + proto_header.compute_size() as usize
         } else {
             4 + 3 + 8 + 8 + 1 + 8 + 4
@@ -337,7 +350,7 @@ struct RawMessageEncoder {
 #[track_caller]
 fn assert_can_unsplit(head: &BytesMut, tail: &BytesMut) {
     let ptr = unsafe { head.as_ref().as_ptr().add(head.len()) };
-    assert_eq!(ptr, tail.as_ref().as_ptr());
+    debug_assert_eq!(ptr, tail.as_ref().as_ptr());
 }
 
 impl Encoder<RawNetMessage> for RawMessageEncoder {
@@ -444,13 +457,11 @@ pub async fn connect<A: ToSocketAddrs>(
     let key = key.plain;
 
     Ok((
-        flatten_multi(
-            raw_reader
-                .and_then(move |encrypted| {
-                    ready(symmetric_decrypt(encrypted, &key).map_err(Into::into))
-                })
-                .and_then(|raw| ready(RawNetMessage::read(raw))),
-        ),
+        raw_reader
+            .and_then(move |encrypted| {
+                ready(symmetric_decrypt(encrypted, &key).map_err(Into::into))
+            })
+            .and_then(|raw| ready(RawNetMessage::read(raw))),
         FramedWrite::new(raw_writer.into_inner(), RawMessageEncoder { key }),
     ))
 }

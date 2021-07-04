@@ -1,5 +1,6 @@
 use futures_util::SinkExt;
 use std::error::Error;
+use steam_vent::message::flatten_multi;
 use steam_vent::net::{connect, NetMessageHeader, RawNetMessage};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_base::CMsgIPAddress;
@@ -14,6 +15,7 @@ use tokio_stream::StreamExt;
 async fn main() -> Result<(), Box<dyn Error>> {
     env_logger::init();
     let (read, mut write) = connect("155.133.248.39:27020").await?;
+    let read = flatten_multi(read);
 
     println!("Handshake done");
 
