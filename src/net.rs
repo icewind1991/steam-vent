@@ -38,8 +38,10 @@ pub enum NetworkError {
     InvalidMessageKind(i32),
     #[error("Failed to perform crypto handshake")]
     CryptoHandshakeFailed,
-    #[error("Difference message expected, expected {0:?}, got {1:?}")]
+    #[error("Different message expected, expected {0:?}, got {1:?}")]
     DifferentMessage(EMsg, EMsg),
+    #[error("Different service method expected, expected {0:?}, got {1:?}")]
+    DifferentServiceMethod(&'static str, String),
     #[error("{0}")]
     MalformedBody(#[from] crate::message::MalformedBody),
     #[error("Crypto error: {0}")]
@@ -298,8 +300,8 @@ impl<T: NetMessage> TryFrom<RawNetMessage> for (NetMessageHeader, T) {
 impl RawNetMessage {
     pub fn into_message<T: NetMessage>(self) -> Result<(NetMessageHeader, T)> {
         if self.kind == T::KIND {
-            let mut reader = Cursor::new(self.data);
-            Ok((self.header, T::read_body(&mut reader)?))
+            let body = T::read_body(self.data, &self.header)?;
+            Ok((self.header, body))
         } else {
             Err(NetworkError::DifferentMessage(T::KIND, self.kind))
         }

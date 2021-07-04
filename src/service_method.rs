@@ -1,5 +1,6 @@
-use protobuf::Message;
+use protobuf::{Message, ProtobufResult};
 use std::fmt::Debug;
+use std::io::Read;
 use steam_vent_proto::{
     steammessages_chat_steamclient, steammessages_credentials_steamclient,
     steammessages_deviceauth_steamclient, steammessages_econ_steamclient,
@@ -14,12 +15,18 @@ pub trait ServiceMethodRequest: Debug + Message {
     type Response: ServiceMethodResponse;
 }
 
-pub trait ServiceMethodResponse: Debug {
+pub trait ServiceMethodResponse: Debug + Sized {
     const NAME: &'static str;
+
+    fn parse_from_reader(reader: &mut dyn Read) -> ProtobufResult<Self>;
 }
 
 impl ServiceMethodResponse for () {
     const NAME: &'static str = "";
+
+    fn parse_from_reader(_reader: &mut dyn Read) -> ProtobufResult<Self> {
+        Ok(())
+    }
 }
 
 macro_rules! service_method {
@@ -31,6 +38,10 @@ macro_rules! service_method {
 
         impl ServiceMethodResponse for $res {
             const NAME: &'static str = $res_name;
+
+            fn parse_from_reader(reader: &mut dyn Read) -> ProtobufResult<Self> {
+                <Self as Message>::parse_from_reader(reader)
+            }
         }
     };
     ($name:literal => $req:path, $res:path) => {
@@ -41,6 +52,10 @@ macro_rules! service_method {
 
         impl ServiceMethodResponse for $res {
             const NAME: &'static str = concat!($name, "#1_Response");
+
+            fn parse_from_reader(reader: &mut dyn Read) -> ProtobufResult<Self> {
+                <Self as Message>::parse_from_reader(reader)
+            }
         }
     };
     ($name:literal => $req:path) => {

@@ -23,6 +23,7 @@ pub enum SessionError {
 #[derive(Debug, Clone)]
 pub struct Session {
     session_id: i32,
+    last_source_id: u64,
     pub steam_id: SteamID,
 }
 
@@ -38,11 +39,14 @@ impl Session {
     }
 
     pub async fn send<Msg: NetMessage, Write: Sink<RawNetMessage, Error = NetworkError> + Unpin>(
-        &self,
+        &mut self,
         write: &mut Write,
         msg: Msg,
     ) -> Result<(), NetworkError> {
-        let msg = RawNetMessage::from_message(self.header(), msg)?;
+        self.last_source_id += 1;
+        let mut header = self.header();
+        header.source_job_id = self.last_source_id;
+        let msg = RawNetMessage::from_message(header, msg)?;
         write.send(msg).await
     }
 }
@@ -104,7 +108,8 @@ pub async fn login<
                 return if response.get_eresult() == 1 {
                     Ok(Session {
                         session_id: header.session_id,
-                        steam_id,
+                        steam_id: header.steam_id,
+                        last_source_id: 0,
                     })
                 } else {
                     Err(SessionError::LoginError)
