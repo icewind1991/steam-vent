@@ -6,7 +6,7 @@ Allows communication with the steam servers using the same protocol as the regul
 
 ## Usage
 
-Note that this probject is still in early development and api's might see large changes.
+Note that this project is still in early development and api's might see large changes.
 
 ```rust
 use std::error::Error;
