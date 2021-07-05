@@ -1,4 +1,3 @@
-use crate::message::NetMessage;
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::proto::steammessages_base::CMsgIPAddress;
 use crate::proto::steammessages_clientserver_login::CMsgClientLogon;
@@ -28,26 +27,15 @@ pub struct Session {
 }
 
 impl Session {
-    pub fn header(&self) -> NetMessageHeader {
+    pub fn header(&mut self) -> NetMessageHeader {
+        self.last_source_id += 1;
         NetMessageHeader {
             session_id: self.session_id,
-            source_job_id: u64::MAX,
+            source_job_id: self.last_source_id,
             target_job_id: u64::MAX,
             steam_id: self.steam_id,
             target_job_name: None,
         }
-    }
-
-    pub async fn send<Msg: NetMessage, Write: Sink<RawNetMessage, Error = NetworkError> + Unpin>(
-        &mut self,
-        write: &mut Write,
-        msg: Msg,
-    ) -> Result<(), NetworkError> {
-        self.last_source_id += 1;
-        let mut header = self.header();
-        header.source_job_id = self.last_source_id;
-        let msg = RawNetMessage::from_message(header, msg)?;
-        write.send(msg).await
     }
 }
 

@@ -1,3 +1,4 @@
+pub mod connection;
 pub mod eresult;
 pub mod message;
 pub mod net;

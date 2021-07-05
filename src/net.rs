@@ -12,6 +12,7 @@ use futures_util::TryStreamExt;
 use log::{debug, trace};
 use protobuf::{Message, ProtobufEnum};
 use std::borrow::Cow;
+use std::cmp::max;
 use std::convert::TryFrom;
 use std::convert::TryInto;
 use std::io::{Cursor, Seek, SeekFrom};
@@ -48,6 +49,8 @@ pub enum NetworkError {
     CryptoError(#[from] CryptError),
     #[error("Unexpected end of stream")]
     EOF,
+    #[error("Response timed out")]
+    Timeout,
 }
 
 pub type Result<T, E = NetworkError> = std::result::Result<T, E>;
@@ -71,7 +74,7 @@ impl Header {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug, Default, Clone)]
 pub struct NetMessageHeader {
     pub source_job_id: u64,
     pub target_job_id: u64,
@@ -202,7 +205,7 @@ impl NetMessageHeader {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct RawNetMessage {
     pub kind: EMsg,
     pub is_protobuf: bool,
@@ -256,13 +259,15 @@ impl RawNetMessage {
 
         message.process_header(&mut header);
 
+        let body_size = message.encode_size();
+
         // allocate the buffer with extra bytes and split those off
         // this allows later re-joining the bytes and use the space for the frame header and iv
         // without having to copy the message again
         //
         // 8 byte frame header, 16 byte iv, header, body, 16 byte encryption padding
         let mut buff = BytesMut::with_capacity(
-            8 + 16 + header.encode_size(T::KIND, T::IS_PROTOBUF) + message.encode_size() + 16,
+            8 + 16 + header.encode_size(T::KIND, T::IS_PROTOBUF) + body_size + 16,
         );
         buff.extend([0; 8 + 16]);
         let frame_header_buffer = buff.split_to(8);
@@ -360,13 +365,21 @@ fn assert_can_unsplit(head: &BytesMut, tail: &BytesMut) {
 impl Encoder<RawNetMessage> for RawMessageEncoder {
     type Error = NetworkError;
 
-    fn encode(&mut self, item: RawNetMessage, dst: &mut BytesMut) -> Result<(), Self::Error> {
+    fn encode(&mut self, mut item: RawNetMessage, dst: &mut BytesMut) -> Result<(), Self::Error> {
         let header_len = item.header_buffer.len();
         let body_len = item.data.len();
         let mut raw = item.header_buffer;
 
+        let empty_body = item.data.len() == 0;
+        if empty_body {
+            // trick unsplit into actually doing something
+            item.data.resize(1, 0);
+        }
         assert_can_unsplit(&raw, &item.data);
         raw.unsplit(item.data);
+        if empty_body {
+            raw.truncate(raw.len() - 1);
+        }
 
         trace!(
             "sending raw message({} byte header + {} byte body = {} bytes): {:?}",
@@ -379,14 +392,15 @@ impl Encoder<RawNetMessage> for RawMessageEncoder {
         let iv_buffer = item
             .iv_buffer
             .unwrap_or_else(|| BytesMut::from(&[0; 16][..]));
-        assert_eq!(16, iv_buffer.len());
+        debug_assert_eq!(16, iv_buffer.len());
 
+        assert_can_unsplit(&iv_buffer, &raw);
         let encrypted = symmetric_encrypt_with_iv_buffer(iv_buffer, raw, &self.key);
 
         let mut buf = item
             .frame_header_buffer
             .unwrap_or_else(|| BytesMut::from(&[0; 8][..]));
-        assert_eq!(8, buf.len());
+        debug_assert_eq!(8, buf.len());
         buf.clear();
         buf.extend_from_slice(&u32::to_le_bytes(encrypted.len() as u32));
         buf.extend_from_slice(&MAGIC);
