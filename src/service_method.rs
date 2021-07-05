@@ -16,43 +16,23 @@ pub trait ServiceMethodRequest: Debug + Message {
 }
 
 pub trait ServiceMethodResponse: Debug + Sized {
-    const NAME: &'static str;
-
     fn parse_from_reader(reader: &mut dyn Read) -> ProtobufResult<Self>;
 }
 
 impl ServiceMethodResponse for () {
-    const NAME: &'static str = "";
-
     fn parse_from_reader(_reader: &mut dyn Read) -> ProtobufResult<Self> {
         Ok(())
     }
 }
 
 macro_rules! service_method {
-    ($req_name:literal, $res_name:literal => $req:path, $res:path) => {
-        impl ServiceMethodRequest for $req {
-            const NAME: &'static str = $req_name;
-            type Response = $res;
-        }
-
-        impl ServiceMethodResponse for $res {
-            const NAME: &'static str = $res_name;
-
-            fn parse_from_reader(reader: &mut dyn Read) -> ProtobufResult<Self> {
-                <Self as Message>::parse_from_reader(reader)
-            }
-        }
-    };
     ($name:literal => $req:path, $res:path) => {
         impl ServiceMethodRequest for $req {
-            const NAME: &'static str = concat!($name, "#1_Request");
+            const NAME: &'static str = concat!($name, "#1");
             type Response = $res;
         }
 
         impl ServiceMethodResponse for $res {
-            const NAME: &'static str = concat!($name, "#1_Response");
-
             fn parse_from_reader(reader: &mut dyn Read) -> ProtobufResult<Self> {
                 <Self as Message>::parse_from_reader(reader)
             }

@@ -1,4 +1,5 @@
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
+use crate::proto::steammessages_clientserver::CMsgClientCMList;
 use crate::service_method::{ServiceMethodRequest, ServiceMethodResponse};
 use binread::BinRead;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
@@ -334,3 +335,4 @@ proto_msg!(EMsg::k_EMsgClientLogon => CMsgClientLogon);
 proto_msg!(EMsg::k_EMsgClientLoggedOff => CMsgClientLoggedOff);
 proto_msg!(EMsg::k_EMsgClientLogOnResponse => CMsgClientLogonResponse);
 proto_msg!(EMsg::k_EMsgClientServersAvailable => CMsgClientServersAvailable);
+proto_msg!(EMsg::k_EMsgClientCMList => CMsgClientCMList);

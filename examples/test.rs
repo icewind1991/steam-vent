@@ -8,8 +8,17 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let mut connection = Connection::anonymous().await?;
 
     let mut req = CGameServers_GetServerList_Request::new();
-    req.set_limit(100);
-    dbg!(connection.service_method(req).await)?;
+    req.set_limit(16);
+    req.set_filter("\\appid\\440".into());
+    let some_tf2_servers = connection.service_method(req).await?;
+    for server in some_tf2_servers.servers {
+        println!(
+            "{}({}) playing {}",
+            server.get_name(),
+            server.get_addr(),
+            server.get_map()
+        );
+    }
 
     Ok(())
 }

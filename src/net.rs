@@ -12,8 +12,6 @@ use futures_util::TryStreamExt;
 use log::{debug, trace};
 use protobuf::{Message, ProtobufEnum};
 use std::borrow::Cow;
-use std::cmp::max;
-use std::convert::TryFrom;
 use std::convert::TryInto;
 use std::io::{Cursor, Seek, SeekFrom};
 use steam_vent_crypto::{
@@ -281,6 +279,7 @@ impl RawNetMessage {
         let header_buffer = buff.split();
         let mut writer = (&mut buff).writer();
         message.write_body(&mut writer)?;
+        trace!("encoded body({} bytes): {:?}", buff.len(), buff.as_ref());
 
         Ok(RawNetMessage {
             kind: T::KIND,
@@ -294,19 +293,16 @@ impl RawNetMessage {
     }
 }
 
-impl<T: NetMessage> TryFrom<RawNetMessage> for (NetMessageHeader, T) {
-    type Error = NetworkError;
-
-    fn try_from(value: RawNetMessage) -> Result<Self, Self::Error> {
-        value.into_message()
-    }
-}
-
 impl RawNetMessage {
-    pub fn into_message<T: NetMessage>(self) -> Result<(NetMessageHeader, T)> {
+    pub fn into_message<T: NetMessage>(self) -> Result<T> {
         if self.kind == T::KIND {
+            trace!(
+                "reading body of {:?} message({} bytes)",
+                self.kind,
+                self.data.len()
+            );
             let body = T::read_body(self.data, &self.header)?;
-            Ok((self.header, body))
+            Ok(body)
         } else {
             Err(NetworkError::DifferentMessage(T::KIND, self.kind))
         }
@@ -421,7 +417,6 @@ pub async fn encode_message<T: NetMessage, S: Sink<BytesMut, Error = NetworkErro
     message: &T,
     dst: &mut S,
 ) -> Result<()> {
-    debug!("writing raw {:?} message", T::KIND);
     let mut buff = BytesMut::new();
 
     buff.reserve(message.encode_size() + 4);
@@ -447,9 +442,8 @@ pub async fn connect<A: ToSocketAddrs>(
     let mut raw_reader = FramedRead::new(read, FrameCodec);
     let mut raw_writer = FramedWrite::new(write, FrameCodec);
 
-    let (_header, encrypt_request) =
-        RawNetMessage::read(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
-            .into_message::<ChannelEncryptRequest>()?;
+    let encrypt_request = RawNetMessage::read(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
+        .into_message::<ChannelEncryptRequest>()?;
 
     trace!("using nonce: {:?}", encrypt_request.nonce);
     let key = generate_session_key(None);
@@ -463,9 +457,8 @@ pub async fn connect<A: ToSocketAddrs>(
     };
     encode_message(&NetMessageHeader::default(), &response, &mut raw_writer).await?;
 
-    let (_header, encrypt_response) =
-        RawNetMessage::read(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
-            .into_message::<ChannelEncryptResult>()?;
+    let encrypt_response = RawNetMessage::read(raw_reader.next().await.ok_or(NetworkError::EOF)??)?
+        .into_message::<ChannelEncryptResult>()?;
 
     if encrypt_response.result != 1 {
         return Err(NetworkError::CryptoHandshakeFailed);
@@ -477,7 +470,11 @@ pub async fn connect<A: ToSocketAddrs>(
     Ok((
         raw_reader
             .and_then(move |encrypted| {
-                ready(symmetric_decrypt(encrypted, &key).map_err(Into::into))
+                let decrypted = symmetric_decrypt(encrypted, &key).map_err(Into::into);
+                if let Ok(bytes) = decrypted.as_ref() {
+                    trace!("decrypted message of {} bytes", bytes.len());
+                }
+                ready(decrypted)
             })
             .and_then(|raw| ready(RawNetMessage::read(raw))),
         FramedWrite::new(raw_writer.into_inner(), RawMessageEncoder { key }),

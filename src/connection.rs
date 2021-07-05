@@ -25,7 +25,7 @@ pub struct Connection {
 
 impl Connection {
     pub async fn anonymous() -> Result<Self, SessionError> {
-        let (read, mut write) = connect("155.133.248.39:27020").await?;
+        let (read, mut write) = connect("155.133.248.38:27020").await?;
         let mut read = flatten_multi(read);
 
         let session = anonymous(&mut read, &mut write).await?;
@@ -51,12 +51,16 @@ impl Connection {
         msg: Msg,
     ) -> Result<Msg::Response> {
         let job_id = self.send(msg).await?;
-        let (_header, message) = timeout(Duration::from_secs(10), self.filter.on_job_id(job_id))
+        let message = timeout(Duration::from_secs(10), self.filter.on_job_id(job_id))
             .await
             .map_err(|_| NetworkError::Timeout)?
             .map_err(|_| NetworkError::Timeout)?
             .into_message::<ServiceMethodResponseMessage>()?;
         message.into_response::<Msg>()
+    }
+
+    pub async fn next(&mut self) -> Result<RawNetMessage> {
+        self.rest.recv().await.ok_or(NetworkError::EOF)?
     }
 }
 
