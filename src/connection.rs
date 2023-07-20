@@ -22,6 +22,7 @@ pub struct Connection {
     filter: MessageFilter,
     rest: mpsc::Receiver<Result<RawNetMessage>>,
     write: Box<dyn Sink<RawNetMessage, Error = NetworkError> + Unpin>,
+    timeout: Duration,
 }
 
 impl Connection {
@@ -37,6 +38,7 @@ impl Connection {
             filter,
             rest,
             write: Box::new(write),
+            timeout: Duration::from_secs(10),
         })
     }
 
@@ -48,12 +50,16 @@ impl Connection {
         Ok(id)
     }
 
+    pub fn set_timeout(&mut self, timeout: Duration) {
+        self.timeout = timeout;
+    }
+
     pub async fn service_method<Msg: ServiceMethodRequest>(
         &mut self,
         msg: Msg,
     ) -> Result<Msg::Response> {
         let job_id = self.send(msg).await?;
-        let message = timeout(Duration::from_secs(10), self.filter.on_job_id(job_id))
+        let message = timeout(self.timeout, self.filter.on_job_id(job_id))
             .await
             .map_err(|_| NetworkError::Timeout)?
             .map_err(|_| NetworkError::Timeout)?
