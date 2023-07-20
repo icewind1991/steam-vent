@@ -9,7 +9,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let mut req = CGameServers_GetServerList_Request::new();
     req.set_limit(16);
-    req.set_filter("\\appid\\440".into());
+    req.set_filter(r"\appid\440".into());
     let some_tf2_servers = connection.service_method(req).await?;
     for server in some_tf2_servers.servers {
         println!(

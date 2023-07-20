@@ -93,22 +93,19 @@ pub async fn login<
 
     while let Some(result) = read.next().await {
         let msg: RawNetMessage = result?;
-        match msg.kind {
-            EMsg::k_EMsgClientLogOnResponse => {
-                let session_id = msg.header.session_id;
-                let steam_id = msg.header.steam_id;
-                let response = msg.into_message::<CMsgClientLogonResponse>()?;
-                return if response.get_eresult() == 1 {
-                    Ok(Session {
-                        session_id,
-                        steam_id,
-                        last_source_id: 0,
-                    })
-                } else {
-                    Err(SessionError::LoginError)
-                };
-            }
-            _ => {}
+        if let EMsg::k_EMsgClientLogOnResponse = msg.kind {
+            let session_id = msg.header.session_id;
+            let steam_id = msg.header.steam_id;
+            let response = msg.into_message::<CMsgClientLogonResponse>()?;
+            return if response.get_eresult() == 1 {
+                Ok(Session {
+                    session_id,
+                    steam_id,
+                    last_source_id: 0,
+                })
+            } else {
+                Err(SessionError::LoginError)
+            };
         }
     }
     Err(NetworkError::EOF.into())

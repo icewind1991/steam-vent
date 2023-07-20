@@ -70,6 +70,10 @@ impl Connection {
     pub async fn next(&mut self) -> Result<RawNetMessage> {
         self.rest.recv().await.ok_or(NetworkError::EOF)?
     }
+
+    pub fn on_kind(&self, kind: EMsg) -> broadcast::Receiver<RawNetMessage> {
+        self.filter.on_kind(kind)
+    }
 }
 
 #[derive(Clone)]
