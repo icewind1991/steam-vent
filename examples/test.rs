@@ -4,7 +4,7 @@ use steam_vent_proto::steammessages_gameservers_steamclient::CGameServers_GetSer
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    env_logger::init();
+    tracing_subscriber::fmt::init();
     let mut connection = Connection::anonymous().await?;
 
     let mut req = CGameServers_GetServerList_Request::new();

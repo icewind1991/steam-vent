@@ -9,7 +9,7 @@ use futures_sink::Sink;
 use futures_util::future::ready;
 use futures_util::sink::SinkExt;
 use futures_util::TryStreamExt;
-use log::{debug, trace};
+use tracing::{debug, trace};
 use protobuf::{Message, ProtobufEnum};
 use std::borrow::Cow;
 use std::convert::TryInto;

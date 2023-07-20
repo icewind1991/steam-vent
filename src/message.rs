@@ -11,7 +11,7 @@ use futures_util::{
     stream::{iter, once},
     StreamExt,
 };
-use log::{debug, trace};
+use tracing::{debug, trace};
 use protobuf::{Message, ProtobufError};
 use std::any::type_name;
 use std::fmt::Debug;

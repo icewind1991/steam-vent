@@ -19,14 +19,14 @@ bytemuck = { version = "1", features = ["derive"] }
 crc = "2"
 byteorder = "1"
 flate2 = "1"
-log = "0.4"
 steamid-ng = "1"
 futures-sink = "0.3"
 futures-util = { version = "0.3", features = ["sink"] }
 dashmap = "4"
+tracing = "0.1.37"
 
 [dev-dependencies]
 tokio = { version = "1.0", features = ["macros", "rt", "rt-multi-thread"] }
-env_logger = "0.8"
+tracing-subscriber = "0.3.17"
 
 [workspace]
