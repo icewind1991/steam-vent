@@ -1,5 +1,6 @@
 use crate::message::{flatten_multi, NetMessage, ServiceMethodResponseMessage};
 use crate::net::{connect, NetworkError, RawNetMessage};
+use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, Session, SessionError};
 use dashmap::DashMap;
@@ -25,7 +26,8 @@ pub struct Connection {
 
 impl Connection {
     pub async fn anonymous() -> Result<Self, SessionError> {
-        let (read, mut write) = connect("155.133.226.78:27018").await?;
+        let server_list = ServerList::discover().await?;
+        let (read, mut write) = connect(server_list.pick()).await?;
         let mut read = flatten_multi(read);
 
         let session = anonymous(&mut read, &mut write).await?;

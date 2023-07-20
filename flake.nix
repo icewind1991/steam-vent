@@ -24,9 +24,14 @@
       lib = pkgs.lib;
       naersk' = pkgs.callPackage naersk {};
       src = lib.sources.sourceByRegex (lib.cleanSource ./.) ["Cargo.*" "(src|derive|benches|tests|examples|crypto|protobuf)(/.*)?"];
+      buildDeps = with pkgs; [
+        pkg-config
+        openssl
+      ];
       nearskOpt = {
         pname = "steam-vent";
         root = src;
+        nativeBuildInputs = buildDeps;
       };
     in rec {
       packages = {
@@ -43,7 +48,7 @@
       };
 
       devShells.default = pkgs.mkShell {
-        nativeBuildInputs = with pkgs; [rustc cargo bacon cargo-edit cargo-outdated clippy cargo-audit cargo-msrv cargo-fuzz];
+        nativeBuildInputs = with pkgs; [rustc cargo bacon cargo-edit cargo-outdated clippy cargo-audit cargo-msrv cargo-fuzz] ++ buildDeps;
       };
     });
 }

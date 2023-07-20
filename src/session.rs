@@ -1,6 +1,7 @@
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::proto::steammessages_base::CMsgIPAddress;
 use crate::proto::steammessages_clientserver_login::CMsgClientLogon;
+use crate::serverlist::ServerDiscoveryError;
 use futures_util::{Sink, SinkExt};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_clientserver_login::CMsgClientLogonResponse;
@@ -17,6 +18,8 @@ pub enum SessionError {
     Network(#[from] NetworkError),
     #[error("Login failed")]
     LoginError,
+    #[error(transparent)]
+    Discovery(#[from] ServerDiscoveryError),
 }
 
 #[derive(Debug, Clone)]
