@@ -65,6 +65,16 @@ pub fn generate_session_key(nonce: Option<&[u8; 16]>) -> SessionKeys {
     SessionKeys { plain, encrypted }
 }
 
+#[test]
+fn test_gen_session_key() {
+    assert!(!generate_session_key(None).encrypted.is_empty());
+    assert!(!generate_session_key(Some(&[
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+    ]))
+    .encrypted
+    .is_empty(),);
+}
+
 /// Decrypt an Initialization Vector with AES 256 ECB.
 fn encrypt_iv(iv: [u8; 16], key: &[u8; 32]) -> [u8; 16] {
     let iv_crypter = Aes256::new(GenericArray::from_slice(key));
@@ -79,6 +89,17 @@ fn decrypt_iv(iv: [u8; 16], key: &[u8; 32]) -> [u8; 16] {
     let mut iv_block = GenericArray::from(iv);
     iv_crypter.decrypt_block(&mut iv_block);
     iv_block.into()
+}
+
+#[test]
+fn test_iv_encryption_round_trip() {
+    let iv = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+    let key = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+        12, 13, 14, 15, 16,
+    ];
+    let encrypted = encrypt_iv(iv, &key);
+    assert_eq!(iv, decrypt_iv(encrypted, &key));
 }
 
 type Aes256Cbc = Cbc<Aes256, Pkcs7>;
@@ -110,6 +131,19 @@ fn decrypt_message(mut message: BytesMut, key: &[u8; 32], plain_iv: &[u8; 16]) -
         .len();
     message.truncate(len);
     Ok(message)
+}
+
+#[test]
+fn test_encryption_round_trip() {
+    let iv = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+    let key = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+        12, 13, 14, 15, 16,
+    ];
+    let msg = "some test message to encrypt";
+    let plain = BytesMut::from(msg);
+    let encrypted = encrypt_message(plain.clone(), &key, &iv);
+    assert_eq!(plain, decrypt_message(encrypted, &key, &iv).unwrap());
 }
 
 fn symmetric_encrypt_with_iv(
