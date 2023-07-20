@@ -9,7 +9,6 @@ use futures_sink::Sink;
 use futures_util::future::ready;
 use futures_util::sink::SinkExt;
 use futures_util::TryStreamExt;
-use tracing::{debug, trace, instrument};
 use protobuf::{Message, ProtobufEnum};
 use std::borrow::Cow;
 use std::convert::TryInto;
@@ -25,6 +24,7 @@ use tokio::net::{TcpStream, ToSocketAddrs};
 use tokio_stream::Stream;
 use tokio_stream::StreamExt;
 use tokio_util::codec::{Decoder, Encoder, FramedRead, FramedWrite};
+use tracing::{debug, instrument, trace};
 
 pub const PROTO_MASK: u32 = 0x80000000;
 
@@ -107,8 +107,8 @@ impl NetMessageHeader {
             trace!("reading protobuf header of {} bytes", header_length);
             let header = if header_length > 0 {
                 let mut bytes = vec![0; header_length as usize];
-                reader.read(&mut bytes)?;
-                CMsgProtoBufHeader::parse_from_bytes(&bytes)
+                let num = reader.read(&mut bytes)?;
+                CMsgProtoBufHeader::parse_from_bytes(&bytes[0..num])
                     .map_err(|_| NetworkError::InvalidHeader)?
                     .into()
             } else {
@@ -367,7 +367,7 @@ impl Encoder<RawNetMessage> for RawMessageEncoder {
         let body_len = item.data.len();
         let mut raw = item.header_buffer;
 
-        let empty_body = item.data.len() == 0;
+        let empty_body = item.data.is_empty();
         if empty_body {
             // trick unsplit into actually doing something
             item.data.resize(1, 0);

@@ -11,7 +11,6 @@ use futures_util::{
     stream::{iter, once},
     StreamExt,
 };
-use tracing::{debug, trace};
 use protobuf::{Message, ProtobufError};
 use std::any::type_name;
 use std::fmt::Debug;
@@ -24,6 +23,7 @@ use steam_vent_proto::steammessages_clientserver_login::{
 };
 use thiserror::Error;
 use tokio_stream::Stream;
+use tracing::{debug, trace};
 
 #[derive(Error, Debug)]
 #[error("Malformed message body for {0:?}: {1}")]
@@ -138,7 +138,7 @@ pub struct Multi {
 
 enum MaybeZipReader {
     Raw(Cursor<Vec<u8>>),
-    Zipped(GzDecoder<Cursor<Vec<u8>>>),
+    Zipped(Box<GzDecoder<Cursor<Vec<u8>>>>),
 }
 
 impl Read for MaybeZipReader {
@@ -200,7 +200,9 @@ impl MultiBodyIter<MaybeZipReader> {
 
         let data = match multi.get_size_unzipped() {
             0 => MaybeZipReader::Raw(Cursor::new(multi.take_message_body())),
-            _ => MaybeZipReader::Zipped(GzDecoder::new(Cursor::new(multi.take_message_body()))),
+            _ => MaybeZipReader::Zipped(Box::new(GzDecoder::new(Cursor::new(
+                multi.take_message_body(),
+            )))),
         };
 
         Ok(MultiBodyIter { reader: data })

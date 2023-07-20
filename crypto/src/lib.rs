@@ -176,7 +176,7 @@ pub fn symmetric_decrypt(mut input: BytesMut, key: &[u8; 32]) -> Result<BytesMut
     hmac_key[0..16].copy_from_slice(&key[0..16]);
 
     let mut hmac = HmacSha1::new(GenericArray::from_slice(&hmac_key));
-    hmac.update(&hmac_random);
+    hmac.update(hmac_random);
     hmac.update(&message);
 
     let hmac: [u8; 20] = hmac.finalize().into_bytes().into();
