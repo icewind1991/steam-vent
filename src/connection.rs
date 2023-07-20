@@ -25,7 +25,7 @@ pub struct Connection {
 
 impl Connection {
     pub async fn anonymous() -> Result<Self, SessionError> {
-        let (read, mut write) = connect("155.133.248.38:27020").await?;
+        let (read, mut write) = connect("155.133.226.78:27018").await?;
         let mut read = flatten_multi(read);
 
         let session = anonymous(&mut read, &mut write).await?;

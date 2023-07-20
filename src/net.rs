@@ -9,10 +9,11 @@ use futures_sink::Sink;
 use futures_util::future::ready;
 use futures_util::sink::SinkExt;
 use futures_util::TryStreamExt;
-use tracing::{debug, trace};
+use tracing::{debug, trace, instrument};
 use protobuf::{Message, ProtobufEnum};
 use std::borrow::Cow;
 use std::convert::TryInto;
+use std::fmt::Debug;
 use std::io::{Cursor, Seek, SeekFrom};
 use steam_vent_crypto::{
     generate_session_key, symmetric_decrypt, symmetric_encrypt_with_iv_buffer, CryptError,
@@ -431,13 +432,15 @@ pub async fn encode_message<T: NetMessage, S: Sink<BytesMut, Error = NetworkErro
     Ok(())
 }
 
-pub async fn connect<A: ToSocketAddrs>(
+#[instrument]
+pub async fn connect<A: ToSocketAddrs + Debug>(
     addr: A,
 ) -> Result<(
     impl Stream<Item = Result<RawNetMessage>>,
     impl Sink<RawNetMessage, Error = NetworkError>,
 )> {
     let stream = TcpStream::connect(addr).await?;
+    debug!("connected to server");
     let (read, write) = stream.into_split();
     let mut raw_reader = FramedRead::new(read, FrameCodec);
     let mut raw_writer = FramedWrite::new(write, FrameCodec);
