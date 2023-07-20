@@ -40,4 +40,5 @@ jobs:
           name: ci
           instance: https://cache.icewind.me
           authToken: '${{ secrets.ATTIC_TOKEN }}'
+      - run: nix build .#test-crypto
       - run: nix build .#test

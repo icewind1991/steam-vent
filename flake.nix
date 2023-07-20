@@ -29,8 +29,8 @@
         openssl
       ];
       nearskOpt = {
+        inherit src;
         pname = "steam-vent";
-        root = src;
         nativeBuildInputs = buildDeps;
       };
     in rec {
@@ -44,6 +44,11 @@
         test = naersk'.buildPackage (nearskOpt // {
           release = false;
           mode = "test";
+        });
+        test-crypto = naersk'.buildPackage (nearskOpt // {
+          release = false;
+          mode = "test";
+          cargoTestOptions = x: x ++ [ "-p" "steam-vent-crypto" ];
         });
       };
 
