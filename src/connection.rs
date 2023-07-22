@@ -12,6 +12,7 @@ use steam_vent_proto::enums_clientserver::EMsg;
 use tokio::sync::{broadcast, mpsc, oneshot};
 use tokio::task::spawn;
 use tokio::time::timeout;
+use tokio_stream::wrappers::BroadcastStream;
 use tokio_stream::Stream;
 use tokio_stream::StreamExt;
 
@@ -71,8 +72,10 @@ impl Connection {
         self.rest.recv().await.ok_or(NetworkError::EOF)?
     }
 
-    pub fn on_kind(&self, kind: EMsg) -> broadcast::Receiver<RawNetMessage> {
-        self.filter.on_kind(kind)
+    pub fn on<T: NetMessage>(&self) -> impl Stream<Item = Result<T>> {
+        BroadcastStream::new(self.filter.on_kind(T::KIND))
+            .filter_map(|res| res.ok())
+            .map(|raw: RawNetMessage| raw.into_message())
     }
 }
 
