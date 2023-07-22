@@ -17,6 +17,27 @@ impl From<reqwest::Error> for ServerDiscoveryError {
     }
 }
 
+#[derive(Default, Clone, Debug)]
+pub struct DiscoverOptions {
+    web_client: Option<Client>,
+    // todo: some smart cell based routing based on
+    // https://raw.githubusercontent.com/SteamDatabase/SteamTracking/6d23ebb0070998ae851278cfae5f38832f4ac28d/ClientExtracted/steam/cached/CellMap.vdf
+    cell: u8,
+}
+
+impl DiscoverOptions {
+    pub fn with_web_client(self, web_client: Client) -> Self {
+        DiscoverOptions {
+            web_client: Some(web_client),
+            ..self
+        }
+    }
+
+    pub fn with_cell(self, cell: u8) -> Self {
+        DiscoverOptions { cell, ..self }
+    }
+}
+
 #[derive(Debug)]
 pub struct ServerList {
     servers: Vec<SocketAddr>,
@@ -24,11 +45,19 @@ pub struct ServerList {
 
 impl ServerList {
     pub async fn discover() -> Result<ServerList, ServerDiscoveryError> {
-        // todo: some smart cell based routing based on
-        // https://raw.githubusercontent.com/SteamDatabase/SteamTracking/6d23ebb0070998ae851278cfae5f38832f4ac28d/ClientExtracted/steam/cached/CellMap.vdf
-        // or something
-        let response: ServerListResponse = Client::new()
-            .get("https://api.steampowered.com/ISteamDirectory/GetCMList/v1/?cellid=15")
+        Self::discover_with(DiscoverOptions::default()).await
+    }
+
+    pub async fn discover_with(
+        options: DiscoverOptions,
+    ) -> Result<ServerList, ServerDiscoveryError> {
+        let client = options.web_client.unwrap_or_default();
+        let cell = options.cell;
+
+        let response: ServerListResponse = client
+            .get(&format!(
+                "https://api.steampowered.com/ISteamDirectory/GetCMList/v1/?cellid={cell}"
+            ))
             .send()
             .await?
             .json()

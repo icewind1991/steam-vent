@@ -1,8 +1,9 @@
-use crate::message::{flatten_multi, NetMessage, ServiceMethodResponseMessage};
+use crate::auth::LoginState;
+use crate::message::{NetMessage, ServiceMethodResponseMessage};
 use crate::net::{connect, NetworkError, RawNetMessage};
 use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
-use crate::session::{anonymous, Session, SessionError};
+use crate::session::{Session, SessionError};
 use dashmap::DashMap;
 use futures_sink::Sink;
 use futures_util::SinkExt;
@@ -27,12 +28,11 @@ pub struct Connection {
 }
 
 impl Connection {
-    pub async fn anonymous() -> Result<Self, SessionError> {
-        let server_list = ServerList::discover().await?;
-        let (read, mut write) = connect(server_list.pick()).await?;
-        let mut read = flatten_multi(read);
+    pub async fn anonymous(server_list: ServerList) -> Result<Self, SessionError> {
+        let (read, write) = connect(server_list.pick()).await?;
+        let (session, read, write) = LoginState::anonymous(read, write).await.unwrap();
+        let session = session?;
 
-        let session = anonymous(&mut read, &mut write).await?;
         let (filter, rest) = MessageFilter::new(read);
         Ok(Connection {
             session,

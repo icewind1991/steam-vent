@@ -1,5 +1,5 @@
 use crate::message::{
-    ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, NetMessage,
+    flatten_multi, ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, NetMessage,
 };
 use crate::proto::steammessages_base::CMsgProtoBufHeader;
 use bytemuck::{cast, Pod, Zeroable};
@@ -471,15 +471,17 @@ pub async fn connect<A: ToSocketAddrs + Debug>(
     let key = key.plain;
 
     Ok((
-        raw_reader
-            .and_then(move |encrypted| {
-                let decrypted = symmetric_decrypt(encrypted, &key).map_err(Into::into);
-                if let Ok(bytes) = decrypted.as_ref() {
-                    trace!("decrypted message of {} bytes", bytes.len());
-                }
-                ready(decrypted)
-            })
-            .and_then(|raw| ready(RawNetMessage::read(raw))),
+        flatten_multi(
+            raw_reader
+                .and_then(move |encrypted| {
+                    let decrypted = symmetric_decrypt(encrypted, &key).map_err(Into::into);
+                    if let Ok(bytes) = decrypted.as_ref() {
+                        trace!("decrypted message of {} bytes", bytes.len());
+                    }
+                    ready(decrypted)
+                })
+                .and_then(|raw| ready(RawNetMessage::read(raw))),
+        ),
         FramedWrite::new(raw_writer.into_inner(), RawMessageEncoder { key }),
     ))
 }

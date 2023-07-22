@@ -16,10 +16,31 @@ type Result<T, E = SessionError> = std::result::Result<T, E>;
 pub enum SessionError {
     #[error("Network error: {0:#}")]
     Network(#[from] NetworkError),
-    #[error("Login failed")]
-    LoginError,
+    #[error("Login failed: {0:#}")]
+    LoginError(#[from] LoginError),
     #[error(transparent)]
     Discovery(#[from] ServerDiscoveryError),
+}
+
+#[derive(Debug, Error)]
+pub enum LoginError {
+    #[error("invalid credentials")]
+    InvalidCredentials,
+    #[error("unknown error {0}")]
+    Unknown(i32),
+    #[error("steam guard required")]
+    SteamGuardRequired,
+}
+
+impl LoginError {
+    fn from_e_result(result: i32) -> Result<(), Self> {
+        // https://steam.readthedocs.io/en/latest/api/steam.enums.html#steam.enums.common.EResult
+        match result {
+            1 => Ok(()),
+            5 => Err(LoginError::InvalidCredentials),
+            _ => Err(LoginError::Unknown(result)),
+        }
+    }
 }
 
 #[derive(Debug, Clone)]
@@ -97,15 +118,13 @@ pub async fn login<
             let session_id = msg.header.session_id;
             let steam_id = msg.header.steam_id;
             let response = msg.into_message::<CMsgClientLogonResponse>()?;
-            return if response.get_eresult() == 1 {
-                Ok(Session {
-                    session_id,
-                    steam_id,
-                    last_source_id: 0,
-                })
-            } else {
-                Err(SessionError::LoginError)
-            };
+
+            LoginError::from_e_result(response.get_eresult())?;
+            return Ok(Session {
+                session_id,
+                steam_id,
+                last_source_id: 0,
+            });
         }
     }
     Err(NetworkError::EOF.into())
