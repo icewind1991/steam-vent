@@ -17,9 +17,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
     for server in some_tf2_servers.servers {
         println!(
             "{}({}) playing {}",
-            server.get_name(),
-            server.get_addr(),
-            server.get_map()
+            server.name(),
+            server.addr(),
+            server.map()
         );
     }
 

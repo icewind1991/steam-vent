@@ -8,8 +8,8 @@ use bytes::{Buf, BufMut, BytesMut};
 use futures_sink::Sink;
 use futures_util::future::ready;
 use futures_util::sink::SinkExt;
-use futures_util::TryStreamExt;
-use protobuf::{Message, ProtobufEnum};
+use futures_util::{StreamExt, TryStreamExt};
+use protobuf::{Enum, Message};
 use std::borrow::Cow;
 use std::convert::TryInto;
 use std::fmt::Debug;
@@ -85,13 +85,13 @@ pub struct NetMessageHeader {
 impl From<CMsgProtoBufHeader> for NetMessageHeader {
     fn from(header: CMsgProtoBufHeader) -> Self {
         NetMessageHeader {
-            source_job_id: header.get_jobid_source(),
-            target_job_id: header.get_jobid_target(),
-            steam_id: header.get_steamid().into(),
-            session_id: header.get_client_sessionid(),
+            source_job_id: header.jobid_source(),
+            target_job_id: header.jobid_target(),
+            steam_id: header.steamid().into(),
+            session_id: header.client_sessionid(),
             target_job_name: header
                 .has_target_job_name()
-                .then(|| header.get_target_job_name().to_string().into()),
+                .then(|| header.target_job_name().to_string().into()),
         }
     }
 }
@@ -169,7 +169,7 @@ impl NetMessageHeader {
             if let Some(target_job_name) = self.target_job_name.as_deref() {
                 proto_header.set_target_job_name(target_job_name.into());
             }
-            writer.write_u32::<LittleEndian>(proto_header.compute_size())?;
+            writer.write_u32::<LittleEndian>(proto_header.compute_size() as u32)?;
             proto_header.write_to_writer(writer)?;
         } else {
             trace!("writing header for {:?} message: {:?}", kind, self);

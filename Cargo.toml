@@ -5,7 +5,7 @@ authors = ["Robin Appelman <robin@icewind.nl>"]
 edition = "2021"
 
 [dependencies]
-steam-vent-proto = { version = "0.1", path = "./protobuf" }
+steam-vent-proto = { version = "0.2", path = "./protobuf" }
 steam-vent-crypto = { version = "0.2", path = "./crypto" }
 tokio = { version = "1.29.1", features = ["net", "io-util"] }
 tokio-util = { version = "0.7.8", features = ["codec"] }
@@ -14,7 +14,7 @@ binread = "2.2.0"
 binwrite = "0.2.1"
 thiserror = "1.0.43"
 bytes = "1.4.0"
-protobuf = "=2.24.1"
+protobuf = "=3.2.0"
 bytemuck = { version = "1.13.1", features = ["derive"] }
 crc = "3.0.1"
 byteorder = "1.4.3"

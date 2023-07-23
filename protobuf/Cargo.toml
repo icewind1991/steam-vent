@@ -1,11 +1,15 @@
 [package]
 name = "steam-vent-proto"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Robin Appelman <robin@icewind.nl>"]
-edition = "2018"
+edition = "2021"
 description = "Protobuf structs used by the Steam client protocol"
 license = "MIT"
 repository = "https://github.com/icewind1991/steam-vent"
 
 [dependencies]
-protobuf = "=2.24.1"
+protobuf = { version = "=3.2.0", features = ["with-bytes"] }
+
+[build-dependencies]
+protobuf-codegen = "=3.2.0"
+walkdir = "2.3.3"

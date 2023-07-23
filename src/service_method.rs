@@ -1,4 +1,4 @@
-use protobuf::{Message, ProtobufResult};
+use protobuf::Message;
 use std::fmt::Debug;
 use std::io::Read;
 use steam_vent_proto::{
@@ -11,16 +11,16 @@ use steam_vent_proto::{
 };
 
 pub trait ServiceMethodRequest: Debug + Message {
-    const NAME: &'static str;
+    const REQ_NAME: &'static str;
     type Response: ServiceMethodResponse;
 }
 
 pub trait ServiceMethodResponse: Debug + Sized {
-    fn parse_from_reader(reader: &mut dyn Read) -> ProtobufResult<Self>;
+    fn parse_from_reader(reader: &mut dyn Read) -> protobuf::Result<Self>;
 }
 
 impl ServiceMethodResponse for () {
-    fn parse_from_reader(_reader: &mut dyn Read) -> ProtobufResult<Self> {
+    fn parse_from_reader(_reader: &mut dyn Read) -> protobuf::Result<Self> {
         Ok(())
     }
 }
@@ -28,19 +28,19 @@ impl ServiceMethodResponse for () {
 macro_rules! service_method {
     ($name:literal => $req:path, $res:path) => {
         impl ServiceMethodRequest for $req {
-            const NAME: &'static str = concat!($name, "#1");
+            const REQ_NAME: &'static str = concat!($name, "#1");
             type Response = $res;
         }
 
         impl ServiceMethodResponse for $res {
-            fn parse_from_reader(reader: &mut dyn Read) -> ProtobufResult<Self> {
+            fn parse_from_reader(reader: &mut dyn Read) -> protobuf::Result<Self> {
                 <Self as Message>::parse_from_reader(reader)
             }
         }
     };
     ($name:literal => $req:path) => {
         impl ServiceMethodRequest for $req {
-            const NAME: &'static str = concat!($name, "#1");
+            const REQ_NAME: &'static str = concat!($name, "#1");
             type Response = ();
         }
     };

@@ -11,7 +11,7 @@ use futures_util::{
     stream::{iter, once},
     StreamExt,
 };
-use protobuf::{Message, ProtobufError};
+use protobuf::Message;
 use std::any::type_name;
 use std::fmt::Debug;
 use std::io::{Cursor, Read, Write};
@@ -32,7 +32,7 @@ pub struct MalformedBody(EMsg, MessageBodyError);
 #[derive(Error, Debug)]
 pub enum MessageBodyError {
     #[error("{0}")]
-    Protobuf(#[from] ProtobufError),
+    Protobuf(#[from] protobuf::Error),
     #[error("{0}")]
     BinRead(#[from] binread::Error),
     #[error("{0}")]
@@ -198,7 +198,7 @@ impl MultiBodyIter<MaybeZipReader> {
         let mut multi = CMsgMulti::parse_from_reader(&mut reader)
             .map_err(|e| MalformedBody(EMsg::k_EMsgMulti, e.into()))?;
 
-        let data = match multi.get_size_unzipped() {
+        let data = match multi.size_unzipped() {
             0 => MaybeZipReader::Raw(Cursor::new(multi.take_message_body())),
             _ => MaybeZipReader::Zipped(Box::new(GzDecoder::new(Cursor::new(
                 multi.take_message_body(),
@@ -260,7 +260,7 @@ impl<Request: ServiceMethodRequest> NetMessage for Request {
     }
 
     fn process_header(&self, header: &mut NetMessageHeader) {
-        header.target_job_name = Some(Request::NAME.into())
+        header.target_job_name = Some(Request::REQ_NAME.into())
     }
 }
 
@@ -274,14 +274,14 @@ impl ServiceMethodResponseMessage {
     pub fn into_response<Request: ServiceMethodRequest>(
         self,
     ) -> Result<Request::Response, NetworkError> {
-        if self.job_name == Request::NAME {
+        if self.job_name == Request::REQ_NAME {
             Ok(
                 Request::Response::parse_from_reader(&mut self.body.reader())
                     .map_err(|e| MalformedBody(Self::KIND, e.into()))?,
             )
         } else {
             Err(NetworkError::DifferentServiceMethod(
-                Request::NAME,
+                Request::REQ_NAME,
                 self.job_name,
             ))
         }

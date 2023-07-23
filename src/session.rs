@@ -3,6 +3,7 @@ use crate::proto::steammessages_base::CMsgIPAddress;
 use crate::proto::steammessages_clientserver_login::CMsgClientLogon;
 use crate::serverlist::ServerDiscoveryError;
 use futures_util::{Sink, SinkExt};
+use protobuf::MessageField;
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_clientserver_login::CMsgClientLogonResponse;
 use steamid_ng::{AccountType, Instance, SteamID, Universe};
@@ -95,7 +96,7 @@ pub async fn login<
 
     let mut ip = CMsgIPAddress::new();
     ip.set_v4(0);
-    logon.set_obfuscated_private_ip(ip);
+    logon.obfuscated_private_ip = MessageField::some(ip);
     logon.set_client_language(String::new());
     logon.set_machine_name(String::new());
     logon.set_steamguard_dont_remember_computer(false);
@@ -119,7 +120,7 @@ pub async fn login<
             let steam_id = msg.header.steam_id;
             let response = msg.into_message::<CMsgClientLogonResponse>()?;
 
-            LoginError::from_e_result(response.get_eresult())?;
+            LoginError::from_e_result(response.eresult())?;
             return Ok(Session {
                 session_id,
                 steam_id,
