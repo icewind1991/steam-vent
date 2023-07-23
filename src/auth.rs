@@ -1,7 +1,6 @@
 use crate::net::{NetworkError, RawNetMessage};
 use crate::session::{anonymous, LoginError, Session, SessionError};
 use futures_sink::Sink;
-use steamid_ng::SteamID;
 use tokio_stream::Stream;
 
 pub enum LoginState<Read, Write> {
@@ -23,7 +22,13 @@ where
         })
     }
 
-    pub async fn password(_read: Read, _write: Write, _steam_id: SteamID, _password: &str) -> Self {
+    pub async fn password(
+        _read: Read,
+        _write: Write,
+        _account: &str,
+        _password: &str,
+        _machine_token: Option<&str>,
+    ) -> Self {
         todo!();
     }
 

@@ -17,7 +17,7 @@
     rust-overlay,
   }:
     utils.lib.eachDefaultSystem (system: let
-      overlays = [ (import rust-overlay) ];
+      overlays = [(import rust-overlay)];
       pkgs = (import nixpkgs) {
         inherit system overlays;
       };
@@ -35,25 +35,41 @@
       };
     in rec {
       packages = {
-        check = naersk'.buildPackage (nearskOpt // {
-          mode = "check";
-        });
-        clippy = naersk'.buildPackage (nearskOpt // {
-          mode = "clippy";
-        });
-        test = naersk'.buildPackage (nearskOpt // {
-          release = false;
-          mode = "test";
-        });
-        test-crypto = naersk'.buildPackage (nearskOpt // {
-          release = false;
-          mode = "test";
-          cargoTestOptions = x: x ++ [ "-p" "steam-vent-crypto" ];
-        });
+        check = naersk'.buildPackage (nearskOpt
+          // {
+            mode = "check";
+          });
+        clippy = naersk'.buildPackage (nearskOpt
+          // {
+            mode = "clippy";
+          });
+        test = naersk'.buildPackage (nearskOpt
+          // {
+            release = false;
+            mode = "test";
+          });
+        test-crypto = naersk'.buildPackage (nearskOpt
+          // {
+            release = false;
+            mode = "test";
+            cargoTestOptions = x: x ++ ["-p" "steam-vent-crypto"];
+          });
       };
 
       devShells.default = pkgs.mkShell {
-        nativeBuildInputs = with pkgs; [rustc cargo bacon cargo-edit cargo-outdated clippy cargo-audit cargo-msrv cargo-fuzz] ++ buildDeps;
+        nativeBuildInputs = with pkgs;
+          [
+            rustc
+            cargo
+            bacon
+            cargo-edit
+            cargo-outdated
+            clippy
+            cargo-audit
+            cargo-msrv
+            cargo-fuzz
+          ]
+          ++ buildDeps;
       };
     });
 }

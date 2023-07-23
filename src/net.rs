@@ -22,7 +22,8 @@ use steamid_ng::SteamID;
 use thiserror::Error;
 use tokio::net::{TcpStream, ToSocketAddrs};
 use tokio_stream::Stream;
-use tokio_stream::StreamExt;
+use tokio_tungstenite::connect_async;
+use tokio_tungstenite::tungstenite::Message as WsMessage;
 use tokio_util::codec::{Decoder, Encoder, FramedRead, FramedWrite};
 use tracing::{debug, instrument, trace};
 
@@ -32,6 +33,8 @@ pub const PROTO_MASK: u32 = 0x80000000;
 pub enum NetworkError {
     #[error("{0}")]
     IO(#[from] std::io::Error),
+    #[error("{0}")]
+    Ws(#[from] tokio_tungstenite::tungstenite::Error),
     #[error("Invalid message header")]
     InvalidHeader,
     #[error("Invalid message kind {0}")]
@@ -483,5 +486,33 @@ pub async fn connect<A: ToSocketAddrs + Debug>(
                 .and_then(|raw| ready(RawNetMessage::read(raw))),
         ),
         FramedWrite::new(raw_writer.into_inner(), RawMessageEncoder { key }),
+    ))
+}
+
+#[instrument]
+pub async fn connect_ws(
+    addr: &str,
+) -> Result<(
+    impl Stream<Item = Result<RawNetMessage>>,
+    impl Sink<RawNetMessage, Error = NetworkError>,
+)> {
+    let (stream, _) = connect_async(addr).await?;
+    debug!("connected to websocket server");
+    let (raw_write, raw_read) = stream.split();
+
+    Ok((
+        flatten_multi(
+            raw_read
+                .map_err(NetworkError::from)
+                .map_ok(|raw| raw.into_data())
+                .map_ok(|vec| vec.into_iter().collect()) // this should be optimized to reuse the memory
+                .map(|res| res.and_then(RawNetMessage::read)),
+        ),
+        raw_write.with(|msg: RawNetMessage| {
+            let mut body = Vec::with_capacity(msg.header_buffer.len() + msg.data.len());
+            body.extend_from_slice(msg.header_buffer.as_ref());
+            body.extend_from_slice(msg.data.as_ref());
+            ready(Ok(WsMessage::binary(body)))
+        }),
     ))
 }
