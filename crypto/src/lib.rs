@@ -7,8 +7,7 @@ use cbc::cipher::{BlockDecryptMut, BlockEncryptMut};
 use hmac::{Hmac, Mac};
 use once_cell::sync::Lazy;
 use rand::{random, Rng};
-use rsa::pkcs8::DecodePublicKey;
-use rsa::{Oaep, Pss, RsaPublicKey};
+use rsa::{BigUint, Oaep, Pss, RsaPublicKey};
 use sha1::Sha1;
 use std::convert::TryInto;
 use thiserror::Error;
@@ -29,11 +28,16 @@ pub type Result<T> = std::result::Result<T, CryptError>;
 #[error("{0}")]
 pub struct RsaError(rsa::errors::Error);
 
-const SYSTEM_PUBLIC_KEY_DER_BYTES: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/system.der"));
+mod system_key {
+    include!(concat!(env!("OUT_DIR"), "/system_key.rs"));
+}
 
 static SYSTEM_PUBLIC_KEY: Lazy<RsaPublicKey> = Lazy::new(|| {
-    RsaPublicKey::from_public_key_der(SYSTEM_PUBLIC_KEY_DER_BYTES)
-        .expect("Failed to parse public key")
+    RsaPublicKey::new(
+        BigUint::from_bytes_le(system_key::N),
+        BigUint::from_bytes_le(system_key::E),
+    )
+    .expect("Failed to parse public key")
 });
 
 /// Verify sha1 signature using the steam "system" public key
