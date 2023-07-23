@@ -1,3 +1,4 @@
+import "steammessages_base.proto";
 import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
@@ -17,6 +18,7 @@ enum EBroadcastWatchLocation {
 	k_EBroadcastWatchLocation_DeveloperPage = 11;
 	k_EBroadcastWatchLocation_Chat_Friends = 12;
 	k_EBroadcastWatchLocation_SteamTV_Web = 13;
+	k_EBroadcastWatchLocation_DesktopUI_Overlay = 14;
 }
 
 enum EBroadcastChatPermission {
@@ -256,7 +258,7 @@ message CBroadcast_GetBroadcastChatUserNames_Request {
 
 message CBroadcast_GetBroadcastChatUserNames_Response {
 	message PersonaName {
-		optional fixed64 steam_id = 1;
+		optional fixed64 steam_id = 1 [(allow_field_named_steam_id) = true];
 		optional string persona = 2;
 	}
 
@@ -320,6 +322,8 @@ message CBroadcast_SetRTMPInfo_Request {
 	optional fixed64 steamid = 8 [(description) = "broadcaster steamID if not logged-in user"];
 	optional uint32 chat_rate_limit = 9 [(description) = "Seconds required between chat messages"];
 	optional bool enable_replay = 10 [(description) = "Enable replay of last upload"];
+	optional bool is_partner_chat_only = 11 [(description) = "When true, then only steamwork partner can create chat messages."];
+	optional string wordban_list = 12;
 }
 
 message CBroadcast_SetRTMPInfo_Response {
@@ -342,6 +346,8 @@ message CBroadcast_GetRTMPInfo_Response {
 	optional fixed64 steamid = 9 [(description) = "broadcaster steamID"];
 	optional uint32 chat_rate_limit = 10 [(description) = "Seconds required between chat messages"];
 	optional bool enable_replay = 11 [(description) = "Enable replay of last upload"];
+	optional bool is_partner_chat_only = 12 [(description) = "When true, then only steamwork partner can create chat messages."];
+	optional string wordban_list = 13;
 }
 
 message CBroadcast_WebRTCHaveTURNServer_Notification {

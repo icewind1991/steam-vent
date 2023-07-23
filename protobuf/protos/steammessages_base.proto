@@ -15,6 +15,18 @@ extend .google.protobuf.FileOptions {
 
 extend .google.protobuf.FieldOptions {
 	optional bool php_output_always_number = 50020 [default = false];
+	optional bool allow_field_named_steam_id = 50024 [default = false];
+}
+
+enum EBanContentCheckResult {
+	k_EBanContentCheckResult_NotScanned = 0;
+	k_EBanContentCheckResult_Reset = 1;
+	k_EBanContentCheckResult_NeedsChecking = 2;
+	k_EBanContentCheckResult_VeryUnlikely = 5;
+	k_EBanContentCheckResult_Unlikely = 30;
+	k_EBanContentCheckResult_Possible = 50;
+	k_EBanContentCheckResult_Likely = 75;
+	k_EBanContentCheckResult_VeryLikely = 100;
 }
 
 enum EProtoClanEventType {
@@ -74,7 +86,17 @@ message CMsgIPAddressBucket {
 	optional fixed64 bucket = 2;
 }
 
+message CMsgGCRoutingProtoBufHeader {
+	optional uint64 dst_gcid_queue = 1;
+	optional uint32 dst_gc_dir_index = 2;
+}
+
 message CMsgProtoBufHeader {
+	enum ESessionDisposition {
+		k_ESessionDispositionNormal = 0;
+		k_ESessionDispositionDisconnect = 1;
+	}
+
 	optional fixed64 steamid = 1;
 	optional int32 client_sessionid = 2;
 	optional uint32 routing_appid = 3;
@@ -96,9 +118,16 @@ message CMsgProtoBufHeader {
 	optional bool is_from_external_source = 26;
 	repeated uint32 forward_to_sysid = 27;
 	optional uint32 cm_sysid = 28;
-	optional string wg_token = 30;
 	optional uint32 launcher_type = 31 [default = 0];
 	optional uint32 realm = 32 [default = 0];
+	optional int32 timeout_ms = 33 [default = -1];
+	optional string debug_source = 34;
+	optional uint32 debug_source_string_index = 35;
+	optional uint64 token_id = 36;
+	optional .CMsgGCRoutingProtoBufHeader routing_gc = 37;
+	optional .CMsgProtoBufHeader.ESessionDisposition session_disposition = 38 [default = k_ESessionDispositionNormal];
+	optional string wg_token = 39;
+	optional string webui_auth_key = 40;
 
 	oneof ip_addr {
 		uint32 ip = 15;
@@ -123,14 +152,14 @@ message CMsgAuthTicket {
 	optional uint32 h_steam_pipe = 5;
 	optional uint32 ticket_crc = 6;
 	optional bytes ticket = 7;
+	optional bytes server_secret = 8;
+	optional uint32 ticket_type = 9;
 }
 
 message CCDDBAppDetailCommon {
 	optional uint32 appid = 1;
 	optional string name = 2;
 	optional string icon = 3;
-	optional string logo = 4;
-	optional string logo_small = 5;
 	optional bool tool = 6;
 	optional bool demo = 7;
 	optional bool media = 8;
@@ -139,6 +168,10 @@ message CCDDBAppDetailCommon {
 	optional string propagation = 11;
 	optional bool has_adult_content = 12;
 	optional bool is_visible_in_steam_china = 13;
+	optional uint32 app_type = 14;
+	optional bool has_adult_content_sex = 15;
+	optional bool has_adult_content_violence = 16;
+	repeated uint32 content_descriptorids = 17;
 }
 
 message CMsgAppRights {
@@ -158,6 +191,7 @@ message CMsgAppRights {
 	optional bool manage_pricing = 14;
 	optional bool broadcast_live = 15;
 	optional bool view_marketing_traffic = 16;
+	optional bool edit_store_display_content = 17;
 }
 
 message CCuratorPreferences {
@@ -218,6 +252,8 @@ message CCommunity_ClanAnnouncementInfo {
 	optional fixed64 event_gid = 13;
 	optional int32 voteupcount = 14;
 	optional int32 votedowncount = 15;
+	optional .EBanContentCheckResult ban_check_result = 16 [default = k_EBanContentCheckResult_NotScanned];
+	optional bool banned = 17;
 }
 
 message CClanEventData {
@@ -249,6 +285,8 @@ message CClanEventData {
 	optional uint32 rtime_mod_reviewed = 26;
 	optional uint32 featured_app_tagid = 27;
 	repeated uint32 referenced_appids = 28;
+	optional uint32 build_id = 29;
+	optional string build_branch = 30;
 }
 
 message CBilling_Address {
@@ -273,4 +311,22 @@ message CPackageReservationStatus {
 	optional bool expired = 6;
 	optional uint32 time_expires = 7;
 	optional uint32 time_reserved = 8;
+}
+
+message CMsgKeyValuePair {
+	optional string name = 1;
+	optional string value = 2;
+}
+
+message CMsgKeyValueSet {
+	repeated .CMsgKeyValuePair pairs = 1;
+}
+
+message UserContentDescriptorPreferences {
+	message ContentDescriptor {
+		optional uint32 content_descriptorid = 1;
+		optional uint32 timestamp_added = 2;
+	}
+
+	repeated .UserContentDescriptorPreferences.ContentDescriptor content_descriptors_to_exclude = 1;
 }

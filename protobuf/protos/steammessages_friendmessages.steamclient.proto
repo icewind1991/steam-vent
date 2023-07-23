@@ -1,3 +1,4 @@
+import "steammessages_base.proto";
 import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
@@ -5,6 +6,7 @@ option cc_generic_services = true;
 enum EMessageReactionType {
 	k_EMessageReactionType_Invalid = 0;
 	k_EMessageReactionType_Emoticon = 1;
+	k_EMessageReactionType_Sticker = 2;
 }
 
 message CFriendMessages_GetRecentMessages_Request {

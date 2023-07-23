@@ -1,5 +1,4 @@
 use protobuf_codegen::Codegen;
-use std::fs;
 use std::path::{Path, PathBuf};
 use walkdir::WalkDir;
 
@@ -30,17 +29,9 @@ fn main() {
 }
 
 fn print_rerun_if_changed<P: AsRef<Path>>(path: P) {
-    let path = path.as_ref();
-    println!("cargo:rerun-if-changed={}", path.to_str().expect("to_str"));
+    println!("cargo:rerun-if-changed={}", path.as_ref().display());
 }
 
 pub fn print_rerun_if_changed_recursively<P: AsRef<Path>>(path: P) {
-    let path = path.as_ref();
-    print_rerun_if_changed(path);
-    if path.is_dir() {
-        for child in fs::read_dir(path).expect("read_dir") {
-            let child = child.expect("child").path();
-            print_rerun_if_changed_recursively(child);
-        }
-    }
+    get_protos(path).for_each(print_rerun_if_changed)
 }
