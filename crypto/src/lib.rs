@@ -1,12 +1,14 @@
 use aes::cipher::generic_array::GenericArray;
-use aes::{Aes256, BlockDecrypt, BlockEncrypt, NewBlockCipher};
-use block_modes::block_padding::Pkcs7;
-use block_modes::{BlockMode, Cbc};
+use aes::cipher::{BlockDecrypt, BlockEncrypt, KeyInit, KeyIvInit};
+use aes::Aes256;
 use bytes::BytesMut;
-use hmac::{Hmac, Mac, NewMac};
+use cbc::cipher::block_padding::Pkcs7;
+use cbc::cipher::{BlockDecryptMut, BlockEncryptMut};
+use hmac::{Hmac, Mac};
 use once_cell::sync::Lazy;
 use rand::{random, Rng};
-use rsa::{padding::PaddingScheme, PublicKey, RSAPublicKey};
+use rsa::pkcs8::DecodePublicKey;
+use rsa::{Oaep, Pss, RsaPublicKey};
 use sha1::Sha1;
 use std::convert::TryInto;
 use thiserror::Error;
@@ -14,7 +16,7 @@ use thiserror::Error;
 #[derive(Debug, Error)]
 pub enum CryptError {
     #[error("Malformed signature: {0}")]
-    MalformedSignature(RSAError),
+    MalformedSignature(RsaError),
     #[error("Malformed message")]
     MalformedMessage,
     #[error("Invalid HMAC")]
@@ -25,20 +27,21 @@ pub type Result<T> = std::result::Result<T, CryptError>;
 
 #[derive(Debug, Error)]
 #[error("{0}")]
-pub struct RSAError(rsa::errors::Error);
+pub struct RsaError(rsa::errors::Error);
 
 const SYSTEM_PUBLIC_KEY_DER_BYTES: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/system.der"));
 
-static SYSTEM_PUBLIC_KEY: Lazy<RSAPublicKey> = Lazy::new(|| {
-    RSAPublicKey::from_pkcs8(SYSTEM_PUBLIC_KEY_DER_BYTES).expect("Failed to parse public key")
+static SYSTEM_PUBLIC_KEY: Lazy<RsaPublicKey> = Lazy::new(|| {
+    RsaPublicKey::from_public_key_der(SYSTEM_PUBLIC_KEY_DER_BYTES)
+        .expect("Failed to parse public key")
 });
 
 /// Verify sha1 signature using the steam "system" public key
 pub fn verify_signature(data: &[u8], signature: &[u8]) -> Result<bool> {
-    match SYSTEM_PUBLIC_KEY.verify(PaddingScheme::new_oaep::<Sha1>(), data, signature) {
+    match SYSTEM_PUBLIC_KEY.verify(Pss::new::<Sha1>(), data, signature) {
         Ok(_) => Ok(true),
         Err(rsa::errors::Error::Verification) => Ok(false),
-        Err(err) => Err(CryptError::MalformedSignature(RSAError(err))),
+        Err(err) => Err(CryptError::MalformedSignature(RsaError(err))),
     }
 }
 
@@ -56,9 +59,9 @@ pub fn generate_session_key(nonce: Option<&[u8; 16]>) -> SessionKeys {
             let mut data = [0; 48];
             data[0..32].copy_from_slice(&plain);
             data[32..48].copy_from_slice(nonce);
-            SYSTEM_PUBLIC_KEY.encrypt(&mut rng, PaddingScheme::new_oaep::<Sha1>(), &data)
+            SYSTEM_PUBLIC_KEY.encrypt(&mut rng, Oaep::new::<Sha1>(), &data)
         }
-        None => SYSTEM_PUBLIC_KEY.encrypt(&mut rng, PaddingScheme::new_oaep::<Sha1>(), &plain),
+        None => SYSTEM_PUBLIC_KEY.encrypt(&mut rng, Oaep::new::<Sha1>(), &plain),
     }
     .expect("Invalid crypt setup");
 
@@ -102,17 +105,18 @@ fn test_iv_encryption_round_trip() {
     assert_eq!(iv, decrypt_iv(encrypted, &key));
 }
 
-type Aes256Cbc = Cbc<Aes256, Pkcs7>;
+type Aes256CbcEnc = cbc::Encryptor<Aes256>;
+type Aes256CbcDec = cbc::Decryptor<Aes256>;
 
 fn encrypt_message(mut message: BytesMut, key: &[u8; 32], plain_iv: &[u8; 16]) -> BytesMut {
-    let cipher = Aes256Cbc::new_fix(
+    let cipher = <Aes256CbcEnc as KeyIvInit>::new(
         GenericArray::from_slice(key),
         GenericArray::from_slice(plain_iv),
     );
     let length = message.len();
     message.resize(length + 16, 0);
     let len = cipher
-        .encrypt(&mut message, length)
+        .encrypt_padded_mut::<Pkcs7>(&mut message, length)
         .expect("not enough padding")
         .len();
 
@@ -121,12 +125,12 @@ fn encrypt_message(mut message: BytesMut, key: &[u8; 32], plain_iv: &[u8; 16]) -
 }
 
 fn decrypt_message(mut message: BytesMut, key: &[u8; 32], plain_iv: &[u8; 16]) -> Result<BytesMut> {
-    let cipher = Aes256Cbc::new_fix(
+    let cipher = Aes256CbcDec::new(
         GenericArray::from_slice(key),
         GenericArray::from_slice(plain_iv),
     );
     let len = cipher
-        .decrypt(message.as_mut())
+        .decrypt_padded_mut::<Pkcs7>(message.as_mut())
         .map_err(|_| CryptError::MalformedMessage)?
         .len();
     message.truncate(len);
@@ -175,7 +179,7 @@ pub fn symmetric_encrypt_with_iv_buffer(
     let mut hmac_key = [0; 64];
     hmac_key[0..16].copy_from_slice(&key[0..16]);
 
-    let mut hmac = HmacSha1::new(GenericArray::from_slice(&hmac_key));
+    let mut hmac = <HmacSha1 as Mac>::new(GenericArray::from_slice(&hmac_key));
     hmac.update(&hmac_random);
     hmac.update(&input);
 
@@ -209,7 +213,7 @@ pub fn symmetric_decrypt(mut input: BytesMut, key: &[u8; 32]) -> Result<BytesMut
     let mut hmac_key = [0; 64];
     hmac_key[0..16].copy_from_slice(&key[0..16]);
 
-    let mut hmac = HmacSha1::new(GenericArray::from_slice(&hmac_key));
+    let mut hmac = <HmacSha1 as Mac>::new(GenericArray::from_slice(&hmac_key));
     hmac.update(hmac_random);
     hmac.update(&message);
 
