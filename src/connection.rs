@@ -1,6 +1,6 @@
 use crate::auth::LoginState;
 use crate::message::{NetMessage, ServiceMethodResponseMessage};
-use crate::net::{connect, NetworkError, RawNetMessage};
+use crate::net::{connect, NetMessageHeader, NetworkError, RawNetMessage};
 use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
 use crate::session::{Session, SessionError};
@@ -16,6 +16,7 @@ use tokio::time::timeout;
 use tokio_stream::wrappers::BroadcastStream;
 use tokio_stream::Stream;
 use tokio_stream::StreamExt;
+use tracing::debug;
 
 type Result<T, E = NetworkError> = std::result::Result<T, E>;
 
@@ -42,13 +43,46 @@ impl Connection {
             timeout: Duration::from_secs(10),
         })
     }
+    pub async fn login(
+        server_list: ServerList,
+        account: &str,
+        password: &str,
+    ) -> Result<Self, SessionError> {
+        let (read, write) = connect(server_list.pick()).await?;
+        let (session, read, write) = LoginState::password(read, write, account, password)
+            .await?
+            .unwrap();
+        let session = session?;
+        Ok(Self::from_parts(read, write, session))
+    }
 
-    pub async fn send<Msg: NetMessage>(&mut self, msg: Msg) -> Result<u64> {
-        let header = self.session.header();
-        let id = header.source_job_id;
+    pub fn from_parts<Read, Write>(read: Read, write: Write, session: Session) -> Self
+    where
+        Read: Stream<Item = Result<RawNetMessage, NetworkError>> + Unpin + Send + 'static,
+        Write: Sink<RawNetMessage, Error = NetworkError> + Unpin + 'static,
+    {
+        let (filter, rest) = MessageFilter::new(read);
+        Connection {
+            session,
+            filter,
+            rest,
+            write: Box::new(write),
+            timeout: Duration::from_secs(10),
+        }
+    }
+
+    pub fn prepare(&mut self) -> NetMessageHeader {
+        self.session.header()
+    }
+
+    pub async fn send<Msg: NetMessage>(
+        &mut self,
+        header: NetMessageHeader,
+        msg: Msg,
+    ) -> Result<()> {
         let msg = RawNetMessage::from_message(header, msg)?;
         self.write.send(msg).await?;
-        Ok(id)
+        Ok(())
     }
 
     pub fn set_timeout(&mut self, timeout: Duration) {
@@ -59,8 +93,10 @@ impl Connection {
         &mut self,
         msg: Msg,
     ) -> Result<Msg::Response> {
-        let job_id = self.send(msg).await?;
-        let message = timeout(self.timeout, self.filter.on_job_id(job_id))
+        let header = self.prepare();
+        let recv = self.filter.on_job_id(header.source_job_id);
+        self.send(header, msg).await?;
+        let message = timeout(self.timeout, recv)
             .await
             .map_err(|_| NetworkError::Timeout)?
             .map_err(|_| NetworkError::Timeout)?
@@ -99,6 +135,7 @@ impl MessageFilter {
         spawn(async move {
             while let Some(res) = source.next().await {
                 if let Ok(message) = res {
+                    debug!(job_id = message.header.target_job_id, kind = ?message.kind, "processing message");
                     if let Some((_, tx)) = filter_send
                         .job_id_filters
                         .remove(&message.header.target_job_id)

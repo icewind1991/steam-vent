@@ -7,7 +7,7 @@ use cbc::cipher::{BlockDecryptMut, BlockEncryptMut};
 use hmac::{Hmac, Mac};
 use once_cell::sync::Lazy;
 use rand::{random, Rng};
-use rsa::{BigUint, Oaep, Pss, RsaPublicKey};
+use rsa::{BigUint, Oaep, Pkcs1v15Encrypt, Pss, RsaPublicKey};
 use sha1::Sha1;
 use std::convert::TryInto;
 use thiserror::Error;
@@ -15,7 +15,7 @@ use thiserror::Error;
 #[derive(Debug, Error)]
 pub enum CryptError {
     #[error("Malformed signature: {0}")]
-    MalformedSignature(RsaError),
+    MalformedSignature(#[from] RsaError),
     #[error("Malformed message")]
     MalformedMessage,
     #[error("Invalid HMAC")]
@@ -63,13 +63,27 @@ pub fn generate_session_key(nonce: Option<&[u8; 16]>) -> SessionKeys {
             let mut data = [0; 48];
             data[0..32].copy_from_slice(&plain);
             data[32..48].copy_from_slice(nonce);
-            SYSTEM_PUBLIC_KEY.encrypt(&mut rng, Oaep::new::<Sha1>(), &data)
+            encrypt_with_key(&SYSTEM_PUBLIC_KEY, &data)
         }
-        None => SYSTEM_PUBLIC_KEY.encrypt(&mut rng, Oaep::new::<Sha1>(), &plain),
+        None => encrypt_with_key(&SYSTEM_PUBLIC_KEY, &plain),
     }
     .expect("Invalid crypt setup");
 
     SessionKeys { plain, encrypted }
+}
+
+pub fn encrypt_with_key(key: &RsaPublicKey, data: &[u8]) -> Result<Vec<u8>> {
+    let mut rng = rand::thread_rng();
+    Ok(key
+        .encrypt(&mut rng, Oaep::new::<Sha1>(), data)
+        .map_err(RsaError)?)
+}
+
+pub fn encrypt_with_key_pkcs1(key: &RsaPublicKey, data: &[u8]) -> Result<Vec<u8>> {
+    let mut rng = rand::thread_rng();
+    Ok(key
+        .encrypt(&mut rng, Pkcs1v15Encrypt, data)
+        .map_err(RsaError)?)
 }
 
 #[test]

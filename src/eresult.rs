@@ -1,3 +1,8 @@
+use num_enum::TryFromPrimitive;
+use std::convert::TryFrom;
+
+#[derive(TryFromPrimitive, Debug, Copy, Clone)]
+#[repr(i32)]
 pub enum EResult {
     Invalid = 0,
     OK = 1,
@@ -127,4 +132,14 @@ pub enum EResult {
     NoLauncherSpecified = 117,
     MustAgreeToSSA = 118,
     ClientNoLongerSupported = 119,
+}
+
+impl EResult {
+    pub fn from_result(result: i32) -> Result<(), EResult> {
+        let result = EResult::try_from(result).unwrap_or(EResult::Invalid);
+        match result {
+            EResult::OK => Ok(()),
+            err => Err(err),
+        }
+    }
 }

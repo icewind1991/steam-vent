@@ -1,3 +1,4 @@
+use crate::eresult::EResult;
 use crate::message::{
     flatten_multi, ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, NetMessage,
 };
@@ -53,6 +54,14 @@ pub enum NetworkError {
     EOF,
     #[error("Response timed out")]
     Timeout,
+    #[error("Remote returned an error code: {0:?}")]
+    ApiError(EResult),
+}
+
+impl From<EResult> for NetworkError {
+    fn from(value: EResult) -> Self {
+        NetworkError::ApiError(value)
+    }
 }
 
 pub type Result<T, E = NetworkError> = std::result::Result<T, E>;
@@ -83,6 +92,7 @@ pub struct NetMessageHeader {
     pub steam_id: SteamID,
     pub session_id: i32,
     pub target_job_name: Option<Cow<'static, str>>,
+    pub result: Option<i32>,
 }
 
 impl From<CMsgProtoBufHeader> for NetMessageHeader {
@@ -95,6 +105,7 @@ impl From<CMsgProtoBufHeader> for NetMessageHeader {
             target_job_name: header
                 .has_target_job_name()
                 .then(|| header.target_job_name().to_string().into()),
+            result: header.eresult,
         }
     }
 }
@@ -129,7 +140,7 @@ impl NetMessageHeader {
                     source_job_id,
                     session_id: 0,
                     steam_id: SteamID::default(),
-                    target_job_name: None,
+                    ..NetMessageHeader::default()
                 },
                 4 + 8 + 8,
             ))
@@ -147,6 +158,7 @@ impl NetMessageHeader {
                     steam_id,
                     session_id,
                     target_job_name: None,
+                    result: None,
                 },
                 4 + 3 + 8 + 8 + 1 + 8 + 4,
             ))
@@ -299,6 +311,9 @@ impl RawNetMessage {
 
 impl RawNetMessage {
     pub fn into_message<T: NetMessage>(self) -> Result<T> {
+        if let Some(result) = self.header.result {
+            EResult::from_result(result)?;
+        }
         if self.kind == T::KIND {
             trace!(
                 "reading body of {:?} message({} bytes)",

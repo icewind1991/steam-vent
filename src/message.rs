@@ -1,6 +1,8 @@
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::proto::steammessages_clientserver::CMsgClientCMList;
 use crate::service_method::{ServiceMethodRequest, ServiceMethodResponse};
+use base64::prelude::BASE64_STANDARD;
+use base64::Engine;
 use binread::BinRead;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::{Buf, BytesMut};
@@ -11,6 +13,7 @@ use futures_util::{
     stream::{iter, once},
     StreamExt,
 };
+use num_bigint_dig::ParseBigIntError;
 use protobuf::Message;
 use std::any::type_name;
 use std::fmt::Debug;
@@ -29,6 +32,12 @@ use tracing::{debug, trace};
 #[error("Malformed message body for {0:?}: {1}")]
 pub struct MalformedBody(EMsg, MessageBodyError);
 
+impl MalformedBody {
+    pub fn new(kind: EMsg, err: impl Into<MessageBodyError>) -> Self {
+        MalformedBody(kind, err.into())
+    }
+}
+
 #[derive(Error, Debug)]
 pub enum MessageBodyError {
     #[error("{0}")]
@@ -41,6 +50,10 @@ pub enum MessageBodyError {
     Other(String),
     #[error("malformed child: {0}")]
     MalformedChild(Box<NetworkError>),
+    #[error("malformed big int: {0:#}")]
+    BigInt(#[from] ParseBigIntError),
+    #[error("invalid rsa key: {0:#}")]
+    Rsa(#[from] rsa::Error),
 }
 
 impl From<String> for MessageBodyError {
@@ -251,6 +264,10 @@ impl<Request: ServiceMethodRequest> NetMessage for Request {
 
     fn write_body<W: Write>(&self, mut writer: W) -> Result<(), std::io::Error> {
         trace!("writing body of protobuf message {:?}", Self::KIND);
+        println!(
+            "{0}",
+            BASE64_STANDARD.encode(self.write_to_bytes().unwrap())
+        );
         self.write_to_writer(&mut writer)
             .map_err(|_| std::io::Error::from(std::io::ErrorKind::InvalidData))
     }
