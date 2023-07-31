@@ -1,8 +1,6 @@
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::proto::steammessages_clientserver::CMsgClientCMList;
 use crate::service_method::{ServiceMethodRequest, ServiceMethodResponse};
-use base64::prelude::BASE64_STANDARD;
-use base64::Engine;
 use binread::BinRead;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::{Buf, BytesMut};
@@ -264,10 +262,10 @@ impl<Request: ServiceMethodRequest> NetMessage for Request {
 
     fn write_body<W: Write>(&self, mut writer: W) -> Result<(), std::io::Error> {
         trace!("writing body of protobuf message {:?}", Self::KIND);
-        println!(
-            "{0}",
-            BASE64_STANDARD.encode(self.write_to_bytes().unwrap())
-        );
+        // println!(
+        //     "{0}",
+        //     BASE64_STANDARD.encode(self.write_to_bytes().unwrap())
+        // );
         self.write_to_writer(&mut writer)
             .map_err(|_| std::io::Error::from(std::io::ErrorKind::InvalidData))
     }

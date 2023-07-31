@@ -1,21 +1,18 @@
 use crate::connection::Connection;
 use crate::eresult::EResult;
-use crate::message::{MalformedBody, NetMessage};
+use crate::message::NetMessage;
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
-use crate::proto::steammessages_auth_steamclient::CAuthentication_GetPasswordRSAPublicKey_Request;
 use crate::proto::steammessages_base::CMsgIPAddress;
 use crate::proto::steammessages_clientserver_login::CMsgClientLogon;
 use crate::serverlist::ServerDiscoveryError;
-use num_traits::Num;
 use protobuf::MessageField;
-use rsa::{BigUint, RsaPublicKey};
 use steam_vent_crypto::CryptError;
 use steam_vent_proto::steammessages_clientserver_login::CMsgClientLogonResponse;
 use steamid_ng::{AccountType, Instance, SteamID, Universe};
 use thiserror::Error;
 use tokio_stream::Stream;
 use tokio_stream::StreamExt;
-use tracing::{debug, instrument, warn};
+use tracing::{debug, warn};
 
 type Result<T, E = SessionError> = std::result::Result<T, E>;
 
@@ -142,33 +139,4 @@ where
         }
     }
     Err(NetworkError::EOF)
-}
-
-#[instrument(skip(connection))]
-pub async fn get_password_rsa(
-    connection: &mut Connection,
-    account: String,
-) -> Result<(RsaPublicKey, u64), NetworkError> {
-    debug!("getting password rsa");
-    let req = CAuthentication_GetPasswordRSAPublicKey_Request {
-        account_name: Some(account),
-        ..CAuthentication_GetPasswordRSAPublicKey_Request::default()
-    };
-    let response = connection.service_method(req).await?;
-    dbg!(&response);
-
-    let key_mod =
-        BigUint::from_str_radix(response.publickey_mod.as_deref().unwrap_or_default(), 32)
-            .map_err(|e| {
-                MalformedBody::new(CAuthentication_GetPasswordRSAPublicKey_Request::KIND, e)
-            })?;
-    let key_exp =
-        BigUint::from_str_radix(response.publickey_exp.as_deref().unwrap_or_default(), 32)
-            .map_err(|e| {
-                MalformedBody::new(CAuthentication_GetPasswordRSAPublicKey_Request::KIND, e)
-            })?;
-    let key = RsaPublicKey::new(key_mod, key_exp).map_err(|e| {
-        MalformedBody::new(CAuthentication_GetPasswordRSAPublicKey_Request::KIND, e)
-    })?;
-    Ok((key, response.timestamp.unwrap_or_default()))
 }
