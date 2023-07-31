@@ -76,12 +76,12 @@ pub async fn get_password_rsa(
     let response = connection.service_method(req).await?;
 
     let key_mod =
-        BigUint::from_str_radix(response.publickey_mod.as_deref().unwrap_or_default(), 32)
+        BigUint::from_str_radix(response.publickey_mod.as_deref().unwrap_or_default(), 16)
             .map_err(|e| {
                 MalformedBody::new(CAuthentication_GetPasswordRSAPublicKey_Request::KIND, e)
             })?;
     let key_exp =
-        BigUint::from_str_radix(response.publickey_exp.as_deref().unwrap_or_default(), 32)
+        BigUint::from_str_radix(response.publickey_exp.as_deref().unwrap_or_default(), 16)
             .map_err(|e| {
                 MalformedBody::new(CAuthentication_GetPasswordRSAPublicKey_Request::KIND, e)
             })?;
