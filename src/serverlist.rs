@@ -2,6 +2,7 @@ use reqwest::{Client, Error};
 use serde::Deserialize;
 use std::net::SocketAddr;
 use thiserror::Error;
+use tracing::debug;
 
 #[derive(Debug, Error)]
 pub enum ServerDiscoveryError {
@@ -70,7 +71,9 @@ impl ServerList {
 
     pub fn pick(&self) -> SocketAddr {
         // todo: something more smart than always using the first
-        *self.servers.first().unwrap()
+        let addr = *self.servers.first().unwrap();
+        debug!(addr = ?addr, "picked server from list");
+        addr
     }
 }
 

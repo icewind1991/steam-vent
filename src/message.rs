@@ -20,7 +20,8 @@ use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_base::CMsgMulti;
 use steam_vent_proto::steammessages_clientserver::CMsgClientServersAvailable;
 use steam_vent_proto::steammessages_clientserver_login::{
-    CMsgClientLoggedOff, CMsgClientLogon, CMsgClientLogonResponse,
+    CMsgClientHello, CMsgClientLogOff, CMsgClientLoggedOff, CMsgClientLogon,
+    CMsgClientLogonResponse,
 };
 use thiserror::Error;
 use tokio_stream::Stream;
@@ -348,7 +349,9 @@ macro_rules! proto_msg {
     };
 }
 
+proto_msg!(EMsg::k_EMsgClientHello => CMsgClientHello);
 proto_msg!(EMsg::k_EMsgClientLogon => CMsgClientLogon);
+proto_msg!(EMsg::k_EMsgClientLogOff => CMsgClientLogOff);
 proto_msg!(EMsg::k_EMsgClientLoggedOff => CMsgClientLoggedOff);
 proto_msg!(EMsg::k_EMsgClientLogOnResponse => CMsgClientLogonResponse);
 proto_msg!(EMsg::k_EMsgClientServersAvailable => CMsgClientServersAvailable);

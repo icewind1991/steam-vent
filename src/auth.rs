@@ -7,6 +7,7 @@ use crate::proto::steammessages_auth_steamclient::CAuthentication_GetPasswordRSA
 use crate::proto::steammessages_auth_steamclient::{
     CAuthentication_AllowedConfirmation, CAuthentication_BeginAuthSessionViaCredentials_Request,
     CAuthentication_BeginAuthSessionViaCredentials_Response, CAuthentication_DeviceDetails,
+    CAuthentication_PollAuthSessionStatus_Request, CAuthentication_PollAuthSessionStatus_Response,
     CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request, EAuthSessionGuardType,
     EAuthTokenPlatformType,
 };
@@ -19,7 +20,10 @@ use protobuf::{EnumOrUnknown, MessageField};
 use rsa::RsaPublicKey;
 use std::io::{stdin, stdout, Write};
 use std::io::{Stdin, Stdout};
+use std::time::Duration;
 use steam_vent_crypto::encrypt_with_key_pkcs1;
+use steamid_ng::SteamID;
+use tokio::time::sleep;
 use tracing::{debug, info, instrument};
 
 pub async fn begin_password_auth(
@@ -53,6 +57,7 @@ pub async fn begin_password_auth(
         ..CAuthentication_BeginAuthSessionViaCredentials_Request::default()
     };
     let res = connection.service_method(req).await?;
+    connection.steam_id = res.steamid().into();
     Ok(StartedAuth::Credentials(res))
 }
 
@@ -93,11 +98,23 @@ impl StartedAuth {
         }
     }
 
+    fn request_id(&self) -> Vec<u8> {
+        match self {
+            StartedAuth::Credentials(res) => res.request_id().into(),
+        }
+    }
+
+    fn interval(&self) -> f32 {
+        match self {
+            StartedAuth::Credentials(res) => res.interval(),
+        }
+    }
+
     pub async fn submit_confirmation(
         self,
         connection: &mut Connection,
         confirmation: ConfirmationAction,
-    ) -> Result<(), NetworkError> {
+    ) -> Result<PendingAuth, NetworkError> {
         match confirmation {
             ConfirmationAction::GuardToken(token, ty) => {
                 let code_type = match ty {
@@ -113,7 +130,12 @@ impl StartedAuth {
                     ..CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request::default()
                 };
                 let _ = connection.service_method(req).await?;
-                Ok(())
+                Ok(PendingAuth {
+                    interval: self.interval(),
+                    client_id: self.client_id(),
+                    request_id: self.request_id(),
+                    steam_id: self.steam_id().into(),
+                })
             }
             _ => {
                 todo!("non token confirmations not implemented yet")
@@ -258,6 +280,84 @@ impl AuthConfirmationHandler for ConsoleAuthConfirmationHandler {
 
 #[derive(Debug)]
 pub struct SteamGuardToken(String);
+
+pub struct PendingAuth {
+    client_id: u64,
+    request_id: Vec<u8>,
+    interval: f32,
+    steam_id: SteamID,
+}
+
+impl PendingAuth {
+    pub async fn wait_for_tokens(
+        &self,
+        connection: &mut Connection,
+    ) -> Result<Tokens, NetworkError> {
+        loop {
+            let mut response = poll_until_info(
+                connection,
+                self.client_id,
+                &self.request_id,
+                Duration::from_secs_f32(self.interval),
+            )
+            .await?;
+            if response.has_access_token() {
+                return Ok(Tokens {
+                    access_token: Token(response.take_access_token()),
+                    refresh_token: Token(response.take_refresh_token()),
+                    new_guard_data: response.take_new_guard_data(),
+                });
+            }
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
+pub struct Token(String);
+
+impl AsRef<str> for Token {
+    fn as_ref(&self) -> &str {
+        self.0.as_ref()
+    }
+}
+
+#[derive(Debug, Clone)]
+pub struct Tokens {
+    pub access_token: Token,
+    pub refresh_token: Token,
+    pub new_guard_data: String,
+}
+
+async fn poll_until_info(
+    connection: &mut Connection,
+    client_id: u64,
+    request_id: &[u8],
+    interval: Duration,
+) -> Result<CAuthentication_PollAuthSessionStatus_Response, NetworkError> {
+    loop {
+        let req = CAuthentication_PollAuthSessionStatus_Request {
+            client_id: Some(client_id),
+            request_id: Some(request_id.into()),
+            ..CAuthentication_PollAuthSessionStatus_Request::default()
+        };
+
+        let resp = connection.service_method(req).await?;
+        let has_data = resp.has_access_token()
+            || resp.has_account_name()
+            || resp.has_agreement_session_url()
+            || resp.has_had_remote_interaction()
+            || resp.has_new_challenge_url()
+            || resp.has_new_client_id()
+            || resp.has_new_guard_data()
+            || resp.has_refresh_token();
+
+        if has_data {
+            return Ok(resp);
+        }
+
+        sleep(interval).await;
+    }
+}
 
 #[instrument(skip(connection))]
 pub async fn get_password_rsa(

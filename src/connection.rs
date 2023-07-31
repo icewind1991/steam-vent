@@ -1,9 +1,9 @@
-use crate::auth::{begin_password_auth, AuthConfirmationHandler};
+use crate::auth::{begin_password_auth, AuthConfirmationHandler, Tokens};
 use crate::message::{NetMessage, ServiceMethodResponseMessage};
 use crate::net::{connect, NetMessageHeader, NetworkError, RawNetMessage};
 use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
-use crate::session::{anonymous, login, Session, SessionError};
+use crate::session::{anonymous, hello, login, logout, Session, SessionError};
 use dashmap::DashMap;
 use futures_sink::Sink;
 use futures_util::SinkExt;
@@ -11,6 +11,7 @@ use std::future::Future;
 use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_proto::enums_clientserver::EMsg;
+use steamid_ng::{AccountType, Instance, SteamID, Universe};
 use tokio::sync::{broadcast, mpsc, oneshot};
 use tokio::task::spawn;
 use tokio::time::timeout;
@@ -22,11 +23,13 @@ use tracing::debug;
 type Result<T, E = NetworkError> = std::result::Result<T, E>;
 
 pub struct Connection {
-    pub session: Session,
+    pub(crate) session: Session,
     filter: MessageFilter,
     rest: mpsc::Receiver<Result<RawNetMessage>>,
     write: Box<dyn Sink<RawNetMessage, Error = NetworkError> + Unpin>,
     timeout: Duration,
+    pub steam_id: SteamID,
+    tokens: Option<Tokens>,
 }
 
 impl Connection {
@@ -39,6 +42,8 @@ impl Connection {
             rest,
             write: Box::new(write),
             timeout: Duration::from_secs(10),
+            steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
+            tokens: None,
         })
     }
 
@@ -56,15 +61,20 @@ impl Connection {
         mut confirmation_handler: H,
     ) -> Result<Self, SessionError> {
         let mut connection = Self::connect(server_list).await?;
-        connection.session = login(&mut connection, account).await?;
+        // connection.session = login(&mut connection, account, None).await?;
+        hello(&mut connection).await?;
         let begin = begin_password_auth(&mut connection, account, password).await?;
-        if begin.action_required() {
-            let confirmation_action =
-                confirmation_handler.handle_confirmation(begin.allowed_confirmations());
-            begin
-                .submit_confirmation(&mut connection, confirmation_action)
-                .await?;
-        }
+
+        let confirmation_action =
+            confirmation_handler.handle_confirmation(begin.allowed_confirmations());
+        let pending = begin
+            .submit_confirmation(&mut connection, confirmation_action)
+            .await?;
+        let tokens = pending.wait_for_tokens(&mut connection).await?;
+        connection.session =
+            login(&mut connection, account, Some(tokens.access_token.as_ref())).await?;
+        connection.tokens = Some(tokens);
+
         Ok(connection)
     }
 
@@ -80,6 +90,8 @@ impl Connection {
             rest,
             write: Box::new(write),
             timeout: Duration::from_secs(10),
+            steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
+            tokens: None,
         }
     }
 

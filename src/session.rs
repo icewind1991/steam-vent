@@ -1,18 +1,18 @@
 use crate::connection::Connection;
 use crate::eresult::EResult;
-use crate::message::NetMessage;
-use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
+use crate::net::{NetMessageHeader, NetworkError};
 use crate::proto::steammessages_base::CMsgIPAddress;
-use crate::proto::steammessages_clientserver_login::CMsgClientLogon;
+use crate::proto::steammessages_clientserver_login::{
+    CMsgClientHello, CMsgClientLogOff, CMsgClientLoggedOff, CMsgClientLogon,
+    CMsgClientLogonResponse,
+};
 use crate::serverlist::ServerDiscoveryError;
 use protobuf::MessageField;
 use steam_vent_crypto::CryptError;
-use steam_vent_proto::steammessages_clientserver_login::CMsgClientLogonResponse;
 use steamid_ng::{AccountType, Instance, SteamID, Universe};
 use thiserror::Error;
-use tokio_stream::Stream;
 use tokio_stream::StreamExt;
-use tracing::{debug, warn};
+use tracing::debug;
 
 type Result<T, E = SessionError> = std::result::Result<T, E>;
 
@@ -79,10 +79,14 @@ impl Session {
 }
 
 pub async fn anonymous(conn: &mut Connection) -> Result<Session> {
-    login(conn, "anonymous").await
+    login(conn, "anonymous", None).await
 }
 
-pub async fn login(conn: &mut Connection, account: &str) -> Result<Session> {
+pub async fn login(
+    conn: &mut Connection,
+    account: &str,
+    access_token: Option<&str>,
+) -> Result<Session> {
     let mut ip = CMsgIPAddress::new();
     ip.set_v4(0);
 
@@ -98,6 +102,7 @@ pub async fn login(conn: &mut Connection, account: &str) -> Result<Session> {
         machine_name: Some(String::new()),
         steamguard_dont_remember_computer: Some(false),
         chat_mode: Some(2),
+        access_token: access_token.map(String::from),
         ..CMsgClientLogon::default()
     };
 
@@ -122,22 +127,42 @@ pub async fn login(conn: &mut Connection, account: &str) -> Result<Session> {
     })
 }
 
-/// Receive a message, throwing away anything else
-/// only useful during session setup when we know there are no other requests going on
-pub async fn blocking_recv<Msg, Read>(
-    read: &mut Read,
-) -> Result<(NetMessageHeader, Msg), NetworkError>
-where
-    Msg: NetMessage,
-    Read: Stream<Item = Result<RawNetMessage, NetworkError>> + Unpin,
-{
-    while let Some(result) = read.next().await {
-        let msg: RawNetMessage = result?;
-        if Msg::KIND == msg.kind {
-            return Ok((msg.header.clone(), msg.into_message::<Msg>()?));
-        } else {
-            warn!(kind = ?msg.kind, "skipping message");
-        }
-    }
-    Err(NetworkError::EOF)
+pub async fn logout(conn: &mut Connection) -> Result<()> {
+    let mut ip = CMsgIPAddress::new();
+    ip.set_v4(0);
+
+    let logout = CMsgClientLogOff::default();
+
+    let header = conn.prepare();
+    let fut = conn.one::<CMsgClientLoggedOff>();
+    conn.send(header, logout).await?;
+
+    let (header, response) = fut.await?;
+    EResult::from_result(response.eresult()).map_err(NetworkError::from)?;
+    debug!("session logged out");
+    Ok(())
+}
+
+pub async fn hello(conn: &mut Connection) -> Result<()> {
+    const PROTOCOL_VERSION: u32 = 65580;
+    let req = CMsgClientHello {
+        protocol_version: Some(PROTOCOL_VERSION),
+        ..CMsgClientHello::default()
+    };
+
+    let header = NetMessageHeader {
+        session_id: 0,
+        source_job_id: u64::MAX,
+        target_job_id: u64::MAX,
+        steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
+        ..NetMessageHeader::default()
+    };
+
+    // let fut = conn.one::<CMsgClientLoggedOff>();
+    conn.send(header, req).await?;
+
+    // let (header, response) = fut.await?;
+    // EResult::from_result(response.eresult()).map_err(NetworkError::from)?;
+    // debug!("session hello");
+    Ok(())
 }
