@@ -11,7 +11,6 @@ use protobuf::MessageField;
 use steam_vent_crypto::CryptError;
 use steamid_ng::{AccountType, Instance, SteamID, Universe};
 use thiserror::Error;
-use tokio_stream::StreamExt;
 use tracing::debug;
 
 type Result<T, E = SessionError> = std::result::Result<T, E>;
@@ -137,7 +136,7 @@ pub async fn logout(conn: &mut Connection) -> Result<()> {
     let fut = conn.one::<CMsgClientLoggedOff>();
     conn.send(header, logout).await?;
 
-    let (header, response) = fut.await?;
+    let (_header, response) = fut.await?;
     EResult::from_result(response.eresult()).map_err(NetworkError::from)?;
     debug!("session logged out");
     Ok(())

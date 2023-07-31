@@ -42,6 +42,7 @@ impl DiscoverOptions {
 #[derive(Debug)]
 pub struct ServerList {
     servers: Vec<SocketAddr>,
+    ws_servers: Vec<String>,
 }
 
 impl ServerList {
@@ -75,12 +76,20 @@ impl ServerList {
         debug!(addr = ?addr, "picked server from list");
         addr
     }
+
+    pub fn pick_ws(&self) -> String {
+        // todo: something more smart than always using the first
+        let addr = self.ws_servers.first().unwrap();
+        debug!(addr = ?addr, "picked websocket server from list");
+        format!("wss://{addr}/cmsocket/")
+    }
 }
 
 impl From<ServerListResponse> for ServerList {
     fn from(value: ServerListResponse) -> Self {
         ServerList {
             servers: value.response.server_list,
+            ws_servers: value.response.server_list_websockets,
         }
     }
 }
@@ -94,4 +103,6 @@ struct ServerListResponse {
 struct ServerListResponseInner {
     #[serde(rename = "serverlist")]
     server_list: Vec<SocketAddr>,
+    #[serde(rename = "serverlist_websockets")]
+    server_list_websockets: Vec<String>,
 }

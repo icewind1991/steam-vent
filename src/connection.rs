@@ -1,9 +1,10 @@
 use crate::auth::{begin_password_auth, AuthConfirmationHandler, Tokens};
 use crate::message::{NetMessage, ServiceMethodResponseMessage};
-use crate::net::{connect, NetMessageHeader, NetworkError, RawNetMessage};
+use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
-use crate::session::{anonymous, hello, login, logout, Session, SessionError};
+use crate::session::{anonymous, login, Session, SessionError};
+use crate::transport::websocket::connect;
 use dashmap::DashMap;
 use futures_sink::Sink;
 use futures_util::SinkExt;
@@ -34,7 +35,7 @@ pub struct Connection {
 
 impl Connection {
     async fn connect(server_list: ServerList) -> Result<Self, SessionError> {
-        let (read, write) = connect(server_list.pick()).await?;
+        let (read, write) = connect(&server_list.pick_ws()).await?;
         let (filter, rest) = MessageFilter::new(read);
         Ok(Connection {
             session: Session::default(),
@@ -61,8 +62,8 @@ impl Connection {
         mut confirmation_handler: H,
     ) -> Result<Self, SessionError> {
         let mut connection = Self::connect(server_list).await?;
-        // connection.session = login(&mut connection, account, None).await?;
-        hello(&mut connection).await?;
+        connection.session = login(&mut connection, account, None).await?;
+        // hello(&mut connection).await?;
         let begin = begin_password_auth(&mut connection, account, password).await?;
 
         let confirmation_action =

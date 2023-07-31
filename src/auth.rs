@@ -285,7 +285,7 @@ pub struct PendingAuth {
     client_id: u64,
     request_id: Vec<u8>,
     interval: f32,
-    steam_id: SteamID,
+    pub steam_id: SteamID,
 }
 
 impl PendingAuth {

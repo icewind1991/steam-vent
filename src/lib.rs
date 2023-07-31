@@ -6,5 +6,6 @@ pub mod net;
 pub mod serverlist;
 pub mod service_method;
 pub mod session;
+pub mod transport;
 
 pub use steam_vent_proto as proto;
