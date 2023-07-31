@@ -322,9 +322,6 @@ impl RawNetMessage {
             );
             let body = T::read_body(self.data, &self.header)?;
             Ok(body)
-        } else if self.kind == EMsg::k_EMsgDestJobFailed {
-            dbg!(self.header);
-            Err(NetworkError::DifferentMessage(T::KIND, self.kind))
         } else {
             Err(NetworkError::DifferentMessage(T::KIND, self.kind))
         }

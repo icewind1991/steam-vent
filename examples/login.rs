@@ -1,7 +1,8 @@
 use std::env::args;
 use std::error::Error;
+use steam_vent::auth::ConsoleAuthConfirmationHandler;
 use steam_vent::connection::Connection;
-use steam_vent::proto::steammessages_gameservers_steamclient::CGameServers_GetServerList_Request;
+use steam_vent::proto::steammessages_player_steamclient::CPlayer_GetOwnedGames_Request;
 use steam_vent::serverlist::ServerList;
 
 #[tokio::main]
@@ -13,21 +14,24 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let password = args.next().expect("no password");
 
     let server_list = ServerList::discover().await?;
-    let mut connection = Connection::login(server_list, &account, &password).await?;
+    let mut connection = Connection::login(
+        server_list,
+        &account,
+        &password,
+        ConsoleAuthConfirmationHandler::default(),
+    )
+    .await?;
 
-    println!("requesting servers");
+    println!("requesting games");
 
-    let mut req = CGameServers_GetServerList_Request::new();
-    req.set_limit(16);
-    req.set_filter(r"\appid\440".into());
-    let some_tf2_servers = connection.service_method(req).await?;
-    for server in some_tf2_servers.servers {
-        println!(
-            "{}({}) playing {}",
-            server.name(),
-            server.addr(),
-            server.map()
-        );
+    let req = CPlayer_GetOwnedGames_Request {
+        steamid: Some(connection.session.steam_id.into()),
+        include_appinfo: Some(true),
+        ..CPlayer_GetOwnedGames_Request::default()
+    };
+    let games = connection.service_method(req).await?;
+    for game in games.games {
+        println!("{}: {}", game.appid(), game.name(),);
     }
 
     Ok(())

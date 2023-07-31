@@ -42,6 +42,7 @@ pub enum LoginError {
 pub struct JobIdCounter(u64);
 
 impl JobIdCounter {
+    #[allow(clippy::should_implement_trait)]
     pub fn next(&mut self) -> u64 {
         self.0 += 1;
         self.0
@@ -114,11 +115,11 @@ pub async fn login(conn: &mut Connection, account: &str) -> Result<Session> {
     let (header, response) = fut.await?;
     EResult::from_result(response.eresult()).map_err(NetworkError::from)?;
     debug!(account, "session started");
-    return Ok(Session {
+    Ok(Session {
         session_id: header.session_id,
         steam_id: header.steam_id,
         job_id: JobIdCounter::default(),
-    });
+    })
 }
 
 /// Receive a message, throwing away anything else

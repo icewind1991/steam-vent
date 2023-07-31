@@ -1,9 +1,9 @@
-use crate::auth::password_auth;
+use crate::auth::{begin_password_auth, AuthConfirmationHandler};
 use crate::message::{NetMessage, ServiceMethodResponseMessage};
 use crate::net::{connect, NetMessageHeader, NetworkError, RawNetMessage};
 use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
-use crate::session::{anonymous, Session, SessionError};
+use crate::session::{anonymous, login, Session, SessionError};
 use dashmap::DashMap;
 use futures_sink::Sink;
 use futures_util::SinkExt;
@@ -49,13 +49,22 @@ impl Connection {
 
         Ok(connection)
     }
-    pub async fn login(
+    pub async fn login<H: AuthConfirmationHandler>(
         server_list: ServerList,
         account: &str,
         password: &str,
+        mut confirmation_handler: H,
     ) -> Result<Self, SessionError> {
         let mut connection = Self::connect(server_list).await?;
-        connection.session = password_auth(&mut connection, account, password).await?;
+        connection.session = login(&mut connection, account).await?;
+        let begin = begin_password_auth(&mut connection, account, password).await?;
+        if begin.action_required() {
+            let confirmation_action =
+                confirmation_handler.handle_confirmation(begin.allowed_confirmations());
+            begin
+                .submit_confirmation(&mut connection, confirmation_action)
+                .await?;
+        }
         Ok(connection)
     }
 
