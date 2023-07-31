@@ -6,7 +6,6 @@ use crate::proto::steammessages_auth_steamclient::CAuthentication_GetPasswordRSA
 use crate::proto::steammessages_base::CMsgIPAddress;
 use crate::proto::steammessages_clientserver_login::CMsgClientLogon;
 use crate::serverlist::ServerDiscoveryError;
-use futures_util::{Sink, SinkExt};
 use num_traits::Num;
 use protobuf::MessageField;
 use rsa::{BigUint, RsaPublicKey};
@@ -59,6 +58,16 @@ pub struct Session {
     pub steam_id: SteamID,
 }
 
+impl Default for Session {
+    fn default() -> Self {
+        Session {
+            session_id: 0,
+            job_id: JobIdCounter::default(),
+            steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
+        }
+    }
+}
+
 impl Session {
     pub fn header(&mut self) -> NetMessageHeader {
         NetMessageHeader {
@@ -71,38 +80,28 @@ impl Session {
     }
 }
 
-pub async fn anonymous<
-    Read: Stream<Item = Result<RawNetMessage, NetworkError>> + Unpin,
-    Write: Sink<RawNetMessage, Error = NetworkError> + Unpin,
->(
-    read: &mut Read,
-    write: &mut Write,
-) -> Result<Session> {
-    login(read, write, "anonymous").await
+pub async fn anonymous(conn: &mut Connection) -> Result<Session> {
+    login(conn, "anonymous").await
 }
 
-pub async fn login<
-    Read: Stream<Item = Result<RawNetMessage, NetworkError>> + Unpin,
-    Write: Sink<RawNetMessage, Error = NetworkError> + Unpin,
->(
-    read: &mut Read,
-    write: &mut Write,
-    account: &str,
-) -> Result<Session> {
-    let mut logon = CMsgClientLogon::new();
-    logon.set_protocol_version(65580);
-    logon.set_client_os_type(203);
-    logon.set_anon_user_target_account_name(String::from(account));
-    logon.set_should_remember_password(false);
-    logon.set_supports_rate_limit_response(false);
-
+pub async fn login(conn: &mut Connection, account: &str) -> Result<Session> {
     let mut ip = CMsgIPAddress::new();
     ip.set_v4(0);
-    logon.obfuscated_private_ip = MessageField::some(ip);
-    logon.set_client_language(String::new());
-    logon.set_machine_name(String::new());
-    logon.set_steamguard_dont_remember_computer(false);
-    logon.set_chat_mode(2);
+
+    let logon = CMsgClientLogon {
+        protocol_version: Some(65580),
+        client_os_type: Some(203),
+        anon_user_target_account_name: Some(String::from(account)),
+        account_name: Some(String::from(account)),
+        should_remember_password: Some(false),
+        supports_rate_limit_response: Some(false),
+        obfuscated_private_ip: MessageField::some(ip),
+        client_language: Some(String::new()),
+        machine_name: Some(String::new()),
+        steamguard_dont_remember_computer: Some(false),
+        chat_mode: Some(2),
+        ..CMsgClientLogon::default()
+    };
 
     let header = NetMessageHeader {
         session_id: 0,
@@ -112,10 +111,10 @@ pub async fn login<
         ..NetMessageHeader::default()
     };
 
-    let msg = RawNetMessage::from_message(header, logon)?;
-    write.send(msg).await?;
+    let fut = conn.one::<CMsgClientLogonResponse>();
+    conn.send(header, logon).await?;
 
-    let (header, response): (_, CMsgClientLogonResponse) = blocking_recv(read).await?;
+    let (header, response) = fut.await?;
     EResult::from_result(response.eresult()).map_err(NetworkError::from)?;
     debug!(account, "session started");
     return Ok(Session {

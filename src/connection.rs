@@ -1,12 +1,13 @@
-use crate::auth::LoginState;
+use crate::auth::password_auth;
 use crate::message::{NetMessage, ServiceMethodResponseMessage};
 use crate::net::{connect, NetMessageHeader, NetworkError, RawNetMessage};
 use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
-use crate::session::{Session, SessionError};
+use crate::session::{anonymous, Session, SessionError};
 use dashmap::DashMap;
 use futures_sink::Sink;
 use futures_util::SinkExt;
+use std::future::Future;
 use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_proto::enums_clientserver::EMsg;
@@ -21,7 +22,7 @@ use tracing::debug;
 type Result<T, E = NetworkError> = std::result::Result<T, E>;
 
 pub struct Connection {
-    session: Session,
+    pub session: Session,
     filter: MessageFilter,
     rest: mpsc::Receiver<Result<RawNetMessage>>,
     write: Box<dyn Sink<RawNetMessage, Error = NetworkError> + Unpin>,
@@ -29,31 +30,33 @@ pub struct Connection {
 }
 
 impl Connection {
-    pub async fn anonymous(server_list: ServerList) -> Result<Self, SessionError> {
+    async fn connect(server_list: ServerList) -> Result<Self, SessionError> {
         let (read, write) = connect(server_list.pick()).await?;
-        let (session, read, write) = LoginState::anonymous(read, write).await.unwrap();
-        let session = session?;
-
         let (filter, rest) = MessageFilter::new(read);
         Ok(Connection {
-            session,
+            session: Session::default(),
             filter,
             rest,
             write: Box::new(write),
             timeout: Duration::from_secs(10),
         })
     }
+
+    pub async fn anonymous(server_list: ServerList) -> Result<Self, SessionError> {
+        let mut connection = Self::connect(server_list).await?;
+
+        connection.session = anonymous(&mut connection).await?;
+
+        Ok(connection)
+    }
     pub async fn login(
         server_list: ServerList,
         account: &str,
         password: &str,
     ) -> Result<Self, SessionError> {
-        let (read, write) = connect(server_list.pick()).await?;
-        let (session, read, write) = LoginState::password(read, write, account, password)
-            .await?
-            .unwrap();
-        let session = session?;
-        Ok(Self::from_parts(read, write, session))
+        let mut connection = Self::connect(server_list).await?;
+        connection.session = password_auth(&mut connection, account, password).await?;
+        Ok(connection)
     }
 
     pub fn from_parts<Read, Write>(read: Read, write: Write, session: Session) -> Self
@@ -113,12 +116,21 @@ impl Connection {
             .filter_map(|res| res.ok())
             .map(|raw: RawNetMessage| raw.into_message())
     }
+
+    pub fn one<T: NetMessage>(&self) -> impl Future<Output = Result<(NetMessageHeader, T)>> {
+        let fut = self.filter.one_kind(T::KIND);
+        async move {
+            let raw = fut.await.map_err(|_| NetworkError::EOF)?;
+            Ok((raw.header.clone(), raw.into_message()?))
+        }
+    }
 }
 
 #[derive(Clone)]
 struct MessageFilter {
     job_id_filters: Arc<DashMap<u64, oneshot::Sender<RawNetMessage>>>,
     kind_filters: Arc<DashMap<EMsg, broadcast::Sender<RawNetMessage>>>,
+    oneshot_kind_filters: Arc<DashMap<EMsg, oneshot::Sender<RawNetMessage>>>,
 }
 
 impl MessageFilter {
@@ -129,6 +141,7 @@ impl MessageFilter {
         let filter = MessageFilter {
             job_id_filters: Default::default(),
             kind_filters: Default::default(),
+            oneshot_kind_filters: Default::default(),
         };
 
         let filter_send = filter.clone();
@@ -139,6 +152,10 @@ impl MessageFilter {
                     if let Some((_, tx)) = filter_send
                         .job_id_filters
                         .remove(&message.header.target_job_id)
+                    {
+                        tx.send(message).ok();
+                    } else if let Some((_, tx)) =
+                        filter_send.oneshot_kind_filters.remove(&message.kind)
                     {
                         tx.send(message).ok();
                     } else if let Some(tx) = filter_send.kind_filters.get(&message.kind) {
@@ -166,5 +183,11 @@ impl MessageFilter {
             .entry(kind)
             .or_insert_with(|| broadcast::channel(16).0);
         tx.subscribe()
+    }
+
+    pub fn one_kind(&self, kind: EMsg) -> oneshot::Receiver<RawNetMessage> {
+        let (tx, rx) = oneshot::channel();
+        self.oneshot_kind_filters.insert(kind, tx);
+        rx
     }
 }
