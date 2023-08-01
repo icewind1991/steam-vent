@@ -60,7 +60,7 @@ impl Default for Session {
         Session {
             session_id: 0,
             job_id: JobIdCounter::default(),
-            steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
+            steam_id: SteamID::from(0),
         }
     }
 }
@@ -78,30 +78,19 @@ impl Session {
 }
 
 pub async fn anonymous(conn: &mut Connection) -> Result<Session> {
-    login(conn, "anonymous", None).await
-}
-
-pub async fn login(
-    conn: &mut Connection,
-    account: &str,
-    access_token: Option<&str>,
-) -> Result<Session> {
     let mut ip = CMsgIPAddress::new();
     ip.set_v4(0);
 
     let logon = CMsgClientLogon {
         protocol_version: Some(65580),
         client_os_type: Some(203),
-        anon_user_target_account_name: Some(String::from(account)),
-        account_name: Some(String::from(account)),
-        should_remember_password: Some(false),
+        anon_user_target_account_name: Some(String::from("anonymous")),
+        account_name: Some(String::from("anonymous")),
         supports_rate_limit_response: Some(false),
         obfuscated_private_ip: MessageField::some(ip),
         client_language: Some(String::new()),
-        machine_name: Some(String::new()),
-        steamguard_dont_remember_computer: Some(false),
         chat_mode: Some(2),
-        access_token: access_token.map(String::from),
+        client_package_version: Some(1771),
         ..CMsgClientLogon::default()
     };
 
@@ -110,6 +99,51 @@ pub async fn login(
         source_job_id: u64::MAX,
         target_job_id: u64::MAX,
         steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
+        ..NetMessageHeader::default()
+    };
+
+    let fut = conn.one::<CMsgClientLogonResponse>();
+    conn.send(header, logon).await?;
+
+    let (header, response) = fut.await?;
+    EResult::from_result(response.eresult()).map_err(NetworkError::from)?;
+    debug!("anonymous session started");
+    Ok(Session {
+        session_id: header.session_id,
+        steam_id: header.steam_id,
+        job_id: JobIdCounter::default(),
+    })
+}
+
+pub async fn login(
+    conn: &mut Connection,
+    account: &str,
+    steam_id: SteamID,
+    access_token: &str,
+) -> Result<Session> {
+    let mut ip = CMsgIPAddress::new();
+    ip.set_v4(0);
+
+    let logon = CMsgClientLogon {
+        protocol_version: Some(65580),
+        client_os_type: Some(203),
+        account_name: Some(String::from(account)),
+        supports_rate_limit_response: Some(false),
+        obfuscated_private_ip: MessageField::some(ip),
+        client_language: Some(String::new()),
+        machine_name: Some(String::new()),
+        steamguard_dont_remember_computer: Some(false),
+        chat_mode: Some(2),
+        access_token: Some(access_token.into()),
+        client_package_version: Some(1771),
+        ..CMsgClientLogon::default()
+    };
+
+    let header = NetMessageHeader {
+        session_id: 0,
+        source_job_id: u64::MAX,
+        target_job_id: u64::MAX,
+        steam_id,
         ..NetMessageHeader::default()
     };
 
@@ -153,15 +187,10 @@ pub async fn hello(conn: &mut Connection) -> Result<()> {
         session_id: 0,
         source_job_id: u64::MAX,
         target_job_id: u64::MAX,
-        steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
+        steam_id: SteamID::from(0),
         ..NetMessageHeader::default()
     };
 
-    // let fut = conn.one::<CMsgClientLoggedOff>();
     conn.send(header, req).await?;
-
-    // let (header, response) = fut.await?;
-    // EResult::from_result(response.eresult()).map_err(NetworkError::from)?;
-    // debug!("session hello");
     Ok(())
 }

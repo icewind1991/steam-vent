@@ -3,7 +3,7 @@ use crate::message::{NetMessage, ServiceMethodResponseMessage};
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
-use crate::session::{anonymous, login, Session, SessionError};
+use crate::session::{anonymous, hello, login, Session, SessionError};
 use crate::transport::websocket::connect;
 use dashmap::DashMap;
 use futures_sink::Sink;
@@ -12,7 +12,7 @@ use std::future::Future;
 use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_proto::enums_clientserver::EMsg;
-use steamid_ng::{AccountType, Instance, SteamID, Universe};
+use steamid_ng::SteamID;
 use tokio::sync::{broadcast, mpsc, oneshot};
 use tokio::task::spawn;
 use tokio::time::timeout;
@@ -29,7 +29,6 @@ pub struct Connection {
     rest: mpsc::Receiver<Result<RawNetMessage>>,
     write: Box<dyn Sink<RawNetMessage, Error = NetworkError> + Unpin>,
     timeout: Duration,
-    pub steam_id: SteamID,
     tokens: Option<Tokens>,
 }
 
@@ -37,20 +36,20 @@ impl Connection {
     async fn connect(server_list: ServerList) -> Result<Self, SessionError> {
         let (read, write) = connect(&server_list.pick_ws()).await?;
         let (filter, rest) = MessageFilter::new(read);
-        Ok(Connection {
+        let mut connection = Connection {
             session: Session::default(),
             filter,
             rest,
             write: Box::new(write),
             timeout: Duration::from_secs(10),
-            steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
             tokens: None,
-        })
+        };
+        hello(&mut connection).await?;
+        Ok(connection)
     }
 
     pub async fn anonymous(server_list: ServerList) -> Result<Self, SessionError> {
         let mut connection = Self::connect(server_list).await?;
-
         connection.session = anonymous(&mut connection).await?;
 
         Ok(connection)
@@ -62,9 +61,8 @@ impl Connection {
         mut confirmation_handler: H,
     ) -> Result<Self, SessionError> {
         let mut connection = Self::connect(server_list).await?;
-        connection.session = login(&mut connection, account, None).await?;
-        // hello(&mut connection).await?;
         let begin = begin_password_auth(&mut connection, account, password).await?;
+        let steam_id = SteamID::from(begin.steam_id());
 
         let confirmation_action =
             confirmation_handler.handle_confirmation(begin.allowed_confirmations());
@@ -72,8 +70,14 @@ impl Connection {
             .submit_confirmation(&mut connection, confirmation_action)
             .await?;
         let tokens = pending.wait_for_tokens(&mut connection).await?;
-        connection.session =
-            login(&mut connection, account, Some(tokens.access_token.as_ref())).await?;
+        connection.session = login(
+            &mut connection,
+            account,
+            steam_id,
+            // yes we send the refresh token as access token, yes it makes no sense, yes this is actually required
+            tokens.refresh_token.as_ref(),
+        )
+        .await?;
         connection.tokens = Some(tokens);
 
         Ok(connection)
@@ -91,9 +95,12 @@ impl Connection {
             rest,
             write: Box::new(write),
             timeout: Duration::from_secs(10),
-            steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
             tokens: None,
         }
+    }
+
+    pub fn steam_id(&self) -> SteamID {
+        self.session.steam_id
     }
 
     pub fn prepare(&mut self) -> NetMessageHeader {
@@ -121,6 +128,26 @@ impl Connection {
         let header = self.prepare();
         let recv = self.filter.on_job_id(header.source_job_id);
         self.send(header, msg).await?;
+        let message = timeout(self.timeout, recv)
+            .await
+            .map_err(|_| NetworkError::Timeout)?
+            .map_err(|_| NetworkError::Timeout)?
+            .into_message::<ServiceMethodResponseMessage>()?;
+        message.into_response::<Msg>()
+    }
+
+    pub async fn service_method_un_authenticated<Msg: ServiceMethodRequest>(
+        &mut self,
+        msg: Msg,
+    ) -> Result<Msg::Response> {
+        let header = self.prepare();
+        let recv = self.filter.on_job_id(header.source_job_id);
+        let msg = RawNetMessage::from_message_with_kind(
+            header,
+            msg,
+            EMsg::k_EMsgServiceMethodCallFromClientNonAuthed,
+        )?;
+        self.write.send(msg).await?;
         let message = timeout(self.timeout, recv)
             .await
             .map_err(|_| NetworkError::Timeout)?

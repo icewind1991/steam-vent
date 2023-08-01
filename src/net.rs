@@ -141,15 +141,8 @@ impl NetMessageHeader {
             writer.write_u32::<LittleEndian>(kind.value() as u32)?;
         } else if proto {
             trace!("writing header for {:?} protobuf message: {:?}", kind, self);
-            let mut proto_header = CMsgProtoBufHeader::new();
+            let proto_header = self.proto_header(kind);
             writer.write_u32::<LittleEndian>(kind.value() as u32 | PROTO_MASK)?;
-            proto_header.set_jobid_target(self.target_job_id);
-            proto_header.set_jobid_source(self.source_job_id);
-            proto_header.set_steamid(self.steam_id.into());
-            proto_header.set_client_sessionid(self.session_id);
-            if let Some(target_job_name) = self.target_job_name.as_deref() {
-                proto_header.set_target_job_name(target_job_name.into());
-            }
             writer.write_u32::<LittleEndian>(proto_header.compute_size() as u32)?;
             proto_header.write_to_writer(writer)?;
         } else {
@@ -166,18 +159,36 @@ impl NetMessageHeader {
         Ok(())
     }
 
+    fn proto_header(&self, kind: EMsg) -> CMsgProtoBufHeader {
+        let mut proto_header = CMsgProtoBufHeader::new();
+        proto_header.set_steamid(
+            if kind == EMsg::k_EMsgServiceMethodCallFromClientNonAuthed {
+                0
+            } else {
+                self.steam_id.into()
+            },
+        );
+        proto_header.set_client_sessionid(self.session_id);
+        if kind == EMsg::k_EMsgServiceMethodCallFromClientNonAuthed
+            || kind == EMsg::k_EMsgServiceMethodCallFromClient
+        {
+            proto_header.set_realm(1);
+            proto_header.set_jobid_source(self.source_job_id);
+            if self.source_job_id > 0 {
+                proto_header.set_jobid_target(self.target_job_id);
+            }
+        }
+        if let Some(target_job_name) = self.target_job_name.as_deref() {
+            proto_header.set_target_job_name(target_job_name.into());
+        }
+        proto_header
+    }
+
     fn encode_size(&self, kind: EMsg, proto: bool) -> usize {
         if kind == EMsg::k_EMsgChannelEncryptResponse {
             4
         } else if proto {
-            let mut proto_header = CMsgProtoBufHeader::new();
-            proto_header.set_jobid_target(self.target_job_id);
-            proto_header.set_jobid_source(self.source_job_id);
-            proto_header.set_steamid(self.steam_id.into());
-            proto_header.set_client_sessionid(self.session_id);
-            if let Some(target_job_name) = self.target_job_name.as_deref() {
-                proto_header.set_target_job_name(target_job_name.into());
-            }
+            let proto_header = self.proto_header(kind);
             4 + 4 + proto_header.compute_size() as usize
         } else {
             4 + 1 + 2 + 8 + 8 + 1 + 8 + 4 + 4
@@ -234,8 +245,16 @@ impl RawNetMessage {
         })
     }
 
-    pub fn from_message<T: NetMessage>(mut header: NetMessageHeader, message: T) -> Result<Self> {
-        debug!("writing raw {:?} message", T::KIND);
+    pub fn from_message<T: NetMessage>(header: NetMessageHeader, message: T) -> Result<Self> {
+        Self::from_message_with_kind(header, message, T::KIND)
+    }
+
+    pub fn from_message_with_kind<T: NetMessage>(
+        mut header: NetMessageHeader,
+        message: T,
+        kind: EMsg,
+    ) -> Result<Self> {
+        debug!("writing raw {:?} message", kind);
 
         message.process_header(&mut header);
 
@@ -247,7 +266,7 @@ impl RawNetMessage {
         //
         // 8 byte frame header, 16 byte iv, header, body, 16 byte encryption padding
         let mut buff = BytesMut::with_capacity(
-            8 + 16 + header.encode_size(T::KIND, T::IS_PROTOBUF) + body_size + 16,
+            8 + 16 + header.encode_size(kind, T::IS_PROTOBUF) + body_size + 16,
         );
         buff.extend([0; 8 + 16]);
         let frame_header_buffer = buff.split_to(8);
@@ -255,7 +274,7 @@ impl RawNetMessage {
 
         {
             let mut writer = (&mut buff).writer();
-            header.write(&mut writer, T::KIND, T::IS_PROTOBUF)?;
+            header.write(&mut writer, kind, T::IS_PROTOBUF)?;
         }
 
         let header_buffer = buff.split();
@@ -264,7 +283,7 @@ impl RawNetMessage {
         trace!("encoded body({} bytes): {:?}", buff.len(), buff.as_ref());
 
         Ok(RawNetMessage {
-            kind: T::KIND,
+            kind,
             is_protobuf: T::IS_PROTOBUF,
             header,
             data: buff,

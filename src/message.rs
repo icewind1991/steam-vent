@@ -246,11 +246,6 @@ impl<R: Read> Iterator for MultiBodyIter<R> {
     }
 }
 
-// #[derive(Debug)]
-// struct ServiceMethodRequestMessage<Request: ServiceMethodRequest> {
-//
-// }
-
 impl<Request: ServiceMethodRequest> NetMessage for Request {
     const KIND: EMsg = EMsg::k_EMsgServiceMethodCallFromClient;
     const IS_PROTOBUF: bool = true;

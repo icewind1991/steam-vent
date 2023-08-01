@@ -25,22 +25,25 @@ async fn main() -> Result<(), Box<dyn Error>> {
     println!("requesting games");
 
     let req = CPlayer_GetOwnedGames_Request {
-        steamid: Some(connection.steam_id.into()),
+        steamid: Some(connection.steam_id().into()),
         include_appinfo: Some(true),
         include_played_free_games: Some(true),
         ..CPlayer_GetOwnedGames_Request::default()
     };
-    dbg!(connection.steam_id);
     let games = connection.service_method(req).await?;
-    println!("{} owned games", games.game_count());
-    // for game in games.games {
-    //     println!(
-    //         "{}: {} {}",
-    //         game.appid(),
-    //         game.name(),
-    //         game.playtime_forever()
-    //     );
-    // }
+    println!(
+        "{} owns {} games",
+        connection.steam_id().steam3(),
+        games.game_count()
+    );
+    for game in games.games {
+        println!(
+            "{}: {} {}",
+            game.appid(),
+            game.name(),
+            game.playtime_forever()
+        );
+    }
 
     Ok(())
 }

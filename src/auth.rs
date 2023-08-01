@@ -56,8 +56,7 @@ pub async fn begin_password_auth(
         }),
         ..CAuthentication_BeginAuthSessionViaCredentials_Request::default()
     };
-    let res = connection.service_method(req).await?;
-    connection.steam_id = res.steamid().into();
+    let res = connection.service_method_un_authenticated(req).await?;
     Ok(StartedAuth::Credentials(res))
 }
 
@@ -92,7 +91,7 @@ impl StartedAuth {
         }
     }
 
-    fn steam_id(&self) -> u64 {
+    pub fn steam_id(&self) -> u64 {
         match self {
             StartedAuth::Credentials(res) => res.steamid(),
         }
@@ -129,7 +128,7 @@ impl StartedAuth {
                     code_type: Some(EnumOrUnknown::new(code_type)),
                     ..CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request::default()
                 };
-                let _ = connection.service_method(req).await?;
+                let _ = connection.service_method_un_authenticated(req).await?;
                 Ok(PendingAuth {
                     interval: self.interval(),
                     client_id: self.client_id(),
@@ -341,7 +340,7 @@ async fn poll_until_info(
             ..CAuthentication_PollAuthSessionStatus_Request::default()
         };
 
-        let resp = connection.service_method(req).await?;
+        let resp = connection.service_method_un_authenticated(req).await?;
         let has_data = resp.has_access_token()
             || resp.has_account_name()
             || resp.has_agreement_session_url()
@@ -369,7 +368,7 @@ pub async fn get_password_rsa(
         account_name: Some(account),
         ..CAuthentication_GetPasswordRSAPublicKey_Request::default()
     };
-    let response = connection.service_method(req).await?;
+    let response = connection.service_method_un_authenticated(req).await?;
 
     let key_mod =
         BigUint::from_str_radix(response.publickey_mod.as_deref().unwrap_or_default(), 16)
