@@ -4,6 +4,20 @@
 
 Allows communication with the steam servers using the same protocol as the regular steam client.
 
+## State
+
+While the project is still very incomplete, the basics of authenticating to steam and sending requests is working.
+
+- [x] Anonymous sessions
+- [x] Password Authentication
+- [ ] QR Authentication
+- [x] Steam guard (device or email) confirmation
+- [ ] Device notification confirmation
+- [ ] Saved machine token confirmation
+- [x] Making RPC calls over the connection
+- [ ] Support for all available RPC messages
+- [ ] High level wrappers around the RPC calls 
+
 ## Usage
 
 Note that this project is still in early development and api's might see large changes.
