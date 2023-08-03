@@ -1,6 +1,6 @@
 use crate::connection::Connection;
-use crate::message::MalformedBody;
 use crate::message::NetMessage;
+use crate::message::{MalformedBody, ServiceMethodMessage};
 use crate::net::NetworkError;
 use crate::proto::enums::ESessionPersistence;
 use crate::proto::steammessages_auth_steamclient::CAuthentication_GetPasswordRSAPublicKey_Request;
@@ -373,15 +373,24 @@ pub async fn get_password_rsa(
     let key_mod =
         BigUint::from_str_radix(response.publickey_mod.as_deref().unwrap_or_default(), 16)
             .map_err(|e| {
-                MalformedBody::new(CAuthentication_GetPasswordRSAPublicKey_Request::KIND, e)
+                MalformedBody::new(
+                    ServiceMethodMessage::<CAuthentication_GetPasswordRSAPublicKey_Request>::KIND,
+                    e,
+                )
             })?;
     let key_exp =
         BigUint::from_str_radix(response.publickey_exp.as_deref().unwrap_or_default(), 16)
             .map_err(|e| {
-                MalformedBody::new(CAuthentication_GetPasswordRSAPublicKey_Request::KIND, e)
+                MalformedBody::new(
+                    ServiceMethodMessage::<CAuthentication_GetPasswordRSAPublicKey_Request>::KIND,
+                    e,
+                )
             })?;
     let key = RsaPublicKey::new(key_mod, key_exp).map_err(|e| {
-        MalformedBody::new(CAuthentication_GetPasswordRSAPublicKey_Request::KIND, e)
+        MalformedBody::new(
+            ServiceMethodMessage::<CAuthentication_GetPasswordRSAPublicKey_Request>::KIND,
+            e,
+        )
     })?;
     Ok((key, response.timestamp.unwrap_or_default()))
 }

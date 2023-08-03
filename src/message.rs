@@ -1,6 +1,6 @@
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::proto::steammessages_clientserver::CMsgClientCMList;
-use crate::service_method::{ServiceMethodRequest, ServiceMethodResponse};
+use crate::service_method::ServiceMethodRequest;
 use binread::BinRead;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::{Buf, BytesMut};
@@ -23,6 +23,7 @@ use steam_vent_proto::steammessages_clientserver_login::{
     CMsgClientHello, CMsgClientLogOff, CMsgClientLoggedOff, CMsgClientLogon,
     CMsgClientLogonResponse,
 };
+use steam_vent_proto::RpcMessage;
 use thiserror::Error;
 use tokio_stream::Stream;
 use tracing::{debug, trace};
@@ -246,28 +247,29 @@ impl<R: Read> Iterator for MultiBodyIter<R> {
     }
 }
 
-impl<Request: ServiceMethodRequest> NetMessage for Request {
+#[derive(Debug)]
+pub struct ServiceMethodMessage<Request: Debug>(pub Request);
+
+impl<Request: ServiceMethodRequest + Debug> NetMessage for ServiceMethodMessage<Request> {
     const KIND: EMsg = EMsg::k_EMsgServiceMethodCallFromClient;
     const IS_PROTOBUF: bool = true;
 
     fn read_body(data: BytesMut, _header: &NetMessageHeader) -> Result<Self, MalformedBody> {
         trace!("reading body of protobuf message {:?}", Self::KIND);
-        Request::parse_from_reader(&mut data.reader())
+        Request::parse(&mut data.reader())
             .map_err(|e| MalformedBody(Self::KIND, e.into()))
+            .map(ServiceMethodMessage)
     }
 
     fn write_body<W: Write>(&self, mut writer: W) -> Result<(), std::io::Error> {
         trace!("writing body of protobuf message {:?}", Self::KIND);
-        // println!(
-        //     "{0}",
-        //     BASE64_STANDARD.encode(self.write_to_bytes().unwrap())
-        // );
-        self.write_to_writer(&mut writer)
+        self.0
+            .write(&mut writer)
             .map_err(|_| std::io::Error::from(std::io::ErrorKind::InvalidData))
     }
 
     fn encode_size(&self) -> usize {
-        self.compute_size() as usize
+        self.0.compute_size() as usize
     }
 
     fn process_header(&self, header: &mut NetMessageHeader) {
@@ -286,10 +288,8 @@ impl ServiceMethodResponseMessage {
         self,
     ) -> Result<Request::Response, NetworkError> {
         if self.job_name == Request::REQ_NAME {
-            Ok(
-                Request::Response::parse_from_reader(&mut self.body.reader())
-                    .map_err(|e| MalformedBody(Self::KIND, e.into()))?,
-            )
+            Ok(Request::Response::parse(&mut self.body.reader())
+                .map_err(|e| MalformedBody(Self::KIND, e.into()))?)
         } else {
             Err(NetworkError::DifferentServiceMethod(
                 Request::REQ_NAME,

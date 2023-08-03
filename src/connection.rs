@@ -1,5 +1,5 @@
 use crate::auth::{begin_password_auth, AuthConfirmationHandler};
-use crate::message::{NetMessage, ServiceMethodResponseMessage};
+use crate::message::{NetMessage, ServiceMethodMessage, ServiceMethodResponseMessage};
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
@@ -108,7 +108,7 @@ impl Connection {
     ) -> Result<Msg::Response> {
         let header = self.prepare();
         let recv = self.filter.on_job_id(header.source_job_id);
-        self.send(header, msg).await?;
+        self.send(header, ServiceMethodMessage(msg)).await?;
         let message = timeout(self.timeout, recv)
             .await
             .map_err(|_| NetworkError::Timeout)?
@@ -125,7 +125,7 @@ impl Connection {
         let recv = self.filter.on_job_id(header.source_job_id);
         let msg = RawNetMessage::from_message_with_kind(
             header,
-            msg,
+            ServiceMethodMessage(msg),
             EMsg::k_EMsgServiceMethodCallFromClientNonAuthed,
         )?;
         self.write.send(msg).await?;
