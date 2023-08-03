@@ -1089,21 +1089,21 @@ struct TestExternalPrivilege {}
 impl crate::RpcService for TestExternalPrivilege {
     const SERVICE_NAME: &'static str = "TestExternalPrivilege";
 }
-impl crate::RpcMethod for CMsgTest_MessageToServer_Request {
-    const METHOD_NAME: &'static str = "TestServerFromClient.MessageToServer#1";
-    type Response = CMsgTest_MessageToServer_Response;
-}
-impl crate::RpcMethod for CMsgTest_NotifyClient_Notification {
-    const METHOD_NAME: &'static str = "TestSteamClient.NotifyClient#1";
-    type Response = ();
-}
 impl crate::RpcMethod for CMsgTest_MessageToClient_Request {
     const METHOD_NAME: &'static str = "TestSteamClient.MessageToClient#1";
     type Response = CMsgTest_MessageToClient_Response;
 }
+impl crate::RpcMethod for CMsgTest_MessageToServer_Request {
+    const METHOD_NAME: &'static str = "TestServerFromClient.MessageToServer#1";
+    type Response = CMsgTest_MessageToServer_Response;
+}
 impl crate::RpcMethod for CMsgTest_NoBody_Request {
     const METHOD_NAME: &'static str = "TestExternalPrivilege.CallClient#1";
     type Response = CMsgTest_CallClient_Response;
+}
+impl crate::RpcMethod for CMsgTest_NotifyClient_Notification {
+    const METHOD_NAME: &'static str = "TestSteamClient.NotifyClient#1";
+    type Response = ();
 }
 impl crate::RpcMethod for CMsgTest_NotifyServer_Notification {
     const METHOD_NAME: &'static str = "TestServerFromClient.NotifyServer#1";

@@ -3547,6 +3547,9 @@ impl crate::RpcMessage for CMsgClientPICSChangesSinceRequest {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientPICSChangesSinceRequest {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientPICSChangesSinceRequest;
+}
 impl crate::RpcMessage for CMsgClientPICSChangesSinceResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -3559,6 +3562,9 @@ impl crate::RpcMessage for CMsgClientPICSChangesSinceResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientPICSChangesSinceResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientPICSChangesSinceResponse;
 }
 impl crate::RpcMessage for CMsgClientPICSProductInfoRequest {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -3573,6 +3579,9 @@ impl crate::RpcMessage for CMsgClientPICSProductInfoRequest {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientPICSProductInfoRequest {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientPICSProductInfoRequest;
+}
 impl crate::RpcMessage for CMsgClientPICSProductInfoResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -3585,6 +3594,9 @@ impl crate::RpcMessage for CMsgClientPICSProductInfoResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientPICSProductInfoResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientPICSProductInfoResponse;
 }
 impl crate::RpcMessage for CMsgClientPICSAccessTokenRequest {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -3599,6 +3611,9 @@ impl crate::RpcMessage for CMsgClientPICSAccessTokenRequest {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientPICSAccessTokenRequest {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientPICSAccessTokenRequest;
+}
 impl crate::RpcMessage for CMsgClientPICSAccessTokenResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -3611,4 +3626,7 @@ impl crate::RpcMessage for CMsgClientPICSAccessTokenResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientPICSAccessTokenResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientPICSAccessTokenResponse;
 }

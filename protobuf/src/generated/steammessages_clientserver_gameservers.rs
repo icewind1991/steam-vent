@@ -4895,6 +4895,9 @@ impl crate::RpcMessage for CMsgGSServerType {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgGSServerType {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgGSServerType;
+}
 impl crate::RpcMessage for CMsgGSStatusReply {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -4907,6 +4910,9 @@ impl crate::RpcMessage for CMsgGSStatusReply {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgGSStatusReply {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgGSStatusReply;
 }
 impl crate::RpcMessage for CMsgGSPlayerList {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -4921,6 +4927,9 @@ impl crate::RpcMessage for CMsgGSPlayerList {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgGSPlayerList {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgGSPlayerList;
+}
 impl crate::RpcMessage for CMsgGSUserPlaying {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -4934,6 +4943,9 @@ impl crate::RpcMessage for CMsgGSUserPlaying {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgGSUserPlaying {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgGSUserPlaying;
+}
 impl crate::RpcMessage for CMsgGSDisconnectNotice {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -4946,6 +4958,9 @@ impl crate::RpcMessage for CMsgGSDisconnectNotice {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgGSDisconnectNotice {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgGSDisconnectNotice;
 }
 impl crate::RpcMessage for CMsgGameServerData {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -4986,6 +5001,9 @@ impl crate::RpcMessage for CMsgClientGMSServerQuery {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientGMSServerQuery {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientGMSServerQuery;
+}
 impl crate::RpcMessage for CMsgGMSClientServerQueryResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -4998,6 +5016,9 @@ impl crate::RpcMessage for CMsgGMSClientServerQueryResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgGMSClientServerQueryResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgGMSClientServerQueryResponse;
 }
 impl crate::RpcMessage for CMsgGameServerOutOfDate {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -5012,6 +5033,9 @@ impl crate::RpcMessage for CMsgGameServerOutOfDate {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgGameServerOutOfDate {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgGameServerOutOfDate;
+}
 impl crate::RpcMessage for CMsgGSAssociateWithClan {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -5024,6 +5048,9 @@ impl crate::RpcMessage for CMsgGSAssociateWithClan {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgGSAssociateWithClan {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgGSAssociateWithClan;
 }
 impl crate::RpcMessage for CMsgGSAssociateWithClanResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -5038,6 +5065,9 @@ impl crate::RpcMessage for CMsgGSAssociateWithClanResponse {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgGSAssociateWithClanResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgGSAssociateWithClanResponse;
+}
 impl crate::RpcMessage for CMsgGSComputeNewPlayerCompatibility {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -5051,6 +5081,9 @@ impl crate::RpcMessage for CMsgGSComputeNewPlayerCompatibility {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgGSComputeNewPlayerCompatibility {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgGSComputeNewPlayerCompatibility;
+}
 impl crate::RpcMessage for CMsgGSComputeNewPlayerCompatibilityResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -5063,4 +5096,7 @@ impl crate::RpcMessage for CMsgGSComputeNewPlayerCompatibilityResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgGSComputeNewPlayerCompatibilityResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgGSComputeNewPlayerCompatibilityResponse;
 }

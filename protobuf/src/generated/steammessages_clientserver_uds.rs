@@ -3612,6 +3612,9 @@ impl crate::RpcMessage for CMsgClientUDSP2PSessionStarted {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientUDSP2PSessionStarted {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUDSP2PSessionStarted;
+}
 impl crate::RpcMessage for CMsgClientUDSP2PSessionEnded {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -3624,6 +3627,9 @@ impl crate::RpcMessage for CMsgClientUDSP2PSessionEnded {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientUDSP2PSessionEnded {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUDSP2PSessionEnded;
 }
 impl crate::RpcMessage for CMsgClientGetClientDetails {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -3638,6 +3644,9 @@ impl crate::RpcMessage for CMsgClientGetClientDetails {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientGetClientDetails {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientGetClientDetails;
+}
 impl crate::RpcMessage for CMsgClientGetClientDetailsResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -3650,6 +3659,9 @@ impl crate::RpcMessage for CMsgClientGetClientDetailsResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientGetClientDetailsResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientGetClientDetailsResponse;
 }
 impl crate::RpcMessage for CMsgClientGetClientAppList {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -3664,6 +3676,9 @@ impl crate::RpcMessage for CMsgClientGetClientAppList {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientGetClientAppList {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientGetClientAppList;
+}
 impl crate::RpcMessage for CMsgClientGetClientAppListResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -3676,6 +3691,9 @@ impl crate::RpcMessage for CMsgClientGetClientAppListResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientGetClientAppListResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientGetClientAppListResponse;
 }
 impl crate::RpcMessage for CMsgClientInstallClientApp {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -3690,6 +3708,9 @@ impl crate::RpcMessage for CMsgClientInstallClientApp {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientInstallClientApp {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientInstallClientApp;
+}
 impl crate::RpcMessage for CMsgClientInstallClientAppResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -3702,6 +3723,9 @@ impl crate::RpcMessage for CMsgClientInstallClientAppResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientInstallClientAppResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientInstallClientAppResponse;
 }
 impl crate::RpcMessage for CMsgClientUninstallClientApp {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -3716,6 +3740,9 @@ impl crate::RpcMessage for CMsgClientUninstallClientApp {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientUninstallClientApp {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUninstallClientApp;
+}
 impl crate::RpcMessage for CMsgClientUninstallClientAppResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -3728,6 +3755,9 @@ impl crate::RpcMessage for CMsgClientUninstallClientAppResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientUninstallClientAppResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUninstallClientAppResponse;
 }
 impl crate::RpcMessage for CMsgClientSetClientAppUpdateState {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -3742,6 +3772,9 @@ impl crate::RpcMessage for CMsgClientSetClientAppUpdateState {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientSetClientAppUpdateState {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientSetClientAppUpdateState;
+}
 impl crate::RpcMessage for CMsgClientSetClientAppUpdateStateResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -3754,6 +3787,9 @@ impl crate::RpcMessage for CMsgClientSetClientAppUpdateStateResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientSetClientAppUpdateStateResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientSetClientAppUpdateStateResponse;
 }
 impl crate::RpcMessage for CMsgClientEnableOrDisableDownloads {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -3768,6 +3804,9 @@ impl crate::RpcMessage for CMsgClientEnableOrDisableDownloads {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientEnableOrDisableDownloads {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientEnableOrDisableDownloads;
+}
 impl crate::RpcMessage for CMsgClientEnableOrDisableDownloadsResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -3780,4 +3819,7 @@ impl crate::RpcMessage for CMsgClientEnableOrDisableDownloadsResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientEnableOrDisableDownloadsResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientEnableOrDisableDownloadsResponse;
 }

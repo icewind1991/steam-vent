@@ -4151,15 +4151,15 @@ impl crate::RpcMethod for CEcon_ClientGetItemShopOverlayAuthURL_Request {
     const METHOD_NAME: &'static str = "Econ.ClientGetItemShopOverlayAuthURL#1";
     type Response = CEcon_ClientGetItemShopOverlayAuthURL_Response;
 }
-impl crate::RpcMethod for CEcon_GetTradeOfferAccessToken_Request {
-    const METHOD_NAME: &'static str = "Econ.GetTradeOfferAccessToken#1";
-    type Response = CEcon_GetTradeOfferAccessToken_Response;
+impl crate::RpcMethod for CEcon_GetAssetClassInfo_Request {
+    const METHOD_NAME: &'static str = "Econ.GetAssetClassInfo#1";
+    type Response = CEcon_GetAssetClassInfo_Response;
 }
 impl crate::RpcMethod for CEcon_GetInventoryItemsWithDescriptions_Request {
     const METHOD_NAME: &'static str = "Econ.GetInventoryItemsWithDescriptions#1";
     type Response = CEcon_GetInventoryItemsWithDescriptions_Response;
 }
-impl crate::RpcMethod for CEcon_GetAssetClassInfo_Request {
-    const METHOD_NAME: &'static str = "Econ.GetAssetClassInfo#1";
-    type Response = CEcon_GetAssetClassInfo_Response;
+impl crate::RpcMethod for CEcon_GetTradeOfferAccessToken_Request {
+    const METHOD_NAME: &'static str = "Econ.GetTradeOfferAccessToken#1";
+    type Response = CEcon_GetTradeOfferAccessToken_Response;
 }

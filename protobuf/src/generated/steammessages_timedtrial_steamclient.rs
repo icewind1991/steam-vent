@@ -958,10 +958,6 @@ struct TimedTrial {}
 impl crate::RpcService for TimedTrial {
     const SERVICE_NAME: &'static str = "TimedTrial";
 }
-impl crate::RpcMethod for CTimedTrial_ResetPlaytime_Request {
-    const METHOD_NAME: &'static str = "TimedTrial.ResetPlaytime#1";
-    type Response = CTimedTrial_ResetPlaytime_Response;
-}
 impl crate::RpcMethod for CTimedTrial_GetTimeRemaining_Request {
     const METHOD_NAME: &'static str = "TimedTrial.GetTimeRemaining#1";
     type Response = CTimedTrial_GetTimeRemaining_Response;
@@ -969,4 +965,8 @@ impl crate::RpcMethod for CTimedTrial_GetTimeRemaining_Request {
 impl crate::RpcMethod for CTimedTrial_RecordPlaytime_Request {
     const METHOD_NAME: &'static str = "TimedTrial.RecordPlaytime#1";
     type Response = CTimedTrial_RecordPlaytime_Response;
+}
+impl crate::RpcMethod for CTimedTrial_ResetPlaytime_Request {
+    const METHOD_NAME: &'static str = "TimedTrial.ResetPlaytime#1";
+    type Response = CTimedTrial_ResetPlaytime_Response;
 }

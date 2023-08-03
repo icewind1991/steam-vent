@@ -2710,17 +2710,29 @@ struct SiteLicense {}
 impl crate::RpcService for SiteLicense {
     const SERVICE_NAME: &'static str = "SiteLicense";
 }
+impl crate::RpcMethod for CSiteLicense_ClientGetAvailableSeats_Request {
+    const METHOD_NAME: &'static str = "SiteLicense.ClientGetAvailableSeats#1";
+    type Response = CSiteLicense_ClientGetAvailableSeats_Response;
+}
 impl crate::RpcMethod for CSiteLicense_ClientSeatCheckout_Notification {
     const METHOD_NAME: &'static str = "SiteManagerClient.ClientSeatCheckoutNotification#1";
     type Response = ();
 }
+impl crate::RpcMethod for CSiteLicense_ClientSeatCheckout_Request {
+    const METHOD_NAME: &'static str = "SiteLicense.ClientSeatCheckout#1";
+    type Response = CSiteLicense_ClientSeatCheckout_Response;
+}
+impl crate::RpcMethod for CSiteLicense_InitiateAssociation_Request {
+    const METHOD_NAME: &'static str = "SiteLicense.InitiateAssociation#1";
+    type Response = CSiteLicense_InitiateAssociation_Response;
+}
+impl crate::RpcMethod for CSiteLicense_LCSAssociateUser_Request {
+    const METHOD_NAME: &'static str = "SiteLicense.LCSAssociateUser#1";
+    type Response = CSiteLicense_LCSAssociateUser_Response;
+}
 impl crate::RpcMethod for CSiteLicense_LCSAuthenticate_Request {
     const METHOD_NAME: &'static str = "SiteLicense.LCSAuthenticate#1";
     type Response = CSiteLicense_LCSAuthenticate_Response;
-}
-impl crate::RpcMethod for CSiteLicense_ClientGetAvailableSeats_Request {
-    const METHOD_NAME: &'static str = "SiteLicense.ClientGetAvailableSeats#1";
-    type Response = CSiteLicense_ClientGetAvailableSeats_Response;
 }
 impl crate::RpcMethod for CSiteManagerClient_IncomingClient_Request {
     const METHOD_NAME: &'static str = "SiteManagerClient.IncomingClient#1";
@@ -2729,16 +2741,4 @@ impl crate::RpcMethod for CSiteManagerClient_IncomingClient_Request {
 impl crate::RpcMethod for CSiteManagerClient_TrackedPayments_Notification {
     const METHOD_NAME: &'static str = "SiteManagerClient.TrackedPaymentsNotification#1";
     type Response = ();
-}
-impl crate::RpcMethod for CSiteLicense_InitiateAssociation_Request {
-    const METHOD_NAME: &'static str = "SiteLicense.InitiateAssociation#1";
-    type Response = CSiteLicense_InitiateAssociation_Response;
-}
-impl crate::RpcMethod for CSiteLicense_ClientSeatCheckout_Request {
-    const METHOD_NAME: &'static str = "SiteLicense.ClientSeatCheckout#1";
-    type Response = CSiteLicense_ClientSeatCheckout_Response;
-}
-impl crate::RpcMethod for CSiteLicense_LCSAssociateUser_Request {
-    const METHOD_NAME: &'static str = "SiteLicense.LCSAssociateUser#1";
-    type Response = CSiteLicense_LCSAssociateUser_Response;
 }

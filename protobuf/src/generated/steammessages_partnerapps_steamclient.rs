@@ -2939,31 +2939,31 @@ struct PartnerApps {}
 impl crate::RpcService for PartnerApps {
     const SERVICE_NAME: &'static str = "PartnerApps";
 }
-impl crate::RpcMethod for CPartnerApps_FinishUpload_Request {
-    const METHOD_NAME: &'static str = "PartnerApps.FinishUploadKVSign#1";
-    type Response = CPartnerApps_FinishUploadKVSign_Response;
-}
-impl crate::RpcMethod for CPartnerApps_FinishUploadDepot_Request {
-    const METHOD_NAME: &'static str = "PartnerApps.FinishUploadDepotUpload#1";
-    type Response = CPartnerApps_FinishUploadDepot_Response;
-}
-impl crate::RpcMethod for CPartnerApps_GetDepotBuildResult_Request {
-    const METHOD_NAME: &'static str = "PartnerApps.GetDepotBuildResult#1";
-    type Response = CPartnerApps_GetDepotBuildResult_Response;
+impl crate::RpcMethod for CPartnerApps_Download_Request {
+    const METHOD_NAME: &'static str = "PartnerApps.Download#1";
+    type Response = CPartnerApps_Download_Response;
 }
 impl crate::RpcMethod for CPartnerApps_FindDRMUploads_Request {
     const METHOD_NAME: &'static str = "PartnerApps.FindDRMUploads#1";
     type Response = CPartnerApps_FindDRMUploads_Response;
 }
-impl crate::RpcMethod for CPartnerApps_Download_Request {
-    const METHOD_NAME: &'static str = "PartnerApps.Download#1";
-    type Response = CPartnerApps_Download_Response;
-}
-impl crate::RpcMethod for CPartnerApps_RequestUploadToken_Request {
-    const METHOD_NAME: &'static str = "PartnerApps.RequestKVSignUploadToken#1";
-    type Response = CPartnerApps_RequestUploadToken_Response;
+impl crate::RpcMethod for CPartnerApps_FinishUploadDepot_Request {
+    const METHOD_NAME: &'static str = "PartnerApps.FinishUploadDepotUpload#1";
+    type Response = CPartnerApps_FinishUploadDepot_Response;
 }
 impl crate::RpcMethod for CPartnerApps_FinishUploadLegacyDRM_Request {
     const METHOD_NAME: &'static str = "PartnerApps.FinishUploadDRMUpload#1";
     type Response = CPartnerApps_FinishUploadLegacyDRM_Response;
+}
+impl crate::RpcMethod for CPartnerApps_FinishUpload_Request {
+    const METHOD_NAME: &'static str = "PartnerApps.FinishUploadKVSign#1";
+    type Response = CPartnerApps_FinishUploadKVSign_Response;
+}
+impl crate::RpcMethod for CPartnerApps_GetDepotBuildResult_Request {
+    const METHOD_NAME: &'static str = "PartnerApps.GetDepotBuildResult#1";
+    type Response = CPartnerApps_GetDepotBuildResult_Response;
+}
+impl crate::RpcMethod for CPartnerApps_RequestUploadToken_Request {
+    const METHOD_NAME: &'static str = "PartnerApps.RequestKVSignUploadToken#1";
+    type Response = CPartnerApps_RequestUploadToken_Response;
 }

@@ -3301,31 +3301,31 @@ struct ContentServerDirectory {}
 impl crate::RpcService for ContentServerDirectory {
     const SERVICE_NAME: &'static str = "ContentServerDirectory";
 }
-impl crate::RpcMethod for CContentServerDirectory_GetDepotPatchInfo_Request {
-    const METHOD_NAME: &'static str = "ContentServerDirectory.GetDepotPatchInfo#1";
-    type Response = CContentServerDirectory_GetDepotPatchInfo_Response;
-}
 impl crate::RpcMethod for CContentServerDirectory_GetCDNAuthToken_Request {
     const METHOD_NAME: &'static str = "ContentServerDirectory.GetCDNAuthToken#1";
     type Response = CContentServerDirectory_GetCDNAuthToken_Response;
-}
-impl crate::RpcMethod for CContentServerDirectory_RequestPeerContentServer_Request {
-    const METHOD_NAME: &'static str = "ContentServerDirectory.RequestPeerContentServer#1";
-    type Response = CContentServerDirectory_RequestPeerContentServer_Response;
-}
-impl crate::RpcMethod for CContentServerDirectory_GetPeerContentInfo_Request {
-    const METHOD_NAME: &'static str = "ContentServerDirectory.GetPeerContentInfo#1";
-    type Response = CContentServerDirectory_GetPeerContentInfo_Response;
 }
 impl crate::RpcMethod for CContentServerDirectory_GetClientUpdateHosts_Request {
     const METHOD_NAME: &'static str = "ContentServerDirectory.GetClientUpdateHosts#1";
     type Response = CContentServerDirectory_GetClientUpdateHosts_Response;
 }
+impl crate::RpcMethod for CContentServerDirectory_GetDepotPatchInfo_Request {
+    const METHOD_NAME: &'static str = "ContentServerDirectory.GetDepotPatchInfo#1";
+    type Response = CContentServerDirectory_GetDepotPatchInfo_Response;
+}
 impl crate::RpcMethod for CContentServerDirectory_GetManifestRequestCode_Request {
     const METHOD_NAME: &'static str = "ContentServerDirectory.GetManifestRequestCode#1";
     type Response = CContentServerDirectory_GetManifestRequestCode_Response;
 }
+impl crate::RpcMethod for CContentServerDirectory_GetPeerContentInfo_Request {
+    const METHOD_NAME: &'static str = "ContentServerDirectory.GetPeerContentInfo#1";
+    type Response = CContentServerDirectory_GetPeerContentInfo_Response;
+}
 impl crate::RpcMethod for CContentServerDirectory_GetServersForSteamPipe_Request {
     const METHOD_NAME: &'static str = "ContentServerDirectory.GetServersForSteamPipe#1";
     type Response = CContentServerDirectory_GetServersForSteamPipe_Response;
+}
+impl crate::RpcMethod for CContentServerDirectory_RequestPeerContentServer_Request {
+    const METHOD_NAME: &'static str = "ContentServerDirectory.RequestPeerContentServer#1";
+    type Response = CContentServerDirectory_RequestPeerContentServer_Response;
 }

@@ -3329,17 +3329,9 @@ impl crate::RpcMethod for CGameNotifications_CreateSession_Request {
     const METHOD_NAME: &'static str = "GameNotifications.UserCreateSession#1";
     type Response = CGameNotifications_CreateSession_Response;
 }
-impl crate::RpcMethod for CGameNotifications_UpdateSession_Request {
-    const METHOD_NAME: &'static str = "GameNotifications.UserUpdateSession#1";
-    type Response = CGameNotifications_UpdateSession_Response;
-}
 impl crate::RpcMethod for CGameNotifications_DeleteSession_Request {
     const METHOD_NAME: &'static str = "GameNotifications.UserDeleteSession#1";
     type Response = CGameNotifications_DeleteSession_Response;
-}
-impl crate::RpcMethod for CGameNotifications_OnNotificationsRequested_Notification {
-    const METHOD_NAME: &'static str = "GameNotificationsClient.OnNotificationsRequested#1";
-    type Response = ();
 }
 impl crate::RpcMethod for CGameNotifications_EnumerateSessions_Request {
     const METHOD_NAME: &'static str = "GameNotifications.EnumerateSessions#1";
@@ -3349,11 +3341,19 @@ impl crate::RpcMethod for CGameNotifications_GetSessionDetails_Request {
     const METHOD_NAME: &'static str = "GameNotifications.GetSessionDetails#1";
     type Response = CGameNotifications_GetSessionDetails_Response;
 }
-impl crate::RpcMethod for CGameNotifications_UpdateNotificationSettings_Request {
-    const METHOD_NAME: &'static str = "GameNotifications.UpdateNotificationSettings#1";
-    type Response = CGameNotifications_UpdateNotificationSettings_Response;
+impl crate::RpcMethod for CGameNotifications_OnNotificationsRequested_Notification {
+    const METHOD_NAME: &'static str = "GameNotificationsClient.OnNotificationsRequested#1";
+    type Response = ();
 }
 impl crate::RpcMethod for CGameNotifications_OnUserStatusChanged_Notification {
     const METHOD_NAME: &'static str = "GameNotificationsClient.OnUserStatusChanged#1";
     type Response = ();
+}
+impl crate::RpcMethod for CGameNotifications_UpdateNotificationSettings_Request {
+    const METHOD_NAME: &'static str = "GameNotifications.UpdateNotificationSettings#1";
+    type Response = CGameNotifications_UpdateNotificationSettings_Response;
+}
+impl crate::RpcMethod for CGameNotifications_UpdateSession_Request {
+    const METHOD_NAME: &'static str = "GameNotifications.UserUpdateSession#1";
+    type Response = CGameNotifications_UpdateSession_Response;
 }

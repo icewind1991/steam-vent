@@ -15,7 +15,6 @@ While the project is still very incomplete, the basics of authenticating to stea
 - [ ] Device notification confirmation
 - [ ] Saved machine token confirmation
 - [x] Making RPC calls over the connection
-- [ ] Support for all available RPC messages
 - [ ] High level wrappers around the RPC calls 
 
 ## Usage

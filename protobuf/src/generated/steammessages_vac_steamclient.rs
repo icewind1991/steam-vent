@@ -940,11 +940,11 @@ struct FileVerification {}
 impl crate::RpcService for FileVerification {
     const SERVICE_NAME: &'static str = "FileVerification";
 }
-impl crate::RpcMethod for CFileVerification_SteamServiceCheck_Request {
-    const METHOD_NAME: &'static str = "FileVerification.SteamServiceCheck#1";
-    type Response = CFileVerification_SteamServiceCheck_Response;
-}
 impl crate::RpcMethod for CFileVerification_SignatureCheck_Request {
     const METHOD_NAME: &'static str = "FileVerification.SignatureCheck#1";
     type Response = CFileVerification_SignatureCheck_Response;
+}
+impl crate::RpcMethod for CFileVerification_SteamServiceCheck_Request {
+    const METHOD_NAME: &'static str = "FileVerification.SteamServiceCheck#1";
+    type Response = CFileVerification_SteamServiceCheck_Response;
 }

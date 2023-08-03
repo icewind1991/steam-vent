@@ -8464,6 +8464,9 @@ impl crate::RpcMessage for CMsgMulti {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgMulti {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgMulti;
+}
 impl crate::RpcMessage for CMsgProtobufWrapped {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -8476,6 +8479,9 @@ impl crate::RpcMessage for CMsgProtobufWrapped {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgProtobufWrapped {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgProtobufWrapped;
 }
 impl crate::RpcMessage for CMsgAuthTicket {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {

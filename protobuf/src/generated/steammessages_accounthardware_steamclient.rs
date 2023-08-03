@@ -4890,47 +4890,47 @@ struct AccountHardware {}
 impl crate::RpcService for AccountHardware {
     const SERVICE_NAME: &'static str = "AccountHardware";
 }
+impl crate::RpcMethod for CAccountHardware_CompleteSteamControllerRegistration_Request {
+    const METHOD_NAME: &'static str = "AccountHardware.CompleteSteamControllerRegistration#1";
+    type Response = CAccountHardware_CompleteSteamControllerRegistration_Response;
+}
 impl crate::RpcMethod for CAccountHardware_DeRegisterSteamController_Request {
     const METHOD_NAME: &'static str = "AccountHardware.DeRegisterSteamController#1";
     type Response = CAccountHardware_DeRegisterSteamController_Response;
-}
-impl crate::RpcMethod for CAccountHardware_SteamControllerSetConfig_Request {
-    const METHOD_NAME: &'static str = "AccountHardware.SetDesiredControllerConfigForApp#1";
-    type Response = CAccountHardware_SteamControllerSetConfig_Response;
-}
-impl crate::RpcMethod for CAccountHardware_RegisterSteamController_Request {
-    const METHOD_NAME: &'static str = "AccountHardware.RegisterSteamController#1";
-    type Response = CAccountHardware_RegisterSteamController_Response;
-}
-impl crate::RpcMethod for CAccountHardware_QueryAccountsRegisteredToSerial_Request {
-    const METHOD_NAME: &'static str = "AccountHardware.QueryAccountsRegisteredToController#1";
-    type Response = CAccountHardware_QueryAccountsRegisteredToSerial_Response;
-}
-impl crate::RpcMethod for CAccountHardware_SteamControllerGetConfig_Request {
-    const METHOD_NAME: &'static str = "AccountHardware.GetDesiredControllerConfigForApp#1";
-    type Response = CAccountHardware_SteamControllerGetConfig_Response;
 }
 impl crate::RpcMethod for CAccountHardware_GetPersonalizationFile_Request {
     const METHOD_NAME: &'static str = "AccountHardware.GetControllerPersonalizationFile#1";
     type Response = CAccountHardware_GetPersonalizationFile_Response;
 }
-impl crate::RpcMethod for CAccountHardware_SetPersonalizationFile_Request {
-    const METHOD_NAME: &'static str = "AccountHardware.SetControllerPersonalizationFile#1";
-    type Response = CAccountHardware_SetPersonalizationFile_Response;
-}
 impl crate::RpcMethod for CAccountHardware_GetSteamDeckComponents_Request {
     const METHOD_NAME: &'static str = "AccountHardware.GetSteamDeckComponents#1";
     type Response = CAccountHardware_GetSteamDeckComponents_Response;
 }
-impl crate::RpcMethod for CAccountHardware_VRCompatibilityCheck_Request {
-    const METHOD_NAME: &'static str = "AccountHardware.VRCompatibilityCheck#1";
-    type Response = CAccountHardware_VRCompatibilityCheck_Response;
+impl crate::RpcMethod for CAccountHardware_QueryAccountsRegisteredToSerial_Request {
+    const METHOD_NAME: &'static str = "AccountHardware.QueryAccountsRegisteredToController#1";
+    type Response = CAccountHardware_QueryAccountsRegisteredToSerial_Response;
+}
+impl crate::RpcMethod for CAccountHardware_RegisterSteamController_Request {
+    const METHOD_NAME: &'static str = "AccountHardware.RegisterSteamController#1";
+    type Response = CAccountHardware_RegisterSteamController_Response;
 }
 impl crate::RpcMethod for CAccountHardware_RegisterValveIndexComponent_Request {
     const METHOD_NAME: &'static str = "AccountHardware.RegisterValveIndexComponent#1";
     type Response = CAccountHardware_RegisterValveIndexComponent_Response;
 }
-impl crate::RpcMethod for CAccountHardware_CompleteSteamControllerRegistration_Request {
-    const METHOD_NAME: &'static str = "AccountHardware.CompleteSteamControllerRegistration#1";
-    type Response = CAccountHardware_CompleteSteamControllerRegistration_Response;
+impl crate::RpcMethod for CAccountHardware_SetPersonalizationFile_Request {
+    const METHOD_NAME: &'static str = "AccountHardware.SetControllerPersonalizationFile#1";
+    type Response = CAccountHardware_SetPersonalizationFile_Response;
+}
+impl crate::RpcMethod for CAccountHardware_SteamControllerGetConfig_Request {
+    const METHOD_NAME: &'static str = "AccountHardware.GetDesiredControllerConfigForApp#1";
+    type Response = CAccountHardware_SteamControllerGetConfig_Response;
+}
+impl crate::RpcMethod for CAccountHardware_SteamControllerSetConfig_Request {
+    const METHOD_NAME: &'static str = "AccountHardware.SetDesiredControllerConfigForApp#1";
+    type Response = CAccountHardware_SteamControllerSetConfig_Response;
+}
+impl crate::RpcMethod for CAccountHardware_VRCompatibilityCheck_Request {
+    const METHOD_NAME: &'static str = "AccountHardware.VRCompatibilityCheck#1";
+    type Response = CAccountHardware_VRCompatibilityCheck_Response;
 }

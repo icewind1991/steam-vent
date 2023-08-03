@@ -4477,24 +4477,36 @@ impl crate::RpcMethod for CInventoryClient_NewItems_Notification {
     const METHOD_NAME: &'static str = "InventoryClient.NotifyNewItems#1";
     type Response = ();
 }
-impl crate::RpcMethod for CInventory_ModifyItems_Request {
-    const METHOD_NAME: &'static str = "Inventory.SafeModifyItems#1";
+impl crate::RpcMethod for CInventory_AddItem_Request {
+    const METHOD_NAME: &'static str = "Inventory.AddPromoItem#1";
     type Response = CInventory_Response;
 }
 impl crate::RpcMethod for CInventory_CombineItemStacks_Request {
     const METHOD_NAME: &'static str = "Inventory.CombineItemStacks#1";
     type Response = CInventory_Response;
 }
-impl crate::RpcMethod for CInventory_GetInventory_Request {
-    const METHOD_NAME: &'static str = "Inventory.GetInventory#1";
-    type Response = CInventory_Response;
-}
 impl crate::RpcMethod for CInventory_ConsumeItem_Request {
     const METHOD_NAME: &'static str = "Inventory.ConsumeItem#1";
     type Response = CInventory_Response;
 }
+impl crate::RpcMethod for CInventory_ConsumePlaytime_Request {
+    const METHOD_NAME: &'static str = "Inventory.ConsumePlaytime#1";
+    type Response = CInventory_Response;
+}
 impl crate::RpcMethod for CInventory_DevSetNextDrop_Request {
     const METHOD_NAME: &'static str = "Inventory.DevSetNextDrop#1";
+    type Response = CInventory_Response;
+}
+impl crate::RpcMethod for CInventory_ExchangeItem_Request {
+    const METHOD_NAME: &'static str = "Inventory.ExchangeItem#1";
+    type Response = CInventory_Response;
+}
+impl crate::RpcMethod for CInventory_GetEligiblePromoItemDefIDs_Request {
+    const METHOD_NAME: &'static str = "Inventory.GetEligiblePromoItemDefIDs#1";
+    type Response = CInventory_GetEligiblePromoItemDefIDs_Response;
+}
+impl crate::RpcMethod for CInventory_GetInventory_Request {
+    const METHOD_NAME: &'static str = "Inventory.GetInventory#1";
     type Response = CInventory_Response;
 }
 impl crate::RpcMethod for CInventory_GetItemDefMeta_Request {
@@ -4509,8 +4521,12 @@ impl crate::RpcMethod for CInventory_InspectItem_Request {
     const METHOD_NAME: &'static str = "Inventory.InspectItem#1";
     type Response = CInventory_Response;
 }
-impl crate::RpcMethod for CInventory_ConsumePlaytime_Request {
-    const METHOD_NAME: &'static str = "Inventory.ConsumePlaytime#1";
+impl crate::RpcMethod for CInventory_ModifyItems_Request {
+    const METHOD_NAME: &'static str = "Inventory.SafeModifyItems#1";
+    type Response = CInventory_Response;
+}
+impl crate::RpcMethod for CInventory_PurchaseFinalize_Request {
+    const METHOD_NAME: &'static str = "Inventory.PurchaseFinalize#1";
     type Response = CInventory_Response;
 }
 impl crate::RpcMethod for CInventory_PurchaseInit_Request {
@@ -4520,20 +4536,4 @@ impl crate::RpcMethod for CInventory_PurchaseInit_Request {
 impl crate::RpcMethod for CInventory_SplitItemStack_Request {
     const METHOD_NAME: &'static str = "Inventory.SplitItemStack#1";
     type Response = CInventory_Response;
-}
-impl crate::RpcMethod for CInventory_ExchangeItem_Request {
-    const METHOD_NAME: &'static str = "Inventory.ExchangeItem#1";
-    type Response = CInventory_Response;
-}
-impl crate::RpcMethod for CInventory_AddItem_Request {
-    const METHOD_NAME: &'static str = "Inventory.AddPromoItem#1";
-    type Response = CInventory_Response;
-}
-impl crate::RpcMethod for CInventory_PurchaseFinalize_Request {
-    const METHOD_NAME: &'static str = "Inventory.PurchaseFinalize#1";
-    type Response = CInventory_Response;
-}
-impl crate::RpcMethod for CInventory_GetEligiblePromoItemDefIDs_Request {
-    const METHOD_NAME: &'static str = "Inventory.GetEligiblePromoItemDefIDs#1";
-    type Response = CInventory_GetEligiblePromoItemDefIDs_Response;
 }

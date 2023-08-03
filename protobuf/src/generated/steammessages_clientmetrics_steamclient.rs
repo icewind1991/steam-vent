@@ -5121,47 +5121,47 @@ struct ClientMetrics {}
 impl crate::RpcService for ClientMetrics {
     const SERVICE_NAME: &'static str = "ClientMetrics";
 }
-impl crate::RpcMethod for CClientMetrics_ReportClientArgs_Notification {
-    const METHOD_NAME: &'static str = "ClientMetrics.ReportClientArgs#1";
-    type Response = ();
-}
 impl crate::RpcMethod for CClientMetrics_AppInterfaceStats_Notification {
     const METHOD_NAME: &'static str = "ClientMetrics.ClientAppInterfaceStatsReport#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CClientMetrics_ContentValidation_Notification {
-    const METHOD_NAME: &'static str = "ClientMetrics.ClientContentValidationReport#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CClientMetrics_ContentDownloadResponse_Counts_Notification {
-    const METHOD_NAME: &'static str = "ClientMetrics.ClientDownloadResponseCodeCounts#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CClientMetrics_IPv6Connectivity_Notification {
-    const METHOD_NAME: &'static str = "ClientMetrics.ClientIPv6ConnectivityReport#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CClientMetrics_SteamPipeWorkStats_Notification {
-    const METHOD_NAME: &'static str = "ClientMetrics.SteamPipeWorkStatsReport#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CClientMetrics_ReportReactUsage_Notification {
-    const METHOD_NAME: &'static str = "ClientMetrics.ReportReactUsage#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CClientMetrics_ReportClientError_Notification {
-    const METHOD_NAME: &'static str = "ClientMetrics.ReportClientError#1";
     type Response = ();
 }
 impl crate::RpcMethod for CClientMetrics_ClientBootstrap_Notification {
     const METHOD_NAME: &'static str = "ClientMetrics.ClientBootstrapReport#1";
     type Response = ();
 }
+impl crate::RpcMethod for CClientMetrics_CloudAppSyncStats_Notification {
+    const METHOD_NAME: &'static str = "ClientMetrics.ClientCloudAppSyncStats#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CClientMetrics_ContentDownloadResponse_Counts_Notification {
+    const METHOD_NAME: &'static str = "ClientMetrics.ClientDownloadResponseCodeCounts#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CClientMetrics_ContentValidation_Notification {
+    const METHOD_NAME: &'static str = "ClientMetrics.ClientContentValidationReport#1";
+    type Response = ();
+}
 impl crate::RpcMethod for CClientMetrics_DownloadRates_Notification {
     const METHOD_NAME: &'static str = "ClientMetrics.ClientDownloadRatesReport#1";
     type Response = ();
 }
-impl crate::RpcMethod for CClientMetrics_CloudAppSyncStats_Notification {
-    const METHOD_NAME: &'static str = "ClientMetrics.ClientCloudAppSyncStats#1";
+impl crate::RpcMethod for CClientMetrics_IPv6Connectivity_Notification {
+    const METHOD_NAME: &'static str = "ClientMetrics.ClientIPv6ConnectivityReport#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CClientMetrics_ReportClientArgs_Notification {
+    const METHOD_NAME: &'static str = "ClientMetrics.ReportClientArgs#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CClientMetrics_ReportClientError_Notification {
+    const METHOD_NAME: &'static str = "ClientMetrics.ReportClientError#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CClientMetrics_ReportReactUsage_Notification {
+    const METHOD_NAME: &'static str = "ClientMetrics.ReportReactUsage#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CClientMetrics_SteamPipeWorkStats_Notification {
+    const METHOD_NAME: &'static str = "ClientMetrics.SteamPipeWorkStatsReport#1";
     type Response = ();
 }

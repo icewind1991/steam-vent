@@ -2353,6 +2353,10 @@ struct Shader {}
 impl crate::RpcService for Shader {
     const SERVICE_NAME: &'static str = "Shader";
 }
+impl crate::RpcMethod for CShader_GetBucketManifest_Request {
+    const METHOD_NAME: &'static str = "Shader.GetBucketManifest#1";
+    type Response = CShader_GetBucketManifest_Response;
+}
 impl crate::RpcMethod for CShader_GetStaleBucket_Request {
     const METHOD_NAME: &'static str = "Shader.GetStaleBucket#1";
     type Response = CShader_GetStaleBucket_Response;
@@ -2364,10 +2368,6 @@ impl crate::RpcMethod for CShader_RegisterShader_Request {
 impl crate::RpcMethod for CShader_ReportExternalBuild_Request {
     const METHOD_NAME: &'static str = "Shader.ReportExternalBuild#1";
     type Response = CShader_ReportExternalBuild_Response;
-}
-impl crate::RpcMethod for CShader_GetBucketManifest_Request {
-    const METHOD_NAME: &'static str = "Shader.GetBucketManifest#1";
-    type Response = CShader_GetBucketManifest_Response;
 }
 impl crate::RpcMethod for CShader_SendShader_Request {
     const METHOD_NAME: &'static str = "Shader.SendShader#1";

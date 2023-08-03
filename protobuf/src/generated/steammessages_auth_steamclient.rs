@@ -10031,29 +10031,65 @@ struct CloudGaming {}
 impl crate::RpcService for CloudGaming {
     const SERVICE_NAME: &'static str = "CloudGaming";
 }
-impl crate::RpcMethod for CAuthentication_GetPasswordRSAPublicKey_Request {
-    const METHOD_NAME: &'static str = "Authentication.GetPasswordRSAPublicKey#1";
-    type Response = CAuthentication_GetPasswordRSAPublicKey_Response;
+impl crate::RpcMethod for CAuthenticationSupport_GetTokenHistory_Request {
+    const METHOD_NAME: &'static str = "AuthenticationSupport.GetTokenHistory#1";
+    type Response = CAuthenticationSupport_GetTokenHistory_Response;
 }
 impl crate::RpcMethod for CAuthenticationSupport_QueryRefreshTokenByID_Request {
     const METHOD_NAME: &'static str = "AuthenticationSupport.QueryRefreshTokenByID#1";
     type Response = CAuthenticationSupport_QueryRefreshTokenByID_Response;
 }
-impl crate::RpcMethod for CAuthentication_PollAuthSessionStatus_Request {
-    const METHOD_NAME: &'static str = "Authentication.PollAuthSessionStatus#1";
-    type Response = CAuthentication_PollAuthSessionStatus_Response;
+impl crate::RpcMethod for CAuthenticationSupport_QueryRefreshTokensByAccount_Request {
+    const METHOD_NAME: &'static str = "AuthenticationSupport.QueryRefreshTokensByAccount#1";
+    type Response = CAuthenticationSupport_QueryRefreshTokensByAccount_Response;
 }
 impl crate::RpcMethod for CAuthenticationSupport_RevokeToken_Request {
     const METHOD_NAME: &'static str = "AuthenticationSupport.RevokeToken#1";
     type Response = CAuthenticationSupport_RevokeToken_Response;
 }
-impl crate::RpcMethod for CCloudGaming_CreateNonce_Request {
-    const METHOD_NAME: &'static str = "CloudGaming.CreateNonce#1";
-    type Response = CCloudGaming_CreateNonce_Response;
+impl crate::RpcMethod for CAuthentication_AccessToken_GenerateForApp_Request {
+    const METHOD_NAME: &'static str = "Authentication.GenerateAccessTokenForApp#1";
+    type Response = CAuthentication_AccessToken_GenerateForApp_Response;
+}
+impl crate::RpcMethod for CAuthentication_BeginAuthSessionViaCredentials_Request {
+    const METHOD_NAME: &'static str = "Authentication.BeginAuthSessionViaCredentials#1";
+    type Response = CAuthentication_BeginAuthSessionViaCredentials_Response;
+}
+impl crate::RpcMethod for CAuthentication_BeginAuthSessionViaQR_Request {
+    const METHOD_NAME: &'static str = "Authentication.BeginAuthSessionViaQR#1";
+    type Response = CAuthentication_BeginAuthSessionViaQR_Response;
+}
+impl crate::RpcMethod for CAuthentication_GetAuthSessionInfo_Request {
+    const METHOD_NAME: &'static str = "Authentication.GetAuthSessionInfo#1";
+    type Response = CAuthentication_GetAuthSessionInfo_Response;
+}
+impl crate::RpcMethod for CAuthentication_GetAuthSessionsForAccount_Request {
+    const METHOD_NAME: &'static str = "Authentication.GetAuthSessionsForAccount#1";
+    type Response = CAuthentication_GetAuthSessionsForAccount_Response;
+}
+impl crate::RpcMethod for CAuthentication_GetPasswordRSAPublicKey_Request {
+    const METHOD_NAME: &'static str = "Authentication.GetPasswordRSAPublicKey#1";
+    type Response = CAuthentication_GetPasswordRSAPublicKey_Response;
 }
 impl crate::RpcMethod for CAuthentication_MigrateMobileSession_Request {
     const METHOD_NAME: &'static str = "Authentication.MigrateMobileSession#1";
     type Response = CAuthentication_MigrateMobileSession_Response;
+}
+impl crate::RpcMethod for CAuthentication_PollAuthSessionStatus_Request {
+    const METHOD_NAME: &'static str = "Authentication.PollAuthSessionStatus#1";
+    type Response = CAuthentication_PollAuthSessionStatus_Response;
+}
+impl crate::RpcMethod for CAuthentication_RefreshToken_Enumerate_Request {
+    const METHOD_NAME: &'static str = "Authentication.EnumerateTokens#1";
+    type Response = CAuthentication_RefreshToken_Enumerate_Response;
+}
+impl crate::RpcMethod for CAuthentication_RefreshToken_Revoke_Request {
+    const METHOD_NAME: &'static str = "Authentication.RevokeRefreshToken#1";
+    type Response = CAuthentication_RefreshToken_Revoke_Response;
+}
+impl crate::RpcMethod for CAuthentication_Token_Revoke_Request {
+    const METHOD_NAME: &'static str = "Authentication.RevokeToken#1";
+    type Response = CAuthentication_Token_Revoke_Response;
 }
 impl crate::RpcMethod
 for CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request {
@@ -10064,47 +10100,11 @@ impl crate::RpcMethod for CAuthentication_UpdateAuthSessionWithSteamGuardCode_Re
     const METHOD_NAME: &'static str = "Authentication.UpdateAuthSessionWithSteamGuardCode#1";
     type Response = CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response;
 }
-impl crate::RpcMethod for CAuthentication_Token_Revoke_Request {
-    const METHOD_NAME: &'static str = "Authentication.RevokeToken#1";
-    type Response = CAuthentication_Token_Revoke_Response;
+impl crate::RpcMethod for CCloudGaming_CreateNonce_Request {
+    const METHOD_NAME: &'static str = "CloudGaming.CreateNonce#1";
+    type Response = CCloudGaming_CreateNonce_Response;
 }
 impl crate::RpcMethod for CCloudGaming_GetTimeRemaining_Request {
     const METHOD_NAME: &'static str = "CloudGaming.GetTimeRemaining#1";
     type Response = CCloudGaming_GetTimeRemaining_Response;
-}
-impl crate::RpcMethod for CAuthentication_GetAuthSessionsForAccount_Request {
-    const METHOD_NAME: &'static str = "Authentication.GetAuthSessionsForAccount#1";
-    type Response = CAuthentication_GetAuthSessionsForAccount_Response;
-}
-impl crate::RpcMethod for CAuthenticationSupport_GetTokenHistory_Request {
-    const METHOD_NAME: &'static str = "AuthenticationSupport.GetTokenHistory#1";
-    type Response = CAuthenticationSupport_GetTokenHistory_Response;
-}
-impl crate::RpcMethod for CAuthentication_BeginAuthSessionViaQR_Request {
-    const METHOD_NAME: &'static str = "Authentication.BeginAuthSessionViaQR#1";
-    type Response = CAuthentication_BeginAuthSessionViaQR_Response;
-}
-impl crate::RpcMethod for CAuthentication_BeginAuthSessionViaCredentials_Request {
-    const METHOD_NAME: &'static str = "Authentication.BeginAuthSessionViaCredentials#1";
-    type Response = CAuthentication_BeginAuthSessionViaCredentials_Response;
-}
-impl crate::RpcMethod for CAuthentication_GetAuthSessionInfo_Request {
-    const METHOD_NAME: &'static str = "Authentication.GetAuthSessionInfo#1";
-    type Response = CAuthentication_GetAuthSessionInfo_Response;
-}
-impl crate::RpcMethod for CAuthentication_RefreshToken_Enumerate_Request {
-    const METHOD_NAME: &'static str = "Authentication.EnumerateTokens#1";
-    type Response = CAuthentication_RefreshToken_Enumerate_Response;
-}
-impl crate::RpcMethod for CAuthenticationSupport_QueryRefreshTokensByAccount_Request {
-    const METHOD_NAME: &'static str = "AuthenticationSupport.QueryRefreshTokensByAccount#1";
-    type Response = CAuthenticationSupport_QueryRefreshTokensByAccount_Response;
-}
-impl crate::RpcMethod for CAuthentication_RefreshToken_Revoke_Request {
-    const METHOD_NAME: &'static str = "Authentication.RevokeRefreshToken#1";
-    type Response = CAuthentication_RefreshToken_Revoke_Response;
-}
-impl crate::RpcMethod for CAuthentication_AccessToken_GenerateForApp_Request {
-    const METHOD_NAME: &'static str = "Authentication.GenerateAccessTokenForApp#1";
-    type Response = CAuthentication_AccessToken_GenerateForApp_Response;
 }

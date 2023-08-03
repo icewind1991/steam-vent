@@ -908,13 +908,13 @@ struct CommunityLinkFilter {}
 impl crate::RpcService for CommunityLinkFilter {
     const SERVICE_NAME: &'static str = "CommunityLinkFilter";
 }
-impl crate::RpcMethod for CCommunity_GetLinkFilterHashes_Request {
-    const METHOD_NAME: &'static str = "CommunityLinkFilter.GetLinkFilterHashes#1";
-    type Response = CCommunity_GetLinkFilterHashes_Response;
-}
 impl crate::RpcMethod for CCommunity_GetLinkFilterHashPrefixes_Request {
     const METHOD_NAME: &'static str = "CommunityLinkFilter.GetLinkFilterHashPrefixes#1";
     type Response = CCommunity_GetLinkFilterHashPrefixes_Response;
+}
+impl crate::RpcMethod for CCommunity_GetLinkFilterHashes_Request {
+    const METHOD_NAME: &'static str = "CommunityLinkFilter.GetLinkFilterHashes#1";
+    type Response = CCommunity_GetLinkFilterHashes_Response;
 }
 impl crate::RpcMethod for CCommunity_GetLinkFilterListVersion_Request {
     const METHOD_NAME: &'static str = "CommunityLinkFilter.GetLinkFilterListVersion#1";

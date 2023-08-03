@@ -41,48 +41,40 @@ struct RemoteClientSteamClient {}
 impl crate::RpcService for RemoteClientSteamClient {
     const SERVICE_NAME: &'static str = "RemoteClientSteamClient";
 }
-impl crate::RpcMethod for CRemoteClient_DeleteRemotePlayTogetherInvitation_Request {
-    const METHOD_NAME: &'static str = "RemoteClient.DeleteRemotePlayTogetherInvitation#1";
-    type Response = CRemoteClient_DeleteRemotePlayTogetherInvitation_Response;
-}
 impl crate::RpcMethod for CRemoteClient_AllocateRelayServer_Request {
     const METHOD_NAME: &'static str = "RemoteClient.AllocateRelayServer#1";
     type Response = CRemoteClient_AllocateRelayServer_Response;
-}
-impl crate::RpcMethod for CRemoteClient_GetPairingInfo_Request {
-    const METHOD_NAME: &'static str = "RemoteClient.GetPairingInfo#1";
-    type Response = CRemoteClient_GetPairingInfo_Response;
-}
-impl crate::RpcMethod for CRemotePlayTogether_Notification {
-    const METHOD_NAME: &'static str = "RemoteClient.SendRemotePlayTogetherPacket#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CRemoteClient_RemotePacket_Notification {
-    const METHOD_NAME: &'static str = "RemoteClientSteamClient.NotifyRemotePacket#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CRemotePlay_SessionStarted_Request {
-    const METHOD_NAME: &'static str = "RemoteClient.SendRemotePlaySessionStarted#1";
-    type Response = CRemotePlay_SessionStarted_Response;
 }
 impl crate::RpcMethod for CRemoteClient_AllocateSDR_Request {
     const METHOD_NAME: &'static str = "RemoteClient.AllocateSDR#1";
     type Response = CRemoteClient_AllocateSDR_Response;
 }
+impl crate::RpcMethod for CRemoteClient_AllocateTURNServer_Request {
+    const METHOD_NAME: &'static str = "RemoteClient.AllocateTURNServer#1";
+    type Response = CRemoteClient_AllocateTURNServer_Response;
+}
 impl crate::RpcMethod for CRemoteClient_CreateRemotePlayTogetherInvitation_Request {
     const METHOD_NAME: &'static str = "RemoteClient.CreateRemotePlayTogetherInvitation#1";
     type Response = CRemoteClient_CreateRemotePlayTogetherInvitation_Response;
+}
+impl crate::RpcMethod for CRemoteClient_DeleteRemotePlayTogetherInvitation_Request {
+    const METHOD_NAME: &'static str = "RemoteClient.DeleteRemotePlayTogetherInvitation#1";
+    type Response = CRemoteClient_DeleteRemotePlayTogetherInvitation_Response;
+}
+impl crate::RpcMethod for CRemoteClient_GetPairingInfo_Request {
+    const METHOD_NAME: &'static str = "RemoteClient.GetPairingInfo#1";
+    type Response = CRemoteClient_GetPairingInfo_Response;
+}
+impl crate::RpcMethod for CRemoteClient_Online_Notification {
+    const METHOD_NAME: &'static str = "RemoteClient.NotifyOnline#1";
+    type Response = ();
 }
 impl crate::RpcMethod for CRemoteClient_RegisterStatusUpdate_Notification {
     const METHOD_NAME: &'static str = "RemoteClientSteamClient.NotifyRegisterStatusUpdate#1";
     type Response = ();
 }
-impl crate::RpcMethod for CRemoteClient_UnregisterStatusUpdate_Notification {
-    const METHOD_NAME: &'static str = "RemoteClientSteamClient.NotifyUnregisterStatusUpdate#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CRemoteClient_Online_Notification {
-    const METHOD_NAME: &'static str = "RemoteClient.NotifyOnline#1";
+impl crate::RpcMethod for CRemoteClient_RemotePacket_Notification {
+    const METHOD_NAME: &'static str = "RemoteClientSteamClient.NotifyRemotePacket#1";
     type Response = ();
 }
 impl crate::RpcMethod for CRemoteClient_ReplyPacket_Notification {
@@ -97,11 +89,19 @@ impl crate::RpcMethod for CRemoteClient_SteamToSteam_Notification {
     const METHOD_NAME: &'static str = "RemoteClient.SendSteamToSteamPacket#1";
     type Response = ();
 }
+impl crate::RpcMethod for CRemoteClient_UnregisterStatusUpdate_Notification {
+    const METHOD_NAME: &'static str = "RemoteClientSteamClient.NotifyUnregisterStatusUpdate#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CRemotePlayTogether_Notification {
+    const METHOD_NAME: &'static str = "RemoteClient.SendRemotePlayTogetherPacket#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CRemotePlay_SessionStarted_Request {
+    const METHOD_NAME: &'static str = "RemoteClient.SendRemotePlaySessionStarted#1";
+    type Response = CRemotePlay_SessionStarted_Response;
+}
 impl crate::RpcMethod for CRemotePlay_SessionStopped_Notification {
     const METHOD_NAME: &'static str = "RemoteClient.SendRemotePlaySessionStopped#1";
     type Response = ();
-}
-impl crate::RpcMethod for CRemoteClient_AllocateTURNServer_Request {
-    const METHOD_NAME: &'static str = "RemoteClient.AllocateTURNServer#1";
-    type Response = CRemoteClient_AllocateTURNServer_Response;
 }

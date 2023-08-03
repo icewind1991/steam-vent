@@ -1041,6 +1041,9 @@ impl crate::RpcMessage for CMsgClientSiteLicenseCheckout {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientSiteLicenseCheckout {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseCheckout;
+}
 impl crate::RpcMessage for CMsgClientSiteLicenseCheckoutResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -1053,6 +1056,9 @@ impl crate::RpcMessage for CMsgClientSiteLicenseCheckoutResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientSiteLicenseCheckoutResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseCheckoutResponse;
 }
 impl crate::RpcMessage for CMsgClientSiteLicenseGetAvailableSeats {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -1067,6 +1073,9 @@ impl crate::RpcMessage for CMsgClientSiteLicenseGetAvailableSeats {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientSiteLicenseGetAvailableSeats {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseGetAvailableSeats;
+}
 impl crate::RpcMessage for CMsgClientSiteLicenseGetAvailableSeatsResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -1079,6 +1088,9 @@ impl crate::RpcMessage for CMsgClientSiteLicenseGetAvailableSeatsResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientSiteLicenseGetAvailableSeatsResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseGetAvailableSeatsResponse;
 }
 impl crate::RpcMessage for CMsgClientSiteLicenseGetContentCacheInfo {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -1093,6 +1105,9 @@ impl crate::RpcMessage for CMsgClientSiteLicenseGetContentCacheInfo {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientSiteLicenseGetContentCacheInfo {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseGetContentCacheInfo;
+}
 impl crate::RpcMessage for CMsgClientSiteLicenseGetContentCacheInfoResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -1105,4 +1120,7 @@ impl crate::RpcMessage for CMsgClientSiteLicenseGetContentCacheInfoResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientSiteLicenseGetContentCacheInfoResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseGetContentCacheInfoResponse;
 }

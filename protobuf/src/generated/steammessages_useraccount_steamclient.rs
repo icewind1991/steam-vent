@@ -5428,25 +5428,13 @@ struct EmbeddedClient {}
 impl crate::RpcService for EmbeddedClient {
     const SERVICE_NAME: &'static str = "EmbeddedClient";
 }
-impl crate::RpcMethod for CEmbeddedClient_AuthorizeCurrentDevice_Request {
-    const METHOD_NAME: &'static str = "EmbeddedClient.AuthorizeCurrentDevice#1";
-    type Response = CEmbeddedClient_AuthorizeDevice_Response;
-}
-impl crate::RpcMethod for CUserAccount_ViewFriendInviteToken_Request {
-    const METHOD_NAME: &'static str = "UserAccount.ViewFriendInviteToken#1";
-    type Response = CUserAccount_ViewFriendInviteToken_Response;
-}
 impl crate::RpcMethod for CAccountLinking_GetLinkedAccountInfo_Request {
     const METHOD_NAME: &'static str = "AccountLinking.GetLinkedAccountInfo#1";
     type Response = CAccountLinking_GetLinkedAccountInfo_Response;
 }
-impl crate::RpcMethod for CUserAccount_GetUserCountry_Request {
-    const METHOD_NAME: &'static str = "UserAccount.GetUserCountry#1";
-    type Response = CUserAccount_GetUserCountry_Response;
-}
-impl crate::RpcMethod for CUserAccount_GetAvailableValveDiscountPromotions_Request {
-    const METHOD_NAME: &'static str = "UserAccount.GetAvailableValveDiscountPromotions#1";
-    type Response = CUserAccount_GetAvailableValveDiscountPromotions_Response;
+impl crate::RpcMethod for CEmbeddedClient_AuthorizeCurrentDevice_Request {
+    const METHOD_NAME: &'static str = "EmbeddedClient.AuthorizeCurrentDevice#1";
+    type Response = CEmbeddedClient_AuthorizeDevice_Response;
 }
 impl crate::RpcMethod for CUserAccount_CancelLicenseForApp_Request {
     const METHOD_NAME: &'static str = "UserAccount.CancelLicenseForApp#1";
@@ -5456,27 +5444,39 @@ impl crate::RpcMethod for CUserAccount_CreateFriendInviteToken_Request {
     const METHOD_NAME: &'static str = "UserAccount.CreateFriendInviteToken#1";
     type Response = CUserAccount_CreateFriendInviteToken_Response;
 }
-impl crate::RpcMethod for CUserAccount_GetFriendInviteTokens_Request {
-    const METHOD_NAME: &'static str = "UserAccount.GetFriendInviteTokens#1";
-    type Response = CUserAccount_GetFriendInviteTokens_Response;
-}
 impl crate::RpcMethod for CUserAccount_GetAccountLinkStatus_Request {
     const METHOD_NAME: &'static str = "UserAccount.GetAccountLinkStatus#1";
     type Response = CUserAccount_GetAccountLinkStatus_Response;
 }
-impl crate::RpcMethod for CUserAccount_RevokeFriendInviteToken_Request {
-    const METHOD_NAME: &'static str = "UserAccount.RevokeFriendInviteToken#1";
-    type Response = CUserAccount_RevokeFriendInviteToken_Response;
-}
-impl crate::RpcMethod for CUserAccount_RedeemFriendInviteToken_Request {
-    const METHOD_NAME: &'static str = "UserAccount.RedeemFriendInviteToken#1";
-    type Response = CUserAccount_RedeemFriendInviteToken_Response;
+impl crate::RpcMethod for CUserAccount_GetAvailableValveDiscountPromotions_Request {
+    const METHOD_NAME: &'static str = "UserAccount.GetAvailableValveDiscountPromotions#1";
+    type Response = CUserAccount_GetAvailableValveDiscountPromotions_Response;
 }
 impl crate::RpcMethod for CUserAccount_GetClientWalletDetails_Request {
     const METHOD_NAME: &'static str = "UserAccount.GetClientWalletDetails#1";
     type Response = CUserAccount_GetWalletDetails_Response;
 }
+impl crate::RpcMethod for CUserAccount_GetFriendInviteTokens_Request {
+    const METHOD_NAME: &'static str = "UserAccount.GetFriendInviteTokens#1";
+    type Response = CUserAccount_GetFriendInviteTokens_Response;
+}
+impl crate::RpcMethod for CUserAccount_GetUserCountry_Request {
+    const METHOD_NAME: &'static str = "UserAccount.GetUserCountry#1";
+    type Response = CUserAccount_GetUserCountry_Response;
+}
+impl crate::RpcMethod for CUserAccount_RedeemFriendInviteToken_Request {
+    const METHOD_NAME: &'static str = "UserAccount.RedeemFriendInviteToken#1";
+    type Response = CUserAccount_RedeemFriendInviteToken_Response;
+}
 impl crate::RpcMethod for CUserAccount_RegisterCompatTool_Request {
     const METHOD_NAME: &'static str = "UserAccount.RegisterCompatTool#1";
     type Response = CUserAccount_RegisterCompatTool_Response;
+}
+impl crate::RpcMethod for CUserAccount_RevokeFriendInviteToken_Request {
+    const METHOD_NAME: &'static str = "UserAccount.RevokeFriendInviteToken#1";
+    type Response = CUserAccount_RevokeFriendInviteToken_Response;
+}
+impl crate::RpcMethod for CUserAccount_ViewFriendInviteToken_Request {
+    const METHOD_NAME: &'static str = "UserAccount.ViewFriendInviteToken#1";
+    type Response = CUserAccount_ViewFriendInviteToken_Response;
 }

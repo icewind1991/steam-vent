@@ -496,11 +496,11 @@ struct GameNetworking {}
 impl crate::RpcService for GameNetworking {
     const SERVICE_NAME: &'static str = "GameNetworking";
 }
-impl crate::RpcMethod for CGameNetworking_ReleaseFakeIP_Notification {
-    const METHOD_NAME: &'static str = "GameNetworking.NotifyReleaseFakeIP#1";
-    type Response = ();
-}
 impl crate::RpcMethod for CGameNetworking_AllocateFakeIP_Request {
     const METHOD_NAME: &'static str = "GameNetworking.AllocateFakeIP#1";
     type Response = CGameNetworking_AllocateFakeIP_Response;
+}
+impl crate::RpcMethod for CGameNetworking_ReleaseFakeIP_Notification {
+    const METHOD_NAME: &'static str = "GameNetworking.NotifyReleaseFakeIP#1";
+    type Response = ();
 }

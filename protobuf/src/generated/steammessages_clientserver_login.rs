@@ -5525,6 +5525,9 @@ impl crate::RpcMessage for CMsgClientHeartBeat {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientHeartBeat {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientHeartBeat;
+}
 impl crate::RpcMessage for CMsgClientServerTimestampRequest {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -5538,6 +5541,9 @@ impl crate::RpcMessage for CMsgClientServerTimestampRequest {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientServerTimestampRequest {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientServerTimestampRequest;
+}
 impl crate::RpcMessage for CMsgClientServerTimestampResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -5550,6 +5556,9 @@ impl crate::RpcMessage for CMsgClientServerTimestampResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientServerTimestampResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientServerTimestampResponse;
 }
 impl crate::RpcMessage for CMsgClientSecret {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -5577,6 +5586,9 @@ impl crate::RpcMessage for CMsgClientHello {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientHello {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientHello;
+}
 impl crate::RpcMessage for CMsgClientLogon {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -5589,6 +5601,9 @@ impl crate::RpcMessage for CMsgClientLogon {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientLogon {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLogon;
 }
 impl crate::RpcMessage for CMsgClientLogonResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -5603,6 +5618,9 @@ impl crate::RpcMessage for CMsgClientLogonResponse {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientLogonResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLogOnResponse;
+}
 impl crate::RpcMessage for CMsgClientRequestWebAPIAuthenticateUserNonce {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -5615,6 +5633,9 @@ impl crate::RpcMessage for CMsgClientRequestWebAPIAuthenticateUserNonce {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientRequestWebAPIAuthenticateUserNonce {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientRequestWebAPIAuthenticateUserNonce;
 }
 impl crate::RpcMessage for CMsgClientRequestWebAPIAuthenticateUserNonceResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -5629,6 +5650,9 @@ impl crate::RpcMessage for CMsgClientRequestWebAPIAuthenticateUserNonceResponse 
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientRequestWebAPIAuthenticateUserNonceResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientRequestWebAPIAuthenticateUserNonceResponse;
+}
 impl crate::RpcMessage for CMsgClientLogOff {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -5641,6 +5665,9 @@ impl crate::RpcMessage for CMsgClientLogOff {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientLogOff {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLogOff;
 }
 impl crate::RpcMessage for CMsgClientLoggedOff {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -5655,6 +5682,9 @@ impl crate::RpcMessage for CMsgClientLoggedOff {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientLoggedOff {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLoggedOff;
+}
 impl crate::RpcMessage for CMsgClientNewLoginKey {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -5667,6 +5697,9 @@ impl crate::RpcMessage for CMsgClientNewLoginKey {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientNewLoginKey {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientNewLoginKey;
 }
 impl crate::RpcMessage for CMsgClientNewLoginKeyAccepted {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -5681,6 +5714,9 @@ impl crate::RpcMessage for CMsgClientNewLoginKeyAccepted {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientNewLoginKeyAccepted {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientNewLoginKeyAccepted;
+}
 impl crate::RpcMessage for CMsgClientAccountInfo {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -5693,6 +5729,9 @@ impl crate::RpcMessage for CMsgClientAccountInfo {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientAccountInfo {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientAccountInfo;
 }
 impl crate::RpcMessage for CMsgClientChallengeRequest {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -5707,6 +5746,9 @@ impl crate::RpcMessage for CMsgClientChallengeRequest {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientChallengeRequest {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientChallengeRequest;
+}
 impl crate::RpcMessage for CMsgClientChallengeResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -5719,4 +5761,7 @@ impl crate::RpcMessage for CMsgClientChallengeResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientChallengeResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientChallengeResponse;
 }

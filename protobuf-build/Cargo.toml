@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 protobuf-codegen = "=3.2.0"
+protobuf-parse = "=3.2.0"
 protobuf = "=3.2.0"
 walkdir = "2.3.3"
 clap = { version = "4.3.19", features = ["derive"] }
@@ -12,3 +13,4 @@ quote = "1.0.32"
 prettyplease = "0.2.12"
 syn = { version = "2.0.28", features = ["full"] }
 proc-macro2 = "1.0.66"
+ahash = { version = "0.8.3", default-features = false, features = ["std"] }

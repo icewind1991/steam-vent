@@ -2872,12 +2872,12 @@ impl crate::RpcMethod for CDataPublisher_AddVRDeviceInfo_Request {
     const METHOD_NAME: &'static str = "DataPublisher.AddVRDeviceInfo#1";
     type Response = CDataPublisher_AddVRDeviceInfo_Response;
 }
-impl crate::RpcMethod for CDataPublisher_ClientUpdateAppJob_Notification {
-    const METHOD_NAME: &'static str = "DataPublisher.ClientUpdateAppJobReport#1";
-    type Response = ();
-}
 impl crate::RpcMethod for CDataPublisher_ClientContentCorruptionReport_Notification {
     const METHOD_NAME: &'static str = "DataPublisher.ClientContentCorruptionReport#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CDataPublisher_ClientUpdateAppJob_Notification {
+    const METHOD_NAME: &'static str = "DataPublisher.ClientUpdateAppJobReport#1";
     type Response = ();
 }
 impl crate::RpcMethod for CDataPublisher_GetVRDeviceInfo_Request {

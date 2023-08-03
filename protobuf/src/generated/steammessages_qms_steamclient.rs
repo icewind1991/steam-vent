@@ -2590,6 +2590,10 @@ struct QueuedMatchmakingGameHost {}
 impl crate::RpcService for QueuedMatchmakingGameHost {
     const SERVICE_NAME: &'static str = "QueuedMatchmakingGameHost";
 }
+impl crate::RpcMethod for CQueuedMatchmakingGameHost_EndGame_Request {
+    const METHOD_NAME: &'static str = "QueuedMatchmakingGameHost.EndGame#1";
+    type Response = CQueuedMatchmakingGameHost_EndGame_Response;
+}
 impl crate::RpcMethod for CQueuedMatchmakingGameHost_SearchForPlayers_Request {
     const METHOD_NAME: &'static str = "QueuedMatchmakingGameHost.SearchForPlayers#1";
     type Response = CQueuedMatchmakingGameHost_SearchForPlayers_Response;
@@ -2601,8 +2605,4 @@ impl crate::RpcMethod for CQueuedMatchmakingGameHost_SubmitPlayerResult_Request 
 impl crate::RpcMethod for CQueuedMatchmaking_SearchForGame_Request {
     const METHOD_NAME: &'static str = "QueuedMatchmaking.SearchForGame#1";
     type Response = CQueuedMatchmaking_SearchForGame_Response;
-}
-impl crate::RpcMethod for CQueuedMatchmakingGameHost_EndGame_Request {
-    const METHOD_NAME: &'static str = "QueuedMatchmakingGameHost.EndGame#1";
-    type Response = CQueuedMatchmakingGameHost_EndGame_Response;
 }

@@ -6155,6 +6155,9 @@ impl crate::RpcMessage for CMsgClientUCMAddScreenshot {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientUCMAddScreenshot {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMAddScreenshot;
+}
 impl crate::RpcMessage for CMsgClientUCMAddScreenshotResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -6167,6 +6170,9 @@ impl crate::RpcMessage for CMsgClientUCMAddScreenshotResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientUCMAddScreenshotResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMAddScreenshotResponse;
 }
 impl crate::RpcMessage for CMsgClientUCMDeleteScreenshot {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -6181,6 +6187,9 @@ impl crate::RpcMessage for CMsgClientUCMDeleteScreenshot {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientUCMDeleteScreenshot {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMDeleteScreenshot;
+}
 impl crate::RpcMessage for CMsgClientUCMDeleteScreenshotResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -6193,6 +6202,9 @@ impl crate::RpcMessage for CMsgClientUCMDeleteScreenshotResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientUCMDeleteScreenshotResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMDeleteScreenshotResponse;
 }
 impl crate::RpcMessage for CMsgClientUCMPublishFile {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -6207,6 +6219,9 @@ impl crate::RpcMessage for CMsgClientUCMPublishFile {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientUCMPublishFile {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMPublishFile;
+}
 impl crate::RpcMessage for CMsgClientUCMPublishFileResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -6219,6 +6234,9 @@ impl crate::RpcMessage for CMsgClientUCMPublishFileResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientUCMPublishFileResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMPublishFileResponse;
 }
 impl crate::RpcMessage for CMsgClientUCMUpdatePublishedFile {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -6233,6 +6251,9 @@ impl crate::RpcMessage for CMsgClientUCMUpdatePublishedFile {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientUCMUpdatePublishedFile {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMUpdatePublishedFile;
+}
 impl crate::RpcMessage for CMsgClientUCMUpdatePublishedFileResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -6245,6 +6266,9 @@ impl crate::RpcMessage for CMsgClientUCMUpdatePublishedFileResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientUCMUpdatePublishedFileResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMUpdatePublishedFileResponse;
 }
 impl crate::RpcMessage for CMsgClientUCMDeletePublishedFile {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -6259,6 +6283,9 @@ impl crate::RpcMessage for CMsgClientUCMDeletePublishedFile {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientUCMDeletePublishedFile {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMDeletePublishedFile;
+}
 impl crate::RpcMessage for CMsgClientUCMDeletePublishedFileResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -6271,6 +6298,9 @@ impl crate::RpcMessage for CMsgClientUCMDeletePublishedFileResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientUCMDeletePublishedFileResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMDeletePublishedFileResponse;
 }
 impl crate::RpcMessage for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -6285,6 +6315,9 @@ impl crate::RpcMessage for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates 
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdates;
+}
 impl crate::RpcMessage for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -6298,6 +6331,10 @@ impl crate::RpcMessage for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesR
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind
+for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse;
+}
 impl crate::RpcMessage for CMsgClientUCMPublishedFileUpdated {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -6310,6 +6347,9 @@ impl crate::RpcMessage for CMsgClientUCMPublishedFileUpdated {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientUCMPublishedFileUpdated {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMPublishedFileUpdated;
 }
 impl crate::RpcMessage for CMsgClientWorkshopItemChangesRequest {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -6350,6 +6390,9 @@ impl crate::RpcMessage for CMsgClientUCMSetUserPublishedFileAction {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientUCMSetUserPublishedFileAction {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMSetUserPublishedFileAction;
+}
 impl crate::RpcMessage for CMsgClientUCMSetUserPublishedFileActionResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -6362,6 +6405,9 @@ impl crate::RpcMessage for CMsgClientUCMSetUserPublishedFileActionResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientUCMSetUserPublishedFileActionResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMSetUserPublishedFileActionResponse;
 }
 impl crate::RpcMessage for CMsgClientUCMEnumeratePublishedFilesByUserAction {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -6376,6 +6422,9 @@ impl crate::RpcMessage for CMsgClientUCMEnumeratePublishedFilesByUserAction {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientUCMEnumeratePublishedFilesByUserAction {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMEnumeratePublishedFilesByUserAction;
+}
 impl crate::RpcMessage for CMsgClientUCMEnumeratePublishedFilesByUserActionResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -6389,6 +6438,10 @@ impl crate::RpcMessage for CMsgClientUCMEnumeratePublishedFilesByUserActionRespo
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind
+for CMsgClientUCMEnumeratePublishedFilesByUserActionResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientUCMEnumeratePublishedFilesByUserActionResponse;
+}
 impl crate::RpcMessage for CMsgClientScreenshotsChanged {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -6401,4 +6454,7 @@ impl crate::RpcMessage for CMsgClientScreenshotsChanged {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientScreenshotsChanged {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientScreenshotsChanged;
 }

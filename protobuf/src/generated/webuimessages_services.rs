@@ -2458,43 +2458,43 @@ struct TransportAuth {}
 impl crate::RpcService for TransportAuth {
     const SERVICE_NAME: &'static str = "TransportAuth";
 }
-impl crate::RpcMethod for CTransportValidation_NotifySyntheticEvent_Notification {
-    const METHOD_NAME: &'static str = "TransportValidation.NotifySyntheticEvent#1";
-    type Response = WebUINoResponse;
-}
-impl crate::RpcMethod for CTransportValidation_NotifyNumber_Notification {
-    const METHOD_NAME: &'static str = "TransportValidation.NotifyNumber#1";
-    type Response = WebUINoResponse;
+impl crate::RpcMethod for CTransportAuth_Authenticate_Request {
+    const METHOD_NAME: &'static str = "TransportAuth.Authenticate#1";
+    type Response = CTransportAuth_Authenticate_Response;
 }
 impl crate::RpcMethod for CTransportValidationClient_AddNumbers_Request {
     const METHOD_NAME: &'static str = "TransportValidationClient.AddNumbers#1";
     type Response = CTransportValidationClient_AddNumbers_Response;
 }
-impl crate::RpcMethod for CTransportValidation_TriggerSyntheticEvents_Request {
-    const METHOD_NAME: &'static str = "TransportValidation.TriggerSyntheticEvents#1";
-    type Response = CTransportValidation_TriggerSyntheticEvents_Response;
-}
-impl crate::RpcMethod for CTransportValidation_GetLastNotifyNumber_Request {
-    const METHOD_NAME: &'static str = "TransportValidation.GetLastNotifyNumber#1";
-    type Response = CTransportValidation_GetLastNotifyNumber_Response;
-}
 impl crate::RpcMethod for CTransportValidation_AddNumbers_Request {
     const METHOD_NAME: &'static str = "TransportValidation.AddNumbers#1";
     type Response = CTransportValidation_AddNumbers_Response;
-}
-impl crate::RpcMethod for CTransportValidation_NotifyText_Notification {
-    const METHOD_NAME: &'static str = "TransportValidation.NotifyText#1";
-    type Response = WebUINoResponse;
 }
 impl crate::RpcMethod for CTransportValidation_AppendToString_Request {
     const METHOD_NAME: &'static str = "TransportValidation.AppendToString#1";
     type Response = CTransportValidation_AppendToString_Response;
 }
-impl crate::RpcMethod for CTransportAuth_Authenticate_Request {
-    const METHOD_NAME: &'static str = "TransportAuth.Authenticate#1";
-    type Response = CTransportAuth_Authenticate_Response;
-}
 impl crate::RpcMethod for CTransportValidation_CountOrderedBytes_Request {
     const METHOD_NAME: &'static str = "TransportValidation.CountOrderedBytes#1";
     type Response = CTransportValidation_CountOrderedBytes_Response;
+}
+impl crate::RpcMethod for CTransportValidation_GetLastNotifyNumber_Request {
+    const METHOD_NAME: &'static str = "TransportValidation.GetLastNotifyNumber#1";
+    type Response = CTransportValidation_GetLastNotifyNumber_Response;
+}
+impl crate::RpcMethod for CTransportValidation_NotifyNumber_Notification {
+    const METHOD_NAME: &'static str = "TransportValidation.NotifyNumber#1";
+    type Response = WebUINoResponse;
+}
+impl crate::RpcMethod for CTransportValidation_NotifySyntheticEvent_Notification {
+    const METHOD_NAME: &'static str = "TransportValidation.NotifySyntheticEvent#1";
+    type Response = WebUINoResponse;
+}
+impl crate::RpcMethod for CTransportValidation_NotifyText_Notification {
+    const METHOD_NAME: &'static str = "TransportValidation.NotifyText#1";
+    type Response = WebUINoResponse;
+}
+impl crate::RpcMethod for CTransportValidation_TriggerSyntheticEvents_Request {
+    const METHOD_NAME: &'static str = "TransportValidation.TriggerSyntheticEvents#1";
+    type Response = CTransportValidation_TriggerSyntheticEvents_Response;
 }

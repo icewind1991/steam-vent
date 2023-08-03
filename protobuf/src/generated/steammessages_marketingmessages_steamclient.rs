@@ -5448,26 +5448,6 @@ struct MarketingMessages {}
 impl crate::RpcService for MarketingMessages {
     const SERVICE_NAME: &'static str = "MarketingMessages";
 }
-impl crate::RpcMethod for CMarketingMessages_GetMarketingMessageViewerStats_Request {
-    const METHOD_NAME: &'static str = "MarketingMessages.GetMarketingMessageViewerStats#1";
-    type Response = CMarketingMessages_GetMarketingMessageViewerStats_Response;
-}
-impl crate::RpcMethod for CMarketingMessages_GetDisplayMarketingMessage_Request {
-    const METHOD_NAME: &'static str = "MarketingMessages.GetDisplayMarketingMessage#1";
-    type Response = CMarketingMessages_GetDisplayMarketingMessage_Response;
-}
-impl crate::RpcMethod for CMarketingMessages_UpdateMarketingMessage_Request {
-    const METHOD_NAME: &'static str = "MarketingMessages.UpdateMarketingMessage#1";
-    type Response = CMarketingMessages_UpdateMarketingMessage_Response;
-}
-impl crate::RpcMethod for CMarketingMessages_MarkMessageSeen_Notification {
-    const METHOD_NAME: &'static str = "MarketingMessages.MarkMessageSeen#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CMarketingMessages_GetMarketingMessage_Request {
-    const METHOD_NAME: &'static str = "MarketingMessages.GetMarketingMessage#1";
-    type Response = CMarketingMessages_GetMarketingMessage_Response;
-}
 impl crate::RpcMethod for CMarketingMessages_CreateMarketingMessage_Request {
     const METHOD_NAME: &'static str = "MarketingMessages.CreateMarketingMessage#1";
     type Response = CMarketingMessages_CreateMarketingMessage_Response;
@@ -5481,20 +5461,40 @@ for CMarketingMessages_DoesUserHavePendingMarketingMessages_Request {
     const METHOD_NAME: &'static str = "MarketingMessages.DoesUserHavePendingMarketingMessages#1";
     type Response = CMarketingMessages_DoesUserHavePendingMarketingMessages_Response;
 }
-impl crate::RpcMethod
-for CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request {
-    const METHOD_NAME: &'static str = "MarketingMessages.GetMarketingMessagesViewerRangeStats#1";
-    type Response = CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response;
+impl crate::RpcMethod for CMarketingMessages_FindMarketingMessages_Request {
+    const METHOD_NAME: &'static str = "MarketingMessages.FindMarketingMessages#1";
+    type Response = CMarketingMessages_FindMarketingMessages_Response;
 }
 impl crate::RpcMethod for CMarketingMessages_GetActiveMarketingMessages_Request {
     const METHOD_NAME: &'static str = "MarketingMessages.GetActiveMarketingMessages#1";
     type Response = CMarketingMessages_GetActiveMarketingMessages_Response;
 }
+impl crate::RpcMethod for CMarketingMessages_GetDisplayMarketingMessage_Request {
+    const METHOD_NAME: &'static str = "MarketingMessages.GetDisplayMarketingMessage#1";
+    type Response = CMarketingMessages_GetDisplayMarketingMessage_Response;
+}
+impl crate::RpcMethod for CMarketingMessages_GetMarketingMessageViewerStats_Request {
+    const METHOD_NAME: &'static str = "MarketingMessages.GetMarketingMessageViewerStats#1";
+    type Response = CMarketingMessages_GetMarketingMessageViewerStats_Response;
+}
+impl crate::RpcMethod for CMarketingMessages_GetMarketingMessage_Request {
+    const METHOD_NAME: &'static str = "MarketingMessages.GetMarketingMessage#1";
+    type Response = CMarketingMessages_GetMarketingMessage_Response;
+}
 impl crate::RpcMethod for CMarketingMessages_GetMarketingMessagesForUser_Request {
     const METHOD_NAME: &'static str = "MarketingMessages.GetMarketingMessagesForUser#1";
     type Response = CMarketingMessages_GetMarketingMessagesForUser_Response;
 }
-impl crate::RpcMethod for CMarketingMessages_FindMarketingMessages_Request {
-    const METHOD_NAME: &'static str = "MarketingMessages.FindMarketingMessages#1";
-    type Response = CMarketingMessages_FindMarketingMessages_Response;
+impl crate::RpcMethod
+for CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request {
+    const METHOD_NAME: &'static str = "MarketingMessages.GetMarketingMessagesViewerRangeStats#1";
+    type Response = CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response;
+}
+impl crate::RpcMethod for CMarketingMessages_MarkMessageSeen_Notification {
+    const METHOD_NAME: &'static str = "MarketingMessages.MarkMessageSeen#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CMarketingMessages_UpdateMarketingMessage_Request {
+    const METHOD_NAME: &'static str = "MarketingMessages.UpdateMarketingMessage#1";
+    type Response = CMarketingMessages_UpdateMarketingMessage_Response;
 }

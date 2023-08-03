@@ -1392,7 +1392,7 @@ dependencies = [
 
 [[package]]
 name = "steam-vent-proto"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "protobuf",
 ]

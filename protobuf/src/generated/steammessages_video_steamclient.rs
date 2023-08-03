@@ -3961,29 +3961,17 @@ struct FovasVideo {}
 impl crate::RpcService for FovasVideo {
     const SERVICE_NAME: &'static str = "FovasVideo";
 }
-impl crate::RpcMethod for CVideo_BeginGameClipSegmentsUpload_Request {
-    const METHOD_NAME: &'static str = "Video.BeginGameClipSegmentsUpload#1";
-    type Response = CVideo_BeginGameClipSegmentsUpload_Response;
-}
-impl crate::RpcMethod for CVideo_SetVideoBookmark_Notification {
-    const METHOD_NAME: &'static str = "Video.SetVideoBookmark#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CVideo_ClientGetVideoURL_Request {
-    const METHOD_NAME: &'static str = "Video.ClientGetVideoURL#1";
-    type Response = CVideo_ClientGetVideoURL_Response;
-}
 impl crate::RpcMethod for CFovasVideo_ClientGetOPFSettings_Request {
     const METHOD_NAME: &'static str = "FovasVideo.ClientGetOPFSettings#1";
     type Response = CFovasVideo_ClientGetOPFSettings_Response;
 }
-impl crate::RpcMethod for CVideo_GetVideoBookmarks_Request {
-    const METHOD_NAME: &'static str = "Video.GetVideoBookmarks#1";
-    type Response = CVideo_GetVideoBookmarks_Response;
+impl crate::RpcMethod for CVideo_BeginGameClipSegmentsUpload_Request {
+    const METHOD_NAME: &'static str = "Video.BeginGameClipSegmentsUpload#1";
+    type Response = CVideo_BeginGameClipSegmentsUpload_Response;
 }
-impl crate::RpcMethod for CVideo_UnlockedH264_Notification {
-    const METHOD_NAME: &'static str = "VideoClient.NotifyUnlockedH264#1";
-    type Response = ();
+impl crate::RpcMethod for CVideo_ClientGetVideoURL_Request {
+    const METHOD_NAME: &'static str = "Video.ClientGetVideoURL#1";
+    type Response = CVideo_ClientGetVideoURL_Response;
 }
 impl crate::RpcMethod for CVideo_CommitGameClipSegmentsUpload_Request {
     const METHOD_NAME: &'static str = "Video.CommitGameClipSegmentsUpload#1";
@@ -3992,4 +3980,16 @@ impl crate::RpcMethod for CVideo_CommitGameClipSegmentsUpload_Request {
 impl crate::RpcMethod for CVideo_CreateGameClip_Request {
     const METHOD_NAME: &'static str = "Video.CreateGameClip#1";
     type Response = CVideo_CreateGameClip_Response;
+}
+impl crate::RpcMethod for CVideo_GetVideoBookmarks_Request {
+    const METHOD_NAME: &'static str = "Video.GetVideoBookmarks#1";
+    type Response = CVideo_GetVideoBookmarks_Response;
+}
+impl crate::RpcMethod for CVideo_SetVideoBookmark_Notification {
+    const METHOD_NAME: &'static str = "Video.SetVideoBookmark#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CVideo_UnlockedH264_Notification {
+    const METHOD_NAME: &'static str = "VideoClient.NotifyUnlockedH264#1";
+    type Response = ();
 }

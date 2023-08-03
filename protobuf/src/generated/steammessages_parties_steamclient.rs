@@ -1973,14 +1973,6 @@ struct Parties {}
 impl crate::RpcService for Parties {
     const SERVICE_NAME: &'static str = "Parties";
 }
-impl crate::RpcMethod for CParties_CreateBeacon_Request {
-    const METHOD_NAME: &'static str = "Parties.CreateBeacon#1";
-    type Response = CParties_CreateBeacon_Response;
-}
-impl crate::RpcMethod for CParties_OnReservationCompleted_Request {
-    const METHOD_NAME: &'static str = "Parties.OnReservationCompleted#1";
-    type Response = CParties_OnReservationCompleted_Response;
-}
 impl crate::RpcMethod for CParties_CancelReservation_Request {
     const METHOD_NAME: &'static str = "Parties.CancelReservation#1";
     type Response = CParties_CancelReservation_Response;
@@ -1989,11 +1981,19 @@ impl crate::RpcMethod for CParties_ChangeNumOpenSlots_Request {
     const METHOD_NAME: &'static str = "Parties.ChangeNumOpenSlots#1";
     type Response = CParties_ChangeNumOpenSlots_Response;
 }
-impl crate::RpcMethod for CParties_JoinParty_Request {
-    const METHOD_NAME: &'static str = "Parties.JoinParty#1";
-    type Response = CParties_JoinParty_Response;
+impl crate::RpcMethod for CParties_CreateBeacon_Request {
+    const METHOD_NAME: &'static str = "Parties.CreateBeacon#1";
+    type Response = CParties_CreateBeacon_Response;
 }
 impl crate::RpcMethod for CParties_DestroyBeacon_Request {
     const METHOD_NAME: &'static str = "Parties.DestroyBeacon#1";
     type Response = CParties_DestroyBeacon_Response;
+}
+impl crate::RpcMethod for CParties_JoinParty_Request {
+    const METHOD_NAME: &'static str = "Parties.JoinParty#1";
+    type Response = CParties_JoinParty_Response;
+}
+impl crate::RpcMethod for CParties_OnReservationCompleted_Request {
+    const METHOD_NAME: &'static str = "Parties.OnReservationCompleted#1";
+    type Response = CParties_OnReservationCompleted_Response;
 }

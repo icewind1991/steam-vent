@@ -16951,152 +16951,104 @@ struct BroadcastClient {}
 impl crate::RpcService for BroadcastClient {
     const SERVICE_NAME: &'static str = "BroadcastClient";
 }
-impl crate::RpcMethod for CBroadcast_GetBuildClipStatus_Request {
-    const METHOD_NAME: &'static str = "Broadcast.GetBuildClipStatus#1";
-    type Response = CBroadcast_GetBuildClipStatus_Response;
+impl crate::RpcMethod for CBroadcast_BeginBroadcastSession_Request {
+    const METHOD_NAME: &'static str = "Broadcast.BeginBroadcastSession#1";
+    type Response = CBroadcast_BeginBroadcastSession_Response;
 }
-impl crate::RpcMethod for CBroadcast_WebRTCAddViewerCandidate_Notification {
-    const METHOD_NAME: &'static str = "BroadcastClient.NotifyWebRTCAddViewerCandidate#1";
+impl crate::RpcMethod for CBroadcast_BroadcastChannelLive_Notification {
+    const METHOD_NAME: &'static str = "BroadcastClient.NotifyBroadcastChannelLive#1";
     type Response = ();
 }
-impl crate::RpcMethod for CBroadcast_HeartbeatBroadcast_Notification {
-    const METHOD_NAME: &'static str = "Broadcast.HeartbeatBroadcast#1";
+impl crate::RpcMethod for CBroadcast_BroadcastStatus_Notification {
+    const METHOD_NAME: &'static str = "BroadcastClient.NotifyBroadcastStatus#1";
     type Response = ();
-}
-impl crate::RpcMethod for CBroadcast_GetBroadcastStatus_Request {
-    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastStatus#1";
-    type Response = CBroadcast_GetBroadcastStatus_Response;
-}
-impl crate::RpcMethod for CBroadcast_NotifyBroadcastSessionHeartbeat_Notification {
-    const METHOD_NAME: &'static str = "Broadcast.NotifyBroadcastSessionHeartbeat#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CBroadcast_WatchBroadcast_Request {
-    const METHOD_NAME: &'static str = "Broadcast.WatchBroadcast#1";
-    type Response = CBroadcast_WatchBroadcast_Response;
-}
-impl crate::RpcMethod for CBroadcast_StartBroadcastUpload_Request {
-    const METHOD_NAME: &'static str = "Broadcast.StartBroadcastUpload#1";
-    type Response = CBroadcast_StartBroadcastUpload_Response;
-}
-impl crate::RpcMethod for CBroadcast_PostChatMessage_Request {
-    const METHOD_NAME: &'static str = "Broadcast.PostChatMessage#1";
-    type Response = CBroadcast_PostChatMessage_Response;
 }
 impl crate::RpcMethod for CBroadcast_BroadcastUploadStarted_Notification {
     const METHOD_NAME: &'static str = "BroadcastClient.NotifyBroadcastUploadStarted#1";
     type Response = ();
 }
-impl crate::RpcMethod for CBroadcast_WebRTCHaveTURNServer_Notification {
-    const METHOD_NAME: &'static str = "Broadcast.NotifyWebRTCHaveTURNServer#1";
+impl crate::RpcMethod for CBroadcast_BroadcastViewerState_Notification {
+    const METHOD_NAME: &'static str = "BroadcastClient.NotifyBroadcastViewerState#1";
     type Response = ();
 }
-impl crate::RpcMethod for CBroadcast_ViewerBroadcastInvite_Notification {
-    const METHOD_NAME: &'static str = "BroadcastClient.NotifyViewerBroadcastInvite#1";
+impl crate::RpcMethod for CBroadcast_EndBroadcastSession_Request {
+    const METHOD_NAME: &'static str = "Broadcast.EndBroadcastSession#1";
+    type Response = CBroadcast_EndBroadcastSession_Response;
+}
+impl crate::RpcMethod for CBroadcast_GetBroadcastChatInfo_Request {
+    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastChatInfo#1";
+    type Response = CBroadcast_GetBroadcastChatInfo_Response;
+}
+impl crate::RpcMethod for CBroadcast_GetBroadcastChatUserNames_Request {
+    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastChatUserNames#1";
+    type Response = CBroadcast_GetBroadcastChatUserNames_Response;
+}
+impl crate::RpcMethod for CBroadcast_GetBroadcastStatus_Request {
+    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastStatus#1";
+    type Response = CBroadcast_GetBroadcastStatus_Response;
+}
+impl crate::RpcMethod for CBroadcast_GetBroadcastThumbnail_Request {
+    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastThumbnail#1";
+    type Response = CBroadcast_GetBroadcastThumbnail_Response;
+}
+impl crate::RpcMethod for CBroadcast_GetBroadcastUploadStats_Request {
+    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastUploadStats#1";
+    type Response = CBroadcast_GetBroadcastUploadStats_Response;
+}
+impl crate::RpcMethod for CBroadcast_GetBroadcastViewerStats_Request {
+    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastViewerStats#1";
+    type Response = CBroadcast_GetBroadcastViewerStats_Response;
+}
+impl crate::RpcMethod for CBroadcast_GetBuildClipStatus_Request {
+    const METHOD_NAME: &'static str = "Broadcast.GetBuildClipStatus#1";
+    type Response = CBroadcast_GetBuildClipStatus_Response;
+}
+impl crate::RpcMethod for CBroadcast_GetClipDetails_Request {
+    const METHOD_NAME: &'static str = "Broadcast.GetClipDetails#1";
+    type Response = CBroadcast_GetClipDetails_Response;
+}
+impl crate::RpcMethod for CBroadcast_GetRTMPInfo_Request {
+    const METHOD_NAME: &'static str = "Broadcast.GetRTMPInfo#1";
+    type Response = CBroadcast_GetRTMPInfo_Response;
+}
+impl crate::RpcMethod for CBroadcast_HeartbeatBroadcast_Notification {
+    const METHOD_NAME: &'static str = "Broadcast.HeartbeatBroadcast#1";
     type Response = ();
 }
 impl crate::RpcMethod for CBroadcast_InviteToBroadcast_Request {
     const METHOD_NAME: &'static str = "Broadcast.InviteToBroadcast#1";
     type Response = CBroadcast_InviteToBroadcast_Response;
 }
-impl crate::RpcMethod for CBroadcast_StartBuildClip_Request {
-    const METHOD_NAME: &'static str = "Broadcast.StartBuildClip#1";
-    type Response = CBroadcast_StartBuildClip_Response;
+impl crate::RpcMethod for CBroadcast_MuteBroadcastChatUser_Request {
+    const METHOD_NAME: &'static str = "Broadcast.MuteBroadcastChatUser#1";
+    type Response = CBroadcast_MuteBroadcastChatUser_Response;
 }
-impl crate::RpcMethod for CBroadcast_BroadcastStatus_Notification {
-    const METHOD_NAME: &'static str = "BroadcastClient.NotifyBroadcastStatus#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CBroadcast_GetBroadcastChatInfo_Request {
-    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastChatInfo#1";
-    type Response = CBroadcast_GetBroadcastChatInfo_Response;
-}
-impl crate::RpcMethod for CBroadcast_SendBroadcastStateToServer_Request {
-    const METHOD_NAME: &'static str = "Broadcast.SendBroadcastStateToServer#1";
-    type Response = CBroadcast_SendBroadcastStateToServer_Response;
-}
-impl crate::RpcMethod for CBroadcast_WebRTCLookupTURNServer_Request {
-    const METHOD_NAME: &'static str = "Broadcast.WebRTCLookupTURNServer#1";
-    type Response = CBroadcast_WebRTCLookupTURNServer_Response;
-}
-impl crate::RpcMethod for CBroadcast_SessionClosed_Notification {
-    const METHOD_NAME: &'static str = "BroadcastClient.NotifySessionClosed#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CBroadcast_SendThumbnailToRelay_Notification {
-    const METHOD_NAME: &'static str = "BroadcastClient.SendThumbnailToRelay#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CBroadcast_WebRTCSetAnswer_Notification {
-    const METHOD_NAME: &'static str = "BroadcastClient.NotifyWebRTCSetAnswer#1";
+impl crate::RpcMethod for CBroadcast_NotifyBroadcastSessionHeartbeat_Notification {
+    const METHOD_NAME: &'static str = "Broadcast.NotifyBroadcastSessionHeartbeat#1";
     type Response = ();
 }
 impl crate::RpcMethod for CBroadcast_NotifyBroadcastUploadStop_Notification {
     const METHOD_NAME: &'static str = "Broadcast.NotifyBroadcastUploadStop#1";
     type Response = ();
 }
-impl crate::RpcMethod for CBroadcast_GetBroadcastChatUserNames_Request {
-    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastChatUserNames#1";
-    type Response = CBroadcast_GetBroadcastChatUserNames_Response;
-}
-impl crate::RpcMethod for CBroadcast_WebRTCAddViewerCandidate_Request {
-    const METHOD_NAME: &'static str = "Broadcast.WebRTCAddViewerCandidate#1";
-    type Response = CBroadcast_WebRTCAddViewerCandidate_Response;
-}
-impl crate::RpcMethod for CBroadcast_WebRTCGetHostCandidates_Request {
-    const METHOD_NAME: &'static str = "Broadcast.WebRTCGetHostCandidates#1";
-    type Response = CBroadcast_WebRTCGetHostCandidates_Response;
-}
-impl crate::RpcMethod for CBroadcast_GetBroadcastUploadStats_Request {
-    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastUploadStats#1";
-    type Response = CBroadcast_GetBroadcastUploadStats_Response;
-}
-impl crate::RpcMethod for CBroadcast_WebRTCStartResult_Request {
-    const METHOD_NAME: &'static str = "Broadcast.WebRTCStartResult#1";
-    type Response = CBroadcast_WebRTCStartResult_Response;
-}
-impl crate::RpcMethod for CBroadcast_MuteBroadcastChatUser_Request {
-    const METHOD_NAME: &'static str = "Broadcast.MuteBroadcastChatUser#1";
-    type Response = CBroadcast_MuteBroadcastChatUser_Response;
-}
-impl crate::RpcMethod for CBroadcast_UpdateChatMessageFlair_Request {
-    const METHOD_NAME: &'static str = "Broadcast.UpdateChatMessageFlair#1";
-    type Response = CBroadcast_UpdateChatMessageFlair_Response;
-}
-impl crate::RpcMethod for CBroadcast_GetRTMPInfo_Request {
-    const METHOD_NAME: &'static str = "Broadcast.GetRTMPInfo#1";
-    type Response = CBroadcast_GetRTMPInfo_Response;
+impl crate::RpcMethod for CBroadcast_PostChatMessage_Request {
+    const METHOD_NAME: &'static str = "Broadcast.PostChatMessage#1";
+    type Response = CBroadcast_PostChatMessage_Response;
 }
 impl crate::RpcMethod for CBroadcast_RemoveUserChatText_Request {
     const METHOD_NAME: &'static str = "Broadcast.RemoveUserChatText#1";
     type Response = CBroadcast_RemoveUserChatText_Response;
 }
-impl crate::RpcMethod for CBroadcast_GetClipDetails_Request {
-    const METHOD_NAME: &'static str = "Broadcast.GetClipDetails#1";
-    type Response = CBroadcast_GetClipDetails_Response;
+impl crate::RpcMethod for CBroadcast_SendBroadcastStateToServer_Request {
+    const METHOD_NAME: &'static str = "Broadcast.SendBroadcastStateToServer#1";
+    type Response = CBroadcast_SendBroadcastStateToServer_Response;
 }
-impl crate::RpcMethod for CBroadcast_WebRTCStart_Notification {
-    const METHOD_NAME: &'static str = "BroadcastClient.NotifyWebRTCStart#1";
+impl crate::RpcMethod for CBroadcast_SendThumbnailToRelay_Notification {
+    const METHOD_NAME: &'static str = "BroadcastClient.SendThumbnailToRelay#1";
     type Response = ();
 }
-impl crate::RpcMethod for CBroadcast_WebRTCSetAnswer_Request {
-    const METHOD_NAME: &'static str = "Broadcast.WebRTCSetAnswer#1";
-    type Response = CBroadcast_WebRTCSetAnswer_Response;
-}
-impl crate::RpcMethod for CBroadcast_EndBroadcastSession_Request {
-    const METHOD_NAME: &'static str = "Broadcast.EndBroadcastSession#1";
-    type Response = CBroadcast_EndBroadcastSession_Response;
-}
-impl crate::RpcMethod for CBroadcast_StopWatchingBroadcast_Notification {
-    const METHOD_NAME: &'static str = "Broadcast.StopWatchingBroadcast#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CBroadcast_StopBroadcastUpload_Notification {
-    const METHOD_NAME: &'static str = "BroadcastClient.NotifyStopBroadcastUpload#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CBroadcast_BroadcastChannelLive_Notification {
-    const METHOD_NAME: &'static str = "BroadcastClient.NotifyBroadcastChannelLive#1";
+impl crate::RpcMethod for CBroadcast_SessionClosed_Notification {
+    const METHOD_NAME: &'static str = "BroadcastClient.NotifySessionClosed#1";
     type Response = ();
 }
 impl crate::RpcMethod for CBroadcast_SetClipDetails_Request {
@@ -17107,35 +17059,83 @@ impl crate::RpcMethod for CBroadcast_SetRTMPInfo_Request {
     const METHOD_NAME: &'static str = "Broadcast.SetRTMPInfo#1";
     type Response = CBroadcast_SetRTMPInfo_Response;
 }
-impl crate::RpcMethod for CBroadcast_BroadcastViewerState_Notification {
-    const METHOD_NAME: &'static str = "BroadcastClient.NotifyBroadcastViewerState#1";
+impl crate::RpcMethod for CBroadcast_StartBroadcastUpload_Request {
+    const METHOD_NAME: &'static str = "Broadcast.StartBroadcastUpload#1";
+    type Response = CBroadcast_StartBroadcastUpload_Response;
+}
+impl crate::RpcMethod for CBroadcast_StartBuildClip_Request {
+    const METHOD_NAME: &'static str = "Broadcast.StartBuildClip#1";
+    type Response = CBroadcast_StartBuildClip_Response;
+}
+impl crate::RpcMethod for CBroadcast_StopBroadcastUpload_Notification {
+    const METHOD_NAME: &'static str = "BroadcastClient.NotifyStopBroadcastUpload#1";
     type Response = ();
 }
-impl crate::RpcMethod for CBroadcast_WebRTCNeedTURNServer_Notification {
-    const METHOD_NAME: &'static str = "BroadcastClient.NotifyWebRTCNeedTURNServer#1";
+impl crate::RpcMethod for CBroadcast_StopWatchingBroadcast_Notification {
+    const METHOD_NAME: &'static str = "Broadcast.StopWatchingBroadcast#1";
     type Response = ();
 }
-impl crate::RpcMethod for CBroadcast_WebRTCAddHostCandidate_Request {
-    const METHOD_NAME: &'static str = "Broadcast.WebRTCAddHostCandidate#1";
-    type Response = CBroadcast_WebRTCAddHostCandidate_Response;
+impl crate::RpcMethod for CBroadcast_UpdateChatMessageFlair_Request {
+    const METHOD_NAME: &'static str = "Broadcast.UpdateChatMessageFlair#1";
+    type Response = CBroadcast_UpdateChatMessageFlair_Response;
 }
-impl crate::RpcMethod for CBroadcast_GetBroadcastViewerStats_Request {
-    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastViewerStats#1";
-    type Response = CBroadcast_GetBroadcastViewerStats_Response;
-}
-impl crate::RpcMethod for CBroadcast_WebRTCStopped_Request {
-    const METHOD_NAME: &'static str = "Broadcast.WebRTCStopped#1";
-    type Response = CBroadcast_WebRTCStopped_Response;
+impl crate::RpcMethod for CBroadcast_ViewerBroadcastInvite_Notification {
+    const METHOD_NAME: &'static str = "BroadcastClient.NotifyViewerBroadcastInvite#1";
+    type Response = ();
 }
 impl crate::RpcMethod for CBroadcast_WaitingBroadcastViewer_Notification {
     const METHOD_NAME: &'static str = "BroadcastClient.NotifyWaitingBroadcastViewer#1";
     type Response = ();
 }
-impl crate::RpcMethod for CBroadcast_GetBroadcastThumbnail_Request {
-    const METHOD_NAME: &'static str = "Broadcast.GetBroadcastThumbnail#1";
-    type Response = CBroadcast_GetBroadcastThumbnail_Response;
+impl crate::RpcMethod for CBroadcast_WatchBroadcast_Request {
+    const METHOD_NAME: &'static str = "Broadcast.WatchBroadcast#1";
+    type Response = CBroadcast_WatchBroadcast_Response;
 }
-impl crate::RpcMethod for CBroadcast_BeginBroadcastSession_Request {
-    const METHOD_NAME: &'static str = "Broadcast.BeginBroadcastSession#1";
-    type Response = CBroadcast_BeginBroadcastSession_Response;
+impl crate::RpcMethod for CBroadcast_WebRTCAddHostCandidate_Request {
+    const METHOD_NAME: &'static str = "Broadcast.WebRTCAddHostCandidate#1";
+    type Response = CBroadcast_WebRTCAddHostCandidate_Response;
+}
+impl crate::RpcMethod for CBroadcast_WebRTCAddViewerCandidate_Notification {
+    const METHOD_NAME: &'static str = "BroadcastClient.NotifyWebRTCAddViewerCandidate#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CBroadcast_WebRTCAddViewerCandidate_Request {
+    const METHOD_NAME: &'static str = "Broadcast.WebRTCAddViewerCandidate#1";
+    type Response = CBroadcast_WebRTCAddViewerCandidate_Response;
+}
+impl crate::RpcMethod for CBroadcast_WebRTCGetHostCandidates_Request {
+    const METHOD_NAME: &'static str = "Broadcast.WebRTCGetHostCandidates#1";
+    type Response = CBroadcast_WebRTCGetHostCandidates_Response;
+}
+impl crate::RpcMethod for CBroadcast_WebRTCHaveTURNServer_Notification {
+    const METHOD_NAME: &'static str = "Broadcast.NotifyWebRTCHaveTURNServer#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CBroadcast_WebRTCLookupTURNServer_Request {
+    const METHOD_NAME: &'static str = "Broadcast.WebRTCLookupTURNServer#1";
+    type Response = CBroadcast_WebRTCLookupTURNServer_Response;
+}
+impl crate::RpcMethod for CBroadcast_WebRTCNeedTURNServer_Notification {
+    const METHOD_NAME: &'static str = "BroadcastClient.NotifyWebRTCNeedTURNServer#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CBroadcast_WebRTCSetAnswer_Notification {
+    const METHOD_NAME: &'static str = "BroadcastClient.NotifyWebRTCSetAnswer#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CBroadcast_WebRTCSetAnswer_Request {
+    const METHOD_NAME: &'static str = "Broadcast.WebRTCSetAnswer#1";
+    type Response = CBroadcast_WebRTCSetAnswer_Response;
+}
+impl crate::RpcMethod for CBroadcast_WebRTCStartResult_Request {
+    const METHOD_NAME: &'static str = "Broadcast.WebRTCStartResult#1";
+    type Response = CBroadcast_WebRTCStartResult_Response;
+}
+impl crate::RpcMethod for CBroadcast_WebRTCStart_Notification {
+    const METHOD_NAME: &'static str = "BroadcastClient.NotifyWebRTCStart#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CBroadcast_WebRTCStopped_Request {
+    const METHOD_NAME: &'static str = "Broadcast.WebRTCStopped#1";
+    type Response = CBroadcast_WebRTCStopped_Response;
 }

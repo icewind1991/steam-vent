@@ -3695,24 +3695,8 @@ struct FriendMessagesClient {}
 impl crate::RpcService for FriendMessagesClient {
     const SERVICE_NAME: &'static str = "FriendMessagesClient";
 }
-impl crate::RpcMethod for CFriendsMessages_GetActiveMessageSessions_Request {
-    const METHOD_NAME: &'static str = "FriendMessages.GetActiveMessageSessions#1";
-    type Response = CFriendsMessages_GetActiveMessageSessions_Response;
-}
 impl crate::RpcMethod for CFriendMessages_AckMessage_Notification {
     const METHOD_NAME: &'static str = "FriendMessages.AckMessage#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CFriendMessages_IsInFriendsUIBeta_Request {
-    const METHOD_NAME: &'static str = "FriendMessages.IsInFriendsUIBeta#1";
-    type Response = CFriendMessages_IsInFriendsUIBeta_Response;
-}
-impl crate::RpcMethod for CFriendMessages_UpdateMessageReaction_Request {
-    const METHOD_NAME: &'static str = "FriendMessages.UpdateMessageReaction#1";
-    type Response = CFriendMessages_UpdateMessageReaction_Response;
-}
-impl crate::RpcMethod for CFriendMessages_MessageReaction_Notification {
-    const METHOD_NAME: &'static str = "FriendMessagesClient.MessageReaction#1";
     type Response = ();
 }
 impl crate::RpcMethod for CFriendMessages_GetRecentMessages_Request {
@@ -3723,7 +3707,23 @@ impl crate::RpcMethod for CFriendMessages_IncomingMessage_Notification {
     const METHOD_NAME: &'static str = "FriendMessagesClient.IncomingMessage#1";
     type Response = ();
 }
+impl crate::RpcMethod for CFriendMessages_IsInFriendsUIBeta_Request {
+    const METHOD_NAME: &'static str = "FriendMessages.IsInFriendsUIBeta#1";
+    type Response = CFriendMessages_IsInFriendsUIBeta_Response;
+}
+impl crate::RpcMethod for CFriendMessages_MessageReaction_Notification {
+    const METHOD_NAME: &'static str = "FriendMessagesClient.MessageReaction#1";
+    type Response = ();
+}
 impl crate::RpcMethod for CFriendMessages_SendMessage_Request {
     const METHOD_NAME: &'static str = "FriendMessages.SendMessage#1";
     type Response = CFriendMessages_SendMessage_Response;
+}
+impl crate::RpcMethod for CFriendMessages_UpdateMessageReaction_Request {
+    const METHOD_NAME: &'static str = "FriendMessages.UpdateMessageReaction#1";
+    type Response = CFriendMessages_UpdateMessageReaction_Response;
+}
+impl crate::RpcMethod for CFriendsMessages_GetActiveMessageSessions_Request {
+    const METHOD_NAME: &'static str = "FriendMessages.GetActiveMessageSessions#1";
+    type Response = CFriendsMessages_GetActiveMessageSessions_Response;
 }

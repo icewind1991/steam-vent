@@ -3659,6 +3659,18 @@ struct GameServerClient {}
 impl crate::RpcService for GameServerClient {
     const SERVICE_NAME: &'static str = "GameServerClient";
 }
+impl crate::RpcMethod for CGameServers_GetServerIPsBySteamID_Request {
+    const METHOD_NAME: &'static str = "GameServers.GetServerIPsBySteamID#1";
+    type Response = CGameServers_IPsWithSteamIDs_Response;
+}
+impl crate::RpcMethod for CGameServers_GetServerList_Request {
+    const METHOD_NAME: &'static str = "GameServers.GetServerList#1";
+    type Response = CGameServers_GetServerList_Response;
+}
+impl crate::RpcMethod for CGameServers_GetServerSteamIDsByIP_Request {
+    const METHOD_NAME: &'static str = "GameServers.GetServerSteamIDsByIP#1";
+    type Response = CGameServers_IPsWithSteamIDs_Response;
+}
 impl crate::RpcMethod for CGameServers_QueryByFakeIP_Request {
     const METHOD_NAME: &'static str = "GameServers.QueryByFakeIP#1";
     type Response = CGameServers_GameServerQuery_Response;
@@ -3666,16 +3678,4 @@ impl crate::RpcMethod for CGameServers_QueryByFakeIP_Request {
 impl crate::RpcMethod for GameServerClient_QueryServerData_Request {
     const METHOD_NAME: &'static str = "GameServerClient.QueryServerData#1";
     type Response = GameServerClient_QueryServerData_Response;
-}
-impl crate::RpcMethod for CGameServers_GetServerSteamIDsByIP_Request {
-    const METHOD_NAME: &'static str = "GameServers.GetServerSteamIDsByIP#1";
-    type Response = CGameServers_IPsWithSteamIDs_Response;
-}
-impl crate::RpcMethod for CGameServers_GetServerList_Request {
-    const METHOD_NAME: &'static str = "GameServers.GetServerList#1";
-    type Response = CGameServers_GetServerList_Response;
-}
-impl crate::RpcMethod for CGameServers_GetServerIPsBySteamID_Request {
-    const METHOD_NAME: &'static str = "GameServers.GetServerIPsBySteamID#1";
-    type Response = CGameServers_IPsWithSteamIDs_Response;
 }

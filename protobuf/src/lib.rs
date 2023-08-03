@@ -1,5 +1,6 @@
 mod generated;
 
+use crate::enums_clientserver::EMsg;
 pub use generated::*;
 use std::fmt::Debug;
 use std::io::{Read, Write};
@@ -33,4 +34,8 @@ impl RpcMessage for () {
     fn encode_size(&self) -> usize {
         0
     }
+}
+
+pub trait RpcMessageWithKind: RpcMessage {
+    const KIND: EMsg;
 }

@@ -19817,135 +19817,135 @@ struct PublishedFileClient {}
 impl crate::RpcService for PublishedFileClient {
     const SERVICE_NAME: &'static str = "PublishedFileClient";
 }
-impl crate::RpcMethod for CPublishedFile_GetAppRelationshipsBatched_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.GetAppRelationshipsBatched#1";
-    type Response = CPublishedFile_GetAppRelationshipsBatched_Response;
-}
-impl crate::RpcMethod for CPublishedFile_GetChangeHistoryEntry_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.GetChangeHistoryEntry#1";
-    type Response = CPublishedFile_GetChangeHistoryEntry_Response;
-}
-impl crate::RpcMethod for CPublishedFile_RefreshVotingQueue_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.RefreshVotingQueue#1";
-    type Response = CPublishedFile_RefreshVotingQueue_Response;
-}
-impl crate::RpcMethod for CPublishedFile_GetDetails_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.GetDetails#1";
-    type Response = CPublishedFile_GetDetails_Response;
-}
-impl crate::RpcMethod for CPublishedFile_SetPlaytimeForControllerConfigs_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.SetPlaytimeForControllerConfigs#1";
-    type Response = CPublishedFile_SetPlaytimeForControllerConfigs_Response;
-}
 impl crate::RpcMethod for CPublishedFile_AddAppRelationship_Request {
     const METHOD_NAME: &'static str = "PublishedFile.AddAppRelationship#1";
     type Response = CPublishedFile_AddAppRelationship_Response;
-}
-impl crate::RpcMethod for CPublishedFile_StartPlaytimeTracking_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.StartPlaytimeTracking#1";
-    type Response = CPublishedFile_StartPlaytimeTracking_Response;
-}
-impl crate::RpcMethod for CPublishedFile_GetSubSectionData_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.GetSubSectionData#1";
-    type Response = CPublishedFile_GetSubSectionData_Response;
-}
-impl crate::RpcMethod for CPublishedFile_FileSubscribed_Notification {
-    const METHOD_NAME: &'static str = "PublishedFileClient.NotifyFileSubscribed#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CPublishedFile_GetItemInfo_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.GetItemInfo#1";
-    type Response = CPublishedFile_GetItemInfo_Response;
-}
-impl crate::RpcMethod for CPublishedFile_Publish_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.Publish#1";
-    type Response = CPublishedFile_Publish_Response;
-}
-impl crate::RpcMethod for CPublishedFile_GetContentDescriptors_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.GetContentDescriptors#1";
-    type Response = CPublishedFile_GetContentDescriptors_Response;
-}
-impl crate::RpcMethod for CPublishedFile_GetUserFiles_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.GetUserFiles#1";
-    type Response = CPublishedFile_GetUserFiles_Response;
-}
-impl crate::RpcMethod for CPublishedFile_Unsubscribe_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.Unsubscribe#1";
-    type Response = CPublishedFile_Unsubscribe_Response;
-}
-impl crate::RpcMethod for CPublishedFile_Delete_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.Delete#1";
-    type Response = CPublishedFile_Delete_Response;
-}
-impl crate::RpcMethod for CPublishedFile_AreFilesInSubscriptionList_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.AreFilesInSubscriptionList#1";
-    type Response = CPublishedFile_AreFilesInSubscriptionList_Response;
-}
-impl crate::RpcMethod for CPublishedFile_FileDeleted_Client_Notification {
-    const METHOD_NAME: &'static str = "PublishedFileClient.NotifyFileDeleted#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CPublishedFile_CanSubscribe_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.CanSubscribe#1";
-    type Response = CPublishedFile_CanSubscribe_Response;
-}
-impl crate::RpcMethod for CPublishedFile_GetChangeHistory_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.GetChangeHistory#1";
-    type Response = CPublishedFile_GetChangeHistory_Response;
-}
-impl crate::RpcMethod for CPublishedFile_GetUserVoteSummary_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.GetUserVoteSummary#1";
-    type Response = CPublishedFile_GetUserVoteSummary_Response;
-}
-impl crate::RpcMethod for CPublishedFile_StopPlaytimeTracking_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.StopPlaytimeTracking#1";
-    type Response = CPublishedFile_StopPlaytimeTracking_Response;
-}
-impl crate::RpcMethod for CPublishedFile_Vote_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.Vote#1";
-    type Response = CPublishedFile_Vote_Response;
-}
-impl crate::RpcMethod for CPublishedFile_UpdateContentDescriptors_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.UpdateContentDescriptors#1";
-    type Response = CPublishedFile_UpdateContentDescriptors_Response;
-}
-impl crate::RpcMethod for CPublishedFile_RemoveAppRelationship_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.RemoveAppRelationship#1";
-    type Response = CPublishedFile_RemoveAppRelationship_Response;
-}
-impl crate::RpcMethod for CPublishedFile_FileUnsubscribed_Notification {
-    const METHOD_NAME: &'static str = "PublishedFileClient.NotifyFileUnsubscribed#1";
-    type Response = ();
 }
 impl crate::RpcMethod for CPublishedFile_AddChild_Request {
     const METHOD_NAME: &'static str = "PublishedFile.AddChild#1";
     type Response = CPublishedFile_AddChild_Response;
 }
-impl crate::RpcMethod for CPublishedFile_QueryFiles_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.QueryFiles#1";
-    type Response = CPublishedFile_QueryFiles_Response;
+impl crate::RpcMethod for CPublishedFile_AreFilesInSubscriptionList_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.AreFilesInSubscriptionList#1";
+    type Response = CPublishedFile_AreFilesInSubscriptionList_Response;
 }
-impl crate::RpcMethod for CPublishedFile_Update_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.Update#1";
-    type Response = CPublishedFile_Update_Response;
+impl crate::RpcMethod for CPublishedFile_CanSubscribe_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.CanSubscribe#1";
+    type Response = CPublishedFile_CanSubscribe_Response;
 }
-impl crate::RpcMethod for CPublishedFile_GetItemChanges_Request {
-    const METHOD_NAME: &'static str = "PublishedFile.GetItemChanges#1";
-    type Response = CPublishedFile_GetItemChanges_Response;
+impl crate::RpcMethod for CPublishedFile_Delete_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.Delete#1";
+    type Response = CPublishedFile_Delete_Response;
+}
+impl crate::RpcMethod for CPublishedFile_FileDeleted_Client_Notification {
+    const METHOD_NAME: &'static str = "PublishedFileClient.NotifyFileDeleted#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CPublishedFile_FileSubscribed_Notification {
+    const METHOD_NAME: &'static str = "PublishedFileClient.NotifyFileSubscribed#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CPublishedFile_FileUnsubscribed_Notification {
+    const METHOD_NAME: &'static str = "PublishedFileClient.NotifyFileUnsubscribed#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CPublishedFile_GetAppRelationshipsBatched_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.GetAppRelationshipsBatched#1";
+    type Response = CPublishedFile_GetAppRelationshipsBatched_Response;
 }
 impl crate::RpcMethod for CPublishedFile_GetAppRelationships_Request {
     const METHOD_NAME: &'static str = "PublishedFile.GetAppRelationships#1";
     type Response = CPublishedFile_GetAppRelationships_Response;
 }
+impl crate::RpcMethod for CPublishedFile_GetChangeHistoryEntry_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.GetChangeHistoryEntry#1";
+    type Response = CPublishedFile_GetChangeHistoryEntry_Response;
+}
+impl crate::RpcMethod for CPublishedFile_GetChangeHistory_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.GetChangeHistory#1";
+    type Response = CPublishedFile_GetChangeHistory_Response;
+}
+impl crate::RpcMethod for CPublishedFile_GetContentDescriptors_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.GetContentDescriptors#1";
+    type Response = CPublishedFile_GetContentDescriptors_Response;
+}
+impl crate::RpcMethod for CPublishedFile_GetDetails_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.GetDetails#1";
+    type Response = CPublishedFile_GetDetails_Response;
+}
+impl crate::RpcMethod for CPublishedFile_GetItemChanges_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.GetItemChanges#1";
+    type Response = CPublishedFile_GetItemChanges_Response;
+}
+impl crate::RpcMethod for CPublishedFile_GetItemInfo_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.GetItemInfo#1";
+    type Response = CPublishedFile_GetItemInfo_Response;
+}
+impl crate::RpcMethod for CPublishedFile_GetSubSectionData_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.GetSubSectionData#1";
+    type Response = CPublishedFile_GetSubSectionData_Response;
+}
+impl crate::RpcMethod for CPublishedFile_GetUserFiles_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.GetUserFiles#1";
+    type Response = CPublishedFile_GetUserFiles_Response;
+}
+impl crate::RpcMethod for CPublishedFile_GetUserVoteSummary_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.GetUserVoteSummary#1";
+    type Response = CPublishedFile_GetUserVoteSummary_Response;
+}
+impl crate::RpcMethod for CPublishedFile_Publish_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.Publish#1";
+    type Response = CPublishedFile_Publish_Response;
+}
+impl crate::RpcMethod for CPublishedFile_QueryFiles_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.QueryFiles#1";
+    type Response = CPublishedFile_QueryFiles_Response;
+}
+impl crate::RpcMethod for CPublishedFile_RefreshVotingQueue_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.RefreshVotingQueue#1";
+    type Response = CPublishedFile_RefreshVotingQueue_Response;
+}
+impl crate::RpcMethod for CPublishedFile_RemoveAppRelationship_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.RemoveAppRelationship#1";
+    type Response = CPublishedFile_RemoveAppRelationship_Response;
+}
 impl crate::RpcMethod for CPublishedFile_RemoveChild_Request {
     const METHOD_NAME: &'static str = "PublishedFile.RemoveChild#1";
     type Response = CPublishedFile_RemoveChild_Response;
+}
+impl crate::RpcMethod for CPublishedFile_SetPlaytimeForControllerConfigs_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.SetPlaytimeForControllerConfigs#1";
+    type Response = CPublishedFile_SetPlaytimeForControllerConfigs_Response;
+}
+impl crate::RpcMethod for CPublishedFile_StartPlaytimeTracking_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.StartPlaytimeTracking#1";
+    type Response = CPublishedFile_StartPlaytimeTracking_Response;
 }
 impl crate::RpcMethod for CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request {
     const METHOD_NAME: &'static str = "PublishedFile.StopPlaytimeTrackingForAllAppItems#1";
     type Response = CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response;
 }
+impl crate::RpcMethod for CPublishedFile_StopPlaytimeTracking_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.StopPlaytimeTracking#1";
+    type Response = CPublishedFile_StopPlaytimeTracking_Response;
+}
 impl crate::RpcMethod for CPublishedFile_Subscribe_Request {
     const METHOD_NAME: &'static str = "PublishedFile.Subscribe#1";
     type Response = CPublishedFile_Subscribe_Response;
+}
+impl crate::RpcMethod for CPublishedFile_Unsubscribe_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.Unsubscribe#1";
+    type Response = CPublishedFile_Unsubscribe_Response;
+}
+impl crate::RpcMethod for CPublishedFile_UpdateContentDescriptors_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.UpdateContentDescriptors#1";
+    type Response = CPublishedFile_UpdateContentDescriptors_Response;
+}
+impl crate::RpcMethod for CPublishedFile_Update_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.Update#1";
+    type Response = CPublishedFile_Update_Response;
+}
+impl crate::RpcMethod for CPublishedFile_Vote_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.Vote#1";
+    type Response = CPublishedFile_Vote_Response;
 }

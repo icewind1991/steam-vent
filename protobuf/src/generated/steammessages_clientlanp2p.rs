@@ -1240,6 +1240,9 @@ impl crate::RpcMessage for CMsgClientPeerChunkRequest {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientPeerChunkRequest {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientPeerChunkRequest;
+}
 impl crate::RpcMessage for CMsgClientPeerChunkResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -1252,4 +1255,7 @@ impl crate::RpcMessage for CMsgClientPeerChunkResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientPeerChunkResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientPeerChunkResponse;
 }

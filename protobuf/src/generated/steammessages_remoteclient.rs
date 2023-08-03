@@ -2768,6 +2768,9 @@ impl crate::RpcMessage for CMsgRemoteClientAppStatus {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgRemoteClientAppStatus {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgRemoteClientAppStatus;
+}
 impl crate::RpcMessage for CMsgRemoteClientStartStream {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -2780,6 +2783,9 @@ impl crate::RpcMessage for CMsgRemoteClientStartStream {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgRemoteClientStartStream {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgRemoteClientStartStream;
 }
 impl crate::RpcMessage for CMsgRemoteClientStartStreamResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -2794,6 +2800,9 @@ impl crate::RpcMessage for CMsgRemoteClientStartStreamResponse {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgRemoteClientStartStreamResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgRemoteClientStartStreamResponse;
+}
 impl crate::RpcMessage for CMsgRemoteClientPing {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -2806,6 +2815,9 @@ impl crate::RpcMessage for CMsgRemoteClientPing {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgRemoteClientPing {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgRemoteClientPing;
 }
 impl crate::RpcMessage for CMsgRemoteClientPingResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -2820,6 +2832,9 @@ impl crate::RpcMessage for CMsgRemoteClientPingResponse {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgRemoteClientPingResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgRemoteClientPingResponse;
+}
 impl crate::RpcMessage for CMsgRemoteClientAcceptEULA {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -2832,6 +2847,9 @@ impl crate::RpcMessage for CMsgRemoteClientAcceptEULA {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgRemoteClientAcceptEULA {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgRemoteClientAcceptEULA;
 }
 impl crate::RpcMessage for CMsgRemoteClientGetControllerConfig {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -2846,6 +2864,9 @@ impl crate::RpcMessage for CMsgRemoteClientGetControllerConfig {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgRemoteClientGetControllerConfig {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgRemoteClientGetControllerConfig;
+}
 impl crate::RpcMessage for CMsgRemoteClientGetControllerConfigResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -2859,6 +2880,9 @@ impl crate::RpcMessage for CMsgRemoteClientGetControllerConfigResponse {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgRemoteClientGetControllerConfigResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgRemoteClientGetControllerConfigResponse;
+}
 impl crate::RpcMessage for CMsgRemoteClientStreamingEnabled {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -2871,4 +2895,7 @@ impl crate::RpcMessage for CMsgRemoteClientStreamingEnabled {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgRemoteClientStreamingEnabled {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgRemoteClientStreamingEnabled;
 }

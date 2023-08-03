@@ -9800,15 +9800,15 @@ impl crate::RpcMethod for CStoreBrowse_GetDLCForAppsSolr_Request {
     const METHOD_NAME: &'static str = "StoreBrowse.GetDLCForAppsSolr#1";
     type Response = CStoreBrowse_GetDLCForAppsSolr_Response;
 }
-impl crate::RpcMethod for CStoreBrowse_GetStoreCategories_Request {
-    const METHOD_NAME: &'static str = "StoreBrowse.GetStoreCategories#1";
-    type Response = CStoreBrowse_GetStoreCategories_Response;
+impl crate::RpcMethod for CStoreBrowse_GetDLCForApps_Request {
+    const METHOD_NAME: &'static str = "StoreBrowse.GetDLCForApps#1";
+    type Response = CStoreBrowse_GetDLCForApps_Response;
 }
 impl crate::RpcMethod for CStoreBrowse_GetItems_Request {
     const METHOD_NAME: &'static str = "StoreBrowse.GetItems#1";
     type Response = CStoreBrowse_GetItems_Response;
 }
-impl crate::RpcMethod for CStoreBrowse_GetDLCForApps_Request {
-    const METHOD_NAME: &'static str = "StoreBrowse.GetDLCForApps#1";
-    type Response = CStoreBrowse_GetDLCForApps_Response;
+impl crate::RpcMethod for CStoreBrowse_GetStoreCategories_Request {
+    const METHOD_NAME: &'static str = "StoreBrowse.GetStoreCategories#1";
+    type Response = CStoreBrowse_GetStoreCategories_Response;
 }

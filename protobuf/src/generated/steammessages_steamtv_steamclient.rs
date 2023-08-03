@@ -14773,73 +14773,17 @@ struct SteamTV {}
 impl crate::RpcService for SteamTV {
     const SERVICE_NAME: &'static str = "SteamTV";
 }
+impl crate::RpcMethod for CSteamTV_AddChatBan_Request {
+    const METHOD_NAME: &'static str = "SteamTV.AddChatBan#1";
+    type Response = CSteamTV_AddChatBan_Response;
+}
+impl crate::RpcMethod for CSteamTV_AddChatModerator_Request {
+    const METHOD_NAME: &'static str = "SteamTV.AddChatModerator#1";
+    type Response = CSteamTV_AddChatModerator_Response;
+}
 impl crate::RpcMethod for CSteamTV_AddWordBan_Request {
     const METHOD_NAME: &'static str = "SteamTV.AddWordBan#1";
     type Response = CSteamTV_AddWordBan_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetWordBans_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetWordBans#1";
-    type Response = CSteamTV_GetWordBans_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetMyBroadcastChannels_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetMyBroadcastChannels#1";
-    type Response = CSteamTV_GetMyBroadcastChannels_Response;
-}
-impl crate::RpcMethod for CSteamTV_SubscribeBroadcastChannel_Request {
-    const METHOD_NAME: &'static str = "SteamTV.SubscribeBroadcastChannel#1";
-    type Response = CSteamTV_SubscribeBroadcastChannel_Response;
-}
-impl crate::RpcMethod for CSteamTV_SetBroadcastChannelImage_Request {
-    const METHOD_NAME: &'static str = "SteamTV.SetBroadcastChannelImage#1";
-    type Response = CSteamTV_SetBroadcastChannelImage_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetBroadcastChannelInteraction_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelInteraction#1";
-    type Response = CSteamTV_GetBroadcastChannelInteraction_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetGames_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetGames#1";
-    type Response = CSteamTV_GetGames_Response;
-}
-impl crate::RpcMethod for CSteamTV_JoinChat_Request {
-    const METHOD_NAME: &'static str = "SteamTV.JoinChat#1";
-    type Response = CSteamTV_JoinChat_Response;
-}
-impl crate::RpcMethod for CSteamTV_ReportBroadcastChannel_Request {
-    const METHOD_NAME: &'static str = "SteamTV.ReportBroadcastChannel#1";
-    type Response = CSteamTV_ReportBroadcastChannel_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetChatModerators_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetChatModerators#1";
-    type Response = CSteamTV_GetChatModerators_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetHomePageContents_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetHomePageContents#1";
-    type Response = CSteamTV_GetHomePageContents_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetBroadcastChannelID_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelID#1";
-    type Response = CSteamTV_GetBroadcastChannelID_Response;
-}
-impl crate::RpcMethod for CSteamTV_FollowBroadcastChannel_Request {
-    const METHOD_NAME: &'static str = "SteamTV.FollowBroadcastChannel#1";
-    type Response = CSteamTV_FollowBroadcastChannel_Response;
-}
-impl crate::RpcMethod for CSteamTV_SetSteamTVUserSettings_Request {
-    const METHOD_NAME: &'static str = "SteamTV.SetSteamTVUserSettings#1";
-    type Response = CSteamTV_SetSteamTVUserSettings_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetBroadcastChannelBroadcasters_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelBroadcasters#1";
-    type Response = CSteamTV_GetBroadcastChannelBroadcasters_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetChatBans_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetChatBans#1";
-    type Response = CSteamTV_GetChatBans_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetSteamTVUserSettings_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetSteamTVUserSettings#1";
-    type Response = CSteamTV_GetSteamTVUserSettings_Response;
 }
 impl crate::RpcMethod for CSteamTV_AppCheer_Request {
     const METHOD_NAME: &'static str = "SteamTV.AppCheer#1";
@@ -14849,55 +14793,111 @@ impl crate::RpcMethod for CSteamTV_CreateBroadcastChannel_Request {
     const METHOD_NAME: &'static str = "SteamTV.CreateBroadcastChannel#1";
     type Response = CSteamTV_CreateBroadcastChannel_Response;
 }
+impl crate::RpcMethod for CSteamTV_FollowBroadcastChannel_Request {
+    const METHOD_NAME: &'static str = "SteamTV.FollowBroadcastChannel#1";
+    type Response = CSteamTV_FollowBroadcastChannel_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetBroadcastChannelBroadcasters_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelBroadcasters#1";
+    type Response = CSteamTV_GetBroadcastChannelBroadcasters_Response;
+}
 impl crate::RpcMethod for CSteamTV_GetBroadcastChannelClips_Request {
     const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelClips#1";
     type Response = CSteamTV_GetBroadcastChannelClips_Response;
 }
-impl crate::RpcMethod for CSteamTV_AddChatModerator_Request {
-    const METHOD_NAME: &'static str = "SteamTV.AddChatModerator#1";
-    type Response = CSteamTV_AddChatModerator_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetSubscribedChannels_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetSubscribedChannels#1";
-    type Response = CSteamTV_GetSubscribedChannels_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetBroadcastChannelLinks_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelLinks#1";
-    type Response = CSteamTV_GetBroadcastChannelLinks_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetChannels_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetChannels#1";
-    type Response = CSteamTV_GetChannels_Response;
-}
-impl crate::RpcMethod for CSteamTV_SetBroadcastChannelLinkRegions_Request {
-    const METHOD_NAME: &'static str = "SteamTV.SetBroadcastChannelLinkRegions#1";
-    type Response = CSteamTV_SetBroadcastChannelLinkRegions_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetBroadcastChannelProfile_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelProfile#1";
-    type Response = CSteamTV_GetBroadcastChannelProfile_Response;
-}
-impl crate::RpcMethod for CSteamTV_SetBroadcastChannelProfile_Request {
-    const METHOD_NAME: &'static str = "SteamTV.SetBroadcastChannelProfile#1";
-    type Response = CSteamTV_SetBroadcastChannelProfile_Response;
-}
-impl crate::RpcMethod for CSteamTV_GetBroadcastChannelStatus_Request {
-    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelStatus#1";
-    type Response = CSteamTV_GetBroadcastChannelStatus_Response;
-}
-impl crate::RpcMethod for CSteamTV_Search_Request {
-    const METHOD_NAME: &'static str = "SteamTV.Search#1";
-    type Response = CSteamTV_Search_Response;
-}
-impl crate::RpcMethod for CSteamTV_AddChatBan_Request {
-    const METHOD_NAME: &'static str = "SteamTV.AddChatBan#1";
-    type Response = CSteamTV_AddChatBan_Response;
+impl crate::RpcMethod for CSteamTV_GetBroadcastChannelID_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelID#1";
+    type Response = CSteamTV_GetBroadcastChannelID_Response;
 }
 impl crate::RpcMethod for CSteamTV_GetBroadcastChannelImages_Request {
     const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelImages#1";
     type Response = CSteamTV_GetBroadcastChannelImages_Response;
 }
+impl crate::RpcMethod for CSteamTV_GetBroadcastChannelInteraction_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelInteraction#1";
+    type Response = CSteamTV_GetBroadcastChannelInteraction_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetBroadcastChannelLinks_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelLinks#1";
+    type Response = CSteamTV_GetBroadcastChannelLinks_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetBroadcastChannelProfile_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelProfile#1";
+    type Response = CSteamTV_GetBroadcastChannelProfile_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetBroadcastChannelStatus_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetBroadcastChannelStatus#1";
+    type Response = CSteamTV_GetBroadcastChannelStatus_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetChannels_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetChannels#1";
+    type Response = CSteamTV_GetChannels_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetChatBans_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetChatBans#1";
+    type Response = CSteamTV_GetChatBans_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetChatModerators_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetChatModerators#1";
+    type Response = CSteamTV_GetChatModerators_Response;
+}
 impl crate::RpcMethod for CSteamTV_GetFollowedChannels_Request {
     const METHOD_NAME: &'static str = "SteamTV.GetFollowedChannels#1";
     type Response = CSteamTV_GetFollowedChannels_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetGames_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetGames#1";
+    type Response = CSteamTV_GetGames_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetHomePageContents_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetHomePageContents#1";
+    type Response = CSteamTV_GetHomePageContents_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetMyBroadcastChannels_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetMyBroadcastChannels#1";
+    type Response = CSteamTV_GetMyBroadcastChannels_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetSteamTVUserSettings_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetSteamTVUserSettings#1";
+    type Response = CSteamTV_GetSteamTVUserSettings_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetSubscribedChannels_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetSubscribedChannels#1";
+    type Response = CSteamTV_GetSubscribedChannels_Response;
+}
+impl crate::RpcMethod for CSteamTV_GetWordBans_Request {
+    const METHOD_NAME: &'static str = "SteamTV.GetWordBans#1";
+    type Response = CSteamTV_GetWordBans_Response;
+}
+impl crate::RpcMethod for CSteamTV_JoinChat_Request {
+    const METHOD_NAME: &'static str = "SteamTV.JoinChat#1";
+    type Response = CSteamTV_JoinChat_Response;
+}
+impl crate::RpcMethod for CSteamTV_ReportBroadcastChannel_Request {
+    const METHOD_NAME: &'static str = "SteamTV.ReportBroadcastChannel#1";
+    type Response = CSteamTV_ReportBroadcastChannel_Response;
+}
+impl crate::RpcMethod for CSteamTV_Search_Request {
+    const METHOD_NAME: &'static str = "SteamTV.Search#1";
+    type Response = CSteamTV_Search_Response;
+}
+impl crate::RpcMethod for CSteamTV_SetBroadcastChannelImage_Request {
+    const METHOD_NAME: &'static str = "SteamTV.SetBroadcastChannelImage#1";
+    type Response = CSteamTV_SetBroadcastChannelImage_Response;
+}
+impl crate::RpcMethod for CSteamTV_SetBroadcastChannelLinkRegions_Request {
+    const METHOD_NAME: &'static str = "SteamTV.SetBroadcastChannelLinkRegions#1";
+    type Response = CSteamTV_SetBroadcastChannelLinkRegions_Response;
+}
+impl crate::RpcMethod for CSteamTV_SetBroadcastChannelProfile_Request {
+    const METHOD_NAME: &'static str = "SteamTV.SetBroadcastChannelProfile#1";
+    type Response = CSteamTV_SetBroadcastChannelProfile_Response;
+}
+impl crate::RpcMethod for CSteamTV_SetSteamTVUserSettings_Request {
+    const METHOD_NAME: &'static str = "SteamTV.SetSteamTVUserSettings#1";
+    type Response = CSteamTV_SetSteamTVUserSettings_Response;
+}
+impl crate::RpcMethod for CSteamTV_SubscribeBroadcastChannel_Request {
+    const METHOD_NAME: &'static str = "SteamTV.SubscribeBroadcastChannel#1";
+    type Response = CSteamTV_SubscribeBroadcastChannel_Response;
 }

@@ -2016,6 +2016,9 @@ impl crate::RpcMessage for CMsgClientLBSSetScore {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientLBSSetScore {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLBSSetScore;
+}
 impl crate::RpcMessage for CMsgClientLBSSetScoreResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -2028,6 +2031,9 @@ impl crate::RpcMessage for CMsgClientLBSSetScoreResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientLBSSetScoreResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLBSSetScoreResponse;
 }
 impl crate::RpcMessage for CMsgClientLBSSetUGC {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -2042,6 +2048,9 @@ impl crate::RpcMessage for CMsgClientLBSSetUGC {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientLBSSetUGC {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLBSSetUGC;
+}
 impl crate::RpcMessage for CMsgClientLBSSetUGCResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -2054,6 +2063,9 @@ impl crate::RpcMessage for CMsgClientLBSSetUGCResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientLBSSetUGCResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLBSSetUGCResponse;
 }
 impl crate::RpcMessage for CMsgClientLBSFindOrCreateLB {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -2068,6 +2080,9 @@ impl crate::RpcMessage for CMsgClientLBSFindOrCreateLB {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientLBSFindOrCreateLB {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLBSFindOrCreateLB;
+}
 impl crate::RpcMessage for CMsgClientLBSFindOrCreateLBResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -2080,6 +2095,9 @@ impl crate::RpcMessage for CMsgClientLBSFindOrCreateLBResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientLBSFindOrCreateLBResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLBSFindOrCreateLBResponse;
 }
 impl crate::RpcMessage for CMsgClientLBSGetLBEntries {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
@@ -2094,6 +2112,9 @@ impl crate::RpcMessage for CMsgClientLBSGetLBEntries {
         self.compute_size() as usize
     }
 }
+impl crate::RpcMessageWithKind for CMsgClientLBSGetLBEntries {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLBSGetLBEntries;
+}
 impl crate::RpcMessage for CMsgClientLBSGetLBEntriesResponse {
     fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
         <Self as protobuf::Message>::parse_from_reader(reader)
@@ -2106,4 +2127,7 @@ impl crate::RpcMessage for CMsgClientLBSGetLBEntriesResponse {
         use protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl crate::RpcMessageWithKind for CMsgClientLBSGetLBEntriesResponse {
+    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::k_EMsgClientLBSGetLBEntriesResponse;
 }

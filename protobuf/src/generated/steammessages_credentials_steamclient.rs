@@ -2905,17 +2905,9 @@ struct Credentials {}
 impl crate::RpcService for Credentials {
     const SERVICE_NAME: &'static str = "Credentials";
 }
-impl crate::RpcMethod for CCredentials_TestAvailablePassword_Request {
-    const METHOD_NAME: &'static str = "Credentials.TestAvailablePassword#1";
-    type Response = CCredentials_TestAvailablePassword_Response;
-}
-impl crate::RpcMethod for CCredentials_SteamGuardPhishingReport_Request {
-    const METHOD_NAME: &'static str = "Credentials.SteamGuardPhishingReport#1";
-    type Response = CCredentials_SteamGuardPhishingReport_Response;
-}
-impl crate::RpcMethod for CCredentials_ValidateEmailAddress_Request {
-    const METHOD_NAME: &'static str = "Credentials.ValidateEmailAddress#1";
-    type Response = CCredentials_ValidateEmailAddress_Response;
+impl crate::RpcMethod for CCredentials_GetAccountAuthSecret_Request {
+    const METHOD_NAME: &'static str = "Credentials.GetAccountAuthSecret#1";
+    type Response = CCredentials_GetAccountAuthSecret_Response;
 }
 impl crate::RpcMethod for CCredentials_GetSteamGuardDetails_Request {
     const METHOD_NAME: &'static str = "Credentials.GetSteamGuardDetails#1";
@@ -2925,7 +2917,15 @@ impl crate::RpcMethod for CCredentials_LastCredentialChangeTime_Request {
     const METHOD_NAME: &'static str = "Credentials.GetCredentialChangeTimeDetails#1";
     type Response = CCredentials_LastCredentialChangeTime_Response;
 }
-impl crate::RpcMethod for CCredentials_GetAccountAuthSecret_Request {
-    const METHOD_NAME: &'static str = "Credentials.GetAccountAuthSecret#1";
-    type Response = CCredentials_GetAccountAuthSecret_Response;
+impl crate::RpcMethod for CCredentials_SteamGuardPhishingReport_Request {
+    const METHOD_NAME: &'static str = "Credentials.SteamGuardPhishingReport#1";
+    type Response = CCredentials_SteamGuardPhishingReport_Response;
+}
+impl crate::RpcMethod for CCredentials_TestAvailablePassword_Request {
+    const METHOD_NAME: &'static str = "Credentials.TestAvailablePassword#1";
+    type Response = CCredentials_TestAvailablePassword_Response;
+}
+impl crate::RpcMethod for CCredentials_ValidateEmailAddress_Request {
+    const METHOD_NAME: &'static str = "Credentials.ValidateEmailAddress#1";
+    type Response = CCredentials_ValidateEmailAddress_Response;
 }

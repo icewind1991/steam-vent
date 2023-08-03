@@ -22311,235 +22311,235 @@ struct PlayerClient {}
 impl crate::RpcService for PlayerClient {
     const SERVICE_NAME: &'static str = "PlayerClient";
 }
-impl crate::RpcMethod for CPlayer_GetFriendsGameplayInfo_Request {
-    const METHOD_NAME: &'static str = "Player.GetFriendsGameplayInfo#1";
-    type Response = CPlayer_GetFriendsGameplayInfo_Response;
-}
 impl crate::RpcMethod for CPlayer_AcceptSSA_Request {
     const METHOD_NAME: &'static str = "Player.AcceptSSA#1";
     type Response = CPlayer_AcceptSSA_Response;
-}
-impl crate::RpcMethod for CPlayer_SetProfileBackground_Request {
-    const METHOD_NAME: &'static str = "Player.SetProfileBackground#1";
-    type Response = CPlayer_SetProfileBackground_Response;
-}
-impl crate::RpcMethod for CPlayer_SetCommunityPreferences_Request {
-    const METHOD_NAME: &'static str = "Player.SetCommunityPreferences#1";
-    type Response = CPlayer_SetCommunityPreferences_Response;
-}
-impl crate::RpcMethod for CPlayer_GetLastPlayedTimes_Request {
-    const METHOD_NAME: &'static str = "Player.ClientGetLastPlayedTimes#1";
-    type Response = CPlayer_GetLastPlayedTimes_Response;
-}
-impl crate::RpcMethod for CPlayer_FriendNicknameChanged_Notification {
-    const METHOD_NAME: &'static str = "PlayerClient.NotifyFriendNicknameChanged#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CPlayer_SetEquippedProfileItemFlags_Request {
-    const METHOD_NAME: &'static str = "Player.SetEquippedProfileItemFlags#1";
-    type Response = CPlayer_SetEquippedProfileItemFlags_Response;
-}
-impl crate::RpcMethod for CPlayer_PerFriendPreferencesChanged_Notification {
-    const METHOD_NAME: &'static str = "PlayerClient.NotifyPerFriendPreferencesChanged#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CPlayer_SetSteamDeckKeyboardSkin_Request {
-    const METHOD_NAME: &'static str = "Player.SetSteamDeckKeyboardSkin#1";
-    type Response = CPlayer_SetSteamDeckKeyboardSkin_Response;
-}
-impl crate::RpcMethod for CPlayer_GetAnimatedAvatar_Request {
-    const METHOD_NAME: &'static str = "Player.GetAnimatedAvatar#1";
-    type Response = CPlayer_GetAnimatedAvatar_Response;
-}
-impl crate::RpcMethod for CPlayer_GetTimeSSAAccepted_Request {
-    const METHOD_NAME: &'static str = "Player.GetTimeSSAAccepted#1";
-    type Response = CPlayer_GetTimeSSAAccepted_Response;
 }
 impl crate::RpcMethod for CPlayer_AddFriend_Request {
     const METHOD_NAME: &'static str = "Player.AddFriend#1";
     type Response = CPlayer_AddFriend_Response;
 }
-impl crate::RpcMethod for CPlayer_GetPerFriendPreferences_Request {
-    const METHOD_NAME: &'static str = "Player.GetPerFriendPreferences#1";
-    type Response = CPlayer_GetPerFriendPreferences_Response;
+impl crate::RpcMethod for CPlayer_CommunityPreferencesChanged_Notification {
+    const METHOD_NAME: &'static str = "PlayerClient.NotifyCommunityPreferencesChanged#1";
+    type Response = ();
 }
 impl crate::RpcMethod for CPlayer_DeletePostedStatus_Request {
     const METHOD_NAME: &'static str = "Player.DeletePostedStatus#1";
     type Response = CPlayer_DeletePostedStatus_Response;
 }
-impl crate::RpcMethod for CPlayer_TextFilterWordsChanged_Notification {
-    const METHOD_NAME: &'static str = "PlayerClient.NotifyTextFilterWordsChanged#1";
+impl crate::RpcMethod for CPlayer_FriendEquippedProfileItemsChanged_Notification {
+    const METHOD_NAME: &'static str = "PlayerClient.NotifyFriendEquippedProfileItemsChanged#1";
     type Response = ();
 }
-impl crate::RpcMethod for CPlayer_GetDurationControl_Request {
-    const METHOD_NAME: &'static str = "Player.GetDurationControl#1";
-    type Response = CPlayer_GetDurationControl_Response;
-}
-impl crate::RpcMethod for CPlayer_SetPerFriendPreferences_Request {
-    const METHOD_NAME: &'static str = "Player.SetPerFriendPreferences#1";
-    type Response = CPlayer_SetPerFriendPreferences_Response;
-}
-impl crate::RpcMethod for CPlayer_GetGameBadgeLevels_Request {
-    const METHOD_NAME: &'static str = "Player.GetGameBadgeLevels#1";
-    type Response = CPlayer_GetGameBadgeLevels_Response;
+impl crate::RpcMethod for CPlayer_FriendNicknameChanged_Notification {
+    const METHOD_NAME: &'static str = "PlayerClient.NotifyFriendNicknameChanged#1";
+    type Response = ();
 }
 impl crate::RpcMethod for CPlayer_GetAchievementsProgress_Request {
     const METHOD_NAME: &'static str = "Player.GetAchievementsProgress#1";
     type Response = CPlayer_GetAchievementsProgress_Response;
 }
-impl crate::RpcMethod for CPlayer_GetPlayNext_Request {
-    const METHOD_NAME: &'static str = "Player.GetPlayNext#1";
-    type Response = CPlayer_GetPlayNext_Response;
-}
-impl crate::RpcMethod for CPlayer_GetNewSteamAnnouncementState_Request {
-    const METHOD_NAME: &'static str = "Player.GetNewSteamAnnouncementState#1";
-    type Response = CPlayer_GetNewSteamAnnouncementState_Response;
-}
-impl crate::RpcMethod for CPlayer_GetTextFilterWords_Request {
-    const METHOD_NAME: &'static str = "Player.GetTextFilterWords#1";
-    type Response = CPlayer_GetTextFilterWords_Response;
-}
-impl crate::RpcMethod for CPlayer_GetPrivacySettings_Request {
-    const METHOD_NAME: &'static str = "Player.GetPrivacySettings#1";
-    type Response = CPlayer_GetPrivacySettings_Response;
-}
-impl crate::RpcMethod for CPlayer_GetOwnedGames_Request {
-    const METHOD_NAME: &'static str = "Player.GetOwnedGames#1";
-    type Response = CPlayer_GetOwnedGames_Response;
+impl crate::RpcMethod for CPlayer_GetAnimatedAvatar_Request {
+    const METHOD_NAME: &'static str = "Player.GetAnimatedAvatar#1";
+    type Response = CPlayer_GetAnimatedAvatar_Response;
 }
 impl crate::RpcMethod for CPlayer_GetAvatarFrame_Request {
     const METHOD_NAME: &'static str = "Player.GetAvatarFrame#1";
     type Response = CPlayer_GetAvatarFrame_Response;
 }
-impl crate::RpcMethod for CPlayer_GetNicknameList_Request {
-    const METHOD_NAME: &'static str = "Player.GetNicknameList#1";
-    type Response = CPlayer_GetNicknameList_Response;
-}
-impl crate::RpcMethod for CPlayer_FriendEquippedProfileItemsChanged_Notification {
-    const METHOD_NAME: &'static str = "PlayerClient.NotifyFriendEquippedProfileItemsChanged#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CPlayer_LastPlayedTimes_Notification {
-    const METHOD_NAME: &'static str = "PlayerClient.NotifyLastPlayedTimes#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CPlayer_GetPurchasedProfileCustomizations_Request {
-    const METHOD_NAME: &'static str = "Player.GetPurchasedProfileCustomizations#1";
-    type Response = CPlayer_GetPurchasedProfileCustomizations_Response;
-}
-impl crate::RpcMethod for CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request {
-    const METHOD_NAME: &'static str = "Player.GetPurchasedAndUpgradedProfileCustomizations#1";
-    type Response = CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response;
-}
-impl crate::RpcMethod for CPlayer_SetAvatarFrame_Request {
-    const METHOD_NAME: &'static str = "Player.SetAvatarFrame#1";
-    type Response = CPlayer_SetAvatarFrame_Response;
-}
-impl crate::RpcMethod for CPlayer_SetAnimatedAvatar_Request {
-    const METHOD_NAME: &'static str = "Player.SetAnimatedAvatar#1";
-    type Response = CPlayer_SetAnimatedAvatar_Response;
-}
-impl crate::RpcMethod for CPlayer_GetFavoriteBadge_Request {
-    const METHOD_NAME: &'static str = "Player.GetFavoriteBadge#1";
-    type Response = CPlayer_GetFavoriteBadge_Response;
-}
-impl crate::RpcMethod for CPlayer_IgnoreFriend_Request {
-    const METHOD_NAME: &'static str = "Player.IgnoreFriend#1";
-    type Response = CPlayer_IgnoreFriend_Response;
-}
-impl crate::RpcMethod for CPlayer_GetMiniProfileBackground_Request {
-    const METHOD_NAME: &'static str = "Player.GetMiniProfileBackground#1";
-    type Response = CPlayer_GetMiniProfileBackground_Response;
-}
 impl crate::RpcMethod for CPlayer_GetCommunityPreferences_Request {
     const METHOD_NAME: &'static str = "Player.GetCommunityPreferences#1";
     type Response = CPlayer_GetCommunityPreferences_Response;
 }
-impl crate::RpcMethod for CPlayer_GetProfileBackground_Request {
-    const METHOD_NAME: &'static str = "Player.GetProfileBackground#1";
-    type Response = CPlayer_GetProfileBackground_Response;
-}
-impl crate::RpcMethod for CPlayer_SetMiniProfileBackground_Request {
-    const METHOD_NAME: &'static str = "Player.SetMiniProfileBackground#1";
-    type Response = CPlayer_SetMiniProfileBackground_Response;
-}
-impl crate::RpcMethod for CPlayer_NewSteamAnnouncementState_Notification {
-    const METHOD_NAME: &'static str = "PlayerClient.NotifyNewSteamAnnouncementState#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CPlayer_RemoveFriend_Request {
-    const METHOD_NAME: &'static str = "Player.RemoveFriend#1";
-    type Response = CPlayer_RemoveFriend_Response;
-}
-impl crate::RpcMethod for CPlayer_GetProfileThemesAvailable_Request {
-    const METHOD_NAME: &'static str = "Player.GetProfileThemesAvailable#1";
-    type Response = CPlayer_GetProfileThemesAvailable_Response;
-}
-impl crate::RpcMethod for CPlayer_SetFavoriteBadge_Request {
-    const METHOD_NAME: &'static str = "Player.SetFavoriteBadge#1";
-    type Response = CPlayer_SetFavoriteBadge_Response;
-}
-impl crate::RpcMethod for CPlayer_GetMutualFriendsForIncomingInvites_Request {
-    const METHOD_NAME: &'static str = "Player.GetMutualFriendsForIncomingInvites#1";
-    type Response = CPlayer_GetMutualFriendsForIncomingInvites_Response;
-}
-impl crate::RpcMethod for CPlayer_SetProfileTheme_Request {
-    const METHOD_NAME: &'static str = "Player.SetProfileTheme#1";
-    type Response = CPlayer_SetProfileTheme_Response;
-}
-impl crate::RpcMethod for CPlayer_SetProfilePreferences_Request {
-    const METHOD_NAME: &'static str = "Player.SetProfilePreferences#1";
-    type Response = CPlayer_SetProfilePreferences_Response;
-}
-impl crate::RpcMethod for CPlayer_GetGameAchievements_Request {
-    const METHOD_NAME: &'static str = "Player.GetGameAchievements#1";
-    type Response = CPlayer_GetGameAchievements_Response;
-}
-impl crate::RpcMethod for CPlayer_GetProfileItemsEquipped_Request {
-    const METHOD_NAME: &'static str = "Player.GetProfileItemsEquipped#1";
-    type Response = CPlayer_GetProfileItemsEquipped_Response;
-}
-impl crate::RpcMethod for CPlayer_GetTopAchievementsForGames_Request {
-    const METHOD_NAME: &'static str = "Player.GetTopAchievementsForGames#1";
-    type Response = CPlayer_GetTopAchievementsForGames_Response;
-}
-impl crate::RpcMethod for CPlayer_PrivacySettingsChanged_Notification {
-    const METHOD_NAME: &'static str = "PlayerClient.NotifyPrivacyPrivacySettingsChanged#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CPlayer_UpdateSteamAnnouncementLastRead_Request {
-    const METHOD_NAME: &'static str = "Player.UpdateSteamAnnouncementLastRead#1";
-    type Response = CPlayer_UpdateSteamAnnouncementLastRead_Response;
-}
-impl crate::RpcMethod for CPlayer_GetSteamDeckKeyboardSkin_Request {
-    const METHOD_NAME: &'static str = "Player.GetSteamDeckKeyboardSkin#1";
-    type Response = CPlayer_GetSteamDeckKeyboardSkin_Response;
+impl crate::RpcMethod for CPlayer_GetDurationControl_Request {
+    const METHOD_NAME: &'static str = "Player.GetDurationControl#1";
+    type Response = CPlayer_GetDurationControl_Response;
 }
 impl crate::RpcMethod for CPlayer_GetEmoticonList_Request {
     const METHOD_NAME: &'static str = "Player.GetEmoticonList#1";
     type Response = CPlayer_GetEmoticonList_Response;
 }
+impl crate::RpcMethod for CPlayer_GetFavoriteBadge_Request {
+    const METHOD_NAME: &'static str = "Player.GetFavoriteBadge#1";
+    type Response = CPlayer_GetFavoriteBadge_Response;
+}
+impl crate::RpcMethod for CPlayer_GetFriendsGameplayInfo_Request {
+    const METHOD_NAME: &'static str = "Player.GetFriendsGameplayInfo#1";
+    type Response = CPlayer_GetFriendsGameplayInfo_Response;
+}
+impl crate::RpcMethod for CPlayer_GetGameAchievements_Request {
+    const METHOD_NAME: &'static str = "Player.GetGameAchievements#1";
+    type Response = CPlayer_GetGameAchievements_Response;
+}
+impl crate::RpcMethod for CPlayer_GetGameBadgeLevels_Request {
+    const METHOD_NAME: &'static str = "Player.GetGameBadgeLevels#1";
+    type Response = CPlayer_GetGameBadgeLevels_Response;
+}
+impl crate::RpcMethod for CPlayer_GetLastPlayedTimes_Request {
+    const METHOD_NAME: &'static str = "Player.ClientGetLastPlayedTimes#1";
+    type Response = CPlayer_GetLastPlayedTimes_Response;
+}
+impl crate::RpcMethod for CPlayer_GetMiniProfileBackground_Request {
+    const METHOD_NAME: &'static str = "Player.GetMiniProfileBackground#1";
+    type Response = CPlayer_GetMiniProfileBackground_Response;
+}
+impl crate::RpcMethod for CPlayer_GetMutualFriendsForIncomingInvites_Request {
+    const METHOD_NAME: &'static str = "Player.GetMutualFriendsForIncomingInvites#1";
+    type Response = CPlayer_GetMutualFriendsForIncomingInvites_Response;
+}
+impl crate::RpcMethod for CPlayer_GetNewSteamAnnouncementState_Request {
+    const METHOD_NAME: &'static str = "Player.GetNewSteamAnnouncementState#1";
+    type Response = CPlayer_GetNewSteamAnnouncementState_Response;
+}
+impl crate::RpcMethod for CPlayer_GetNicknameList_Request {
+    const METHOD_NAME: &'static str = "Player.GetNicknameList#1";
+    type Response = CPlayer_GetNicknameList_Response;
+}
+impl crate::RpcMethod for CPlayer_GetOwnedGames_Request {
+    const METHOD_NAME: &'static str = "Player.GetOwnedGames#1";
+    type Response = CPlayer_GetOwnedGames_Response;
+}
+impl crate::RpcMethod for CPlayer_GetPerFriendPreferences_Request {
+    const METHOD_NAME: &'static str = "Player.GetPerFriendPreferences#1";
+    type Response = CPlayer_GetPerFriendPreferences_Response;
+}
+impl crate::RpcMethod for CPlayer_GetPlayNext_Request {
+    const METHOD_NAME: &'static str = "Player.GetPlayNext#1";
+    type Response = CPlayer_GetPlayNext_Response;
+}
+impl crate::RpcMethod for CPlayer_GetPostedStatus_Request {
+    const METHOD_NAME: &'static str = "Player.GetPostedStatus#1";
+    type Response = CPlayer_GetPostedStatus_Response;
+}
+impl crate::RpcMethod for CPlayer_GetPrivacySettings_Request {
+    const METHOD_NAME: &'static str = "Player.GetPrivacySettings#1";
+    type Response = CPlayer_GetPrivacySettings_Response;
+}
+impl crate::RpcMethod for CPlayer_GetProfileBackground_Request {
+    const METHOD_NAME: &'static str = "Player.GetProfileBackground#1";
+    type Response = CPlayer_GetProfileBackground_Response;
+}
+impl crate::RpcMethod for CPlayer_GetProfileCustomization_Request {
+    const METHOD_NAME: &'static str = "Player.GetProfileCustomization#1";
+    type Response = CPlayer_GetProfileCustomization_Response;
+}
+impl crate::RpcMethod for CPlayer_GetProfileItemsEquipped_Request {
+    const METHOD_NAME: &'static str = "Player.GetProfileItemsEquipped#1";
+    type Response = CPlayer_GetProfileItemsEquipped_Response;
+}
 impl crate::RpcMethod for CPlayer_GetProfileItemsOwned_Request {
     const METHOD_NAME: &'static str = "Player.GetProfileItemsOwned#1";
     type Response = CPlayer_GetProfileItemsOwned_Response;
 }
-impl crate::RpcMethod for CPlayer_CommunityPreferencesChanged_Notification {
-    const METHOD_NAME: &'static str = "PlayerClient.NotifyCommunityPreferencesChanged#1";
+impl crate::RpcMethod for CPlayer_GetProfileThemesAvailable_Request {
+    const METHOD_NAME: &'static str = "Player.GetProfileThemesAvailable#1";
+    type Response = CPlayer_GetProfileThemesAvailable_Response;
+}
+impl crate::RpcMethod for CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request {
+    const METHOD_NAME: &'static str = "Player.GetPurchasedAndUpgradedProfileCustomizations#1";
+    type Response = CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response;
+}
+impl crate::RpcMethod for CPlayer_GetPurchasedProfileCustomizations_Request {
+    const METHOD_NAME: &'static str = "Player.GetPurchasedProfileCustomizations#1";
+    type Response = CPlayer_GetPurchasedProfileCustomizations_Response;
+}
+impl crate::RpcMethod for CPlayer_GetSteamDeckKeyboardSkin_Request {
+    const METHOD_NAME: &'static str = "Player.GetSteamDeckKeyboardSkin#1";
+    type Response = CPlayer_GetSteamDeckKeyboardSkin_Response;
+}
+impl crate::RpcMethod for CPlayer_GetTextFilterWords_Request {
+    const METHOD_NAME: &'static str = "Player.GetTextFilterWords#1";
+    type Response = CPlayer_GetTextFilterWords_Response;
+}
+impl crate::RpcMethod for CPlayer_GetTimeSSAAccepted_Request {
+    const METHOD_NAME: &'static str = "Player.GetTimeSSAAccepted#1";
+    type Response = CPlayer_GetTimeSSAAccepted_Response;
+}
+impl crate::RpcMethod for CPlayer_GetTopAchievementsForGames_Request {
+    const METHOD_NAME: &'static str = "Player.GetTopAchievementsForGames#1";
+    type Response = CPlayer_GetTopAchievementsForGames_Response;
+}
+impl crate::RpcMethod for CPlayer_IgnoreFriend_Request {
+    const METHOD_NAME: &'static str = "Player.IgnoreFriend#1";
+    type Response = CPlayer_IgnoreFriend_Response;
+}
+impl crate::RpcMethod for CPlayer_LastPlayedTimes_Notification {
+    const METHOD_NAME: &'static str = "PlayerClient.NotifyLastPlayedTimes#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CPlayer_NewSteamAnnouncementState_Notification {
+    const METHOD_NAME: &'static str = "PlayerClient.NotifyNewSteamAnnouncementState#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CPlayer_PerFriendPreferencesChanged_Notification {
+    const METHOD_NAME: &'static str = "PlayerClient.NotifyPerFriendPreferencesChanged#1";
     type Response = ();
 }
 impl crate::RpcMethod for CPlayer_PostStatusToFriends_Request {
     const METHOD_NAME: &'static str = "Player.PostStatusToFriends#1";
     type Response = CPlayer_PostStatusToFriends_Response;
 }
-impl crate::RpcMethod for CPlayer_GetPostedStatus_Request {
-    const METHOD_NAME: &'static str = "Player.GetPostedStatus#1";
-    type Response = CPlayer_GetPostedStatus_Response;
-}
-impl crate::RpcMethod for CPlayer_GetProfileCustomization_Request {
-    const METHOD_NAME: &'static str = "Player.GetProfileCustomization#1";
-    type Response = CPlayer_GetProfileCustomization_Response;
+impl crate::RpcMethod for CPlayer_PrivacySettingsChanged_Notification {
+    const METHOD_NAME: &'static str = "PlayerClient.NotifyPrivacyPrivacySettingsChanged#1";
+    type Response = ();
 }
 impl crate::RpcMethod for CPlayer_RecordDisconnectedPlaytime_Request {
     const METHOD_NAME: &'static str = "Player.RecordDisconnectedPlaytime#1";
     type Response = CPlayer_RecordDisconnectedPlaytime_Response;
+}
+impl crate::RpcMethod for CPlayer_RemoveFriend_Request {
+    const METHOD_NAME: &'static str = "Player.RemoveFriend#1";
+    type Response = CPlayer_RemoveFriend_Response;
+}
+impl crate::RpcMethod for CPlayer_SetAnimatedAvatar_Request {
+    const METHOD_NAME: &'static str = "Player.SetAnimatedAvatar#1";
+    type Response = CPlayer_SetAnimatedAvatar_Response;
+}
+impl crate::RpcMethod for CPlayer_SetAvatarFrame_Request {
+    const METHOD_NAME: &'static str = "Player.SetAvatarFrame#1";
+    type Response = CPlayer_SetAvatarFrame_Response;
+}
+impl crate::RpcMethod for CPlayer_SetCommunityPreferences_Request {
+    const METHOD_NAME: &'static str = "Player.SetCommunityPreferences#1";
+    type Response = CPlayer_SetCommunityPreferences_Response;
+}
+impl crate::RpcMethod for CPlayer_SetEquippedProfileItemFlags_Request {
+    const METHOD_NAME: &'static str = "Player.SetEquippedProfileItemFlags#1";
+    type Response = CPlayer_SetEquippedProfileItemFlags_Response;
+}
+impl crate::RpcMethod for CPlayer_SetFavoriteBadge_Request {
+    const METHOD_NAME: &'static str = "Player.SetFavoriteBadge#1";
+    type Response = CPlayer_SetFavoriteBadge_Response;
+}
+impl crate::RpcMethod for CPlayer_SetMiniProfileBackground_Request {
+    const METHOD_NAME: &'static str = "Player.SetMiniProfileBackground#1";
+    type Response = CPlayer_SetMiniProfileBackground_Response;
+}
+impl crate::RpcMethod for CPlayer_SetPerFriendPreferences_Request {
+    const METHOD_NAME: &'static str = "Player.SetPerFriendPreferences#1";
+    type Response = CPlayer_SetPerFriendPreferences_Response;
+}
+impl crate::RpcMethod for CPlayer_SetProfileBackground_Request {
+    const METHOD_NAME: &'static str = "Player.SetProfileBackground#1";
+    type Response = CPlayer_SetProfileBackground_Response;
+}
+impl crate::RpcMethod for CPlayer_SetProfilePreferences_Request {
+    const METHOD_NAME: &'static str = "Player.SetProfilePreferences#1";
+    type Response = CPlayer_SetProfilePreferences_Response;
+}
+impl crate::RpcMethod for CPlayer_SetProfileTheme_Request {
+    const METHOD_NAME: &'static str = "Player.SetProfileTheme#1";
+    type Response = CPlayer_SetProfileTheme_Response;
+}
+impl crate::RpcMethod for CPlayer_SetSteamDeckKeyboardSkin_Request {
+    const METHOD_NAME: &'static str = "Player.SetSteamDeckKeyboardSkin#1";
+    type Response = CPlayer_SetSteamDeckKeyboardSkin_Response;
+}
+impl crate::RpcMethod for CPlayer_TextFilterWordsChanged_Notification {
+    const METHOD_NAME: &'static str = "PlayerClient.NotifyTextFilterWordsChanged#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CPlayer_UpdateSteamAnnouncementLastRead_Request {
+    const METHOD_NAME: &'static str = "Player.UpdateSteamAnnouncementLastRead#1";
+    type Response = CPlayer_UpdateSteamAnnouncementLastRead_Response;
 }

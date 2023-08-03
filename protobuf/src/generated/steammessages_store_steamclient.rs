@@ -7864,46 +7864,6 @@ struct StoreClient {}
 impl crate::RpcService for StoreClient {
     const SERVICE_NAME: &'static str = "StoreClient";
 }
-impl crate::RpcMethod for CStore_GetDiscoveryQueueSettings_Request {
-    const METHOD_NAME: &'static str = "Store.GetDiscoveryQueueSettings#1";
-    type Response = CStore_GetDiscoveryQueueSettings_Response;
-}
-impl crate::RpcMethod for CStore_SkipDiscoveryQueueItem_Request {
-    const METHOD_NAME: &'static str = "Store.SkipDiscoveryQueueItem#1";
-    type Response = CStore_SkipDiscoveryQueueItem_Response;
-}
-impl crate::RpcMethod for CStore_GetTrendingAppsAmongFriends_Request {
-    const METHOD_NAME: &'static str = "Store.GetTrendingAppsAmongFriends#1";
-    type Response = CStore_GetTrendingAppsAmongFriends_Response;
-}
-impl crate::RpcMethod for CStore_GetDiscoveryQueueSkippedApps_Request {
-    const METHOD_NAME: &'static str = "Store.GetDiscoveryQueueSkippedApps#1";
-    type Response = CStore_GetDiscoveryQueueSkippedApps_Response;
-}
-impl crate::RpcMethod for CStore_StorePreferencesChanged_Notification {
-    const METHOD_NAME: &'static str = "StoreClient.NotifyStorePreferencesChanged#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CStore_GetTagList_Request {
-    const METHOD_NAME: &'static str = "Store.GetTagList#1";
-    type Response = CStore_GetTagList_Response;
-}
-impl crate::RpcMethod for CStore_GetStorePreferences_Request {
-    const METHOD_NAME: &'static str = "Store.GetStorePreferences#1";
-    type Response = CStore_GetStorePreferences_Response;
-}
-impl crate::RpcMethod for CStore_GetMostPopularTags_Request {
-    const METHOD_NAME: &'static str = "Store.GetMostPopularTags#1";
-    type Response = CStore_GetMostPopularTags_Response;
-}
-impl crate::RpcMethod for CStore_RegisterCDKey_Request {
-    const METHOD_NAME: &'static str = "Store.RegisterCDKey#1";
-    type Response = CStore_RegisterCDKey_Response;
-}
-impl crate::RpcMethod for CStore_GetLocalizedNameForTags_Request {
-    const METHOD_NAME: &'static str = "Store.GetLocalizedNameForTags#1";
-    type Response = CStore_GetLocalizedNameForTags_Response;
-}
 impl crate::RpcMethod for CSteamDeckCompatibility_SetFeedback_Request {
     const METHOD_NAME: &'static str = "Store.SetCompatibilityFeedback#1";
     type Response = CSteamDeckCompatibility_SetFeedback_Response;
@@ -7912,11 +7872,51 @@ impl crate::RpcMethod for CSteamDeckCompatibility_ShouldPrompt_Request {
     const METHOD_NAME: &'static str = "Store.ShouldPromptForCompatibilityFeedback#1";
     type Response = CSteamDeckCompatibility_ShouldPrompt_Response;
 }
+impl crate::RpcMethod for CStore_GetDiscoveryQueueSettings_Request {
+    const METHOD_NAME: &'static str = "Store.GetDiscoveryQueueSettings#1";
+    type Response = CStore_GetDiscoveryQueueSettings_Response;
+}
+impl crate::RpcMethod for CStore_GetDiscoveryQueueSkippedApps_Request {
+    const METHOD_NAME: &'static str = "Store.GetDiscoveryQueueSkippedApps#1";
+    type Response = CStore_GetDiscoveryQueueSkippedApps_Response;
+}
 impl crate::RpcMethod for CStore_GetDiscoveryQueue_Request {
     const METHOD_NAME: &'static str = "Store.GetDiscoveryQueue#1";
     type Response = CStore_GetDiscoveryQueue_Response;
 }
+impl crate::RpcMethod for CStore_GetLocalizedNameForTags_Request {
+    const METHOD_NAME: &'static str = "Store.GetLocalizedNameForTags#1";
+    type Response = CStore_GetLocalizedNameForTags_Response;
+}
+impl crate::RpcMethod for CStore_GetMostPopularTags_Request {
+    const METHOD_NAME: &'static str = "Store.GetMostPopularTags#1";
+    type Response = CStore_GetMostPopularTags_Response;
+}
+impl crate::RpcMethod for CStore_GetStorePreferences_Request {
+    const METHOD_NAME: &'static str = "Store.GetStorePreferences#1";
+    type Response = CStore_GetStorePreferences_Response;
+}
+impl crate::RpcMethod for CStore_GetTagList_Request {
+    const METHOD_NAME: &'static str = "Store.GetTagList#1";
+    type Response = CStore_GetTagList_Response;
+}
+impl crate::RpcMethod for CStore_GetTrendingAppsAmongFriends_Request {
+    const METHOD_NAME: &'static str = "Store.GetTrendingAppsAmongFriends#1";
+    type Response = CStore_GetTrendingAppsAmongFriends_Response;
+}
 impl crate::RpcMethod for CStore_GetUserGameInterestState_Request {
     const METHOD_NAME: &'static str = "Store.GetUserGameInterestState#1";
     type Response = CStore_GetUserGameInterestState_Response;
+}
+impl crate::RpcMethod for CStore_RegisterCDKey_Request {
+    const METHOD_NAME: &'static str = "Store.RegisterCDKey#1";
+    type Response = CStore_RegisterCDKey_Response;
+}
+impl crate::RpcMethod for CStore_SkipDiscoveryQueueItem_Request {
+    const METHOD_NAME: &'static str = "Store.SkipDiscoveryQueueItem#1";
+    type Response = CStore_SkipDiscoveryQueueItem_Response;
+}
+impl crate::RpcMethod for CStore_StorePreferencesChanged_Notification {
+    const METHOD_NAME: &'static str = "StoreClient.NotifyStorePreferencesChanged#1";
+    type Response = ();
 }

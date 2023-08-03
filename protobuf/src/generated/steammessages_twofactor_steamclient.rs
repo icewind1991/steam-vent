@@ -4830,39 +4830,39 @@ struct TwoFactor {}
 impl crate::RpcService for TwoFactor {
     const SERVICE_NAME: &'static str = "TwoFactor";
 }
+impl crate::RpcMethod for CTwoFactor_AddAuthenticator_Request {
+    const METHOD_NAME: &'static str = "TwoFactor.AddAuthenticator#1";
+    type Response = CTwoFactor_AddAuthenticator_Response;
+}
 impl crate::RpcMethod for CTwoFactor_FinalizeAddAuthenticator_Request {
     const METHOD_NAME: &'static str = "TwoFactor.FinalizeAddAuthenticator#1";
     type Response = CTwoFactor_FinalizeAddAuthenticator_Response;
-}
-impl crate::RpcMethod for CTwoFactor_Status_Request {
-    const METHOD_NAME: &'static str = "TwoFactor.QueryStatus#1";
-    type Response = CTwoFactor_Status_Response;
-}
-impl crate::RpcMethod for CTwoFactor_UpdateTokenVersion_Request {
-    const METHOD_NAME: &'static str = "TwoFactor.UpdateTokenVersion#1";
-    type Response = CTwoFactor_UpdateTokenVersion_Response;
-}
-impl crate::RpcMethod for CTwoFactor_SendEmail_Request {
-    const METHOD_NAME: &'static str = "TwoFactor.SendEmail#1";
-    type Response = CTwoFactor_SendEmail_Response;
-}
-impl crate::RpcMethod for CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request {
-    const METHOD_NAME: &'static str = "TwoFactor.RemoveAuthenticatorViaChallengeStart#1";
-    type Response = CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response;
 }
 impl crate::RpcMethod for CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request {
     const METHOD_NAME: &'static str = "TwoFactor.RemoveAuthenticatorViaChallengeContinue#1";
     type Response = CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response;
 }
+impl crate::RpcMethod for CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request {
+    const METHOD_NAME: &'static str = "TwoFactor.RemoveAuthenticatorViaChallengeStart#1";
+    type Response = CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response;
+}
 impl crate::RpcMethod for CTwoFactor_RemoveAuthenticator_Request {
     const METHOD_NAME: &'static str = "TwoFactor.RemoveAuthenticator#1";
     type Response = CTwoFactor_RemoveAuthenticator_Response;
 }
-impl crate::RpcMethod for CTwoFactor_AddAuthenticator_Request {
-    const METHOD_NAME: &'static str = "TwoFactor.AddAuthenticator#1";
-    type Response = CTwoFactor_AddAuthenticator_Response;
+impl crate::RpcMethod for CTwoFactor_SendEmail_Request {
+    const METHOD_NAME: &'static str = "TwoFactor.SendEmail#1";
+    type Response = CTwoFactor_SendEmail_Response;
+}
+impl crate::RpcMethod for CTwoFactor_Status_Request {
+    const METHOD_NAME: &'static str = "TwoFactor.QueryStatus#1";
+    type Response = CTwoFactor_Status_Response;
 }
 impl crate::RpcMethod for CTwoFactor_Time_Request {
     const METHOD_NAME: &'static str = "TwoFactor.QueryTime#1";
     type Response = CTwoFactor_Time_Response;
+}
+impl crate::RpcMethod for CTwoFactor_UpdateTokenVersion_Request {
+    const METHOD_NAME: &'static str = "TwoFactor.UpdateTokenVersion#1";
+    type Response = CTwoFactor_UpdateTokenVersion_Response;
 }

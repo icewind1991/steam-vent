@@ -2803,21 +2803,21 @@ impl crate::RpcMethod for CContentBuilder_CommitAppBuild_Request {
     const METHOD_NAME: &'static str = "ContentBuilder.CommitAppBuild#1";
     type Response = CContentBuilder_CommitAppBuild_Response;
 }
-impl crate::RpcMethod for CContentBuilder_SignInstallScript_Request {
-    const METHOD_NAME: &'static str = "ContentBuilder.SignInstallScript#1";
-    type Response = CContentBuilder_SignInstallScript_Response;
+impl crate::RpcMethod for CContentBuilder_FinishDepotUpload_Request {
+    const METHOD_NAME: &'static str = "ContentBuilder.FinishDepotUpload#1";
+    type Response = CContentBuilder_FinishDepotUpload_Response;
 }
 impl crate::RpcMethod for CContentBuilder_GetMissingDepotChunks_Request {
     const METHOD_NAME: &'static str = "ContentBuilder.GetMissingDepotChunks#1";
     type Response = CContentBuilder_GetMissingDepotChunks_Response;
 }
-impl crate::RpcMethod for CContentBuilder_FinishDepotUpload_Request {
-    const METHOD_NAME: &'static str = "ContentBuilder.FinishDepotUpload#1";
-    type Response = CContentBuilder_FinishDepotUpload_Response;
-}
 impl crate::RpcMethod for CContentBuilder_InitDepotBuild_Request {
     const METHOD_NAME: &'static str = "ContentBuilder.InitDepotBuild#1";
     type Response = CContentBuilder_InitDepotBuild_Response;
+}
+impl crate::RpcMethod for CContentBuilder_SignInstallScript_Request {
+    const METHOD_NAME: &'static str = "ContentBuilder.SignInstallScript#1";
+    type Response = CContentBuilder_SignInstallScript_Response;
 }
 impl crate::RpcMethod for CContentBuilder_StartDepotUpload_Request {
     const METHOD_NAME: &'static str = "ContentBuilder.StartDepotUpload#1";

@@ -12167,123 +12167,123 @@ struct CloudClient {}
 impl crate::RpcService for CloudClient {
     const SERVICE_NAME: &'static str = "CloudClient";
 }
-impl crate::RpcMethod for CCloud_AppSessionSuspend_Request {
-    const METHOD_NAME: &'static str = "Cloud.SuspendAppSession#1";
-    type Response = CCloud_AppSessionSuspend_Response;
-}
-impl crate::RpcMethod for CCloud_GetUploadServerInfo_Request {
-    const METHOD_NAME: &'static str = "Cloud.GetUploadServerInfo#1";
-    type Response = CCloud_GetUploadServerInfo_Response;
-}
-impl crate::RpcMethod for CCloud_CommitUGCUpload_Request {
-    const METHOD_NAME: &'static str = "Cloud.CommitUGCUpload#1";
-    type Response = CCloud_CommitUGCUpload_Response;
+impl crate::RpcMethod for CCloud_AppCloudStateChange_Notification {
+    const METHOD_NAME: &'static str = "CloudClient.NotifyAppStateChange#1";
+    type Response = ();
 }
 impl crate::RpcMethod for CCloud_AppExitSyncDone_Notification {
     const METHOD_NAME: &'static str = "Cloud.SignalAppExitSyncDone#1";
     type Response = ();
 }
-impl crate::RpcMethod for CCloud_AppCloudStateChange_Notification {
-    const METHOD_NAME: &'static str = "CloudClient.NotifyAppStateChange#1";
-    type Response = ();
+impl crate::RpcMethod for CCloud_AppLaunchIntent_Request {
+    const METHOD_NAME: &'static str = "Cloud.SignalAppLaunchIntent#1";
+    type Response = CCloud_AppLaunchIntent_Response;
 }
-impl crate::RpcMethod for CCloud_CompleteAppUploadBatch_Request {
-    const METHOD_NAME: &'static str = "Cloud.CompleteAppUploadBatchBlocking#1";
-    type Response = CCloud_CompleteAppUploadBatch_Response;
+impl crate::RpcMethod for CCloud_AppSessionResume_Request {
+    const METHOD_NAME: &'static str = "Cloud.ResumeAppSession#1";
+    type Response = CCloud_AppSessionResume_Response;
 }
-impl crate::RpcMethod for CCloud_ClientLogUploadCheck_Notification {
-    const METHOD_NAME: &'static str = "Cloud.ClientLogUploadCheck#1";
+impl crate::RpcMethod for CCloud_AppSessionSuspend_Request {
+    const METHOD_NAME: &'static str = "Cloud.SuspendAppSession#1";
+    type Response = CCloud_AppSessionSuspend_Response;
+}
+impl crate::RpcMethod for CCloud_BeginAppUploadBatch_Request {
+    const METHOD_NAME: &'static str = "Cloud.BeginAppUploadBatch#1";
+    type Response = CCloud_BeginAppUploadBatch_Response;
+}
+impl crate::RpcMethod for CCloud_BeginHTTPUpload_Request {
+    const METHOD_NAME: &'static str = "Cloud.BeginHTTPUpload#1";
+    type Response = CCloud_BeginHTTPUpload_Response;
+}
+impl crate::RpcMethod for CCloud_BeginUGCUpload_Request {
+    const METHOD_NAME: &'static str = "Cloud.BeginUGCUpload#1";
+    type Response = CCloud_BeginUGCUpload_Response;
+}
+impl crate::RpcMethod for CCloud_CDNReport_Notification {
+    const METHOD_NAME: &'static str = "Cloud.CDNReport#1";
     type Response = ();
 }
 impl crate::RpcMethod for CCloud_ClientBeginFileUpload_Request {
     const METHOD_NAME: &'static str = "Cloud.ClientBeginFileUpload#1";
     type Response = CCloud_ClientBeginFileUpload_Response;
 }
+impl crate::RpcMethod for CCloud_ClientCommitFileUpload_Request {
+    const METHOD_NAME: &'static str = "Cloud.ClientCommitFileUpload#1";
+    type Response = CCloud_ClientCommitFileUpload_Response;
+}
 impl crate::RpcMethod for CCloud_ClientConflictResolution_Notification {
     const METHOD_NAME: &'static str = "Cloud.ClientConflictResolution#1";
     type Response = ();
 }
-impl crate::RpcMethod for CCloud_CDNReport_Notification {
-    const METHOD_NAME: &'static str = "Cloud.CDNReport#1";
-    type Response = ();
+impl crate::RpcMethod for CCloud_ClientDeleteFile_Request {
+    const METHOD_NAME: &'static str = "Cloud.ClientDeleteFile#1";
+    type Response = CCloud_ClientDeleteFile_Response;
 }
-impl crate::RpcMethod for CCloud_EnumerateUserApps_Request {
-    const METHOD_NAME: &'static str = "Cloud.EnumerateUserApps#1";
-    type Response = CCloud_EnumerateUserApps_Response;
+impl crate::RpcMethod for CCloud_ClientFileDownload_Request {
+    const METHOD_NAME: &'static str = "Cloud.ClientFileDownload#1";
+    type Response = CCloud_ClientFileDownload_Response;
 }
-impl crate::RpcMethod for CCloud_AppLaunchIntent_Request {
-    const METHOD_NAME: &'static str = "Cloud.SignalAppLaunchIntent#1";
-    type Response = CCloud_AppLaunchIntent_Response;
+impl crate::RpcMethod for CCloud_ClientGetAppQuotaUsage_Request {
+    const METHOD_NAME: &'static str = "Cloud.ClientGetAppQuotaUsage#1";
+    type Response = CCloud_ClientGetAppQuotaUsage_Response;
 }
-impl crate::RpcMethod for CCloud_ClientLogUploadRequest_Notification {
-    const METHOD_NAME: &'static str = "CloudClient.ClientLogUploadRequest#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CCloud_BeginUGCUpload_Request {
-    const METHOD_NAME: &'static str = "Cloud.BeginUGCUpload#1";
-    type Response = CCloud_BeginUGCUpload_Response;
-}
-impl crate::RpcMethod for CCloud_ExternalStorageTransferReport_Notification {
-    const METHOD_NAME: &'static str = "Cloud.ExternalStorageTransferReport#1";
+impl crate::RpcMethod for CCloud_ClientLogUploadCheck_Notification {
+    const METHOD_NAME: &'static str = "Cloud.ClientLogUploadCheck#1";
     type Response = ();
 }
 impl crate::RpcMethod for CCloud_ClientLogUploadComplete_Notification {
     const METHOD_NAME: &'static str = "Cloud.ClientLogUploadComplete#1";
     type Response = ();
 }
-impl crate::RpcMethod for CCloud_Delete_Request {
-    const METHOD_NAME: &'static str = "Cloud.Delete#1";
-    type Response = CCloud_Delete_Response;
-}
-impl crate::RpcMethod for CCloud_GetAppFileChangelist_Request {
-    const METHOD_NAME: &'static str = "Cloud.GetAppFileChangelist#1";
-    type Response = CCloud_GetAppFileChangelist_Response;
-}
-impl crate::RpcMethod for CCloud_AppSessionResume_Request {
-    const METHOD_NAME: &'static str = "Cloud.ResumeAppSession#1";
-    type Response = CCloud_AppSessionResume_Response;
-}
-impl crate::RpcMethod for CCloud_BeginAppUploadBatch_Request {
-    const METHOD_NAME: &'static str = "Cloud.BeginAppUploadBatch#1";
-    type Response = CCloud_BeginAppUploadBatch_Response;
-}
-impl crate::RpcMethod for CCloud_CompleteAppUploadBatch_Notification {
-    const METHOD_NAME: &'static str = "Cloud.CompleteAppUploadBatch#1";
+impl crate::RpcMethod for CCloud_ClientLogUploadRequest_Notification {
+    const METHOD_NAME: &'static str = "CloudClient.ClientLogUploadRequest#1";
     type Response = ();
-}
-impl crate::RpcMethod for CCloud_EnumerateUserFiles_Request {
-    const METHOD_NAME: &'static str = "Cloud.EnumerateUserFiles#1";
-    type Response = CCloud_EnumerateUserFiles_Response;
 }
 impl crate::RpcMethod for CCloud_CommitHTTPUpload_Request {
     const METHOD_NAME: &'static str = "Cloud.CommitHTTPUpload#1";
     type Response = CCloud_CommitHTTPUpload_Response;
 }
-impl crate::RpcMethod for CCloud_GetFileDetails_Request {
-    const METHOD_NAME: &'static str = "Cloud.GetFileDetails#1";
-    type Response = CCloud_GetFileDetails_Response;
+impl crate::RpcMethod for CCloud_CommitUGCUpload_Request {
+    const METHOD_NAME: &'static str = "Cloud.CommitUGCUpload#1";
+    type Response = CCloud_CommitUGCUpload_Response;
+}
+impl crate::RpcMethod for CCloud_CompleteAppUploadBatch_Notification {
+    const METHOD_NAME: &'static str = "Cloud.CompleteAppUploadBatch#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CCloud_CompleteAppUploadBatch_Request {
+    const METHOD_NAME: &'static str = "Cloud.CompleteAppUploadBatchBlocking#1";
+    type Response = CCloud_CompleteAppUploadBatch_Response;
+}
+impl crate::RpcMethod for CCloud_Delete_Request {
+    const METHOD_NAME: &'static str = "Cloud.Delete#1";
+    type Response = CCloud_Delete_Response;
+}
+impl crate::RpcMethod for CCloud_EnumerateUserApps_Request {
+    const METHOD_NAME: &'static str = "Cloud.EnumerateUserApps#1";
+    type Response = CCloud_EnumerateUserApps_Response;
+}
+impl crate::RpcMethod for CCloud_EnumerateUserFiles_Request {
+    const METHOD_NAME: &'static str = "Cloud.EnumerateUserFiles#1";
+    type Response = CCloud_EnumerateUserFiles_Response;
+}
+impl crate::RpcMethod for CCloud_ExternalStorageTransferReport_Notification {
+    const METHOD_NAME: &'static str = "Cloud.ExternalStorageTransferReport#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CCloud_GetAppFileChangelist_Request {
+    const METHOD_NAME: &'static str = "Cloud.GetAppFileChangelist#1";
+    type Response = CCloud_GetAppFileChangelist_Response;
 }
 impl crate::RpcMethod for CCloud_GetClientEncryptionKey_Request {
     const METHOD_NAME: &'static str = "Cloud.GetClientEncryptionKey#1";
     type Response = CCloud_GetClientEncryptionKey_Response;
 }
-impl crate::RpcMethod for CCloud_ClientCommitFileUpload_Request {
-    const METHOD_NAME: &'static str = "Cloud.ClientCommitFileUpload#1";
-    type Response = CCloud_ClientCommitFileUpload_Response;
+impl crate::RpcMethod for CCloud_GetFileDetails_Request {
+    const METHOD_NAME: &'static str = "Cloud.GetFileDetails#1";
+    type Response = CCloud_GetFileDetails_Response;
 }
-impl crate::RpcMethod for CCloud_ClientGetAppQuotaUsage_Request {
-    const METHOD_NAME: &'static str = "Cloud.ClientGetAppQuotaUsage#1";
-    type Response = CCloud_ClientGetAppQuotaUsage_Response;
-}
-impl crate::RpcMethod for CCloud_ClientFileDownload_Request {
-    const METHOD_NAME: &'static str = "Cloud.ClientFileDownload#1";
-    type Response = CCloud_ClientFileDownload_Response;
-}
-impl crate::RpcMethod for CCloud_ClientDeleteFile_Request {
-    const METHOD_NAME: &'static str = "Cloud.ClientDeleteFile#1";
-    type Response = CCloud_ClientDeleteFile_Response;
-}
-impl crate::RpcMethod for CCloud_BeginHTTPUpload_Request {
-    const METHOD_NAME: &'static str = "Cloud.BeginHTTPUpload#1";
-    type Response = CCloud_BeginHTTPUpload_Response;
+impl crate::RpcMethod for CCloud_GetUploadServerInfo_Request {
+    const METHOD_NAME: &'static str = "Cloud.GetUploadServerInfo#1";
+    type Response = CCloud_GetUploadServerInfo_Response;
 }

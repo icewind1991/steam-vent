@@ -4071,38 +4071,6 @@ struct ParentalClient {}
 impl crate::RpcService for ParentalClient {
     const SERVICE_NAME: &'static str = "ParentalClient";
 }
-impl crate::RpcMethod for CParental_ParentalUnlock_Notification {
-    const METHOD_NAME: &'static str = "ParentalClient.NotifyUnlock#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CParental_GetParentalSettings_Request {
-    const METHOD_NAME: &'static str = "Parental.GetParentalSettings#1";
-    type Response = CParental_GetParentalSettings_Response;
-}
-impl crate::RpcMethod for CParental_ValidatePassword_Request {
-    const METHOD_NAME: &'static str = "Parental.ValidatePassword#1";
-    type Response = CParental_ValidatePassword_Response;
-}
-impl crate::RpcMethod for CParental_ValidateToken_Request {
-    const METHOD_NAME: &'static str = "Parental.ValidateToken#1";
-    type Response = CParental_ValidateToken_Response;
-}
-impl crate::RpcMethod for CParental_LockClient_Request {
-    const METHOD_NAME: &'static str = "Parental.LockClient#1";
-    type Response = CParental_LockClient_Response;
-}
-impl crate::RpcMethod for CParental_RequestRecoveryCode_Request {
-    const METHOD_NAME: &'static str = "Parental.RequestRecoveryCode#1";
-    type Response = CParental_RequestRecoveryCode_Response;
-}
-impl crate::RpcMethod for CParental_ParentalSettingsChange_Notification {
-    const METHOD_NAME: &'static str = "ParentalClient.NotifySettingsChange#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CParental_SetParentalSettings_Request {
-    const METHOD_NAME: &'static str = "Parental.SetParentalSettings#1";
-    type Response = CParental_SetParentalSettings_Response;
-}
 impl crate::RpcMethod for CParental_DisableParentalSettings_Request {
     const METHOD_NAME: &'static str = "Parental.DisableParentalSettings#1";
     type Response = CParental_DisableParentalSettings_Response;
@@ -4115,11 +4083,43 @@ impl crate::RpcMethod for CParental_EnableParentalSettings_Request {
     const METHOD_NAME: &'static str = "Parental.EnableParentalSettings#1";
     type Response = CParental_EnableParentalSettings_Response;
 }
-impl crate::RpcMethod for CParental_ParentalLock_Notification {
-    const METHOD_NAME: &'static str = "ParentalClient.NotifyLock#1";
-    type Response = ();
+impl crate::RpcMethod for CParental_GetParentalSettings_Request {
+    const METHOD_NAME: &'static str = "Parental.GetParentalSettings#1";
+    type Response = CParental_GetParentalSettings_Response;
 }
 impl crate::RpcMethod for CParental_GetSignedParentalSettings_Request {
     const METHOD_NAME: &'static str = "Parental.GetSignedParentalSettings#1";
     type Response = CParental_GetSignedParentalSettings_Response;
+}
+impl crate::RpcMethod for CParental_LockClient_Request {
+    const METHOD_NAME: &'static str = "Parental.LockClient#1";
+    type Response = CParental_LockClient_Response;
+}
+impl crate::RpcMethod for CParental_ParentalLock_Notification {
+    const METHOD_NAME: &'static str = "ParentalClient.NotifyLock#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CParental_ParentalSettingsChange_Notification {
+    const METHOD_NAME: &'static str = "ParentalClient.NotifySettingsChange#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CParental_ParentalUnlock_Notification {
+    const METHOD_NAME: &'static str = "ParentalClient.NotifyUnlock#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CParental_RequestRecoveryCode_Request {
+    const METHOD_NAME: &'static str = "Parental.RequestRecoveryCode#1";
+    type Response = CParental_RequestRecoveryCode_Response;
+}
+impl crate::RpcMethod for CParental_SetParentalSettings_Request {
+    const METHOD_NAME: &'static str = "Parental.SetParentalSettings#1";
+    type Response = CParental_SetParentalSettings_Response;
+}
+impl crate::RpcMethod for CParental_ValidatePassword_Request {
+    const METHOD_NAME: &'static str = "Parental.ValidatePassword#1";
+    type Response = CParental_ValidatePassword_Response;
+}
+impl crate::RpcMethod for CParental_ValidateToken_Request {
+    const METHOD_NAME: &'static str = "Parental.ValidateToken#1";
+    type Response = CParental_ValidateToken_Response;
 }

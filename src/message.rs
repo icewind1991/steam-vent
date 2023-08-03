@@ -1,5 +1,4 @@
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
-use crate::proto::steammessages_clientserver::CMsgClientCMList;
 use crate::service_method::ServiceMethodRequest;
 use binread::BinRead;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
@@ -18,12 +17,7 @@ use std::fmt::Debug;
 use std::io::{Cursor, Read, Write};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_base::CMsgMulti;
-use steam_vent_proto::steammessages_clientserver::CMsgClientServersAvailable;
-use steam_vent_proto::steammessages_clientserver_login::{
-    CMsgClientHello, CMsgClientLogOff, CMsgClientLoggedOff, CMsgClientLogon,
-    CMsgClientLogonResponse,
-};
-use steam_vent_proto::RpcMessage;
+use steam_vent_proto::{RpcMessage, RpcMessageWithKind};
 use thiserror::Error;
 use tokio_stream::Stream;
 use tracing::{debug, trace};
@@ -316,38 +310,22 @@ impl NetMessage for ServiceMethodResponseMessage {
     }
 }
 
-macro_rules! proto_msg {
-    ($kind:expr => $ty:ident) => {
-        impl NetMessage for $ty {
-            const KIND: EMsg = $kind;
-            const IS_PROTOBUF: bool = true;
+impl<ProtoMsg: RpcMessageWithKind> NetMessage for ProtoMsg {
+    const KIND: EMsg = <ProtoMsg as RpcMessageWithKind>::KIND;
+    const IS_PROTOBUF: bool = true;
 
-            fn read_body(
-                data: BytesMut,
-                _header: &NetMessageHeader,
-            ) -> Result<Self, MalformedBody> {
-                trace!("reading body of protobuf message {:?}", Self::KIND);
-                $ty::parse_from_reader(&mut data.reader())
-                    .map_err(|e| MalformedBody(Self::KIND, e.into()))
-            }
+    fn read_body(data: BytesMut, _header: &NetMessageHeader) -> Result<Self, MalformedBody> {
+        trace!("reading body of protobuf message {:?}", Self::KIND);
+        Self::parse(&mut data.reader()).map_err(|e| MalformedBody(Self::KIND, e.into()))
+    }
 
-            fn write_body<W: Write>(&self, mut writer: W) -> Result<(), std::io::Error> {
-                trace!("writing body of protobuf message {:?}", Self::KIND);
-                self.write_to_writer(&mut writer)
-                    .map_err(|_| std::io::Error::from(std::io::ErrorKind::InvalidData))
-            }
+    fn write_body<W: Write>(&self, mut writer: W) -> Result<(), std::io::Error> {
+        trace!("writing body of protobuf message {:?}", Self::KIND);
+        self.write(&mut writer)
+            .map_err(|_| std::io::Error::from(std::io::ErrorKind::InvalidData))
+    }
 
-            fn encode_size(&self) -> usize {
-                self.compute_size() as usize
-            }
-        }
-    };
+    fn encode_size(&self) -> usize {
+        <Self as RpcMessage>::encode_size(&self)
+    }
 }
-
-proto_msg!(EMsg::k_EMsgClientHello => CMsgClientHello);
-proto_msg!(EMsg::k_EMsgClientLogon => CMsgClientLogon);
-proto_msg!(EMsg::k_EMsgClientLogOff => CMsgClientLogOff);
-proto_msg!(EMsg::k_EMsgClientLoggedOff => CMsgClientLoggedOff);
-proto_msg!(EMsg::k_EMsgClientLogOnResponse => CMsgClientLogonResponse);
-proto_msg!(EMsg::k_EMsgClientServersAvailable => CMsgClientServersAvailable);
-proto_msg!(EMsg::k_EMsgClientCMList => CMsgClientCMList);

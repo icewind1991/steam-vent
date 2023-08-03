@@ -1,11 +1,12 @@
-use clap::Parser;
+use ahash::{AHashMap, AHashSet, RandomState};
 use proc_macro2::{Ident, Span, TokenStream};
 use protobuf::reflect::{FileDescriptor, ServiceDescriptor};
 use protobuf::{Message, SpecialFields, UnknownValueRef};
 use protobuf_codegen::{Codegen, Customize, CustomizeCallback};
+use protobuf_parse::Parser;
 use quote::{quote, ToTokens};
 use std::cell::RefCell;
-use std::collections::{HashMap, HashSet};
+use std::cmp::Ordering;
 use std::fs::OpenOptions;
 use std::hash::{Hash, Hasher};
 use std::io::Write;
@@ -28,7 +29,7 @@ fn get_protos(path: impl AsRef<Path>) -> impl Iterator<Item = PathBuf> {
         .map(|entry| entry.into_path())
 }
 
-#[derive(Parser, Debug)]
+#[derive(clap::Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
     /// Folder containing the proto buffers
@@ -38,10 +39,12 @@ struct Args {
 }
 
 fn main() {
+    use clap::Parser;
     let args: Args = Args::parse();
     let protos = get_protos(&args.protos).collect::<Vec<_>>();
 
-    let service_generator = ServiceGenerator::default();
+    let kinds = get_kinds(args.protos.join("enums_clientserver.proto"));
+    let service_generator = ServiceGenerator::new(kinds);
     let service_files = service_generator.files.clone();
 
     Codegen::new()
@@ -53,7 +56,7 @@ fn main() {
         .customize(Customize::default().lite_runtime(true))
         .run_from_script();
 
-    for (file, services) in service_files.take().into_iter() {
+    for (file, services) in service_files.borrow().iter() {
         let mut file = proto_path_to_rust_mod(&file);
         file.push_str(".rs");
         let source_file = args.target.join(file);
@@ -113,6 +116,18 @@ impl PartialEq for ServiceMethod {
 
 impl Eq for ServiceMethod {}
 
+impl PartialOrd for ServiceMethod {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        self.request.partial_cmp(&other.request)
+    }
+}
+
+impl Ord for ServiceMethod {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.request.cmp(&other.request)
+    }
+}
+
 impl ServiceMethod {
     fn gen(&self) -> TokenStream {
         let name = format!("{}.{}#1", self.service_name, self.name);
@@ -141,11 +156,20 @@ struct Service {
 
 struct ServiceMessage {
     name: String,
+    kind: Option<String>,
 }
 
 impl ServiceMessage {
     fn gen(&self) -> TokenStream {
         let message_ident = Ident::new(&self.name, Span::call_site());
+        let kind_tokens = self.kind.as_deref().map(|kind| {
+            let kind_ident = Ident::new(kind, Span::call_site());
+            quote! {
+                impl crate::RpcMessageWithKind for #message_ident {
+                    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::#kind_ident;
+                }
+            }
+        });
 
         quote! {
             impl crate::RpcMessage for #message_ident {
@@ -163,6 +187,7 @@ impl ServiceMessage {
                     self.compute_size() as usize
                 }
             }
+            #kind_tokens
         }
     }
 }
@@ -180,19 +205,41 @@ impl FileServices {
     }
 
     fn methods(&self) -> impl Iterator<Item = ServiceMethod> {
-        let methods: HashSet<ServiceMethod> = self
+        let methods: AHashSet<ServiceMethod> = self
             .services
             .iter()
             .flat_map(|service| service.methods.iter())
             .cloned()
             .collect();
+        let mut methods: Vec<_> = methods.into_iter().collect();
+        methods.sort();
         methods.into_iter()
     }
 }
 
-#[derive(Default)]
 struct ServiceGenerator {
-    files: Rc<RefCell<HashMap<String, FileServices>>>,
+    files: Rc<RefCell<AHashMap<String, FileServices>>>,
+    kinds: Vec<String>,
+}
+
+impl ServiceGenerator {
+    pub fn new(kinds: Vec<String>) -> Self {
+        Self {
+            files: Rc::new(RefCell::new(AHashMap::with_capacity_and_hasher(
+                16,
+                RandomState::with_seeds(1, 2, 3, 4),
+            ))),
+            kinds,
+        }
+    }
+
+    fn find_kind(&self, message_type: &str) -> Option<String> {
+        let postfix = message_type.strip_prefix('C')?;
+        self.kinds
+            .iter()
+            .find(|e_kind| postfix.eq_ignore_ascii_case(e_kind.strip_prefix("k_E").unwrap()))
+            .cloned()
+    }
 }
 
 fn get_description(fields: &SpecialFields) -> Option<String> {
@@ -256,6 +303,7 @@ impl CustomizeCallback for ServiceGenerator {
             .messages()
             .map(|msg| ServiceMessage {
                 name: msg.name().into(),
+                kind: self.find_kind(msg.name()),
             })
             .collect();
         self.files.borrow_mut().insert(
@@ -299,4 +347,26 @@ fn ident_start(c: char) -> bool {
 // Copy-pasted from libsyntax.
 fn ident_continue(c: char) -> bool {
     (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_'
+}
+
+fn get_kinds(path: PathBuf) -> Vec<String> {
+    let mut parser = Parser::new();
+    parser.pure().include(path.parent().unwrap()).input(path);
+    let parsed = parser
+        .parse_and_typecheck()
+        .unwrap()
+        .file_descriptors
+        .pop()
+        .unwrap();
+    let kinds_enum = parsed
+        .enum_type
+        .into_iter()
+        .find(|e| e.name() == "EMsg")
+        .unwrap();
+
+    kinds_enum
+        .value
+        .into_iter()
+        .map(|opt| opt.name.unwrap())
+        .collect()
 }

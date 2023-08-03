@@ -4504,17 +4504,9 @@ struct DeviceAuth {}
 impl crate::RpcService for DeviceAuth {
     const SERVICE_NAME: &'static str = "DeviceAuth";
 }
-impl crate::RpcMethod for CDeviceAuth_GetExcludedGamesInLibrary_Request {
-    const METHOD_NAME: &'static str = "DeviceAuth.GetExcludedGamesInLibrary#1";
-    type Response = CDeviceAuth_GetExcludedGamesInLibrary_Response;
-}
-impl crate::RpcMethod for CDeviceAuth_GetOwnAuthorizedDevices_Request {
-    const METHOD_NAME: &'static str = "DeviceAuth.GetOwnAuthorizedDevices#1";
-    type Response = CDeviceAuth_GetOwnAuthorizedDevices_Response;
-}
-impl crate::RpcMethod for CDeviceAuth_DeauthorizeRemoteDevice_Request {
-    const METHOD_NAME: &'static str = "DeviceAuth.DeauthorizeRemoteDevice#1";
-    type Response = CDeviceAuth_DeauthorizeRemoteDevice_Response;
+impl crate::RpcMethod for CDeviceAuth_AcceptAuthorizationRequest_Request {
+    const METHOD_NAME: &'static str = "DeviceAuth.AcceptAuthorizationRequest#1";
+    type Response = CDeviceAuth_AcceptAuthorizationRequest_Response;
 }
 impl crate::RpcMethod for CDeviceAuth_AddAuthorizedBorrowers_Request {
     const METHOD_NAME: &'static str = "DeviceAuth.AddAuthorizedBorrowers#1";
@@ -4524,17 +4516,9 @@ impl crate::RpcMethod for CDeviceAuth_AuthorizeRemoteDevice_Request {
     const METHOD_NAME: &'static str = "DeviceAuth.AuthorizeRemoteDevice#1";
     type Response = CDeviceAuth_AuthorizeRemoteDevice_Response;
 }
-impl crate::RpcMethod for CDeviceAuth_AcceptAuthorizationRequest_Request {
-    const METHOD_NAME: &'static str = "DeviceAuth.AcceptAuthorizationRequest#1";
-    type Response = CDeviceAuth_AcceptAuthorizationRequest_Response;
-}
-impl crate::RpcMethod for CDeviceAuth_RemoveAuthorizedBorrowers_Request {
-    const METHOD_NAME: &'static str = "DeviceAuth.RemoveAuthorizedBorrowers#1";
-    type Response = CDeviceAuth_RemoveAuthorizedBorrowers_Response;
-}
-impl crate::RpcMethod for CDeviceAuth_GetBorrowerPlayHistory_Request {
-    const METHOD_NAME: &'static str = "DeviceAuth.GetBorrowerPlayHistory#1";
-    type Response = CDeviceAuth_GetBorrowerPlayHistory_Response;
+impl crate::RpcMethod for CDeviceAuth_DeauthorizeRemoteDevice_Request {
+    const METHOD_NAME: &'static str = "DeviceAuth.DeauthorizeRemoteDevice#1";
+    type Response = CDeviceAuth_DeauthorizeRemoteDevice_Response;
 }
 impl crate::RpcMethod for CDeviceAuth_GetAuthorizedAsBorrower_Request {
     const METHOD_NAME: &'static str = "DeviceAuth.GetAuthorizedAsBorrower#1";
@@ -4544,7 +4528,23 @@ impl crate::RpcMethod for CDeviceAuth_GetAuthorizedBorrowers_Request {
     const METHOD_NAME: &'static str = "DeviceAuth.GetAuthorizedBorrowers#1";
     type Response = CDeviceAuth_GetAuthorizedBorrowers_Response;
 }
+impl crate::RpcMethod for CDeviceAuth_GetBorrowerPlayHistory_Request {
+    const METHOD_NAME: &'static str = "DeviceAuth.GetBorrowerPlayHistory#1";
+    type Response = CDeviceAuth_GetBorrowerPlayHistory_Response;
+}
+impl crate::RpcMethod for CDeviceAuth_GetExcludedGamesInLibrary_Request {
+    const METHOD_NAME: &'static str = "DeviceAuth.GetExcludedGamesInLibrary#1";
+    type Response = CDeviceAuth_GetExcludedGamesInLibrary_Response;
+}
+impl crate::RpcMethod for CDeviceAuth_GetOwnAuthorizedDevices_Request {
+    const METHOD_NAME: &'static str = "DeviceAuth.GetOwnAuthorizedDevices#1";
+    type Response = CDeviceAuth_GetOwnAuthorizedDevices_Response;
+}
 impl crate::RpcMethod for CDeviceAuth_GetUsedAuthorizedDevices_Request {
     const METHOD_NAME: &'static str = "DeviceAuth.GetUsedAuthorizedDevices#1";
     type Response = CDeviceAuth_GetUsedAuthorizedDevices_Response;
+}
+impl crate::RpcMethod for CDeviceAuth_RemoveAuthorizedBorrowers_Request {
+    const METHOD_NAME: &'static str = "DeviceAuth.RemoveAuthorizedBorrowers#1";
+    type Response = CDeviceAuth_RemoveAuthorizedBorrowers_Response;
 }

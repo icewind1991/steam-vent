@@ -28094,275 +28094,275 @@ struct ChatUsabilityClient {}
 impl crate::RpcService for ChatUsabilityClient {
     const SERVICE_NAME: &'static str = "ChatUsabilityClient";
 }
-impl crate::RpcMethod for CChatRoom_JoinChatRoomGroup_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.JoinChatRoomGroup#1";
-    type Response = CChatRoom_JoinChatRoomGroup_Response;
-}
-impl crate::RpcMethod for CChatRoom_SetChatRoomGroupWatchingBroadcast_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.SetChatRoomGroupWatchingBroadcast#1";
-    type Response = CChatRoom_SetChatRoomGroupWatchingBroadcast_Response;
-}
 impl crate::RpcMethod for CChatRoomClient_MemberListViewUpdated_Notification {
     const METHOD_NAME: &'static str = "ChatRoomClient.NotifyMemberListViewUpdated#1";
     type Response = ();
 }
-impl crate::RpcMethod for CChatRoom_GetMessageReactionReactors_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetMessageReactionReactors#1";
-    type Response = CChatRoom_GetMessageReactionReactors_Response;
-}
-impl crate::RpcMethod for CChatRoom_InviteFriendToChatRoomGroup_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.InviteFriendToChatRoomGroup#1";
-    type Response = CChatRoom_InviteFriendToChatRoomGroup_Response;
-}
-impl crate::RpcMethod for ChatRoomClient_NotifyChatGroupUserStateChanged_Notification {
-    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyChatGroupUserStateChanged#1";
+impl crate::RpcMethod for CChatRoom_AckChatMessage_Notification {
+    const METHOD_NAME: &'static str = "ChatRoom.AckChatMessage#1";
     type Response = ();
 }
-impl crate::RpcMethod for CChatRoom_SetChatRoomGroupTagline_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.SetChatRoomGroupTagline#1";
-    type Response = CChatRoom_SetChatRoomGroupTagline_Response;
+impl crate::RpcMethod for CChatRoom_AddRoleToUser_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.AddRoleToUser#1";
+    type Response = CChatRoom_AddRoleToUser_Response;
 }
-impl crate::RpcMethod for CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification {
-    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyShouldRejoinChatRoomVoiceChat#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CChatRoom_SetChatRoomGroupAvatar_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.SetChatRoomGroupAvatar#1";
-    type Response = CChatRoom_SetChatRoomGroupAvatar_Response;
-}
-impl crate::RpcMethod for CChatRoom_DeleteRoleFromUser_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.DeleteRoleFromUser#1";
-    type Response = CChatRoom_DeleteRoleFromUser_Response;
-}
-impl crate::RpcMethod for CChatRoom_IncomingChatMessage_Notification {
-    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyIncomingChatMessage#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CChatRoom_DeleteChatRoom_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.DeleteChatRoom#1";
-    type Response = CChatRoom_DeleteChatRoom_Response;
-}
-impl crate::RpcMethod for CChatRoom_MemberStateChange_Notification {
-    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyMemberStateChange#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CChatRoom_UpdateMemberListView_Notification {
-    const METHOD_NAME: &'static str = "ChatRoom.UpdateMemberListView#1";
+impl crate::RpcMethod for CChatRoom_ChatMessageModified_Notification {
+    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyChatMessageModified#1";
     type Response = ();
 }
 impl crate::RpcMethod for CChatRoom_ChatRoomGroupRoomsChange_Notification {
     const METHOD_NAME: &'static str = "ChatRoomClient.NotifyChatRoomGroupRoomsChange#1";
     type Response = ();
 }
-impl crate::RpcMethod for CChatRoom_GetMessageHistory_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetMessageHistory#1";
-    type Response = CChatRoom_GetMessageHistory_Response;
-}
-impl crate::RpcMethod for CChatUsability_RequestClientUsabilityMetrics_Notification {
-    const METHOD_NAME: &'static str = "ChatUsabilityClient.NotifyRequestClientUsabilityMetrics#1";
+impl crate::RpcMethod for CChatRoom_ChatRoomHeaderState_Notification {
+    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyChatRoomHeaderStateChange#1";
     type Response = ();
 }
-impl crate::RpcMethod for CChatRoom_SearchMembers_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.SearchMembers#1";
-    type Response = CChatRoom_SearchMembers_Response;
-}
-impl crate::RpcMethod for CChatRoom_ReplaceRoleActions_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.ReplaceRoleActions#1";
-    type Response = CChatRoom_ReplaceRoleActions_Response;
-}
-impl crate::RpcMethod for CChatRoom_GetChatRoomGroupState_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetChatRoomGroupState#1";
-    type Response = CChatRoom_GetChatRoomGroupState_Response;
+impl crate::RpcMethod for CChatRoom_CreateChatRoomGroup_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.CreateChatRoomGroup#1";
+    type Response = CChatRoom_CreateChatRoomGroup_Response;
 }
 impl crate::RpcMethod for CChatRoom_CreateChatRoom_Request {
     const METHOD_NAME: &'static str = "ChatRoom.CreateChatRoom#1";
     type Response = CChatRoom_CreateChatRoom_Response;
 }
-impl crate::RpcMethod for CChatUsability_ClientUsabilityMetrics_Notification {
-    const METHOD_NAME: &'static str = "ChatUsability.NotifyClientUsabilityMetrics#1";
-    type Response = ();
+impl crate::RpcMethod for CChatRoom_CreateInviteLink_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.CreateInviteLink#1";
+    type Response = CChatRoom_CreateInviteLink_Response;
 }
-impl crate::RpcMethod for CChatRoom_SetUserChatGroupPreferences_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.SetUserChatGroupPreferences#1";
-    type Response = CChatRoom_SetUserChatGroupPreferences_Response;
+impl crate::RpcMethod for CChatRoom_CreateRole_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.CreateRole#1";
+    type Response = CChatRoom_CreateRole_Response;
+}
+impl crate::RpcMethod for CChatRoom_DeleteChatMessages_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.DeleteChatMessages#1";
+    type Response = CChatRoom_DeleteChatMessages_Response;
+}
+impl crate::RpcMethod for CChatRoom_DeleteChatRoom_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.DeleteChatRoom#1";
+    type Response = CChatRoom_DeleteChatRoom_Response;
 }
 impl crate::RpcMethod for CChatRoom_DeleteInviteLink_Request {
     const METHOD_NAME: &'static str = "ChatRoom.DeleteInviteLink#1";
     type Response = CChatRoom_DeleteInviteLink_Response;
 }
-impl crate::RpcMethod for ChatRoomClient_NotifyChatRoomDisconnect_Notification {
-    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyChatRoomDisconnect#1";
-    type Response = ();
+impl crate::RpcMethod for CChatRoom_DeleteRoleFromUser_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.DeleteRoleFromUser#1";
+    type Response = CChatRoom_DeleteRoleFromUser_Response;
 }
-impl crate::RpcMethod for CChat_RequestFriendPersonaStates_Request {
-    const METHOD_NAME: &'static str = "Chat.RequestFriendPersonaStates#1";
-    type Response = CChat_RequestFriendPersonaStates_Response;
-}
-impl crate::RpcMethod for CChatRoom_UpdateMessageReaction_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.UpdateMessageReaction#1";
-    type Response = CChatRoom_UpdateMessageReaction_Response;
+impl crate::RpcMethod for CChatRoom_DeleteRole_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.DeleteRole#1";
+    type Response = CChatRoom_DeleteRole_Response;
 }
 impl crate::RpcMethod for CChatRoom_EndMiniGameForChatRoomGroup_Request {
     const METHOD_NAME: &'static str = "ChatRoom.EndMiniGameForChatRoomGroup#1";
     type Response = CChatRoom_EndMiniGameForChatRoomGroup_Response;
 }
-impl crate::RpcMethod for CChatRoom_GetMyChatRoomGroups_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetMyChatRoomGroups#1";
-    type Response = CChatRoom_GetMyChatRoomGroups_Response;
+impl crate::RpcMethod for CChatRoom_GetBanList_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetBanList#1";
+    type Response = CChatRoom_GetBanList_Response;
 }
-impl crate::RpcMethod for CChatRoom_MessageReaction_Notification {
-    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyMessageReaction#1";
-    type Response = ();
+impl crate::RpcMethod for CChatRoom_GetChatRoomGroupState_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetChatRoomGroupState#1";
+    type Response = CChatRoom_GetChatRoomGroupState_Response;
 }
-impl crate::RpcMethod for CChatRoom_SetUserBanState_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.SetUserBanState#1";
-    type Response = CChatRoom_SetUserBanState_Response;
+impl crate::RpcMethod for CChatRoom_GetChatRoomGroupSummary_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetChatRoomGroupSummary#1";
+    type Response = CChatRoom_GetChatRoomGroupSummary_Response;
 }
-impl crate::RpcMethod for CChatRoom_GetRoleActions_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetRoleActions#1";
-    type Response = CChatRoom_GetRoleActions_Response;
+impl crate::RpcMethod for CChatRoom_GetInviteInfo_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetInviteInfo#1";
+    type Response = CChatRoom_GetInviteInfo_Response;
 }
-impl crate::RpcMethod for CChatRoom_RevokeInvite_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.RevokeInviteToGroup#1";
-    type Response = CChatRoom_RevokeInvite_Response;
-}
-impl crate::RpcMethod for CChatRoom_ChatRoomHeaderState_Notification {
-    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyChatRoomHeaderStateChange#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CChatRoom_GetRolesForUser_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetRolesForUser#1";
-    type Response = CChatRoom_GetRolesForUser_Response;
-}
-impl crate::RpcMethod for CChatRoom_GetInviteList_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetInviteList#1";
-    type Response = CChatRoom_GetInviteList_Response;
+impl crate::RpcMethod for CChatRoom_GetInviteLinkInfo_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetInviteLinkInfo#1";
+    type Response = CChatRoom_GetInviteLinkInfo_Response;
 }
 impl crate::RpcMethod for CChatRoom_GetInviteLinksForGroup_Request {
     const METHOD_NAME: &'static str = "ChatRoom.GetInviteLinksForGroup#1";
     type Response = CChatRoom_GetInviteLinksForGroup_Response;
 }
-impl crate::RpcMethod for CChatRoom_ReorderRole_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.ReorderRole#1";
-    type Response = CChatRoom_ReorderRole_Response;
+impl crate::RpcMethod for CChatRoom_GetInviteList_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetInviteList#1";
+    type Response = CChatRoom_GetInviteList_Response;
 }
-impl crate::RpcMethod for CChatRoom_SetAppChatRoomGroupStopForceActive_Notification {
-    const METHOD_NAME: &'static str = "ChatRoom.SetAppChatRoomGroupStopForceActive#1";
+impl crate::RpcMethod for CChatRoom_GetMessageHistory_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetMessageHistory#1";
+    type Response = CChatRoom_GetMessageHistory_Response;
+}
+impl crate::RpcMethod for CChatRoom_GetMessageReactionReactors_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetMessageReactionReactors#1";
+    type Response = CChatRoom_GetMessageReactionReactors_Response;
+}
+impl crate::RpcMethod for CChatRoom_GetMyChatRoomGroups_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetMyChatRoomGroups#1";
+    type Response = CChatRoom_GetMyChatRoomGroups_Response;
+}
+impl crate::RpcMethod for CChatRoom_GetRoleActions_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetRoleActions#1";
+    type Response = CChatRoom_GetRoleActions_Response;
+}
+impl crate::RpcMethod for CChatRoom_GetRolesForUser_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetRolesForUser#1";
+    type Response = CChatRoom_GetRolesForUser_Response;
+}
+impl crate::RpcMethod for CChatRoom_GetRoles_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.GetRoles#1";
+    type Response = CChatRoom_GetRoles_Response;
+}
+impl crate::RpcMethod for CChatRoom_IncomingChatMessage_Notification {
+    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyIncomingChatMessage#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CChatRoom_InviteFriendToChatRoomGroup_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.InviteFriendToChatRoomGroup#1";
+    type Response = CChatRoom_InviteFriendToChatRoomGroup_Response;
+}
+impl crate::RpcMethod for CChatRoom_JoinChatRoomGroup_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.JoinChatRoomGroup#1";
+    type Response = CChatRoom_JoinChatRoomGroup_Response;
+}
+impl crate::RpcMethod for CChatRoom_JoinMiniGameForChatRoomGroup_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.JoinMiniGameForChatRoomGroup#1";
+    type Response = CChatRoom_JoinMiniGameForChatRoomGroup_Response;
+}
+impl crate::RpcMethod for CChatRoom_JoinVoiceChat_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.JoinVoiceChat#1";
+    type Response = CChatRoom_JoinVoiceChat_Response;
+}
+impl crate::RpcMethod for CChatRoom_KickUser_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.KickUserFromGroup#1";
+    type Response = CChatRoom_KickUser_Response;
+}
+impl crate::RpcMethod for CChatRoom_LeaveChatRoomGroup_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.LeaveChatRoomGroup#1";
+    type Response = CChatRoom_LeaveChatRoomGroup_Response;
+}
+impl crate::RpcMethod for CChatRoom_LeaveVoiceChat_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.LeaveVoiceChat#1";
+    type Response = CChatRoom_LeaveVoiceChat_Response;
+}
+impl crate::RpcMethod for CChatRoom_MemberStateChange_Notification {
+    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyMemberStateChange#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CChatRoom_MessageReaction_Notification {
+    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyMessageReaction#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CChatRoom_MuteUser_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.MuteUserInGroup#1";
+    type Response = CChatRoom_MuteUser_Response;
+}
+impl crate::RpcMethod for CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification {
+    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyShouldRejoinChatRoomVoiceChat#1";
     type Response = ();
 }
 impl crate::RpcMethod for CChatRoom_RenameChatRoomGroup_Request {
     const METHOD_NAME: &'static str = "ChatRoom.RenameChatRoomGroup#1";
     type Response = CChatRoom_RenameChatRoomGroup_Response;
 }
-impl crate::RpcMethod for CChatRoom_DeleteChatMessages_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.DeleteChatMessages#1";
-    type Response = CChatRoom_DeleteChatMessages_Response;
+impl crate::RpcMethod for CChatRoom_RenameChatRoom_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.RenameChatRoom#1";
+    type Response = CChatRoom_RenameChatRoom_Response;
 }
 impl crate::RpcMethod for CChatRoom_RenameRole_Request {
     const METHOD_NAME: &'static str = "ChatRoom.RenameRole#1";
     type Response = CChatRoom_RenameRole_Response;
 }
-impl crate::RpcMethod for CChatRoom_CreateChatRoomGroup_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.CreateChatRoomGroup#1";
-    type Response = CChatRoom_CreateChatRoomGroup_Response;
+impl crate::RpcMethod for CChatRoom_ReorderChatRoom_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.ReorderChatRoom#1";
+    type Response = CChatRoom_ReorderChatRoom_Response;
 }
-impl crate::RpcMethod for CChatRoom_SetAppChatRoomGroupForceActive_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.SetAppChatRoomGroupForceActive#1";
-    type Response = CChatRoom_SetAppChatRoomGroupForceActive_Response;
+impl crate::RpcMethod for CChatRoom_ReorderRole_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.ReorderRole#1";
+    type Response = CChatRoom_ReorderRole_Response;
 }
-impl crate::RpcMethod for CChatRoom_CreateRole_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.CreateRole#1";
-    type Response = CChatRoom_CreateRole_Response;
+impl crate::RpcMethod for CChatRoom_ReplaceRoleActions_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.ReplaceRoleActions#1";
+    type Response = CChatRoom_ReplaceRoleActions_Response;
 }
-impl crate::RpcMethod for CChatRoom_GetRoles_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetRoles#1";
-    type Response = CChatRoom_GetRoles_Response;
-}
-impl crate::RpcMethod for CChatRoom_KickUser_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.KickUserFromGroup#1";
-    type Response = CChatRoom_KickUser_Response;
-}
-impl crate::RpcMethod for CChatRoom_DeleteRole_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.DeleteRole#1";
-    type Response = CChatRoom_DeleteRole_Response;
-}
-impl crate::RpcMethod for CChatRoom_LeaveVoiceChat_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.LeaveVoiceChat#1";
-    type Response = CChatRoom_LeaveVoiceChat_Response;
-}
-impl crate::RpcMethod for CClanChatRooms_GetClanChatRoomInfo_Request {
-    const METHOD_NAME: &'static str = "ClanChatRooms.GetClanChatRoomInfo#1";
-    type Response = CClanChatRooms_GetClanChatRoomInfo_Response;
-}
-impl crate::RpcMethod for CChatRoom_LeaveChatRoomGroup_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.LeaveChatRoomGroup#1";
-    type Response = CChatRoom_LeaveChatRoomGroup_Response;
-}
-impl crate::RpcMethod for CChatRoom_GetChatRoomGroupSummary_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetChatRoomGroupSummary#1";
-    type Response = CChatRoom_GetChatRoomGroupSummary_Response;
-}
-impl crate::RpcMethod for CChatRoom_JoinMiniGameForChatRoomGroup_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.JoinMiniGameForChatRoomGroup#1";
-    type Response = CChatRoom_JoinMiniGameForChatRoomGroup_Response;
-}
-impl crate::RpcMethod for CChatRoom_AddRoleToUser_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.AddRoleToUser#1";
-    type Response = CChatRoom_AddRoleToUser_Response;
-}
-impl crate::RpcMethod for CChatRoom_CreateInviteLink_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.CreateInviteLink#1";
-    type Response = CChatRoom_CreateInviteLink_Response;
-}
-impl crate::RpcMethod for CChatRoom_MuteUser_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.MuteUserInGroup#1";
-    type Response = CChatRoom_MuteUser_Response;
-}
-impl crate::RpcMethod for CChatRoom_AckChatMessage_Notification {
-    const METHOD_NAME: &'static str = "ChatRoom.AckChatMessage#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CChatRoom_GetInviteInfo_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetInviteInfo#1";
-    type Response = CChatRoom_GetInviteInfo_Response;
-}
-impl crate::RpcMethod for CChatRoom_SetSessionActiveChatRoomGroups_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.SetSessionActiveChatRoomGroups#1";
-    type Response = CChatRoom_SetSessionActiveChatRoomGroups_Response;
-}
-impl crate::RpcMethod for CChatRoom_RenameChatRoom_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.RenameChatRoom#1";
-    type Response = CChatRoom_RenameChatRoom_Response;
-}
-impl crate::RpcMethod for CChatRoom_ChatMessageModified_Notification {
-    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyChatMessageModified#1";
-    type Response = ();
-}
-impl crate::RpcMethod for CChatRoom_GetBanList_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetBanList#1";
-    type Response = CChatRoom_GetBanList_Response;
-}
-impl crate::RpcMethod for CChatRoom_GetInviteLinkInfo_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.GetInviteLinkInfo#1";
-    type Response = CChatRoom_GetInviteLinkInfo_Response;
-}
-impl crate::RpcMethod for CChatRoom_SendChatMessage_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.SendChatMessage#1";
-    type Response = CChatRoom_SendChatMessage_Response;
+impl crate::RpcMethod for CChatRoom_RevokeInvite_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.RevokeInviteToGroup#1";
+    type Response = CChatRoom_RevokeInvite_Response;
 }
 impl crate::RpcMethod for CChatRoom_SaveChatRoomGroup_Request {
     const METHOD_NAME: &'static str = "ChatRoom.SaveChatRoomGroup#1";
     type Response = CChatRoom_SaveChatRoomGroup_Response;
 }
+impl crate::RpcMethod for CChatRoom_SearchMembers_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.SearchMembers#1";
+    type Response = CChatRoom_SearchMembers_Response;
+}
+impl crate::RpcMethod for CChatRoom_SendChatMessage_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.SendChatMessage#1";
+    type Response = CChatRoom_SendChatMessage_Response;
+}
+impl crate::RpcMethod for CChatRoom_SetAppChatRoomGroupForceActive_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.SetAppChatRoomGroupForceActive#1";
+    type Response = CChatRoom_SetAppChatRoomGroupForceActive_Response;
+}
+impl crate::RpcMethod for CChatRoom_SetAppChatRoomGroupStopForceActive_Notification {
+    const METHOD_NAME: &'static str = "ChatRoom.SetAppChatRoomGroupStopForceActive#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CChatRoom_SetChatRoomGroupAvatar_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.SetChatRoomGroupAvatar#1";
+    type Response = CChatRoom_SetChatRoomGroupAvatar_Response;
+}
+impl crate::RpcMethod for CChatRoom_SetChatRoomGroupTagline_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.SetChatRoomGroupTagline#1";
+    type Response = CChatRoom_SetChatRoomGroupTagline_Response;
+}
+impl crate::RpcMethod for CChatRoom_SetChatRoomGroupWatchingBroadcast_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.SetChatRoomGroupWatchingBroadcast#1";
+    type Response = CChatRoom_SetChatRoomGroupWatchingBroadcast_Response;
+}
+impl crate::RpcMethod for CChatRoom_SetSessionActiveChatRoomGroups_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.SetSessionActiveChatRoomGroups#1";
+    type Response = CChatRoom_SetSessionActiveChatRoomGroups_Response;
+}
+impl crate::RpcMethod for CChatRoom_SetUserBanState_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.SetUserBanState#1";
+    type Response = CChatRoom_SetUserBanState_Response;
+}
+impl crate::RpcMethod for CChatRoom_SetUserChatGroupPreferences_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.SetUserChatGroupPreferences#1";
+    type Response = CChatRoom_SetUserChatGroupPreferences_Response;
+}
+impl crate::RpcMethod for CChatRoom_UpdateMemberListView_Notification {
+    const METHOD_NAME: &'static str = "ChatRoom.UpdateMemberListView#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CChatRoom_UpdateMessageReaction_Request {
+    const METHOD_NAME: &'static str = "ChatRoom.UpdateMessageReaction#1";
+    type Response = CChatRoom_UpdateMessageReaction_Response;
+}
+impl crate::RpcMethod for CChatUsability_ClientUsabilityMetrics_Notification {
+    const METHOD_NAME: &'static str = "ChatUsability.NotifyClientUsabilityMetrics#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CChatUsability_RequestClientUsabilityMetrics_Notification {
+    const METHOD_NAME: &'static str = "ChatUsabilityClient.NotifyRequestClientUsabilityMetrics#1";
+    type Response = ();
+}
+impl crate::RpcMethod for CChat_RequestFriendPersonaStates_Request {
+    const METHOD_NAME: &'static str = "Chat.RequestFriendPersonaStates#1";
+    type Response = CChat_RequestFriendPersonaStates_Response;
+}
+impl crate::RpcMethod for CClanChatRooms_GetClanChatRoomInfo_Request {
+    const METHOD_NAME: &'static str = "ClanChatRooms.GetClanChatRoomInfo#1";
+    type Response = CClanChatRooms_GetClanChatRoomInfo_Response;
+}
 impl crate::RpcMethod for CClanChatRooms_SetClanChatRoomPrivate_Request {
     const METHOD_NAME: &'static str = "ClanChatRooms.SetClanChatRoomPrivate#1";
     type Response = CClanChatRooms_SetClanChatRoomPrivate_Response;
 }
-impl crate::RpcMethod for CChatRoom_ReorderChatRoom_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.ReorderChatRoom#1";
-    type Response = CChatRoom_ReorderChatRoom_Response;
+impl crate::RpcMethod for ChatRoomClient_NotifyChatGroupUserStateChanged_Notification {
+    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyChatGroupUserStateChanged#1";
+    type Response = ();
 }
-impl crate::RpcMethod for CChatRoom_JoinVoiceChat_Request {
-    const METHOD_NAME: &'static str = "ChatRoom.JoinVoiceChat#1";
-    type Response = CChatRoom_JoinVoiceChat_Response;
+impl crate::RpcMethod for ChatRoomClient_NotifyChatRoomDisconnect_Notification {
+    const METHOD_NAME: &'static str = "ChatRoomClient.NotifyChatRoomDisconnect#1";
+    type Response = ();
 }
