@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Retrieves a users inventory as a big JSON blob"]
 // @@protoc_insertion_point(message:CInventory_GetInventory_Request)
 pub struct CInventory_GetInventory_Request {
     // message fields
@@ -489,6 +490,7 @@ impl ::protobuf::Message for CInventory_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Craft an item in a user's inventory"]
 // @@protoc_insertion_point(message:CInventory_ExchangeItem_Request)
 pub struct CInventory_ExchangeItem_Request {
     // message fields
@@ -694,6 +696,7 @@ impl ::protobuf::Message for CInventory_ExchangeItem_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns a list of promo item defs the user is eligible for"]
 // @@protoc_insertion_point(message:CInventory_GetEligiblePromoItemDefIDs_Request)
 pub struct CInventory_GetEligiblePromoItemDefIDs_Request {
     // message fields
@@ -928,6 +931,7 @@ impl ::protobuf::Message for CInventory_GetEligiblePromoItemDefIDs_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Grant an item when in developer mode"]
 // @@protoc_insertion_point(message:CInventory_AddItem_Request)
 pub struct CInventory_AddItem_Request {
     // message fields
@@ -1226,6 +1230,7 @@ impl ::protobuf::Message for CInventory_AddItem_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Modify an item in a user's inventory (safe properties only)"]
 // @@protoc_insertion_point(message:CInventory_ModifyItems_Request)
 pub struct CInventory_ModifyItems_Request {
     // message fields
@@ -1751,6 +1756,7 @@ pub mod cinventory_modify_items_request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Consumes playtime and possibly returns a granted item"]
 // @@protoc_insertion_point(message:CInventory_ConsumePlaytime_Request)
 pub struct CInventory_ConsumePlaytime_Request {
     // message fields
@@ -1892,6 +1898,7 @@ impl ::protobuf::Message for CInventory_ConsumePlaytime_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Consume an item"]
 // @@protoc_insertion_point(message:CInventory_ConsumeItem_Request)
 pub struct CInventory_ConsumeItem_Request {
     // message fields
@@ -2178,6 +2185,7 @@ impl ::protobuf::Message for CInventory_ConsumeItem_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Consume an item"]
 // @@protoc_insertion_point(message:CInventory_DevSetNextDrop_Request)
 pub struct CInventory_DevSetNextDrop_Request {
     // message fields
@@ -2368,6 +2376,7 @@ impl ::protobuf::Message for CInventory_DevSetNextDrop_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Split an item stack into two stacks"]
 // @@protoc_insertion_point(message:CInventory_SplitItemStack_Request)
 pub struct CInventory_SplitItemStack_Request {
     // message fields
@@ -2573,6 +2582,7 @@ impl ::protobuf::Message for CInventory_SplitItemStack_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Combine two stacks of items"]
 // @@protoc_insertion_point(message:CInventory_CombineItemStacks_Request)
 pub struct CInventory_CombineItemStacks_Request {
     // message fields
@@ -2810,6 +2820,7 @@ impl ::protobuf::Message for CInventory_CombineItemStacks_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get metadata about the current item definition for this game."]
 // @@protoc_insertion_point(message:CInventory_GetItemDefMeta_Request)
 pub struct CInventory_GetItemDefMeta_Request {
     // message fields
@@ -3077,6 +3088,7 @@ impl ::protobuf::Message for CInventory_GetItemDefMeta_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns information about the user such as their currency"]
 // @@protoc_insertion_point(message:CInventory_GetUserPurchaseInfo_Request)
 pub struct CInventory_GetUserPurchaseInfo_Request {
     // special fields
@@ -3262,6 +3274,7 @@ impl ::protobuf::Message for CInventory_GetUserPurchaseInfo_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Initializes a purchase for the user"]
 // @@protoc_insertion_point(message:CInventory_PurchaseInit_Request)
 pub struct CInventory_PurchaseInit_Request {
     // message fields
@@ -3702,6 +3715,7 @@ impl ::protobuf::Message for CInventory_PurchaseInit_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Finalizes a purchase for the user"]
 // @@protoc_insertion_point(message:CInventory_PurchaseFinalize_Request)
 pub struct CInventory_PurchaseFinalize_Request {
     // message fields
@@ -3875,6 +3889,7 @@ impl ::protobuf::Message for CInventory_PurchaseFinalize_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get item detail given a valid inspection token"]
 // @@protoc_insertion_point(message:CInventory_InspectItem_Request)
 pub struct CInventory_InspectItem_Request {
     // message fields
@@ -4065,6 +4080,7 @@ impl ::protobuf::Message for CInventory_InspectItem_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notify client that the user received new items"]
 // @@protoc_insertion_point(message:CInventoryClient_NewItems_Notification)
 pub struct CInventoryClient_NewItems_Notification {
     // message fields

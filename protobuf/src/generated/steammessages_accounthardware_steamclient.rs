@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Records a serial number and the calling user's account info for warranty purposes."]
 // @@protoc_insertion_point(message:CAccountHardware_RegisterSteamController_Request)
 pub struct CAccountHardware_RegisterSteamController_Request {
     // message fields
@@ -278,6 +279,7 @@ impl ::protobuf::Message for CAccountHardware_RegisterSteamController_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Marks a controller's registration as complete"]
 // @@protoc_insertion_point(message:CAccountHardware_CompleteSteamControllerRegistration_Request)
 pub struct CAccountHardware_CompleteSteamControllerRegistration_Request {
     // message fields
@@ -529,6 +531,7 @@ impl ::protobuf::Message for CAccountHardware_CompleteSteamControllerRegistratio
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sends back a list of accounts registered to a controller."]
 // @@protoc_insertion_point(message:CAccountHardware_QueryAccountsRegisteredToSerial_Request)
 pub struct CAccountHardware_QueryAccountsRegisteredToSerial_Request {
     // message fields
@@ -1143,6 +1146,7 @@ impl ::protobuf::Message for CAccountHardware_SteamControllerSetConfig_Controlle
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets a desired controller config for an app"]
 // @@protoc_insertion_point(message:CAccountHardware_SteamControllerSetConfig_Request)
 pub struct CAccountHardware_SteamControllerSetConfig_Request {
     // message fields
@@ -1504,6 +1508,7 @@ impl ::protobuf::Message for CAccountHardware_SteamControllerSetConfig_Response 
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets a desired controller config for an app"]
 // @@protoc_insertion_point(message:CAccountHardware_SteamControllerGetConfig_Request)
 pub struct CAccountHardware_SteamControllerGetConfig_Request {
     // message fields
@@ -2203,6 +2208,7 @@ impl ::protobuf::Message for CAccountHardware_SteamControllerGetConfig_Response 
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "De registers a controller"]
 // @@protoc_insertion_point(message:CAccountHardware_DeRegisterSteamController_Request)
 pub struct CAccountHardware_DeRegisterSteamController_Request {
     // message fields
@@ -2486,6 +2492,7 @@ impl ::protobuf::Message for CAccountHardware_DeRegisterSteamController_Response
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Stores the file ID of the personalization file"]
 // @@protoc_insertion_point(message:CAccountHardware_SetPersonalizationFile_Request)
 pub struct CAccountHardware_SetPersonalizationFile_Request {
     // message fields
@@ -2752,6 +2759,7 @@ impl ::protobuf::Message for CAccountHardware_SetPersonalizationFile_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets the file ID of the personalization file"]
 // @@protoc_insertion_point(message:CAccountHardware_GetPersonalizationFile_Request)
 pub struct CAccountHardware_GetPersonalizationFile_Request {
     // message fields
@@ -3019,6 +3027,7 @@ impl ::protobuf::Message for CAccountHardware_GetPersonalizationFile_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Check system info for compatibility with VR"]
 // @@protoc_insertion_point(message:CAccountHardware_VRCompatibilityCheck_Request)
 pub struct CAccountHardware_VRCompatibilityCheck_Request {
     // message fields
@@ -3844,6 +3853,7 @@ pub mod caccount_hardware_vrcompatibility_check_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Registers a valve index component to a customer"]
 // @@protoc_insertion_point(message:CAccountHardware_RegisterValveIndexComponent_Request)
 pub struct CAccountHardware_RegisterValveIndexComponent_Request {
     // message fields
@@ -4211,6 +4221,7 @@ impl ::protobuf::Message for CAccountHardware_RegisterValveIndexComponent_Respon
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the components that went into the given Steam Deck"]
 // @@protoc_insertion_point(message:CAccountHardware_GetSteamDeckComponents_Request)
 pub struct CAccountHardware_GetSteamDeckComponents_Request {
     // message fields

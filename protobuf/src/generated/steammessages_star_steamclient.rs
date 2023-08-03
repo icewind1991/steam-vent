@@ -812,6 +812,7 @@ impl ::protobuf::Message for CSTAR_WriteGlyphData_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "processes a generic message"]
 // @@protoc_insertion_point(message:CSTAR_Request)
 pub struct CSTAR_Request {
     // message fields

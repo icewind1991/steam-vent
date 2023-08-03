@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Service to perform authenticated key-exchange involving Steam Client"]
 // @@protoc_insertion_point(message:CKeyEscrow_Request)
 pub struct CKeyEscrow_Request {
     // message fields

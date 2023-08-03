@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request upload token for steampipe depot upload"]
 // @@protoc_insertion_point(message:CPartnerApps_RequestUploadToken_Request)
 pub struct CPartnerApps_RequestUploadToken_Request {
     // message fields
@@ -375,6 +376,7 @@ impl ::protobuf::Message for CPartnerApps_RequestUploadToken_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Commit method for custom executable file processing"]
 // @@protoc_insertion_point(message:CPartnerApps_FinishUpload_Request)
 pub struct CPartnerApps_FinishUpload_Request {
     // message fields
@@ -674,6 +676,7 @@ impl ::protobuf::Message for CPartnerApps_FinishUploadKVSign_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Commit method for executable file processing"]
 // @@protoc_insertion_point(message:CPartnerApps_FinishUploadLegacyDRM_Request)
 pub struct CPartnerApps_FinishUploadLegacyDRM_Request {
     // message fields
@@ -1162,6 +1165,7 @@ impl ::protobuf::Message for CPartnerApps_FinishUpload_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Commit method for custom executable file processing"]
 // @@protoc_insertion_point(message:CPartnerApps_FinishUploadDepot_Request)
 pub struct CPartnerApps_FinishUploadDepot_Request {
     // message fields
@@ -1508,6 +1512,7 @@ impl ::protobuf::Message for CPartnerApps_FinishUploadDepot_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get build status for previously uploaded depot ZIP"]
 // @@protoc_insertion_point(message:CPartnerApps_GetDepotBuildResult_Request)
 pub struct CPartnerApps_GetDepotBuildResult_Request {
     // message fields
@@ -1807,6 +1812,7 @@ impl ::protobuf::Message for CPartnerApps_GetDepotBuildResult_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Finds N most recent prior uploads by appid"]
 // @@protoc_insertion_point(message:CPartnerApps_FindDRMUploads_Request)
 pub struct CPartnerApps_FindDRMUploads_Request {
     // message fields

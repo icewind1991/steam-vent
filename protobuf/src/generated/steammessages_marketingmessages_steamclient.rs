@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a list of active marketing messages."]
 // @@protoc_insertion_point(message:CMarketingMessages_GetActiveMarketingMessages_Request)
 pub struct CMarketingMessages_GetActiveMarketingMessages_Request {
     // message fields
@@ -1364,6 +1365,7 @@ impl ::protobuf::Message for CMarketingMessages_GetActiveMarketingMessages_Respo
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a list of active marketing messages filtered for a specific user."]
 // @@protoc_insertion_point(message:CMarketingMessages_GetMarketingMessagesForUser_Request)
 pub struct CMarketingMessages_GetMarketingMessagesForUser_Request {
     // message fields
@@ -2231,6 +2233,7 @@ pub mod cmarketing_messages_get_marketing_messages_for_user_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns a boolean if the user has pending marketing messages.  Intended to be fast."]
 // @@protoc_insertion_point(message:CMarketingMessages_DoesUserHavePendingMarketingMessages_Request)
 pub struct CMarketingMessages_DoesUserHavePendingMarketingMessages_Request {
     // message fields
@@ -2594,6 +2597,7 @@ impl ::protobuf::Message for CMarketingMessages_DoesUserHavePendingMarketingMess
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a single marketing message for Admin, not cacheable."]
 // @@protoc_insertion_point(message:CMarketingMessages_GetDisplayMarketingMessage_Request)
 pub struct CMarketingMessages_GetDisplayMarketingMessage_Request {
     // message fields
@@ -2822,6 +2826,7 @@ impl ::protobuf::Message for CMarketingMessages_GetDisplayMarketingMessage_Respo
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Mark that a user has viewed a message (so we won't show it again)'."]
 // @@protoc_insertion_point(message:CMarketingMessages_MarkMessageSeen_Notification)
 pub struct CMarketingMessages_MarkMessageSeen_Notification {
     // message fields
@@ -2998,6 +3003,7 @@ impl ::protobuf::Message for CMarketingMessages_MarkMessageSeen_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a single marketing message.  Admin account needed for non-active messages"]
 // @@protoc_insertion_point(message:CMarketingMessages_GetMarketingMessage_Request)
 pub struct CMarketingMessages_GetMarketingMessage_Request {
     // message fields
@@ -3198,6 +3204,7 @@ impl ::protobuf::Message for CMarketingMessages_GetMarketingMessage_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Create a new marketing message."]
 // @@protoc_insertion_point(message:CMarketingMessages_CreateMarketingMessage_Request)
 pub struct CMarketingMessages_CreateMarketingMessage_Request {
     // message fields
@@ -3430,6 +3437,7 @@ impl ::protobuf::Message for CMarketingMessages_CreateMarketingMessage_Response 
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Modify a marketing message."]
 // @@protoc_insertion_point(message:CMarketingMessages_UpdateMarketingMessage_Request)
 pub struct CMarketingMessages_UpdateMarketingMessage_Request {
     // message fields
@@ -3661,6 +3669,7 @@ impl ::protobuf::Message for CMarketingMessages_UpdateMarketingMessage_Response 
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Delete a marketing message."]
 // @@protoc_insertion_point(message:CMarketingMessages_DeleteMarketingMessage_Request)
 pub struct CMarketingMessages_DeleteMarketingMessage_Request {
     // message fields
@@ -3846,6 +3855,7 @@ impl ::protobuf::Message for CMarketingMessages_DeleteMarketingMessage_Response 
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Search for marketing messages by name, type, etc."]
 // @@protoc_insertion_point(message:CMarketingMessages_FindMarketingMessages_Request)
 pub struct CMarketingMessages_FindMarketingMessages_Request {
     // message fields
@@ -4179,6 +4189,7 @@ impl ::protobuf::Message for CMarketingMessages_FindMarketingMessages_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "For a specific marketing message, then all of the viewership stats for the date range it was intended to be visible to customers"]
 // @@protoc_insertion_point(message:CMarketingMessages_GetMarketingMessageViewerStats_Request)
 pub struct CMarketingMessages_GetMarketingMessageViewerStats_Request {
     // message fields
@@ -4587,6 +4598,7 @@ impl ::protobuf::Message for CMarketingMessages_GetMarketingMessageViewerStats_R
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "For a time range, return the seen stats across all of the marketing messages"]
 // @@protoc_insertion_point(message:CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request)
 pub struct CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request {
     // message fields

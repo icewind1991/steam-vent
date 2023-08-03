@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client is asking to lease a FakeIP."]
 // @@protoc_insertion_point(message:CGameNetworking_AllocateFakeIP_Request)
 pub struct CGameNetworking_AllocateFakeIP_Request {
     // message fields
@@ -293,6 +294,7 @@ impl ::protobuf::Message for CGameNetworking_AllocateFakeIP_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client informs server it is done with the FakeIP."]
 // @@protoc_insertion_point(message:CGameNetworking_ReleaseFakeIP_Notification)
 pub struct CGameNetworking_ReleaseFakeIP_Notification {
     // message fields

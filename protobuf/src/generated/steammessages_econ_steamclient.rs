@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets a set of items from a users inventory, along with descriptions"]
 // @@protoc_insertion_point(message:CEcon_GetInventoryItemsWithDescriptions_Request)
 pub struct CEcon_GetInventoryItemsWithDescriptions_Request {
     // message fields
@@ -3045,6 +3046,7 @@ impl ::protobuf::Message for CEcon_GetInventoryItemsWithDescriptions_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the user's trade offer access token"]
 // @@protoc_insertion_point(message:CEcon_GetTradeOfferAccessToken_Request)
 pub struct CEcon_GetTradeOfferAccessToken_Request {
     // message fields
@@ -3280,6 +3282,7 @@ impl ::protobuf::Message for CEcon_GetTradeOfferAccessToken_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Generates a URL which sets a secure cookie for in-game-browser itemshop purchases"]
 // @@protoc_insertion_point(message:CEcon_ClientGetItemShopOverlayAuthURL_Request)
 pub struct CEcon_ClientGetItemShopOverlayAuthURL_Request {
     // message fields
@@ -3532,6 +3535,7 @@ impl ::protobuf::Message for CEcon_ClientGetItemShopOverlayAuthURL_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns description information about the passed in asset classes"]
 // @@protoc_insertion_point(message:CEcon_GetAssetClassInfo_Request)
 pub struct CEcon_GetAssetClassInfo_Request {
     // message fields

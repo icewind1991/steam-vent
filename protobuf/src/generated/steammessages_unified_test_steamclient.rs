@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Some description - MessageToClient."]
 // @@protoc_insertion_point(message:CMsgTest_MessageToClient_Request)
 pub struct CMsgTest_MessageToClient_Request {
     // message fields
@@ -279,6 +280,7 @@ impl ::protobuf::Message for CMsgTest_MessageToClient_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Some description - NotifyClient."]
 // @@protoc_insertion_point(message:CMsgTest_NotifyClient_Notification)
 pub struct CMsgTest_NotifyClient_Notification {
     // message fields
@@ -405,6 +407,7 @@ impl ::protobuf::Message for CMsgTest_NotifyClient_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Some description - MessageToServer."]
 // @@protoc_insertion_point(message:CMsgTest_MessageToServer_Request)
 pub struct CMsgTest_MessageToServer_Request {
     // message fields
@@ -657,6 +660,7 @@ impl ::protobuf::Message for CMsgTest_MessageToServer_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Some description - NotifyServer."]
 // @@protoc_insertion_point(message:CMsgTest_NotifyServer_Notification)
 pub struct CMsgTest_NotifyServer_Notification {
     // message fields

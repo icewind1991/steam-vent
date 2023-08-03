@@ -661,6 +661,7 @@ impl ::protobuf::Message for ParentalSettings {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Enable parental settings for the logged in account, optionally setting the current settings"]
 // @@protoc_insertion_point(message:CParental_EnableParentalSettings_Request)
 pub struct CParental_EnableParentalSettings_Request {
     // message fields
@@ -990,6 +991,7 @@ impl ::protobuf::Message for CParental_EnableParentalSettings_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Disable parental settings for the logged in account"]
 // @@protoc_insertion_point(message:CParental_DisableParentalSettings_Request)
 pub struct CParental_DisableParentalSettings_Request {
     // message fields
@@ -1224,6 +1226,7 @@ impl ::protobuf::Message for CParental_DisableParentalSettings_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the current parental settings for the logged in account"]
 // @@protoc_insertion_point(message:CParental_GetParentalSettings_Request)
 pub struct CParental_GetParentalSettings_Request {
     // message fields
@@ -1424,6 +1427,7 @@ impl ::protobuf::Message for CParental_GetParentalSettings_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the current parental settings for the logged in account in a form that can by verified by the receiver"]
 // @@protoc_insertion_point(message:CParental_GetSignedParentalSettings_Request)
 pub struct CParental_GetSignedParentalSettings_Request {
     // message fields
@@ -1708,6 +1712,7 @@ impl ::protobuf::Message for CParental_GetSignedParentalSettings_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Set the current parental settings for the logged in account"]
 // @@protoc_insertion_point(message:CParental_SetParentalSettings_Request)
 pub struct CParental_SetParentalSettings_Request {
     // message fields
@@ -2054,6 +2059,7 @@ impl ::protobuf::Message for CParental_SetParentalSettings_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Check if the given parental unlock token is correct for the logged in account"]
 // @@protoc_insertion_point(message:CParental_ValidateToken_Request)
 pub struct CParental_ValidateToken_Request {
     // message fields
@@ -2256,6 +2262,7 @@ impl ::protobuf::Message for CParental_ValidateToken_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Validate the plaintext password for the logged in account and return an unlock token"]
 // @@protoc_insertion_point(message:CParental_ValidatePassword_Request)
 pub struct CParental_ValidatePassword_Request {
     // message fields
@@ -2589,6 +2596,7 @@ impl ::protobuf::Message for CParental_ValidatePassword_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notify connected clients that a lock has occurred in a browser"]
 // @@protoc_insertion_point(message:CParental_LockClient_Request)
 pub struct CParental_LockClient_Request {
     // message fields
@@ -2791,6 +2799,7 @@ impl ::protobuf::Message for CParental_LockClient_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request a recovery code be sent to the recovery email address for the specified account"]
 // @@protoc_insertion_point(message:CParental_RequestRecoveryCode_Request)
 pub struct CParental_RequestRecoveryCode_Request {
     // special fields
@@ -2943,6 +2952,7 @@ impl ::protobuf::Message for CParental_RequestRecoveryCode_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Attempt a recovery unlock on the specified account"]
 // @@protoc_insertion_point(message:CParental_DisableWithRecoveryCode_Request)
 pub struct CParental_DisableWithRecoveryCode_Request {
     // message fields
@@ -3160,6 +3170,7 @@ impl ::protobuf::Message for CParental_DisableWithRecoveryCode_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client of a change in parental settings"]
 // @@protoc_insertion_point(message:CParental_ParentalSettingsChange_Notification)
 pub struct CParental_ParentalSettingsChange_Notification {
     // message fields
@@ -3433,6 +3444,7 @@ impl ::protobuf::Message for CParental_ParentalSettingsChange_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that an unlock has occurred in a browser"]
 // @@protoc_insertion_point(message:CParental_ParentalUnlock_Notification)
 pub struct CParental_ParentalUnlock_Notification {
     // message fields
@@ -3608,6 +3620,7 @@ impl ::protobuf::Message for CParental_ParentalUnlock_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that a lock has occurred in a browser"]
 // @@protoc_insertion_point(message:CParental_ParentalLock_Notification)
 pub struct CParental_ParentalLock_Notification {
     // message fields

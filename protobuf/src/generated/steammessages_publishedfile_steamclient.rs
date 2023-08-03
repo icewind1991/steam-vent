@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "User wants to vote on the item"]
 // @@protoc_insertion_point(message:CPublishedFile_Vote_Request)
 pub struct CPublishedFile_Vote_Request {
     // message fields
@@ -244,6 +245,7 @@ impl ::protobuf::Message for CPublishedFile_Vote_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Subscribes the user to the published file"]
 // @@protoc_insertion_point(message:CPublishedFile_Subscribe_Request)
 pub struct CPublishedFile_Subscribe_Request {
     // message fields
@@ -525,6 +527,7 @@ impl ::protobuf::Message for CPublishedFile_Subscribe_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Unsubscribes the user from the published file"]
 // @@protoc_insertion_point(message:CPublishedFile_Unsubscribe_Request)
 pub struct CPublishedFile_Unsubscribe_Request {
     // message fields
@@ -806,6 +809,7 @@ impl ::protobuf::Message for CPublishedFile_Unsubscribe_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Check if the user can subscribe to the published file"]
 // @@protoc_insertion_point(message:CPublishedFile_CanSubscribe_Request)
 pub struct CPublishedFile_CanSubscribe_Request {
     // message fields
@@ -1024,6 +1028,7 @@ impl ::protobuf::Message for CPublishedFile_CanSubscribe_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get sub section data (for table of contents, a specific section, or all)"]
 // @@protoc_insertion_point(message:CPublishedFile_GetSubSectionData_Request)
 pub struct CPublishedFile_GetSubSectionData_Request {
     // message fields
@@ -1562,6 +1567,7 @@ impl ::protobuf::Message for CPublishedFile_GetSubSectionData_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Publishes a clouded user file to the Workshop."]
 // @@protoc_insertion_point(message:CPublishedFile_Publish_Request)
 pub struct CPublishedFile_Publish_Request {
     // message fields
@@ -2477,6 +2483,7 @@ impl ::protobuf::Message for CPublishedFile_Publish_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Retrieves information about a set of published files."]
 // @@protoc_insertion_point(message:CPublishedFile_GetDetails_Request)
 pub struct CPublishedFile_GetDetails_Request {
     // message fields
@@ -7196,6 +7203,7 @@ impl ::protobuf::Message for CPublishedFile_GetDetails_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Retrieves information about a set of published files."]
 // @@protoc_insertion_point(message:CPublishedFile_GetItemInfo_Request)
 pub struct CPublishedFile_GetItemInfo_Request {
     // message fields
@@ -7875,6 +7883,7 @@ pub mod cpublished_file_get_item_info_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Retrieves a count of files published by a user. Uses the same messages as GetUserFiles but totalonly must be true."]
 // @@protoc_insertion_point(message:CPublishedFile_GetUserFiles_Request)
 pub struct CPublishedFile_GetUserFiles_Request {
     // message fields
@@ -9666,6 +9675,7 @@ pub mod cpublished_file_get_user_files_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Determines which files in the given list are in a user's subscription list"]
 // @@protoc_insertion_point(message:CPublishedFile_AreFilesInSubscriptionList_Request)
 pub struct CPublishedFile_AreFilesInSubscriptionList_Request {
     // message fields
@@ -10120,6 +10130,7 @@ pub mod cpublished_file_are_files_in_subscription_list_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Updates information about a published file."]
 // @@protoc_insertion_point(message:CPublishedFile_Update_Request)
 pub struct CPublishedFile_Update_Request {
     // message fields
@@ -10674,6 +10685,7 @@ impl ::protobuf::Message for CPublishedFile_Update_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Deletes a published file."]
 // @@protoc_insertion_point(message:CPublishedFile_Delete_Request)
 pub struct CPublishedFile_Delete_Request {
     // message fields
@@ -10859,6 +10871,7 @@ impl ::protobuf::Message for CPublishedFile_Delete_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns data on a specific change history entry for a published file"]
 // @@protoc_insertion_point(message:CPublishedFile_GetChangeHistoryEntry_Request)
 pub struct CPublishedFile_GetChangeHistoryEntry_Request {
     // message fields
@@ -11190,6 +11203,7 @@ impl ::protobuf::Message for CPublishedFile_GetChangeHistoryEntry_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns data on the change history for a published file"]
 // @@protoc_insertion_point(message:CPublishedFile_GetChangeHistory_Request)
 pub struct CPublishedFile_GetChangeHistory_Request {
     // message fields
@@ -11743,6 +11757,7 @@ pub mod cpublished_file_get_change_history_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Refresh the voting queue for the user"]
 // @@protoc_insertion_point(message:CPublishedFile_RefreshVotingQueue_Request)
 pub struct CPublishedFile_RefreshVotingQueue_Request {
     // message fields
@@ -12085,6 +12100,7 @@ impl ::protobuf::Message for CPublishedFile_RefreshVotingQueue_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Performs a search query for published files"]
 // @@protoc_insertion_point(message:CPublishedFile_QueryFiles_Request)
 pub struct CPublishedFile_QueryFiles_Request {
     // message fields
@@ -13832,6 +13848,7 @@ impl ::protobuf::Message for CPublishedFile_QueryFiles_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Adds a relationship between the published file and the given app"]
 // @@protoc_insertion_point(message:CPublishedFile_AddAppRelationship_Request)
 pub struct CPublishedFile_AddAppRelationship_Request {
     // message fields
@@ -14081,6 +14098,7 @@ impl ::protobuf::Message for CPublishedFile_AddAppRelationship_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Remove a relationship between the published file and the given app"]
 // @@protoc_insertion_point(message:CPublishedFile_RemoveAppRelationship_Request)
 pub struct CPublishedFile_RemoveAppRelationship_Request {
     // message fields
@@ -14330,6 +14348,7 @@ impl ::protobuf::Message for CPublishedFile_RemoveAppRelationship_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the list of app relationships for this published file"]
 // @@protoc_insertion_point(message:CPublishedFile_GetAppRelationships_Request)
 pub struct CPublishedFile_GetAppRelationships_Request {
     // message fields
@@ -14674,6 +14693,7 @@ pub mod cpublished_file_get_app_relationships_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the list of app relationships for set of published files"]
 // @@protoc_insertion_point(message:CPublishedFile_GetAppRelationshipsBatched_Request)
 pub struct CPublishedFile_GetAppRelationshipsBatched_Request {
     // message fields
@@ -15189,6 +15209,7 @@ pub mod cpublished_file_get_app_relationships_batched_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Start usage tracking for a given set of published files"]
 // @@protoc_insertion_point(message:CPublishedFile_StartPlaytimeTracking_Request)
 pub struct CPublishedFile_StartPlaytimeTracking_Request {
     // message fields
@@ -15390,6 +15411,7 @@ impl ::protobuf::Message for CPublishedFile_StartPlaytimeTracking_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Stops usage tracking for a given set of published files"]
 // @@protoc_insertion_point(message:CPublishedFile_StopPlaytimeTracking_Request)
 pub struct CPublishedFile_StopPlaytimeTracking_Request {
     // message fields
@@ -15591,6 +15613,7 @@ impl ::protobuf::Message for CPublishedFile_StopPlaytimeTracking_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Stops usage tracking for all items currently tracked for the specified app"]
 // @@protoc_insertion_point(message:CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request)
 pub struct CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request {
     // message fields
@@ -15776,6 +15799,7 @@ impl ::protobuf::Message for CPublishedFile_StopPlaytimeTrackingForAllAppItems_R
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Stops usage tracking all controller configs for the given app and set the usage time for the for the given controller configs"]
 // @@protoc_insertion_point(message:CPublishedFile_SetPlaytimeForControllerConfigs_Request)
 pub struct CPublishedFile_SetPlaytimeForControllerConfigs_Request {
     // message fields
@@ -16119,6 +16143,7 @@ impl ::protobuf::Message for CPublishedFile_SetPlaytimeForControllerConfigs_Resp
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Adds a parent->child relationship between the given items."]
 // @@protoc_insertion_point(message:CPublishedFile_AddChild_Request)
 pub struct CPublishedFile_AddChild_Request {
     // message fields
@@ -16336,6 +16361,7 @@ impl ::protobuf::Message for CPublishedFile_AddChild_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Removes parent->child relationship between the given items."]
 // @@protoc_insertion_point(message:CPublishedFile_RemoveChild_Request)
 pub struct CPublishedFile_RemoveChild_Request {
     // message fields
@@ -16553,6 +16579,7 @@ impl ::protobuf::Message for CPublishedFile_RemoveChild_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get user vote summary"]
 // @@protoc_insertion_point(message:CPublishedFile_GetUserVoteSummary_Request)
 pub struct CPublishedFile_GetUserVoteSummary_Request {
     // message fields
@@ -16943,6 +16970,7 @@ pub mod cpublished_file_get_user_vote_summary_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get list of updated items since given date"]
 // @@protoc_insertion_point(message:CPublishedFile_GetItemChanges_Request)
 pub struct CPublishedFile_GetItemChanges_Request {
     // message fields
@@ -17415,6 +17443,7 @@ pub mod cpublished_file_get_item_changes_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns more detailed information about the content descriptors for the published file"]
 // @@protoc_insertion_point(message:CPublishedFile_GetContentDescriptors_Request)
 pub struct CPublishedFile_GetContentDescriptors_Request {
     // message fields
@@ -17826,6 +17855,7 @@ pub mod cpublished_file_get_content_descriptors_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Updates content descriptors on the published file"]
 // @@protoc_insertion_point(message:CPublishedFile_UpdateContentDescriptors_Request)
 pub struct CPublishedFile_UpdateContentDescriptors_Request {
     // message fields
@@ -18076,6 +18106,7 @@ impl ::protobuf::Message for CPublishedFile_UpdateContentDescriptors_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from the server when a user subscribes to a file"]
 // @@protoc_insertion_point(message:CPublishedFile_FileSubscribed_Notification)
 pub struct CPublishedFile_FileSubscribed_Notification {
     // message fields
@@ -18570,6 +18601,7 @@ pub mod cpublished_file_file_subscribed_notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from the server when a user unsubscribes from a file"]
 // @@protoc_insertion_point(message:CPublishedFile_FileUnsubscribed_Notification)
 pub struct CPublishedFile_FileUnsubscribed_Notification {
     // message fields
@@ -18711,6 +18743,7 @@ impl ::protobuf::Message for CPublishedFile_FileUnsubscribed_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from the server when a published file is deleted"]
 // @@protoc_insertion_point(message:CPublishedFile_FileDeleted_Client_Notification)
 pub struct CPublishedFile_FileDeleted_Client_Notification {
     // message fields

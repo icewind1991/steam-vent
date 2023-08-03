@@ -166,6 +166,7 @@ impl ::protobuf::Message for GameSearchParam {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Search for a game"]
 // @@protoc_insertion_point(message:CQueuedMatchmaking_SearchForGame_Request)
 pub struct CQueuedMatchmaking_SearchForGame_Request {
     // message fields
@@ -933,6 +934,7 @@ impl ::protobuf::Message for CQueuedMatchmaking_SearchForGame_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "SearchForPlayers"]
 // @@protoc_insertion_point(message:CQueuedMatchmakingGameHost_SearchForPlayers_Request)
 pub struct CQueuedMatchmakingGameHost_SearchForPlayers_Request {
     // message fields
@@ -1885,6 +1887,7 @@ impl ::protobuf::Message for PlayerResult {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "SubmitPlayerResult"]
 // @@protoc_insertion_point(message:CQueuedMatchmakingGameHost_SubmitPlayerResult_Request)
 pub struct CQueuedMatchmakingGameHost_SubmitPlayerResult_Request {
     // message fields
@@ -2116,6 +2119,7 @@ impl ::protobuf::Message for CQueuedMatchmakingGameHost_SubmitPlayerResult_Respo
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "EndGame"]
 // @@protoc_insertion_point(message:CQueuedMatchmakingGameHost_EndGame_Request)
 pub struct CQueuedMatchmakingGameHost_EndGame_Request {
     // message fields

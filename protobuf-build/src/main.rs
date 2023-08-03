@@ -1,6 +1,6 @@
 use ahash::{AHashMap, AHashSet, RandomState};
 use proc_macro2::{Ident, Span, TokenStream};
-use protobuf::reflect::{FileDescriptor, ServiceDescriptor};
+use protobuf::reflect::{FileDescriptor, MessageDescriptor, ServiceDescriptor};
 use protobuf::{Message, SpecialFields, UnknownValueRef};
 use protobuf_codegen::{Codegen, Customize, CustomizeCallback};
 use protobuf_parse::Parser;
@@ -219,6 +219,7 @@ impl FileServices {
 
 struct ServiceGenerator {
     files: Rc<RefCell<AHashMap<String, FileServices>>>,
+    descriptions: Rc<RefCell<AHashMap<String, String>>>,
     kinds: Vec<String>,
 }
 
@@ -229,6 +230,7 @@ impl ServiceGenerator {
                 16,
                 RandomState::with_seeds(1, 2, 3, 4),
             ))),
+            descriptions: Default::default(),
             kinds,
         }
     }
@@ -292,20 +294,32 @@ impl Service {
 
 impl CustomizeCallback for ServiceGenerator {
     fn file(&self, file: &FileDescriptor) -> Customize {
-        let services = file.services().map(Service::from).collect();
+        let services: Vec<Service> = file.services().map(Service::from).collect();
         let imports = file
             .deps()
             .iter()
             .map(|dep| dep.name().to_string())
             .filter(|import| !import.starts_with("google"))
             .collect();
-        let messages = file
+        let messages: Vec<_> = file
             .messages()
             .map(|msg| ServiceMessage {
                 name: msg.name().into(),
                 kind: self.find_kind(msg.name()),
             })
             .collect();
+
+        for service in services.iter() {
+            for method in service.methods.iter() {
+                if let Some(description) = method.description.clone() {
+                    println!("{} = {}", method.name, description);
+                    self.descriptions
+                        .borrow_mut()
+                        .insert(method.request.clone(), description);
+                }
+            }
+        }
+
         self.files.borrow_mut().insert(
             file.name().to_string(),
             FileServices {
@@ -315,6 +329,14 @@ impl CustomizeCallback for ServiceGenerator {
             },
         );
         Customize::default()
+    }
+
+    fn message(&self, message: &MessageDescriptor) -> Customize {
+        if let Some(description) = self.descriptions.borrow().get(message.name()) {
+            Customize::default().before(&format!("#[doc = \"{description}\"]"))
+        } else {
+            Customize::default()
+        }
     }
 }
 

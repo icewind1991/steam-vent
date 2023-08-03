@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client just finished playing a game, detected new shader cache entries and is notifying us about them"]
 // @@protoc_insertion_point(message:CShader_RegisterShader_Request)
 pub struct CShader_RegisterShader_Request {
     // message fields
@@ -519,6 +520,7 @@ impl ::protobuf::Message for CShader_RegisterShader_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client is sending us actual compiled shader code that we requested"]
 // @@protoc_insertion_point(message:CShader_SendShader_Request)
 pub struct CShader_SendShader_Request {
     // message fields
@@ -896,6 +898,7 @@ impl ::protobuf::Message for CShader_SendShader_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client wants to know the manifest ID to fetch (if any) for a bucket's depot"]
 // @@protoc_insertion_point(message:CShader_GetBucketManifest_Request)
 pub struct CShader_GetBucketManifest_Request {
     // message fields
@@ -1276,6 +1279,7 @@ impl ::protobuf::Message for CShader_GetBucketManifest_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Job to get a stale bucket given a gpu and driver desc"]
 // @@protoc_insertion_point(message:CShader_GetStaleBucket_Request)
 pub struct CShader_GetStaleBucket_Request {
     // message fields
@@ -1771,6 +1775,7 @@ impl ::protobuf::Message for CShader_GetStaleBucket_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Report an exernally built bucket"]
 // @@protoc_insertion_point(message:CShader_ReportExternalBuild_Request)
 pub struct CShader_ReportExternalBuild_Request {
     // message fields

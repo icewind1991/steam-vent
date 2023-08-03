@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "TestAvailablePassword."]
 // @@protoc_insertion_point(message:CCredentials_TestAvailablePassword_Request)
 pub struct CCredentials_TestAvailablePassword_Request {
     // message fields
@@ -360,6 +361,7 @@ impl ::protobuf::Message for CCredentials_TestAvailablePassword_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "GetSteamGuardDetails."]
 // @@protoc_insertion_point(message:CCredentials_GetSteamGuardDetails_Request)
 pub struct CCredentials_GetSteamGuardDetails_Request {
     // message fields
@@ -1298,6 +1300,7 @@ pub mod ccredentials_get_steam_guard_details_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Validate an email address given a token"]
 // @@protoc_insertion_point(message:CCredentials_ValidateEmailAddress_Request)
 pub struct CCredentials_ValidateEmailAddress_Request {
     // message fields
@@ -1533,6 +1536,7 @@ impl ::protobuf::Message for CCredentials_ValidateEmailAddress_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "SteamGuardPhishingReport"]
 // @@protoc_insertion_point(message:CCredentials_SteamGuardPhishingReport_Request)
 pub struct CCredentials_SteamGuardPhishingReport_Request {
     // message fields
@@ -2226,6 +2230,7 @@ impl ::protobuf::Message for CCredentials_SteamGuardPhishingReport_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "GetCredentialChangeTimeDetails."]
 // @@protoc_insertion_point(message:CCredentials_LastCredentialChangeTime_Request)
 pub struct CCredentials_LastCredentialChangeTime_Request {
     // message fields
@@ -2508,6 +2513,7 @@ impl ::protobuf::Message for CCredentials_LastCredentialChangeTime_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "GetAccountAuthSecret"]
 // @@protoc_insertion_point(message:CCredentials_GetAccountAuthSecret_Request)
 pub struct CCredentials_GetAccountAuthSecret_Request {
     // special fields

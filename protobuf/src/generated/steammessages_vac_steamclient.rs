@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "File signature check was performed"]
 // @@protoc_insertion_point(message:CFileVerification_SignatureCheck_Request)
 pub struct CFileVerification_SignatureCheck_Request {
     // message fields
@@ -535,6 +536,7 @@ impl ::protobuf::Message for CFileVerification_SignatureCheck_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Steam Service check was performed"]
 // @@protoc_insertion_point(message:CFileVerification_SteamServiceCheck_Request)
 pub struct CFileVerification_SteamServiceCheck_Request {
     // message fields

@@ -1225,6 +1225,7 @@ impl ::protobuf::Message for CDataPublisher_ClientUpdateAppJob_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Generate a debug report of what devices are in the survey"]
 // @@protoc_insertion_point(message:CDataPublisher_GetVRDeviceInfo_Request)
 pub struct CDataPublisher_GetVRDeviceInfo_Request {
     // message fields
@@ -1731,6 +1732,7 @@ pub mod cdata_publisher_get_vrdevice_info_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Set the rollup reference of a single VR device"]
 // @@protoc_insertion_point(message:CDataPublisher_SetVRDeviceInfoAggregationReference_Request)
 pub struct CDataPublisher_SetVRDeviceInfoAggregationReference_Request {
     // message fields
@@ -1981,6 +1983,7 @@ impl ::protobuf::Message for CDataPublisher_SetVRDeviceInfoAggregationReference_
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Adds a device to the VRDeviceInfo table for the hardware survey"]
 // @@protoc_insertion_point(message:CDataPublisher_AddVRDeviceInfo_Request)
 pub struct CDataPublisher_AddVRDeviceInfo_Request {
     // message fields
@@ -2427,6 +2430,7 @@ impl ::protobuf::Message for CDataPublisher_AddVRDeviceInfo_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Should I run the survey"]
 // @@protoc_insertion_point(message:CValveHWSurvey_GetSurveySchedule_Request)
 pub struct CValveHWSurvey_GetSurveySchedule_Request {
     // message fields

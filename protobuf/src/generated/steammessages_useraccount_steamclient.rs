@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets the available promotional discounts available to the user"]
 // @@protoc_insertion_point(message:CUserAccount_GetAvailableValveDiscountPromotions_Request)
 pub struct CUserAccount_GetAvailableValveDiscountPromotions_Request {
     // message fields
@@ -710,6 +711,7 @@ pub mod cuser_account_get_available_valve_discount_promotions_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns balance and details about any users wallet"]
 // @@protoc_insertion_point(message:CUserAccount_GetClientWalletDetails_Request)
 pub struct CUserAccount_GetClientWalletDetails_Request {
     // message fields
@@ -1460,6 +1462,7 @@ impl ::protobuf::Message for CUserAccount_GetWalletDetails_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Fetches account link status"]
 // @@protoc_insertion_point(message:CUserAccount_GetAccountLinkStatus_Request)
 pub struct CUserAccount_GetAccountLinkStatus_Request {
     // special fields
@@ -1709,6 +1712,7 @@ impl ::protobuf::Message for CUserAccount_GetAccountLinkStatus_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Cancels a free license for a user"]
 // @@protoc_insertion_point(message:CUserAccount_CancelLicenseForApp_Request)
 pub struct CUserAccount_CancelLicenseForApp_Request {
     // message fields
@@ -1894,6 +1898,7 @@ impl ::protobuf::Message for CUserAccount_CancelLicenseForApp_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the country code associated with the passed steamid (only available for logged-in user or support)"]
 // @@protoc_insertion_point(message:CUserAccount_GetUserCountry_Request)
 pub struct CUserAccount_GetUserCountry_Request {
     // message fields
@@ -2129,6 +2134,7 @@ impl ::protobuf::Message for CUserAccount_GetUserCountry_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Create a limited-use token that can be used to create a friend request"]
 // @@protoc_insertion_point(message:CUserAccount_CreateFriendInviteToken_Request)
 pub struct CUserAccount_CreateFriendInviteToken_Request {
     // message fields
@@ -2573,6 +2579,7 @@ impl ::protobuf::Message for CUserAccount_CreateFriendInviteToken_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the set of active tokens for the user"]
 // @@protoc_insertion_point(message:CUserAccount_GetFriendInviteTokens_Request)
 pub struct CUserAccount_GetFriendInviteTokens_Request {
     // special fields
@@ -2740,6 +2747,7 @@ impl ::protobuf::Message for CUserAccount_GetFriendInviteTokens_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "View details about an invite token "]
 // @@protoc_insertion_point(message:CUserAccount_ViewFriendInviteToken_Request)
 pub struct CUserAccount_ViewFriendInviteToken_Request {
     // message fields
@@ -3071,6 +3079,7 @@ impl ::protobuf::Message for CUserAccount_ViewFriendInviteToken_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Create a friend relationship using the given invite token"]
 // @@protoc_insertion_point(message:CUserAccount_RedeemFriendInviteToken_Request)
 pub struct CUserAccount_RedeemFriendInviteToken_Request {
     // message fields
@@ -3305,6 +3314,7 @@ impl ::protobuf::Message for CUserAccount_RedeemFriendInviteToken_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Revoke an active friend invite token"]
 // @@protoc_insertion_point(message:CUserAccount_RevokeFriendInviteToken_Request)
 pub struct CUserAccount_RevokeFriendInviteToken_Request {
     // message fields
@@ -3507,6 +3517,7 @@ impl ::protobuf::Message for CUserAccount_RevokeFriendInviteToken_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Register intended account usage of a tool"]
 // @@protoc_insertion_point(message:CUserAccount_RegisterCompatTool_Request)
 pub struct CUserAccount_RegisterCompatTool_Request {
     // message fields
@@ -3692,6 +3703,7 @@ impl ::protobuf::Message for CUserAccount_RegisterCompatTool_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "List all my active linked external accounts; may be requested to return the access token"]
 // @@protoc_insertion_point(message:CAccountLinking_GetLinkedAccountInfo_Request)
 pub struct CAccountLinking_GetLinkedAccountInfo_Request {
     // message fields
@@ -4386,6 +4398,7 @@ pub mod caccount_linking_get_linked_account_info_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Use a logged-in (password/etc) session to create a durable access token"]
 // @@protoc_insertion_point(message:CEmbeddedClient_AuthorizeCurrentDevice_Request)
 pub struct CEmbeddedClient_AuthorizeCurrentDevice_Request {
     // message fields

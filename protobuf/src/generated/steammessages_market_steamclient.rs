@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Checks whether or not the authed account is allowed to use the market"]
 // @@protoc_insertion_point(message:CEconMarket_IsMarketplaceAllowed_Request)
 pub struct CEconMarket_IsMarketplaceAllowed_Request {
     // message fields

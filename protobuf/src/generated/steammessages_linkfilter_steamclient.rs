@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a list of hash prefixes for the specified hit type, to use for client caching."]
 // @@protoc_insertion_point(message:CCommunity_GetLinkFilterHashPrefixes_Request)
 pub struct CCommunity_GetLinkFilterHashPrefixes_Request {
     // message fields
@@ -293,6 +294,7 @@ impl ::protobuf::Message for CCommunity_GetLinkFilterHashPrefixes_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a list of hashes for the specified hit type, to use for client caching."]
 // @@protoc_insertion_point(message:CCommunity_GetLinkFilterHashes_Request)
 pub struct CCommunity_GetLinkFilterHashes_Request {
     // message fields
@@ -556,6 +558,7 @@ impl ::protobuf::Message for CCommunity_GetLinkFilterHashes_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a list of hashes describing the version of each chunk of the requested size."]
 // @@protoc_insertion_point(message:CCommunity_GetLinkFilterListVersion_Request)
 pub struct CCommunity_GetLinkFilterListVersion_Request {
     // message fields

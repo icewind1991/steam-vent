@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Fetches RSA public key to use to encrypt passwords for a given account name"]
 // @@protoc_insertion_point(message:CAuthentication_GetPasswordRSAPublicKey_Request)
 pub struct CAuthentication_GetPasswordRSAPublicKey_Request {
     // message fields
@@ -666,6 +667,7 @@ impl ::protobuf::Message for CAuthentication_DeviceDetails {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "start authentication process"]
 // @@protoc_insertion_point(message:CAuthentication_BeginAuthSessionViaQR_Request)
 pub struct CAuthentication_BeginAuthSessionViaQR_Request {
     // message fields
@@ -1336,6 +1338,7 @@ impl ::protobuf::Message for CAuthentication_BeginAuthSessionViaQR_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "start authentication process"]
 // @@protoc_insertion_point(message:CAuthentication_BeginAuthSessionViaCredentials_Request)
 pub struct CAuthentication_BeginAuthSessionViaCredentials_Request {
     // message fields
@@ -2253,6 +2256,7 @@ impl ::protobuf::Message for CAuthentication_BeginAuthSessionViaCredentials_Resp
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "poll during authentication process"]
 // @@protoc_insertion_point(message:CAuthentication_PollAuthSessionStatus_Request)
 pub struct CAuthentication_PollAuthSessionStatus_Request {
     // message fields
@@ -2878,6 +2882,7 @@ impl ::protobuf::Message for CAuthentication_PollAuthSessionStatus_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "get metadata of specific auth session, this will also implicitly bind the calling account"]
 // @@protoc_insertion_point(message:CAuthentication_GetAuthSessionInfo_Request)
 pub struct CAuthentication_GetAuthSessionInfo_Request {
     // message fields
@@ -3559,6 +3564,7 @@ impl ::protobuf::Message for CAuthentication_GetAuthSessionInfo_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "approve an authentication session via mobile 2fa"]
 // @@protoc_insertion_point(message:CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request)
 pub struct CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request {
     // message fields
@@ -3924,6 +3930,7 @@ impl ::protobuf::Message for CAuthentication_UpdateAuthSessionWithMobileConfirma
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "approve an authentication session via steam guard code"]
 // @@protoc_insertion_point(message:CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request)
 pub struct CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request {
     // message fields
@@ -4275,6 +4282,7 @@ impl ::protobuf::Message for CAuthentication_UpdateAuthSessionWithSteamGuardCode
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Given a refresh token for a client app audience (e.g. desktop client / mobile client), generate an access token"]
 // @@protoc_insertion_point(message:CAuthentication_AccessToken_GenerateForApp_Request)
 pub struct CAuthentication_AccessToken_GenerateForApp_Request {
     // message fields
@@ -4643,6 +4651,7 @@ impl ::protobuf::Message for CAuthentication_AccessToken_GenerateForApp_Response
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Enumerate durable (refresh) tokens for the given subject account"]
 // @@protoc_insertion_point(message:CAuthentication_RefreshToken_Enumerate_Request)
 pub struct CAuthentication_RefreshToken_Enumerate_Request {
     // special fields
@@ -5577,6 +5586,7 @@ pub mod cauthentication_refresh_token_enumerate_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets all active auth sessions for an account for reference by the mobile app"]
 // @@protoc_insertion_point(message:CAuthentication_GetAuthSessionsForAccount_Request)
 pub struct CAuthentication_GetAuthSessionsForAccount_Request {
     // special fields
@@ -5746,6 +5756,7 @@ impl ::protobuf::Message for CAuthentication_GetAuthSessionsForAccount_Response 
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Migrates a WG token to an access and refresh token using a signature generated with the user's 2FA secret"]
 // @@protoc_insertion_point(message:CAuthentication_MigrateMobileSession_Request)
 pub struct CAuthentication_MigrateMobileSession_Request {
     // message fields
@@ -6128,6 +6139,7 @@ impl ::protobuf::Message for CAuthentication_MigrateMobileSession_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Revoke a single token immediately, making it unable to renew or generate new access tokens"]
 // @@protoc_insertion_point(message:CAuthentication_Token_Revoke_Request)
 pub struct CAuthentication_Token_Revoke_Request {
     // message fields
@@ -6365,6 +6377,7 @@ impl ::protobuf::Message for CAuthentication_Token_Revoke_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Mark the given refresh token as revoked"]
 // @@protoc_insertion_point(message:CAuthentication_RefreshToken_Revoke_Request)
 pub struct CAuthentication_RefreshToken_Revoke_Request {
     // message fields
@@ -6666,6 +6679,7 @@ impl ::protobuf::Message for CAuthentication_RefreshToken_Revoke_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Asks the server for a list of refresh tokens associated with an account"]
 // @@protoc_insertion_point(message:CAuthenticationSupport_QueryRefreshTokensByAccount_Request)
 pub struct CAuthenticationSupport_QueryRefreshTokensByAccount_Request {
     // message fields
@@ -7651,6 +7665,7 @@ impl ::protobuf::Message for CAuthenticationSupport_QueryRefreshTokensByAccount_
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Asks the server for a list of refresh tokens associated with an account"]
 // @@protoc_insertion_point(message:CAuthenticationSupport_QueryRefreshTokenByID_Request)
 pub struct CAuthenticationSupport_QueryRefreshTokenByID_Request {
     // message fields
@@ -7851,6 +7866,7 @@ impl ::protobuf::Message for CAuthenticationSupport_QueryRefreshTokenByID_Respon
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Revokes a user's auth token"]
 // @@protoc_insertion_point(message:CAuthenticationSupport_RevokeToken_Request)
 pub struct CAuthenticationSupport_RevokeToken_Request {
     // message fields
@@ -8068,6 +8084,7 @@ impl ::protobuf::Message for CAuthenticationSupport_RevokeToken_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets the audit history for a user's auth token"]
 // @@protoc_insertion_point(message:CAuthenticationSupport_GetTokenHistory_Request)
 pub struct CAuthenticationSupport_GetTokenHistory_Request {
     // message fields
@@ -8455,6 +8472,7 @@ impl ::protobuf::Message for CAuthenticationSupport_GetTokenHistory_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Create a nonce for a cloud gaming service session"]
 // @@protoc_insertion_point(message:CCloudGaming_CreateNonce_Request)
 pub struct CCloudGaming_CreateNonce_Request {
     // message fields
@@ -8771,6 +8789,7 @@ impl ::protobuf::Message for CCloudGaming_CreateNonce_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the amount of streaming time remaining for a set of apps"]
 // @@protoc_insertion_point(message:CCloudGaming_GetTimeRemaining_Request)
 pub struct CCloudGaming_GetTimeRemaining_Request {
     // message fields

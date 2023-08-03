@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Rack informing site manager of new inbound client PSK connection"]
 // @@protoc_insertion_point(message:CSiteManagerClient_IncomingClient_Request)
 pub struct CSiteManagerClient_IncomingClient_Request {
     // message fields
@@ -325,6 +326,7 @@ impl ::protobuf::Message for CSiteManagerClient_IncomingClient_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notify client directly about seat checkout result"]
 // @@protoc_insertion_point(message:CSiteLicense_ClientSeatCheckout_Notification)
 pub struct CSiteLicense_ClientSeatCheckout_Notification {
     // message fields
@@ -466,6 +468,7 @@ impl ::protobuf::Message for CSiteLicense_ClientSeatCheckout_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Rack informing site manager of existing tracked payments"]
 // @@protoc_insertion_point(message:CSiteManagerClient_TrackedPayments_Notification)
 pub struct CSiteManagerClient_TrackedPayments_Notification {
     // message fields
@@ -1057,6 +1060,7 @@ pub mod csite_manager_client_tracked_payments_notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client is requesting connetion info for local site"]
 // @@protoc_insertion_point(message:CSiteLicense_InitiateAssociation_Request)
 pub struct CSiteLicense_InitiateAssociation_Request {
     // message fields
@@ -1356,6 +1360,7 @@ impl ::protobuf::Message for CSiteLicense_InitiateAssociation_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Local cafe server authentication"]
 // @@protoc_insertion_point(message:CSiteLicense_LCSAuthenticate_Request)
 pub struct CSiteLicense_LCSAuthenticate_Request {
     // message fields
@@ -1687,6 +1692,7 @@ impl ::protobuf::Message for CSiteLicense_LCSAuthenticate_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Local cafe server wants to grant user access to site"]
 // @@protoc_insertion_point(message:CSiteLicense_LCSAssociateUser_Request)
 pub struct CSiteLicense_LCSAssociateUser_Request {
     // message fields
@@ -1985,6 +1991,7 @@ impl ::protobuf::Message for CSiteLicense_LCSAssociateUser_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client is requesting use of a site license seat"]
 // @@protoc_insertion_point(message:CSiteLicense_ClientSeatCheckout_Request)
 pub struct CSiteLicense_ClientSeatCheckout_Request {
     // message fields
@@ -2234,6 +2241,7 @@ impl ::protobuf::Message for CSiteLicense_ClientSeatCheckout_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client is requesting the number of currently available seats"]
 // @@protoc_insertion_point(message:CSiteLicense_ClientGetAvailableSeats_Request)
 pub struct CSiteLicense_ClientGetAvailableSeats_Request {
     // message fields

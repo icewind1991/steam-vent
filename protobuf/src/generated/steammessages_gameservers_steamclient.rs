@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets a list of servers given a filter string"]
 // @@protoc_insertion_point(message:CGameServers_GetServerList_Request)
 pub struct CGameServers_GetServerList_Request {
     // message fields
@@ -1068,6 +1069,7 @@ pub mod cgame_servers_get_server_list_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets a list of server SteamIDs given a list of IPs"]
 // @@protoc_insertion_point(message:CGameServers_GetServerSteamIDsByIP_Request)
 pub struct CGameServers_GetServerSteamIDsByIP_Request {
     // message fields
@@ -1410,6 +1412,7 @@ pub mod cgame_servers_ips_with_steam_ids_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets a list of server IP addresses given a list of SteamIDs"]
 // @@protoc_insertion_point(message:CGameServers_GetServerIPsBySteamID_Request)
 pub struct CGameServers_GetServerIPsBySteamID_Request {
     // message fields
@@ -1501,6 +1504,7 @@ impl ::protobuf::Message for CGameServers_GetServerIPsBySteamID_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Perform a query on a specific server by FakeIP"]
 // @@protoc_insertion_point(message:CGameServers_QueryByFakeIP_Request)
 pub struct CGameServers_QueryByFakeIP_Request {
     // message fields
@@ -3296,6 +3300,7 @@ impl ::protobuf::Message for CGameServers_GameServerQuery_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Steam is asking a gameserver for its data"]
 // @@protoc_insertion_point(message:GameServerClient_QueryServerData_Request)
 pub struct GameServerClient_QueryServerData_Request {
     // special fields

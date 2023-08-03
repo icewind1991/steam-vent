@@ -996,6 +996,7 @@ impl ::protobuf::Message for StoreBrowseItemDataRequest {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get information about items on the store"]
 // @@protoc_insertion_point(message:CStoreBrowse_GetItems_Request)
 pub struct CStoreBrowse_GetItems_Request {
     // message fields
@@ -7612,6 +7613,7 @@ impl ::protobuf::Message for CStoreBrowse_GetItems_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get category definitions for store.  This is a public-facing API (as compared to StoreCatalog.GetCategories, which is intended for PHP)"]
 // @@protoc_insertion_point(message:CStoreBrowse_GetStoreCategories_Request)
 pub struct CStoreBrowse_GetStoreCategories_Request {
     // message fields
@@ -8187,6 +8189,7 @@ pub mod cstore_browse_get_store_categories_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns all DLC appids for games owned by the user."]
 // @@protoc_insertion_point(message:CStoreBrowse_GetDLCForApps_Request)
 pub struct CStoreBrowse_GetDLCForApps_Request {
     // message fields
@@ -8920,6 +8923,7 @@ pub mod cstore_browse_get_dlcfor_apps_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns all DLC appids for the specified games."]
 // @@protoc_insertion_point(message:CStoreBrowse_GetDLCForAppsSolr_Request)
 pub struct CStoreBrowse_GetDLCForAppsSolr_Request {
     // message fields

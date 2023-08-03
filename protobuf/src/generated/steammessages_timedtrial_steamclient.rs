@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the amount of time a user has left on a timed trial for an app"]
 // @@protoc_insertion_point(message:CTimedTrial_GetTimeRemaining_Request)
 pub struct CTimedTrial_GetTimeRemaining_Request {
     // message fields
@@ -341,6 +342,7 @@ impl ::protobuf::Message for CTimedTrial_GetTimeRemaining_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Updates the user's remaining playtime while in game"]
 // @@protoc_insertion_point(message:CTimedTrial_RecordPlaytime_Request)
 pub struct CTimedTrial_RecordPlaytime_Request {
     // message fields
@@ -623,6 +625,7 @@ impl ::protobuf::Message for CTimedTrial_RecordPlaytime_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Reset the user's remaining playtime (developer only)"]
 // @@protoc_insertion_point(message:CTimedTrial_ResetPlaytime_Request)
 pub struct CTimedTrial_ResetPlaytime_Request {
     // message fields

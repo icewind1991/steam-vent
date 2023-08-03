@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get me the mutual friends for each of my pending incoming invites (individuals and clans)."]
 // @@protoc_insertion_point(message:CPlayer_GetMutualFriendsForIncomingInvites_Request)
 pub struct CPlayer_GetMutualFriendsForIncomingInvites_Request {
     // special fields
@@ -319,6 +320,7 @@ impl ::protobuf::Message for CPlayer_GetMutualFriendsForIncomingInvites_Response
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Return a list of games owned by the player"]
 // @@protoc_insertion_point(message:CPlayer_GetOwnedGames_Request)
 pub struct CPlayer_GetOwnedGames_Request {
     // message fields
@@ -1484,6 +1486,7 @@ pub mod cplayer_get_owned_games_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Return suggested games for player to play next."]
 // @@protoc_insertion_point(message:CPlayer_GetPlayNext_Request)
 pub struct CPlayer_GetPlayNext_Request {
     // message fields
@@ -1734,6 +1737,7 @@ impl ::protobuf::Message for CPlayer_GetPlayNext_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a list of friends who are playing, have played, own, or want a game"]
 // @@protoc_insertion_point(message:CPlayer_GetFriendsGameplayInfo_Request)
 pub struct CPlayer_GetFriendsGameplayInfo_Request {
     // message fields
@@ -2417,6 +2421,7 @@ pub mod cplayer_get_friends_gameplay_info_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the Steam Level of a user, the Badge level for the game, and if it's foil"]
 // @@protoc_insertion_point(message:CPlayer_GetGameBadgeLevels_Request)
 pub struct CPlayer_GetGameBadgeLevels_Request {
     // message fields
@@ -2825,6 +2830,7 @@ pub mod cplayer_get_game_badge_levels_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets which profile background is active for a specific user"]
 // @@protoc_insertion_point(message:CPlayer_GetProfileBackground_Request)
 pub struct CPlayer_GetProfileBackground_Request {
     // message fields
@@ -3944,6 +3950,7 @@ impl ::protobuf::Message for CPlayer_GetProfileBackground_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets the user's profile background"]
 // @@protoc_insertion_point(message:CPlayer_SetProfileBackground_Request)
 pub struct CPlayer_SetProfileBackground_Request {
     // message fields
@@ -4129,6 +4136,7 @@ impl ::protobuf::Message for CPlayer_SetProfileBackground_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets which mini profile background is active for a specific user"]
 // @@protoc_insertion_point(message:CPlayer_GetMiniProfileBackground_Request)
 pub struct CPlayer_GetMiniProfileBackground_Request {
     // message fields
@@ -4378,6 +4386,7 @@ impl ::protobuf::Message for CPlayer_GetMiniProfileBackground_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets the user's mini profile background"]
 // @@protoc_insertion_point(message:CPlayer_SetMiniProfileBackground_Request)
 pub struct CPlayer_SetMiniProfileBackground_Request {
     // message fields
@@ -4563,6 +4572,7 @@ impl ::protobuf::Message for CPlayer_SetMiniProfileBackground_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets which avatar frame is active for a specific user"]
 // @@protoc_insertion_point(message:CPlayer_GetAvatarFrame_Request)
 pub struct CPlayer_GetAvatarFrame_Request {
     // message fields
@@ -4812,6 +4822,7 @@ impl ::protobuf::Message for CPlayer_GetAvatarFrame_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets the user's avatar frame for their profile"]
 // @@protoc_insertion_point(message:CPlayer_SetAvatarFrame_Request)
 pub struct CPlayer_SetAvatarFrame_Request {
     // message fields
@@ -4997,6 +5008,7 @@ impl ::protobuf::Message for CPlayer_SetAvatarFrame_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets which animated avatar is active for a specific user"]
 // @@protoc_insertion_point(message:CPlayer_GetAnimatedAvatar_Request)
 pub struct CPlayer_GetAnimatedAvatar_Request {
     // message fields
@@ -5246,6 +5258,7 @@ impl ::protobuf::Message for CPlayer_GetAnimatedAvatar_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets the user's animated avatar for their profile"]
 // @@protoc_insertion_point(message:CPlayer_SetAnimatedAvatar_Request)
 pub struct CPlayer_SetAnimatedAvatar_Request {
     // message fields
@@ -5431,6 +5444,7 @@ impl ::protobuf::Message for CPlayer_SetAnimatedAvatar_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets which Steam Deck keyboard skin is active for a specific user"]
 // @@protoc_insertion_point(message:CPlayer_GetSteamDeckKeyboardSkin_Request)
 pub struct CPlayer_GetSteamDeckKeyboardSkin_Request {
     // message fields
@@ -5680,6 +5694,7 @@ impl ::protobuf::Message for CPlayer_GetSteamDeckKeyboardSkin_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets the user's current Steam Deck keyboard skin"]
 // @@protoc_insertion_point(message:CPlayer_SetSteamDeckKeyboardSkin_Request)
 pub struct CPlayer_SetSteamDeckKeyboardSkin_Request {
     // message fields
@@ -5865,6 +5880,7 @@ impl ::protobuf::Message for CPlayer_SetSteamDeckKeyboardSkin_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the items the user can equip on their profile"]
 // @@protoc_insertion_point(message:CPlayer_GetProfileItemsOwned_Request)
 pub struct CPlayer_GetProfileItemsOwned_Request {
     // message fields
@@ -6182,6 +6198,7 @@ impl ::protobuf::Message for CPlayer_GetProfileItemsOwned_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the items the user has equipped on their profile"]
 // @@protoc_insertion_point(message:CPlayer_GetProfileItemsEquipped_Request)
 pub struct CPlayer_GetProfileItemsEquipped_Request {
     // message fields
@@ -6501,6 +6518,7 @@ impl ::protobuf::Message for CPlayer_GetProfileItemsEquipped_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets special flags on the equipped item"]
 // @@protoc_insertion_point(message:CPlayer_SetEquippedProfileItemFlags_Request)
 pub struct CPlayer_SetEquippedProfileItemFlags_Request {
     // message fields
@@ -6718,6 +6736,7 @@ impl ::protobuf::Message for CPlayer_SetEquippedProfileItemFlags_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets a list of the emoticons a user has with metadata"]
 // @@protoc_insertion_point(message:CPlayer_GetEmoticonList_Request)
 pub struct CPlayer_GetEmoticonList_Request {
     // special fields
@@ -7174,6 +7193,7 @@ pub mod cplayer_get_emoticon_list_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets the best achievements the user has gotten for the specified list of apps."]
 // @@protoc_insertion_point(message:CPlayer_GetTopAchievementsForGames_Request)
 pub struct CPlayer_GetTopAchievementsForGames_Request {
     // message fields
@@ -8047,6 +8067,7 @@ pub mod cplayer_get_top_achievements_for_games_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets the achievement completion stats for the specified list of apps."]
 // @@protoc_insertion_point(message:CPlayer_GetAchievementsProgress_Request)
 pub struct CPlayer_GetAchievementsProgress_Request {
     // message fields
@@ -8584,6 +8605,7 @@ pub mod cplayer_get_achievements_progress_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a games available achievements for display purposes."]
 // @@protoc_insertion_point(message:CPlayer_GetGameAchievements_Request)
 pub struct CPlayer_GetGameAchievements_Request {
     // message fields
@@ -9239,6 +9261,7 @@ pub mod cplayer_get_game_achievements_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets the badge the user has set as their favorite"]
 // @@protoc_insertion_point(message:CPlayer_GetFavoriteBadge_Request)
 pub struct CPlayer_GetFavoriteBadge_Request {
     // message fields
@@ -9649,6 +9672,7 @@ impl ::protobuf::Message for CPlayer_GetFavoriteBadge_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets the badge  as the users favorite"]
 // @@protoc_insertion_point(message:CPlayer_SetFavoriteBadge_Request)
 pub struct CPlayer_SetFavoriteBadge_Request {
     // message fields
@@ -9866,6 +9890,7 @@ impl ::protobuf::Message for CPlayer_SetFavoriteBadge_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the customizations (if any) for a profile"]
 // @@protoc_insertion_point(message:CPlayer_GetProfileCustomization_Request)
 pub struct CPlayer_GetProfileCustomization_Request {
     // message fields
@@ -11518,6 +11543,7 @@ pub mod cplayer_get_profile_customization_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the purchased profile customizations"]
 // @@protoc_insertion_point(message:CPlayer_GetPurchasedProfileCustomizations_Request)
 pub struct CPlayer_GetPurchasedProfileCustomizations_Request {
     // message fields
@@ -11865,6 +11891,7 @@ pub mod cplayer_get_purchased_profile_customizations_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the purchased and upgraded profile customizations"]
 // @@protoc_insertion_point(message:CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request)
 pub struct CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request {
     // message fields
@@ -12370,6 +12397,7 @@ pub mod cplayer_get_purchased_and_upgraded_profile_customizations_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets themes available for the user."]
 // @@protoc_insertion_point(message:CPlayer_GetProfileThemesAvailable_Request)
 pub struct CPlayer_GetProfileThemesAvailable_Request {
     // special fields
@@ -12537,6 +12565,7 @@ impl ::protobuf::Message for CPlayer_GetProfileThemesAvailable_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Selects a theme for the profile"]
 // @@protoc_insertion_point(message:CPlayer_SetProfileTheme_Request)
 pub struct CPlayer_SetProfileTheme_Request {
     // message fields
@@ -12739,6 +12768,7 @@ impl ::protobuf::Message for CPlayer_SetProfileTheme_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets profile preferences"]
 // @@protoc_insertion_point(message:CPlayer_SetProfilePreferences_Request)
 pub struct CPlayer_SetProfilePreferences_Request {
     // message fields
@@ -12906,6 +12936,7 @@ impl ::protobuf::Message for CPlayer_SetProfilePreferences_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Posts custom status text into the blotter"]
 // @@protoc_insertion_point(message:CPlayer_PostStatusToFriends_Request)
 pub struct CPlayer_PostStatusToFriends_Request {
     // message fields
@@ -13140,6 +13171,7 @@ impl ::protobuf::Message for CPlayer_PostStatusToFriends_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets a posted status text for a user by id"]
 // @@protoc_insertion_point(message:CPlayer_GetPostedStatus_Request)
 pub struct CPlayer_GetPostedStatus_Request {
     // message fields
@@ -13535,6 +13567,7 @@ impl ::protobuf::Message for CPlayer_GetPostedStatus_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Deletes a posted status text for a user by id"]
 // @@protoc_insertion_point(message:CPlayer_DeletePostedStatus_Request)
 pub struct CPlayer_DeletePostedStatus_Request {
     // message fields
@@ -13720,6 +13753,7 @@ impl ::protobuf::Message for CPlayer_DeletePostedStatus_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets the last-played times for the account"]
 // @@protoc_insertion_point(message:CPlayer_GetLastPlayedTimes_Request)
 pub struct CPlayer_GetLastPlayedTimes_Request {
     // message fields
@@ -14480,6 +14514,7 @@ pub mod cplayer_get_last_played_times_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets the time when the user accepted the SSA"]
 // @@protoc_insertion_point(message:CPlayer_GetTimeSSAAccepted_Request)
 pub struct CPlayer_GetTimeSSAAccepted_Request {
     // special fields
@@ -14729,6 +14764,7 @@ impl ::protobuf::Message for CPlayer_GetTimeSSAAccepted_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "User is accepting the SSA"]
 // @@protoc_insertion_point(message:CPlayer_AcceptSSA_Request)
 pub struct CPlayer_AcceptSSA_Request {
     // message fields
@@ -14949,6 +14985,7 @@ impl ::protobuf::Message for CPlayer_AcceptSSA_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets the list of nicknames this user has for other users"]
 // @@protoc_insertion_point(message:CPlayer_GetNicknameList_Request)
 pub struct CPlayer_GetNicknameList_Request {
     // special fields
@@ -15277,6 +15314,7 @@ pub mod cplayer_get_nickname_list_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets the list of per-friend preferences this user has set for other users"]
 // @@protoc_insertion_point(message:CPlayer_GetPerFriendPreferences_Request)
 pub struct CPlayer_GetPerFriendPreferences_Request {
     // special fields
@@ -15847,6 +15885,7 @@ impl ::protobuf::Message for CPlayer_GetPerFriendPreferences_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets the logged in user's per-friend preferences for the given user"]
 // @@protoc_insertion_point(message:CPlayer_SetPerFriendPreferences_Request)
 pub struct CPlayer_SetPerFriendPreferences_Request {
     // message fields
@@ -16014,6 +16053,7 @@ impl ::protobuf::Message for CPlayer_SetPerFriendPreferences_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Invites another Steam user to be a friend"]
 // @@protoc_insertion_point(message:CPlayer_AddFriend_Request)
 pub struct CPlayer_AddFriend_Request {
     // message fields
@@ -16296,6 +16336,7 @@ impl ::protobuf::Message for CPlayer_AddFriend_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Removes a friend or ignores a friend suggestion"]
 // @@protoc_insertion_point(message:CPlayer_RemoveFriend_Request)
 pub struct CPlayer_RemoveFriend_Request {
     // message fields
@@ -16514,6 +16555,7 @@ impl ::protobuf::Message for CPlayer_RemoveFriend_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Blocks or unblocks communication with the user.  Despite name, can be a non-friend."]
 // @@protoc_insertion_point(message:CPlayer_IgnoreFriend_Request)
 pub struct CPlayer_IgnoreFriend_Request {
     // message fields
@@ -16764,6 +16806,7 @@ impl ::protobuf::Message for CPlayer_IgnoreFriend_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the player's community preferences"]
 // @@protoc_insertion_point(message:CPlayer_GetCommunityPreferences_Request)
 pub struct CPlayer_GetCommunityPreferences_Request {
     // special fields
@@ -17185,6 +17228,7 @@ impl ::protobuf::Message for CPlayer_GetCommunityPreferences_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets the player's community preferences"]
 // @@protoc_insertion_point(message:CPlayer_SetCommunityPreferences_Request)
 pub struct CPlayer_SetCommunityPreferences_Request {
     // message fields
@@ -17352,6 +17396,7 @@ impl ::protobuf::Message for CPlayer_SetCommunityPreferences_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the custom text filtering dictionary for this user"]
 // @@protoc_insertion_point(message:CPlayer_GetTextFilterWords_Request)
 pub struct CPlayer_GetTextFilterWords_Request {
     // special fields
@@ -17654,6 +17699,7 @@ impl ::protobuf::Message for CPlayer_GetTextFilterWords_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Calculates and returns what to display for UI that renders new steam announcement available"]
 // @@protoc_insertion_point(message:CPlayer_GetNewSteamAnnouncementState_Request)
 pub struct CPlayer_GetNewSteamAnnouncementState_Request {
     // message fields
@@ -18037,6 +18083,7 @@ impl ::protobuf::Message for CPlayer_GetNewSteamAnnouncementState_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Marks latest announcement timestamp read by user"]
 // @@protoc_insertion_point(message:CPlayer_UpdateSteamAnnouncementLastRead_Request)
 pub struct CPlayer_UpdateSteamAnnouncementLastRead_Request {
     // message fields
@@ -18254,6 +18301,7 @@ impl ::protobuf::Message for CPlayer_UpdateSteamAnnouncementLastRead_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get current privacy settings."]
 // @@protoc_insertion_point(message:CPlayer_GetPrivacySettings_Request)
 pub struct CPlayer_GetPrivacySettings_Request {
     // special fields
@@ -18690,6 +18738,7 @@ impl ::protobuf::Message for CPlayer_GetPrivacySettings_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get gameplay duration control settings."]
 // @@protoc_insertion_point(message:CPlayer_GetDurationControl_Request)
 pub struct CPlayer_GetDurationControl_Request {
     // message fields
@@ -19132,6 +19181,7 @@ impl ::protobuf::Message for CPlayer_GetDurationControl_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Submit playtime records that happened while the client was disconnected from steam (whether marked offline or not)"]
 // @@protoc_insertion_point(message:CPlayer_RecordDisconnectedPlaytime_Request)
 pub struct CPlayer_RecordDisconnectedPlaytime_Request {
     // message fields
@@ -19507,6 +19557,7 @@ impl ::protobuf::Message for CPlayer_RecordDisconnectedPlaytime_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client of more recent play time"]
 // @@protoc_insertion_point(message:CPlayer_LastPlayedTimes_Notification)
 pub struct CPlayer_LastPlayedTimes_Notification {
     // message fields
@@ -19598,6 +19649,7 @@ impl ::protobuf::Message for CPlayer_LastPlayedTimes_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that a friend's nickname has changed"]
 // @@protoc_insertion_point(message:CPlayer_FriendNicknameChanged_Notification)
 pub struct CPlayer_FriendNicknameChanged_Notification {
     // message fields
@@ -19788,6 +19840,7 @@ impl ::protobuf::Message for CPlayer_FriendNicknameChanged_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that a friend's equipped profile items have changed"]
 // @@protoc_insertion_point(message:CPlayer_FriendEquippedProfileItemsChanged_Notification)
 pub struct CPlayer_FriendEquippedProfileItemsChanged_Notification {
     // message fields
@@ -19897,6 +19950,7 @@ impl ::protobuf::Message for CPlayer_FriendEquippedProfileItemsChanged_Notificat
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notifies client of changes to steam announcement state for user"]
 // @@protoc_insertion_point(message:CPlayer_NewSteamAnnouncementState_Notification)
 pub struct CPlayer_NewSteamAnnouncementState_Notification {
     // message fields
@@ -20171,6 +20225,7 @@ impl ::protobuf::Message for CPlayer_NewSteamAnnouncementState_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that their community preferences have changed"]
 // @@protoc_insertion_point(message:CPlayer_CommunityPreferencesChanged_Notification)
 pub struct CPlayer_CommunityPreferencesChanged_Notification {
     // message fields
@@ -20276,6 +20331,7 @@ impl ::protobuf::Message for CPlayer_CommunityPreferencesChanged_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that their text filtering dictionary has changed"]
 // @@protoc_insertion_point(message:CPlayer_TextFilterWordsChanged_Notification)
 pub struct CPlayer_TextFilterWordsChanged_Notification {
     // message fields
@@ -20367,6 +20423,7 @@ impl ::protobuf::Message for CPlayer_TextFilterWordsChanged_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server that per-friend preferences have changed"]
 // @@protoc_insertion_point(message:CPlayer_PerFriendPreferencesChanged_Notification)
 pub struct CPlayer_PerFriendPreferencesChanged_Notification {
     // message fields
@@ -20490,6 +20547,7 @@ impl ::protobuf::Message for CPlayer_PerFriendPreferencesChanged_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server that privacy settings changed"]
 // @@protoc_insertion_point(message:CPlayer_PrivacySettingsChanged_Notification)
 pub struct CPlayer_PrivacySettingsChanged_Notification {
     // message fields

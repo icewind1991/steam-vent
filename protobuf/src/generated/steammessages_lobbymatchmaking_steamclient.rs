@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "GetLobbyStatus"]
 // @@protoc_insertion_point(message:LobbyMatchmakingLegacy_GetLobbyStatus_Request)
 pub struct LobbyMatchmakingLegacy_GetLobbyStatus_Request {
     // message fields

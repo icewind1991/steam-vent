@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get list of authorized devices"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetOwnAuthorizedDevices_Request)
 pub struct CDeviceAuth_GetOwnAuthorizedDevices_Request {
     // message fields
@@ -612,6 +613,7 @@ pub mod cdevice_auth_get_own_authorized_devices_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Accept an authorization request by another users"]
 // @@protoc_insertion_point(message:CDeviceAuth_AcceptAuthorizationRequest_Request)
 pub struct CDeviceAuth_AcceptAuthorizationRequest_Request {
     // message fields
@@ -893,6 +895,7 @@ impl ::protobuf::Message for CDeviceAuth_AcceptAuthorizationRequest_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Authorize own remote device that has pending request"]
 // @@protoc_insertion_point(message:CDeviceAuth_AuthorizeRemoteDevice_Request)
 pub struct CDeviceAuth_AuthorizeRemoteDevice_Request {
     // message fields
@@ -1110,6 +1113,7 @@ impl ::protobuf::Message for CDeviceAuth_AuthorizeRemoteDevice_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Revoke own device authorization"]
 // @@protoc_insertion_point(message:CDeviceAuth_DeauthorizeRemoteDevice_Request)
 pub struct CDeviceAuth_DeauthorizeRemoteDevice_Request {
     // message fields
@@ -1327,6 +1331,7 @@ impl ::protobuf::Message for CDeviceAuth_DeauthorizeRemoteDevice_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get list of authorized devices user played borrowed games on"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetUsedAuthorizedDevices_Request)
 pub struct CDeviceAuth_GetUsedAuthorizedDevices_Request {
     // message fields
@@ -1784,6 +1789,7 @@ pub mod cdevice_auth_get_used_authorized_devices_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get list of users that can borrow on an authorized device"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetAuthorizedBorrowers_Request)
 pub struct CDeviceAuth_GetAuthorizedBorrowers_Request {
     // message fields
@@ -2256,6 +2262,7 @@ pub mod cdevice_auth_get_authorized_borrowers_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Add users that can borrow on limited authorized devices"]
 // @@protoc_insertion_point(message:CDeviceAuth_AddAuthorizedBorrowers_Request)
 pub struct CDeviceAuth_AddAuthorizedBorrowers_Request {
     // message fields
@@ -2488,6 +2495,7 @@ impl ::protobuf::Message for CDeviceAuth_AddAuthorizedBorrowers_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Remove users that can borrow on limited authorized devices"]
 // @@protoc_insertion_point(message:CDeviceAuth_RemoveAuthorizedBorrowers_Request)
 pub struct CDeviceAuth_RemoveAuthorizedBorrowers_Request {
     // message fields
@@ -2687,6 +2695,7 @@ impl ::protobuf::Message for CDeviceAuth_RemoveAuthorizedBorrowers_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get list of lenders that authorized given account as borrower"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetAuthorizedAsBorrower_Request)
 pub struct CDeviceAuth_GetAuthorizedAsBorrower_Request {
     // message fields
@@ -3255,6 +3264,7 @@ pub mod cdevice_auth_get_authorized_as_borrower_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get list of excluded games in lenders library"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetExcludedGamesInLibrary_Request)
 pub struct CDeviceAuth_GetExcludedGamesInLibrary_Request {
     // message fields
@@ -3680,6 +3690,7 @@ pub mod cdevice_auth_get_excluded_games_in_library_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get list played games as borrower"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetBorrowerPlayHistory_Request)
 pub struct CDeviceAuth_GetBorrowerPlayHistory_Request {
     // message fields

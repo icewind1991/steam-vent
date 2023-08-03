@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get server's idea of the current time"]
 // @@protoc_insertion_point(message:CTwoFactor_Time_Request)
 pub struct CTwoFactor_Time_Request {
     // message fields
@@ -501,6 +502,7 @@ impl ::protobuf::Message for CTwoFactor_Time_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get two-factor authentication settings for the logged-in account"]
 // @@protoc_insertion_point(message:CTwoFactor_Status_Request)
 pub struct CTwoFactor_Status_Request {
     // message fields
@@ -1186,6 +1188,7 @@ impl ::protobuf::Message for CTwoFactor_Status_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Add two-factor authenticator to the logged-in account"]
 // @@protoc_insertion_point(message:CTwoFactor_AddAuthenticator_Request)
 pub struct CTwoFactor_AddAuthenticator_Request {
     // message fields
@@ -2099,6 +2102,7 @@ impl ::protobuf::Message for CTwoFactor_AddAuthenticator_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Send email to the account"]
 // @@protoc_insertion_point(message:CTwoFactor_SendEmail_Request)
 pub struct CTwoFactor_SendEmail_Request {
     // message fields
@@ -2348,6 +2352,7 @@ impl ::protobuf::Message for CTwoFactor_SendEmail_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Finalize two-factor authentication addition to the logged-in account"]
 // @@protoc_insertion_point(message:CTwoFactor_FinalizeAddAuthenticator_Request)
 pub struct CTwoFactor_FinalizeAddAuthenticator_Request {
     // message fields
@@ -2837,6 +2842,7 @@ impl ::protobuf::Message for CTwoFactor_FinalizeAddAuthenticator_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Update the version for my token"]
 // @@protoc_insertion_point(message:CTwoFactor_UpdateTokenVersion_Request)
 pub struct CTwoFactor_UpdateTokenVersion_Request {
     // message fields
@@ -3103,6 +3109,7 @@ impl ::protobuf::Message for CTwoFactor_UpdateTokenVersion_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Remove two-factor authentication addition from the logged-in account"]
 // @@protoc_insertion_point(message:CTwoFactor_RemoveAuthenticator_Request)
 pub struct CTwoFactor_RemoveAuthenticator_Request {
     // message fields
@@ -3498,6 +3505,7 @@ impl ::protobuf::Message for CTwoFactor_RemoveAuthenticator_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Start challenge-based authenticator removal"]
 // @@protoc_insertion_point(message:CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request)
 pub struct CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request {
     // special fields
@@ -3683,6 +3691,7 @@ impl ::protobuf::Message for CTwoFactor_RemoveAuthenticatorViaChallengeStart_Res
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Continue challenge-based authenticator removal"]
 // @@protoc_insertion_point(message:CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request)
 pub struct CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request {
     // message fields

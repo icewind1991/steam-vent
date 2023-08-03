@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request to join a Party via the given Beacon ID. If successful, will be given the necessary 'connect' string."]
 // @@protoc_insertion_point(message:CParties_JoinParty_Request)
 pub struct CParties_JoinParty_Request {
     // message fields
@@ -467,6 +468,7 @@ impl ::protobuf::Message for CParties_BeaconLocation {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Create a Beacon to attract people to your Party."]
 // @@protoc_insertion_point(message:CParties_CreateBeacon_Request)
 pub struct CParties_CreateBeacon_Request {
     // message fields
@@ -829,6 +831,7 @@ impl ::protobuf::Message for CParties_CreateBeacon_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notify Steam that a user with a reservation has successfully joined."]
 // @@protoc_insertion_point(message:CParties_OnReservationCompleted_Request)
 pub struct CParties_OnReservationCompleted_Request {
     // message fields
@@ -1079,6 +1082,7 @@ impl ::protobuf::Message for CParties_OnReservationCompleted_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notify Steam that a user with a reservation either never showed up, or has left the party."]
 // @@protoc_insertion_point(message:CParties_CancelReservation_Request)
 pub struct CParties_CancelReservation_Request {
     // message fields
@@ -1329,6 +1333,7 @@ impl ::protobuf::Message for CParties_CancelReservation_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Change the number of open slots"]
 // @@protoc_insertion_point(message:CParties_ChangeNumOpenSlots_Request)
 pub struct CParties_ChangeNumOpenSlots_Request {
     // message fields
@@ -1579,6 +1584,7 @@ impl ::protobuf::Message for CParties_ChangeNumOpenSlots_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Delete the Beacon."]
 // @@protoc_insertion_point(message:CParties_DestroyBeacon_Request)
 pub struct CParties_DestroyBeacon_Request {
     // message fields

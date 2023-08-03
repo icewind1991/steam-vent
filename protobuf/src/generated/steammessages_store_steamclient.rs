@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Registers a CD key with Steam on the logged in user's account"]
 // @@protoc_insertion_point(message:CStore_RegisterCDKey_Request)
 pub struct CStore_RegisterCDKey_Request {
     // message fields
@@ -1253,6 +1254,7 @@ impl ::protobuf::Message for CStore_RegisterCDKey_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get all whitelisted tags, with localized names."]
 // @@protoc_insertion_point(message:CStore_GetMostPopularTags_Request)
 pub struct CStore_GetMostPopularTags_Request {
     // message fields
@@ -1631,6 +1633,7 @@ pub mod cstore_get_most_popular_tags_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets tag names in a different language"]
 // @@protoc_insertion_point(message:CStore_GetLocalizedNameForTags_Request)
 pub struct CStore_GetLocalizedNameForTags_Request {
     // message fields
@@ -2123,6 +2126,7 @@ pub mod cstore_get_localized_name_for_tags_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the list of tags, localized"]
 // @@protoc_insertion_point(message:CStore_GetTagList_Request)
 pub struct CStore_GetTagList_Request {
     // message fields
@@ -3060,6 +3064,7 @@ impl ::protobuf::Message for CStoreDiscoveryQueueSettings {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a list of games for the user to explore on the store."]
 // @@protoc_insertion_point(message:CStore_GetDiscoveryQueue_Request)
 pub struct CStore_GetDiscoveryQueue_Request {
     // message fields
@@ -3774,6 +3779,7 @@ impl ::protobuf::Message for CStore_GetDiscoveryQueue_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the settings that were used to generate a user's discovery queue."]
 // @@protoc_insertion_point(message:CStore_GetDiscoveryQueueSettings_Request)
 pub struct CStore_GetDiscoveryQueueSettings_Request {
     // message fields
@@ -4040,6 +4046,7 @@ impl ::protobuf::Message for CStore_GetDiscoveryQueueSettings_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Skip an item in the user's queue."]
 // @@protoc_insertion_point(message:CStore_SkipDiscoveryQueueItem_Request)
 pub struct CStore_SkipDiscoveryQueueItem_Request {
     // message fields
@@ -4274,6 +4281,7 @@ impl ::protobuf::Message for CStore_SkipDiscoveryQueueItem_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get information about a user's relationship to a game - ownership, wishlist, discovery queue state, etc."]
 // @@protoc_insertion_point(message:CStore_GetUserGameInterestState_Request)
 pub struct CStore_GetUserGameInterestState_Request {
     // message fields
@@ -5072,6 +5080,7 @@ pub mod cstore_get_user_game_interest_state_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns all the apps skipped so far in the given discovery queue for the given user."]
 // @@protoc_insertion_point(message:CStore_GetDiscoveryQueueSkippedApps_Request)
 pub struct CStore_GetDiscoveryQueueSkippedApps_Request {
     // message fields
@@ -5323,6 +5332,7 @@ impl ::protobuf::Message for CStore_GetDiscoveryQueueSkippedApps_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the desired ratings board and maximum rating to show on the store"]
 // @@protoc_insertion_point(message:CStore_GetStorePreferences_Request)
 pub struct CStore_GetStorePreferences_Request {
     // special fields
@@ -6254,6 +6264,7 @@ impl ::protobuf::Message for CStore_GetStorePreferences_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get trending apps among friends"]
 // @@protoc_insertion_point(message:CStore_GetTrendingAppsAmongFriends_Request)
 pub struct CStore_GetTrendingAppsAmongFriends_Request {
     // message fields
@@ -6646,6 +6657,7 @@ pub mod cstore_get_trending_apps_among_friends_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Upserts user feedback regarding the published Steam Deck Compatibility rating for a game"]
 // @@protoc_insertion_point(message:CSteamDeckCompatibility_SetFeedback_Request)
 pub struct CSteamDeckCompatibility_SetFeedback_Request {
     // message fields
@@ -6866,6 +6878,7 @@ impl ::protobuf::Message for CSteamDeckCompatibility_SetFeedback_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns whether we should ask the user if the compatibility rating is correct"]
 // @@protoc_insertion_point(message:CSteamDeckCompatibility_ShouldPrompt_Request)
 pub struct CSteamDeckCompatibility_ShouldPrompt_Request {
     // message fields
@@ -7151,6 +7164,7 @@ impl ::protobuf::Message for CSteamDeckCompatibility_ShouldPrompt_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that the user's store preferences have changed"]
 // @@protoc_insertion_point(message:CStore_StorePreferencesChanged_Notification)
 pub struct CStore_StorePreferencesChanged_Notification {
     // message fields

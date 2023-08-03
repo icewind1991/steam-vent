@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the initial URL to begin streaming a video"]
 // @@protoc_insertion_point(message:CVideo_ClientGetVideoURL_Request)
 pub struct CVideo_ClientGetVideoURL_Request {
     // message fields
@@ -659,6 +660,7 @@ impl ::protobuf::Message for VideoBookmark {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Bookmarks the locations in the video the user has reached. As as record playback settings per video. Fire and forget."]
 // @@protoc_insertion_point(message:CVideo_SetVideoBookmark_Notification)
 pub struct CVideo_SetVideoBookmark_Notification {
     // message fields
@@ -750,6 +752,7 @@ impl ::protobuf::Message for CVideo_SetVideoBookmark_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the video bookmarks locations for the specific videos. Includes playback settings per video"]
 // @@protoc_insertion_point(message:CVideo_GetVideoBookmarks_Request)
 pub struct CVideo_GetVideoBookmarks_Request {
     // message fields
@@ -1635,6 +1638,7 @@ impl ::protobuf::Message for CVideo_GameClipComponent {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Create a game recording clip video"]
 // @@protoc_insertion_point(message:CVideo_CreateGameClip_Request)
 pub struct CVideo_CreateGameClip_Request {
     // message fields
@@ -2136,6 +2140,7 @@ impl ::protobuf::Message for CVideo_GameClipSegmentInfo {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Begin a batch of segment uploads for a GameClip"]
 // @@protoc_insertion_point(message:CVideo_BeginGameClipSegmentsUpload_Request)
 pub struct CVideo_BeginGameClipSegmentsUpload_Request {
     // message fields
@@ -2893,6 +2898,7 @@ impl ::protobuf::Message for CVideo_BeginGameClipSegmentsUpload_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Note completion of a batch of GameClip segment uploads"]
 // @@protoc_insertion_point(message:CVideo_CommitGameClipSegmentsUpload_Request)
 pub struct CVideo_CommitGameClipSegmentsUpload_Request {
     // message fields
@@ -3272,6 +3278,7 @@ impl ::protobuf::Message for CVideo_CommitGameClipSegmentsUpload_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that h264 has been unlocked"]
 // @@protoc_insertion_point(message:CVideo_UnlockedH264_Notification)
 pub struct CVideo_UnlockedH264_Notification {
     // message fields
@@ -3398,6 +3405,7 @@ impl ::protobuf::Message for CVideo_UnlockedH264_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Retrieve the OPF settings JSON blob. Available via the Client for 360 Player App"]
 // @@protoc_insertion_point(message:CFovasVideo_ClientGetOPFSettings_Request)
 pub struct CFovasVideo_ClientGetOPFSettings_Request {
     // message fields

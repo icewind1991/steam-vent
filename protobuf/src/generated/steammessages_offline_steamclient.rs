@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a serialized and signed offline logon ticket for the current user"]
 // @@protoc_insertion_point(message:COffline_GetOfflineLogonTicket_Request)
 pub struct COffline_GetOfflineLogonTicket_Request {
     // message fields
@@ -357,6 +358,7 @@ impl ::protobuf::Message for COffline_GetOfflineLogonTicket_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get an unsigned offline logon ticket for the current user"]
 // @@protoc_insertion_point(message:COffline_GetUnsignedOfflineLogonTicket_Request)
 pub struct COffline_GetUnsignedOfflineLogonTicket_Request {
     // special fields

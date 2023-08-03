@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Retrieve the status of the user's EULA acceptance."]
 // @@protoc_insertion_point(message:CWorkshop_GetEULAStatus_Request)
 pub struct CWorkshop_GetEULAStatus_Request {
     // message fields

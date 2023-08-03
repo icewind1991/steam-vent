@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get inital parameters to start building a depot"]
 // @@protoc_insertion_point(message:CContentBuilder_InitDepotBuild_Request)
 pub struct CContentBuilder_InitDepotBuild_Request {
     // message fields
@@ -761,6 +762,7 @@ impl ::protobuf::Message for CContentBuilder_InitDepotBuild_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Start uploading manifest and chunks for a depot"]
 // @@protoc_insertion_point(message:CContentBuilder_StartDepotUpload_Request)
 pub struct CContentBuilder_StartDepotUpload_Request {
     // message fields
@@ -1139,6 +1141,7 @@ impl ::protobuf::Message for CContentBuilder_StartDepotUpload_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get list of missing chunks for depot upload"]
 // @@protoc_insertion_point(message:CContentBuilder_GetMissingDepotChunks_Request)
 pub struct CContentBuilder_GetMissingDepotChunks_Request {
     // message fields
@@ -1564,6 +1567,7 @@ pub mod ccontent_builder_get_missing_depot_chunks_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Commit a depot build after manifest and all chunks are uploaded"]
 // @@protoc_insertion_point(message:CContentBuilder_FinishDepotUpload_Request)
 pub struct CContentBuilder_FinishDepotUpload_Request {
     // message fields
@@ -1846,6 +1850,7 @@ impl ::protobuf::Message for CContentBuilder_FinishDepotUpload_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Combine previous depot uploads into an app build and commit it"]
 // @@protoc_insertion_point(message:CContentBuilder_CommitAppBuild_Request)
 pub struct CContentBuilder_CommitAppBuild_Request {
     // message fields
@@ -2320,6 +2325,7 @@ impl ::protobuf::Message for CContentBuilder_CommitAppBuild_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sign an install script"]
 // @@protoc_insertion_point(message:CContentBuilder_SignInstallScript_Request)
 pub struct CContentBuilder_SignInstallScript_Request {
     // message fields

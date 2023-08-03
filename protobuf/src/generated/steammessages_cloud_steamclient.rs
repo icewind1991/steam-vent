@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client checking for pending log upload requests."]
 // @@protoc_insertion_point(message:CCloud_ClientLogUploadCheck_Notification)
 pub struct CCloud_ClientLogUploadCheck_Notification {
     // message fields
@@ -136,6 +137,7 @@ impl ::protobuf::Message for CCloud_ClientLogUploadCheck_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client is flagging a log upload request as completed."]
 // @@protoc_insertion_point(message:CCloud_ClientLogUploadComplete_Notification)
 pub struct CCloud_ClientLogUploadComplete_Notification {
     // message fields
@@ -277,6 +279,7 @@ impl ::protobuf::Message for CCloud_ClientLogUploadComplete_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns the URL of the proper cloud server for a user."]
 // @@protoc_insertion_point(message:CCloud_GetUploadServerInfo_Request)
 pub struct CCloud_GetUploadServerInfo_Request {
     // message fields
@@ -512,6 +515,7 @@ impl ::protobuf::Message for CCloud_GetUploadServerInfo_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload."]
 // @@protoc_insertion_point(message:CCloud_BeginHTTPUpload_Request)
 pub struct CCloud_BeginHTTPUpload_Request {
     // message fields
@@ -1317,6 +1321,7 @@ pub mod ccloud_begin_httpupload_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Commits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT."]
 // @@protoc_insertion_point(message:CCloud_CommitHTTPUpload_Request)
 pub struct CCloud_CommitHTTPUpload_Request {
     // message fields
@@ -1665,6 +1670,7 @@ impl ::protobuf::Message for CCloud_CommitHTTPUpload_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload."]
 // @@protoc_insertion_point(message:CCloud_BeginUGCUpload_Request)
 pub struct CCloud_BeginUGCUpload_Request {
     // message fields
@@ -2451,6 +2457,7 @@ pub mod ccloud_begin_ugcupload_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Commits a file upload initiated by BeginUGCUpload and transferred via HTTP PUT."]
 // @@protoc_insertion_point(message:CCloud_CommitUGCUpload_Request)
 pub struct CCloud_CommitUGCUpload_Request {
     // message fields
@@ -2733,6 +2740,7 @@ impl ::protobuf::Message for CCloud_CommitUGCUpload_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns details on a Cloud file."]
 // @@protoc_insertion_point(message:CCloud_GetFileDetails_Request)
 pub struct CCloud_GetFileDetails_Request {
     // message fields
@@ -3394,6 +3402,7 @@ impl ::protobuf::Message for CCloud_GetFileDetails_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Enumerates Cloud files for a user of a given app ID. Returns up to 500 files at a time."]
 // @@protoc_insertion_point(message:CCloud_EnumerateUserFiles_Request)
 pub struct CCloud_EnumerateUserFiles_Request {
     // message fields
@@ -3722,6 +3731,7 @@ impl ::protobuf::Message for CCloud_EnumerateUserFiles_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Deletes a file from the user's cloud."]
 // @@protoc_insertion_point(message:CCloud_Delete_Request)
 pub struct CCloud_Delete_Request {
     // message fields
@@ -3988,6 +3998,7 @@ impl ::protobuf::Message for CCloud_Delete_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets the user's Cloud file encryption key."]
 // @@protoc_insertion_point(message:CCloud_GetClientEncryptionKey_Request)
 pub struct CCloud_GetClientEncryptionKey_Request {
     // special fields
@@ -4222,6 +4233,7 @@ impl ::protobuf::Message for CCloud_GetClientEncryptionKey_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Reports the result of a CDN transfer."]
 // @@protoc_insertion_point(message:CCloud_CDNReport_Notification)
 pub struct CCloud_CDNReport_Notification {
     // message fields
@@ -4540,6 +4552,7 @@ impl ::protobuf::Message for CCloud_CDNReport_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Reports the result of an external Cloud storage transfer."]
 // @@protoc_insertion_point(message:CCloud_ExternalStorageTransferReport_Notification)
 pub struct CCloud_ExternalStorageTransferReport_Notification {
     // message fields
@@ -5163,6 +5176,7 @@ impl ::protobuf::Message for CCloud_ExternalStorageTransferReport_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Indicate a batch of files that will be uploaded / deleted for an app."]
 // @@protoc_insertion_point(message:CCloud_BeginAppUploadBatch_Request)
 pub struct CCloud_BeginAppUploadBatch_Request {
     // message fields
@@ -5552,6 +5566,7 @@ impl ::protobuf::Message for CCloud_BeginAppUploadBatch_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Indicate that the batch is complete or being stopped for some other reason."]
 // @@protoc_insertion_point(message:CCloud_CompleteAppUploadBatch_Notification)
 pub struct CCloud_CompleteAppUploadBatch_Notification {
     // message fields
@@ -5725,6 +5740,7 @@ impl ::protobuf::Message for CCloud_CompleteAppUploadBatch_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Indicate that the batch is complete or being stopped for some other reason."]
 // @@protoc_insertion_point(message:CCloud_CompleteAppUploadBatch_Request)
 pub struct CCloud_CompleteAppUploadBatch_Request {
     // message fields
@@ -5974,6 +5990,7 @@ impl ::protobuf::Message for CCloud_CompleteAppUploadBatch_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Initiate an upload to Cloud."]
 // @@protoc_insertion_point(message:CCloud_ClientBeginFileUpload_Request)
 pub struct CCloud_ClientBeginFileUpload_Request {
     // message fields
@@ -7168,6 +7185,7 @@ impl ::protobuf::Message for CCloud_ClientBeginFileUpload_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Commit the file upload or indicate failure."]
 // @@protoc_insertion_point(message:CCloud_ClientCommitFileUpload_Request)
 pub struct CCloud_ClientCommitFileUpload_Request {
     // message fields
@@ -7516,6 +7534,7 @@ impl ::protobuf::Message for CCloud_ClientCommitFileUpload_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Initiate a file download."]
 // @@protoc_insertion_point(message:CCloud_ClientFileDownload_Request)
 pub struct CCloud_ClientFileDownload_Request {
     // message fields
@@ -8346,6 +8365,7 @@ pub mod ccloud_client_file_download_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Delete or forget a file."]
 // @@protoc_insertion_point(message:CCloud_ClientDeleteFile_Request)
 pub struct CCloud_ClientDeleteFile_Request {
     // message fields
@@ -8644,6 +8664,7 @@ impl ::protobuf::Message for CCloud_ClientDeleteFile_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "User has picked a resolution for a Cloud conflict."]
 // @@protoc_insertion_point(message:CCloud_ClientConflictResolution_Notification)
 pub struct CCloud_ClientConflictResolution_Notification {
     // message fields
@@ -8785,6 +8806,7 @@ impl ::protobuf::Message for CCloud_ClientConflictResolution_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Enumerates apps stroing cloud files for a user."]
 // @@protoc_insertion_point(message:CCloud_EnumerateUserApps_Request)
 pub struct CCloud_EnumerateUserApps_Request {
     // special fields
@@ -9128,6 +9150,7 @@ pub mod ccloud_enumerate_user_apps_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a list of Cloud file changes for an app given a starting Change Number."]
 // @@protoc_insertion_point(message:CCloud_GetAppFileChangelist_Request)
 pub struct CCloud_GetAppFileChangelist_Request {
     // message fields
@@ -9852,6 +9875,7 @@ impl ::protobuf::Message for CCloud_GetAppFileChangelist_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "An app session is being suspended"]
 // @@protoc_insertion_point(message:CCloud_AppSessionSuspend_Request)
 pub struct CCloud_AppSessionSuspend_Request {
     // message fields
@@ -10150,6 +10174,7 @@ impl ::protobuf::Message for CCloud_AppSessionSuspend_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "An app session is being resumed"]
 // @@protoc_insertion_point(message:CCloud_AppSessionResume_Request)
 pub struct CCloud_AppSessionResume_Request {
     // message fields
@@ -10367,6 +10392,7 @@ impl ::protobuf::Message for CCloud_AppSessionResume_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client intends to launch an app"]
 // @@protoc_insertion_point(message:CCloud_AppLaunchIntent_Request)
 pub struct CCloud_AppLaunchIntent_Request {
     // message fields
@@ -10680,6 +10706,7 @@ impl ::protobuf::Message for CCloud_AppLaunchIntent_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client is done trying to sync after a game session"]
 // @@protoc_insertion_point(message:CCloud_AppExitSyncDone_Notification)
 pub struct CCloud_AppExitSyncDone_Notification {
     // message fields
@@ -10885,6 +10912,7 @@ impl ::protobuf::Message for CCloud_AppExitSyncDone_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Client is requesting quota usage for an app"]
 // @@protoc_insertion_point(message:CCloud_ClientGetAppQuotaUsage_Request)
 pub struct CCloud_ClientGetAppQuotaUsage_Request {
     // message fields
@@ -11199,6 +11227,7 @@ impl ::protobuf::Message for CCloud_ClientGetAppQuotaUsage_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Cloud state for the given app has changed."]
 // @@protoc_insertion_point(message:CCloud_AppCloudStateChange_Notification)
 pub struct CCloud_AppCloudStateChange_Notification {
     // message fields
@@ -11340,6 +11369,7 @@ impl ::protobuf::Message for CCloud_AppCloudStateChange_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Server is requesting log file uploads from the given client."]
 // @@protoc_insertion_point(message:CCloud_ClientLogUploadRequest_Notification)
 pub struct CCloud_ClientLogUploadRequest_Notification {
     // message fields

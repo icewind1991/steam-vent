@@ -577,6 +577,7 @@ impl ::protobuf::Message for CGameNotifications_UserStatus {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Creates an async game session"]
 // @@protoc_insertion_point(message:CGameNotifications_CreateSession_Request)
 pub struct CGameNotifications_CreateSession_Request {
     // message fields
@@ -887,6 +888,7 @@ impl ::protobuf::Message for CGameNotifications_CreateSession_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Deletes an async game session"]
 // @@protoc_insertion_point(message:CGameNotifications_DeleteSession_Request)
 pub struct CGameNotifications_DeleteSession_Request {
     // message fields
@@ -1136,6 +1138,7 @@ impl ::protobuf::Message for CGameNotifications_DeleteSession_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Updates an async game session"]
 // @@protoc_insertion_point(message:CGameNotifications_UpdateSession_Request)
 pub struct CGameNotifications_UpdateSession_Request {
     // message fields
@@ -1413,6 +1416,7 @@ impl ::protobuf::Message for CGameNotifications_UpdateSession_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Enumerates a user's sessions"]
 // @@protoc_insertion_point(message:CGameNotifications_EnumerateSessions_Request)
 pub struct CGameNotifications_EnumerateSessions_Request {
     // message fields
@@ -1991,6 +1995,7 @@ impl ::protobuf::Message for CGameNotifications_EnumerateSessions_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the details for a specific session"]
 // @@protoc_insertion_point(message:CGameNotifications_GetSessionDetails_Request)
 pub struct CGameNotifications_GetSessionDetails_Request {
     // message fields
@@ -2539,6 +2544,7 @@ impl ::protobuf::Message for GameNotificationSettings {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Updates whether a user allows game notifications for a specific app"]
 // @@protoc_insertion_point(message:CGameNotifications_UpdateNotificationSettings_Request)
 pub struct CGameNotifications_UpdateNotificationSettings_Request {
     // message fields
@@ -2706,6 +2712,7 @@ impl ::protobuf::Message for CGameNotifications_UpdateNotificationSettings_Respo
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Requests that the user opt into notifications"]
 // @@protoc_insertion_point(message:CGameNotifications_OnNotificationsRequested_Notification)
 pub struct CGameNotifications_OnNotificationsRequested_Notification {
     // message fields
@@ -2847,6 +2854,7 @@ impl ::protobuf::Message for CGameNotifications_OnNotificationsRequested_Notific
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification that the user's status has changed"]
 // @@protoc_insertion_point(message:CGameNotifications_OnUserStatusChanged_Notification)
 pub struct CGameNotifications_OnUserStatusChanged_Notification {
     // message fields

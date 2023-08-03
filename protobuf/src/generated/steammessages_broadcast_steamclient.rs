@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request from client to directory to begin a broadcast session. No data being sent to relay; just available for broadcast."]
 // @@protoc_insertion_point(message:CBroadcast_BeginBroadcastSession_Request)
 pub struct CBroadcast_BeginBroadcastSession_Request {
     // message fields
@@ -729,6 +730,7 @@ impl ::protobuf::Message for CBroadcast_BeginBroadcastSession_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request from client to stop a broadcast session. Any uploads will terminate."]
 // @@protoc_insertion_point(message:CBroadcast_EndBroadcastSession_Request)
 pub struct CBroadcast_EndBroadcastSession_Request {
     // message fields
@@ -914,6 +916,7 @@ impl ::protobuf::Message for CBroadcast_EndBroadcastSession_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request from client to begin sending video for a broadcast."]
 // @@protoc_insertion_point(message:CBroadcast_StartBroadcastUpload_Request)
 pub struct CBroadcast_StartBroadcastUpload_Request {
     // message fields
@@ -1535,6 +1538,7 @@ impl ::protobuf::Message for CBroadcast_StartBroadcastUpload_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Tells directory that client stopped uploading broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_NotifyBroadcastUploadStop_Notification)
 pub struct CBroadcast_NotifyBroadcastUploadStop_Notification {
     // message fields
@@ -1676,6 +1680,7 @@ impl ::protobuf::Message for CBroadcast_NotifyBroadcastUploadStop_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request from viewer to watch a broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_WatchBroadcast_Request)
 pub struct CBroadcast_WatchBroadcast_Request {
     // message fields
@@ -2868,6 +2873,7 @@ pub mod cbroadcast_watch_broadcast_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notify directory that user is still watching."]
 // @@protoc_insertion_point(message:CBroadcast_HeartbeatBroadcast_Notification)
 pub struct CBroadcast_HeartbeatBroadcast_Notification {
     // message fields
@@ -3073,6 +3079,7 @@ impl ::protobuf::Message for CBroadcast_HeartbeatBroadcast_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request to immediately stop watching a broadcast. Optional Method, if not called, viewer will time out."]
 // @@protoc_insertion_point(message:CBroadcast_StopWatchingBroadcast_Notification)
 pub struct CBroadcast_StopWatchingBroadcast_Notification {
     // message fields
@@ -3246,6 +3253,7 @@ impl ::protobuf::Message for CBroadcast_StopWatchingBroadcast_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request from viewer about broadcast details"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastStatus_Request)
 pub struct CBroadcast_GetBroadcastStatus_Request {
     // message fields
@@ -3946,6 +3954,7 @@ impl ::protobuf::Message for CBroadcast_GetBroadcastStatus_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request thumbnail URL for broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastThumbnail_Request)
 pub struct CBroadcast_GetBroadcastThumbnail_Request {
     // message fields
@@ -4309,6 +4318,7 @@ impl ::protobuf::Message for CBroadcast_GetBroadcastThumbnail_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Invites another steam user to watch the caller's broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_InviteToBroadcast_Request)
 pub struct CBroadcast_InviteToBroadcast_Request {
     // message fields
@@ -4559,6 +4569,7 @@ impl ::protobuf::Message for CBroadcast_InviteToBroadcast_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sends users current broadcast state (permissions, game) to the server"]
 // @@protoc_insertion_point(message:CBroadcast_SendBroadcastStateToServer_Request)
 pub struct CBroadcast_SendBroadcastStateToServer_Request {
     // message fields
@@ -4874,6 +4885,7 @@ impl ::protobuf::Message for CBroadcast_SendBroadcastStateToServer_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Tells directory broadcast session is still available"]
 // @@protoc_insertion_point(message:CBroadcast_NotifyBroadcastSessionHeartbeat_Notification)
 pub struct CBroadcast_NotifyBroadcastSessionHeartbeat_Notification {
     // message fields
@@ -4983,6 +4995,7 @@ impl ::protobuf::Message for CBroadcast_NotifyBroadcastSessionHeartbeat_Notifica
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets chat room info for a broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastChatInfo_Request)
 pub struct CBroadcast_GetBroadcastChatInfo_Request {
     // message fields
@@ -5362,6 +5375,7 @@ impl ::protobuf::Message for CBroadcast_GetBroadcastChatInfo_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Post chat message to specified chat room"]
 // @@protoc_insertion_point(message:CBroadcast_PostChatMessage_Request)
 pub struct CBroadcast_PostChatMessage_Request {
     // message fields
@@ -5855,6 +5869,7 @@ impl ::protobuf::Message for CBroadcast_PostChatMessage_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Update chat message flair in the specified chat room"]
 // @@protoc_insertion_point(message:CBroadcast_UpdateChatMessageFlair_Request)
 pub struct CBroadcast_UpdateChatMessageFlair_Request {
     // message fields
@@ -6203,6 +6218,7 @@ impl ::protobuf::Message for CBroadcast_UpdateChatMessageFlair_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Mute a user in your broadcast chat"]
 // @@protoc_insertion_point(message:CBroadcast_MuteBroadcastChatUser_Request)
 pub struct CBroadcast_MuteBroadcastChatUser_Request {
     // message fields
@@ -6452,6 +6468,7 @@ impl ::protobuf::Message for CBroadcast_MuteBroadcastChatUser_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Tell all viewers to remove user chat text"]
 // @@protoc_insertion_point(message:CBroadcast_RemoveUserChatText_Request)
 pub struct CBroadcast_RemoveUserChatText_Request {
     // message fields
@@ -6669,6 +6686,7 @@ impl ::protobuf::Message for CBroadcast_RemoveUserChatText_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get names for list of users in chat"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastChatUserNames_Request)
 pub struct CBroadcast_GetBroadcastChatUserNames_Request {
     // message fields
@@ -7044,6 +7062,7 @@ pub mod cbroadcast_get_broadcast_chat_user_names_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Start building a broadcast clip"]
 // @@protoc_insertion_point(message:CBroadcast_StartBuildClip_Request)
 pub struct CBroadcast_StartBuildClip_Request {
     // message fields
@@ -7407,6 +7426,7 @@ impl ::protobuf::Message for CBroadcast_StartBuildClip_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Start building a broadcast clip"]
 // @@protoc_insertion_point(message:CBroadcast_GetBuildClipStatus_Request)
 pub struct CBroadcast_GetBuildClipStatus_Request {
     // message fields
@@ -7592,6 +7612,7 @@ impl ::protobuf::Message for CBroadcast_GetBuildClipStatus_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Updates a broadcast clip"]
 // @@protoc_insertion_point(message:CBroadcast_SetClipDetails_Request)
 pub struct CBroadcast_SetClipDetails_Request {
     // message fields
@@ -7890,6 +7911,7 @@ impl ::protobuf::Message for CBroadcast_SetClipDetails_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get details for Broadcast Clips"]
 // @@protoc_insertion_point(message:CBroadcast_GetClipDetails_Request)
 pub struct CBroadcast_GetClipDetails_Request {
     // message fields
@@ -8430,6 +8452,7 @@ impl ::protobuf::Message for CBroadcast_GetClipDetails_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets RTMP broadcast info"]
 // @@protoc_insertion_point(message:CBroadcast_SetRTMPInfo_Request)
 pub struct CBroadcast_SetRTMPInfo_Request {
     // message fields
@@ -8987,6 +9010,7 @@ impl ::protobuf::Message for CBroadcast_SetRTMPInfo_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets RTMP broadcast info"]
 // @@protoc_insertion_point(message:CBroadcast_GetRTMPInfo_Request)
 pub struct CBroadcast_GetRTMPInfo_Request {
     // message fields
@@ -9675,6 +9699,7 @@ impl ::protobuf::Message for CBroadcast_GetRTMPInfo_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from client to server with the client's TURN server"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCHaveTURNServer_Notification)
 pub struct CBroadcast_WebRTCHaveTURNServer_Notification {
     // message fields
@@ -9833,6 +9858,7 @@ impl ::protobuf::Message for CBroadcast_WebRTCHaveTURNServer_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notify the server that a WebRTC session has been created by the host"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCStartResult_Request)
 pub struct CBroadcast_WebRTCStartResult_Request {
     // message fields
@@ -10195,6 +10221,7 @@ impl ::protobuf::Message for CBroadcast_WebRTCStartResult_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notify the server that a WebRTC session has been stopped by the host"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCStopped_Request)
 pub struct CBroadcast_WebRTCStopped_Request {
     // message fields
@@ -10380,6 +10407,7 @@ impl ::protobuf::Message for CBroadcast_WebRTCStopped_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notify the server that a WebRTC session has been created by the viewer"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCSetAnswer_Request)
 pub struct CBroadcast_WebRTCSetAnswer_Request {
     // message fields
@@ -10646,6 +10674,7 @@ impl ::protobuf::Message for CBroadcast_WebRTCSetAnswer_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Lookup the best TURN server for this client"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCLookupTURNServer_Request)
 pub struct CBroadcast_WebRTCLookupTURNServer_Request {
     // message fields
@@ -11088,6 +11117,7 @@ impl ::protobuf::Message for CBroadcast_WebRTC_Candidate {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Add an ICE candidate for the host side of a WebRTC session"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCAddHostCandidate_Request)
 pub struct CBroadcast_WebRTCAddHostCandidate_Request {
     // message fields
@@ -11287,6 +11317,7 @@ impl ::protobuf::Message for CBroadcast_WebRTCAddHostCandidate_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Add an ICE candidate for the viewer side of a WebRTC session"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCAddViewerCandidate_Request)
 pub struct CBroadcast_WebRTCAddViewerCandidate_Request {
     // message fields
@@ -11518,6 +11549,7 @@ impl ::protobuf::Message for CBroadcast_WebRTCAddViewerCandidate_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the ICE candidates for the host side of a WebRTC session"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCGetHostCandidates_Request)
 pub struct CBroadcast_WebRTCGetHostCandidates_Request {
     // message fields
@@ -11814,6 +11846,7 @@ impl ::protobuf::Message for CBroadcast_WebRTCGetHostCandidates_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets broadcast upload stats for user"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastUploadStats_Request)
 pub struct CBroadcast_GetBroadcastUploadStats_Request {
     // message fields
@@ -12913,6 +12946,7 @@ pub mod cbroadcast_get_broadcast_upload_stats_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets viewer stats for given broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastViewerStats_Request)
 pub struct CBroadcast_GetBroadcastViewerStats_Request {
     // message fields
@@ -13461,6 +13495,7 @@ pub mod cbroadcast_get_broadcast_viewer_stats_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that a viewers state has changed"]
 // @@protoc_insertion_point(message:CBroadcast_BroadcastViewerState_Notification)
 pub struct CBroadcast_BroadcastViewerState_Notification {
     // message fields
@@ -13650,6 +13685,7 @@ pub mod cbroadcast_broadcast_viewer_state_notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client one or more users is waiting for user to start broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_WaitingBroadcastViewer_Notification)
 pub struct CBroadcast_WaitingBroadcastViewer_Notification {
     // message fields
@@ -13759,6 +13795,7 @@ impl ::protobuf::Message for CBroadcast_WaitingBroadcastViewer_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client with information about a broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_BroadcastUploadStarted_Notification)
 pub struct CBroadcast_BroadcastUploadStarted_Notification {
     // message fields
@@ -14111,6 +14148,7 @@ impl ::protobuf::Message for CBroadcast_BroadcastUploadStarted_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client telling it to stop uploading when the last viewer has disconnected from their broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_StopBroadcastUpload_Notification)
 pub struct CBroadcast_StopBroadcastUpload_Notification {
     // message fields
@@ -14316,6 +14354,7 @@ impl ::protobuf::Message for CBroadcast_StopBroadcastUpload_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client telling it a session has been closed unexpectedly by the directory"]
 // @@protoc_insertion_point(message:CBroadcast_SessionClosed_Notification)
 pub struct CBroadcast_SessionClosed_Notification {
     // message fields
@@ -14425,6 +14464,7 @@ impl ::protobuf::Message for CBroadcast_SessionClosed_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that a broadcaster is inviting a viewer to watch their broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_ViewerBroadcastInvite_Notification)
 pub struct CBroadcast_ViewerBroadcastInvite_Notification {
     // message fields
@@ -14534,6 +14574,7 @@ impl ::protobuf::Message for CBroadcast_ViewerBroadcastInvite_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client about current broadcast status"]
 // @@protoc_insertion_point(message:CBroadcast_BroadcastStatus_Notification)
 pub struct CBroadcast_BroadcastStatus_Notification {
     // message fields
@@ -14675,6 +14716,7 @@ impl ::protobuf::Message for CBroadcast_BroadcastStatus_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client about current broadcast status"]
 // @@protoc_insertion_point(message:CBroadcast_BroadcastChannelLive_Notification)
 pub struct CBroadcast_BroadcastChannelLive_Notification {
     // message fields
@@ -14882,6 +14924,7 @@ impl ::protobuf::Message for CBroadcast_BroadcastChannelLive_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Send thumbnails to relay"]
 // @@protoc_insertion_point(message:CBroadcast_SendThumbnailToRelay_Notification)
 pub struct CBroadcast_SendThumbnailToRelay_Notification {
     // message fields
@@ -15153,6 +15196,7 @@ impl ::protobuf::Message for CBroadcast_SendThumbnailToRelay_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that it needs the client's TURN server"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCNeedTURNServer_Notification)
 pub struct CBroadcast_WebRTCNeedTURNServer_Notification {
     // message fields
@@ -15262,6 +15306,7 @@ impl ::protobuf::Message for CBroadcast_WebRTCNeedTURNServer_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client that it should start a WebRTC session"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCStart_Notification)
 pub struct CBroadcast_WebRTCStart_Notification {
     // message fields
@@ -15467,6 +15512,7 @@ impl ::protobuf::Message for CBroadcast_WebRTCStart_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client about the broadcast viewer WebRTC answer"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCSetAnswer_Notification)
 pub struct CBroadcast_WebRTCSetAnswer_Notification {
     // message fields
@@ -15657,6 +15703,7 @@ impl ::protobuf::Message for CBroadcast_WebRTCSetAnswer_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Notification from server to client about a broadcast viewer WebRTC ICE candidate"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCAddViewerCandidate_Notification)
 pub struct CBroadcast_WebRTCAddViewerCandidate_Notification {
     // message fields

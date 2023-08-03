@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a log of recent chat messages between two users"]
 // @@protoc_insertion_point(message:CFriendMessages_GetRecentMessages_Request)
 pub struct CFriendMessages_GetRecentMessages_Request {
     // message fields
@@ -934,6 +935,7 @@ pub mod cfriend_messages_get_recent_messages_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get information about recent offline messages and chats"]
 // @@protoc_insertion_point(message:CFriendsMessages_GetActiveMessageSessions_Request)
 pub struct CFriendsMessages_GetActiveMessageSessions_Request {
     // message fields
@@ -1406,6 +1408,7 @@ pub mod cfriends_messages_get_active_message_sessions_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Send a chat message to a friend"]
 // @@protoc_insertion_point(message:CFriendMessages_SendMessage_Request)
 pub struct CFriendMessages_SendMessage_Request {
     // message fields
@@ -1980,6 +1983,7 @@ impl ::protobuf::Message for CFriendMessages_SendMessage_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "A session acked an unread message, echo to other sessions."]
 // @@protoc_insertion_point(message:CFriendMessages_AckMessage_Notification)
 pub struct CFriendMessages_AckMessage_Notification {
     // message fields
@@ -2121,6 +2125,7 @@ impl ::protobuf::Message for CFriendMessages_AckMessage_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "See if a friend is in the friendsui beta."]
 // @@protoc_insertion_point(message:CFriendMessages_IsInFriendsUIBeta_Request)
 pub struct CFriendMessages_IsInFriendsUIBeta_Request {
     // message fields
@@ -2371,6 +2376,7 @@ impl ::protobuf::Message for CFriendMessages_IsInFriendsUIBeta_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Adds/removes a reaction to/from a friend message"]
 // @@protoc_insertion_point(message:CFriendMessages_UpdateMessageReaction_Request)
 pub struct CFriendMessages_UpdateMessageReaction_Request {
     // message fields
@@ -2753,6 +2759,7 @@ impl ::protobuf::Message for CFriendMessages_UpdateMessageReaction_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "New chat message from a friend."]
 // @@protoc_insertion_point(message:CFriendMessages_IncomingMessage_Notification)
 pub struct CFriendMessages_IncomingMessage_Notification {
     // message fields
@@ -3152,6 +3159,7 @@ impl ::protobuf::Message for CFriendMessages_IncomingMessage_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "New message reaction from a friend."]
 // @@protoc_insertion_point(message:CFriendMessages_MessageReaction_Notification)
 pub struct CFriendMessages_MessageReaction_Notification {
     // message fields

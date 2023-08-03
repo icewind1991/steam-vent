@@ -27,6 +27,7 @@
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_2_0;
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request to be notified of online friend persona state information.  Responses sent via CMsgClientPersonaState."]
 // @@protoc_insertion_point(message:CChat_RequestFriendPersonaStates_Request)
 pub struct CChat_RequestFriendPersonaStates_Request {
     // special fields
@@ -179,6 +180,7 @@ impl ::protobuf::Message for CChat_RequestFriendPersonaStates_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Create's a chat group that can contain other chat rooms"]
 // @@protoc_insertion_point(message:CChatRoom_CreateChatRoomGroup_Request)
 pub struct CChatRoom_CreateChatRoomGroup_Request {
     // message fields
@@ -3431,6 +3433,7 @@ impl ::protobuf::Message for CChatRoom_CreateChatRoomGroup_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Saves's a chat group"]
 // @@protoc_insertion_point(message:CChatRoom_SaveChatRoomGroup_Request)
 pub struct CChatRoom_SaveChatRoomGroup_Request {
     // message fields
@@ -3665,6 +3668,7 @@ impl ::protobuf::Message for CChatRoom_SaveChatRoomGroup_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Rename a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_RenameChatRoomGroup_Request)
 pub struct CChatRoom_RenameChatRoomGroup_Request {
     // message fields
@@ -3949,6 +3953,7 @@ impl ::protobuf::Message for CChatRoom_RenameChatRoomGroup_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Set tagline for a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_SetChatRoomGroupTagline_Request)
 pub struct CChatRoom_SetChatRoomGroupTagline_Request {
     // message fields
@@ -4183,6 +4188,7 @@ impl ::protobuf::Message for CChatRoom_SetChatRoomGroupTagline_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Set avatar SHA for a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_SetChatRoomGroupAvatar_Request)
 pub struct CChatRoom_SetChatRoomGroupAvatar_Request {
     // message fields
@@ -4417,6 +4423,7 @@ impl ::protobuf::Message for CChatRoom_SetChatRoomGroupAvatar_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Sets a broadcast that the chat room group is watching"]
 // @@protoc_insertion_point(message:CChatRoom_SetChatRoomGroupWatchingBroadcast_Request)
 pub struct CChatRoom_SetChatRoomGroupWatchingBroadcast_Request {
     // message fields
@@ -4666,6 +4673,7 @@ impl ::protobuf::Message for CChatRoom_SetChatRoomGroupWatchingBroadcast_Respons
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Joins the minigame for the chat room group or starts a new one (Winter 2019 sale party game)"]
 // @@protoc_insertion_point(message:CChatRoom_JoinMiniGameForChatRoomGroup_Request)
 pub struct CChatRoom_JoinMiniGameForChatRoomGroup_Request {
     // message fields
@@ -4916,6 +4924,7 @@ impl ::protobuf::Message for CChatRoom_JoinMiniGameForChatRoomGroup_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Ends the minigame in the chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_EndMiniGameForChatRoomGroup_Request)
 pub struct CChatRoom_EndMiniGameForChatRoomGroup_Request {
     // message fields
@@ -5165,6 +5174,7 @@ impl ::protobuf::Message for CChatRoom_EndMiniGameForChatRoomGroup_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Mute user in group"]
 // @@protoc_insertion_point(message:CChatRoom_MuteUser_Request)
 pub struct CChatRoom_MuteUser_Request {
     // message fields
@@ -5414,6 +5424,7 @@ impl ::protobuf::Message for CChatRoom_MuteUser_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Kick user from group"]
 // @@protoc_insertion_point(message:CChatRoom_KickUser_Request)
 pub struct CChatRoom_KickUser_Request {
     // message fields
@@ -5663,6 +5674,7 @@ impl ::protobuf::Message for CChatRoom_KickUser_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Ban/unban user from group"]
 // @@protoc_insertion_point(message:CChatRoom_SetUserBanState_Request)
 pub struct CChatRoom_SetUserBanState_Request {
     // message fields
@@ -5912,6 +5924,7 @@ impl ::protobuf::Message for CChatRoom_SetUserBanState_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Revoke a direct invitation of a user"]
 // @@protoc_insertion_point(message:CChatRoom_RevokeInvite_Request)
 pub struct CChatRoom_RevokeInvite_Request {
     // message fields
@@ -6129,6 +6142,7 @@ impl ::protobuf::Message for CChatRoom_RevokeInvite_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Create role for goup"]
 // @@protoc_insertion_point(message:CChatRoom_CreateRole_Request)
 pub struct CChatRoom_CreateRole_Request {
     // message fields
@@ -6378,6 +6392,7 @@ impl ::protobuf::Message for CChatRoom_CreateRole_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get all roles in group"]
 // @@protoc_insertion_point(message:CChatRoom_GetRoles_Request)
 pub struct CChatRoom_GetRoles_Request {
     // message fields
@@ -6578,6 +6593,7 @@ impl ::protobuf::Message for CChatRoom_GetRoles_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Rename role for goup"]
 // @@protoc_insertion_point(message:CChatRoom_RenameRole_Request)
 pub struct CChatRoom_RenameRole_Request {
     // message fields
@@ -6844,6 +6860,7 @@ impl ::protobuf::Message for CChatRoom_RenameRole_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Reorder role with a goup"]
 // @@protoc_insertion_point(message:CChatRoom_ReorderRole_Request)
 pub struct CChatRoom_ReorderRole_Request {
     // message fields
@@ -7093,6 +7110,7 @@ impl ::protobuf::Message for CChatRoom_ReorderRole_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Delete role from group"]
 // @@protoc_insertion_point(message:CChatRoom_DeleteRole_Request)
 pub struct CChatRoom_DeleteRole_Request {
     // message fields
@@ -7310,6 +7328,7 @@ impl ::protobuf::Message for CChatRoom_DeleteRole_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get all defined roles and actions in group"]
 // @@protoc_insertion_point(message:CChatRoom_GetRoleActions_Request)
 pub struct CChatRoom_GetRoleActions_Request {
     // message fields
@@ -7542,6 +7561,7 @@ impl ::protobuf::Message for CChatRoom_GetRoleActions_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Replace role actions in group"]
 // @@protoc_insertion_point(message:CChatRoom_ReplaceRoleActions_Request)
 pub struct CChatRoom_ReplaceRoleActions_Request {
     // message fields
@@ -7773,6 +7793,7 @@ impl ::protobuf::Message for CChatRoom_ReplaceRoleActions_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Add role to user in group"]
 // @@protoc_insertion_point(message:CChatRoom_AddRoleToUser_Request)
 pub struct CChatRoom_AddRoleToUser_Request {
     // message fields
@@ -8022,6 +8043,7 @@ impl ::protobuf::Message for CChatRoom_AddRoleToUser_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get all roles assigned to user in group"]
 // @@protoc_insertion_point(message:CChatRoom_GetRolesForUser_Request)
 pub struct CChatRoom_GetRolesForUser_Request {
     // message fields
@@ -8256,6 +8278,7 @@ impl ::protobuf::Message for CChatRoom_GetRolesForUser_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Delete role from user in group"]
 // @@protoc_insertion_point(message:CChatRoom_DeleteRoleFromUser_Request)
 pub struct CChatRoom_DeleteRoleFromUser_Request {
     // message fields
@@ -8505,6 +8528,7 @@ impl ::protobuf::Message for CChatRoom_DeleteRoleFromUser_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Join a multi-user chat room"]
 // @@protoc_insertion_point(message:CChatRoom_JoinChatRoomGroup_Request)
 pub struct CChatRoom_JoinChatRoomGroup_Request {
     // message fields
@@ -8864,6 +8888,7 @@ impl ::protobuf::Message for CChatRoom_JoinChatRoomGroup_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Invite a friend to a multi-user chat room"]
 // @@protoc_insertion_point(message:CChatRoom_InviteFriendToChatRoomGroup_Request)
 pub struct CChatRoom_InviteFriendToChatRoomGroup_Request {
     // message fields
@@ -9145,6 +9170,7 @@ impl ::protobuf::Message for CChatRoom_InviteFriendToChatRoomGroup_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Leaves a chat room group and all related chats"]
 // @@protoc_insertion_point(message:CChatRoom_LeaveChatRoomGroup_Request)
 pub struct CChatRoom_LeaveChatRoomGroup_Request {
     // message fields
@@ -9330,6 +9356,7 @@ impl ::protobuf::Message for CChatRoom_LeaveChatRoomGroup_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Creates a chat room inside a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_CreateChatRoom_Request)
 pub struct CChatRoom_CreateChatRoom_Request {
     // message fields
@@ -9611,6 +9638,7 @@ impl ::protobuf::Message for CChatRoom_CreateChatRoom_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Deletes a chat room inside a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_DeleteChatRoom_Request)
 pub struct CChatRoom_DeleteChatRoom_Request {
     // message fields
@@ -9828,6 +9856,7 @@ impl ::protobuf::Message for CChatRoom_DeleteChatRoom_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Renames a chat room inside a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_RenameChatRoom_Request)
 pub struct CChatRoom_RenameChatRoom_Request {
     // message fields
@@ -10094,6 +10123,7 @@ impl ::protobuf::Message for CChatRoom_RenameChatRoom_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Reorders a chat room inside a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_ReorderChatRoom_Request)
 pub struct CChatRoom_ReorderChatRoom_Request {
     // message fields
@@ -10343,6 +10373,7 @@ impl ::protobuf::Message for CChatRoom_ReorderChatRoom_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Send a chat message to a multi-user chat room"]
 // @@protoc_insertion_point(message:CChatRoom_SendChatMessage_Request)
 pub struct CChatRoom_SendChatMessage_Request {
     // message fields
@@ -10804,6 +10835,7 @@ impl ::protobuf::Message for CChatRoom_SendChatMessage_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Join the voice chat in a multi-room chat (should already be in the chat room)"]
 // @@protoc_insertion_point(message:CChatRoom_JoinVoiceChat_Request)
 pub struct CChatRoom_JoinVoiceChat_Request {
     // message fields
@@ -11054,6 +11086,7 @@ impl ::protobuf::Message for CChatRoom_JoinVoiceChat_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Leave the voice chat in a multi-room chat"]
 // @@protoc_insertion_point(message:CChatRoom_LeaveVoiceChat_Request)
 pub struct CChatRoom_LeaveVoiceChat_Request {
     // message fields
@@ -11271,6 +11304,7 @@ impl ::protobuf::Message for CChatRoom_LeaveVoiceChat_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get the history of messages in a chat room.  You must currently be a member of the chat room."]
 // @@protoc_insertion_point(message:CChatRoom_GetMessageHistory_Request)
 pub struct CChatRoom_GetMessageHistory_Request {
     // message fields
@@ -12401,6 +12435,7 @@ pub mod cchat_room_get_message_history_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a list of our chat rooms"]
 // @@protoc_insertion_point(message:CChatRoom_GetMyChatRoomGroups_Request)
 pub struct CChatRoom_GetMyChatRoomGroups_Request {
     // special fields
@@ -13439,6 +13474,7 @@ impl ::protobuf::Message for CChatRoom_GetMyChatRoomGroups_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get information about a single chat room"]
 // @@protoc_insertion_point(message:CChatRoom_GetChatRoomGroupState_Request)
 pub struct CChatRoom_GetChatRoomGroupState_Request {
     // message fields
@@ -13639,6 +13675,7 @@ impl ::protobuf::Message for CChatRoom_GetChatRoomGroupState_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get basic information about a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_GetChatRoomGroupSummary_Request)
 pub struct CChatRoom_GetChatRoomGroupSummary_Request {
     // message fields
@@ -13748,6 +13785,7 @@ impl ::protobuf::Message for CChatRoom_GetChatRoomGroupSummary_Request {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Force a group chat to be considered active on the server for this user"]
 // @@protoc_insertion_point(message:CChatRoom_SetAppChatRoomGroupForceActive_Request)
 pub struct CChatRoom_SetAppChatRoomGroupForceActive_Request {
     // message fields
@@ -14014,6 +14052,7 @@ impl ::protobuf::Message for CChatRoom_SetAppChatRoomGroupForceActive_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "If a group chat is forced active (see SetAppChatRoomGroupForceActive), decrement the force count"]
 // @@protoc_insertion_point(message:CChatRoom_SetAppChatRoomGroupStopForceActive_Notification)
 pub struct CChatRoom_SetAppChatRoomGroupStopForceActive_Notification {
     // message fields
@@ -14155,6 +14194,7 @@ impl ::protobuf::Message for CChatRoom_SetAppChatRoomGroupStopForceActive_Notifi
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "A session acked an unread message, echo to other sessions."]
 // @@protoc_insertion_point(message:CChatRoom_AckChatMessage_Notification)
 pub struct CChatRoom_AckChatMessage_Notification {
     // message fields
@@ -14328,6 +14368,7 @@ impl ::protobuf::Message for CChatRoom_AckChatMessage_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Creates a chatroom invite link"]
 // @@protoc_insertion_point(message:CChatRoom_CreateInviteLink_Request)
 pub struct CChatRoom_CreateInviteLink_Request {
     // message fields
@@ -14659,6 +14700,7 @@ impl ::protobuf::Message for CChatRoom_CreateInviteLink_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns chat room info about provided link"]
 // @@protoc_insertion_point(message:CChatRoom_GetInviteLinkInfo_Request)
 pub struct CChatRoom_GetInviteLinkInfo_Request {
     // message fields
@@ -15050,6 +15092,7 @@ impl ::protobuf::Message for CChatRoom_GetInviteLinkInfo_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns chat room info about any invite involving the sender and passed group id"]
 // @@protoc_insertion_point(message:CChatRoom_GetInviteInfo_Request)
 pub struct CChatRoom_GetInviteInfo_Request {
     // message fields
@@ -15427,6 +15470,7 @@ impl ::protobuf::Message for CChatRoom_GetInviteInfo_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Returns all invite links for the specified group"]
 // @@protoc_insertion_point(message:CChatRoom_GetInviteLinksForGroup_Request)
 pub struct CChatRoom_GetInviteLinksForGroup_Request {
     // message fields
@@ -15852,6 +15896,7 @@ pub mod cchat_room_get_invite_links_for_group_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets a list of users who have been banned from a chat room"]
 // @@protoc_insertion_point(message:CChatRoom_GetBanList_Request)
 pub struct CChatRoom_GetBanList_Request {
     // message fields
@@ -16277,6 +16322,7 @@ pub mod cchat_room_get_ban_list_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Gets a list of users who have been invited to a chat room"]
 // @@protoc_insertion_point(message:CChatRoom_GetInviteList_Request)
 pub struct CChatRoom_GetInviteList_Request {
     // message fields
@@ -16650,6 +16696,7 @@ impl ::protobuf::Message for CChatRoom_GetInviteList_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Deletes specified invite link"]
 // @@protoc_insertion_point(message:CChatRoom_DeleteInviteLink_Request)
 pub struct CChatRoom_DeleteInviteLink_Request {
     // message fields
@@ -16884,6 +16931,7 @@ impl ::protobuf::Message for CChatRoom_DeleteInviteLink_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Set which chat rooms we are using in the active session"]
 // @@protoc_insertion_point(message:CChatRoom_SetSessionActiveChatRoomGroups_Request)
 pub struct CChatRoom_SetSessionActiveChatRoomGroups_Request {
     // message fields
@@ -17132,6 +17180,7 @@ impl ::protobuf::Message for CChatRoom_SetSessionActiveChatRoomGroups_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Set preferences around chat notifications for a group"]
 // @@protoc_insertion_point(message:CChatRoom_SetUserChatGroupPreferences_Request)
 pub struct CChatRoom_SetUserChatGroupPreferences_Request {
     // message fields
@@ -17738,6 +17787,7 @@ impl ::protobuf::Message for CChatRoom_SetUserChatGroupPreferences_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Deletes specified chat messages"]
 // @@protoc_insertion_point(message:CChatRoom_DeleteChatMessages_Request)
 pub struct CChatRoom_DeleteChatMessages_Request {
     // message fields
@@ -18113,6 +18163,7 @@ impl ::protobuf::Message for CChatRoom_DeleteChatMessages_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "A client is indicating it has an active view into the members list."]
 // @@protoc_insertion_point(message:CChatRoom_UpdateMemberListView_Notification)
 pub struct CChatRoom_UpdateMemberListView_Notification {
     // message fields
@@ -18414,6 +18465,7 @@ impl ::protobuf::Message for CChatRoom_UpdateMemberListView_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Search chat room members by name."]
 // @@protoc_insertion_point(message:CChatRoom_SearchMembers_Request)
 pub struct CChatRoom_SearchMembers_Request {
     // message fields
@@ -18885,6 +18937,7 @@ pub mod cchat_room_search_members_response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Adds/removes a reaction to/from a chat room message"]
 // @@protoc_insertion_point(message:CChatRoom_UpdateMessageReaction_Request)
 pub struct CChatRoom_UpdateMessageReaction_Request {
     // message fields
@@ -19315,6 +19368,7 @@ impl ::protobuf::Message for CChatRoom_UpdateMessageReaction_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Fetches a list of reactors for a specified reaction"]
 // @@protoc_insertion_point(message:CChatRoom_GetMessageReactionReactors_Request)
 pub struct CChatRoom_GetMessageReactionReactors_Request {
     // message fields
@@ -19729,6 +19783,7 @@ impl ::protobuf::Message for CChatRoom_GetMessageReactionReactors_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Get a list of chat rooms for a clan, optionally creating a new one"]
 // @@protoc_insertion_point(message:CClanChatRooms_GetClanChatRoomInfo_Request)
 pub struct CClanChatRooms_GetClanChatRoomInfo_Request {
     // message fields
@@ -19961,6 +20016,7 @@ impl ::protobuf::Message for CClanChatRooms_GetClanChatRoomInfo_Response {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Set a clan chat room to be members only (or public)"]
 // @@protoc_insertion_point(message:CClanChatRooms_SetClanChatRoomPrivate_Request)
 pub struct CClanChatRooms_SetClanChatRoomPrivate_Request {
     // message fields
@@ -20368,6 +20424,7 @@ impl ::protobuf::Message for CChatMentions {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "New chat message for a chat room"]
 // @@protoc_insertion_point(message:CChatRoom_IncomingChatMessage_Notification)
 pub struct CChatRoom_IncomingChatMessage_Notification {
     // message fields
@@ -20780,6 +20837,7 @@ impl ::protobuf::Message for CChatRoom_IncomingChatMessage_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "An existing chat message has been modified on the backend"]
 // @@protoc_insertion_point(message:CChatRoom_ChatMessageModified_Notification)
 pub struct CChatRoom_ChatMessageModified_Notification {
     // message fields
@@ -21111,6 +21169,7 @@ pub mod cchat_room_chat_message_modified_notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "A chat room member's state has changed (join/part/permissions)"]
 // @@protoc_insertion_point(message:CChatRoom_MemberStateChange_Notification)
 pub struct CChatRoom_MemberStateChange_Notification {
     // message fields
@@ -21269,6 +21328,7 @@ impl ::protobuf::Message for CChatRoom_MemberStateChange_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Chat Room header / metadata has changed"]
 // @@protoc_insertion_point(message:CChatRoom_ChatRoomHeaderState_Notification)
 pub struct CChatRoom_ChatRoomHeaderState_Notification {
     // message fields
@@ -21360,6 +21420,7 @@ impl ::protobuf::Message for CChatRoom_ChatRoomHeaderState_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Something about a chatroom group changed (created, deleted, etc.)"]
 // @@protoc_insertion_point(message:CChatRoom_ChatRoomGroupRoomsChange_Notification)
 pub struct CChatRoom_ChatRoomGroupRoomsChange_Notification {
     // message fields
@@ -21515,6 +21576,7 @@ impl ::protobuf::Message for CChatRoom_ChatRoomGroupRoomsChange_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Voice chat was recreated or dropped on the backend and client needs to rejoin to remain in chat."]
 // @@protoc_insertion_point(message:CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification)
 pub struct CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification {
     // message fields
@@ -21656,6 +21718,7 @@ impl ::protobuf::Message for CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notif
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "User chat group state (preferences, ack state, etc) have changed."]
 // @@protoc_insertion_point(message:ChatRoomClient_NotifyChatGroupUserStateChanged_Notification)
 pub struct ChatRoomClient_NotifyChatGroupUserStateChanged_Notification {
     // message fields
@@ -21828,6 +21891,7 @@ impl ::protobuf::Message for ChatRoomClient_NotifyChatGroupUserStateChanged_Noti
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "The ChatRoom server hosting the chat rooms has reconnected to the user's Chat server (may have restarted), client should refresh state."]
 // @@protoc_insertion_point(message:ChatRoomClient_NotifyChatRoomDisconnect_Notification)
 pub struct ChatRoomClient_NotifyChatRoomDisconnect_Notification {
     // message fields
@@ -22331,6 +22395,7 @@ impl ::protobuf::Message for CChatRoomMemberSummaryCounts {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "The list of members for a chat room with virtualized member list has changed on the server (or client requested)"]
 // @@protoc_insertion_point(message:CChatRoomClient_MemberListViewUpdated_Notification)
 pub struct CChatRoomClient_MemberListViewUpdated_Notification {
     // message fields
@@ -22718,6 +22783,7 @@ pub mod cchat_room_client_member_list_view_updated_notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "New message reaction"]
 // @@protoc_insertion_point(message:CChatRoom_MessageReaction_Notification)
 pub struct CChatRoom_MessageReaction_Notification {
     // message fields
@@ -23071,6 +23137,7 @@ impl ::protobuf::Message for CChatRoom_MessageReaction_Notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Incoming metrics from the client"]
 // @@protoc_insertion_point(message:CChatUsability_ClientUsabilityMetrics_Notification)
 pub struct CChatUsability_ClientUsabilityMetrics_Notification {
     // message fields
@@ -25849,6 +25916,7 @@ pub mod cchat_usability_client_usability_metrics_notification {
 }
 
 #[derive(PartialEq,Clone,Default,Debug)]
+#[doc = "Request client send usability metrics"]
 // @@protoc_insertion_point(message:CChatUsability_RequestClientUsabilityMetrics_Notification)
 pub struct CChatUsability_RequestClientUsabilityMetrics_Notification {
     // message fields
