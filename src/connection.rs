@@ -114,7 +114,7 @@ impl Connection {
         let message = timeout(self.timeout, recv)
             .await
             .map_err(|_| NetworkError::Timeout)?
-            .map_err(|_| NetworkError::Timeout)?
+            .map_err(|_| NetworkError::EOF)?
             .into_message::<ServiceMethodResponseMessage>()?;
         message.into_response::<Msg>()
     }
