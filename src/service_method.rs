@@ -25,6 +25,6 @@ impl<T: RpcMethod> ServiceMethodRequest for T {
     }
 
     fn encode_size(&self) -> usize {
-        <Self as RpcMessage>::encode_size(&self)
+        <Self as RpcMessage>::encode_size(self)
     }
 }

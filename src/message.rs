@@ -326,6 +326,6 @@ impl<ProtoMsg: RpcMessageWithKind> NetMessage for ProtoMsg {
     }
 
     fn encode_size(&self) -> usize {
-        <Self as RpcMessage>::encode_size(&self)
+        <Self as RpcMessage>::encode_size(self)
     }
 }
