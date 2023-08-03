@@ -1,5 +1,7 @@
 use crate::auth::{begin_password_auth, AuthConfirmationHandler};
-use crate::message::{NetMessage, ServiceMethodMessage, ServiceMethodResponseMessage};
+use crate::message::{
+    NetMessage, ServiceMethodMessage, ServiceMethodNotification, ServiceMethodResponseMessage,
+};
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
@@ -141,10 +143,10 @@ impl Connection {
         self.rest.recv().await.ok_or(NetworkError::EOF)?
     }
 
-    pub fn on<T: NetMessage>(&self) -> impl Stream<Item = Result<T>> {
-        BroadcastStream::new(self.filter.on_kind(T::KIND))
+    pub fn on<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> {
+        BroadcastStream::new(self.filter.on_notification(T::REQ_NAME))
             .filter_map(|res| res.ok())
-            .map(|raw: RawNetMessage| raw.into_message())
+            .map(|raw| raw.into_notification())
     }
 
     pub fn one<T: NetMessage>(&self) -> impl Future<Output = Result<(NetMessageHeader, T)>> {
@@ -161,6 +163,7 @@ impl Connection {
 #[derive(Clone)]
 struct MessageFilter {
     job_id_filters: Arc<DashMap<u64, oneshot::Sender<RawNetMessage>>>,
+    notification_filters: Arc<DashMap<&'static str, broadcast::Sender<ServiceMethodNotification>>>,
     kind_filters: Arc<DashMap<EMsg, broadcast::Sender<RawNetMessage>>>,
     oneshot_kind_filters: Arc<DashMap<EMsg, oneshot::Sender<RawNetMessage>>>,
 }
@@ -173,6 +176,7 @@ impl MessageFilter {
         let filter = MessageFilter {
             job_id_filters: Default::default(),
             kind_filters: Default::default(),
+            notification_filters: Default::default(),
             oneshot_kind_filters: Default::default(),
         };
 
@@ -190,6 +194,21 @@ impl MessageFilter {
                         filter_send.oneshot_kind_filters.remove(&message.kind)
                     {
                         tx.send(message).ok();
+                    } else if message.kind == EMsg::k_EMsgServiceMethod {
+                        if let Ok(notification) =
+                            message.into_message::<ServiceMethodNotification>()
+                        {
+                            debug!(
+                                job_name = notification.job_name.as_str(),
+                                "processing notification"
+                            );
+                            if let Some(tx) = filter_send
+                                .notification_filters
+                                .get(notification.job_name.as_str())
+                            {
+                                tx.send(notification).ok();
+                            }
+                        }
                     } else if let Some(tx) = filter_send.kind_filters.get(&message.kind) {
                         tx.send(message).ok();
                     } else {
@@ -209,10 +228,13 @@ impl MessageFilter {
         rx
     }
 
-    pub fn on_kind(&self, kind: EMsg) -> broadcast::Receiver<RawNetMessage> {
+    pub fn on_notification(
+        &self,
+        job_name: &'static str,
+    ) -> broadcast::Receiver<ServiceMethodNotification> {
         let tx = self
-            .kind_filters
-            .entry(kind)
+            .notification_filters
+            .entry(job_name)
             .or_insert_with(|| broadcast::channel(16).0);
         tx.subscribe()
     }

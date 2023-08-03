@@ -310,6 +310,43 @@ impl NetMessage for ServiceMethodResponseMessage {
     }
 }
 
+#[derive(Debug, Clone)]
+pub struct ServiceMethodNotification {
+    pub(crate) job_name: String,
+    body: BytesMut,
+}
+
+impl ServiceMethodNotification {
+    pub fn into_notification<Request: ServiceMethodRequest>(self) -> Result<Request, NetworkError> {
+        if self.job_name == Request::REQ_NAME {
+            Ok(Request::parse(&mut self.body.reader())
+                .map_err(|e| MalformedBody(Self::KIND, e.into()))?)
+        } else {
+            Err(NetworkError::DifferentServiceMethod(
+                Request::REQ_NAME,
+                self.job_name,
+            ))
+        }
+    }
+}
+
+impl NetMessage for ServiceMethodNotification {
+    const KIND: EMsg = EMsg::k_EMsgServiceMethod;
+    const IS_PROTOBUF: bool = true;
+
+    fn read_body(data: BytesMut, header: &NetMessageHeader) -> Result<Self, MalformedBody> {
+        trace!("reading body of protobuf message {:?}", Self::KIND);
+        Ok(ServiceMethodNotification {
+            job_name: header
+                .target_job_name
+                .as_deref()
+                .unwrap_or_default()
+                .to_string(),
+            body: data,
+        })
+    }
+}
+
 impl<ProtoMsg: RpcMessageWithKind> NetMessage for ProtoMsg {
     const KIND: EMsg = <ProtoMsg as RpcMessageWithKind>::KIND;
     const IS_PROTOBUF: bool = true;
