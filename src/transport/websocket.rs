@@ -1,7 +1,7 @@
 use crate::message::flatten_multi;
 use crate::net::{NetworkError, RawNetMessage};
-use futures_sink::Sink;
-use futures_util::{SinkExt, StreamExt, TryStreamExt};
+use crate::transport::assert_can_unsplit;
+use futures_util::{Sink, SinkExt, StreamExt, TryStreamExt};
 use std::future::ready;
 use tokio_stream::Stream;
 use tokio_tungstenite::connect_async;
@@ -30,9 +30,9 @@ pub async fn connect(
                 .map(|res| res.and_then(RawNetMessage::read)),
         ),
         raw_write.with(|msg: RawNetMessage| {
-            let mut body = Vec::with_capacity(msg.header_buffer.len() + msg.data.len());
-            body.extend_from_slice(msg.header_buffer.as_ref());
-            body.extend_from_slice(msg.data.as_ref());
+            let mut body = msg.header_buffer;
+            assert_can_unsplit(&body, &msg.data);
+            body.unsplit(msg.data);
             ready(Ok(WsMessage::binary(body)))
         }),
     ))

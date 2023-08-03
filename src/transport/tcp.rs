@@ -2,12 +2,11 @@ use crate::message::{
     flatten_multi, ChannelEncryptRequest, ChannelEncryptResult, ClientEncryptResponse, NetMessage,
 };
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
+use crate::transport::assert_can_unsplit;
 use bytemuck::{cast, Pod, Zeroable};
 use bytes::{Buf, BufMut, BytesMut};
-use futures_sink::Sink;
 use futures_util::future::ready;
-use futures_util::sink::SinkExt;
-use futures_util::{StreamExt, TryStreamExt};
+use futures_util::{Sink, SinkExt, StreamExt, TryStreamExt};
 use std::convert::TryInto;
 use std::fmt::Debug;
 use steam_vent_crypto::{
@@ -79,13 +78,6 @@ impl Encoder<BytesMut> for FrameCodec {
 
 struct RawMessageEncoder {
     key: [u8; 32],
-}
-
-/// Assert that two BytesMut can be unsplit without allocations
-#[track_caller]
-fn assert_can_unsplit(head: &BytesMut, tail: &BytesMut) {
-    let ptr = unsafe { head.as_ref().as_ptr().add(head.len()) };
-    debug_assert_eq!(ptr, tail.as_ref().as_ptr());
 }
 
 impl Encoder<RawNetMessage> for RawMessageEncoder {

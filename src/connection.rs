@@ -1,4 +1,4 @@
-use crate::auth::{begin_password_auth, AuthConfirmationHandler, Tokens};
+use crate::auth::{begin_password_auth, AuthConfirmationHandler};
 use crate::message::{NetMessage, ServiceMethodResponseMessage};
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::serverlist::ServerList;
@@ -6,8 +6,7 @@ use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, hello, login, Session, SessionError};
 use crate::transport::websocket::connect;
 use dashmap::DashMap;
-use futures_sink::Sink;
-use futures_util::SinkExt;
+use futures_util::{Sink, SinkExt};
 use std::future::Future;
 use std::sync::Arc;
 use std::time::Duration;
@@ -29,7 +28,6 @@ pub struct Connection {
     rest: mpsc::Receiver<Result<RawNetMessage>>,
     write: Box<dyn Sink<RawNetMessage, Error = NetworkError> + Unpin>,
     timeout: Duration,
-    tokens: Option<Tokens>,
 }
 
 impl Connection {
@@ -42,7 +40,6 @@ impl Connection {
             rest,
             write: Box::new(write),
             timeout: Duration::from_secs(10),
-            tokens: None,
         };
         hello(&mut connection).await?;
         Ok(connection)
@@ -54,6 +51,7 @@ impl Connection {
 
         Ok(connection)
     }
+
     pub async fn login<H: AuthConfirmationHandler>(
         server_list: ServerList,
         account: &str,
@@ -78,32 +76,15 @@ impl Connection {
             tokens.refresh_token.as_ref(),
         )
         .await?;
-        connection.tokens = Some(tokens);
 
         Ok(connection)
-    }
-
-    pub fn from_parts<Read, Write>(read: Read, write: Write, session: Session) -> Self
-    where
-        Read: Stream<Item = Result<RawNetMessage, NetworkError>> + Unpin + Send + 'static,
-        Write: Sink<RawNetMessage, Error = NetworkError> + Unpin + 'static,
-    {
-        let (filter, rest) = MessageFilter::new(read);
-        Connection {
-            session,
-            filter,
-            rest,
-            write: Box::new(write),
-            timeout: Duration::from_secs(10),
-            tokens: None,
-        }
     }
 
     pub fn steam_id(&self) -> SteamID {
         self.session.steam_id
     }
 
-    pub fn prepare(&mut self) -> NetMessageHeader {
+    fn prepare(&self) -> NetMessageHeader {
         self.session.header()
     }
 
@@ -136,7 +117,7 @@ impl Connection {
         message.into_response::<Msg>()
     }
 
-    pub async fn service_method_un_authenticated<Msg: ServiceMethodRequest>(
+    pub(crate) async fn service_method_un_authenticated<Msg: ServiceMethodRequest>(
         &mut self,
         msg: Msg,
     ) -> Result<Msg::Response> {
@@ -167,6 +148,8 @@ impl Connection {
     }
 
     pub fn one<T: NetMessage>(&self) -> impl Future<Output = Result<(NetMessageHeader, T)>> {
+        // async block instead of async fn so we don't have to tie the lifetime of the returned future
+        // to the lifetime of &self
         let fut = self.filter.one_kind(T::KIND);
         async move {
             let raw = fut.await.map_err(|_| NetworkError::EOF)?;

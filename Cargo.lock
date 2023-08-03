@@ -1452,7 +1452,6 @@ dependencies = [
  "crc",
  "dashmap",
  "flate2",
- "futures-sink",
  "futures-util",
  "num-bigint-dig",
  "num-traits 0.2.16",

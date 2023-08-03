@@ -3,11 +3,11 @@ use crate::eresult::EResult;
 use crate::net::{NetMessageHeader, NetworkError};
 use crate::proto::steammessages_base::CMsgIPAddress;
 use crate::proto::steammessages_clientserver_login::{
-    CMsgClientHello, CMsgClientLogOff, CMsgClientLoggedOff, CMsgClientLogon,
-    CMsgClientLogonResponse,
+    CMsgClientHello, CMsgClientLogon, CMsgClientLogonResponse,
 };
 use crate::serverlist::ServerDiscoveryError;
 use protobuf::MessageField;
+use std::sync::atomic::{AtomicU64, Ordering};
 use steam_vent_crypto::CryptError;
 use steamid_ng::{AccountType, Instance, SteamID, Universe};
 use thiserror::Error;
@@ -37,18 +37,17 @@ pub enum LoginError {
     InvalidPubKey(CryptError),
 }
 
-#[derive(Default, Debug, Clone)]
-pub struct JobIdCounter(u64);
+#[derive(Default, Debug)]
+pub struct JobIdCounter(AtomicU64);
 
 impl JobIdCounter {
     #[allow(clippy::should_implement_trait)]
-    pub fn next(&mut self) -> u64 {
-        self.0 += 1;
-        self.0
+    pub fn next(&self) -> u64 {
+        self.0.fetch_add(1, Ordering::SeqCst)
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct Session {
     session_id: i32,
     job_id: JobIdCounter,
@@ -66,7 +65,7 @@ impl Default for Session {
 }
 
 impl Session {
-    pub fn header(&mut self) -> NetMessageHeader {
+    pub fn header(&self) -> NetMessageHeader {
         NetMessageHeader {
             session_id: self.session_id,
             source_job_id: self.job_id.next(),
@@ -158,22 +157,6 @@ pub async fn login(
         steam_id: header.steam_id,
         job_id: JobIdCounter::default(),
     })
-}
-
-pub async fn logout(conn: &mut Connection) -> Result<()> {
-    let mut ip = CMsgIPAddress::new();
-    ip.set_v4(0);
-
-    let logout = CMsgClientLogOff::default();
-
-    let header = conn.prepare();
-    let fut = conn.one::<CMsgClientLoggedOff>();
-    conn.send(header, logout).await?;
-
-    let (_header, response) = fut.await?;
-    EResult::from_result(response.eresult()).map_err(NetworkError::from)?;
-    debug!("session logged out");
-    Ok(())
 }
 
 pub async fn hello(conn: &mut Connection) -> Result<()> {

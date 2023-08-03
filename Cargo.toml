@@ -21,7 +21,6 @@ crc = "3.0.1"
 byteorder = "1.4.3"
 flate2 = "1.0.26"
 steamid-ng = "1.0.0"
-futures-sink = "0.3.28"
 futures-util = { version = "0.3.28", features = ["sink"] }
 dashmap = "5.5.0"
 tracing = "0.1.37"
