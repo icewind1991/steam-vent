@@ -13,14 +13,15 @@ use std::future::Future;
 use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_proto::enums_clientserver::EMsg;
+use steam_vent_proto::steammessages_clientserver_login::CMsgClientHeartBeat;
 use steamid_ng::SteamID;
-use tokio::sync::{broadcast, mpsc, oneshot};
+use tokio::sync::{broadcast, mpsc, oneshot, Mutex};
 use tokio::task::spawn;
-use tokio::time::timeout;
+use tokio::time::{sleep, timeout};
 use tokio_stream::wrappers::BroadcastStream;
 use tokio_stream::Stream;
 use tokio_stream::StreamExt;
-use tracing::debug;
+use tracing::{debug, error};
 
 type Result<T, E = NetworkError> = std::result::Result<T, E>;
 
@@ -28,7 +29,7 @@ pub struct Connection {
     pub(crate) session: Session,
     filter: MessageFilter,
     rest: mpsc::Receiver<Result<RawNetMessage>>,
-    write: Box<dyn Sink<RawNetMessage, Error = NetworkError> + Unpin>,
+    write: Arc<Mutex<dyn Sink<RawNetMessage, Error = NetworkError> + Unpin + Send>>,
     timeout: Duration,
 }
 
@@ -40,7 +41,7 @@ impl Connection {
             session: Session::default(),
             filter,
             rest,
-            write: Box::new(write),
+            write: Arc::new(Mutex::new(write)),
             timeout: Duration::from_secs(10),
         };
         hello(&mut connection).await?;
@@ -50,6 +51,7 @@ impl Connection {
     pub async fn anonymous(server_list: ServerList) -> Result<Self, SessionError> {
         let mut connection = Self::connect(server_list).await?;
         connection.session = anonymous(&mut connection).await?;
+        connection.setup_heartbeat();
 
         Ok(connection)
     }
@@ -78,8 +80,37 @@ impl Connection {
             tokens.refresh_token.as_ref(),
         )
         .await?;
+        connection.setup_heartbeat();
 
         Ok(connection)
+    }
+
+    fn setup_heartbeat(&self) {
+        let write = self.write.clone();
+        let interval = self.session.heartbeat_interval;
+        let header = NetMessageHeader {
+            session_id: self.session.session_id,
+            source_job_id: u64::MAX,
+            target_job_id: u64::MAX,
+            steam_id: self.steam_id(),
+            ..NetMessageHeader::default()
+        };
+        spawn(async move {
+            loop {
+                sleep(interval).await;
+                match RawNetMessage::from_message(header.clone(), CMsgClientHeartBeat::default()) {
+                    Ok(msg) => {
+                        let mut writer = write.lock().await;
+                        if let Err(e) = writer.send(msg).await {
+                            error!(error = ?e, "Failed to send heartbeat message");
+                        }
+                    }
+                    Err(e) => {
+                        error!(error = ?e, "Failed to prepare heartbeat message")
+                    }
+                }
+            }
+        });
     }
 
     pub fn steam_id(&self) -> SteamID {
@@ -90,13 +121,9 @@ impl Connection {
         self.session.header()
     }
 
-    pub async fn send<Msg: NetMessage>(
-        &mut self,
-        header: NetMessageHeader,
-        msg: Msg,
-    ) -> Result<()> {
+    pub async fn send<Msg: NetMessage>(&self, header: NetMessageHeader, msg: Msg) -> Result<()> {
         let msg = RawNetMessage::from_message(header, msg)?;
-        self.write.send(msg).await?;
+        self.write.lock().await.send(msg).await?;
         Ok(())
     }
 
@@ -105,7 +132,7 @@ impl Connection {
     }
 
     pub async fn service_method<Msg: ServiceMethodRequest>(
-        &mut self,
+        &self,
         msg: Msg,
     ) -> Result<Msg::Response> {
         let header = self.prepare();
@@ -120,7 +147,7 @@ impl Connection {
     }
 
     pub(crate) async fn service_method_un_authenticated<Msg: ServiceMethodRequest>(
-        &mut self,
+        &self,
         msg: Msg,
     ) -> Result<Msg::Response> {
         let header = self.prepare();
@@ -130,7 +157,7 @@ impl Connection {
             ServiceMethodMessage(msg),
             EMsg::k_EMsgServiceMethodCallFromClientNonAuthed,
         )?;
-        self.write.send(msg).await?;
+        self.write.lock().await.send(msg).await?;
         let message = timeout(self.timeout, recv)
             .await
             .map_err(|_| NetworkError::Timeout)?

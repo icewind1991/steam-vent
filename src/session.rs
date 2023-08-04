@@ -8,6 +8,7 @@ use crate::proto::steammessages_clientserver_login::{
 use crate::serverlist::ServerDiscoveryError;
 use protobuf::MessageField;
 use std::sync::atomic::{AtomicU64, Ordering};
+use std::time::Duration;
 use steam_vent_crypto::CryptError;
 use steamid_ng::{AccountType, Instance, SteamID, Universe};
 use thiserror::Error;
@@ -49,9 +50,10 @@ impl JobIdCounter {
 
 #[derive(Debug)]
 pub struct Session {
-    session_id: i32,
-    job_id: JobIdCounter,
+    pub session_id: i32,
+    pub job_id: JobIdCounter,
     pub steam_id: SteamID,
+    pub heartbeat_interval: Duration,
 }
 
 impl Default for Session {
@@ -60,6 +62,7 @@ impl Default for Session {
             session_id: 0,
             job_id: JobIdCounter::default(),
             steam_id: SteamID::from(0),
+            heartbeat_interval: Duration::from_secs(15),
         }
     }
 }
@@ -76,7 +79,7 @@ impl Session {
     }
 }
 
-pub async fn anonymous(conn: &mut Connection) -> Result<Session> {
+pub async fn anonymous(connection: &mut Connection) -> Result<Session> {
     let mut ip = CMsgIPAddress::new();
     ip.set_v4(0);
 
@@ -93,29 +96,16 @@ pub async fn anonymous(conn: &mut Connection) -> Result<Session> {
         ..CMsgClientLogon::default()
     };
 
-    let header = NetMessageHeader {
-        session_id: 0,
-        source_job_id: u64::MAX,
-        target_job_id: u64::MAX,
-        steam_id: SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
-        ..NetMessageHeader::default()
-    };
-
-    let fut = conn.one::<CMsgClientLogonResponse>();
-    conn.send(header, logon).await?;
-
-    let (header, response) = fut.await?;
-    EResult::from_result(response.eresult()).map_err(NetworkError::from)?;
-    debug!("anonymous session started");
-    Ok(Session {
-        session_id: header.session_id,
-        steam_id: header.steam_id,
-        job_id: JobIdCounter::default(),
-    })
+    send_logon(
+        connection,
+        logon,
+        SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
+    )
+    .await
 }
 
 pub async fn login(
-    conn: &mut Connection,
+    connection: &mut Connection,
     account: &str,
     steam_id: SteamID,
     access_token: &str,
@@ -138,6 +128,14 @@ pub async fn login(
         ..CMsgClientLogon::default()
     };
 
+    send_logon(connection, logon, steam_id).await
+}
+
+async fn send_logon(
+    connection: &mut Connection,
+    logon: CMsgClientLogon,
+    steam_id: SteamID,
+) -> Result<Session> {
     let header = NetMessageHeader {
         session_id: 0,
         source_job_id: u64::MAX,
@@ -146,16 +144,17 @@ pub async fn login(
         ..NetMessageHeader::default()
     };
 
-    let fut = conn.one::<CMsgClientLogonResponse>();
-    conn.send(header, logon).await?;
+    let fut = connection.one::<CMsgClientLogonResponse>();
+    connection.send(header, logon).await?;
 
     let (header, response) = fut.await?;
     EResult::from_result(response.eresult()).map_err(NetworkError::from)?;
-    debug!(account, "session started");
+    debug!(steam_id = u64::from(steam_id), "session started");
     Ok(Session {
         session_id: header.session_id,
         steam_id: header.steam_id,
         job_id: JobIdCounter::default(),
+        heartbeat_interval: Duration::from_secs(response.heartbeat_seconds() as u64),
     })
 }
 
