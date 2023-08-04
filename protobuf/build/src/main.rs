@@ -312,7 +312,6 @@ impl CustomizeCallback for ServiceGenerator {
         for service in services.iter() {
             for method in service.methods.iter() {
                 if let Some(description) = method.description.clone() {
-                    println!("{} = {}", method.name, description);
                     self.descriptions
                         .borrow_mut()
                         .insert(method.request.clone(), description);
