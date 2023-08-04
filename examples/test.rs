@@ -1,14 +1,12 @@
-use std::error::Error;
-use steam_vent::connection::Connection;
 use steam_vent::proto::steammessages_gameservers_steamclient::CGameServers_GetServerList_Request;
-use steam_vent::serverlist::ServerList;
+use steam_vent::{Connection, ConnectionError, ServerList};
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn Error>> {
+async fn main() -> Result<(), ConnectionError> {
     tracing_subscriber::fmt::init();
 
     let server_list = ServerList::discover().await?;
-    let mut connection = Connection::anonymous(server_list).await?;
+    let connection = Connection::anonymous(server_list).await?;
 
     println!("requesting servers");
 

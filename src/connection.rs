@@ -3,24 +3,23 @@ use crate::message::{
     NetMessage, ServiceMethodMessage, ServiceMethodNotification, ServiceMethodResponseMessage,
 };
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
+use crate::proto::enums_clientserver::EMsg;
+use crate::proto::steammessages_clientserver_login::CMsgClientHeartBeat;
 use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
-use crate::session::{anonymous, hello, login, Session, SessionError};
+use crate::session::{anonymous, hello, login, ConnectionError, Session};
 use crate::transport::websocket::connect;
 use dashmap::DashMap;
 use futures_util::{Sink, SinkExt};
 use std::future::Future;
 use std::sync::Arc;
 use std::time::Duration;
-use steam_vent_proto::enums_clientserver::EMsg;
-use steam_vent_proto::steammessages_clientserver_login::CMsgClientHeartBeat;
 use steamid_ng::SteamID;
 use tokio::sync::{broadcast, mpsc, oneshot, Mutex};
 use tokio::task::spawn;
 use tokio::time::{sleep, timeout};
 use tokio_stream::wrappers::BroadcastStream;
-use tokio_stream::Stream;
-use tokio_stream::StreamExt;
+use tokio_stream::{Stream, StreamExt};
 use tracing::{debug, error};
 
 type Result<T, E = NetworkError> = std::result::Result<T, E>;
@@ -34,7 +33,7 @@ pub struct Connection {
 }
 
 impl Connection {
-    async fn connect(server_list: ServerList) -> Result<Self, SessionError> {
+    async fn connect(server_list: ServerList) -> Result<Self, ConnectionError> {
         let (read, write) = connect(&server_list.pick_ws()).await?;
         let (filter, rest) = MessageFilter::new(read);
         let mut connection = Connection {
@@ -48,7 +47,7 @@ impl Connection {
         Ok(connection)
     }
 
-    pub async fn anonymous(server_list: ServerList) -> Result<Self, SessionError> {
+    pub async fn anonymous(server_list: ServerList) -> Result<Self, ConnectionError> {
         let mut connection = Self::connect(server_list).await?;
         connection.session = anonymous(&mut connection).await?;
         connection.setup_heartbeat();
@@ -61,7 +60,7 @@ impl Connection {
         account: &str,
         password: &str,
         mut confirmation_handler: H,
-    ) -> Result<Self, SessionError> {
+    ) -> Result<Self, ConnectionError> {
         let mut connection = Self::connect(server_list).await?;
         let begin = begin_password_auth(&mut connection, account, password).await?;
         let steam_id = SteamID::from(begin.steam_id());

@@ -1,11 +1,18 @@
 pub mod auth;
-pub mod connection;
-pub mod eresult;
-pub mod message;
-pub mod net;
-pub mod serverlist;
-pub mod service_method;
-pub mod session;
-pub mod transport;
+mod connection;
+mod eresult;
+mod message;
+mod net;
+mod serverlist;
+mod service_method;
+mod session;
+mod transport;
 
 pub use steam_vent_proto as proto;
+
+pub use connection::Connection;
+pub use eresult::EResult;
+pub use message::NetMessage;
+pub use net::NetworkError;
+pub use serverlist::{ServerDiscoveryError, ServerList};
+pub use session::{ConnectionError, LoginError};

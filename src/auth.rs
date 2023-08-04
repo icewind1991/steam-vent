@@ -11,7 +11,7 @@ use crate::proto::steammessages_auth_steamclient::{
     CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request, EAuthSessionGuardType,
     EAuthTokenPlatformType,
 };
-use crate::session::{LoginError, SessionError};
+use crate::session::{ConnectionError, LoginError};
 use base64::prelude::BASE64_STANDARD;
 use base64::Engine;
 use num_bigint_dig::BigUint;
@@ -26,11 +26,11 @@ use steamid_ng::SteamID;
 use tokio::time::sleep;
 use tracing::{debug, info, instrument};
 
-pub async fn begin_password_auth(
+pub(crate) async fn begin_password_auth(
     connection: &mut Connection,
     account: &str,
     password: &str,
-) -> Result<StartedAuth, SessionError> {
+) -> Result<StartedAuth, ConnectionError> {
     let (pub_key, timestamp) = get_password_rsa(connection, account.into()).await?;
     let encrypted_password =
         encrypt_with_key_pkcs1(&pub_key, password.as_bytes()).map_err(LoginError::InvalidPubKey)?;

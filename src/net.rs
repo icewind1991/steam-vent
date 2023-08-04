@@ -217,7 +217,7 @@ impl RawNetMessage {
         let is_protobuf = kind < 0;
         let kind = kind & (!PROTO_MASK) as i32;
 
-        let kind = match steam_vent_proto::enums_clientserver::EMsg::from_i32(kind) {
+        let kind = match EMsg::from_i32(kind) {
             Some(kind) => kind,
             None => return Err(NetworkError::InvalidMessageKind(kind)),
         };

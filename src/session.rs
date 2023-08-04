@@ -14,10 +14,10 @@ use steamid_ng::{AccountType, Instance, SteamID, Universe};
 use thiserror::Error;
 use tracing::debug;
 
-type Result<T, E = SessionError> = std::result::Result<T, E>;
+type Result<T, E = ConnectionError> = std::result::Result<T, E>;
 
 #[derive(Debug, Error)]
-pub enum SessionError {
+pub enum ConnectionError {
     #[error("Network error: {0:#}")]
     Network(#[from] NetworkError),
     #[error("Login failed: {0:#}")]
@@ -30,12 +30,34 @@ pub enum SessionError {
 pub enum LoginError {
     #[error("invalid credentials")]
     InvalidCredentials,
-    #[error("unknown error {0}")]
-    Unknown(i32),
+    #[error("unknown error {0:?}")]
+    Unknown(EResult),
     #[error("steam guard required")]
     SteamGuardRequired,
     #[error("steam returned an invalid public key: {0:#}")]
     InvalidPubKey(CryptError),
+    #[error("account not available")]
+    UnavailableAccount,
+    #[error("rate limited")]
+    RateLimited,
+}
+
+impl From<EResult> for LoginError {
+    fn from(value: EResult) -> Self {
+        match value {
+            EResult::InvalidPassword => LoginError::InvalidCredentials,
+            EResult::AccountDisabled
+            | EResult::AccountLockedDown
+            | EResult::AccountHasBeenDeleted
+            | EResult::AccountNotFound => LoginError::InvalidCredentials,
+            EResult::RateLimitExceeded
+            | EResult::AccountActivityLimitExceeded
+            | EResult::LimitExceeded
+            | EResult::AccountLimitExceeded => LoginError::RateLimited,
+            EResult::AccountLoginDeniedNeedTwoFactor => LoginError::SteamGuardRequired,
+            value => LoginError::Unknown(value),
+        }
+    }
 }
 
 #[derive(Default, Debug)]
@@ -148,7 +170,7 @@ async fn send_logon(
     connection.send(header, logon).await?;
 
     let (header, response) = fut.await?;
-    EResult::from_result(response.eresult()).map_err(NetworkError::from)?;
+    EResult::from_result(response.eresult()).map_err(LoginError::from)?;
     debug!(steam_id = u64::from(steam_id), "session started");
     Ok(Session {
         session_id: header.session_id,
@@ -158,7 +180,7 @@ async fn send_logon(
     })
 }
 
-pub async fn hello(conn: &mut Connection) -> Result<()> {
+pub async fn hello(conn: &mut Connection) -> Result<(), NetworkError> {
     const PROTOCOL_VERSION: u32 = 65580;
     let req = CMsgClientHello {
         protocol_version: Some(PROTOCOL_VERSION),

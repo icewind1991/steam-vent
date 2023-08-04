@@ -1,12 +1,10 @@
 use std::env::args;
-use std::error::Error;
 use steam_vent::auth::ConsoleAuthConfirmationHandler;
-use steam_vent::connection::Connection;
 use steam_vent::proto::steammessages_player_steamclient::CPlayer_GetOwnedGames_Request;
-use steam_vent::serverlist::ServerList;
+use steam_vent::{Connection, ConnectionError, ServerList};
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn Error>> {
+async fn main() -> Result<(), ConnectionError> {
     tracing_subscriber::fmt::init();
 
     let mut args = args().skip(1);
@@ -14,7 +12,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let password = args.next().expect("no password");
 
     let server_list = ServerList::discover().await?;
-    let mut connection = Connection::login(
+    let connection = Connection::login(
         server_list,
         &account,
         &password,

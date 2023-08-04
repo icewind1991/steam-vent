@@ -1,5 +1,6 @@
 use bytes::BytesMut;
 
+#[allow(dead_code)]
 pub mod tcp;
 pub mod websocket;
 
