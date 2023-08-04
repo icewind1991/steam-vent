@@ -12,6 +12,7 @@ use crate::proto::steammessages_auth_steamclient::{
     EAuthTokenPlatformType,
 };
 use crate::session::{ConnectionError, LoginError};
+use async_trait::async_trait;
 use base64::prelude::BASE64_STANDARD;
 use base64::Engine;
 use num_bigint_dig::BigUint;
@@ -60,7 +61,7 @@ pub(crate) async fn begin_password_auth(
     Ok(StartedAuth::Credentials(res))
 }
 
-pub enum StartedAuth {
+pub(crate) enum StartedAuth {
     Credentials(CAuthentication_BeginAuthSessionViaCredentials_Response),
 }
 
@@ -79,6 +80,7 @@ impl StartedAuth {
             .collect()
     }
 
+    #[allow(dead_code)]
     pub fn action_required(&self) -> bool {
         self.raw_confirmations().iter().any(|method| {
             method.confirmation_type() != EAuthSessionGuardType::k_EAuthSessionGuardType_None
@@ -232,8 +234,9 @@ pub enum GuardType {
     None,
 }
 
+#[async_trait]
 pub trait AuthConfirmationHandler {
-    fn handle_confirmation(
+    async fn handle_confirmation(
         &mut self,
         allowed_confirmations: Vec<ConfirmationMethod>,
     ) -> ConfirmationAction;
@@ -253,8 +256,9 @@ impl Default for ConsoleAuthConfirmationHandler {
     }
 }
 
+#[async_trait]
 impl AuthConfirmationHandler for ConsoleAuthConfirmationHandler {
-    fn handle_confirmation(
+    async fn handle_confirmation(
         &mut self,
         allowed_confirmations: Vec<ConfirmationMethod>,
     ) -> ConfirmationAction {
@@ -280,15 +284,16 @@ impl AuthConfirmationHandler for ConsoleAuthConfirmationHandler {
 #[derive(Debug)]
 pub struct SteamGuardToken(String);
 
-pub struct PendingAuth {
+pub(crate) struct PendingAuth {
     client_id: u64,
     request_id: Vec<u8>,
     interval: f32,
+    #[allow(dead_code)]
     pub steam_id: SteamID,
 }
 
 impl PendingAuth {
-    pub async fn wait_for_tokens(
+    pub(crate) async fn wait_for_tokens(
         &self,
         connection: &mut Connection,
     ) -> Result<Tokens, NetworkError> {
@@ -312,7 +317,7 @@ impl PendingAuth {
 }
 
 #[derive(Debug, Clone)]
-pub struct Token(String);
+pub(crate) struct Token(String);
 
 impl AsRef<str> for Token {
     fn as_ref(&self) -> &str {
@@ -321,9 +326,11 @@ impl AsRef<str> for Token {
 }
 
 #[derive(Debug, Clone)]
-pub struct Tokens {
+pub(crate) struct Tokens {
+    #[allow(dead_code)]
     pub access_token: Token,
     pub refresh_token: Token,
+    #[allow(dead_code)]
     pub new_guard_data: String,
 }
 
@@ -359,7 +366,7 @@ async fn poll_until_info(
 }
 
 #[instrument(skip(connection))]
-pub async fn get_password_rsa(
+async fn get_password_rsa(
     connection: &mut Connection,
     account: String,
 ) -> Result<(RsaPublicKey, u64), NetworkError> {

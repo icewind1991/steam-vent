@@ -32,6 +32,7 @@ num-traits = "0.2.16"
 num-bigint-dig = "0.8.4"
 base64 = "0.21.2"
 num_enum = "0.6.1"
+async-trait = "0.1.72"
 
 [dev-dependencies]
 tokio = { version = "1.0", features = ["macros", "rt", "rt-multi-thread"] }

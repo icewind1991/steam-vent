@@ -65,8 +65,9 @@ impl Connection {
         let begin = begin_password_auth(&mut connection, account, password).await?;
         let steam_id = SteamID::from(begin.steam_id());
 
-        let confirmation_action =
-            confirmation_handler.handle_confirmation(begin.allowed_confirmations());
+        let confirmation_action = confirmation_handler
+            .handle_confirmation(begin.allowed_confirmations())
+            .await;
         let pending = begin
             .submit_confirmation(&mut connection, confirmation_action)
             .await?;
