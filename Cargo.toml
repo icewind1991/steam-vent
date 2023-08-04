@@ -3,6 +3,9 @@ name = "steam-vent"
 version = "0.1.0"
 authors = ["Robin Appelman <robin@icewind.nl>"]
 edition = "2021"
+description = "Interact with the Steam network via rust"
+license = "MIT"
+repository = "https://github.com/icewind1991/steam-vent"
 
 [dependencies]
 steam-vent-proto = { version = "0.3", path = "./protobuf" }
