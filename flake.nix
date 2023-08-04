@@ -23,7 +23,8 @@
       };
       lib = pkgs.lib;
       naersk' = pkgs.callPackage naersk {};
-      src = lib.sources.sourceByRegex (lib.cleanSource ./.) ["Cargo.*" "(src|derive|benches|tests|examples|crypto|protobuf)(/.*)?"];
+      srcFilters = ["Cargo.*" "(src|derive|benches|tests|examples|crypto|protobuf)(/.*)?"];
+      src = lib.sources.sourceByRegex ./. srcFilters;
       buildDeps = with pkgs; [
         pkg-config
         openssl
@@ -54,6 +55,9 @@
             mode = "test";
             cargoTestOptions = x: x ++ ["-p" "steam-vent-crypto"];
           });
+        proto-builder = naersk'.buildPackage {
+          src = lib.sources.sourceByRegex ./protobuf/build srcFilters;
+        };
       };
 
       devShells.default = pkgs.mkShell {

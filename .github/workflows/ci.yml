@@ -4,6 +4,22 @@ on:
   push:
 
 jobs:
+  check-proto:
+    runs-on: ubuntu-latest
+    needs: check
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v20
+      - uses: icewind1991/attic-action@v1
+        with:
+          name: ci
+          instance: https://cache.icewind.me
+          authToken: '${{ secrets.ATTIC_TOKEN }}'
+      - run: nix run .#proto-builder protobuf/protos protobuf/src/generated
+      - run: |
+          git diff
+          git diff-index --quiet HEAD --
+
   check:
     runs-on: ubuntu-latest
     steps:
