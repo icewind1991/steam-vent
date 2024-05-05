@@ -13,7 +13,7 @@ While the project is still very incomplete, the basics of authenticating to stea
 - [ ] QR Authentication
 - [x] Steam guard (device or email) confirmation
 - [ ] Device notification confirmation
-- [ ] Saved machine token confirmation
+- [x] Saved machine token confirmation
 - [x] Making RPC calls over the connection
 - [ ] High level wrappers around the RPC calls 
 

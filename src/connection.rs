@@ -1,4 +1,4 @@
-use crate::auth::{begin_password_auth, AuthConfirmationHandler};
+use crate::auth::{begin_password_auth, AuthConfirmationHandler, GuardDataStore};
 use crate::message::{
     NetMessage, ServiceMethodMessage, ServiceMethodNotification, ServiceMethodResponseMessage,
 };
@@ -55,14 +55,23 @@ impl Connection {
         Ok(connection)
     }
 
-    pub async fn login<H: AuthConfirmationHandler>(
+    pub async fn login<H: AuthConfirmationHandler, G: GuardDataStore>(
         server_list: ServerList,
         account: &str,
         password: &str,
+        mut guard_data_store: G,
         mut confirmation_handler: H,
     ) -> Result<Self, ConnectionError> {
         let mut connection = Self::connect(server_list).await?;
-        let begin = begin_password_auth(&mut connection, account, password).await?;
+        let guard_data = guard_data_store.load(account).await.unwrap_or_else(|e| {
+            error!(error = ?e, "failed to retrieve guard data");
+            None
+        });
+        if guard_data.is_some() {
+            debug!(account, "found stored guard data");
+        }
+        let begin =
+            begin_password_auth(&mut connection, account, password, guard_data.as_deref()).await?;
         let steam_id = SteamID::from(begin.steam_id());
 
         let confirmation_action = confirmation_handler
@@ -72,6 +81,12 @@ impl Connection {
             .submit_confirmation(&mut connection, confirmation_action)
             .await?;
         let tokens = pending.wait_for_tokens(&mut connection).await?;
+
+        debug!(account, "saving guard data");
+        if let Err(e) = guard_data_store.store(account, tokens.new_guard_data).await {
+            error!(error = ?e, "failed to store guard data");
+        }
+
         connection.session = login(
             &mut connection,
             account,

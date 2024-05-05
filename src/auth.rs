@@ -15,15 +15,22 @@ use crate::session::{ConnectionError, LoginError};
 use async_trait::async_trait;
 use base64::prelude::BASE64_STANDARD;
 use base64::Engine;
+use directories::ProjectDirs;
 use num_bigint_dig::BigUint;
 use num_traits::Num;
 use protobuf::{EnumOrUnknown, MessageField};
 use rsa::RsaPublicKey;
+use std::collections::HashMap;
+use std::convert::Infallible;
+use std::error::Error;
+use std::fs::{create_dir_all, read_to_string, write};
 use std::io::{stdin, stdout, Write};
 use std::io::{Stdin, Stdout};
+use std::path::PathBuf;
 use std::time::Duration;
 use steam_vent_crypto::encrypt_with_key_pkcs1;
 use steamid_ng::SteamID;
+use thiserror::Error;
 use tokio::time::sleep;
 use tracing::{debug, info, instrument};
 
@@ -31,6 +38,7 @@ pub(crate) async fn begin_password_auth(
     connection: &mut Connection,
     account: &str,
     password: &str,
+    guard_data: Option<&str>,
 ) -> Result<StartedAuth, ConnectionError> {
     let (pub_key, timestamp) = get_password_rsa(connection, account.into()).await?;
     let encrypted_password =
@@ -55,6 +63,7 @@ pub(crate) async fn begin_password_auth(
             os_type: Some(1),
             ..CAuthentication_DeviceDetails::default()
         }),
+        guard_data: guard_data.map(String::from),
         ..CAuthentication_BeginAuthSessionViaCredentials_Request::default()
     };
     let res = connection.service_method_un_authenticated(req).await?;
@@ -118,16 +127,11 @@ impl StartedAuth {
     ) -> Result<PendingAuth, NetworkError> {
         match confirmation {
             ConfirmationAction::GuardToken(token, ty) => {
-                let code_type = match ty {
-                    GuardType::Device => EAuthSessionGuardType::k_EAuthSessionGuardType_DeviceCode,
-                    GuardType::Email => EAuthSessionGuardType::k_EAuthSessionGuardType_EmailCode,
-                    GuardType::None => EAuthSessionGuardType::k_EAuthSessionGuardType_None,
-                };
                 let req = CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request {
                     client_id: Some(self.client_id()),
                     steamid: Some(self.steam_id()),
                     code: Some(token.0),
-                    code_type: Some(EnumOrUnknown::new(code_type)),
+                    code_type: Some(EnumOrUnknown::new(ty.into())),
                     ..CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request::default()
                 };
                 let _ = connection.service_method_un_authenticated(req).await?;
@@ -138,6 +142,12 @@ impl StartedAuth {
                     steam_id: self.steam_id().into(),
                 })
             }
+            ConfirmationAction::None => Ok(PendingAuth {
+                interval: self.interval(),
+                client_id: self.client_id(),
+                request_id: self.request_id(),
+                steam_id: self.steam_id().into(),
+            }),
             _ => {
                 todo!("non token confirmations not implemented yet")
             }
@@ -223,6 +233,7 @@ pub enum ConfirmationMethodClass {
 #[derive(Debug)]
 pub enum ConfirmationAction {
     GuardToken(SteamGuardToken, GuardType),
+    None,
     NotSupported,
     Abort,
 }
@@ -232,6 +243,16 @@ pub enum GuardType {
     Email,
     Device,
     None,
+}
+
+impl From<GuardType> for EAuthSessionGuardType {
+    fn from(value: GuardType) -> Self {
+        match value {
+            GuardType::Device => EAuthSessionGuardType::k_EAuthSessionGuardType_DeviceCode,
+            GuardType::Email => EAuthSessionGuardType::k_EAuthSessionGuardType_EmailCode,
+            GuardType::None => EAuthSessionGuardType::k_EAuthSessionGuardType_None,
+        }
+    }
 }
 
 #[async_trait]
@@ -263,6 +284,9 @@ impl AuthConfirmationHandler for ConsoleAuthConfirmationHandler {
         allowed_confirmations: Vec<ConfirmationMethod>,
     ) -> ConfirmationAction {
         for method in allowed_confirmations {
+            if method.class() == ConfirmationMethodClass::None {
+                return ConfirmationAction::None;
+            }
             if method.class() == ConfirmationMethodClass::Code {
                 writeln!(
                     &mut self.stdout,
@@ -332,6 +356,113 @@ pub(crate) struct Tokens {
     pub refresh_token: Token,
     #[allow(dead_code)]
     pub new_guard_data: String,
+}
+
+#[async_trait]
+pub trait GuardDataStore {
+    type Err: Error;
+
+    async fn store(&mut self, account: &str, machine_token: String) -> Result<(), Self::Err>;
+
+    async fn load(&mut self, account: &str) -> Result<Option<String>, Self::Err>;
+}
+
+#[derive(Debug, Error)]
+pub enum FileStoreError {
+    #[error("error while reading tokens from {}: {:#}", path.display(), err)]
+    Read { err: std::io::Error, path: PathBuf },
+    #[error("error while writing tokens to {}: {:#}", path.display(), err)]
+    Write { err: std::io::Error, path: PathBuf },
+    #[error("error while parsing tokens from {}: {:#}", path.display(), err)]
+    Json {
+        err: serde_json::error::Error,
+        path: PathBuf,
+    },
+    #[error("error while directory {} for tokens: {:#}", path.display(), err)]
+    DirCreation { err: std::io::Error, path: PathBuf },
+}
+
+/// Store the steam guard data in a json file
+pub struct FileGuardDataStore {
+    path: PathBuf,
+}
+
+impl FileGuardDataStore {
+    pub fn new(path: PathBuf) -> Self {
+        FileGuardDataStore { path }
+    }
+
+    /// Store the machine tokens in the user's cache directory
+    pub fn user_cache() -> Self {
+        let project_dirs = ProjectDirs::from("nl", "icewind", "steam-vent")
+            .expect("user cache not supported on this platform");
+        Self::new(project_dirs.cache_dir().join("machine_tokens.json"))
+    }
+
+    fn all_tokens(&self) -> Result<HashMap<String, String>, FileStoreError> {
+        if !self.path.exists() {
+            return Ok(HashMap::default());
+        }
+        let raw = read_to_string(&self.path).map_err(|err| FileStoreError::Read {
+            err,
+            path: self.path.clone(),
+        })?;
+        serde_json::from_str(&raw).map_err(|err| FileStoreError::Json {
+            err,
+            path: self.path.clone(),
+        })
+    }
+
+    fn save(&self, tokens: HashMap<String, String>) -> Result<(), FileStoreError> {
+        if let Some(parent) = self.path.parent() {
+            create_dir_all(parent).map_err(|err| FileStoreError::DirCreation {
+                err,
+                path: parent.into(),
+            })?;
+        }
+
+        let raw = serde_json::to_string(&tokens).map_err(|err| FileStoreError::Json {
+            err,
+            path: self.path.clone(),
+        })?;
+        write(&self.path, raw).map_err(|err| FileStoreError::Write {
+            err,
+            path: self.path.clone(),
+        })?;
+        Ok(())
+    }
+}
+
+#[async_trait]
+impl GuardDataStore for FileGuardDataStore {
+    type Err = FileStoreError;
+
+    async fn store(&mut self, account: &str, machine_token: String) -> Result<(), Self::Err> {
+        let mut tokens = self.all_tokens()?;
+        tokens.insert(account.into(), machine_token);
+        self.save(tokens)
+    }
+
+    async fn load(&mut self, account: &str) -> Result<Option<String>, Self::Err> {
+        let mut tokens = self.all_tokens()?;
+        Ok(tokens.remove(account))
+    }
+}
+
+/// Don't store guard data
+pub struct NullGuardDataStore;
+
+#[async_trait]
+impl GuardDataStore for NullGuardDataStore {
+    type Err = Infallible;
+
+    async fn store(&mut self, _account: &str, _machine_token: String) -> Result<(), Self::Err> {
+        Ok(())
+    }
+
+    async fn load(&mut self, _account: &str) -> Result<Option<String>, Self::Err> {
+        Ok(None)
+    }
 }
 
 async fn poll_until_info(
