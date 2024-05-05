@@ -10,36 +10,36 @@ repository = "https://github.com/icewind1991/steam-vent"
 [dependencies]
 steam-vent-proto = { version = "0.3", path = "./protobuf" }
 steam-vent-crypto = { version = "0.2", path = "./crypto" }
-tokio = { version = "1.29.1", features = ["net", "io-util"] }
-tokio-util = { version = "0.7.8", features = ["codec"] }
-tokio-stream = { version = "0.1.14", features = ["sync"] }
-tokio-tungstenite = { version = "0.20.0", features = ["rustls-tls-webpki-roots"] }
+tokio = { version = "1.37.0", features = ["net", "io-util"] }
+tokio-util = { version = "0.7.11", features = ["codec"] }
+tokio-stream = { version = "0.1.15", features = ["sync"] }
+tokio-tungstenite = { version = "0.21.0", features = ["rustls-tls-webpki-roots"] }
 binread = "2.2.0"
 binwrite = "0.2.1"
-thiserror = "1.0.43"
-bytes = "1.4.0"
-protobuf = "=3.2.0"
-bytemuck = { version = "1.13.1", features = ["derive"] }
-crc = "3.0.1"
-byteorder = "1.4.3"
-flate2 = "1.0.26"
+thiserror = "1.0.59"
+bytes = "1.6.0"
+protobuf = "=3.4.0"
+bytemuck = { version = "1.15.0", features = ["derive"] }
+crc = "3.2.1"
+byteorder = "1.5.0"
+flate2 = "1.0.30"
 steamid-ng = "1.0.0"
-futures-util = { version = "0.3.28", features = ["sink"] }
-dashmap = "5.5.0"
-tracing = "0.1.37"
-serde = { version = "1.0.173", features = ["derive"] }
-serde_json = "1.0.103"
-reqwest = { version = "0.11.18", default-features = false, features = ["json", "rustls-tls"] }
-rsa = "0.9.2"
-num-traits = "0.2.16"
+futures-util = { version = "0.3.30", features = ["sink"] }
+dashmap = "5.5.3"
+tracing = "0.1.40"
+serde = { version = "1.0.200", features = ["derive"] }
+serde_json = "1.0.116"
+reqwest = { version = "0.12.4", default-features = false, features = ["json", "rustls-tls"] }
+rsa = "0.9.6"
+num-traits = "0.2.19"
 num-bigint-dig = "0.8.4"
-base64 = "0.21.2"
-num_enum = "0.6.1"
-async-trait = "0.1.72"
+base64 = "0.22.1"
+num_enum = "0.7.2"
+async-trait = "0.1.80"
 
 [dev-dependencies]
-tokio = { version = "1.0", features = ["macros", "rt", "rt-multi-thread"] }
-tracing-subscriber = "0.3.17"
+tokio = { version = "1.37", features = ["macros", "rt", "rt-multi-thread"] }
+tracing-subscriber = "0.3.18"
 
 [workspace]
 exclude = ["protobuf/build"]
