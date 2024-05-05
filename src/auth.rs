@@ -135,23 +135,18 @@ impl StartedAuth {
                     ..CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request::default()
                 };
                 let _ = connection.service_method_un_authenticated(req).await?;
-                Ok(PendingAuth {
-                    interval: self.interval(),
-                    client_id: self.client_id(),
-                    request_id: self.request_id(),
-                    steam_id: self.steam_id().into(),
-                })
             }
-            ConfirmationAction::None => Ok(PendingAuth {
-                interval: self.interval(),
-                client_id: self.client_id(),
-                request_id: self.request_id(),
-                steam_id: self.steam_id().into(),
-            }),
+            ConfirmationAction::None => {}
             _ => {
                 todo!("non token confirmations not implemented yet")
             }
-        }
+        };
+        Ok(PendingAuth {
+            interval: self.interval(),
+            client_id: self.client_id(),
+            request_id: self.request_id(),
+            steam_id: self.steam_id().into(),
+        })
     }
 }
 
