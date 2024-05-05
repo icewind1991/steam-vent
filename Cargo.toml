@@ -6,6 +6,7 @@ edition = "2021"
 description = "Interact with the Steam network via rust"
 license = "MIT"
 repository = "https://github.com/icewind1991/steam-vent"
+rust-version = "1.69.0"
 
 [dependencies]
 steam-vent-proto = { version = "0.3", path = "./protobuf" }

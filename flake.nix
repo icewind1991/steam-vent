@@ -21,6 +21,7 @@
       pkgs = (import nixpkgs) {
         inherit system overlays;
       };
+      inherit (builtins) listToAttrs fromTOML readFile;
       lib = pkgs.lib;
       naersk' = pkgs.callPackage naersk {};
       srcFilters = ["Cargo.*" "(src|derive|benches|tests|examples|crypto|protobuf)(/.*)?"];
@@ -29,6 +30,17 @@
         pkg-config
         openssl
       ];
+
+      msrv = (fromTOML (readFile ./Cargo.toml)).package.rust-version;
+      msrvToolchain = pkgs.rust-bin.stable."${msrv}".default;
+      naerskMsrv = let
+        toolchain = msrvToolchain;
+      in
+        pkgs.callPackage naersk {
+          cargo = toolchain;
+          rustc = toolchain;
+        };
+
       nearskOpt = {
         inherit src;
         pname = "steam-vent";
@@ -55,6 +67,10 @@
             mode = "test";
             cargoTestOptions = x: x ++ ["-p" "steam-vent-crypto"];
           });
+        msrv = naerskMsrv.buildPackage (nearskOpt
+          // {
+            mode = "check";
+          });
         proto-builder = naersk'.buildPackage {
           src = lib.sources.sourceByRegex ./protobuf/build srcFilters;
         };
@@ -71,6 +87,7 @@
             cargo-audit
             cargo-msrv
             cargo-fuzz
+            cargo-semver-checks
           ]
           ++ buildDeps;
       };
