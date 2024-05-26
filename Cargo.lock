@@ -38,6 +38,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "another-steam-totp"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "98392c8ea1b615327dfba5471ff3b0e13b5240f6ee946302d8d373361966a50b"
+dependencies = [
+ "base64 0.21.7",
+ "hmac",
+ "sha-1",
+ "thiserror",
+]
+
+[[package]]
 name = "async-trait"
 version = "0.1.80"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -68,6 +80,12 @@ dependencies = [
  "object",
  "rustc-demangle",
 ]
+
+[[package]]
+name = "base64"
+version = "0.21.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9d297deb1925b89f2ccc13d7635fa0714f12c87adce1c75356b39ca9b7178567"
 
 [[package]]
 name = "base64"
@@ -1118,7 +1136,7 @@ version = "0.12.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "566cafdd92868e0939d3fb961bd0dc25fcfaaed179291093b3d43e6b3150ea10"
 dependencies = [
- "base64",
+ "base64 0.22.1",
  "bytes",
  "futures-core",
  "futures-util",
@@ -1214,7 +1232,7 @@ version = "2.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "29993a25686778eb88d4189742cd713c9bce943bc54251a33509dc63cbacf73d"
 dependencies = [
- "base64",
+ "base64 0.22.1",
  "rustls-pki-types",
 ]
 
@@ -1388,8 +1406,9 @@ dependencies = [
 name = "steam-vent"
 version = "0.2.0"
 dependencies = [
+ "another-steam-totp",
  "async-trait",
- "base64",
+ "base64 0.22.1",
  "binread",
  "binwrite",
  "bytemuck",

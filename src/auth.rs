@@ -12,6 +12,7 @@ use crate::proto::steammessages_auth_steamclient::{
     EAuthTokenPlatformType,
 };
 use crate::session::{ConnectionError, LoginError};
+use another_steam_totp::generate_auth_code;
 use async_trait::async_trait;
 use base64::prelude::BASE64_STANDARD;
 use base64::Engine;
@@ -263,6 +264,18 @@ pub struct ConsoleAuthConfirmationHandler {
     stdout: Stdout,
 }
 
+pub struct SharedSecretAuthConfirmationHandler {
+    shared_secret: String,
+}
+
+impl SharedSecretAuthConfirmationHandler {
+    pub fn new(shared_secret: &str) -> Self {
+        SharedSecretAuthConfirmationHandler {
+            shared_secret: shared_secret.into(),
+        }
+    }
+}
+
 impl Default for ConsoleAuthConfirmationHandler {
     fn default() -> Self {
         ConsoleAuthConfirmationHandler {
@@ -293,6 +306,27 @@ impl AuthConfirmationHandler for ConsoleAuthConfirmationHandler {
                 let mut buff = String::with_capacity(16);
                 self.stdin.read_line(&mut buff).ok();
                 let token = SteamGuardToken(buff.trim().to_string());
+                return ConfirmationAction::GuardToken(token, method.guard_type());
+            }
+        }
+        ConfirmationAction::NotSupported
+    }
+}
+
+#[async_trait]
+impl AuthConfirmationHandler for SharedSecretAuthConfirmationHandler {
+    async fn handle_confirmation(
+        &mut self,
+        allowed_confirmations: Vec<ConfirmationMethod>,
+    ) -> ConfirmationAction {
+        for method in allowed_confirmations {
+            if method.class() == ConfirmationMethodClass::None {
+                return ConfirmationAction::None;
+            }
+            if method.class() == ConfirmationMethodClass::Code {
+                let auth_code = generate_auth_code(&self.shared_secret, None)
+                    .expect("Could not generate auth code given shared secret.");
+                let token = SteamGuardToken(auth_code);
                 return ConfirmationAction::GuardToken(token, method.guard_type());
             }
         }
