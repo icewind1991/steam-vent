@@ -77,6 +77,7 @@ pub(crate) enum StartedAuth {
 }
 
 #[derive(Debug, Error)]
+#[non_exhaustive]
 pub enum ConfirmationError {
     #[error(transparent)]
     Network(#[from] NetworkError),
@@ -156,15 +157,12 @@ impl StartedAuth {
             }
             ConfirmationAction::None => {}
             ConfirmationAction::Abort => return Err(ConfirmationError::Aborted),
-            _ => {
-                todo!("non token confirmations not implemented yet")
-            }
         };
         Ok(())
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct ConfirmationMethod(CAuthentication_AllowedConfirmation);
 
 impl ConfirmationMethod {
@@ -244,7 +242,6 @@ pub enum ConfirmationMethodClass {
 pub enum ConfirmationAction {
     GuardToken(SteamGuardToken, GuardType),
     None,
-    NotSupported,
     Abort,
 }
 
@@ -270,7 +267,7 @@ pub trait AuthConfirmationHandler {
     async fn handle_confirmation(
         self,
         allowed_confirmations: &[ConfirmationMethod],
-    ) -> ConfirmationAction;
+    ) -> Option<ConfirmationAction>;
 }
 
 pub type ConsoleAuthConfirmationHandler = UserProvidedAuthConfirmationHandler<Stdin, Stdout>;
@@ -310,11 +307,8 @@ where
     async fn handle_confirmation(
         mut self,
         allowed_confirmations: &[ConfirmationMethod],
-    ) -> ConfirmationAction {
+    ) -> Option<ConfirmationAction> {
         for method in allowed_confirmations {
-            if method.class() == ConfirmationMethodClass::None {
-                return ConfirmationAction::None;
-            }
             if method.class() == ConfirmationMethodClass::Code {
                 let msg = format!(
                     "{}: {}",
@@ -327,14 +321,14 @@ where
                 self.input.read_line(&mut buff).await.ok();
                 buff.truncate(buff.trim().len());
                 if buff.is_empty() {
-                    return ConfirmationAction::Abort;
+                    return Some(ConfirmationAction::Abort);
                 } else {
                     let token = SteamGuardToken(buff);
-                    return ConfirmationAction::GuardToken(token, method.guard_type());
+                    return Some(ConfirmationAction::GuardToken(token, method.guard_type()));
                 }
             }
         }
-        ConfirmationAction::NotSupported
+        None
     }
 }
 
@@ -343,19 +337,16 @@ impl AuthConfirmationHandler for SharedSecretAuthConfirmationHandler {
     async fn handle_confirmation(
         self,
         allowed_confirmations: &[ConfirmationMethod],
-    ) -> ConfirmationAction {
+    ) -> Option<ConfirmationAction> {
         for method in allowed_confirmations {
-            if method.class() == ConfirmationMethodClass::None {
-                return ConfirmationAction::None;
-            }
             if method.class() == ConfirmationMethodClass::Code {
                 let auth_code = generate_auth_code(&self.shared_secret, None)
                     .expect("Could not generate auth code given shared secret.");
                 let token = SteamGuardToken(auth_code);
-                return ConfirmationAction::GuardToken(token, method.guard_type());
+                return Some(ConfirmationAction::GuardToken(token, method.guard_type()));
             }
         }
-        ConfirmationAction::NotSupported
+        None
     }
 }
 
@@ -367,13 +358,13 @@ impl AuthConfirmationHandler for DeviceConfirmationHandler {
     async fn handle_confirmation(
         self,
         allowed_confirmations: &[ConfirmationMethod],
-    ) -> ConfirmationAction {
+    ) -> Option<ConfirmationAction> {
         for method in allowed_confirmations {
             if method.class() == ConfirmationMethodClass::Confirmation {
-                return ConfirmationAction::None;
+                return Some(ConfirmationAction::None);
             }
         }
-        ConfirmationAction::NotSupported
+        None
     }
 }
 
@@ -397,7 +388,7 @@ where
     async fn handle_confirmation(
         self,
         allowed_confirmations: &[ConfirmationMethod],
-    ) -> ConfirmationAction {
+    ) -> Option<ConfirmationAction> {
         match select(
             self.left.handle_confirmation(allowed_confirmations),
             self.right.handle_confirmation(allowed_confirmations),
@@ -405,14 +396,14 @@ where
         .await
         {
             Either::Left((left_result, right_fut)) => {
-                if !matches!(left_result, ConfirmationAction::None) {
+                if !matches!(left_result, None | Some(ConfirmationAction::None)) {
                     left_result
                 } else {
                     right_fut.await
                 }
             }
             Either::Right((right_result, left_fut)) => {
-                if !matches!(right_result, ConfirmationAction::None) {
+                if !matches!(right_result, None | Some(ConfirmationAction::None)) {
                     right_result
                 } else {
                     left_fut.await

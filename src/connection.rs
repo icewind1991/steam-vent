@@ -77,16 +77,24 @@ impl Connection {
         let steam_id = SteamID::from(begin.steam_id());
 
         let allowed_confirmations = begin.allowed_confirmations();
-        let confirmation_fut = confirmation_handler.handle_confirmation(&allowed_confirmations);
 
-        let tokens_fut = begin.poll().wait_for_tokens(&connection);
-
-        let tokens = match select(pin!(confirmation_fut), pin!(tokens_fut)).await {
+        let tokens = match select(
+            pin!(confirmation_handler.handle_confirmation(&allowed_confirmations)),
+            pin!(begin.poll().wait_for_tokens(&connection)),
+        )
+        .await
+        {
             Either::Left((confirmation_action, tokens_fut)) => {
-                begin
-                    .submit_confirmation(&connection, confirmation_action)
-                    .await?;
-                tokens_fut.await?
+                if let Some(confirmation_action) = confirmation_action {
+                    begin
+                        .submit_confirmation(&connection, confirmation_action)
+                        .await?;
+                    tokens_fut.await?
+                } else {
+                    return Err(ConnectionError::UnsupportedConfirmationAction(
+                        allowed_confirmations.clone(),
+                    ));
+                }
             }
             Either::Right((tokens, _)) => tokens?,
         };

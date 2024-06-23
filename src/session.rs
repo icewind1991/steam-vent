@@ -1,4 +1,4 @@
-use crate::auth::ConfirmationError;
+use crate::auth::{ConfirmationError, ConfirmationMethod};
 use crate::connection::Connection;
 use crate::eresult::EResult;
 use crate::net::{NetMessageHeader, NetworkError};
@@ -18,6 +18,7 @@ use tracing::debug;
 type Result<T, E = ConnectionError> = std::result::Result<T, E>;
 
 #[derive(Debug, Error)]
+#[non_exhaustive]
 pub enum ConnectionError {
     #[error("Network error: {0:#}")]
     Network(#[from] NetworkError),
@@ -27,6 +28,8 @@ pub enum ConnectionError {
     Discovery(#[from] ServerDiscoveryError),
     #[error("Aborted")]
     Aborted,
+    #[error("Unsupported confirmation action")]
+    UnsupportedConfirmationAction(Vec<ConfirmationMethod>),
 }
 
 impl From<ConfirmationError> for ConnectionError {
@@ -39,6 +42,7 @@ impl From<ConfirmationError> for ConnectionError {
 }
 
 #[derive(Debug, Error)]
+#[non_exhaustive]
 pub enum LoginError {
     #[error("invalid credentials")]
     InvalidCredentials,
