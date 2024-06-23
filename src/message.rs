@@ -78,6 +78,7 @@ pub trait NetMessage: Sized + Debug {
 #[derive(Debug, BinRead)]
 pub struct ChannelEncryptRequest {
     pub protocol: u32,
+    #[allow(dead_code)]
     pub universe: u32,
     pub nonce: [u8; 16],
 }
@@ -138,11 +139,6 @@ impl NetMessage for ClientEncryptResponse {
     }
 }
 
-#[derive(Debug)]
-pub struct Multi {
-    pub messages: Vec<RawNetMessage>,
-}
-
 enum MaybeZipReader {
     Raw(Cursor<Vec<u8>>),
     Zipped(Box<GzDecoder<Cursor<Vec<u8>>>>),
@@ -154,29 +150,6 @@ impl Read for MaybeZipReader {
             MaybeZipReader::Raw(raw) => raw.read(buf),
             MaybeZipReader::Zipped(zipped) => zipped.read(buf),
         }
-    }
-}
-
-impl NetMessage for Multi {
-    const KIND: EMsg = EMsg::k_EMsgMulti;
-
-    fn read_body(data: BytesMut, _header: &NetMessageHeader) -> Result<Self, MalformedBody> {
-        trace!("reading body of {:?} message", Self::KIND);
-        Ok(Multi {
-            messages: Self::iter(data.reader())?
-                .collect::<Result<Vec<_>, NetworkError>>()
-                .map_err(|e| {
-                    MalformedBody(Self::KIND, MessageBodyError::MalformedChild(Box::new(e)))
-                })?,
-        })
-    }
-}
-
-impl Multi {
-    pub fn iter<R: Read>(
-        reader: R,
-    ) -> Result<impl Iterator<Item = Result<RawNetMessage, NetworkError>>, MalformedBody> {
-        MultiBodyIter::new(reader)
     }
 }
 
