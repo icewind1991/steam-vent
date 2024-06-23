@@ -12,10 +12,10 @@ While the project is still very incomplete, the basics of authenticating to stea
 - [x] Password Authentication
 - [ ] QR Authentication
 - [x] Steam guard (device or email) confirmation
-- [ ] Device notification confirmation
+- [x] Device notification confirmation
 - [x] Saved machine token confirmation
 - [x] Making RPC calls over the connection
-- [ ] High level wrappers around the RPC calls 
+- [ ] High level wrappers around the RPC calls
 
 ## Usage
 
@@ -51,5 +51,6 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
 ## Credit
 
-This is in large parts inspired by and based of [@DoctorMcKay's](https://github.com/DoctorMcKay) work on [SteamUser](https://github.com/DoctorMcKay/node-steam-user/),
+This is in large parts inspired by and based of [@DoctorMcKay's](https://github.com/DoctorMcKay) work
+on [SteamUser](https://github.com/DoctorMcKay/node-steam-user/),
 massive credits go to all who worked on that. 

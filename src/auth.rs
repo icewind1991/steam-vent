@@ -17,6 +17,7 @@ use async_trait::async_trait;
 use base64::prelude::BASE64_STANDARD;
 use base64::Engine;
 use directories::ProjectDirs;
+use futures_util::future::{select, Either};
 use num_bigint_dig::BigUint;
 use num_traits::Num;
 use protobuf::{EnumOrUnknown, MessageField};
@@ -25,13 +26,13 @@ use std::collections::HashMap;
 use std::convert::Infallible;
 use std::error::Error;
 use std::fs::{create_dir_all, read_to_string, write};
-use std::io::{stdin, stdout, Write};
-use std::io::{Stdin, Stdout};
 use std::path::PathBuf;
 use std::time::Duration;
 use steam_vent_crypto::encrypt_with_key_pkcs1;
-use steamid_ng::SteamID;
 use thiserror::Error;
+use tokio::io::{
+    stdin, stdout, AsyncBufReadExt, AsyncRead, AsyncWrite, AsyncWriteExt, BufReader, Stdin, Stdout,
+};
 use tokio::time::sleep;
 use tracing::{debug, info, instrument};
 
@@ -73,6 +74,14 @@ pub(crate) async fn begin_password_auth(
 
 pub(crate) enum StartedAuth {
     Credentials(CAuthentication_BeginAuthSessionViaCredentials_Response),
+}
+
+#[derive(Debug, Error)]
+pub enum ConfirmationError {
+    #[error(transparent)]
+    Network(#[from] NetworkError),
+    #[error("Aborted")]
+    Aborted,
 }
 
 impl StartedAuth {
@@ -121,11 +130,19 @@ impl StartedAuth {
         }
     }
 
+    pub fn poll(&self) -> PendingAuth {
+        PendingAuth {
+            interval: self.interval(),
+            client_id: self.client_id(),
+            request_id: self.request_id(),
+        }
+    }
+
     pub async fn submit_confirmation(
-        self,
-        connection: &mut Connection,
+        &self,
+        connection: &Connection,
         confirmation: ConfirmationAction,
-    ) -> Result<PendingAuth, NetworkError> {
+    ) -> Result<(), ConfirmationError> {
         match confirmation {
             ConfirmationAction::GuardToken(token, ty) => {
                 let req = CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request {
@@ -138,19 +155,16 @@ impl StartedAuth {
                 let _ = connection.service_method_un_authenticated(req).await?;
             }
             ConfirmationAction::None => {}
+            ConfirmationAction::Abort => return Err(ConfirmationError::Aborted),
             _ => {
                 todo!("non token confirmations not implemented yet")
             }
         };
-        Ok(PendingAuth {
-            interval: self.interval(),
-            client_id: self.client_id(),
-            request_id: self.request_id(),
-            steam_id: self.steam_id().into(),
-        })
+        Ok(())
     }
 }
 
+#[derive(Debug)]
 pub struct ConfirmationMethod(CAuthentication_AllowedConfirmation);
 
 impl ConfirmationMethod {
@@ -254,14 +268,16 @@ impl From<GuardType> for EAuthSessionGuardType {
 #[async_trait]
 pub trait AuthConfirmationHandler {
     async fn handle_confirmation(
-        &mut self,
-        allowed_confirmations: Vec<ConfirmationMethod>,
+        self,
+        allowed_confirmations: &[ConfirmationMethod],
     ) -> ConfirmationAction;
 }
 
-pub struct ConsoleAuthConfirmationHandler {
-    stdin: Stdin,
-    stdout: Stdout,
+pub type ConsoleAuthConfirmationHandler = UserProvidedAuthConfirmationHandler<Stdin, Stdout>;
+
+pub struct UserProvidedAuthConfirmationHandler<Read, Write> {
+    input: BufReader<Read>,
+    output: Write,
 }
 
 pub struct SharedSecretAuthConfirmationHandler {
@@ -279,34 +295,43 @@ impl SharedSecretAuthConfirmationHandler {
 impl Default for ConsoleAuthConfirmationHandler {
     fn default() -> Self {
         ConsoleAuthConfirmationHandler {
-            stdin: stdin(),
-            stdout: stdout(),
+            input: BufReader::new(stdin()),
+            output: stdout(),
         }
     }
 }
 
 #[async_trait]
-impl AuthConfirmationHandler for ConsoleAuthConfirmationHandler {
+impl<Read, Write> AuthConfirmationHandler for UserProvidedAuthConfirmationHandler<Read, Write>
+where
+    Read: AsyncRead + Unpin + Send + Sync,
+    Write: AsyncWrite + Unpin + Send + Sync,
+{
     async fn handle_confirmation(
-        &mut self,
-        allowed_confirmations: Vec<ConfirmationMethod>,
+        mut self,
+        allowed_confirmations: &[ConfirmationMethod],
     ) -> ConfirmationAction {
         for method in allowed_confirmations {
             if method.class() == ConfirmationMethodClass::None {
                 return ConfirmationAction::None;
             }
             if method.class() == ConfirmationMethodClass::Code {
-                writeln!(
-                    &mut self.stdout,
+                let msg = format!(
                     "{}: {}",
                     method.confirmation_type(),
                     method.confirmation_details()
-                )
-                .ok();
+                );
+                self.output.write_all(msg.as_bytes()).await.ok();
+                self.output.flush().await.ok();
                 let mut buff = String::with_capacity(16);
-                self.stdin.read_line(&mut buff).ok();
-                let token = SteamGuardToken(buff.trim().to_string());
-                return ConfirmationAction::GuardToken(token, method.guard_type());
+                self.input.read_line(&mut buff).await.ok();
+                buff.truncate(buff.trim().len());
+                if buff.is_empty() {
+                    return ConfirmationAction::Abort;
+                } else {
+                    let token = SteamGuardToken(buff);
+                    return ConfirmationAction::GuardToken(token, method.guard_type());
+                }
             }
         }
         ConfirmationAction::NotSupported
@@ -316,8 +341,8 @@ impl AuthConfirmationHandler for ConsoleAuthConfirmationHandler {
 #[async_trait]
 impl AuthConfirmationHandler for SharedSecretAuthConfirmationHandler {
     async fn handle_confirmation(
-        &mut self,
-        allowed_confirmations: Vec<ConfirmationMethod>,
+        self,
+        allowed_confirmations: &[ConfirmationMethod],
     ) -> ConfirmationAction {
         for method in allowed_confirmations {
             if method.class() == ConfirmationMethodClass::None {
@@ -334,6 +359,69 @@ impl AuthConfirmationHandler for SharedSecretAuthConfirmationHandler {
     }
 }
 
+#[derive(Default)]
+pub struct DeviceConfirmationHandler;
+
+#[async_trait]
+impl AuthConfirmationHandler for DeviceConfirmationHandler {
+    async fn handle_confirmation(
+        self,
+        allowed_confirmations: &[ConfirmationMethod],
+    ) -> ConfirmationAction {
+        for method in allowed_confirmations {
+            if method.class() == ConfirmationMethodClass::Confirmation {
+                return ConfirmationAction::None;
+            }
+        }
+        ConfirmationAction::NotSupported
+    }
+}
+
+pub struct EitherConfirmationHandler<Left, Right> {
+    left: Left,
+    right: Right,
+}
+
+impl<Left, Right> EitherConfirmationHandler<Left, Right> {
+    pub fn new(left: Left, right: Right) -> Self {
+        Self { left, right }
+    }
+}
+
+#[async_trait]
+impl<Left, Right> AuthConfirmationHandler for EitherConfirmationHandler<Left, Right>
+where
+    Left: AuthConfirmationHandler + Send + Sync,
+    Right: AuthConfirmationHandler + Send + Sync,
+{
+    async fn handle_confirmation(
+        self,
+        allowed_confirmations: &[ConfirmationMethod],
+    ) -> ConfirmationAction {
+        match select(
+            self.left.handle_confirmation(allowed_confirmations),
+            self.right.handle_confirmation(allowed_confirmations),
+        )
+        .await
+        {
+            Either::Left((left_result, right_fut)) => {
+                if !matches!(left_result, ConfirmationAction::None) {
+                    left_result
+                } else {
+                    right_fut.await
+                }
+            }
+            Either::Right((right_result, left_fut)) => {
+                if !matches!(right_result, ConfirmationAction::None) {
+                    right_result
+                } else {
+                    left_fut.await
+                }
+            }
+        }
+    }
+}
+
 #[derive(Debug)]
 pub struct SteamGuardToken(String);
 
@@ -341,14 +429,12 @@ pub(crate) struct PendingAuth {
     client_id: u64,
     request_id: Vec<u8>,
     interval: f32,
-    #[allow(dead_code)]
-    pub steam_id: SteamID,
 }
 
 impl PendingAuth {
     pub(crate) async fn wait_for_tokens(
-        &self,
-        connection: &mut Connection,
+        self,
+        connection: &Connection,
     ) -> Result<Tokens, NetworkError> {
         loop {
             let mut response = poll_until_info(
@@ -495,7 +581,7 @@ impl GuardDataStore for NullGuardDataStore {
 }
 
 async fn poll_until_info(
-    connection: &mut Connection,
+    connection: &Connection,
     client_id: u64,
     request_id: &[u8],
     interval: Duration,

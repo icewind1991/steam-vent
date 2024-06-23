@@ -10,8 +10,10 @@ use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, hello, login, ConnectionError, Session};
 use crate::transport::websocket::connect;
 use dashmap::DashMap;
+use futures_util::future::{select, Either};
 use futures_util::{Sink, SinkExt};
 use std::future::Future;
+use std::pin::pin;
 use std::sync::Arc;
 use std::time::Duration;
 use steamid_ng::SteamID;
@@ -60,7 +62,7 @@ impl Connection {
         account: &str,
         password: &str,
         mut guard_data_store: G,
-        mut confirmation_handler: H,
+        confirmation_handler: H,
     ) -> Result<Self, ConnectionError> {
         let mut connection = Self::connect(server_list).await?;
         let guard_data = guard_data_store.load(account).await.unwrap_or_else(|e| {
@@ -74,13 +76,20 @@ impl Connection {
             begin_password_auth(&mut connection, account, password, guard_data.as_deref()).await?;
         let steam_id = SteamID::from(begin.steam_id());
 
-        let confirmation_action = confirmation_handler
-            .handle_confirmation(begin.allowed_confirmations())
-            .await;
-        let pending = begin
-            .submit_confirmation(&mut connection, confirmation_action)
-            .await?;
-        let tokens = pending.wait_for_tokens(&mut connection).await?;
+        let allowed_confirmations = begin.allowed_confirmations();
+        let confirmation_fut = confirmation_handler.handle_confirmation(&allowed_confirmations);
+
+        let tokens_fut = begin.poll().wait_for_tokens(&connection);
+
+        let tokens = match select(pin!(confirmation_fut), pin!(tokens_fut)).await {
+            Either::Left((confirmation_action, tokens_fut)) => {
+                begin
+                    .submit_confirmation(&connection, confirmation_action)
+                    .await?;
+                tokens_fut.await?
+            }
+            Either::Right((tokens, _)) => tokens?,
+        };
 
         debug!(account, "saving guard data");
         if let Err(e) = guard_data_store.store(account, tokens.new_guard_data).await {

@@ -1,3 +1,4 @@
+use crate::auth::ConfirmationError;
 use crate::connection::Connection;
 use crate::eresult::EResult;
 use crate::net::{NetMessageHeader, NetworkError};
@@ -24,6 +25,17 @@ pub enum ConnectionError {
     LoginError(#[from] LoginError),
     #[error(transparent)]
     Discovery(#[from] ServerDiscoveryError),
+    #[error("Aborted")]
+    Aborted,
+}
+
+impl From<ConfirmationError> for ConnectionError {
+    fn from(value: ConfirmationError) -> Self {
+        match value {
+            ConfirmationError::Network(err) => err.into(),
+            ConfirmationError::Aborted => ConnectionError::Aborted,
+        }
+    }
 }
 
 #[derive(Debug, Error)]
