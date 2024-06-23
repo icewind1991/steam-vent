@@ -29,7 +29,7 @@ async fn main() -> Result<(), ConnectionError> {
         &password,
         FileGuardDataStore::user_cache(),
         EitherConfirmationHandler::new(
-            DeviceConfirmationHandler::default(),
+            DeviceConfirmationHandler,
             ConsoleAuthConfirmationHandler::default(),
         ),
     )

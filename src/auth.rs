@@ -340,7 +340,7 @@ impl AuthConfirmationHandler for SharedSecretAuthConfirmationHandler {
     ) -> Option<ConfirmationAction> {
         for method in allowed_confirmations {
             if method.class() == ConfirmationMethodClass::Code {
-                let auth_code = generate_auth_code(&self.shared_secret, None)
+                let auth_code = generate_auth_code(self.shared_secret, None)
                     .expect("Could not generate auth code given shared secret.");
                 let token = SteamGuardToken(auth_code);
                 return Some(ConfirmationAction::GuardToken(token, method.guard_type()));
