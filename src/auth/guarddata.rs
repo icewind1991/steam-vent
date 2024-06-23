@@ -1,4 +1,3 @@
-use async_trait::async_trait;
 use directories::ProjectDirs;
 use std::collections::HashMap;
 use std::convert::Infallible;
@@ -8,15 +7,14 @@ use std::path::PathBuf;
 use thiserror::Error;
 
 /// Trait for storing steam guard machine tokens
-#[async_trait]
 pub trait GuardDataStore {
     type Err: Error;
 
     /// Store a machine token for an account
-    async fn store(&mut self, account: &str, machine_token: String) -> Result<(), Self::Err>;
+    fn store(&mut self, account: &str, machine_token: String) -> impl std::future::Future<Output = Result<(), Self::Err>> + Send;
 
     /// Retrieve the stored token for an account
-    async fn load(&mut self, account: &str) -> Result<Option<String>, Self::Err>;
+    fn load(&mut self, account: &str) -> impl std::future::Future<Output = Result<Option<String>, Self::Err>> + Send;
 }
 
 /// Error while storing or loading guard data from json file
@@ -96,7 +94,6 @@ impl FileGuardDataStore {
     }
 }
 
-#[async_trait]
 impl GuardDataStore for FileGuardDataStore {
     type Err = FileStoreError;
 
@@ -115,7 +112,6 @@ impl GuardDataStore for FileGuardDataStore {
 /// Don't store guard data
 pub struct NullGuardDataStore;
 
-#[async_trait]
 impl GuardDataStore for NullGuardDataStore {
     type Err = Infallible;
 

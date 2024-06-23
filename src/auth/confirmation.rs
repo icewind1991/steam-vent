@@ -1,6 +1,6 @@
+use std::pin::pin;
 use crate::auth::SteamGuardToken;
 use another_steam_totp::generate_auth_code;
-use async_trait::async_trait;
 use futures_util::future::{select, Either};
 use steam_vent_proto::steammessages_auth_steamclient::{
     CAuthentication_AllowedConfirmation, EAuthSessionGuardType,
@@ -140,7 +140,6 @@ impl From<GuardTokenType> for EAuthSessionGuardType {
 /// - Waiting for the user to confirm the login from the mobile app: [`DeviceConfirmationHandler`].
 ///
 /// Additionally, apps can implement the trait to integrate the confirmation flow into the app.
-#[async_trait]
 pub trait AuthConfirmationHandler {
     /// Perform the confirmation action given a list of allowed confirmations for the login
     ///
@@ -149,10 +148,10 @@ pub trait AuthConfirmationHandler {
     ///
     /// If the confirmation handler does not support any of the allowed confirmations it return `None`.
     /// If no confirmation handler supports the allowed confirmations the login will fail.
-    async fn handle_confirmation(
+    fn handle_confirmation(
         self,
         allowed_confirmations: &[ConfirmationMethod],
-    ) -> Option<ConfirmationAction>;
+    ) -> impl std::future::Future<Output = Option<ConfirmationAction>> + Send;
 }
 
 /// Ask the user for the totp token from the terminal
@@ -190,7 +189,6 @@ where
     }
 }
 
-#[async_trait]
 impl<Read, Write> AuthConfirmationHandler for UserProvidedAuthConfirmationHandler<Read, Write>
 where
     Read: AsyncRead + Unpin + Send + Sync,
@@ -242,7 +240,6 @@ impl SharedSecretAuthConfirmationHandler {
     }
 }
 
-#[async_trait]
 impl AuthConfirmationHandler for SharedSecretAuthConfirmationHandler {
     async fn handle_confirmation(
         self,
@@ -264,7 +261,6 @@ impl AuthConfirmationHandler for SharedSecretAuthConfirmationHandler {
 #[derive(Default)]
 pub struct DeviceConfirmationHandler;
 
-#[async_trait]
 impl AuthConfirmationHandler for DeviceConfirmationHandler {
     async fn handle_confirmation(
         self,
@@ -294,7 +290,6 @@ impl<Left, Right> EitherConfirmationHandler<Left, Right> {
     }
 }
 
-#[async_trait]
 impl<Left, Right> AuthConfirmationHandler for EitherConfirmationHandler<Left, Right>
 where
     Left: AuthConfirmationHandler + Send + Sync,
@@ -305,8 +300,8 @@ where
         allowed_confirmations: &[ConfirmationMethod],
     ) -> Option<ConfirmationAction> {
         match select(
-            self.left.handle_confirmation(allowed_confirmations),
-            self.right.handle_confirmation(allowed_confirmations),
+            pin!(self.left.handle_confirmation(allowed_confirmations)),
+            pin!(self.right.handle_confirmation(allowed_confirmations)),
         )
         .await
         {
