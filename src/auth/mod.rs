@@ -17,6 +17,8 @@ use crate::proto::steammessages_auth_steamclient::{
 use crate::session::{ConnectionError, LoginError};
 use base64::prelude::BASE64_STANDARD;
 use base64::Engine;
+pub use confirmation::*;
+pub use guarddata::*;
 use num_bigint_dig::BigUint;
 use num_traits::Num;
 use protobuf::{EnumOrUnknown, MessageField};
@@ -26,8 +28,6 @@ use steam_vent_crypto::encrypt_with_key_pkcs1;
 use thiserror::Error;
 use tokio::time::sleep;
 use tracing::{debug, info, instrument};
-pub use guarddata::*;
-pub use confirmation::*;
 
 pub(crate) async fn begin_password_auth(
     connection: &mut Connection,
@@ -155,7 +155,7 @@ impl StartedAuth {
     }
 }
 
-
+/// The token to send to steam to confirm the login
 #[derive(Debug)]
 pub struct SteamGuardToken(String);
 

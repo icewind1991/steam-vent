@@ -1,11 +1,14 @@
+use crate::auth::SteamGuardToken;
 use another_steam_totp::generate_auth_code;
 use async_trait::async_trait;
-use futures_util::future::{Either, select};
-use tokio::io::{AsyncRead, AsyncWrite, AsyncWriteExt, BufReader, Stdin, stdin, Stdout, stdout};
-use steam_vent_proto::steammessages_auth_steamclient::{CAuthentication_AllowedConfirmation, EAuthSessionGuardType};
-use crate::auth::SteamGuardToken;
+use futures_util::future::{select, Either};
+use steam_vent_proto::steammessages_auth_steamclient::{
+    CAuthentication_AllowedConfirmation, EAuthSessionGuardType,
+};
 use tokio::io::AsyncBufReadExt;
+use tokio::io::{stdin, stdout, AsyncRead, AsyncWrite, AsyncWriteExt, BufReader, Stdin, Stdout};
 
+/// A method that can be used to confirm a login
 #[derive(Debug, Clone)]
 pub struct ConfirmationMethod(CAuthentication_AllowedConfirmation);
 
@@ -16,6 +19,7 @@ impl From<CAuthentication_AllowedConfirmation> for ConfirmationMethod {
 }
 
 impl ConfirmationMethod {
+    /// Get the human-readable confirmation type
     pub fn confirmation_type(&self) -> &'static str {
         match self.0.confirmation_type() {
             EAuthSessionGuardType::k_EAuthSessionGuardType_Unknown => "unknown",
@@ -33,14 +37,17 @@ impl ConfirmationMethod {
         }
     }
 
+    /// Get the server-provided message for the confirmation
     pub fn confirmation_details(&self) -> &str {
         self.0.associated_message()
     }
 
+    /// Is any action required to confirm the login
     pub fn action_required(&self) -> bool {
         self.0.confirmation_type() != EAuthSessionGuardType::k_EAuthSessionGuardType_None
     }
 
+    /// Get the class of the confirmation
     pub fn class(&self) -> ConfirmationMethodClass {
         match self.0.confirmation_type() {
             EAuthSessionGuardType::k_EAuthSessionGuardType_Unknown => ConfirmationMethodClass::None,
@@ -66,77 +73,95 @@ impl ConfirmationMethod {
         }
     }
 
-    pub fn guard_type(&self) -> GuardType {
+    /// Get the token type required for the confirmation, if the confirmation asks for a code
+    pub fn token_type(&self) -> Option<GuardTokenType> {
         match self.0.confirmation_type() {
-            EAuthSessionGuardType::k_EAuthSessionGuardType_Unknown => GuardType::None,
-            EAuthSessionGuardType::k_EAuthSessionGuardType_None => GuardType::None,
-            EAuthSessionGuardType::k_EAuthSessionGuardType_EmailCode => GuardType::Email,
-            EAuthSessionGuardType::k_EAuthSessionGuardType_DeviceCode => GuardType::Device,
-            EAuthSessionGuardType::k_EAuthSessionGuardType_DeviceConfirmation => GuardType::Device,
-            EAuthSessionGuardType::k_EAuthSessionGuardType_EmailConfirmation => GuardType::Email,
-            EAuthSessionGuardType::k_EAuthSessionGuardType_MachineToken => GuardType::None,
-            EAuthSessionGuardType::k_EAuthSessionGuardType_LegacyMachineAuth => GuardType::None,
+            EAuthSessionGuardType::k_EAuthSessionGuardType_Unknown => None,
+            EAuthSessionGuardType::k_EAuthSessionGuardType_None => None,
+            EAuthSessionGuardType::k_EAuthSessionGuardType_EmailCode => Some(GuardTokenType::Email),
+            EAuthSessionGuardType::k_EAuthSessionGuardType_DeviceCode => {
+                Some(GuardTokenType::Device)
+            }
+            EAuthSessionGuardType::k_EAuthSessionGuardType_DeviceConfirmation => None,
+            EAuthSessionGuardType::k_EAuthSessionGuardType_EmailConfirmation => None,
+            EAuthSessionGuardType::k_EAuthSessionGuardType_MachineToken => None,
+            EAuthSessionGuardType::k_EAuthSessionGuardType_LegacyMachineAuth => None,
         }
     }
 }
 
+/// The class of confirmation method
 #[derive(Eq, PartialEq, Debug, Clone)]
 pub enum ConfirmationMethodClass {
+    /// Provide a totp token
     Code,
+    /// Confirm the login out-of-band
     Confirmation,
+    /// Provide stored guard data
     Stored,
+    /// No action required
     None,
 }
 
+/// The action to perform to confirm the login
+#[non_exhaustive]
 #[derive(Debug)]
 pub enum ConfirmationAction {
-    GuardToken(SteamGuardToken, GuardType),
+    /// A totp token to send to the server
+    GuardToken(SteamGuardToken, GuardTokenType),
+    /// No action required
     None,
+    /// Login has been canceled by the user
     Abort,
 }
 
+/// The type of guard token
 #[derive(Debug)]
-pub enum GuardType {
+pub enum GuardTokenType {
     Email,
     Device,
-    None,
 }
 
-impl From<GuardType> for EAuthSessionGuardType {
-    fn from(value: GuardType) -> Self {
+impl From<GuardTokenType> for EAuthSessionGuardType {
+    fn from(value: GuardTokenType) -> Self {
         match value {
-            GuardType::Device => EAuthSessionGuardType::k_EAuthSessionGuardType_DeviceCode,
-            GuardType::Email => EAuthSessionGuardType::k_EAuthSessionGuardType_EmailCode,
-            GuardType::None => EAuthSessionGuardType::k_EAuthSessionGuardType_None,
+            GuardTokenType::Device => EAuthSessionGuardType::k_EAuthSessionGuardType_DeviceCode,
+            GuardTokenType::Email => EAuthSessionGuardType::k_EAuthSessionGuardType_EmailCode,
         }
     }
 }
 
+/// A trait for handling login confirmations
+///
+/// The library comes with handlers for:
+///
+/// - Asking for a code from the terminal: [`ConsoleAuthConfirmationHandler`].
+/// - Generating a code from the pre-shared secret: [`SharedSecretAuthConfirmationHandler`].
+/// - Waiting for the user to confirm the login from the mobile app: [`DeviceConfirmationHandler`].
+///
+/// Additionally, apps can implement the trait to integrate the confirmation flow into the app.
 #[async_trait]
 pub trait AuthConfirmationHandler {
+    /// Perform the confirmation action given a list of allowed confirmations for the login
+    ///
+    /// If the confirmation handler supports any of the allowed confirmations,
+    /// it returns a [`ConfirmationAction`] with the required action.
+    ///
+    /// If the confirmation handler does not support any of the allowed confirmations it return `None`.
+    /// If no confirmation handler supports the allowed confirmations the login will fail.
     async fn handle_confirmation(
         self,
         allowed_confirmations: &[ConfirmationMethod],
     ) -> Option<ConfirmationAction>;
 }
 
+/// Ask the user for the totp token from the terminal
 pub type ConsoleAuthConfirmationHandler = UserProvidedAuthConfirmationHandler<Stdin, Stdout>;
 
+/// Ask the user to provide the totp token
 pub struct UserProvidedAuthConfirmationHandler<Read, Write> {
     input: BufReader<Read>,
     output: Write,
-}
-
-pub struct SharedSecretAuthConfirmationHandler {
-    shared_secret: String,
-}
-
-impl SharedSecretAuthConfirmationHandler {
-    pub fn new(shared_secret: &str) -> Self {
-        SharedSecretAuthConfirmationHandler {
-            shared_secret: shared_secret.into(),
-        }
-    }
 }
 
 impl Default for ConsoleAuthConfirmationHandler {
@@ -144,6 +169,23 @@ impl Default for ConsoleAuthConfirmationHandler {
         ConsoleAuthConfirmationHandler {
             input: BufReader::new(stdin()),
             output: stdout(),
+        }
+    }
+}
+
+impl<Read, Write> UserProvidedAuthConfirmationHandler<Read, Write>
+where
+    Read: AsyncRead + Unpin + Send + Sync,
+    Write: AsyncWrite + Unpin + Send + Sync,
+{
+    /// Create an confirmation handling using the provided I/O
+    ///
+    /// The handler will write details about the required tokens to the output
+    /// and expect the newline terminated token from the input
+    pub fn new(input: Read, output: Write) -> Self {
+        UserProvidedAuthConfirmationHandler {
+            input: BufReader::new(input),
+            output,
         }
     }
 }
@@ -159,7 +201,7 @@ where
         allowed_confirmations: &[ConfirmationMethod],
     ) -> Option<ConfirmationAction> {
         for method in allowed_confirmations {
-            if method.class() == ConfirmationMethodClass::Code {
+            if let Some(token_type) = method.token_type() {
                 let msg = format!(
                     "{}: {}",
                     method.confirmation_type(),
@@ -170,15 +212,33 @@ where
                 let mut buff = String::with_capacity(16);
                 self.input.read_line(&mut buff).await.ok();
                 buff.truncate(buff.trim().len());
-                if buff.is_empty() {
-                    return Some(ConfirmationAction::Abort);
+                return if buff.is_empty() {
+                    Some(ConfirmationAction::Abort)
                 } else {
                     let token = SteamGuardToken(buff);
-                    return Some(ConfirmationAction::GuardToken(token, method.guard_type()));
-                }
+                    Some(ConfirmationAction::GuardToken(token, token_type))
+                };
             }
         }
         None
+    }
+}
+
+/// Generate the steam guard totp token from the shared secret
+///
+/// This requires no user interaction during login but requires the user to retrieve the totp secret in advance
+pub struct SharedSecretAuthConfirmationHandler {
+    shared_secret: String,
+}
+
+impl SharedSecretAuthConfirmationHandler {
+    /// The totp shared secret encoded as base64
+    ///
+    /// Note that the secret as found in `totp://` urls is base32 encoded, not base64
+    pub fn new(shared_secret: &str) -> Self {
+        SharedSecretAuthConfirmationHandler {
+            shared_secret: shared_secret.into(),
+        }
     }
 }
 
@@ -189,17 +249,18 @@ impl AuthConfirmationHandler for SharedSecretAuthConfirmationHandler {
         allowed_confirmations: &[ConfirmationMethod],
     ) -> Option<ConfirmationAction> {
         for method in allowed_confirmations {
-            if method.class() == ConfirmationMethodClass::Code {
+            if let Some(token_type) = method.token_type() {
                 let auth_code = generate_auth_code(self.shared_secret, None)
                     .expect("Could not generate auth code given shared secret.");
                 let token = SteamGuardToken(auth_code);
-                return Some(ConfirmationAction::GuardToken(token, method.guard_type()));
+                return Some(ConfirmationAction::GuardToken(token, token_type));
             }
         }
         None
     }
 }
 
+/// Wait for the user to confirm the login in the mobile app
 #[derive(Default)]
 pub struct DeviceConfirmationHandler;
 
@@ -218,6 +279,10 @@ impl AuthConfirmationHandler for DeviceConfirmationHandler {
     }
 }
 
+/// Use multiple confirmation handlers in parallel.
+///
+/// This is primarily usefully for allowing users to pick between providing a totp code or confirming
+/// the login in the mobile app.
 pub struct EitherConfirmationHandler<Left, Right> {
     left: Left,
     right: Right,
@@ -243,22 +308,16 @@ where
             self.left.handle_confirmation(allowed_confirmations),
             self.right.handle_confirmation(allowed_confirmations),
         )
-            .await
+        .await
         {
-            Either::Left((left_result, right_fut)) => {
-                if !matches!(left_result, None | Some(ConfirmationAction::None)) {
-                    left_result
-                } else {
-                    right_fut.await
-                }
-            }
-            Either::Right((right_result, left_fut)) => {
-                if !matches!(right_result, None | Some(ConfirmationAction::None)) {
-                    right_result
-                } else {
-                    left_fut.await
-                }
-            }
+            Either::Left((left_result, right_fut)) => match left_result {
+                None | Some(ConfirmationAction::None) => right_fut.await,
+                _ => left_result,
+            },
+            Either::Right((right_result, left_fut)) => match right_result {
+                None | Some(ConfirmationAction::None) => left_fut.await,
+                _ => right_result,
+            },
         }
     }
 }
