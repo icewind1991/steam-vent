@@ -14,7 +14,7 @@ message CGameServers_GetServerList_Response {
 		optional uint32 gameport = 2;
 		optional uint32 specport = 3;
 		optional fixed64 steamid = 4;
-		optional string name = 5;
+		optional bytes name = 5;
 		optional uint32 appid = 6;
 		optional string gamedir = 7;
 		optional string version = 8;
