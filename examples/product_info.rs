@@ -20,10 +20,10 @@ async fn main() -> Result<(), Box<dyn Error>> {
         ..Default::default()
     };
 
-    connection.send(msg).await?;
+    let job_id = connection.send(msg).await?;
     println!(
         "response {:?}",
-        connection.one::<CMsgClientPICSProductInfoResponse>().await
+        connection.receive_by_job_id::<CMsgClientPICSProductInfoResponse>(job_id).await
     );
 
     Ok(())
