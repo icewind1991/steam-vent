@@ -399,7 +399,7 @@ fn ident_continue(c: char) -> bool {
 }
 
 fn get_kinds() -> Vec<String> {
-    let source = include_bytes!("../../common/protos/enums_clientserver.proto");
+    let source = include_bytes!("./enums_clientserver.proto");
     let mut file = NamedTempFile::new().unwrap();
     file.write_all(source).unwrap();
     let path = file.into_temp_path();

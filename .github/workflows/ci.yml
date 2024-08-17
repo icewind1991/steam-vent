@@ -15,7 +15,9 @@ jobs:
           name: ci
           instance: https://cache.icewind.me
           authToken: '${{ secrets.ATTIC_TOKEN }}'
-      - run: nix run .#proto-builder protobuf/protos protobuf/src/generated
+      - run: nix run .#proto-builder protobuf/common/protos protobuf/common/src/generated
+      - run: nix run .#proto-builder protobuf/steam/protos protobuf/steam/src/generated
+      - run: nix run .#proto-builder protobuf/tf2/protos protobuf/tf2/src/generated
       - run: |
           git diff
           git diff-index --quiet HEAD --
