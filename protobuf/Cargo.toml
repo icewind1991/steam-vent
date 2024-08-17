@@ -1,6 +1,6 @@
 [package]
 name = "steam-vent-proto"
-version = "0.4.0"
+version = "0.5.0"
 authors = ["Robin Appelman <robin@icewind.nl>"]
 edition = "2021"
 description = "Protobuf structs used by the Steam client protocol"
@@ -9,3 +9,7 @@ repository = "https://github.com/icewind1991/steam-vent"
 
 [dependencies]
 protobuf = { version = "=3.4.0", features = ["with-bytes"] }
+steam-vent-proto-common = { version = "0.5.0", path = "common" }
+steam-vent-proto-steam = { version = "0.5.0", path = "./steam" }
+
+[features]

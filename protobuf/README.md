@@ -4,4 +4,5 @@ Sourced from https://github.com/SteamDatabase/Protobufs
 
 ## Updating generated code
 
-- run `./build.sh`
+- cd build
+- cargo r -- ../protos/ ../src/generated/

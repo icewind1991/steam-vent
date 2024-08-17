@@ -7,11 +7,12 @@ use protobuf_parse::Parser;
 use quote::{quote, ToTokens};
 use std::cell::RefCell;
 use std::cmp::Ordering;
-use std::fs::OpenOptions;
+use std::fs::{read_to_string, OpenOptions};
 use std::hash::{Hash, Hasher};
 use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::rc::Rc;
+use tempfile::NamedTempFile;
 use walkdir::WalkDir;
 
 fn get_protos(path: impl AsRef<Path>) -> impl Iterator<Item = PathBuf> {
@@ -43,9 +44,14 @@ fn main() {
     let args: Args = Args::parse();
     let protos = get_protos(&args.protos).collect::<Vec<_>>();
 
-    let kinds = get_kinds(args.protos.join("enums_clientserver.proto"));
+    let kinds = get_kinds();
     let service_generator = ServiceGenerator::new(kinds);
     let service_files = service_generator.files.clone();
+
+    let builder_version_check = format!(
+        "const _VENT_PROTO_VERSION_CHECK: () = ::steam_vent_proto_common::VERSION_{};",
+        env!("CARGO_PKG_VERSION").replace('.', "_")
+    );
 
     Codegen::new()
         .pure()
@@ -56,39 +62,56 @@ fn main() {
         .customize(Customize::default().lite_runtime(true))
         .run_from_script();
 
+    let is_common = service_files.borrow().len() == 1
+        && service_files
+            .borrow()
+            .contains_key("enums_clientserver.proto");
+
     for (file, services) in service_files.borrow().iter() {
         let mut file = proto_path_to_rust_mod(&file);
         file.push_str(".rs");
-        let source_file = args.target.join(file);
-        if source_file.exists() && !services.is_empty() {
-            let service_tokens = services.services.iter().map(Service::gen);
-            let method_tokens = services.methods().map(|method| method.gen());
-            let message_tokens = services.messages.iter().map(ServiceMessage::gen);
-            let import_tokens = services.imports.iter().map(|file| {
-                let path = proto_path_to_rust_mod(file);
-                let path = Ident::new(&path, Span::call_site());
-                quote! {
-                    #[allow(unused_imports)]
-                    use crate::#path::*;
-                }
-            });
-            let tokens = quote! {
-                #(#import_tokens)*
-                #(#message_tokens)*
-                #(#service_tokens)*
-                #(#method_tokens)*
+        let source_file = args.target.join(&file);
+        if source_file.exists() {
+            let mut code = read_to_string(&source_file).unwrap();
+            let extra_code = if !services.is_empty() {
+                let service_tokens = services.services.iter().map(Service::gen);
+                let method_tokens = services.methods().map(|method| method.gen());
+                let message_tokens = services.messages.iter().map(ServiceMessage::gen);
+                let import_tokens = services.imports.iter().map(|file| {
+                    let path = proto_path_to_rust_mod(file);
+                    let path = Ident::new(&path, Span::call_site());
+                    quote! {
+                        #[allow(unused_imports)]
+                        use crate::#path::*;
+                    }
+                });
+                let tokens = quote! {
+                    #(#import_tokens)*
+                    #(#message_tokens)*
+                    #(#service_tokens)*
+                    #(#method_tokens)*
+                };
+
+                let syntax_tree = syn::parse2(tokens).unwrap();
+                let formatted = prettyplease::unparse(&syntax_tree);
+                format!("{}\n\n{}", builder_version_check, formatted)
+            } else if !is_common {
+                builder_version_check.clone()
+            } else {
+                String::new()
             };
 
-            let syntax_tree = syn::parse2(tokens).unwrap();
-            let formatted = prettyplease::unparse(&syntax_tree);
+            code = format!("{}\n\n{}", code, extra_code);
+            if !is_common {
+                code = code.replace("::protobuf::", "::steam_vent_proto_common::protobuf::");
+            }
 
             let mut file = OpenOptions::new()
                 .write(true)
-                .append(true)
-                .truncate(false)
+                .truncate(true)
                 .open(&source_file)
                 .unwrap();
-            file.write(formatted.as_bytes()).unwrap();
+            file.write_all(code.as_bytes()).unwrap();
         }
     }
 }
@@ -139,7 +162,7 @@ impl ServiceMethod {
             Ident::new(&self.response, Span::call_site()).to_token_stream()
         };
         quote! {
-            impl crate::RpcMethod for #request_ident {
+            impl ::steam_vent_proto_common::RpcMethod for #request_ident {
                 const METHOD_NAME: &'static str = #name;
                 type Response = #response_ident;
             }
@@ -165,25 +188,25 @@ impl ServiceMessage {
         let kind_tokens = self.kind.as_deref().map(|kind| {
             let kind_ident = Ident::new(kind, Span::call_site());
             quote! {
-                impl crate::RpcMessageWithKind for #message_ident {
-                    const KIND: crate::enums_clientserver::EMsg = crate::enums_clientserver::EMsg::#kind_ident;
+                impl ::steam_vent_proto_common::RpcMessageWithKind for #message_ident {
+                    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::#kind_ident;
                 }
             }
         });
 
         quote! {
-            impl crate::RpcMessage for #message_ident {
-                fn parse(reader: &mut dyn std::io::Read) -> protobuf::Result<Self> {
-                    <Self as protobuf::Message>::parse_from_reader(reader)
+            impl ::steam_vent_proto_common::RpcMessage for #message_ident {
+                fn parse(reader: &mut dyn std::io::Read) -> ::protobuf::Result<Self> {
+                    <Self as ::protobuf::Message>::parse_from_reader(reader)
                 }
 
-                fn write(&self, writer: &mut dyn std::io::Write) -> protobuf::Result<()> {
-                    use protobuf::Message;
+                fn write(&self, writer: &mut dyn std::io::Write) -> ::protobuf::Result<()> {
+                    use ::protobuf::Message;
                     self.write_to_writer(writer)
                 }
 
                 fn encode_size(&self) -> usize {
-                    use protobuf::Message;
+                    use ::protobuf::Message;
                     self.compute_size() as usize
                 }
             }
@@ -285,7 +308,7 @@ impl Service {
             #[doc = #desc]
             struct #struct_name {}
 
-            impl crate::RpcService for #struct_name {
+            impl ::steam_vent_proto_common::RpcService for #struct_name {
                 const SERVICE_NAME: &'static str = #name;
             }
         }
@@ -340,7 +363,12 @@ impl CustomizeCallback for ServiceGenerator {
 }
 
 fn proto_path_to_rust_mod(path: &str) -> String {
-    let without_suffix = path.strip_suffix(".proto").unwrap();
+    let without_suffix = path
+        .rsplit("/")
+        .next()
+        .unwrap()
+        .strip_suffix(".proto")
+        .unwrap();
 
     without_suffix
         .chars()
@@ -370,7 +398,13 @@ fn ident_continue(c: char) -> bool {
     (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_'
 }
 
-fn get_kinds(path: PathBuf) -> Vec<String> {
+fn get_kinds() -> Vec<String> {
+    let source = include_bytes!("../../common/protos/enums_clientserver.proto");
+    let mut file = NamedTempFile::new().unwrap();
+    file.write_all(source).unwrap();
+    let path = file.into_temp_path();
+    let path: &Path = &path;
+
     let mut parser = Parser::new();
     parser.pure().include(path.parent().unwrap()).input(path);
     let parsed = parser
