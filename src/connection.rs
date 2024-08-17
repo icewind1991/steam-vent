@@ -149,14 +149,19 @@ impl Connection {
         self.session.steam_id
     }
 
-    fn prepare(&self) -> NetMessageHeader {
-        self.session.header()
-    }
-
-    pub async fn send<Msg: NetMessage>(&self, header: NetMessageHeader, msg: Msg) -> Result<()> {
+    pub(crate) async fn raw_send<Msg: NetMessage>(
+        &self,
+        header: NetMessageHeader,
+        msg: Msg,
+    ) -> Result<u64> {
+        let job_id = header.source_job_id;
         let msg = RawNetMessage::from_message(header, msg)?;
         self.write.lock().await.send(msg).await?;
-        Ok(())
+        Ok(job_id)
+    }
+
+    pub async fn send<Msg: NetMessage>(&self, msg: Msg) -> Result<u64> {
+        self.raw_send(self.session.header(), msg).await
     }
 
     pub fn set_timeout(&mut self, timeout: Duration) {
@@ -167,9 +172,9 @@ impl Connection {
         &self,
         msg: Msg,
     ) -> Result<Msg::Response> {
-        let header = self.prepare();
+        let header = self.session.header();
         let recv = self.filter.on_job_id(header.source_job_id);
-        self.send(header, ServiceMethodMessage(msg)).await?;
+        self.raw_send(header, ServiceMethodMessage(msg)).await?;
         let message = timeout(self.timeout, recv)
             .await
             .map_err(|_| NetworkError::Timeout)?
@@ -182,7 +187,7 @@ impl Connection {
         &self,
         msg: Msg,
     ) -> Result<Msg::Response> {
-        let header = self.prepare();
+        let header = self.session.header();
         let recv = self.filter.on_job_id(header.source_job_id);
         let msg = RawNetMessage::from_message_with_kind(
             header,
@@ -216,6 +221,11 @@ impl Connection {
             let raw = fut.await.map_err(|_| NetworkError::EOF)?;
             Ok((raw.header.clone(), raw.into_message()?))
         }
+    }
+
+    pub fn receive_by_job_id<T: NetMessage>(&self, job_id: u64) -> impl Future<Output = Result<T>> {
+        let future = self.filter.on_job_id(job_id);
+        async move { future.await.map_err(|_| NetworkError::EOF)?.into_message() }
     }
 }
 

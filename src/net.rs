@@ -161,6 +161,12 @@ impl NetMessageHeader {
 
     fn proto_header(&self, kind: EMsg) -> CMsgProtoBufHeader {
         let mut proto_header = CMsgProtoBufHeader::new();
+        if self.source_job_id != u64::MAX {
+            proto_header.set_jobid_source(self.source_job_id);
+        }
+        if self.target_job_id != u64::MAX {
+            proto_header.set_jobid_target(self.target_job_id);
+        }
         proto_header.set_steamid(
             if kind == EMsg::k_EMsgServiceMethodCallFromClientNonAuthed {
                 0
@@ -173,10 +179,6 @@ impl NetMessageHeader {
             || kind == EMsg::k_EMsgServiceMethodCallFromClient
         {
             proto_header.set_realm(1);
-            proto_header.set_jobid_source(self.source_job_id);
-            if self.source_job_id > 0 {
-                proto_header.set_jobid_target(self.target_job_id);
-            }
         }
         if let Some(target_job_name) = self.target_job_name.as_deref() {
             proto_header.set_target_job_name(target_job_name.into());
