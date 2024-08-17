@@ -6,7 +6,8 @@ Allows communication with the steam servers using the same protocol as the regul
 
 ## State
 
-While the project is still very incomplete, the basics of authenticating to steam and sending requests is working.
+While the project is still incomplete, the most forms of authenticating to steam are implemented and you can send
+requests for the protobuf definitions included in the project.
 
 - [x] Anonymous sessions
 - [x] Password Authentication
@@ -14,12 +15,14 @@ While the project is still very incomplete, the basics of authenticating to stea
 - [x] Steam guard (device or email) confirmation
 - [x] Device notification confirmation
 - [x] Saved machine token confirmation
+- [x] Sending and receiving raw messages
 - [x] Making RPC calls over the connection
 - [ ] High level wrappers around the RPC calls
+- [ ] Allow using messages from protobufs not included in the project
 
 ## Usage
 
-Note that this project is still in early development and api's might see large changes.
+Note that this project is still in early development and apis might see large changes.
 
 ```rust
 use std::error::Error;
