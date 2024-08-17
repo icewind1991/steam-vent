@@ -17,7 +17,7 @@ async fn main() -> Result<(), ConnectionError> {
     for server in some_tf2_servers.servers {
         println!(
             "{}({}) playing {}",
-            server.name(),
+            String::from_utf8_lossy(server.name()),
             server.addr(),
             server.map()
         );
