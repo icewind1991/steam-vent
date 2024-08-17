@@ -11,10 +11,17 @@ pub trait GuardDataStore {
     type Err: Error;
 
     /// Store a machine token for an account
-    fn store(&mut self, account: &str, machine_token: String) -> impl std::future::Future<Output = Result<(), Self::Err>> + Send;
+    fn store(
+        &mut self,
+        account: &str,
+        machine_token: String,
+    ) -> impl std::future::Future<Output = Result<(), Self::Err>> + Send;
 
     /// Retrieve the stored token for an account
-    fn load(&mut self, account: &str) -> impl std::future::Future<Output = Result<Option<String>, Self::Err>> + Send;
+    fn load(
+        &mut self,
+        account: &str,
+    ) -> impl std::future::Future<Output = Result<Option<String>, Self::Err>> + Send;
 }
 
 /// Error while storing or loading guard data from json file

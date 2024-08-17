@@ -1,7 +1,7 @@
-use std::pin::pin;
 use crate::auth::SteamGuardToken;
 use another_steam_totp::generate_auth_code;
 use futures_util::future::{select, Either};
+use std::pin::pin;
 use steam_vent_proto::steammessages_auth_steamclient::{
     CAuthentication_AllowedConfirmation, EAuthSessionGuardType,
 };
