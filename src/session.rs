@@ -1,7 +1,7 @@
 use crate::auth::{ConfirmationError, ConfirmationMethod};
 use crate::connection::Connection;
 use crate::eresult::EResult;
-use crate::net::{NetMessageHeader, NetworkError};
+use crate::net::{JobId, NetMessageHeader, NetworkError};
 use crate::proto::steammessages_base::CMsgIPAddress;
 use crate::proto::steammessages_clientserver_login::{
     CMsgClientHello, CMsgClientLogon, CMsgClientLogonResponse,
@@ -81,8 +81,8 @@ pub struct JobIdCounter(AtomicU64);
 
 impl JobIdCounter {
     #[allow(clippy::should_implement_trait)]
-    pub fn next(&self) -> u64 {
-        self.0.fetch_add(1, Ordering::SeqCst)
+    pub fn next(&self) -> JobId {
+        JobId(self.0.fetch_add(1, Ordering::SeqCst))
     }
 }
 
@@ -116,7 +116,7 @@ impl Session {
         NetMessageHeader {
             session_id: self.session_id,
             source_job_id: self.job_id.next(),
-            target_job_id: u64::MAX,
+            target_job_id: JobId::NONE,
             steam_id: self.steam_id,
             ..NetMessageHeader::default()
         }
@@ -182,8 +182,8 @@ async fn send_logon(
 ) -> Result<Session> {
     let header = NetMessageHeader {
         session_id: 0,
-        source_job_id: u64::MAX,
-        target_job_id: u64::MAX,
+        source_job_id: JobId::NONE,
+        target_job_id: JobId::NONE,
         steam_id,
         ..NetMessageHeader::default()
     };
@@ -211,8 +211,8 @@ pub async fn hello(conn: &mut Connection) -> Result<(), NetworkError> {
 
     let header = NetMessageHeader {
         session_id: 0,
-        source_job_id: u64::MAX,
-        target_job_id: u64::MAX,
+        source_job_id: JobId::NONE,
+        target_job_id: JobId::NONE,
         steam_id: SteamID::from(0),
         ..NetMessageHeader::default()
     };

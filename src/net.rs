@@ -51,10 +51,18 @@ impl From<EResult> for NetworkError {
 
 pub type Result<T, E = NetworkError> = std::result::Result<T, E>;
 
+/// A unique (per-session) identifier that links request-response pairs
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Default, Hash)]
+pub struct JobId(pub(crate) u64);
+
+impl JobId {
+    pub const NONE: JobId = JobId(u64::MAX);
+}
+
 #[derive(Debug, Default, Clone)]
 pub struct NetMessageHeader {
-    pub source_job_id: u64,
-    pub target_job_id: u64,
+    pub source_job_id: JobId,
+    pub target_job_id: JobId,
     pub steam_id: SteamID,
     pub session_id: i32,
     pub target_job_name: Option<Cow<'static, str>>,
@@ -64,8 +72,8 @@ pub struct NetMessageHeader {
 impl From<CMsgProtoBufHeader> for NetMessageHeader {
     fn from(header: CMsgProtoBufHeader) -> Self {
         NetMessageHeader {
-            source_job_id: header.jobid_source(),
-            target_job_id: header.jobid_target(),
+            source_job_id: JobId(header.jobid_source()),
+            target_job_id: JobId(header.jobid_target()),
             steam_id: header.steamid().into(),
             session_id: header.client_sessionid(),
             target_job_name: header
@@ -102,8 +110,8 @@ impl NetMessageHeader {
             let source_job_id = reader.read_u64::<LittleEndian>()?;
             Ok((
                 NetMessageHeader {
-                    target_job_id,
-                    source_job_id,
+                    target_job_id: JobId(target_job_id),
+                    source_job_id: JobId(source_job_id),
                     session_id: 0,
                     steam_id: SteamID::default(),
                     ..NetMessageHeader::default()
@@ -119,8 +127,8 @@ impl NetMessageHeader {
             let session_id = reader.read_i32::<LittleEndian>()?;
             Ok((
                 NetMessageHeader {
-                    source_job_id,
-                    target_job_id,
+                    source_job_id: JobId(source_job_id),
+                    target_job_id: JobId(target_job_id),
                     steam_id,
                     session_id,
                     target_job_name: None,
@@ -150,8 +158,8 @@ impl NetMessageHeader {
             writer.write_u32::<LittleEndian>(kind.value() as u32)?;
             writer.write_u8(32)?;
             writer.write_u16::<LittleEndian>(2)?;
-            writer.write_u64::<LittleEndian>(self.target_job_id)?;
-            writer.write_u64::<LittleEndian>(self.source_job_id)?;
+            writer.write_u64::<LittleEndian>(self.target_job_id.0)?;
+            writer.write_u64::<LittleEndian>(self.source_job_id.0)?;
             writer.write_u8(239)?;
             writer.write_u64::<LittleEndian>(self.steam_id.into())?;
             writer.write_i32::<LittleEndian>(self.session_id)?;
@@ -161,11 +169,11 @@ impl NetMessageHeader {
 
     fn proto_header(&self, kind: EMsg) -> CMsgProtoBufHeader {
         let mut proto_header = CMsgProtoBufHeader::new();
-        if self.source_job_id != u64::MAX {
-            proto_header.set_jobid_source(self.source_job_id);
+        if self.source_job_id != JobId::NONE {
+            proto_header.set_jobid_source(self.source_job_id.0);
         }
-        if self.target_job_id != u64::MAX {
-            proto_header.set_jobid_target(self.target_job_id);
+        if self.target_job_id != JobId::NONE {
+            proto_header.set_jobid_target(self.target_job_id.0);
         }
         proto_header.set_steamid(
             if kind == EMsg::k_EMsgServiceMethodCallFromClientNonAuthed {

@@ -2,7 +2,7 @@ use crate::auth::{begin_password_auth, AuthConfirmationHandler, GuardDataStore};
 use crate::message::{
     NetMessage, ServiceMethodMessage, ServiceMethodNotification, ServiceMethodResponseMessage,
 };
-use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
+use crate::net::{JobId, NetMessageHeader, NetworkError, RawNetMessage};
 use crate::proto::enums_clientserver::EMsg;
 use crate::proto::steammessages_clientserver_login::CMsgClientHeartBeat;
 use crate::serverlist::ServerList;
@@ -122,8 +122,8 @@ impl Connection {
         let interval = self.session.heartbeat_interval;
         let header = NetMessageHeader {
             session_id: self.session.session_id,
-            source_job_id: u64::MAX,
-            target_job_id: u64::MAX,
+            source_job_id: JobId::NONE,
+            target_job_id: JobId::NONE,
             steam_id: self.steam_id(),
             ..NetMessageHeader::default()
         };
@@ -153,14 +153,14 @@ impl Connection {
         &self,
         header: NetMessageHeader,
         msg: Msg,
-    ) -> Result<u64> {
+    ) -> Result<JobId> {
         let job_id = header.source_job_id;
         let msg = RawNetMessage::from_message(header, msg)?;
         self.write.lock().await.send(msg).await?;
         Ok(job_id)
     }
 
-    pub async fn send<Msg: NetMessage>(&self, msg: Msg) -> Result<u64> {
+    pub async fn send<Msg: NetMessage>(&self, msg: Msg) -> Result<JobId> {
         self.raw_send(self.session.header(), msg).await
     }
 
@@ -223,7 +223,10 @@ impl Connection {
         }
     }
 
-    pub fn receive_by_job_id<T: NetMessage>(&self, job_id: u64) -> impl Future<Output = Result<T>> {
+    pub fn receive_by_job_id<T: NetMessage>(
+        &self,
+        job_id: JobId,
+    ) -> impl Future<Output = Result<T>> {
         let future = self.filter.on_job_id(job_id);
         async move { future.await.map_err(|_| NetworkError::EOF)?.into_message() }
     }
@@ -231,7 +234,7 @@ impl Connection {
 
 #[derive(Clone)]
 struct MessageFilter {
-    job_id_filters: Arc<DashMap<u64, oneshot::Sender<RawNetMessage>>>,
+    job_id_filters: Arc<DashMap<JobId, oneshot::Sender<RawNetMessage>>>,
     notification_filters: Arc<DashMap<&'static str, broadcast::Sender<ServiceMethodNotification>>>,
     kind_filters: Arc<DashMap<EMsg, broadcast::Sender<RawNetMessage>>>,
     oneshot_kind_filters: Arc<DashMap<EMsg, oneshot::Sender<RawNetMessage>>>,
@@ -253,7 +256,7 @@ impl MessageFilter {
         spawn(async move {
             while let Some(res) = source.next().await {
                 if let Ok(message) = res {
-                    debug!(job_id = message.header.target_job_id, kind = ?message.kind, "processing message");
+                    debug!(job_id = message.header.target_job_id.0, kind = ?message.kind, "processing message");
                     if let Some((_, tx)) = filter_send
                         .job_id_filters
                         .remove(&message.header.target_job_id)
@@ -291,7 +294,7 @@ impl MessageFilter {
         (filter, rx)
     }
 
-    pub fn on_job_id(&self, id: u64) -> oneshot::Receiver<RawNetMessage> {
+    pub fn on_job_id(&self, id: JobId) -> oneshot::Receiver<RawNetMessage> {
         let (tx, rx) = oneshot::channel();
         self.job_id_filters.insert(id, tx);
         rx
