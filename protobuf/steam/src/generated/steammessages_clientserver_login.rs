@@ -5513,7 +5513,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientHeartBeat {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientHeartBeat {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientHeartBeat;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientHeartBeat;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientServerTimestampRequest {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5529,7 +5530,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientServerTimestampRequest 
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientServerTimestampRequest {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientServerTimestampRequest;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientServerTimestampRequest;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientServerTimestampResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5546,7 +5548,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientServerTimestampResponse
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientServerTimestampResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientServerTimestampResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientServerTimestampResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientSecret {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5575,7 +5578,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientHello {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientHello {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientHello;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientHello;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientLogon {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5591,7 +5595,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLogon {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientLogon {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLogon;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLogon;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientLogonResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5607,7 +5612,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLogonResponse {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientLogonResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLogOnResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLogOnResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientRequestWebAPIAuthenticateUserNonce {
@@ -5625,7 +5631,8 @@ for CMsgClientRequestWebAPIAuthenticateUserNonce {
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientRequestWebAPIAuthenticateUserNonce {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientRequestWebAPIAuthenticateUserNonce;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientRequestWebAPIAuthenticateUserNonce;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientRequestWebAPIAuthenticateUserNonceResponse {
@@ -5643,7 +5650,8 @@ for CMsgClientRequestWebAPIAuthenticateUserNonceResponse {
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientRequestWebAPIAuthenticateUserNonceResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientRequestWebAPIAuthenticateUserNonceResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientRequestWebAPIAuthenticateUserNonceResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientLogOff {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5659,7 +5667,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLogOff {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientLogOff {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLogOff;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLogOff;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientLoggedOff {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5675,7 +5684,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLoggedOff {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientLoggedOff {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLoggedOff;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLoggedOff;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientNewLoginKey {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5691,7 +5701,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientNewLoginKey {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientNewLoginKey {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientNewLoginKey;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientNewLoginKey;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientNewLoginKeyAccepted {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5707,7 +5718,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientNewLoginKeyAccepted {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientNewLoginKeyAccepted {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientNewLoginKeyAccepted;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientNewLoginKeyAccepted;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientAccountInfo {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5723,7 +5735,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientAccountInfo {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientAccountInfo {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientAccountInfo;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientAccountInfo;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientChallengeRequest {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5739,7 +5752,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientChallengeRequest {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientChallengeRequest {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientChallengeRequest;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientChallengeRequest;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientChallengeResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5755,5 +5769,6 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientChallengeResponse {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientChallengeResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientChallengeResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientChallengeResponse;
 }

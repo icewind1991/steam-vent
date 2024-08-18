@@ -5400,6 +5400,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgApplyAutograph {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgApplyAutograph {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCApplyAutograph;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgEconPlayerStrangeCountAdjustment {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5612,6 +5616,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgLookupMultipleAccountNames {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgLookupMultipleAccountNames {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCLookupMultipleAccountNames;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgLookupMultipleAccountNamesResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5624,6 +5632,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgLookupMultipleAccountNamesRes
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgLookupMultipleAccountNamesResponse {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCLookupMultipleAccountNamesResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCGrantSelfMadeItemToAccount {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5756,6 +5769,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgCraftCollectionUpgrade {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgCraftCollectionUpgrade {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCCraftCollectionUpgrade;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgCraftHalloweenOffering {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5768,6 +5785,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgCraftHalloweenOffering {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgCraftHalloweenOffering {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCCraftHalloweenOffering;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgCraftCommonStatClock {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5782,6 +5803,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgCraftCommonStatClock {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgCraftCommonStatClock {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCCraftCommonStatClock;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCQuestDiscard_Request {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5795,3 +5820,4 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCQuestDiscard_Request {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::MsgKindEnum for EGCItemMsg {}

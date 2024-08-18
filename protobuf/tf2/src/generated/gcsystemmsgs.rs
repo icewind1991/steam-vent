@@ -2037,3 +2037,7 @@ for CCommunity_TerminateGamePersonalDataEntries_Response {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::MsgKindEnum for EGCSystemMsg {}
+impl ::steam_vent_proto_common::MsgKindEnum for ESOMsg {}
+impl ::steam_vent_proto_common::MsgKindEnum for EGCBaseClientMsg {}
+impl ::steam_vent_proto_common::MsgKindEnum for EGCToGCMsg {}

@@ -17,18 +17,18 @@ use std::fmt::Debug;
 use std::io::{Cursor, Read, Write};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_base::CMsgMulti;
-use steam_vent_proto::{RpcMessage, RpcMessageWithKind};
+use steam_vent_proto::{MsgKind, MsgKindEnum, RpcMessage, RpcMessageWithKind};
 use thiserror::Error;
 use tokio_stream::Stream;
 use tracing::{debug, trace};
 
 #[derive(Error, Debug)]
 #[error("Malformed message body for {0:?}: {1}")]
-pub struct MalformedBody(EMsg, MessageBodyError);
+pub struct MalformedBody(MsgKind, MessageBodyError);
 
 impl MalformedBody {
-    pub fn new(kind: EMsg, err: impl Into<MessageBodyError>) -> Self {
-        MalformedBody(kind, err.into())
+    pub fn new<K: Into<MsgKind>>(kind: K, err: impl Into<MessageBodyError>) -> Self {
+        MalformedBody(kind.into(), err.into())
     }
 }
 
@@ -57,7 +57,8 @@ impl From<String> for MessageBodyError {
 }
 
 pub trait NetMessage: Sized + Debug {
-    const KIND: EMsg;
+    type KindEnum: MsgKindEnum;
+    const KIND: Self::KindEnum;
     const IS_PROTOBUF: bool = false;
 
     fn read_body(_data: BytesMut, _header: &NetMessageHeader) -> Result<Self, MalformedBody> {
@@ -84,12 +85,13 @@ pub struct ChannelEncryptRequest {
 }
 
 impl NetMessage for ChannelEncryptRequest {
-    const KIND: EMsg = EMsg::k_EMsgChannelEncryptRequest;
+    type KindEnum = EMsg;
+    const KIND: Self::KindEnum = EMsg::k_EMsgChannelEncryptRequest;
 
     fn read_body(data: BytesMut, _header: &NetMessageHeader) -> Result<Self, MalformedBody> {
         trace!("reading body of {:?} message", Self::KIND);
         let mut reader = Cursor::new(data);
-        ChannelEncryptRequest::read(&mut reader).map_err(|e| MalformedBody(Self::KIND, e.into()))
+        ChannelEncryptRequest::read(&mut reader).map_err(|e| MalformedBody::new(Self::KIND, e))
     }
 }
 
@@ -99,12 +101,13 @@ pub struct ChannelEncryptResult {
 }
 
 impl NetMessage for ChannelEncryptResult {
-    const KIND: EMsg = EMsg::k_EMsgChannelEncryptResult;
+    type KindEnum = EMsg;
+    const KIND: Self::KindEnum = EMsg::k_EMsgChannelEncryptResult;
 
     fn read_body(data: BytesMut, _header: &NetMessageHeader) -> Result<Self, MalformedBody> {
         trace!("reading body of {:?} message", Self::KIND);
         let mut reader = Cursor::new(data);
-        ChannelEncryptResult::read(&mut reader).map_err(|e| MalformedBody(Self::KIND, e.into()))
+        ChannelEncryptResult::read(&mut reader).map_err(|e| MalformedBody::new(Self::KIND, e))
     }
 }
 
@@ -117,7 +120,8 @@ pub struct ClientEncryptResponse {
 const CRC: Crc<u32> = Crc::<u32>::new(&CRC_32_ISO_HDLC);
 
 impl NetMessage for ClientEncryptResponse {
-    const KIND: EMsg = EMsg::k_EMsgChannelEncryptResponse;
+    type KindEnum = EMsg;
+    const KIND: Self::KindEnum = EMsg::k_EMsgChannelEncryptResponse;
 
     fn write_body<W: Write>(&self, mut writer: W) -> Result<(), std::io::Error> {
         trace!("writing body of {:?} message", Self::KIND);
@@ -176,7 +180,7 @@ struct MultiBodyIter<R> {
 impl MultiBodyIter<MaybeZipReader> {
     pub fn new<R: Read>(mut reader: R) -> Result<Self, MalformedBody> {
         let mut multi = CMsgMulti::parse_from_reader(&mut reader)
-            .map_err(|e| MalformedBody(EMsg::k_EMsgMulti, e.into()))?;
+            .map_err(|e| MalformedBody(EMsg::k_EMsgMulti.into(), e.into()))?;
 
         let data = match multi.size_unzipped() {
             0 => MaybeZipReader::Raw(Cursor::new(multi.take_message_body())),
@@ -218,13 +222,14 @@ impl<R: Read> Iterator for MultiBodyIter<R> {
 pub struct ServiceMethodMessage<Request: Debug>(pub Request);
 
 impl<Request: ServiceMethodRequest + Debug> NetMessage for ServiceMethodMessage<Request> {
-    const KIND: EMsg = EMsg::k_EMsgServiceMethodCallFromClient;
+    type KindEnum = EMsg;
+    const KIND: Self::KindEnum = EMsg::k_EMsgServiceMethodCallFromClient;
     const IS_PROTOBUF: bool = true;
 
     fn read_body(data: BytesMut, _header: &NetMessageHeader) -> Result<Self, MalformedBody> {
         trace!("reading body of protobuf message {:?}", Self::KIND);
         Request::parse(&mut data.reader())
-            .map_err(|e| MalformedBody(Self::KIND, e.into()))
+            .map_err(|e| MalformedBody::new(Self::KIND, e))
             .map(ServiceMethodMessage)
     }
 
@@ -256,7 +261,7 @@ impl ServiceMethodResponseMessage {
     ) -> Result<Request::Response, NetworkError> {
         if self.job_name == Request::REQ_NAME {
             Ok(Request::Response::parse(&mut self.body.reader())
-                .map_err(|e| MalformedBody(Self::KIND, e.into()))?)
+                .map_err(|e| MalformedBody::new(Self::KIND, e))?)
         } else {
             Err(NetworkError::DifferentServiceMethod(
                 Request::REQ_NAME,
@@ -267,7 +272,8 @@ impl ServiceMethodResponseMessage {
 }
 
 impl NetMessage for ServiceMethodResponseMessage {
-    const KIND: EMsg = EMsg::k_EMsgServiceMethodResponse;
+    type KindEnum = EMsg;
+    const KIND: Self::KindEnum = EMsg::k_EMsgServiceMethodResponse;
     const IS_PROTOBUF: bool = true;
 
     fn read_body(data: BytesMut, header: &NetMessageHeader) -> Result<Self, MalformedBody> {
@@ -293,7 +299,7 @@ impl ServiceMethodNotification {
     pub fn into_notification<Request: ServiceMethodRequest>(self) -> Result<Request, NetworkError> {
         if self.job_name == Request::REQ_NAME {
             Ok(Request::parse(&mut self.body.reader())
-                .map_err(|e| MalformedBody(Self::KIND, e.into()))?)
+                .map_err(|e| MalformedBody::new(Self::KIND, e))?)
         } else {
             Err(NetworkError::DifferentServiceMethod(
                 Request::REQ_NAME,
@@ -304,7 +310,8 @@ impl ServiceMethodNotification {
 }
 
 impl NetMessage for ServiceMethodNotification {
-    const KIND: EMsg = EMsg::k_EMsgServiceMethod;
+    type KindEnum = EMsg;
+    const KIND: Self::KindEnum = EMsg::k_EMsgServiceMethod;
     const IS_PROTOBUF: bool = true;
 
     fn read_body(data: BytesMut, header: &NetMessageHeader) -> Result<Self, MalformedBody> {
@@ -321,12 +328,13 @@ impl NetMessage for ServiceMethodNotification {
 }
 
 impl<ProtoMsg: RpcMessageWithKind> NetMessage for ProtoMsg {
-    const KIND: EMsg = <ProtoMsg as RpcMessageWithKind>::KIND;
+    type KindEnum = ProtoMsg::KindEnum;
+    const KIND: Self::KindEnum = <ProtoMsg as RpcMessageWithKind>::KIND;
     const IS_PROTOBUF: bool = true;
 
     fn read_body(data: BytesMut, _header: &NetMessageHeader) -> Result<Self, MalformedBody> {
         trace!("reading body of protobuf message {:?}", Self::KIND);
-        Self::parse(&mut data.reader()).map_err(|e| MalformedBody(Self::KIND, e.into()))
+        Self::parse(&mut data.reader()).map_err(|e| MalformedBody::new(Self::KIND, e))
     }
 
     fn write_body<W: Write>(&self, mut writer: W) -> Result<(), std::io::Error> {

@@ -1277,7 +1277,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientPeerChunkRequest {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientPeerChunkRequest {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientPeerChunkRequest;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientPeerChunkRequest;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientPeerChunkResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -1293,5 +1294,6 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientPeerChunkResponse {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientPeerChunkResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientPeerChunkResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientPeerChunkResponse;
 }

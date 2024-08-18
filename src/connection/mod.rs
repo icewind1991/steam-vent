@@ -1,7 +1,7 @@
+mod filter;
+
 use crate::auth::{begin_password_auth, AuthConfirmationHandler, GuardDataStore};
-use crate::message::{
-    NetMessage, ServiceMethodMessage, ServiceMethodNotification, ServiceMethodResponseMessage,
-};
+use crate::message::{NetMessage, ServiceMethodMessage, ServiceMethodResponseMessage};
 use crate::net::{JobId, NetMessageHeader, NetworkError, RawNetMessage};
 use crate::proto::enums_clientserver::EMsg;
 use crate::proto::steammessages_clientserver_login::CMsgClientHeartBeat;
@@ -9,15 +9,15 @@ use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, hello, login, ConnectionError, Session};
 use crate::transport::websocket::connect;
-use dashmap::DashMap;
+pub(crate) use filter::MessageFilter;
 use futures_util::future::{select, Either};
-use futures_util::{Sink, SinkExt};
+use futures_util::{FutureExt, Sink, SinkExt};
 use std::future::Future;
 use std::pin::pin;
 use std::sync::Arc;
 use std::time::Duration;
 use steamid_ng::SteamID;
-use tokio::sync::{broadcast, mpsc, oneshot, Mutex};
+use tokio::sync::{mpsc, Mutex};
 use tokio::task::spawn;
 use tokio::time::{sleep, timeout};
 use tokio_stream::wrappers::BroadcastStream;
@@ -26,11 +26,14 @@ use tracing::{debug, error};
 
 type Result<T, E = NetworkError> = std::result::Result<T, E>;
 
+pub(crate) type TransportWriter =
+    Arc<Mutex<dyn Sink<RawNetMessage, Error = NetworkError> + Unpin + Send>>;
+
 pub struct Connection {
     pub(crate) session: Session,
     filter: MessageFilter,
     rest: mpsc::Receiver<Result<RawNetMessage>>,
-    write: Arc<Mutex<dyn Sink<RawNetMessage, Error = NetworkError> + Unpin + Send>>,
+    write: TransportWriter,
     timeout: Duration,
 }
 
@@ -207,113 +210,59 @@ impl Connection {
         self.rest.recv().await.ok_or(NetworkError::EOF)?
     }
 
-    pub fn on<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> {
-        BroadcastStream::new(self.filter.on_notification(T::REQ_NAME))
+    pub(crate) fn writer(&self) -> TransportWriter {
+        self.write.clone()
+    }
+}
+
+pub trait ConnectionTrait {
+    fn get_filter(&self) -> &MessageFilter;
+
+    fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> {
+        BroadcastStream::new(self.get_filter().on_notification(T::REQ_NAME))
             .filter_map(|res| res.ok())
             .map(|raw| raw.into_notification())
     }
 
-    pub fn one<T: NetMessage>(&self) -> impl Future<Output = Result<(NetMessageHeader, T)>> {
+    fn one_with_header<T: NetMessage + 'static>(
+        &self,
+    ) -> impl Future<Output = Result<(NetMessageHeader, T)>> + 'static {
         // async block instead of async fn so we don't have to tie the lifetime of the returned future
         // to the lifetime of &self
-        let fut = self.filter.one_kind(T::KIND);
+        let fut = self.get_filter().one_kind(T::KIND);
         async move {
             let raw = fut.await.map_err(|_| NetworkError::EOF)?;
             Ok((raw.header.clone(), raw.into_message()?))
         }
     }
 
-    pub fn receive_by_job_id<T: NetMessage>(
+    fn one<T: NetMessage + 'static>(&self) -> impl Future<Output = Result<T>> + 'static {
+        self.one_with_header::<T>()
+            .map(|res| res.map(|(_, msg)| msg))
+    }
+
+    fn on_with_header<T: NetMessage + 'static>(
         &self,
-        job_id: JobId,
-    ) -> impl Future<Output = Result<T>> {
-        let future = self.filter.on_job_id(job_id);
+    ) -> impl Stream<Item = Result<(NetMessageHeader, T)>> + 'static {
+        BroadcastStream::new(self.get_filter().on_kind(T::KIND)).map(|raw| {
+            let raw = raw.map_err(|_| NetworkError::EOF)?;
+            Ok((raw.header.clone(), raw.into_message()?))
+        })
+    }
+
+    fn on<T: NetMessage + 'static>(&self) -> impl Stream<Item = Result<T>> + 'static {
+        self.on_with_header::<T>()
+            .map(|res| res.map(|(_, msg)| msg))
+    }
+
+    fn receive_by_job_id<T: NetMessage>(&self, job_id: JobId) -> impl Future<Output = Result<T>> {
+        let future = self.get_filter().on_job_id(job_id);
         async move { future.await.map_err(|_| NetworkError::EOF)?.into_message() }
     }
 }
 
-#[derive(Clone)]
-struct MessageFilter {
-    job_id_filters: Arc<DashMap<JobId, oneshot::Sender<RawNetMessage>>>,
-    notification_filters: Arc<DashMap<&'static str, broadcast::Sender<ServiceMethodNotification>>>,
-    kind_filters: Arc<DashMap<EMsg, broadcast::Sender<RawNetMessage>>>,
-    oneshot_kind_filters: Arc<DashMap<EMsg, oneshot::Sender<RawNetMessage>>>,
-}
-
-impl MessageFilter {
-    pub fn new<Input: Stream<Item = Result<RawNetMessage>> + Send + Unpin + 'static>(
-        mut source: Input,
-    ) -> (Self, mpsc::Receiver<Result<RawNetMessage>>) {
-        let (rest_tx, rx) = mpsc::channel(16);
-        let filter = MessageFilter {
-            job_id_filters: Default::default(),
-            kind_filters: Default::default(),
-            notification_filters: Default::default(),
-            oneshot_kind_filters: Default::default(),
-        };
-
-        let filter_send = filter.clone();
-        spawn(async move {
-            while let Some(res) = source.next().await {
-                if let Ok(message) = res {
-                    debug!(job_id = message.header.target_job_id.0, kind = ?message.kind, "processing message");
-                    if let Some((_, tx)) = filter_send
-                        .job_id_filters
-                        .remove(&message.header.target_job_id)
-                    {
-                        tx.send(message).ok();
-                    } else if let Some((_, tx)) =
-                        filter_send.oneshot_kind_filters.remove(&message.kind)
-                    {
-                        tx.send(message).ok();
-                    } else if message.kind == EMsg::k_EMsgServiceMethod {
-                        if let Ok(notification) =
-                            message.into_message::<ServiceMethodNotification>()
-                        {
-                            debug!(
-                                job_name = notification.job_name.as_str(),
-                                "processing notification"
-                            );
-                            if let Some(tx) = filter_send
-                                .notification_filters
-                                .get(notification.job_name.as_str())
-                            {
-                                tx.send(notification).ok();
-                            }
-                        }
-                    } else if let Some(tx) = filter_send.kind_filters.get(&message.kind) {
-                        tx.send(message).ok();
-                    } else {
-                        rest_tx.send(Ok(message)).await.ok();
-                    }
-                } else {
-                    rest_tx.send(res).await.ok();
-                }
-            }
-        });
-        (filter, rx)
-    }
-
-    pub fn on_job_id(&self, id: JobId) -> oneshot::Receiver<RawNetMessage> {
-        let (tx, rx) = oneshot::channel();
-        self.job_id_filters.insert(id, tx);
-        rx
-    }
-
-    pub fn on_notification(
-        &self,
-        job_name: &'static str,
-    ) -> broadcast::Receiver<ServiceMethodNotification> {
-        let tx = self
-            .notification_filters
-            .entry(job_name)
-            .or_insert_with(|| broadcast::channel(16).0);
-        tx.subscribe()
-    }
-
-    pub fn one_kind(&self, kind: EMsg) -> oneshot::Receiver<RawNetMessage> {
-        let (tx, rx) = oneshot::channel();
-        self.oneshot_kind_filters.insert(kind, tx);
-        rx
+impl ConnectionTrait for Connection {
+    fn get_filter(&self) -> &MessageFilter {
+        &self.filter
     }
 }

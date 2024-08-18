@@ -5,6 +5,7 @@ pub mod content_manifest;
 pub mod contenthubs;
 pub mod encrypted_app_ticket;
 pub mod enums;
+pub mod enums_clientserver;
 pub mod enums_productinfo;
 pub mod htmlmessages;
 pub mod offline_ticket;

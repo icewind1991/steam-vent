@@ -3,12 +3,13 @@ use crate::message::NetMessage;
 use crate::proto::steammessages_base::CMsgProtoBufHeader;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::{Buf, BufMut, BytesMut};
-use protobuf::{Enum, Message};
+use protobuf::Message;
 use std::borrow::Cow;
 use std::fmt::Debug;
 use std::io::{Cursor, Seek, SeekFrom};
 use steam_vent_crypto::CryptError;
 use steam_vent_proto::enums_clientserver::EMsg;
+use steam_vent_proto::{MsgKind, MsgKindEnum};
 use steamid_ng::SteamID;
 use thiserror::Error;
 use tracing::{debug, trace};
@@ -28,7 +29,7 @@ pub enum NetworkError {
     #[error("Failed to perform crypto handshake")]
     CryptoHandshakeFailed,
     #[error("Different message expected, expected {0:?}, got {1:?}")]
-    DifferentMessage(EMsg, EMsg),
+    DifferentMessage(MsgKind, MsgKind),
     #[error("Different service method expected, expected {0:?}, got {1:?}")]
     DifferentServiceMethod(&'static str, String),
     #[error("{0}")]
@@ -87,7 +88,7 @@ impl From<CMsgProtoBufHeader> for NetMessageHeader {
 impl NetMessageHeader {
     fn read<R: ReadBytesExt + Seek>(
         mut reader: R,
-        kind: EMsg,
+        kind: MsgKind,
         is_protobuf: bool,
     ) -> Result<(Self, usize)> {
         if is_protobuf {
@@ -139,17 +140,17 @@ impl NetMessageHeader {
         }
     }
 
-    pub(crate) fn write<W: WriteBytesExt>(
+    pub(crate) fn write<W: WriteBytesExt, K: MsgKindEnum>(
         &self,
         writer: &mut W,
-        kind: EMsg,
+        kind: K,
         proto: bool,
     ) -> std::io::Result<()> {
-        if kind == EMsg::k_EMsgChannelEncryptResponse {
+        if MsgKind::from(kind) == EMsg::k_EMsgChannelEncryptResponse {
             writer.write_u32::<LittleEndian>(kind.value() as u32)?;
         } else if proto {
             trace!("writing header for {:?} protobuf message: {:?}", kind, self);
-            let proto_header = self.proto_header(kind);
+            let proto_header = self.proto_header(kind.into());
             writer.write_u32::<LittleEndian>(kind.value() as u32 | PROTO_MASK)?;
             writer.write_u32::<LittleEndian>(proto_header.compute_size() as u32)?;
             proto_header.write_to_writer(writer)?;
@@ -167,7 +168,7 @@ impl NetMessageHeader {
         Ok(())
     }
 
-    fn proto_header(&self, kind: EMsg) -> CMsgProtoBufHeader {
+    fn proto_header(&self, kind: MsgKind) -> CMsgProtoBufHeader {
         let mut proto_header = CMsgProtoBufHeader::new();
         if self.source_job_id != JobId::NONE {
             proto_header.set_jobid_source(self.source_job_id.0);
@@ -194,7 +195,7 @@ impl NetMessageHeader {
         proto_header
     }
 
-    fn encode_size(&self, kind: EMsg, proto: bool) -> usize {
+    fn encode_size(&self, kind: MsgKind, proto: bool) -> usize {
         if kind == EMsg::k_EMsgChannelEncryptResponse {
             4
         } else if proto {
@@ -208,7 +209,7 @@ impl NetMessageHeader {
 
 #[derive(Debug, Clone)]
 pub struct RawNetMessage {
-    pub kind: EMsg,
+    pub kind: MsgKind,
     pub is_protobuf: bool,
     pub header: NetMessageHeader,
     pub data: BytesMut,
@@ -221,16 +222,11 @@ impl RawNetMessage {
     pub fn read(mut value: BytesMut) -> Result<Self> {
         let mut reader = Cursor::new(&value);
         let kind = reader
-            .read_i32::<LittleEndian>()
+            .read_u32::<LittleEndian>()
             .map_err(|_| NetworkError::InvalidHeader)?;
 
-        let is_protobuf = kind < 0;
-        let kind = kind & (!PROTO_MASK) as i32;
-
-        let kind = match EMsg::from_i32(kind) {
-            Some(kind) => kind,
-            None => return Err(NetworkError::InvalidMessageKind(kind)),
-        };
+        let is_protobuf = kind & PROTO_MASK == PROTO_MASK;
+        let kind = MsgKind((kind & !PROTO_MASK) as i32);
 
         trace!(
             "reading header for {:?} {}message",
@@ -259,10 +255,10 @@ impl RawNetMessage {
         Self::from_message_with_kind(header, message, T::KIND)
     }
 
-    pub fn from_message_with_kind<T: NetMessage>(
+    pub fn from_message_with_kind<T: NetMessage, K: MsgKindEnum>(
         mut header: NetMessageHeader,
         message: T,
-        kind: EMsg,
+        kind: K,
     ) -> Result<Self> {
         debug!("writing raw {:?} message", kind);
 
@@ -276,7 +272,7 @@ impl RawNetMessage {
         //
         // 8 byte frame header, 16 byte iv, header, body, 16 byte encryption padding
         let mut buff = BytesMut::with_capacity(
-            8 + 16 + header.encode_size(kind, T::IS_PROTOBUF) + body_size + 16,
+            8 + 16 + header.encode_size(kind.into(), T::IS_PROTOBUF) + body_size + 16,
         );
         buff.extend([0; 8 + 16]);
         let frame_header_buffer = buff.split_to(8);
@@ -293,7 +289,7 @@ impl RawNetMessage {
         trace!("encoded body({} bytes): {:?}", buff.len(), buff.as_ref());
 
         Ok(RawNetMessage {
-            kind,
+            kind: kind.into(),
             is_protobuf: T::IS_PROTOBUF,
             header,
             data: buff,
@@ -318,7 +314,7 @@ impl RawNetMessage {
             let body = T::read_body(self.data, &self.header)?;
             Ok(body)
         } else {
-            Err(NetworkError::DifferentMessage(T::KIND, self.kind))
+            Err(NetworkError::DifferentMessage(T::KIND.into(), self.kind))
         }
     }
 }

@@ -1,9 +1,5 @@
-mod generated;
-
-pub use generated::enums_clientserver::EMsg;
-pub use generated::*;
-
 pub use protobuf;
+use protobuf::Enum;
 use std::fmt::Debug;
 use std::io::{Read, Write};
 
@@ -42,5 +38,39 @@ impl RpcMessage for () {
 }
 
 pub trait RpcMessageWithKind: RpcMessage {
-    const KIND: EMsg;
+    type KindEnum: MsgKindEnum;
+    const KIND: Self::KindEnum;
+}
+
+#[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
+pub struct MsgKind(pub i32);
+
+impl MsgKind {
+    pub fn value(&self) -> i32 {
+        self.0
+    }
+}
+
+impl From<MsgKind> for i32 {
+    fn from(value: MsgKind) -> Self {
+        value.0
+    }
+}
+
+pub trait MsgKindEnum: Enum + Debug {
+    fn enum_value(&self) -> i32 {
+        <Self as Enum>::value(self)
+    }
+}
+
+impl<T: MsgKindEnum> From<T> for MsgKind {
+    fn from(value: T) -> Self {
+        MsgKind(value.enum_value())
+    }
+}
+
+impl<T: MsgKindEnum> PartialEq<T> for MsgKind {
+    fn eq(&self, other: &T) -> bool {
+        self.0.eq(&other.enum_value())
+    }
 }

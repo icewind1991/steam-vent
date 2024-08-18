@@ -40605,3 +40605,4 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCSendNotification {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::MsgKindEnum for ETFGCMsg {}

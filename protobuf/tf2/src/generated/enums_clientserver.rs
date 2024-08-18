@@ -9311,3 +9311,5 @@ impl ::std::default::Default for ECodecUsageReason {
 
 
 const _VENT_PROTO_VERSION_CHECK: () = ::steam_vent_proto_common::VERSION_0_5_0;
+
+impl ::steam_vent_proto_common::MsgKindEnum for EMsg {}

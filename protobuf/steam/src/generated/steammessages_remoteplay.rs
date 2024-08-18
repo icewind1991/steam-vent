@@ -23330,3 +23330,4 @@ impl ::steam_vent_proto_common::RpcMessage for CControllerConfigMsg {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::MsgKindEnum for EStreamControllerConfigMsg {}

@@ -4908,7 +4908,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGSServerType {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGSServerType {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgGSServerType;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgGSServerType;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGSStatusReply {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -4924,7 +4925,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGSStatusReply {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGSStatusReply {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgGSStatusReply;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgGSStatusReply;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGSPlayerList {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -4940,7 +4942,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGSPlayerList {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGSPlayerList {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgGSPlayerList;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgGSPlayerList;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGSUserPlaying {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -4956,7 +4959,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGSUserPlaying {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGSUserPlaying {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgGSUserPlaying;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgGSUserPlaying;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGSDisconnectNotice {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -4972,7 +4976,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGSDisconnectNotice {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGSDisconnectNotice {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgGSDisconnectNotice;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgGSDisconnectNotice;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGameServerData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5014,7 +5019,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientGMSServerQuery {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientGMSServerQuery {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientGMSServerQuery;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientGMSServerQuery;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGMSClientServerQueryResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5030,7 +5036,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGMSClientServerQueryResponse 
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGMSClientServerQueryResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgGMSClientServerQueryResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgGMSClientServerQueryResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGameServerOutOfDate {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5046,7 +5053,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGameServerOutOfDate {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGameServerOutOfDate {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgGameServerOutOfDate;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgGameServerOutOfDate;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGSAssociateWithClan {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5062,7 +5070,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGSAssociateWithClan {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGSAssociateWithClan {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgGSAssociateWithClan;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgGSAssociateWithClan;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGSAssociateWithClanResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5078,7 +5087,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGSAssociateWithClanResponse {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGSAssociateWithClanResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgGSAssociateWithClanResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgGSAssociateWithClanResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGSComputeNewPlayerCompatibility {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5095,7 +5105,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGSComputeNewPlayerCompatibili
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgGSComputeNewPlayerCompatibility {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgGSComputeNewPlayerCompatibility;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgGSComputeNewPlayerCompatibility;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgGSComputeNewPlayerCompatibilityResponse {
@@ -5113,5 +5124,6 @@ for CMsgGSComputeNewPlayerCompatibilityResponse {
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgGSComputeNewPlayerCompatibilityResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgGSComputeNewPlayerCompatibilityResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgGSComputeNewPlayerCompatibilityResponse;
 }

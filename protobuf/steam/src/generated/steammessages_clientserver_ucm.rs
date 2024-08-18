@@ -6607,7 +6607,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMAddScreenshot {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientUCMAddScreenshot {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMAddScreenshot;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMAddScreenshot;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMAddScreenshotResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6624,7 +6625,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMAddScreenshotRespons
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUCMAddScreenshotResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMAddScreenshotResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMAddScreenshotResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMDeleteScreenshot {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6640,7 +6642,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMDeleteScreenshot {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientUCMDeleteScreenshot {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMDeleteScreenshot;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMDeleteScreenshot;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMDeleteScreenshotResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6657,7 +6660,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMDeleteScreenshotResp
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUCMDeleteScreenshotResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMDeleteScreenshotResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMDeleteScreenshotResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMPublishFile {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6673,7 +6677,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMPublishFile {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientUCMPublishFile {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMPublishFile;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMPublishFile;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMPublishFileResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6689,7 +6694,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMPublishFileResponse 
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientUCMPublishFileResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMPublishFileResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMPublishFileResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMUpdatePublishedFile {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6705,7 +6711,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMUpdatePublishedFile 
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientUCMUpdatePublishedFile {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMUpdatePublishedFile;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMUpdatePublishedFile;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMUpdatePublishedFileResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6722,7 +6729,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMUpdatePublishedFileR
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUCMUpdatePublishedFileResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMUpdatePublishedFileResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMUpdatePublishedFileResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMDeletePublishedFile {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6738,7 +6746,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMDeletePublishedFile 
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientUCMDeletePublishedFile {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMDeletePublishedFile;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMDeletePublishedFile;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMDeletePublishedFileResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6755,7 +6764,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMDeletePublishedFileR
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUCMDeletePublishedFileResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMDeletePublishedFileResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMDeletePublishedFileResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates {
@@ -6773,7 +6783,8 @@ for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates {
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdates;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdates;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse {
@@ -6791,7 +6802,8 @@ for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse {
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMPublishedFileUpdated {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6808,7 +6820,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMPublishedFileUpdated
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUCMPublishedFileUpdated {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMPublishedFileUpdated;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMPublishedFileUpdated;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientWorkshopItemChangesRequest {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6851,7 +6864,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUCMSetUserPublishedFile
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUCMSetUserPublishedFileAction {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMSetUserPublishedFileAction;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMSetUserPublishedFileAction;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientUCMSetUserPublishedFileActionResponse {
@@ -6869,7 +6883,8 @@ for CMsgClientUCMSetUserPublishedFileActionResponse {
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUCMSetUserPublishedFileActionResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMSetUserPublishedFileActionResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMSetUserPublishedFileActionResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientUCMEnumeratePublishedFilesByUserAction {
@@ -6887,7 +6902,8 @@ for CMsgClientUCMEnumeratePublishedFilesByUserAction {
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUCMEnumeratePublishedFilesByUserAction {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMEnumeratePublishedFilesByUserAction;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMEnumeratePublishedFilesByUserAction;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientUCMEnumeratePublishedFilesByUserActionResponse {
@@ -6905,7 +6921,8 @@ for CMsgClientUCMEnumeratePublishedFilesByUserActionResponse {
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUCMEnumeratePublishedFilesByUserActionResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUCMEnumeratePublishedFilesByUserActionResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUCMEnumeratePublishedFilesByUserActionResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientScreenshotsChanged {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6921,5 +6938,6 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientScreenshotsChanged {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientScreenshotsChanged {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientScreenshotsChanged;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientScreenshotsChanged;
 }

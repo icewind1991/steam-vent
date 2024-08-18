@@ -1046,7 +1046,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientSiteLicenseCheckout {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientSiteLicenseCheckout {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientSiteLicenseCheckout;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseCheckout;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientSiteLicenseCheckoutResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -1063,7 +1064,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientSiteLicenseCheckoutResp
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientSiteLicenseCheckoutResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientSiteLicenseCheckoutResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseCheckoutResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientSiteLicenseGetAvailableSeats {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -1080,7 +1082,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientSiteLicenseGetAvailable
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientSiteLicenseGetAvailableSeats {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientSiteLicenseGetAvailableSeats;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseGetAvailableSeats;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientSiteLicenseGetAvailableSeatsResponse {
@@ -1098,7 +1101,8 @@ for CMsgClientSiteLicenseGetAvailableSeatsResponse {
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientSiteLicenseGetAvailableSeatsResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientSiteLicenseGetAvailableSeatsResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseGetAvailableSeatsResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientSiteLicenseGetContentCacheInfo {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -1115,7 +1119,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientSiteLicenseGetContentCa
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientSiteLicenseGetContentCacheInfo {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientSiteLicenseGetContentCacheInfo;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseGetContentCacheInfo;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientSiteLicenseGetContentCacheInfoResponse {
@@ -1133,5 +1138,6 @@ for CMsgClientSiteLicenseGetContentCacheInfoResponse {
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientSiteLicenseGetContentCacheInfoResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientSiteLicenseGetContentCacheInfoResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientSiteLicenseGetContentCacheInfoResponse;
 }

@@ -2021,7 +2021,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSSetScore {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientLBSSetScore {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLBSSetScore;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLBSSetScore;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSSetScoreResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2037,7 +2038,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSSetScoreResponse {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientLBSSetScoreResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLBSSetScoreResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLBSSetScoreResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSSetUGC {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2053,7 +2055,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSSetUGC {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientLBSSetUGC {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLBSSetUGC;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLBSSetUGC;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSSetUGCResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2069,7 +2072,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSSetUGCResponse {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientLBSSetUGCResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLBSSetUGCResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLBSSetUGCResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSFindOrCreateLB {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2085,7 +2089,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSFindOrCreateLB {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientLBSFindOrCreateLB {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLBSFindOrCreateLB;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLBSFindOrCreateLB;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSFindOrCreateLBResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2102,7 +2107,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSFindOrCreateLBRespon
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientLBSFindOrCreateLBResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLBSFindOrCreateLBResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLBSFindOrCreateLBResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSGetLBEntries {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2118,7 +2124,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSGetLBEntries {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientLBSGetLBEntries {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLBSGetLBEntries;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLBSGetLBEntries;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSGetLBEntriesResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2135,5 +2142,6 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientLBSGetLBEntriesResponse
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientLBSGetLBEntriesResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientLBSGetLBEntriesResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientLBSGetLBEntriesResponse;
 }

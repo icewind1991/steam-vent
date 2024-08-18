@@ -7044,7 +7044,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetRatelimitPolicyOn
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientMMSSetRatelimitPolicyOnClient {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSSetRatelimitPolicyOnClient;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSSetRatelimitPolicyOnClient;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSCreateLobby {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7060,7 +7061,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSCreateLobby {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSCreateLobby {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSCreateLobby;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSCreateLobby;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSCreateLobbyResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7076,7 +7078,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSCreateLobbyResponse 
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSCreateLobbyResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSCreateLobbyResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSCreateLobbyResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSJoinLobby {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7092,7 +7095,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSJoinLobby {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSJoinLobby {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSJoinLobby;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSJoinLobby;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSJoinLobbyResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7108,7 +7112,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSJoinLobbyResponse {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSJoinLobbyResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSJoinLobbyResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSJoinLobbyResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSLeaveLobby {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7124,7 +7129,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSLeaveLobby {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSLeaveLobby {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSLeaveLobby;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSLeaveLobby;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSLeaveLobbyResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7140,7 +7146,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSLeaveLobbyResponse {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSLeaveLobbyResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSLeaveLobbyResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSLeaveLobbyResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSGetLobbyList {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7156,7 +7163,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSGetLobbyList {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSGetLobbyList {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSGetLobbyList;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSGetLobbyList;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSGetLobbyListResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7173,7 +7181,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSGetLobbyListResponse
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientMMSGetLobbyListResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSGetLobbyListResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSGetLobbyListResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7189,7 +7198,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyData {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSSetLobbyData {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSSetLobbyData;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSSetLobbyData;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyDataResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7206,7 +7216,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyDataResponse
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientMMSSetLobbyDataResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSSetLobbyDataResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSSetLobbyDataResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSGetLobbyData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7222,7 +7233,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSGetLobbyData {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSGetLobbyData {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSGetLobbyData;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSGetLobbyData;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSLobbyData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7238,7 +7250,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSLobbyData {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSLobbyData {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSLobbyData;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSLobbyData;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSendLobbyChatMsg {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7254,7 +7267,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSendLobbyChatMsg {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSSendLobbyChatMsg {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSSendLobbyChatMsg;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSSendLobbyChatMsg;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSLobbyChatMsg {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7270,7 +7284,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSLobbyChatMsg {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSLobbyChatMsg {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSLobbyChatMsg;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSLobbyChatMsg;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyOwner {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7286,7 +7301,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyOwner {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSSetLobbyOwner {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSSetLobbyOwner;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSSetLobbyOwner;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyOwnerResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7303,7 +7319,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyOwnerRespons
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientMMSSetLobbyOwnerResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSSetLobbyOwnerResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSSetLobbyOwnerResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyLinked {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7319,7 +7336,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyLinked {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSSetLobbyLinked {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSSetLobbyLinked;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSSetLobbyLinked;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyGameServer {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7335,7 +7353,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSSetLobbyGameServer {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSSetLobbyGameServer {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSSetLobbyGameServer;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSSetLobbyGameServer;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSLobbyGameServerSet {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7351,7 +7370,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSLobbyGameServerSet {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSLobbyGameServerSet {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSLobbyGameServerSet;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSLobbyGameServerSet;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSUserJoinedLobby {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7367,7 +7387,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSUserJoinedLobby {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSUserJoinedLobby {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSUserJoinedLobby;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSUserJoinedLobby;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSUserLeftLobby {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7383,7 +7404,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSUserLeftLobby {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSUserLeftLobby {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSUserLeftLobby;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSUserLeftLobby;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSInviteToLobby {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7399,7 +7421,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSInviteToLobby {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSInviteToLobby {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSInviteToLobby;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSInviteToLobby;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSGetLobbyStatus {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7415,7 +7438,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSGetLobbyStatus {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientMMSGetLobbyStatus {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSGetLobbyStatus;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSGetLobbyStatus;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSGetLobbyStatusResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7432,5 +7456,6 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientMMSGetLobbyStatusRespon
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientMMSGetLobbyStatusResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientMMSGetLobbyStatusResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientMMSGetLobbyStatusResponse;
 }

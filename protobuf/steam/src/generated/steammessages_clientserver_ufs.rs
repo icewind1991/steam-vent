@@ -1379,7 +1379,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUFSGetUGCDetails {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientUFSGetUGCDetails {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUFSGetUGCDetails;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUFSGetUGCDetails;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUFSGetUGCDetailsResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -1396,7 +1397,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUFSGetUGCDetailsRespons
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUFSGetUGCDetailsResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUFSGetUGCDetailsResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUFSGetUGCDetailsResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUFSGetSingleFileInfo {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -1412,7 +1414,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUFSGetSingleFileInfo {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientUFSGetSingleFileInfo {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUFSGetSingleFileInfo;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUFSGetSingleFileInfo;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUFSGetSingleFileInfoResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -1429,7 +1432,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUFSGetSingleFileInfoRes
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientUFSGetSingleFileInfoResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUFSGetSingleFileInfoResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUFSGetSingleFileInfoResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUFSShareFile {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -1445,7 +1449,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUFSShareFile {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientUFSShareFile {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUFSShareFile;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUFSShareFile;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientUFSShareFileResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -1461,5 +1466,6 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientUFSShareFileResponse {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientUFSShareFileResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientUFSShareFileResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientUFSShareFileResponse;
 }

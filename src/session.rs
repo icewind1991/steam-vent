@@ -1,5 +1,5 @@
 use crate::auth::{ConfirmationError, ConfirmationMethod};
-use crate::connection::Connection;
+use crate::connection::{Connection, ConnectionTrait};
 use crate::eresult::EResult;
 use crate::net::{JobId, NetMessageHeader, NetworkError};
 use crate::proto::steammessages_base::CMsgIPAddress;
@@ -9,6 +9,7 @@ use crate::proto::steammessages_clientserver_login::{
 use crate::serverlist::ServerDiscoveryError;
 use protobuf::MessageField;
 use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_crypto::CryptError;
 use steamid_ng::{AccountType, Instance, SteamID, Universe};
@@ -76,8 +77,8 @@ impl From<EResult> for LoginError {
     }
 }
 
-#[derive(Debug)]
-pub struct JobIdCounter(AtomicU64);
+#[derive(Debug, Clone)]
+pub struct JobIdCounter(Arc<AtomicU64>);
 
 impl JobIdCounter {
     #[allow(clippy::should_implement_trait)]
@@ -88,11 +89,11 @@ impl JobIdCounter {
 
 impl Default for JobIdCounter {
     fn default() -> Self {
-        Self(AtomicU64::new(1))
+        Self(Arc::new(AtomicU64::new(1)))
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Session {
     pub session_id: i32,
     pub job_id: JobIdCounter,
@@ -188,9 +189,10 @@ async fn send_logon(
         ..NetMessageHeader::default()
     };
 
-    let fut = connection.one::<CMsgClientLogonResponse>();
+    let fut = connection.one_with_header::<CMsgClientLogonResponse>();
     connection.raw_send(header, logon).await?;
 
+    debug!("waiting for login response");
     let (header, response) = fut.await?;
     EResult::from_result(response.eresult()).map_err(LoginError::from)?;
     debug!(steam_id = u64::from(steam_id), "session started");

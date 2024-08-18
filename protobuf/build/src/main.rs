@@ -12,7 +12,6 @@ use std::hash::{Hash, Hasher};
 use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::rc::Rc;
-use tempfile::NamedTempFile;
 use walkdir::WalkDir;
 
 fn get_protos(path: impl AsRef<Path>) -> impl Iterator<Item = PathBuf> {
@@ -44,7 +43,7 @@ fn main() {
     let args: Args = Args::parse();
     let protos = get_protos(&args.protos).collect::<Vec<_>>();
 
-    let kinds = get_kinds();
+    let kinds = get_kinds(&args.protos, &protos);
     let service_generator = ServiceGenerator::new(kinds);
     let service_files = service_generator.files.clone();
 
@@ -61,11 +60,6 @@ fn main() {
         .customize_callback(service_generator)
         .customize(Customize::default().lite_runtime(true))
         .run_from_script();
-
-    let is_common = service_files.borrow().len() == 1
-        && service_files
-            .borrow()
-            .contains_key("enums_clientserver.proto");
 
     for (file, services) in service_files.borrow().iter() {
         let mut file = proto_path_to_rust_mod(&file);
@@ -85,26 +79,29 @@ fn main() {
                         use crate::#path::*;
                     }
                 });
+                let enum_kind_tokens = services.kind_enums.iter().map(|enum_name| {
+                    let ident = Ident::new(&enum_name, Span::call_site());
+                    quote!(
+                        impl ::steam_vent_proto_common::MsgKindEnum for #ident {}
+                    )
+                });
                 let tokens = quote! {
                     #(#import_tokens)*
                     #(#message_tokens)*
                     #(#service_tokens)*
                     #(#method_tokens)*
+                    #(#enum_kind_tokens)*
                 };
 
                 let syntax_tree = syn::parse2(tokens).unwrap();
                 let formatted = prettyplease::unparse(&syntax_tree);
                 format!("{}\n\n{}", builder_version_check, formatted)
-            } else if !is_common {
-                builder_version_check.clone()
             } else {
-                String::new()
+                builder_version_check.clone()
             };
 
             code = format!("{}\n\n{}", code, extra_code);
-            if !is_common {
-                code = code.replace("::protobuf::", "::steam_vent_proto_common::protobuf::");
-            }
+            code = code.replace("::protobuf::", "::steam_vent_proto_common::protobuf::");
 
             let mut file = OpenOptions::new()
                 .write(true)
@@ -179,17 +176,19 @@ struct Service {
 
 struct ServiceMessage {
     name: String,
-    kind: Option<String>,
+    kind: Option<Kind>,
 }
 
 impl ServiceMessage {
     fn gen(&self) -> TokenStream {
         let message_ident = Ident::new(&self.name, Span::call_site());
-        let kind_tokens = self.kind.as_deref().map(|kind| {
-            let kind_ident = Ident::new(kind, Span::call_site());
+        let kind_tokens = self.kind.as_ref().map(|kind| {
+            let kind_ident = kind.ident();
+            let enum_ident = kind.enum_ident();
             quote! {
                 impl ::steam_vent_proto_common::RpcMessageWithKind for #message_ident {
-                    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::#kind_ident;
+                    type KindEnum = #enum_ident;
+                    const KIND: Self::KindEnum = #kind_ident;
                 }
             }
         });
@@ -219,12 +218,13 @@ struct FileServices {
     services: Vec<Service>,
     imports: Vec<String>,
     messages: Vec<ServiceMessage>,
+    kind_enums: Vec<String>,
 }
 
 impl FileServices {
     fn is_empty(&self) -> bool {
         // we don't check imports, since we only need to import stuff if we generate code
-        self.services.is_empty() && self.messages.is_empty()
+        self.services.is_empty() && self.messages.is_empty() && self.kind_enums.is_empty()
     }
 
     fn methods(&self) -> impl Iterator<Item = ServiceMethod> {
@@ -243,11 +243,11 @@ impl FileServices {
 struct ServiceGenerator {
     files: Rc<RefCell<AHashMap<String, FileServices>>>,
     descriptions: Rc<RefCell<AHashMap<String, String>>>,
-    kinds: Vec<String>,
+    kinds: Vec<Kind>,
 }
 
 impl ServiceGenerator {
-    pub fn new(kinds: Vec<String>) -> Self {
+    pub fn new(kinds: Vec<Kind>) -> Self {
         Self {
             files: Rc::new(RefCell::new(AHashMap::with_capacity_and_hasher(
                 16,
@@ -258,11 +258,11 @@ impl ServiceGenerator {
         }
     }
 
-    fn find_kind(&self, message_type: &str) -> Option<String> {
+    fn find_kind(&self, message_type: &str) -> Option<Kind> {
         let postfix = message_type.strip_prefix('C')?;
         self.kinds
             .iter()
-            .find(|e_kind| postfix.eq_ignore_ascii_case(e_kind.strip_prefix("k_E").unwrap()))
+            .find(|e_kind| e_kind.matches(postfix))
             .cloned()
     }
 }
@@ -331,6 +331,13 @@ impl CustomizeCallback for ServiceGenerator {
                 kind: self.find_kind(msg.name()),
             })
             .collect();
+        let kind_enums: Vec<_> = file
+            .enums()
+            .filter_map(|enum_type| {
+                (enum_type.name().starts_with("E") && enum_type.name().ends_with("Msg"))
+                    .then(|| enum_type.name().to_string())
+            })
+            .collect();
 
         for service in services.iter() {
             for method in service.methods.iter() {
@@ -348,6 +355,7 @@ impl CustomizeCallback for ServiceGenerator {
                 services,
                 imports,
                 messages,
+                kind_enums,
             },
         );
         Customize::default()
@@ -398,30 +406,68 @@ fn ident_continue(c: char) -> bool {
     (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_'
 }
 
-fn get_kinds() -> Vec<String> {
-    let source = include_bytes!("./enums_clientserver.proto");
-    let mut file = NamedTempFile::new().unwrap();
-    file.write_all(source).unwrap();
-    let path = file.into_temp_path();
-    let path: &Path = &path;
-
+fn get_kinds(base: &Path, protos: &[PathBuf]) -> Vec<Kind> {
     let mut parser = Parser::new();
-    parser.pure().include(path.parent().unwrap()).input(path);
-    let parsed = parser
-        .parse_and_typecheck()
-        .unwrap()
-        .file_descriptors
-        .pop()
-        .unwrap();
-    let kinds_enum = parsed
-        .enum_type
-        .into_iter()
-        .find(|e| e.name() == "EMsg")
-        .unwrap();
+    parser.pure().include(base).inputs(protos);
+    let mut parsed = parser.parse_and_typecheck().unwrap().file_descriptors;
+    let kinds_enums = parsed
+        .iter_mut()
+        .flat_map(|parsed| {
+            let mod_name = proto_path_to_rust_mod(parsed.name());
+            parsed
+                .enum_type
+                .iter_mut()
+                .map(move |e| (mod_name.clone(), e))
+        })
+        .filter(|(_, e)| e.name().starts_with("E") && e.name().ends_with("Msg"));
 
-    kinds_enum
-        .value
-        .into_iter()
-        .map(|opt| opt.name.unwrap())
+    kinds_enums
+        .flat_map(|(mod_name, kinds_enum)| {
+            let prefix: String = kinds_enum
+                .name()
+                .chars()
+                .skip(1)
+                .take_while(char::is_ascii_uppercase)
+                .collect();
+            let prefix = format!("k_EMsg{}", &prefix[0..prefix.len() - 1]);
+            let enum_name = kinds_enum.take_name();
+            kinds_enum.value.iter_mut().map(move |opt| Kind {
+                mod_name: mod_name.clone(),
+                enum_name: enum_name.clone(),
+                prefix: prefix.clone(),
+                variant: opt.take_name(),
+            })
+        })
         .collect()
+}
+
+#[derive(Debug, Clone)]
+struct Kind {
+    mod_name: String,
+    enum_name: String,
+    prefix: String,
+    variant: String,
+}
+
+impl Kind {
+    pub fn matches(&self, struct_name: &str) -> bool {
+        let struct_name = struct_name.strip_prefix("Msg").unwrap_or(struct_name);
+        let Some(stripped) = self.variant.strip_prefix(&self.prefix) else {
+            return false;
+        };
+        struct_name.eq_ignore_ascii_case(stripped)
+    }
+
+    pub fn ident(&self) -> TokenStream {
+        let path = Ident::new(&self.mod_name, Span::call_site());
+        let enum_ident = Ident::new(&self.enum_name, Span::call_site());
+        let variant_ident = Ident::new(&self.variant, Span::call_site());
+        quote!(crate::#path::#enum_ident::#variant_ident)
+    }
+
+    pub fn enum_ident(&self) -> TokenStream {
+        let path = Ident::new(&self.mod_name, Span::call_site());
+        let enum_ident = Ident::new(&self.enum_name, Span::call_site());
+        quote!(crate::#path::#enum_ident)
+    }
 }

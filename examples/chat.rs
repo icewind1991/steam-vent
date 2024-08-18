@@ -7,7 +7,7 @@ use steam_vent::auth::{
 use steam_vent::proto::steammessages_friendmessages_steamclient::{
     CFriendMessages_IncomingMessage_Notification, CFriendMessages_SendMessage_Request,
 };
-use steam_vent::{Connection, ConnectionError, ServerList};
+use steam_vent::{Connection, ConnectionError, ConnectionTrait, ServerList};
 use steamid_ng::SteamID;
 use tokio::spawn;
 use tokio_stream::StreamExt;
@@ -35,7 +35,8 @@ async fn main() -> Result<(), ConnectionError> {
     )
     .await?;
 
-    let mut incoming_messages = connection.on::<CFriendMessages_IncomingMessage_Notification>();
+    let mut incoming_messages =
+        connection.on_notification::<CFriendMessages_IncomingMessage_Notification>();
     spawn(async move {
         while let Some(Ok(incoming)) = incoming_messages.next().await {
             println!("{}: {}", incoming.steamid_friend(), incoming.message());

@@ -388,7 +388,6 @@ dependencies = [
  "protobuf-parse",
  "quote",
  "syn",
- "tempfile",
  "walkdir",
 ]
 

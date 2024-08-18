@@ -24,7 +24,7 @@
 
 /// Generated files are compatible only with the same version
 /// of protobuf runtime.
-const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_4_0;
+const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
 // Note: you cannot use pattern matching for enums with allow_alias option
 #[derive(Clone,Copy,Eq,Debug)]
@@ -3000,17 +3000,17 @@ pub enum EMsg {
 
 impl ::std::cmp::PartialEq for EMsg {
     fn eq(&self, other: &Self) -> bool {
-        ::protobuf::Enum::value(self) == ::protobuf::Enum::value(other)
+        ::steam_vent_proto_common::protobuf::Enum::value(self) == ::steam_vent_proto_common::protobuf::Enum::value(other)
     }
 }
 
 impl ::std::hash::Hash for EMsg {
     fn hash<H : ::std::hash::Hasher>(&self, state: &mut H) {
-        state.write_i32(::protobuf::Enum::value(self))
+        state.write_i32(::steam_vent_proto_common::protobuf::Enum::value(self))
     }
 }
 
-impl ::protobuf::Enum for EMsg {
+impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
     const NAME: &'static str = "EMsg";
 
     fn value(&self) -> i32 {
@@ -8944,7 +8944,7 @@ pub enum EClientPersonaStateFlag {
     k_EClientPersonaStateFlagWatching = 16384,
 }
 
-impl ::protobuf::Enum for EClientPersonaStateFlag {
+impl ::steam_vent_proto_common::protobuf::Enum for EClientPersonaStateFlag {
     const NAME: &'static str = "EClientPersonaStateFlag";
 
     fn value(&self) -> i32 {
@@ -9032,7 +9032,7 @@ pub enum EMsgClanAccountFlags {
     k_EMsgClanAccountFlagOGG = 16,
 }
 
-impl ::protobuf::Enum for EMsgClanAccountFlags {
+impl ::steam_vent_proto_common::protobuf::Enum for EMsgClanAccountFlags {
     const NAME: &'static str = "EMsgClanAccountFlags";
 
     fn value(&self) -> i32 {
@@ -9103,7 +9103,7 @@ pub enum ESteamReviewScore {
     k_ESteamReviewScore_None = 0,
 }
 
-impl ::protobuf::Enum for ESteamReviewScore {
+impl ::steam_vent_proto_common::protobuf::Enum for ESteamReviewScore {
     const NAME: &'static str = "ESteamReviewScore";
 
     fn value(&self) -> i32 {
@@ -9179,7 +9179,7 @@ pub enum ECodecUsagePlatform {
     k_ECodecUsagePlatformSteamDeck = 4,
 }
 
-impl ::protobuf::Enum for ECodecUsagePlatform {
+impl ::steam_vent_proto_common::protobuf::Enum for ECodecUsagePlatform {
     const NAME: &'static str = "ECodecUsagePlatform";
 
     fn value(&self) -> i32 {
@@ -9237,7 +9237,7 @@ pub enum ECodecUsageReason {
     k_ECodecUsageReasonGameVideo = 3,
 }
 
-impl ::protobuf::Enum for ECodecUsageReason {
+impl ::steam_vent_proto_common::protobuf::Enum for ECodecUsageReason {
     const NAME: &'static str = "ECodecUsageReason";
 
     fn value(&self) -> i32 {
@@ -9280,3 +9280,6 @@ impl ::std::default::Default for ECodecUsageReason {
 
 
 
+const _VENT_PROTO_VERSION_CHECK: () = ::steam_vent_proto_common::VERSION_0_5_0;
+
+impl ::steam_vent_proto_common::MsgKindEnum for EMsg {}

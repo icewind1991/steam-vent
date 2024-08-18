@@ -2822,7 +2822,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientAppStatus {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgRemoteClientAppStatus {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgRemoteClientAppStatus;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgRemoteClientAppStatus;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientStartStream {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2838,7 +2839,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientStartStream {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgRemoteClientStartStream {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgRemoteClientStartStream;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgRemoteClientStartStream;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientStartStreamResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2855,7 +2857,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientStartStreamRespon
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgRemoteClientStartStreamResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgRemoteClientStartStreamResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgRemoteClientStartStreamResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientPing {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2871,7 +2874,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientPing {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgRemoteClientPing {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgRemoteClientPing;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgRemoteClientPing;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientPingResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2887,7 +2891,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientPingResponse {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgRemoteClientPingResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgRemoteClientPingResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgRemoteClientPingResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientAcceptEULA {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2903,7 +2908,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientAcceptEULA {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgRemoteClientAcceptEULA {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgRemoteClientAcceptEULA;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgRemoteClientAcceptEULA;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientGetControllerConfig {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2920,7 +2926,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientGetControllerConf
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgRemoteClientGetControllerConfig {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgRemoteClientGetControllerConfig;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgRemoteClientGetControllerConfig;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgRemoteClientGetControllerConfigResponse {
@@ -2938,7 +2945,8 @@ for CMsgRemoteClientGetControllerConfigResponse {
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgRemoteClientGetControllerConfigResponse {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgRemoteClientGetControllerConfigResponse;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgRemoteClientGetControllerConfigResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientStreamingEnabled {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2954,5 +2962,6 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgRemoteClientStreamingEnabled 
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgRemoteClientStreamingEnabled {
-    const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgRemoteClientStreamingEnabled;
+    type KindEnum = crate::enums_clientserver::EMsg;
+    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgRemoteClientStreamingEnabled;
 }
