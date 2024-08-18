@@ -1,9 +1,9 @@
 use std::error::Error;
-use steam_vent::{Connection, ServerList};
-use steam_vent_proto::steammessages_clientserver_appinfo::{
+use steam_vent::proto::steammessages_clientserver_appinfo::{
     cmsg_client_picsproduct_info_request, CMsgClientPICSProductInfoRequest,
     CMsgClientPICSProductInfoResponse,
 };
+use steam_vent::{Connection, ServerList};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {

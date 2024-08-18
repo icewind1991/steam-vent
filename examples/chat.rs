@@ -4,10 +4,10 @@ use steam_vent::auth::{
     ConsoleAuthConfirmationHandler, DeviceConfirmationHandler, EitherConfirmationHandler,
     FileGuardDataStore,
 };
-use steam_vent::{Connection, ConnectionError, ServerList};
-use steam_vent_proto::steammessages_friendmessages_steamclient::{
+use steam_vent::proto::steammessages_friendmessages_steamclient::{
     CFriendMessages_IncomingMessage_Notification, CFriendMessages_SendMessage_Request,
 };
+use steam_vent::{Connection, ConnectionError, ServerList};
 use steamid_ng::SteamID;
 use tokio::spawn;
 use tokio_stream::StreamExt;
