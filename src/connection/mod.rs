@@ -16,7 +16,7 @@ use std::future::Future;
 use std::pin::pin;
 use std::sync::Arc;
 use std::time::Duration;
-use steamid_ng::SteamID;
+use steamid_ng::{AccountType, SteamID};
 use tokio::sync::{mpsc, Mutex};
 use tokio::task::spawn;
 use tokio::time::{sleep, timeout};
@@ -54,7 +54,15 @@ impl Connection {
 
     pub async fn anonymous(server_list: ServerList) -> Result<Self, ConnectionError> {
         let mut connection = Self::connect(server_list).await?;
-        connection.session = anonymous(&mut connection).await?;
+        connection.session = anonymous(&mut connection, AccountType::AnonUser).await?;
+        connection.setup_heartbeat();
+
+        Ok(connection)
+    }
+
+    pub async fn anonymous_server(server_list: ServerList) -> Result<Self, ConnectionError> {
+        let mut connection = Self::connect(server_list).await?;
+        connection.session = anonymous(&mut connection, AccountType::AnonGameServer).await?;
         connection.setup_heartbeat();
 
         Ok(connection)
@@ -220,7 +228,7 @@ impl Connection {
 pub trait ConnectionTrait {
     fn get_filter(&self) -> &MessageFilter;
 
-    fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> {
+    fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> + 'static {
         BroadcastStream::new(self.get_filter().on_notification(T::REQ_NAME))
             .filter_map(|res| res.ok())
             .map(|raw| raw.into_notification())

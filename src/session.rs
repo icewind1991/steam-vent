@@ -122,9 +122,14 @@ impl Session {
             ..NetMessageHeader::default()
         }
     }
+
+    pub fn is_server(&self) -> bool {
+        self.steam_id.account_type() == AccountType::AnonGameServer
+            || self.steam_id.account_type() == AccountType::GameServer
+    }
 }
 
-pub async fn anonymous(connection: &mut Connection) -> Result<Session> {
+pub async fn anonymous(connection: &mut Connection, account_type: AccountType) -> Result<Session> {
     let mut ip = CMsgIPAddress::new();
     ip.set_v4(0);
 
@@ -144,7 +149,7 @@ pub async fn anonymous(connection: &mut Connection) -> Result<Session> {
     send_logon(
         connection,
         logon,
-        SteamID::new(0, Instance::All, AccountType::AnonUser, Universe::Public),
+        SteamID::new(0, Instance::All, account_type, Universe::Public),
     )
     .await
 }
