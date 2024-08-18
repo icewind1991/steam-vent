@@ -16038,8 +16038,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientHello {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientHello {
-    type KindEnum = crate::enums_clientserver::EMsg;
-    const KIND: Self::KindEnum = crate::enums_clientserver::EMsg::k_EMsgClientHello;
+    type KindEnum = crate::gcsystemmsgs::EGCBaseClientMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::EGCBaseClientMsg::k_EMsgGCClientHello;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgServerHello {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {

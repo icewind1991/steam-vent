@@ -12,6 +12,7 @@ use std::hash::{Hash, Hasher};
 use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::rc::Rc;
+use syn::__private::str;
 use walkdir::WalkDir;
 
 fn get_protos(path: impl AsRef<Path>) -> impl Iterator<Item = PathBuf> {
@@ -258,11 +259,11 @@ impl ServiceGenerator {
         }
     }
 
-    fn find_kind(&self, message_type: &str) -> Option<Kind> {
+    fn find_kind(&self, message_type: &str, file_name: &str) -> Option<Kind> {
         let postfix = message_type.strip_prefix('C')?;
         self.kinds
             .iter()
-            .find(|e_kind| e_kind.matches(postfix))
+            .find(|e_kind| e_kind.matches(postfix, file_name))
             .cloned()
     }
 }
@@ -328,7 +329,7 @@ impl CustomizeCallback for ServiceGenerator {
             .messages()
             .map(|msg| ServiceMessage {
                 name: msg.name().into(),
-                kind: self.find_kind(msg.name()),
+                kind: self.find_kind(msg.name(), file.name()),
             })
             .collect();
         let kind_enums: Vec<_> = file
@@ -421,7 +422,7 @@ fn get_kinds(base: &Path, protos: &[PathBuf]) -> Vec<Kind> {
         })
         .filter(|(_, e)| e.name().starts_with("E") && e.name().ends_with("Msg"));
 
-    kinds_enums
+    let mut kinds = kinds_enums
         .flat_map(|(mod_name, kinds_enum)| {
             let prefix: String = kinds_enum
                 .name()
@@ -429,33 +430,40 @@ fn get_kinds(base: &Path, protos: &[PathBuf]) -> Vec<Kind> {
                 .skip(1)
                 .take_while(char::is_ascii_uppercase)
                 .collect();
-            let prefix = format!("k_EMsg{}", &prefix[0..prefix.len() - 1]);
+            let prefix = prefix[0..prefix.len() - 1].to_string();
+            let variant_prefix = format!("k_EMsg{}", prefix);
             let enum_name = kinds_enum.take_name();
             kinds_enum.value.iter_mut().map(move |opt| Kind {
                 mod_name: mod_name.clone(),
                 enum_name: enum_name.clone(),
-                prefix: prefix.clone(),
+                enum_prefix: prefix.to_ascii_lowercase(),
+                variant_prefix: variant_prefix.clone(),
                 variant: opt.take_name(),
             })
         })
-        .collect()
+        .collect::<Vec<_>>();
+
+    // sort kinds with prefix in front
+    kinds.sort_by(|a, b| a.enum_prefix.len().cmp(&b.enum_prefix.len()).reverse());
+    kinds
 }
 
 #[derive(Debug, Clone)]
 struct Kind {
     mod_name: String,
     enum_name: String,
-    prefix: String,
+    enum_prefix: String,
+    variant_prefix: String,
     variant: String,
 }
 
 impl Kind {
-    pub fn matches(&self, struct_name: &str) -> bool {
+    pub fn matches(&self, struct_name: &str, file_name: &str) -> bool {
         let struct_name = struct_name.strip_prefix("Msg").unwrap_or(struct_name);
-        let Some(stripped) = self.variant.strip_prefix(&self.prefix) else {
+        let Some(stripped) = self.variant.strip_prefix(&self.variant_prefix) else {
             return false;
         };
-        struct_name.eq_ignore_ascii_case(stripped)
+        file_name.contains(&self.enum_prefix) && struct_name.eq_ignore_ascii_case(stripped)
     }
 
     pub fn ident(&self) -> TokenStream {
