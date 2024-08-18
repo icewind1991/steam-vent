@@ -93,10 +93,12 @@ impl Connection {
                         .submit_confirmation(&connection, confirmation_action)
                         .await?;
                     tokens_fut.await?
-                } else {
+                } else if begin.action_required() {
                     return Err(ConnectionError::UnsupportedConfirmationAction(
                         allowed_confirmations.clone(),
                     ));
+                } else {
+                    tokens_fut.await?
                 }
             }
             Either::Right((tokens, _)) => tokens?,
