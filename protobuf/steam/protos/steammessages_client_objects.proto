@@ -47,6 +47,7 @@ enum ESteamDeckKeyboardLayout {
 	k_ESteamDeckKeyboardLayout_Chinese_Traditional_Cangjie = 32;
 	k_ESteamDeckKeyboardLayout_Japanese_Kana = 33;
 	k_ESteamDeckKeyboardLayout_Chinese_Traditional_Quick = 34;
+	k_ESteamDeckKeyboardLayout_Indonesian = 35;
 }
 
 message SteamMessagesClientIClientForcedEnumDependencies {
@@ -213,6 +214,9 @@ message CMsgBluetoothDevicesData {
 		optional bool is_connected = 6;
 		optional bool is_paired = 7;
 		optional int32 strength_raw = 8;
+		optional bool wake_allowed = 9;
+		optional bool wake_allowed_supported = 10;
+		optional int32 battery_percent = 11;
 	}
 
 	message Manager {
@@ -266,7 +270,6 @@ message CMsgSystemPerfLimits {
 	optional int32 display_external_refresh_manual_hz_min = 19;
 	optional int32 display_external_refresh_manual_hz_max = 20;
 	repeated int32 fps_limit_options_external = 21;
-	optional bool is_tearing_supported = 22;
 	optional bool is_vrr_supported = 23;
 	optional bool is_dynamic_refresh_rate_in_steam_supported = 24;
 	optional bool is_split_scaling_and_filtering_supported = 25;
@@ -274,6 +277,7 @@ message CMsgSystemPerfLimits {
 	repeated .ESplitScalingScaler split_scaling_scalers_available = 27;
 	optional bool is_hdr_supported = 28;
 	optional int32 display_refresh_manual_hz_oc_max = 29;
+	optional bool disable_refresh_rate_management = 30;
 }
 
 message CMsgSystemPerfSettingsGlobal {
@@ -290,7 +294,7 @@ message CMsgSystemPerfSettingsGlobal {
 	optional bool is_hdr_debug_heatmap_enabled = 13;
 	optional bool force_hdr_wide_gammut_for_sdr = 15 [default = true];
 	optional bool allow_experimental_hdr = 16;
-	optional float sdr_to_hdr_brightness = 17;
+	optional float sdr_to_hdr_brightness = 22;
 	optional bool debug_force_hdr_support = 18;
 	optional bool force_hdr_10pq_output_debug = 19;
 	optional bool is_display_oc_enabled = 20;
@@ -318,8 +322,6 @@ message CMsgSystemPerfSettingsPerApp {
 	optional int32 fps_limit_external = 18;
 	optional bool is_tearing_enabled = 19;
 	optional bool is_vrr_enabled = 20;
-	optional bool is_composite_debug_enabled = 21;
-	optional bool force_composite = 22;
 	optional bool use_dynamic_refresh_rate_in_steam = 23;
 	optional .ESplitScalingFilter split_scaling_filter = 24 [default = k_ESplitScalingFilter_Invalid];
 	optional .ESplitScalingScaler split_scaling_scaler = 25 [default = k_ESplitScalingScaler_Invalid];
@@ -369,6 +371,16 @@ message CMsgSystemPerfUpdateSettings {
 		bool reset_to_default = 2;
 		.CMsgSystemPerfSettings settings_delta = 3;
 	}
+}
+
+message CMsgSystemPerfLegacySettingEntry {
+	optional uint64 profile_game_id = 1;
+	optional .CMsgSystemPerfSettingsPerApp settings = 2;
+}
+
+message CMsgSystemPerfLegacySettings {
+	optional .CMsgSystemPerfSettingsGlobal global = 1;
+	repeated .CMsgSystemPerfLegacySettingEntry per_app_settings = 2;
 }
 
 message CMsgSystemDockUpdateState {
@@ -485,6 +497,7 @@ message CMsgSystemDisplay {
 	optional bool is_vrr_enabled = 15;
 	optional bool is_hdr_capable = 16;
 	optional bool is_hdr_enabled = 17;
+	repeated int32 supported_refresh_rates = 18;
 }
 
 message CMsgSystemDisplayManagerState {
@@ -517,7 +530,7 @@ message CMsgSystemManagerSettings {
 	optional float display_nightmode_schedule_starttime = 18;
 	optional float display_nightmode_schedule_endtime = 19;
 	optional bool display_diagnostics_enabled = 20;
-	optional float als_lux_latest = 21;
+	optional float als_lux_primary = 21;
 	optional float als_lux_median = 22;
 	optional float display_backlight_raw = 23;
 	optional float display_brightness_adaptivemin = 24;
@@ -528,6 +541,13 @@ message CMsgSystemManagerSettings {
 	optional bool is_display_brightness_available = 29;
 	optional bool is_display_colormanagement_available = 31;
 	optional float display_colorgamut = 32;
+	optional float als_lux_alternate = 33;
+	optional bool is_display_colortemp_available = 34;
+	optional float display_colortemp = 35;
+	optional float display_colortemp_default = 36;
+	optional bool display_colortemp_enabled = 37;
+	optional .EColorGamutLabelSet display_colorgamut_labelset = 38 [default = k_ColorGamutLabelSet_Default];
+	optional float display_brightness_overdrive_hdr_split = 39;
 }
 
 message CMsgSelectOSBranchParams {
@@ -548,6 +568,7 @@ message CMsgSystemUpdateCheckResult {
 	optional bool available = 4;
 	optional string version = 5;
 	optional string auto_message = 6;
+	optional bool system_restart_pending = 7;
 }
 
 message CMsgSystemUpdateApplyParams {
@@ -625,4 +646,18 @@ message CMsgGenerateSystemReportReply {
 message CMsgWebUITransportInfo {
 	optional uint32 port = 1;
 	optional string auth_key = 2;
+}
+
+message CMsgWebUITransportFailure {
+	optional uint32 connect_count = 1;
+}
+
+message CMsgClientShaderHitCacheEntry {
+	optional bytes key_sha = 1;
+	optional bytes code_sha = 2;
+	optional uint64 time_last_reported = 3;
+}
+
+message CMsgClientShaderHitCache {
+	repeated .CMsgClientShaderHitCacheEntry entries = 1;
 }

@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Get server's idea of the current time"]
 // @@protoc_insertion_point(message:CTwoFactor_Time_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTwoFactor_Time_Request {
@@ -501,7 +500,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_Time_Response {
     }
 }
 
-#[doc = "Get two-factor authentication settings for the logged-in account"]
 // @@protoc_insertion_point(message:CTwoFactor_Status_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTwoFactor_Status_Request {
@@ -1187,7 +1185,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_Status_Response
     }
 }
 
-#[doc = "Add two-factor authenticator to the logged-in account"]
 // @@protoc_insertion_point(message:CTwoFactor_AddAuthenticator_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTwoFactor_AddAuthenticator_Request {
@@ -1202,8 +1199,6 @@ pub struct CTwoFactor_AddAuthenticator_Request {
     pub authenticator_type: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CTwoFactor_AddAuthenticator_Request.device_identifier)
     pub device_identifier: ::std::option::Option<::std::string::String>,
-    // @@protoc_insertion_point(field:CTwoFactor_AddAuthenticator_Request.sms_phone_id)
-    pub sms_phone_id: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CTwoFactor_AddAuthenticator_Request.http_headers)
     pub http_headers: ::std::vec::Vec<::std::string::String>,
     // @@protoc_insertion_point(field:CTwoFactor_AddAuthenticator_Request.version)
@@ -1336,42 +1331,6 @@ impl CTwoFactor_AddAuthenticator_Request {
         self.device_identifier.take().unwrap_or_else(|| ::std::string::String::new())
     }
 
-    // optional string sms_phone_id = 6;
-
-    pub fn sms_phone_id(&self) -> &str {
-        match self.sms_phone_id.as_ref() {
-            Some(v) => v,
-            None => "",
-        }
-    }
-
-    pub fn clear_sms_phone_id(&mut self) {
-        self.sms_phone_id = ::std::option::Option::None;
-    }
-
-    pub fn has_sms_phone_id(&self) -> bool {
-        self.sms_phone_id.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_sms_phone_id(&mut self, v: ::std::string::String) {
-        self.sms_phone_id = ::std::option::Option::Some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_sms_phone_id(&mut self) -> &mut ::std::string::String {
-        if self.sms_phone_id.is_none() {
-            self.sms_phone_id = ::std::option::Option::Some(::std::string::String::new());
-        }
-        self.sms_phone_id.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_sms_phone_id(&mut self) -> ::std::string::String {
-        self.sms_phone_id.take().unwrap_or_else(|| ::std::string::String::new())
-    }
-
     // optional uint32 version = 8;
 
     pub fn version(&self) -> u32 {
@@ -1417,9 +1376,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_AddAuthenticato
                 42 => {
                     self.device_identifier = ::std::option::Option::Some(is.read_string()?);
                 },
-                50 => {
-                    self.sms_phone_id = ::std::option::Option::Some(is.read_string()?);
-                },
                 58 => {
                     self.http_headers.push(is.read_string()?);
                 },
@@ -1453,9 +1409,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_AddAuthenticato
         if let Some(v) = self.device_identifier.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(5, &v);
         }
-        if let Some(v) = self.sms_phone_id.as_ref() {
-            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(6, &v);
-        }
         for value in &self.http_headers {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(7, &value);
         };
@@ -1482,9 +1435,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_AddAuthenticato
         }
         if let Some(v) = self.device_identifier.as_ref() {
             os.write_string(5, v)?;
-        }
-        if let Some(v) = self.sms_phone_id.as_ref() {
-            os.write_string(6, v)?;
         }
         for v in &self.http_headers {
             os.write_string(7, &v)?;
@@ -1514,7 +1464,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_AddAuthenticato
         self.serial_number = ::std::option::Option::None;
         self.authenticator_type = ::std::option::Option::None;
         self.device_identifier = ::std::option::Option::None;
-        self.sms_phone_id = ::std::option::Option::None;
         self.http_headers.clear();
         self.version = ::std::option::Option::None;
         self.special_fields.clear();
@@ -1527,7 +1476,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_AddAuthenticato
             serial_number: ::std::option::Option::None,
             authenticator_type: ::std::option::Option::None,
             device_identifier: ::std::option::Option::None,
-            sms_phone_id: ::std::option::Option::None,
             http_headers: ::std::vec::Vec::new(),
             version: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
@@ -1562,6 +1510,8 @@ pub struct CTwoFactor_AddAuthenticator_Response {
     pub status: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CTwoFactor_AddAuthenticator_Response.phone_number_hint)
     pub phone_number_hint: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CTwoFactor_AddAuthenticator_Response.confirm_type)
+    pub confirm_type: ::std::option::Option<i32>,
     // special fields
     // @@protoc_insertion_point(special_field:CTwoFactor_AddAuthenticator_Response.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -1922,6 +1872,25 @@ impl CTwoFactor_AddAuthenticator_Response {
     pub fn take_phone_number_hint(&mut self) -> ::std::string::String {
         self.phone_number_hint.take().unwrap_or_else(|| ::std::string::String::new())
     }
+
+    // optional int32 confirm_type = 12;
+
+    pub fn confirm_type(&self) -> i32 {
+        self.confirm_type.unwrap_or(0)
+    }
+
+    pub fn clear_confirm_type(&mut self) {
+        self.confirm_type = ::std::option::Option::None;
+    }
+
+    pub fn has_confirm_type(&self) -> bool {
+        self.confirm_type.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_confirm_type(&mut self, v: i32) {
+        self.confirm_type = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_AddAuthenticator_Response {
@@ -1966,6 +1935,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_AddAuthenticato
                 },
                 90 => {
                     self.phone_number_hint = ::std::option::Option::Some(is.read_string()?);
+                },
+                96 => {
+                    self.confirm_type = ::std::option::Option::Some(is.read_int32()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -2012,6 +1984,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_AddAuthenticato
         if let Some(v) = self.phone_number_hint.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(11, &v);
         }
+        if let Some(v) = self.confirm_type {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(12, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2051,6 +2026,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_AddAuthenticato
         if let Some(v) = self.phone_number_hint.as_ref() {
             os.write_string(11, v)?;
         }
+        if let Some(v) = self.confirm_type {
+            os.write_int32(12, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -2079,6 +2057,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_AddAuthenticato
         self.secret_1 = ::std::option::Option::None;
         self.status = ::std::option::Option::None;
         self.phone_number_hint = ::std::option::Option::None;
+        self.confirm_type = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -2095,13 +2074,13 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_AddAuthenticato
             secret_1: ::std::option::Option::None,
             status: ::std::option::Option::None,
             phone_number_hint: ::std::option::Option::None,
+            confirm_type: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
     }
 }
 
-#[doc = "Send email to the account"]
 // @@protoc_insertion_point(message:CTwoFactor_SendEmail_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTwoFactor_SendEmail_Request {
@@ -2351,7 +2330,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_SendEmail_Respo
     }
 }
 
-#[doc = "Finalize two-factor authentication addition to the logged-in account"]
 // @@protoc_insertion_point(message:CTwoFactor_FinalizeAddAuthenticator_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTwoFactor_FinalizeAddAuthenticator_Request {
@@ -2642,8 +2620,6 @@ pub struct CTwoFactor_FinalizeAddAuthenticator_Response {
     // message fields
     // @@protoc_insertion_point(field:CTwoFactor_FinalizeAddAuthenticator_Response.success)
     pub success: ::std::option::Option<bool>,
-    // @@protoc_insertion_point(field:CTwoFactor_FinalizeAddAuthenticator_Response.want_more)
-    pub want_more: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CTwoFactor_FinalizeAddAuthenticator_Response.server_time)
     pub server_time: ::std::option::Option<u64>,
     // @@protoc_insertion_point(field:CTwoFactor_FinalizeAddAuthenticator_Response.status)
@@ -2681,25 +2657,6 @@ impl CTwoFactor_FinalizeAddAuthenticator_Response {
     // Param is passed by value, moved
     pub fn set_success(&mut self, v: bool) {
         self.success = ::std::option::Option::Some(v);
-    }
-
-    // optional bool want_more = 2;
-
-    pub fn want_more(&self) -> bool {
-        self.want_more.unwrap_or(false)
-    }
-
-    pub fn clear_want_more(&mut self) {
-        self.want_more = ::std::option::Option::None;
-    }
-
-    pub fn has_want_more(&self) -> bool {
-        self.want_more.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_want_more(&mut self, v: bool) {
-        self.want_more = ::std::option::Option::Some(v);
     }
 
     // optional uint64 server_time = 3;
@@ -2754,9 +2711,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_FinalizeAddAuth
                 8 => {
                     self.success = ::std::option::Option::Some(is.read_bool()?);
                 },
-                16 => {
-                    self.want_more = ::std::option::Option::Some(is.read_bool()?);
-                },
                 24 => {
                     self.server_time = ::std::option::Option::Some(is.read_uint64()?);
                 },
@@ -2778,9 +2732,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_FinalizeAddAuth
         if let Some(v) = self.success {
             my_size += 1 + 1;
         }
-        if let Some(v) = self.want_more {
-            my_size += 1 + 1;
-        }
         if let Some(v) = self.server_time {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(3, v);
         }
@@ -2795,9 +2746,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_FinalizeAddAuth
     fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
         if let Some(v) = self.success {
             os.write_bool(1, v)?;
-        }
-        if let Some(v) = self.want_more {
-            os.write_bool(2, v)?;
         }
         if let Some(v) = self.server_time {
             os.write_uint64(3, v)?;
@@ -2823,7 +2771,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_FinalizeAddAuth
 
     fn clear(&mut self) {
         self.success = ::std::option::Option::None;
-        self.want_more = ::std::option::Option::None;
         self.server_time = ::std::option::Option::None;
         self.status = ::std::option::Option::None;
         self.special_fields.clear();
@@ -2832,7 +2779,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_FinalizeAddAuth
     fn default_instance() -> &'static CTwoFactor_FinalizeAddAuthenticator_Response {
         static instance: CTwoFactor_FinalizeAddAuthenticator_Response = CTwoFactor_FinalizeAddAuthenticator_Response {
             success: ::std::option::Option::None,
-            want_more: ::std::option::Option::None,
             server_time: ::std::option::Option::None,
             status: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
@@ -2841,7 +2787,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_FinalizeAddAuth
     }
 }
 
-#[doc = "Update the version for my token"]
 // @@protoc_insertion_point(message:CTwoFactor_UpdateTokenVersion_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTwoFactor_UpdateTokenVersion_Request {
@@ -3108,7 +3053,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_UpdateTokenVers
     }
 }
 
-#[doc = "Remove two-factor authentication addition from the logged-in account"]
 // @@protoc_insertion_point(message:CTwoFactor_RemoveAuthenticator_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTwoFactor_RemoveAuthenticator_Request {
@@ -3504,7 +3448,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_RemoveAuthentic
     }
 }
 
-#[doc = "Start challenge-based authenticator removal"]
 // @@protoc_insertion_point(message:CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request {
@@ -3690,7 +3633,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTwoFactor_RemoveAuthentic
     }
 }
 
-#[doc = "Continue challenge-based authenticator removal"]
 // @@protoc_insertion_point(message:CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request {
@@ -4845,7 +4787,7 @@ for CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response {
         self.compute_size() as usize
     }
 }
-///Two Factor Authentication Service
+///
 struct TwoFactor {}
 impl ::steam_vent_proto_common::RpcService for TwoFactor {
     const SERVICE_NAME: &'static str = "TwoFactor";

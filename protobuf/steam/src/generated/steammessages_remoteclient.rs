@@ -856,8 +856,8 @@ pub mod cmsg_remote_client_app_status {
         pub update_info: ::steam_vent_proto_common::protobuf::MessageField<AppUpdateInfo>,
         // @@protoc_insertion_point(field:CMsgRemoteClientAppStatus.AppStatus.shortcut_info)
         pub shortcut_info: ::steam_vent_proto_common::protobuf::MessageField<ShortcutInfo>,
-        // @@protoc_insertion_point(field:CMsgRemoteClientAppStatus.AppStatus.launch_available)
-        pub launch_available: ::std::option::Option<bool>,
+        // @@protoc_insertion_point(field:CMsgRemoteClientAppStatus.AppStatus.vr_not_required)
+        pub vr_not_required: ::std::option::Option<bool>,
         // special fields
         // @@protoc_insertion_point(special_field:CMsgRemoteClientAppStatus.AppStatus.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -912,23 +912,23 @@ pub mod cmsg_remote_client_app_status {
             self.app_state = ::std::option::Option::Some(v);
         }
 
-        // optional bool launch_available = 5;
+        // optional bool vr_not_required = 5;
 
-        pub fn launch_available(&self) -> bool {
-            self.launch_available.unwrap_or(true)
+        pub fn vr_not_required(&self) -> bool {
+            self.vr_not_required.unwrap_or(true)
         }
 
-        pub fn clear_launch_available(&mut self) {
-            self.launch_available = ::std::option::Option::None;
+        pub fn clear_vr_not_required(&mut self) {
+            self.vr_not_required = ::std::option::Option::None;
         }
 
-        pub fn has_launch_available(&self) -> bool {
-            self.launch_available.is_some()
+        pub fn has_vr_not_required(&self) -> bool {
+            self.vr_not_required.is_some()
         }
 
         // Param is passed by value, moved
-        pub fn set_launch_available(&mut self, v: bool) {
-            self.launch_available = ::std::option::Option::Some(v);
+        pub fn set_vr_not_required(&mut self, v: bool) {
+            self.vr_not_required = ::std::option::Option::Some(v);
         }
     }
 
@@ -955,7 +955,7 @@ pub mod cmsg_remote_client_app_status {
                         ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.shortcut_info)?;
                     },
                     40 => {
-                        self.launch_available = ::std::option::Option::Some(is.read_bool()?);
+                        self.vr_not_required = ::std::option::Option::Some(is.read_bool()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -983,7 +983,7 @@ pub mod cmsg_remote_client_app_status {
                 let len = v.compute_size();
                 my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
             }
-            if let Some(v) = self.launch_available {
+            if let Some(v) = self.vr_not_required {
                 my_size += 1 + 1;
             }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
@@ -1004,7 +1004,7 @@ pub mod cmsg_remote_client_app_status {
             if let Some(v) = self.shortcut_info.as_ref() {
                 ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(4, v, os)?;
             }
-            if let Some(v) = self.launch_available {
+            if let Some(v) = self.vr_not_required {
                 os.write_bool(5, v)?;
             }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
@@ -1028,7 +1028,7 @@ pub mod cmsg_remote_client_app_status {
             self.app_state = ::std::option::Option::None;
             self.update_info.clear();
             self.shortcut_info.clear();
-            self.launch_available = ::std::option::Option::None;
+            self.vr_not_required = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -1038,7 +1038,7 @@ pub mod cmsg_remote_client_app_status {
                 app_state: ::std::option::Option::None,
                 update_info: ::steam_vent_proto_common::protobuf::MessageField::none(),
                 shortcut_info: ::steam_vent_proto_common::protobuf::MessageField::none(),
-                launch_available: ::std::option::Option::None,
+                vr_not_required: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -1626,6 +1626,8 @@ pub struct CMsgRemoteClientStartStreamResponse {
     pub launch_tasks_done: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CMsgRemoteClientStartStreamResponse.launch_tasks_total)
     pub launch_tasks_total: ::std::option::Option<i32>,
+    // @@protoc_insertion_point(field:CMsgRemoteClientStartStreamResponse.vr_connection_params)
+    pub vr_connection_params: ::std::option::Option<::std::string::String>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgRemoteClientStartStreamResponse.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -1883,6 +1885,42 @@ impl CMsgRemoteClientStartStreamResponse {
     pub fn set_launch_tasks_total(&mut self, v: i32) {
         self.launch_tasks_total = ::std::option::Option::Some(v);
     }
+
+    // optional string vr_connection_params = 11;
+
+    pub fn vr_connection_params(&self) -> &str {
+        match self.vr_connection_params.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_vr_connection_params(&mut self) {
+        self.vr_connection_params = ::std::option::Option::None;
+    }
+
+    pub fn has_vr_connection_params(&self) -> bool {
+        self.vr_connection_params.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_vr_connection_params(&mut self, v: ::std::string::String) {
+        self.vr_connection_params = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_vr_connection_params(&mut self) -> &mut ::std::string::String {
+        if self.vr_connection_params.is_none() {
+            self.vr_connection_params = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.vr_connection_params.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_vr_connection_params(&mut self) -> ::std::string::String {
+        self.vr_connection_params.take().unwrap_or_else(|| ::std::string::String::new())
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientStartStreamResponse {
@@ -1928,6 +1966,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientStartStrea
                 80 => {
                     self.launch_tasks_total = ::std::option::Option::Some(is.read_int32()?);
                 },
+                90 => {
+                    self.vr_connection_params = ::std::option::Option::Some(is.read_string()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -1970,6 +2011,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientStartStrea
         if let Some(v) = self.launch_tasks_total {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(10, v);
         }
+        if let Some(v) = self.vr_connection_params.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(11, &v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2006,6 +2050,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientStartStrea
         if let Some(v) = self.launch_tasks_total {
             os.write_int32(10, v)?;
         }
+        if let Some(v) = self.vr_connection_params.as_ref() {
+            os.write_string(11, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -2033,6 +2080,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientStartStrea
         self.launch_task_detail = ::std::option::Option::None;
         self.launch_tasks_done = ::std::option::Option::None;
         self.launch_tasks_total = ::std::option::Option::None;
+        self.vr_connection_params = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -2048,6 +2096,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientStartStrea
             launch_task_detail: ::std::option::Option::None,
             launch_tasks_done: ::std::option::Option::None,
             launch_tasks_total: ::std::option::Option::None,
+            vr_connection_params: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance

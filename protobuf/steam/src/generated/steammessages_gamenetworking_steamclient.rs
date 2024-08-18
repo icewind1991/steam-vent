@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Client is asking to lease a FakeIP."]
 // @@protoc_insertion_point(message:CGameNetworking_AllocateFakeIP_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CGameNetworking_AllocateFakeIP_Request {
@@ -293,7 +292,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CGameNetworking_AllocateFa
     }
 }
 
-#[doc = "Client informs server it is done with the FakeIP."]
 // @@protoc_insertion_point(message:CGameNetworking_ReleaseFakeIP_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CGameNetworking_ReleaseFakeIP_Notification {
@@ -498,7 +496,7 @@ for CGameNetworking_ReleaseFakeIP_Notification {
         self.compute_size() as usize
     }
 }
-///Services that support P2P networking
+///
 struct GameNetworking {}
 impl ::steam_vent_proto_common::RpcService for GameNetworking {
     const SERVICE_NAME: &'static str = "GameNetworking";

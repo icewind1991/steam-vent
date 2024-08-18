@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Create a channel on SteamTV"]
 // @@protoc_insertion_point(message:CSteamTV_CreateBroadcastChannel_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_CreateBroadcastChannel_Request {
@@ -262,7 +261,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_CreateBroadcastCh
     }
 }
 
-#[doc = "Get a broadcast channel ID for a channel by name or owner SteamID"]
 // @@protoc_insertion_point(message:CSteamTV_GetBroadcastChannelID_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetBroadcastChannelID_Request {
@@ -579,7 +577,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetBroadcastChann
     }
 }
 
-#[doc = "Set broadcast channel profile data"]
 // @@protoc_insertion_point(message:CSteamTV_SetBroadcastChannelProfile_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_SetBroadcastChannelProfile_Request {
@@ -1157,7 +1154,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_SetBroadcastChann
     }
 }
 
-#[doc = "Get broadcast channel profile data"]
 // @@protoc_insertion_point(message:CSteamTV_GetBroadcastChannelProfile_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetBroadcastChannelProfile_Request {
@@ -1800,7 +1796,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetBroadcastChann
     }
 }
 
-#[doc = "Set broadcast channel image hash"]
 // @@protoc_insertion_point(message:CSteamTV_SetBroadcastChannelImage_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_SetBroadcastChannelImage_Request {
@@ -2329,7 +2324,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_SetBroadcastChann
     }
 }
 
-#[doc = "Get broadcast channel images"]
 // @@protoc_insertion_point(message:CSteamTV_GetBroadcastChannelImages_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetBroadcastChannelImages_Request {
@@ -2742,7 +2736,6 @@ pub mod csteam_tv_get_broadcast_channel_images_response {
     }
 }
 
-#[doc = "Set broadcast channel link regions"]
 // @@protoc_insertion_point(message:CSteamTV_SetBroadcastChannelLinkRegions_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_SetBroadcastChannelLinkRegions_Request {
@@ -3280,7 +3273,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_SetBroadcastChann
     }
 }
 
-#[doc = "Get broadcast channel link regions"]
 // @@protoc_insertion_point(message:CSteamTV_GetBroadcastChannelLinks_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetBroadcastChannelLinks_Request {
@@ -3819,7 +3811,6 @@ pub mod csteam_tv_get_broadcast_channel_links_response {
     }
 }
 
-#[doc = "Get list of broadcaster info for this channel"]
 // @@protoc_insertion_point(message:CSteamTV_GetBroadcastChannelBroadcasters_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetBroadcastChannelBroadcasters_Request {
@@ -4230,7 +4221,6 @@ pub mod csteam_tv_get_broadcast_channel_broadcasters_response {
     }
 }
 
-#[doc = "Get list of followed channels by a viewer"]
 // @@protoc_insertion_point(message:CSteamTV_GetFollowedChannels_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetFollowedChannels_Request {
@@ -5202,7 +5192,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetFollowedChanne
     }
 }
 
-#[doc = "Get list of channels a user is subscribed to"]
 // @@protoc_insertion_point(message:CSteamTV_GetSubscribedChannels_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetSubscribedChannels_Request {
@@ -5370,7 +5359,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetSubscribedChan
     }
 }
 
-#[doc = "Get broadcast channel live status"]
 // @@protoc_insertion_point(message:CSteamTV_GetBroadcastChannelStatus_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetBroadcastChannelStatus_Request {
@@ -5943,7 +5931,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetBroadcastChann
     }
 }
 
-#[doc = "Follow a broadcast channel"]
 // @@protoc_insertion_point(message:CSteamTV_FollowBroadcastChannel_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_FollowBroadcastChannel_Request {
@@ -6194,7 +6181,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_FollowBroadcastCh
     }
 }
 
-#[doc = "Subscribe to a broadcast channel"]
 // @@protoc_insertion_point(message:CSteamTV_SubscribeBroadcastChannel_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_SubscribeBroadcastChannel_Request {
@@ -6413,7 +6399,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_SubscribeBroadcas
     }
 }
 
-#[doc = "Get broadcast channel clips"]
 // @@protoc_insertion_point(message:CSteamTV_GetBroadcastChannelClips_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetBroadcastChannelClips_Request {
@@ -7062,7 +7047,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetBroadcastChann
     }
 }
 
-#[doc = "Report a broadcast channel"]
 // @@protoc_insertion_point(message:CSteamTV_ReportBroadcastChannel_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_ReportBroadcastChannel_Request {
@@ -7297,7 +7281,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_ReportBroadcastCh
     }
 }
 
-#[doc = "Get user's interaction status with a broadcast channel"]
 // @@protoc_insertion_point(message:CSteamTV_GetBroadcastChannelInteraction_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetBroadcastChannelInteraction_Request {
@@ -7548,7 +7531,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetBroadcastChann
     }
 }
 
-#[doc = "Get list of games with active broadcasters"]
 // @@protoc_insertion_point(message:CSteamTV_GetGames_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetGames_Request {
@@ -8216,7 +8198,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetGames_Response
     }
 }
 
-#[doc = "Get the list of featured broadcast channels"]
 // @@protoc_insertion_point(message:CSteamTV_GetChannels_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetChannels_Request {
@@ -8484,7 +8465,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetChannels_Respo
     }
 }
 
-#[doc = "Set the ban for a specific broadcaster. The issuer is the logged in steam account"]
 // @@protoc_insertion_point(message:CSteamTV_AddChatBan_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_AddChatBan_Request {
@@ -8798,7 +8778,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_AddChatBan_Respon
     }
 }
 
-#[doc = "Get list of bans for a specific broadcaster. "]
 // @@protoc_insertion_point(message:CSteamTV_GetChatBans_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetChatBans_Request {
@@ -9270,7 +9249,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetChatBans_Respo
     }
 }
 
-#[doc = "Add or remove a moderator for this broadcast channel"]
 // @@protoc_insertion_point(message:CSteamTV_AddChatModerator_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_AddChatModerator_Request {
@@ -9520,7 +9498,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_AddChatModerator_
     }
 }
 
-#[doc = "Returns the list of moderators for this broadcast channel"]
 // @@protoc_insertion_point(message:CSteamTV_GetChatModerators_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetChatModerators_Request {
@@ -9879,7 +9856,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetChatModerators
     }
 }
 
-#[doc = "Add or remove a banned keyword in this broadcast channel chat"]
 // @@protoc_insertion_point(message:CSteamTV_AddWordBan_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_AddWordBan_Request {
@@ -10146,7 +10122,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_AddWordBan_Respon
     }
 }
 
-#[doc = "Returns the list of banned keywords for this broadcast channel"]
 // @@protoc_insertion_point(message:CSteamTV_GetWordBans_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetWordBans_Request {
@@ -10346,7 +10321,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetWordBans_Respo
     }
 }
 
-#[doc = "Joins the chat channel for a broadcast"]
 // @@protoc_insertion_point(message:CSteamTV_JoinChat_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_JoinChat_Request {
@@ -10630,7 +10604,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_JoinChat_Response
     }
 }
 
-#[doc = "Searches for broadcast channels based on input keywords"]
 // @@protoc_insertion_point(message:CSteamTV_Search_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_Search_Request {
@@ -10848,7 +10821,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_Search_Response {
     }
 }
 
-#[doc = "Returns a user's SteamTV settings"]
 // @@protoc_insertion_point(message:CSteamTV_GetSteamTVUserSettings_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetSteamTVUserSettings_Request {
@@ -11066,7 +11038,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetSteamTVUserSet
     }
 }
 
-#[doc = "Sets a user's SteamTV settings"]
 // @@protoc_insertion_point(message:CSteamTV_SetSteamTVUserSettings_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_SetSteamTVUserSettings_Request {
@@ -11284,7 +11255,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_SetSteamTVUserSet
     }
 }
 
-#[doc = "Gets the broadcast channels that the current user owns"]
 // @@protoc_insertion_point(message:CSteamTV_GetMyBroadcastChannels_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetMyBroadcastChannels_Request {
@@ -11452,7 +11422,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_GetMyBroadcastCha
     }
 }
 
-#[doc = "Returns homepage contents for user"]
 // @@protoc_insertion_point(message:CSteamTV_GetHomePageContents_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_GetHomePageContents_Request {
@@ -13278,7 +13247,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamTV_AppCheer_SingleCh
     }
 }
 
-#[doc = "The user is cheering for a specific broadcast for a specific app."]
 // @@protoc_insertion_point(message:CSteamTV_AppCheer_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamTV_AppCheer_Request {
@@ -14874,7 +14842,7 @@ impl ::steam_vent_proto_common::RpcMessage for CSteamTV_AppCheer_Response {
         self.compute_size() as usize
     }
 }
-///Methods for Steam TV operations
+///
 struct SteamTV {}
 impl ::steam_vent_proto_common::RpcService for SteamTV {
     const SERVICE_NAME: &'static str = "SteamTV";

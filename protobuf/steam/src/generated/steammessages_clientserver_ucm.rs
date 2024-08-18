@@ -770,6 +770,8 @@ pub struct CMsgClientUCMAddScreenshotResponse {
     pub eresult: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CMsgClientUCMAddScreenshotResponse.screenshotid)
     pub screenshotid: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CMsgClientUCMAddScreenshotResponse.publishedfileid)
+    pub publishedfileid: ::std::option::Option<u64>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgClientUCMAddScreenshotResponse.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -823,6 +825,25 @@ impl CMsgClientUCMAddScreenshotResponse {
     pub fn set_screenshotid(&mut self, v: u64) {
         self.screenshotid = ::std::option::Option::Some(v);
     }
+
+    // optional uint64 publishedfileid = 3;
+
+    pub fn publishedfileid(&self) -> u64 {
+        self.publishedfileid.unwrap_or(0)
+    }
+
+    pub fn clear_publishedfileid(&mut self) {
+        self.publishedfileid = ::std::option::Option::None;
+    }
+
+    pub fn has_publishedfileid(&self) -> bool {
+        self.publishedfileid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_publishedfileid(&mut self, v: u64) {
+        self.publishedfileid = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMAddScreenshotResponse {
@@ -840,6 +861,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMAddScreenshot
                 },
                 17 => {
                     self.screenshotid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                24 => {
+                    self.publishedfileid = ::std::option::Option::Some(is.read_uint64()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -859,6 +883,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMAddScreenshot
         if let Some(v) = self.screenshotid {
             my_size += 1 + 8;
         }
+        if let Some(v) = self.publishedfileid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(3, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -870,6 +897,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMAddScreenshot
         }
         if let Some(v) = self.screenshotid {
             os.write_fixed64(2, v)?;
+        }
+        if let Some(v) = self.publishedfileid {
+            os.write_uint64(3, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -890,6 +920,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMAddScreenshot
     fn clear(&mut self) {
         self.eresult = ::std::option::Option::None;
         self.screenshotid = ::std::option::Option::None;
+        self.publishedfileid = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -897,6 +928,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMAddScreenshot
         static instance: CMsgClientUCMAddScreenshotResponse = CMsgClientUCMAddScreenshotResponse {
             eresult: ::std::option::Option::None,
             screenshotid: ::std::option::Option::None,
+            publishedfileid: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -2015,6 +2047,14 @@ pub struct CMsgClientUCMUpdatePublishedFile {
     pub content_descriptors_to_add: ::std::vec::Vec<i32>,
     // @@protoc_insertion_point(field:CMsgClientUCMUpdatePublishedFile.content_descriptors_to_remove)
     pub content_descriptors_to_remove: ::std::vec::Vec<i32>,
+    // @@protoc_insertion_point(field:CMsgClientUCMUpdatePublishedFile.allow_admin_tags)
+    pub allow_admin_tags: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CMsgClientUCMUpdatePublishedFile.external_asset_id)
+    pub external_asset_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CMsgClientUCMUpdatePublishedFile.game_branch_min)
+    pub game_branch_min: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CMsgClientUCMUpdatePublishedFile.game_branch_max)
+    pub game_branch_max: ::std::option::Option<::std::string::String>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgClientUCMUpdatePublishedFile.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -2586,6 +2626,116 @@ impl CMsgClientUCMUpdatePublishedFile {
     pub fn set_remove_all_kvtags(&mut self, v: bool) {
         self.remove_all_kvtags = ::std::option::Option::Some(v);
     }
+
+    // optional bool allow_admin_tags = 31;
+
+    pub fn allow_admin_tags(&self) -> bool {
+        self.allow_admin_tags.unwrap_or(false)
+    }
+
+    pub fn clear_allow_admin_tags(&mut self) {
+        self.allow_admin_tags = ::std::option::Option::None;
+    }
+
+    pub fn has_allow_admin_tags(&self) -> bool {
+        self.allow_admin_tags.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_allow_admin_tags(&mut self, v: bool) {
+        self.allow_admin_tags = ::std::option::Option::Some(v);
+    }
+
+    // optional uint64 external_asset_id = 32;
+
+    pub fn external_asset_id(&self) -> u64 {
+        self.external_asset_id.unwrap_or(0)
+    }
+
+    pub fn clear_external_asset_id(&mut self) {
+        self.external_asset_id = ::std::option::Option::None;
+    }
+
+    pub fn has_external_asset_id(&self) -> bool {
+        self.external_asset_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_external_asset_id(&mut self, v: u64) {
+        self.external_asset_id = ::std::option::Option::Some(v);
+    }
+
+    // optional string game_branch_min = 33;
+
+    pub fn game_branch_min(&self) -> &str {
+        match self.game_branch_min.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_game_branch_min(&mut self) {
+        self.game_branch_min = ::std::option::Option::None;
+    }
+
+    pub fn has_game_branch_min(&self) -> bool {
+        self.game_branch_min.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_game_branch_min(&mut self, v: ::std::string::String) {
+        self.game_branch_min = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_game_branch_min(&mut self) -> &mut ::std::string::String {
+        if self.game_branch_min.is_none() {
+            self.game_branch_min = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.game_branch_min.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_game_branch_min(&mut self) -> ::std::string::String {
+        self.game_branch_min.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional string game_branch_max = 34;
+
+    pub fn game_branch_max(&self) -> &str {
+        match self.game_branch_max.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_game_branch_max(&mut self) {
+        self.game_branch_max = ::std::option::Option::None;
+    }
+
+    pub fn has_game_branch_max(&self) -> bool {
+        self.game_branch_max.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_game_branch_max(&mut self, v: ::std::string::String) {
+        self.game_branch_max = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_game_branch_max(&mut self) -> &mut ::std::string::String {
+        if self.game_branch_max.is_none() {
+            self.game_branch_max = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.game_branch_max.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_game_branch_max(&mut self) -> ::std::string::String {
+        self.game_branch_max.take().unwrap_or_else(|| ::std::string::String::new())
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMUpdatePublishedFile {
@@ -2697,6 +2847,18 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMUpdatePublish
                 240 => {
                     self.content_descriptors_to_remove.push(is.read_int32()?);
                 },
+                248 => {
+                    self.allow_admin_tags = ::std::option::Option::Some(is.read_bool()?);
+                },
+                256 => {
+                    self.external_asset_id = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                266 => {
+                    self.game_branch_min = ::std::option::Option::Some(is.read_string()?);
+                },
+                274 => {
+                    self.game_branch_max = ::std::option::Option::Some(is.read_string()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -2801,6 +2963,18 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMUpdatePublish
         for value in &self.content_descriptors_to_remove {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(30, *value);
         };
+        if let Some(v) = self.allow_admin_tags {
+            my_size += 2 + 1;
+        }
+        if let Some(v) = self.external_asset_id {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(32, v);
+        }
+        if let Some(v) = self.game_branch_min.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(33, &v);
+        }
+        if let Some(v) = self.game_branch_max.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(34, &v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2897,6 +3071,18 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMUpdatePublish
         for v in &self.content_descriptors_to_remove {
             os.write_int32(30, *v)?;
         };
+        if let Some(v) = self.allow_admin_tags {
+            os.write_bool(31, v)?;
+        }
+        if let Some(v) = self.external_asset_id {
+            os.write_uint64(32, v)?;
+        }
+        if let Some(v) = self.game_branch_min.as_ref() {
+            os.write_string(33, v)?;
+        }
+        if let Some(v) = self.game_branch_max.as_ref() {
+            os.write_string(34, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -2944,6 +3130,10 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMUpdatePublish
         self.remove_all_kvtags = ::std::option::Option::None;
         self.content_descriptors_to_add.clear();
         self.content_descriptors_to_remove.clear();
+        self.allow_admin_tags = ::std::option::Option::None;
+        self.external_asset_id = ::std::option::Option::None;
+        self.game_branch_min = ::std::option::Option::None;
+        self.game_branch_max = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -2979,6 +3169,10 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMUpdatePublish
             remove_all_kvtags: ::std::option::Option::None,
             content_descriptors_to_add: ::std::vec::Vec::new(),
             content_descriptors_to_remove: ::std::vec::Vec::new(),
+            allow_admin_tags: ::std::option::Option::None,
+            external_asset_id: ::std::option::Option::None,
+            game_branch_min: ::std::option::Option::None,
+            game_branch_max: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -4204,6 +4398,245 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientUCMEnumerateUser
 
 /// Nested message and enums of message `CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse`
 pub mod cmsg_client_ucmenumerate_user_subscribed_files_with_updates_response {
+    // @@protoc_insertion_point(message:CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.AuthorSnapshot)
+    #[derive(PartialEq,Clone,Default,Debug)]
+    pub struct AuthorSnapshot {
+        // message fields
+        // @@protoc_insertion_point(field:CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.AuthorSnapshot.timestamp)
+        pub timestamp: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.AuthorSnapshot.game_branch_min)
+        pub game_branch_min: ::std::option::Option<::std::string::String>,
+        // @@protoc_insertion_point(field:CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.AuthorSnapshot.game_branch_max)
+        pub game_branch_max: ::std::option::Option<::std::string::String>,
+        // @@protoc_insertion_point(field:CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.AuthorSnapshot.manifestid)
+        pub manifestid: ::std::option::Option<u64>,
+        // special fields
+        // @@protoc_insertion_point(special_field:CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.AuthorSnapshot.special_fields)
+        pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+    }
+
+    impl<'a> ::std::default::Default for &'a AuthorSnapshot {
+        fn default() -> &'a AuthorSnapshot {
+            <AuthorSnapshot as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+        }
+    }
+
+    impl AuthorSnapshot {
+        pub fn new() -> AuthorSnapshot {
+            ::std::default::Default::default()
+        }
+
+        // optional uint32 timestamp = 1;
+
+        pub fn timestamp(&self) -> u32 {
+            self.timestamp.unwrap_or(0)
+        }
+
+        pub fn clear_timestamp(&mut self) {
+            self.timestamp = ::std::option::Option::None;
+        }
+
+        pub fn has_timestamp(&self) -> bool {
+            self.timestamp.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_timestamp(&mut self, v: u32) {
+            self.timestamp = ::std::option::Option::Some(v);
+        }
+
+        // optional string game_branch_min = 2;
+
+        pub fn game_branch_min(&self) -> &str {
+            match self.game_branch_min.as_ref() {
+                Some(v) => v,
+                None => "",
+            }
+        }
+
+        pub fn clear_game_branch_min(&mut self) {
+            self.game_branch_min = ::std::option::Option::None;
+        }
+
+        pub fn has_game_branch_min(&self) -> bool {
+            self.game_branch_min.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_game_branch_min(&mut self, v: ::std::string::String) {
+            self.game_branch_min = ::std::option::Option::Some(v);
+        }
+
+        // Mutable pointer to the field.
+        // If field is not initialized, it is initialized with default value first.
+        pub fn mut_game_branch_min(&mut self) -> &mut ::std::string::String {
+            if self.game_branch_min.is_none() {
+                self.game_branch_min = ::std::option::Option::Some(::std::string::String::new());
+            }
+            self.game_branch_min.as_mut().unwrap()
+        }
+
+        // Take field
+        pub fn take_game_branch_min(&mut self) -> ::std::string::String {
+            self.game_branch_min.take().unwrap_or_else(|| ::std::string::String::new())
+        }
+
+        // optional string game_branch_max = 3;
+
+        pub fn game_branch_max(&self) -> &str {
+            match self.game_branch_max.as_ref() {
+                Some(v) => v,
+                None => "",
+            }
+        }
+
+        pub fn clear_game_branch_max(&mut self) {
+            self.game_branch_max = ::std::option::Option::None;
+        }
+
+        pub fn has_game_branch_max(&self) -> bool {
+            self.game_branch_max.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_game_branch_max(&mut self, v: ::std::string::String) {
+            self.game_branch_max = ::std::option::Option::Some(v);
+        }
+
+        // Mutable pointer to the field.
+        // If field is not initialized, it is initialized with default value first.
+        pub fn mut_game_branch_max(&mut self) -> &mut ::std::string::String {
+            if self.game_branch_max.is_none() {
+                self.game_branch_max = ::std::option::Option::Some(::std::string::String::new());
+            }
+            self.game_branch_max.as_mut().unwrap()
+        }
+
+        // Take field
+        pub fn take_game_branch_max(&mut self) -> ::std::string::String {
+            self.game_branch_max.take().unwrap_or_else(|| ::std::string::String::new())
+        }
+
+        // optional fixed64 manifestid = 4;
+
+        pub fn manifestid(&self) -> u64 {
+            self.manifestid.unwrap_or(0)
+        }
+
+        pub fn clear_manifestid(&mut self) {
+            self.manifestid = ::std::option::Option::None;
+        }
+
+        pub fn has_manifestid(&self) -> bool {
+            self.manifestid.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_manifestid(&mut self, v: u64) {
+            self.manifestid = ::std::option::Option::Some(v);
+        }
+    }
+
+    impl ::steam_vent_proto_common::protobuf::Message for AuthorSnapshot {
+        const NAME: &'static str = "AuthorSnapshot";
+
+        fn is_initialized(&self) -> bool {
+            true
+        }
+
+        fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+            while let Some(tag) = is.read_raw_tag_or_eof()? {
+                match tag {
+                    8 => {
+                        self.timestamp = ::std::option::Option::Some(is.read_uint32()?);
+                    },
+                    18 => {
+                        self.game_branch_min = ::std::option::Option::Some(is.read_string()?);
+                    },
+                    26 => {
+                        self.game_branch_max = ::std::option::Option::Some(is.read_string()?);
+                    },
+                    33 => {
+                        self.manifestid = ::std::option::Option::Some(is.read_fixed64()?);
+                    },
+                    tag => {
+                        ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                    },
+                };
+            }
+            ::std::result::Result::Ok(())
+        }
+
+        // Compute sizes of nested messages
+        #[allow(unused_variables)]
+        fn compute_size(&self) -> u64 {
+            let mut my_size = 0;
+            if let Some(v) = self.timestamp {
+                my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+            }
+            if let Some(v) = self.game_branch_min.as_ref() {
+                my_size += ::steam_vent_proto_common::protobuf::rt::string_size(2, &v);
+            }
+            if let Some(v) = self.game_branch_max.as_ref() {
+                my_size += ::steam_vent_proto_common::protobuf::rt::string_size(3, &v);
+            }
+            if let Some(v) = self.manifestid {
+                my_size += 1 + 8;
+            }
+            my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+            self.special_fields.cached_size().set(my_size as u32);
+            my_size
+        }
+
+        fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+            if let Some(v) = self.timestamp {
+                os.write_uint32(1, v)?;
+            }
+            if let Some(v) = self.game_branch_min.as_ref() {
+                os.write_string(2, v)?;
+            }
+            if let Some(v) = self.game_branch_max.as_ref() {
+                os.write_string(3, v)?;
+            }
+            if let Some(v) = self.manifestid {
+                os.write_fixed64(4, v)?;
+            }
+            os.write_unknown_fields(self.special_fields.unknown_fields())?;
+            ::std::result::Result::Ok(())
+        }
+
+        fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+            &self.special_fields
+        }
+
+        fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+            &mut self.special_fields
+        }
+
+        fn new() -> AuthorSnapshot {
+            AuthorSnapshot::new()
+        }
+
+        fn clear(&mut self) {
+            self.timestamp = ::std::option::Option::None;
+            self.game_branch_min = ::std::option::Option::None;
+            self.game_branch_max = ::std::option::Option::None;
+            self.manifestid = ::std::option::Option::None;
+            self.special_fields.clear();
+        }
+
+        fn default_instance() -> &'static AuthorSnapshot {
+            static instance: AuthorSnapshot = AuthorSnapshot {
+                timestamp: ::std::option::Option::None,
+                game_branch_min: ::std::option::Option::None,
+                game_branch_max: ::std::option::Option::None,
+                manifestid: ::std::option::Option::None,
+                special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+            };
+            &instance
+        }
+    }
+
     // @@protoc_insertion_point(message:CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.PublishedFileId)
     #[derive(PartialEq,Clone,Default,Debug)]
     pub struct PublishedFileId {
@@ -4222,6 +4655,8 @@ pub mod cmsg_client_ucmenumerate_user_subscribed_files_with_updates_response {
         pub rtime32_last_updated: ::std::option::Option<u32>,
         // @@protoc_insertion_point(field:CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.PublishedFileId.is_depot_content)
         pub is_depot_content: ::std::option::Option<bool>,
+        // @@protoc_insertion_point(field:CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.PublishedFileId.author_snapshots)
+        pub author_snapshots: ::std::vec::Vec<AuthorSnapshot>,
         // special fields
         // @@protoc_insertion_point(special_field:CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.PublishedFileId.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -4403,6 +4838,9 @@ pub mod cmsg_client_ucmenumerate_user_subscribed_files_with_updates_response {
                     56 => {
                         self.is_depot_content = ::std::option::Option::Some(is.read_bool()?);
                     },
+                    66 => {
+                        self.author_snapshots.push(is.read_message()?);
+                    },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                     },
@@ -4436,6 +4874,10 @@ pub mod cmsg_client_ucmenumerate_user_subscribed_files_with_updates_response {
             if let Some(v) = self.is_depot_content {
                 my_size += 1 + 1;
             }
+            for value in &self.author_snapshots {
+                let len = value.compute_size();
+                my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+            };
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -4463,6 +4905,9 @@ pub mod cmsg_client_ucmenumerate_user_subscribed_files_with_updates_response {
             if let Some(v) = self.is_depot_content {
                 os.write_bool(7, v)?;
             }
+            for v in &self.author_snapshots {
+                ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(8, v, os)?;
+            };
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
         }
@@ -4487,6 +4932,7 @@ pub mod cmsg_client_ucmenumerate_user_subscribed_files_with_updates_response {
             self.file_size = ::std::option::Option::None;
             self.rtime32_last_updated = ::std::option::Option::None;
             self.is_depot_content = ::std::option::Option::None;
+            self.author_snapshots.clear();
             self.special_fields.clear();
         }
 
@@ -4499,6 +4945,7 @@ pub mod cmsg_client_ucmenumerate_user_subscribed_files_with_updates_response {
                 file_size: ::std::option::Option::None,
                 rtime32_last_updated: ::std::option::Option::None,
                 is_depot_content: ::std::option::Option::None,
+                author_snapshots: ::std::vec::Vec::new(),
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance

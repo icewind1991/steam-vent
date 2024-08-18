@@ -15842,307 +15842,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgNeedsSharedTexturePain
     }
 }
 
-// @@protoc_insertion_point(message:CMsgGameOverlayTexturePaint)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct CMsgGameOverlayTexturePaint {
-    // message fields
-    // @@protoc_insertion_point(field:CMsgGameOverlayTexturePaint.browser_handle)
-    pub browser_handle: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CMsgGameOverlayTexturePaint.width)
-    pub width: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CMsgGameOverlayTexturePaint.height)
-    pub height: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CMsgGameOverlayTexturePaint.scrollx)
-    pub scrollx: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CMsgGameOverlayTexturePaint.scrolly)
-    pub scrolly: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CMsgGameOverlayTexturePaint.pagescale)
-    pub pagescale: ::std::option::Option<f32>,
-    // @@protoc_insertion_point(field:CMsgGameOverlayTexturePaint.pageserial)
-    pub pageserial: ::std::option::Option<u32>,
-    // special fields
-    // @@protoc_insertion_point(special_field:CMsgGameOverlayTexturePaint.special_fields)
-    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a CMsgGameOverlayTexturePaint {
-    fn default() -> &'a CMsgGameOverlayTexturePaint {
-        <CMsgGameOverlayTexturePaint as ::steam_vent_proto_common::protobuf::Message>::default_instance()
-    }
-}
-
-impl CMsgGameOverlayTexturePaint {
-    pub fn new() -> CMsgGameOverlayTexturePaint {
-        ::std::default::Default::default()
-    }
-
-    // optional uint32 browser_handle = 1;
-
-    pub fn browser_handle(&self) -> u32 {
-        self.browser_handle.unwrap_or(0)
-    }
-
-    pub fn clear_browser_handle(&mut self) {
-        self.browser_handle = ::std::option::Option::None;
-    }
-
-    pub fn has_browser_handle(&self) -> bool {
-        self.browser_handle.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_browser_handle(&mut self, v: u32) {
-        self.browser_handle = ::std::option::Option::Some(v);
-    }
-
-    // optional uint32 width = 3;
-
-    pub fn width(&self) -> u32 {
-        self.width.unwrap_or(0)
-    }
-
-    pub fn clear_width(&mut self) {
-        self.width = ::std::option::Option::None;
-    }
-
-    pub fn has_width(&self) -> bool {
-        self.width.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_width(&mut self, v: u32) {
-        self.width = ::std::option::Option::Some(v);
-    }
-
-    // optional uint32 height = 4;
-
-    pub fn height(&self) -> u32 {
-        self.height.unwrap_or(0)
-    }
-
-    pub fn clear_height(&mut self) {
-        self.height = ::std::option::Option::None;
-    }
-
-    pub fn has_height(&self) -> bool {
-        self.height.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_height(&mut self, v: u32) {
-        self.height = ::std::option::Option::Some(v);
-    }
-
-    // optional uint32 scrollx = 5;
-
-    pub fn scrollx(&self) -> u32 {
-        self.scrollx.unwrap_or(0)
-    }
-
-    pub fn clear_scrollx(&mut self) {
-        self.scrollx = ::std::option::Option::None;
-    }
-
-    pub fn has_scrollx(&self) -> bool {
-        self.scrollx.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_scrollx(&mut self, v: u32) {
-        self.scrollx = ::std::option::Option::Some(v);
-    }
-
-    // optional uint32 scrolly = 6;
-
-    pub fn scrolly(&self) -> u32 {
-        self.scrolly.unwrap_or(0)
-    }
-
-    pub fn clear_scrolly(&mut self) {
-        self.scrolly = ::std::option::Option::None;
-    }
-
-    pub fn has_scrolly(&self) -> bool {
-        self.scrolly.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_scrolly(&mut self, v: u32) {
-        self.scrolly = ::std::option::Option::Some(v);
-    }
-
-    // optional float pagescale = 7;
-
-    pub fn pagescale(&self) -> f32 {
-        self.pagescale.unwrap_or(0.)
-    }
-
-    pub fn clear_pagescale(&mut self) {
-        self.pagescale = ::std::option::Option::None;
-    }
-
-    pub fn has_pagescale(&self) -> bool {
-        self.pagescale.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_pagescale(&mut self, v: f32) {
-        self.pagescale = ::std::option::Option::Some(v);
-    }
-
-    // optional uint32 pageserial = 8;
-
-    pub fn pageserial(&self) -> u32 {
-        self.pageserial.unwrap_or(0)
-    }
-
-    pub fn clear_pageserial(&mut self) {
-        self.pageserial = ::std::option::Option::None;
-    }
-
-    pub fn has_pageserial(&self) -> bool {
-        self.pageserial.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_pageserial(&mut self, v: u32) {
-        self.pageserial = ::std::option::Option::Some(v);
-    }
-}
-
-impl ::steam_vent_proto_common::protobuf::Message for CMsgGameOverlayTexturePaint {
-    const NAME: &'static str = "CMsgGameOverlayTexturePaint";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                8 => {
-                    self.browser_handle = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                24 => {
-                    self.width = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                32 => {
-                    self.height = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                40 => {
-                    self.scrollx = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                48 => {
-                    self.scrolly = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                61 => {
-                    self.pagescale = ::std::option::Option::Some(is.read_float()?);
-                },
-                64 => {
-                    self.pageserial = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                tag => {
-                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.browser_handle {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
-        }
-        if let Some(v) = self.width {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
-        }
-        if let Some(v) = self.height {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(4, v);
-        }
-        if let Some(v) = self.scrollx {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(5, v);
-        }
-        if let Some(v) = self.scrolly {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(6, v);
-        }
-        if let Some(v) = self.pagescale {
-            my_size += 1 + 4;
-        }
-        if let Some(v) = self.pageserial {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(8, v);
-        }
-        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        if let Some(v) = self.browser_handle {
-            os.write_uint32(1, v)?;
-        }
-        if let Some(v) = self.width {
-            os.write_uint32(3, v)?;
-        }
-        if let Some(v) = self.height {
-            os.write_uint32(4, v)?;
-        }
-        if let Some(v) = self.scrollx {
-            os.write_uint32(5, v)?;
-        }
-        if let Some(v) = self.scrolly {
-            os.write_uint32(6, v)?;
-        }
-        if let Some(v) = self.pagescale {
-            os.write_float(7, v)?;
-        }
-        if let Some(v) = self.pageserial {
-            os.write_uint32(8, v)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> CMsgGameOverlayTexturePaint {
-        CMsgGameOverlayTexturePaint::new()
-    }
-
-    fn clear(&mut self) {
-        self.browser_handle = ::std::option::Option::None;
-        self.width = ::std::option::Option::None;
-        self.height = ::std::option::Option::None;
-        self.scrollx = ::std::option::Option::None;
-        self.scrolly = ::std::option::Option::None;
-        self.pagescale = ::std::option::Option::None;
-        self.pageserial = ::std::option::Option::None;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static CMsgGameOverlayTexturePaint {
-        static instance: CMsgGameOverlayTexturePaint = CMsgGameOverlayTexturePaint {
-            browser_handle: ::std::option::Option::None,
-            width: ::std::option::Option::None,
-            height: ::std::option::Option::None,
-            scrollx: ::std::option::Option::None,
-            scrolly: ::std::option::Option::None,
-            pagescale: ::std::option::Option::None,
-            pageserial: ::std::option::Option::None,
-            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
 // @@protoc_insertion_point(message:CMsgGetZoom)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMsgGetZoom {
@@ -19018,6 +18717,8 @@ pub struct CMsgSetCookie {
     pub secure: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgSetCookie.httponly)
     pub httponly: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CMsgSetCookie.samesite)
+    pub samesite: ::std::option::Option<i32>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgSetCookie.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -19234,6 +18935,25 @@ impl CMsgSetCookie {
     pub fn set_httponly(&mut self, v: bool) {
         self.httponly = ::std::option::Option::Some(v);
     }
+
+    // optional int32 samesite = 8;
+
+    pub fn samesite(&self) -> i32 {
+        self.samesite.unwrap_or(0)
+    }
+
+    pub fn clear_samesite(&mut self) {
+        self.samesite = ::std::option::Option::None;
+    }
+
+    pub fn has_samesite(&self) -> bool {
+        self.samesite.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_samesite(&mut self, v: i32) {
+        self.samesite = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgSetCookie {
@@ -19266,6 +18986,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetCookie {
                 },
                 56 => {
                     self.httponly = ::std::option::Option::Some(is.read_bool()?);
+                },
+                64 => {
+                    self.samesite = ::std::option::Option::Some(is.read_int32()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -19300,6 +19023,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetCookie {
         if let Some(v) = self.httponly {
             my_size += 1 + 1;
         }
+        if let Some(v) = self.samesite {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(8, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -19327,6 +19053,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetCookie {
         if let Some(v) = self.httponly {
             os.write_bool(7, v)?;
         }
+        if let Some(v) = self.samesite {
+            os.write_int32(8, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -19351,6 +19080,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetCookie {
         self.expires = ::std::option::Option::None;
         self.secure = ::std::option::Option::None;
         self.httponly = ::std::option::Option::None;
+        self.samesite = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -19363,6 +19093,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetCookie {
             expires: ::std::option::Option::None,
             secure: ::std::option::Option::None,
             httponly: ::std::option::Option::None,
+            samesite: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -21488,224 +21219,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgZoomToFocusedElement {
 
     fn default_instance() -> &'static CMsgZoomToFocusedElement {
         static instance: CMsgZoomToFocusedElement = CMsgZoomToFocusedElement {
-            browser_handle: ::std::option::Option::None,
-            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-// @@protoc_insertion_point(message:CMsgCloseFullScreenFlashIfOpen)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct CMsgCloseFullScreenFlashIfOpen {
-    // message fields
-    // @@protoc_insertion_point(field:CMsgCloseFullScreenFlashIfOpen.browser_handle)
-    pub browser_handle: ::std::option::Option<u32>,
-    // special fields
-    // @@protoc_insertion_point(special_field:CMsgCloseFullScreenFlashIfOpen.special_fields)
-    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a CMsgCloseFullScreenFlashIfOpen {
-    fn default() -> &'a CMsgCloseFullScreenFlashIfOpen {
-        <CMsgCloseFullScreenFlashIfOpen as ::steam_vent_proto_common::protobuf::Message>::default_instance()
-    }
-}
-
-impl CMsgCloseFullScreenFlashIfOpen {
-    pub fn new() -> CMsgCloseFullScreenFlashIfOpen {
-        ::std::default::Default::default()
-    }
-
-    // optional uint32 browser_handle = 1;
-
-    pub fn browser_handle(&self) -> u32 {
-        self.browser_handle.unwrap_or(0)
-    }
-
-    pub fn clear_browser_handle(&mut self) {
-        self.browser_handle = ::std::option::Option::None;
-    }
-
-    pub fn has_browser_handle(&self) -> bool {
-        self.browser_handle.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_browser_handle(&mut self, v: u32) {
-        self.browser_handle = ::std::option::Option::Some(v);
-    }
-}
-
-impl ::steam_vent_proto_common::protobuf::Message for CMsgCloseFullScreenFlashIfOpen {
-    const NAME: &'static str = "CMsgCloseFullScreenFlashIfOpen";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                8 => {
-                    self.browser_handle = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                tag => {
-                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.browser_handle {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
-        }
-        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        if let Some(v) = self.browser_handle {
-            os.write_uint32(1, v)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> CMsgCloseFullScreenFlashIfOpen {
-        CMsgCloseFullScreenFlashIfOpen::new()
-    }
-
-    fn clear(&mut self) {
-        self.browser_handle = ::std::option::Option::None;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static CMsgCloseFullScreenFlashIfOpen {
-        static instance: CMsgCloseFullScreenFlashIfOpen = CMsgCloseFullScreenFlashIfOpen {
-            browser_handle: ::std::option::Option::None,
-            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-// @@protoc_insertion_point(message:CMsgPauseFullScreenFlashMovieIfOpen)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct CMsgPauseFullScreenFlashMovieIfOpen {
-    // message fields
-    // @@protoc_insertion_point(field:CMsgPauseFullScreenFlashMovieIfOpen.browser_handle)
-    pub browser_handle: ::std::option::Option<u32>,
-    // special fields
-    // @@protoc_insertion_point(special_field:CMsgPauseFullScreenFlashMovieIfOpen.special_fields)
-    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a CMsgPauseFullScreenFlashMovieIfOpen {
-    fn default() -> &'a CMsgPauseFullScreenFlashMovieIfOpen {
-        <CMsgPauseFullScreenFlashMovieIfOpen as ::steam_vent_proto_common::protobuf::Message>::default_instance()
-    }
-}
-
-impl CMsgPauseFullScreenFlashMovieIfOpen {
-    pub fn new() -> CMsgPauseFullScreenFlashMovieIfOpen {
-        ::std::default::Default::default()
-    }
-
-    // optional uint32 browser_handle = 1;
-
-    pub fn browser_handle(&self) -> u32 {
-        self.browser_handle.unwrap_or(0)
-    }
-
-    pub fn clear_browser_handle(&mut self) {
-        self.browser_handle = ::std::option::Option::None;
-    }
-
-    pub fn has_browser_handle(&self) -> bool {
-        self.browser_handle.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_browser_handle(&mut self, v: u32) {
-        self.browser_handle = ::std::option::Option::Some(v);
-    }
-}
-
-impl ::steam_vent_proto_common::protobuf::Message for CMsgPauseFullScreenFlashMovieIfOpen {
-    const NAME: &'static str = "CMsgPauseFullScreenFlashMovieIfOpen";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                8 => {
-                    self.browser_handle = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                tag => {
-                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.browser_handle {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
-        }
-        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        if let Some(v) = self.browser_handle {
-            os.write_uint32(1, v)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> CMsgPauseFullScreenFlashMovieIfOpen {
-        CMsgPauseFullScreenFlashMovieIfOpen::new()
-    }
-
-    fn clear(&mut self) {
-        self.browser_handle = ::std::option::Option::None;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static CMsgPauseFullScreenFlashMovieIfOpen {
-        static instance: CMsgPauseFullScreenFlashMovieIfOpen = CMsgPauseFullScreenFlashMovieIfOpen {
             browser_handle: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
@@ -24715,6 +24228,242 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgJSExecuteCallback {
     }
 }
 
+// @@protoc_insertion_point(message:CMsgJSExecutePromise)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgJSExecutePromise {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgJSExecutePromise.browser_handle)
+    pub browser_handle: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgJSExecutePromise.owning_browser_handle)
+    pub owning_browser_handle: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgJSExecutePromise.promise_handle)
+    pub promise_handle: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CMsgJSExecutePromise.reject_reason)
+    pub reject_reason: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CMsgJSExecutePromise.argument)
+    pub argument: ::steam_vent_proto_common::protobuf::MessageField<CMsgJSValue>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgJSExecutePromise.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgJSExecutePromise {
+    fn default() -> &'a CMsgJSExecutePromise {
+        <CMsgJSExecutePromise as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgJSExecutePromise {
+    pub fn new() -> CMsgJSExecutePromise {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 browser_handle = 1;
+
+    pub fn browser_handle(&self) -> u32 {
+        self.browser_handle.unwrap_or(0)
+    }
+
+    pub fn clear_browser_handle(&mut self) {
+        self.browser_handle = ::std::option::Option::None;
+    }
+
+    pub fn has_browser_handle(&self) -> bool {
+        self.browser_handle.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_browser_handle(&mut self, v: u32) {
+        self.browser_handle = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 owning_browser_handle = 2;
+
+    pub fn owning_browser_handle(&self) -> u32 {
+        self.owning_browser_handle.unwrap_or(0)
+    }
+
+    pub fn clear_owning_browser_handle(&mut self) {
+        self.owning_browser_handle = ::std::option::Option::None;
+    }
+
+    pub fn has_owning_browser_handle(&self) -> bool {
+        self.owning_browser_handle.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_owning_browser_handle(&mut self, v: u32) {
+        self.owning_browser_handle = ::std::option::Option::Some(v);
+    }
+
+    // optional uint64 promise_handle = 3;
+
+    pub fn promise_handle(&self) -> u64 {
+        self.promise_handle.unwrap_or(0)
+    }
+
+    pub fn clear_promise_handle(&mut self) {
+        self.promise_handle = ::std::option::Option::None;
+    }
+
+    pub fn has_promise_handle(&self) -> bool {
+        self.promise_handle.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_promise_handle(&mut self, v: u64) {
+        self.promise_handle = ::std::option::Option::Some(v);
+    }
+
+    // optional string reject_reason = 4;
+
+    pub fn reject_reason(&self) -> &str {
+        match self.reject_reason.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_reject_reason(&mut self) {
+        self.reject_reason = ::std::option::Option::None;
+    }
+
+    pub fn has_reject_reason(&self) -> bool {
+        self.reject_reason.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_reject_reason(&mut self, v: ::std::string::String) {
+        self.reject_reason = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_reject_reason(&mut self) -> &mut ::std::string::String {
+        if self.reject_reason.is_none() {
+            self.reject_reason = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.reject_reason.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_reject_reason(&mut self) -> ::std::string::String {
+        self.reject_reason.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgJSExecutePromise {
+    const NAME: &'static str = "CMsgJSExecutePromise";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.browser_handle = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.owning_browser_handle = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                24 => {
+                    self.promise_handle = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                34 => {
+                    self.reject_reason = ::std::option::Option::Some(is.read_string()?);
+                },
+                42 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.argument)?;
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.browser_handle {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.owning_browser_handle {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        if let Some(v) = self.promise_handle {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(3, v);
+        }
+        if let Some(v) = self.reject_reason.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(4, &v);
+        }
+        if let Some(v) = self.argument.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.browser_handle {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.owning_browser_handle {
+            os.write_uint32(2, v)?;
+        }
+        if let Some(v) = self.promise_handle {
+            os.write_uint64(3, v)?;
+        }
+        if let Some(v) = self.reject_reason.as_ref() {
+            os.write_string(4, v)?;
+        }
+        if let Some(v) = self.argument.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(5, v, os)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgJSExecutePromise {
+        CMsgJSExecutePromise::new()
+    }
+
+    fn clear(&mut self) {
+        self.browser_handle = ::std::option::Option::None;
+        self.owning_browser_handle = ::std::option::Option::None;
+        self.promise_handle = ::std::option::Option::None;
+        self.reject_reason = ::std::option::Option::None;
+        self.argument.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgJSExecutePromise {
+        static instance: CMsgJSExecutePromise = CMsgJSExecutePromise {
+            browser_handle: ::std::option::Option::None,
+            owning_browser_handle: ::std::option::Option::None,
+            promise_handle: ::std::option::Option::None,
+            reject_reason: ::std::option::Option::None,
+            argument: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CMsgJSReleaseCallback)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMsgJSReleaseCallback {
@@ -25503,304 +25252,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetNetFakeLocalSystemS
     }
 }
 
-// @@protoc_insertion_point(message:CMsgSetGameOverlayTargetPIDs)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct CMsgSetGameOverlayTargetPIDs {
-    // message fields
-    // @@protoc_insertion_point(field:CMsgSetGameOverlayTargetPIDs.browser_handle)
-    pub browser_handle: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CMsgSetGameOverlayTargetPIDs.target_pid)
-    pub target_pid: ::std::vec::Vec<u32>,
-    // special fields
-    // @@protoc_insertion_point(special_field:CMsgSetGameOverlayTargetPIDs.special_fields)
-    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a CMsgSetGameOverlayTargetPIDs {
-    fn default() -> &'a CMsgSetGameOverlayTargetPIDs {
-        <CMsgSetGameOverlayTargetPIDs as ::steam_vent_proto_common::protobuf::Message>::default_instance()
-    }
-}
-
-impl CMsgSetGameOverlayTargetPIDs {
-    pub fn new() -> CMsgSetGameOverlayTargetPIDs {
-        ::std::default::Default::default()
-    }
-
-    // optional uint32 browser_handle = 1;
-
-    pub fn browser_handle(&self) -> u32 {
-        self.browser_handle.unwrap_or(0)
-    }
-
-    pub fn clear_browser_handle(&mut self) {
-        self.browser_handle = ::std::option::Option::None;
-    }
-
-    pub fn has_browser_handle(&self) -> bool {
-        self.browser_handle.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_browser_handle(&mut self, v: u32) {
-        self.browser_handle = ::std::option::Option::Some(v);
-    }
-}
-
-impl ::steam_vent_proto_common::protobuf::Message for CMsgSetGameOverlayTargetPIDs {
-    const NAME: &'static str = "CMsgSetGameOverlayTargetPIDs";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                8 => {
-                    self.browser_handle = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                18 => {
-                    is.read_repeated_packed_uint32_into(&mut self.target_pid)?;
-                },
-                16 => {
-                    self.target_pid.push(is.read_uint32()?);
-                },
-                tag => {
-                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.browser_handle {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
-        }
-        for value in &self.target_pid {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, *value);
-        };
-        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        if let Some(v) = self.browser_handle {
-            os.write_uint32(1, v)?;
-        }
-        for v in &self.target_pid {
-            os.write_uint32(2, *v)?;
-        };
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> CMsgSetGameOverlayTargetPIDs {
-        CMsgSetGameOverlayTargetPIDs::new()
-    }
-
-    fn clear(&mut self) {
-        self.browser_handle = ::std::option::Option::None;
-        self.target_pid.clear();
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static CMsgSetGameOverlayTargetPIDs {
-        static instance: CMsgSetGameOverlayTargetPIDs = CMsgSetGameOverlayTargetPIDs {
-            browser_handle: ::std::option::Option::None,
-            target_pid: ::std::vec::Vec::new(),
-            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-// @@protoc_insertion_point(message:CMsgGameOverlayTargetTextureID)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct CMsgGameOverlayTargetTextureID {
-    // message fields
-    // @@protoc_insertion_point(field:CMsgGameOverlayTargetTextureID.browser_handle)
-    pub browser_handle: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CMsgGameOverlayTargetTextureID.target_pid)
-    pub target_pid: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CMsgGameOverlayTargetTextureID.texture_handle)
-    pub texture_handle: ::std::option::Option<u32>,
-    // special fields
-    // @@protoc_insertion_point(special_field:CMsgGameOverlayTargetTextureID.special_fields)
-    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a CMsgGameOverlayTargetTextureID {
-    fn default() -> &'a CMsgGameOverlayTargetTextureID {
-        <CMsgGameOverlayTargetTextureID as ::steam_vent_proto_common::protobuf::Message>::default_instance()
-    }
-}
-
-impl CMsgGameOverlayTargetTextureID {
-    pub fn new() -> CMsgGameOverlayTargetTextureID {
-        ::std::default::Default::default()
-    }
-
-    // optional uint32 browser_handle = 1;
-
-    pub fn browser_handle(&self) -> u32 {
-        self.browser_handle.unwrap_or(0)
-    }
-
-    pub fn clear_browser_handle(&mut self) {
-        self.browser_handle = ::std::option::Option::None;
-    }
-
-    pub fn has_browser_handle(&self) -> bool {
-        self.browser_handle.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_browser_handle(&mut self, v: u32) {
-        self.browser_handle = ::std::option::Option::Some(v);
-    }
-
-    // optional uint32 target_pid = 2;
-
-    pub fn target_pid(&self) -> u32 {
-        self.target_pid.unwrap_or(0)
-    }
-
-    pub fn clear_target_pid(&mut self) {
-        self.target_pid = ::std::option::Option::None;
-    }
-
-    pub fn has_target_pid(&self) -> bool {
-        self.target_pid.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_target_pid(&mut self, v: u32) {
-        self.target_pid = ::std::option::Option::Some(v);
-    }
-
-    // optional uint32 texture_handle = 3;
-
-    pub fn texture_handle(&self) -> u32 {
-        self.texture_handle.unwrap_or(0)
-    }
-
-    pub fn clear_texture_handle(&mut self) {
-        self.texture_handle = ::std::option::Option::None;
-    }
-
-    pub fn has_texture_handle(&self) -> bool {
-        self.texture_handle.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_texture_handle(&mut self, v: u32) {
-        self.texture_handle = ::std::option::Option::Some(v);
-    }
-}
-
-impl ::steam_vent_proto_common::protobuf::Message for CMsgGameOverlayTargetTextureID {
-    const NAME: &'static str = "CMsgGameOverlayTargetTextureID";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                8 => {
-                    self.browser_handle = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                16 => {
-                    self.target_pid = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                24 => {
-                    self.texture_handle = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                tag => {
-                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.browser_handle {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
-        }
-        if let Some(v) = self.target_pid {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
-        }
-        if let Some(v) = self.texture_handle {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
-        }
-        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        if let Some(v) = self.browser_handle {
-            os.write_uint32(1, v)?;
-        }
-        if let Some(v) = self.target_pid {
-            os.write_uint32(2, v)?;
-        }
-        if let Some(v) = self.texture_handle {
-            os.write_uint32(3, v)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> CMsgGameOverlayTargetTextureID {
-        CMsgGameOverlayTargetTextureID::new()
-    }
-
-    fn clear(&mut self) {
-        self.browser_handle = ::std::option::Option::None;
-        self.target_pid = ::std::option::Option::None;
-        self.texture_handle = ::std::option::Option::None;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static CMsgGameOverlayTargetTextureID {
-        static instance: CMsgGameOverlayTargetTextureID = CMsgGameOverlayTargetTextureID {
-            browser_handle: ::std::option::Option::None,
-            target_pid: ::std::option::Option::None,
-            texture_handle: ::std::option::Option::None,
-            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
 // @@protoc_insertion_point(message:CMsgDraggableRegionsChanged)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMsgDraggableRegionsChanged {
@@ -25940,6 +25391,8 @@ pub mod cmsg_draggable_regions_changed {
         pub height: ::std::option::Option<i32>,
         // @@protoc_insertion_point(field:CMsgDraggableRegionsChanged.DraggableRects.draggable)
         pub draggable: ::std::option::Option<bool>,
+        // @@protoc_insertion_point(field:CMsgDraggableRegionsChanged.DraggableRects.transparent)
+        pub transparent: ::std::option::Option<bool>,
         // special fields
         // @@protoc_insertion_point(special_field:CMsgDraggableRegionsChanged.DraggableRects.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -26050,6 +25503,25 @@ pub mod cmsg_draggable_regions_changed {
         pub fn set_draggable(&mut self, v: bool) {
             self.draggable = ::std::option::Option::Some(v);
         }
+
+        // optional bool transparent = 6;
+
+        pub fn transparent(&self) -> bool {
+            self.transparent.unwrap_or(false)
+        }
+
+        pub fn clear_transparent(&mut self) {
+            self.transparent = ::std::option::Option::None;
+        }
+
+        pub fn has_transparent(&self) -> bool {
+            self.transparent.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_transparent(&mut self, v: bool) {
+            self.transparent = ::std::option::Option::Some(v);
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for DraggableRects {
@@ -26076,6 +25548,9 @@ pub mod cmsg_draggable_regions_changed {
                     },
                     40 => {
                         self.draggable = ::std::option::Option::Some(is.read_bool()?);
+                    },
+                    48 => {
+                        self.transparent = ::std::option::Option::Some(is.read_bool()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -26104,6 +25579,9 @@ pub mod cmsg_draggable_regions_changed {
             if let Some(v) = self.draggable {
                 my_size += 1 + 1;
             }
+            if let Some(v) = self.transparent {
+                my_size += 1 + 1;
+            }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -26124,6 +25602,9 @@ pub mod cmsg_draggable_regions_changed {
             }
             if let Some(v) = self.draggable {
                 os.write_bool(5, v)?;
+            }
+            if let Some(v) = self.transparent {
+                os.write_bool(6, v)?;
             }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
@@ -26147,6 +25628,7 @@ pub mod cmsg_draggable_regions_changed {
             self.width = ::std::option::Option::None;
             self.height = ::std::option::Option::None;
             self.draggable = ::std::option::Option::None;
+            self.transparent = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -26157,6 +25639,7 @@ pub mod cmsg_draggable_regions_changed {
                 width: ::std::option::Option::None,
                 height: ::std::option::Option::None,
                 draggable: ::std::option::Option::None,
+                transparent: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -29714,25 +29197,27 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgStartDownload {
     }
 }
 
-// @@protoc_insertion_point(message:CMsgSetTopWindow)
+// @@protoc_insertion_point(message:CMsgSetWindowStackingOrder)
 #[derive(PartialEq,Clone,Default,Debug)]
-pub struct CMsgSetTopWindow {
+pub struct CMsgSetWindowStackingOrder {
     // message fields
-    // @@protoc_insertion_point(field:CMsgSetTopWindow.browser_handle)
+    // @@protoc_insertion_point(field:CMsgSetWindowStackingOrder.browser_handle)
     pub browser_handle: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgSetWindowStackingOrder.estackingorder)
+    pub estackingorder: ::std::option::Option<u32>,
     // special fields
-    // @@protoc_insertion_point(special_field:CMsgSetTopWindow.special_fields)
+    // @@protoc_insertion_point(special_field:CMsgSetWindowStackingOrder.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
 }
 
-impl<'a> ::std::default::Default for &'a CMsgSetTopWindow {
-    fn default() -> &'a CMsgSetTopWindow {
-        <CMsgSetTopWindow as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+impl<'a> ::std::default::Default for &'a CMsgSetWindowStackingOrder {
+    fn default() -> &'a CMsgSetWindowStackingOrder {
+        <CMsgSetWindowStackingOrder as ::steam_vent_proto_common::protobuf::Message>::default_instance()
     }
 }
 
-impl CMsgSetTopWindow {
-    pub fn new() -> CMsgSetTopWindow {
+impl CMsgSetWindowStackingOrder {
+    pub fn new() -> CMsgSetWindowStackingOrder {
         ::std::default::Default::default()
     }
 
@@ -29754,10 +29239,29 @@ impl CMsgSetTopWindow {
     pub fn set_browser_handle(&mut self, v: u32) {
         self.browser_handle = ::std::option::Option::Some(v);
     }
+
+    // optional uint32 estackingorder = 2;
+
+    pub fn estackingorder(&self) -> u32 {
+        self.estackingorder.unwrap_or(0)
+    }
+
+    pub fn clear_estackingorder(&mut self) {
+        self.estackingorder = ::std::option::Option::None;
+    }
+
+    pub fn has_estackingorder(&self) -> bool {
+        self.estackingorder.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_estackingorder(&mut self, v: u32) {
+        self.estackingorder = ::std::option::Option::Some(v);
+    }
 }
 
-impl ::steam_vent_proto_common::protobuf::Message for CMsgSetTopWindow {
-    const NAME: &'static str = "CMsgSetTopWindow";
+impl ::steam_vent_proto_common::protobuf::Message for CMsgSetWindowStackingOrder {
+    const NAME: &'static str = "CMsgSetWindowStackingOrder";
 
     fn is_initialized(&self) -> bool {
         true
@@ -29768,6 +29272,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetTopWindow {
             match tag {
                 8 => {
                     self.browser_handle = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.estackingorder = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -29784,6 +29291,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetTopWindow {
         if let Some(v) = self.browser_handle {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
         }
+        if let Some(v) = self.estackingorder {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -29792,6 +29302,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetTopWindow {
     fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
         if let Some(v) = self.browser_handle {
             os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.estackingorder {
+            os.write_uint32(2, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -29805,18 +29318,20 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetTopWindow {
         &mut self.special_fields
     }
 
-    fn new() -> CMsgSetTopWindow {
-        CMsgSetTopWindow::new()
+    fn new() -> CMsgSetWindowStackingOrder {
+        CMsgSetWindowStackingOrder::new()
     }
 
     fn clear(&mut self) {
         self.browser_handle = ::std::option::Option::None;
+        self.estackingorder = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
-    fn default_instance() -> &'static CMsgSetTopWindow {
-        static instance: CMsgSetTopWindow = CMsgSetTopWindow {
+    fn default_instance() -> &'static CMsgSetWindowStackingOrder {
+        static instance: CMsgSetWindowStackingOrder = CMsgSetWindowStackingOrder {
             browser_handle: ::std::option::Option::None,
+            estackingorder: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -30786,6 +30301,132 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetUIMode {
     }
 }
 
+// @@protoc_insertion_point(message:CMsgSetSteamBetaName)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgSetSteamBetaName {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgSetSteamBetaName.steam_beta_name)
+    pub steam_beta_name: ::std::option::Option<::std::string::String>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgSetSteamBetaName.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgSetSteamBetaName {
+    fn default() -> &'a CMsgSetSteamBetaName {
+        <CMsgSetSteamBetaName as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgSetSteamBetaName {
+    pub fn new() -> CMsgSetSteamBetaName {
+        ::std::default::Default::default()
+    }
+
+    // optional string steam_beta_name = 1;
+
+    pub fn steam_beta_name(&self) -> &str {
+        match self.steam_beta_name.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_steam_beta_name(&mut self) {
+        self.steam_beta_name = ::std::option::Option::None;
+    }
+
+    pub fn has_steam_beta_name(&self) -> bool {
+        self.steam_beta_name.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_steam_beta_name(&mut self, v: ::std::string::String) {
+        self.steam_beta_name = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_steam_beta_name(&mut self) -> &mut ::std::string::String {
+        if self.steam_beta_name.is_none() {
+            self.steam_beta_name = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.steam_beta_name.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_steam_beta_name(&mut self) -> ::std::string::String {
+        self.steam_beta_name.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgSetSteamBetaName {
+    const NAME: &'static str = "CMsgSetSteamBetaName";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.steam_beta_name = ::std::option::Option::Some(is.read_string()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.steam_beta_name.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(1, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.steam_beta_name.as_ref() {
+            os.write_string(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgSetSteamBetaName {
+        CMsgSetSteamBetaName::new()
+    }
+
+    fn clear(&mut self) {
+        self.steam_beta_name = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgSetSteamBetaName {
+        static instance: CMsgSetSteamBetaName = CMsgSetSteamBetaName {
+            steam_beta_name: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CMsgPopupCreated)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMsgPopupCreated {
@@ -31030,6 +30671,82 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSetVRKeyboardVisibilit
         static instance: CMsgSetVRKeyboardVisibility = CMsgSetVRKeyboardVisibility {
             browser_handle: ::std::option::Option::None,
             visible: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMsgRestartJSContext)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgRestartJSContext {
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgRestartJSContext.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgRestartJSContext {
+    fn default() -> &'a CMsgRestartJSContext {
+        <CMsgRestartJSContext as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgRestartJSContext {
+    pub fn new() -> CMsgRestartJSContext {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgRestartJSContext {
+    const NAME: &'static str = "CMsgRestartJSContext";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgRestartJSContext {
+        CMsgRestartJSContext::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgRestartJSContext {
+        static instance: CMsgRestartJSContext = CMsgRestartJSContext {
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -32108,19 +31825,6 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgNeedsSharedTexturePaint {
         self.compute_size() as usize
     }
 }
-impl ::steam_vent_proto_common::RpcMessage for CMsgGameOverlayTexturePaint {
-    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
-        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
-    }
-    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.write_to_writer(writer)
-    }
-    fn encode_size(&self) -> usize {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.compute_size() as usize
-    }
-}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGetZoom {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -32524,32 +32228,6 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgZoomToFocusedElement {
         self.compute_size() as usize
     }
 }
-impl ::steam_vent_proto_common::RpcMessage for CMsgCloseFullScreenFlashIfOpen {
-    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
-        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
-    }
-    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.write_to_writer(writer)
-    }
-    fn encode_size(&self) -> usize {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.compute_size() as usize
-    }
-}
-impl ::steam_vent_proto_common::RpcMessage for CMsgPauseFullScreenFlashMovieIfOpen {
-    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
-        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
-    }
-    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.write_to_writer(writer)
-    }
-    fn encode_size(&self) -> usize {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.compute_size() as usize
-    }
-}
 impl ::steam_vent_proto_common::RpcMessage for CMsgFocusedNodeText {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -32771,6 +32449,19 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgJSExecuteCallback {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessage for CMsgJSExecutePromise {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgJSReleaseCallback {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -32824,32 +32515,6 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgNotifyUserActivation {
     }
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgSetNetFakeLocalSystemState {
-    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
-        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
-    }
-    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.write_to_writer(writer)
-    }
-    fn encode_size(&self) -> usize {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.compute_size() as usize
-    }
-}
-impl ::steam_vent_proto_common::RpcMessage for CMsgSetGameOverlayTargetPIDs {
-    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
-        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
-    }
-    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.write_to_writer(writer)
-    }
-    fn encode_size(&self) -> usize {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.compute_size() as usize
-    }
-}
-impl ::steam_vent_proto_common::RpcMessage for CMsgGameOverlayTargetTextureID {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }
@@ -33122,7 +32787,7 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgStartDownload {
         self.compute_size() as usize
     }
 }
-impl ::steam_vent_proto_common::RpcMessage for CMsgSetTopWindow {
+impl ::steam_vent_proto_common::RpcMessage for CMsgSetWindowStackingOrder {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }
@@ -33214,6 +32879,19 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgSetUIMode {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessage for CMsgSetSteamBetaName {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgPopupCreated {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -33228,6 +32906,19 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgPopupCreated {
     }
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgSetVRKeyboardVisibility {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgRestartJSContext {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }

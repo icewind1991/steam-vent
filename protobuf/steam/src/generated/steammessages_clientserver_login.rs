@@ -2993,8 +2993,6 @@ pub struct CMsgClientLogonResponse {
     pub steam2_ticket: ::std::option::Option<::std::vec::Vec<u8>>,
     // @@protoc_insertion_point(field:CMsgClientLogonResponse.eresult_extended)
     pub eresult_extended: ::std::option::Option<i32>,
-    // @@protoc_insertion_point(field:CMsgClientLogonResponse.webapi_authenticate_user_nonce)
-    pub webapi_authenticate_user_nonce: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CMsgClientLogonResponse.cell_id_ping_threshold)
     pub cell_id_ping_threshold: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CMsgClientLogonResponse.deprecated_use_pics)
@@ -3027,6 +3025,8 @@ pub struct CMsgClientLogonResponse {
     pub agreement_session_url: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CMsgClientLogonResponse.token_id)
     pub token_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CMsgClientLogonResponse.family_group_id)
+    pub family_group_id: ::std::option::Option<u64>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgClientLogonResponse.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -3265,42 +3265,6 @@ impl CMsgClientLogonResponse {
     // Param is passed by value, moved
     pub fn set_eresult_extended(&mut self, v: i32) {
         self.eresult_extended = ::std::option::Option::Some(v);
-    }
-
-    // optional string webapi_authenticate_user_nonce = 11;
-
-    pub fn webapi_authenticate_user_nonce(&self) -> &str {
-        match self.webapi_authenticate_user_nonce.as_ref() {
-            Some(v) => v,
-            None => "",
-        }
-    }
-
-    pub fn clear_webapi_authenticate_user_nonce(&mut self) {
-        self.webapi_authenticate_user_nonce = ::std::option::Option::None;
-    }
-
-    pub fn has_webapi_authenticate_user_nonce(&self) -> bool {
-        self.webapi_authenticate_user_nonce.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_webapi_authenticate_user_nonce(&mut self, v: ::std::string::String) {
-        self.webapi_authenticate_user_nonce = ::std::option::Option::Some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_webapi_authenticate_user_nonce(&mut self) -> &mut ::std::string::String {
-        if self.webapi_authenticate_user_nonce.is_none() {
-            self.webapi_authenticate_user_nonce = ::std::option::Option::Some(::std::string::String::new());
-        }
-        self.webapi_authenticate_user_nonce.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_webapi_authenticate_user_nonce(&mut self) -> ::std::string::String {
-        self.webapi_authenticate_user_nonce.take().unwrap_or_else(|| ::std::string::String::new())
     }
 
     // optional uint32 cell_id_ping_threshold = 12;
@@ -3689,6 +3653,25 @@ impl CMsgClientLogonResponse {
     pub fn set_token_id(&mut self, v: u64) {
         self.token_id = ::std::option::Option::Some(v);
     }
+
+    // optional uint64 family_group_id = 31;
+
+    pub fn family_group_id(&self) -> u64 {
+        self.family_group_id.unwrap_or(0)
+    }
+
+    pub fn clear_family_group_id(&mut self) {
+        self.family_group_id = ::std::option::Option::None;
+    }
+
+    pub fn has_family_group_id(&self) -> bool {
+        self.family_group_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_family_group_id(&mut self, v: u64) {
+        self.family_group_id = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLogonResponse {
@@ -3730,9 +3713,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLogonResponse {
                 },
                 80 => {
                     self.eresult_extended = ::std::option::Option::Some(is.read_int32()?);
-                },
-                90 => {
-                    self.webapi_authenticate_user_nonce = ::std::option::Option::Some(is.read_string()?);
                 },
                 96 => {
                     self.cell_id_ping_threshold = ::std::option::Option::Some(is.read_uint32()?);
@@ -3782,6 +3762,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLogonResponse {
                 240 => {
                     self.token_id = ::std::option::Option::Some(is.read_uint64()?);
                 },
+                248 => {
+                    self.family_group_id = ::std::option::Option::Some(is.read_uint64()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -3823,9 +3806,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLogonResponse {
         }
         if let Some(v) = self.eresult_extended {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(10, v);
-        }
-        if let Some(v) = self.webapi_authenticate_user_nonce.as_ref() {
-            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(11, &v);
         }
         if let Some(v) = self.cell_id_ping_threshold {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(12, v);
@@ -3876,6 +3856,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLogonResponse {
         if let Some(v) = self.token_id {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(30, v);
         }
+        if let Some(v) = self.family_group_id {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(31, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -3911,9 +3894,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLogonResponse {
         }
         if let Some(v) = self.eresult_extended {
             os.write_int32(10, v)?;
-        }
-        if let Some(v) = self.webapi_authenticate_user_nonce.as_ref() {
-            os.write_string(11, v)?;
         }
         if let Some(v) = self.cell_id_ping_threshold {
             os.write_uint32(12, v)?;
@@ -3963,6 +3943,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLogonResponse {
         if let Some(v) = self.token_id {
             os.write_uint64(30, v)?;
         }
+        if let Some(v) = self.family_group_id {
+            os.write_uint64(31, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -3990,7 +3973,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLogonResponse {
         self.email_domain = ::std::option::Option::None;
         self.steam2_ticket = ::std::option::Option::None;
         self.eresult_extended = ::std::option::Option::None;
-        self.webapi_authenticate_user_nonce = ::std::option::Option::None;
         self.cell_id_ping_threshold = ::std::option::Option::None;
         self.deprecated_use_pics = ::std::option::Option::None;
         self.vanity_url = ::std::option::Option::None;
@@ -4007,6 +3989,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLogonResponse {
         self.force_client_update_check = ::std::option::Option::None;
         self.agreement_session_url = ::std::option::Option::None;
         self.token_id = ::std::option::Option::None;
+        self.family_group_id = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -4022,7 +4005,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLogonResponse {
             email_domain: ::std::option::Option::None,
             steam2_ticket: ::std::option::Option::None,
             eresult_extended: ::std::option::Option::None,
-            webapi_authenticate_user_nonce: ::std::option::Option::None,
             cell_id_ping_threshold: ::std::option::Option::None,
             deprecated_use_pics: ::std::option::Option::None,
             vanity_url: ::std::option::Option::None,
@@ -4039,6 +4021,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLogonResponse {
             force_client_update_check: ::std::option::Option::None,
             agreement_session_url: ::std::option::Option::None,
             token_id: ::std::option::Option::None,
+            family_group_id: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance

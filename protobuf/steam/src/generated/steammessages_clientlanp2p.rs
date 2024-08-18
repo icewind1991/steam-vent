@@ -685,6 +685,8 @@ pub struct CMsgClientPeerChunkRequest {
     pub depot_id: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CMsgClientPeerChunkRequest.sha)
     pub sha: ::std::option::Option<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:CMsgClientPeerChunkRequest.access_token)
+    pub access_token: ::std::option::Option<u64>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgClientPeerChunkRequest.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -774,6 +776,25 @@ impl CMsgClientPeerChunkRequest {
     pub fn take_sha(&mut self) -> ::std::vec::Vec<u8> {
         self.sha.take().unwrap_or_else(|| ::std::vec::Vec::new())
     }
+
+    // optional uint64 access_token = 4;
+
+    pub fn access_token(&self) -> u64 {
+        self.access_token.unwrap_or(0)
+    }
+
+    pub fn clear_access_token(&mut self) {
+        self.access_token = ::std::option::Option::None;
+    }
+
+    pub fn has_access_token(&self) -> bool {
+        self.access_token.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_access_token(&mut self, v: u64) {
+        self.access_token = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgClientPeerChunkRequest {
@@ -794,6 +815,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientPeerChunkRequest
                 },
                 26 => {
                     self.sha = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                32 => {
+                    self.access_token = ::std::option::Option::Some(is.read_uint64()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -816,6 +840,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientPeerChunkRequest
         if let Some(v) = self.sha.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(3, &v);
         }
+        if let Some(v) = self.access_token {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(4, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -830,6 +857,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientPeerChunkRequest
         }
         if let Some(v) = self.sha.as_ref() {
             os.write_bytes(3, v)?;
+        }
+        if let Some(v) = self.access_token {
+            os.write_uint64(4, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -851,6 +881,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientPeerChunkRequest
         self.app_id = ::std::option::Option::None;
         self.depot_id = ::std::option::Option::None;
         self.sha = ::std::option::Option::None;
+        self.access_token = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -859,6 +890,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientPeerChunkRequest
             app_id: ::std::option::Option::None,
             depot_id: ::std::option::Option::None,
             sha: ::std::option::Option::None,
+            access_token: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance

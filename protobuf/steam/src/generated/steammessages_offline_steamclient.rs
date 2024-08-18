@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Get a serialized and signed offline logon ticket for the current user"]
 // @@protoc_insertion_point(message:COffline_GetOfflineLogonTicket_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct COffline_GetOfflineLogonTicket_Request {
@@ -357,7 +356,6 @@ impl ::steam_vent_proto_common::protobuf::Message for COffline_GetOfflineLogonTi
     }
 }
 
-#[doc = "Get an unsigned offline logon ticket for the current user"]
 // @@protoc_insertion_point(message:COffline_GetUnsignedOfflineLogonTicket_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct COffline_GetUnsignedOfflineLogonTicket_Request {
@@ -742,7 +740,7 @@ for COffline_GetUnsignedOfflineLogonTicket_Response {
         self.compute_size() as usize
     }
 }
-///Offline settings service
+///
 struct Offline {}
 impl ::steam_vent_proto_common::RpcService for Offline {
     const SERVICE_NAME: &'static str = "Offline";

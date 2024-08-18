@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Checks whether or not the authed account is allowed to use the market"]
 // @@protoc_insertion_point(message:CEconMarket_IsMarketplaceAllowed_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CEconMarket_IsMarketplaceAllowed_Request {
@@ -488,7 +487,7 @@ for CEconMarket_IsMarketplaceAllowed_Response {
         self.compute_size() as usize
     }
 }
-///A service to use market functions
+///
 struct EconMarket {}
 impl ::steam_vent_proto_common::RpcService for EconMarket {
     const SERVICE_NAME: &'static str = "EconMarket";

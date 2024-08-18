@@ -308,6 +308,10 @@ pub enum EMsg {
     k_EMsgAMReverseChargebackResponse, // 537
     // @@protoc_insertion_point(enum_value:EMsg.k_EMsgAMClanCleanupList)
     k_EMsgAMClanCleanupList, // 538
+    // @@protoc_insertion_point(enum_value:EMsg.k_EMsgAMGetLicenses)
+    k_EMsgAMGetLicenses, // 539
+    // @@protoc_insertion_point(enum_value:EMsg.k_EMsgAMGetLicensesResponse)
+    k_EMsgAMGetLicensesResponse, // 540
     // @@protoc_insertion_point(enum_value:EMsg.k_EMsgAMSendCartRepurchase)
     k_EMsgAMSendCartRepurchase, // 541
     // @@protoc_insertion_point(enum_value:EMsg.k_EMsgAMSendCartRepurchaseResponse)
@@ -1790,10 +1794,18 @@ pub enum EMsg {
     k_EMsgAMSetRemoteClientID, // 4425
     // @@protoc_insertion_point(enum_value:EMsg.k_EMsgBasePSRange)
     k_EMsgBasePSRange, // 5000
+    // @@protoc_insertion_point(enum_value:EMsg.k_EMsgPSCreateShoppingCart)
+    k_EMsgPSCreateShoppingCart, // 5001
+    // @@protoc_insertion_point(enum_value:EMsg.k_EMsgPSCreateShoppingCartResponse)
+    k_EMsgPSCreateShoppingCartResponse, // 5002
     // @@protoc_insertion_point(enum_value:EMsg.k_EMsgPSIsValidShoppingCart)
     k_EMsgPSIsValidShoppingCart, // 5003
     // @@protoc_insertion_point(enum_value:EMsg.k_EMsgPSIsValidShoppingCartResponse)
     k_EMsgPSIsValidShoppingCartResponse, // 5004
+    // @@protoc_insertion_point(enum_value:EMsg.k_EMsgPSRemoveLineItemFromShoppingCart)
+    k_EMsgPSRemoveLineItemFromShoppingCart, // 5007
+    // @@protoc_insertion_point(enum_value:EMsg.k_EMsgPSRemoveLineItemFromShoppingCartResponse)
+    k_EMsgPSRemoveLineItemFromShoppingCartResponse, // 5008
     // @@protoc_insertion_point(enum_value:EMsg.k_EMsgPSGetShoppingCartContents)
     k_EMsgPSGetShoppingCartContents, // 5009
     // @@protoc_insertion_point(enum_value:EMsg.k_EMsgPSGetShoppingCartContentsResponse)
@@ -2940,8 +2952,6 @@ pub enum EMsg {
     k_EMsgClientEnableOrDisableDownloads, // 9806
     // @@protoc_insertion_point(enum_value:EMsg.k_EMsgClientEnableOrDisableDownloadsResponse)
     k_EMsgClientEnableOrDisableDownloadsResponse, // 9807
-    // @@protoc_insertion_point(enum_value:EMsg.k_EMsgClientFeatureGroupInfo)
-    k_EMsgClientFeatureGroupInfo, // 9808
     // @@protoc_insertion_point(enum_value:EMsg.k_EMsgClientLANP2PBase)
     k_EMsgClientLANP2PBase, // 9900
     // @@protoc_insertion_point(enum_value:EMsg.k_EMsgClientLANP2PRequestChunk)
@@ -3154,6 +3164,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
             EMsg::k_EMsgAMReverseChargeback => 536,
             EMsg::k_EMsgAMReverseChargebackResponse => 537,
             EMsg::k_EMsgAMClanCleanupList => 538,
+            EMsg::k_EMsgAMGetLicenses => 539,
+            EMsg::k_EMsgAMGetLicensesResponse => 540,
             EMsg::k_EMsgAMSendCartRepurchase => 541,
             EMsg::k_EMsgAMSendCartRepurchaseResponse => 542,
             EMsg::k_EMsgAllowUserToPlayQuery => 550,
@@ -3895,8 +3907,12 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
             EMsg::k_EMsgAMECommPayPaymentResponse => 4424,
             EMsg::k_EMsgAMSetRemoteClientID => 4425,
             EMsg::k_EMsgBasePSRange => 5000,
+            EMsg::k_EMsgPSCreateShoppingCart => 5001,
+            EMsg::k_EMsgPSCreateShoppingCartResponse => 5002,
             EMsg::k_EMsgPSIsValidShoppingCart => 5003,
             EMsg::k_EMsgPSIsValidShoppingCartResponse => 5004,
+            EMsg::k_EMsgPSRemoveLineItemFromShoppingCart => 5007,
+            EMsg::k_EMsgPSRemoveLineItemFromShoppingCartResponse => 5008,
             EMsg::k_EMsgPSGetShoppingCartContents => 5009,
             EMsg::k_EMsgPSGetShoppingCartContentsResponse => 5010,
             EMsg::k_EMsgPSAddWalletCreditToShoppingCart => 5011,
@@ -4470,7 +4486,6 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
             EMsg::k_EMsgClientHello => 9805,
             EMsg::k_EMsgClientEnableOrDisableDownloads => 9806,
             EMsg::k_EMsgClientEnableOrDisableDownloadsResponse => 9807,
-            EMsg::k_EMsgClientFeatureGroupInfo => 9808,
             EMsg::k_EMsgClientLANP2PBase => 9900,
             EMsg::k_EMsgClientLANP2PRequestChunk => 9900,
             EMsg::k_EMsgClientLANP2PRequestChunkResponse => 9901,
@@ -4639,6 +4654,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
             536 => ::std::option::Option::Some(EMsg::k_EMsgAMReverseChargeback),
             537 => ::std::option::Option::Some(EMsg::k_EMsgAMReverseChargebackResponse),
             538 => ::std::option::Option::Some(EMsg::k_EMsgAMClanCleanupList),
+            539 => ::std::option::Option::Some(EMsg::k_EMsgAMGetLicenses),
+            540 => ::std::option::Option::Some(EMsg::k_EMsgAMGetLicensesResponse),
             541 => ::std::option::Option::Some(EMsg::k_EMsgAMSendCartRepurchase),
             542 => ::std::option::Option::Some(EMsg::k_EMsgAMSendCartRepurchaseResponse),
             550 => ::std::option::Option::Some(EMsg::k_EMsgAllowUserToPlayQuery),
@@ -5374,8 +5391,12 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
             4424 => ::std::option::Option::Some(EMsg::k_EMsgAMECommPayPaymentResponse),
             4425 => ::std::option::Option::Some(EMsg::k_EMsgAMSetRemoteClientID),
             5000 => ::std::option::Option::Some(EMsg::k_EMsgBasePSRange),
+            5001 => ::std::option::Option::Some(EMsg::k_EMsgPSCreateShoppingCart),
+            5002 => ::std::option::Option::Some(EMsg::k_EMsgPSCreateShoppingCartResponse),
             5003 => ::std::option::Option::Some(EMsg::k_EMsgPSIsValidShoppingCart),
             5004 => ::std::option::Option::Some(EMsg::k_EMsgPSIsValidShoppingCartResponse),
+            5007 => ::std::option::Option::Some(EMsg::k_EMsgPSRemoveLineItemFromShoppingCart),
+            5008 => ::std::option::Option::Some(EMsg::k_EMsgPSRemoveLineItemFromShoppingCartResponse),
             5009 => ::std::option::Option::Some(EMsg::k_EMsgPSGetShoppingCartContents),
             5010 => ::std::option::Option::Some(EMsg::k_EMsgPSGetShoppingCartContentsResponse),
             5011 => ::std::option::Option::Some(EMsg::k_EMsgPSAddWalletCreditToShoppingCart),
@@ -5933,7 +5954,6 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
             9805 => ::std::option::Option::Some(EMsg::k_EMsgClientHello),
             9806 => ::std::option::Option::Some(EMsg::k_EMsgClientEnableOrDisableDownloads),
             9807 => ::std::option::Option::Some(EMsg::k_EMsgClientEnableOrDisableDownloadsResponse),
-            9808 => ::std::option::Option::Some(EMsg::k_EMsgClientFeatureGroupInfo),
             9900 => ::std::option::Option::Some(EMsg::k_EMsgClientLANP2PBase),
             9901 => ::std::option::Option::Some(EMsg::k_EMsgClientLANP2PRequestChunkResponse),
             9902 => ::std::option::Option::Some(EMsg::k_EMsgClientPeerChunkRequest),
@@ -6097,6 +6117,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
             "k_EMsgAMReverseChargeback" => ::std::option::Option::Some(EMsg::k_EMsgAMReverseChargeback),
             "k_EMsgAMReverseChargebackResponse" => ::std::option::Option::Some(EMsg::k_EMsgAMReverseChargebackResponse),
             "k_EMsgAMClanCleanupList" => ::std::option::Option::Some(EMsg::k_EMsgAMClanCleanupList),
+            "k_EMsgAMGetLicenses" => ::std::option::Option::Some(EMsg::k_EMsgAMGetLicenses),
+            "k_EMsgAMGetLicensesResponse" => ::std::option::Option::Some(EMsg::k_EMsgAMGetLicensesResponse),
             "k_EMsgAMSendCartRepurchase" => ::std::option::Option::Some(EMsg::k_EMsgAMSendCartRepurchase),
             "k_EMsgAMSendCartRepurchaseResponse" => ::std::option::Option::Some(EMsg::k_EMsgAMSendCartRepurchaseResponse),
             "k_EMsgAllowUserToPlayQuery" => ::std::option::Option::Some(EMsg::k_EMsgAllowUserToPlayQuery),
@@ -6832,8 +6854,12 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
             "k_EMsgAMECommPayPaymentResponse" => ::std::option::Option::Some(EMsg::k_EMsgAMECommPayPaymentResponse),
             "k_EMsgAMSetRemoteClientID" => ::std::option::Option::Some(EMsg::k_EMsgAMSetRemoteClientID),
             "k_EMsgBasePSRange" => ::std::option::Option::Some(EMsg::k_EMsgBasePSRange),
+            "k_EMsgPSCreateShoppingCart" => ::std::option::Option::Some(EMsg::k_EMsgPSCreateShoppingCart),
+            "k_EMsgPSCreateShoppingCartResponse" => ::std::option::Option::Some(EMsg::k_EMsgPSCreateShoppingCartResponse),
             "k_EMsgPSIsValidShoppingCart" => ::std::option::Option::Some(EMsg::k_EMsgPSIsValidShoppingCart),
             "k_EMsgPSIsValidShoppingCartResponse" => ::std::option::Option::Some(EMsg::k_EMsgPSIsValidShoppingCartResponse),
+            "k_EMsgPSRemoveLineItemFromShoppingCart" => ::std::option::Option::Some(EMsg::k_EMsgPSRemoveLineItemFromShoppingCart),
+            "k_EMsgPSRemoveLineItemFromShoppingCartResponse" => ::std::option::Option::Some(EMsg::k_EMsgPSRemoveLineItemFromShoppingCartResponse),
             "k_EMsgPSGetShoppingCartContents" => ::std::option::Option::Some(EMsg::k_EMsgPSGetShoppingCartContents),
             "k_EMsgPSGetShoppingCartContentsResponse" => ::std::option::Option::Some(EMsg::k_EMsgPSGetShoppingCartContentsResponse),
             "k_EMsgPSAddWalletCreditToShoppingCart" => ::std::option::Option::Some(EMsg::k_EMsgPSAddWalletCreditToShoppingCart),
@@ -7391,7 +7417,6 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
             "k_EMsgClientHello" => ::std::option::Option::Some(EMsg::k_EMsgClientHello),
             "k_EMsgClientEnableOrDisableDownloads" => ::std::option::Option::Some(EMsg::k_EMsgClientEnableOrDisableDownloads),
             "k_EMsgClientEnableOrDisableDownloadsResponse" => ::std::option::Option::Some(EMsg::k_EMsgClientEnableOrDisableDownloadsResponse),
-            "k_EMsgClientFeatureGroupInfo" => ::std::option::Option::Some(EMsg::k_EMsgClientFeatureGroupInfo),
             "k_EMsgClientLANP2PBase" => ::std::option::Option::Some(EMsg::k_EMsgClientLANP2PBase),
             "k_EMsgClientLANP2PRequestChunkResponse" => ::std::option::Option::Some(EMsg::k_EMsgClientLANP2PRequestChunkResponse),
             "k_EMsgClientPeerChunkRequest" => ::std::option::Option::Some(EMsg::k_EMsgClientPeerChunkRequest),
@@ -7557,6 +7582,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
         EMsg::k_EMsgAMReverseChargeback,
         EMsg::k_EMsgAMReverseChargebackResponse,
         EMsg::k_EMsgAMClanCleanupList,
+        EMsg::k_EMsgAMGetLicenses,
+        EMsg::k_EMsgAMGetLicensesResponse,
         EMsg::k_EMsgAMSendCartRepurchase,
         EMsg::k_EMsgAMSendCartRepurchaseResponse,
         EMsg::k_EMsgAllowUserToPlayQuery,
@@ -8298,8 +8325,12 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
         EMsg::k_EMsgAMECommPayPaymentResponse,
         EMsg::k_EMsgAMSetRemoteClientID,
         EMsg::k_EMsgBasePSRange,
+        EMsg::k_EMsgPSCreateShoppingCart,
+        EMsg::k_EMsgPSCreateShoppingCartResponse,
         EMsg::k_EMsgPSIsValidShoppingCart,
         EMsg::k_EMsgPSIsValidShoppingCartResponse,
+        EMsg::k_EMsgPSRemoveLineItemFromShoppingCart,
+        EMsg::k_EMsgPSRemoveLineItemFromShoppingCartResponse,
         EMsg::k_EMsgPSGetShoppingCartContents,
         EMsg::k_EMsgPSGetShoppingCartContentsResponse,
         EMsg::k_EMsgPSAddWalletCreditToShoppingCart,
@@ -8873,7 +8904,6 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMsg {
         EMsg::k_EMsgClientHello,
         EMsg::k_EMsgClientEnableOrDisableDownloads,
         EMsg::k_EMsgClientEnableOrDisableDownloadsResponse,
-        EMsg::k_EMsgClientFeatureGroupInfo,
         EMsg::k_EMsgClientLANP2PBase,
         EMsg::k_EMsgClientLANP2PRequestChunk,
         EMsg::k_EMsgClientLANP2PRequestChunkResponse,

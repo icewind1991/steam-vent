@@ -3371,6 +3371,8 @@ pub mod cmsg_client_persona_state {
         pub player_name_pending_review: ::std::option::Option<bool>,
         // @@protoc_insertion_point(field:CMsgClientPersonaState.Friend.avatar_pending_review)
         pub avatar_pending_review: ::std::option::Option<bool>,
+        // @@protoc_insertion_point(field:CMsgClientPersonaState.Friend.on_steam_deck)
+        pub on_steam_deck: ::std::option::Option<bool>,
         // special fields
         // @@protoc_insertion_point(special_field:CMsgClientPersonaState.Friend.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -4039,6 +4041,25 @@ pub mod cmsg_client_persona_state {
         pub fn set_avatar_pending_review(&mut self, v: bool) {
             self.avatar_pending_review = ::std::option::Option::Some(v);
         }
+
+        // optional bool on_steam_deck = 81;
+
+        pub fn on_steam_deck(&self) -> bool {
+            self.on_steam_deck.unwrap_or(false)
+        }
+
+        pub fn clear_on_steam_deck(&mut self) {
+            self.on_steam_deck = ::std::option::Option::None;
+        }
+
+        pub fn has_on_steam_deck(&self) -> bool {
+            self.on_steam_deck.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_on_steam_deck(&mut self, v: bool) {
+            self.on_steam_deck = ::std::option::Option::Some(v);
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for Friend {
@@ -4143,6 +4164,9 @@ pub mod cmsg_client_persona_state {
                     },
                     640 => {
                         self.avatar_pending_review = ::std::option::Option::Some(is.read_bool()?);
+                    },
+                    648 => {
+                        self.on_steam_deck = ::std::option::Option::Some(is.read_bool()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -4251,6 +4275,9 @@ pub mod cmsg_client_persona_state {
             if let Some(v) = self.avatar_pending_review {
                 my_size += 2 + 1;
             }
+            if let Some(v) = self.on_steam_deck {
+                my_size += 2 + 1;
+            }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -4350,6 +4377,9 @@ pub mod cmsg_client_persona_state {
             if let Some(v) = self.avatar_pending_review {
                 os.write_bool(80, v)?;
             }
+            if let Some(v) = self.on_steam_deck {
+                os.write_bool(81, v)?;
+            }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
         }
@@ -4398,6 +4428,7 @@ pub mod cmsg_client_persona_state {
             self.is_community_banned = ::std::option::Option::None;
             self.player_name_pending_review = ::std::option::Option::None;
             self.avatar_pending_review = ::std::option::Option::None;
+            self.on_steam_deck = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -4434,6 +4465,7 @@ pub mod cmsg_client_persona_state {
                 is_community_banned: ::std::option::Option::None,
                 player_name_pending_review: ::std::option::Option::None,
                 avatar_pending_review: ::std::option::Option::None,
+                on_steam_deck: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance

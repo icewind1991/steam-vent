@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Records a serial number and the calling user's account info for warranty purposes."]
 // @@protoc_insertion_point(message:CAccountHardware_RegisterSteamController_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountHardware_RegisterSteamController_Request {
@@ -278,7 +277,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAccountHardware_RegisterS
     }
 }
 
-#[doc = "Marks a controller's registration as complete"]
 // @@protoc_insertion_point(message:CAccountHardware_CompleteSteamControllerRegistration_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountHardware_CompleteSteamControllerRegistration_Request {
@@ -530,7 +528,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAccountHardware_CompleteS
     }
 }
 
-#[doc = "Sends back a list of accounts registered to a controller."]
 // @@protoc_insertion_point(message:CAccountHardware_QueryAccountsRegisteredToSerial_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountHardware_QueryAccountsRegisteredToSerial_Request {
@@ -1145,7 +1142,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAccountHardware_SteamCont
     }
 }
 
-#[doc = "Sets a desired controller config for an app"]
 // @@protoc_insertion_point(message:CAccountHardware_SteamControllerSetConfig_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountHardware_SteamControllerSetConfig_Request {
@@ -1507,7 +1503,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAccountHardware_SteamCont
     }
 }
 
-#[doc = "Gets a desired controller config for an app"]
 // @@protoc_insertion_point(message:CAccountHardware_SteamControllerGetConfig_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountHardware_SteamControllerGetConfig_Request {
@@ -2207,7 +2202,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAccountHardware_SteamCont
     }
 }
 
-#[doc = "De registers a controller"]
 // @@protoc_insertion_point(message:CAccountHardware_DeRegisterSteamController_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountHardware_DeRegisterSteamController_Request {
@@ -2491,7 +2485,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAccountHardware_DeRegiste
     }
 }
 
-#[doc = "Stores the file ID of the personalization file"]
 // @@protoc_insertion_point(message:CAccountHardware_SetPersonalizationFile_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountHardware_SetPersonalizationFile_Request {
@@ -2758,7 +2751,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAccountHardware_SetPerson
     }
 }
 
-#[doc = "Gets the file ID of the personalization file"]
 // @@protoc_insertion_point(message:CAccountHardware_GetPersonalizationFile_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountHardware_GetPersonalizationFile_Request {
@@ -3026,7 +3018,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAccountHardware_GetPerson
     }
 }
 
-#[doc = "Check system info for compatibility with VR"]
 // @@protoc_insertion_point(message:CAccountHardware_VRCompatibilityCheck_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountHardware_VRCompatibilityCheck_Request {
@@ -3852,7 +3843,6 @@ pub mod caccount_hardware_vrcompatibility_check_response {
     }
 }
 
-#[doc = "Registers a valve index component to a customer"]
 // @@protoc_insertion_point(message:CAccountHardware_RegisterValveIndexComponent_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountHardware_RegisterValveIndexComponent_Request {
@@ -4220,7 +4210,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAccountHardware_RegisterV
     }
 }
 
-#[doc = "Returns the components that went into the given Steam Deck"]
 // @@protoc_insertion_point(message:CAccountHardware_GetSteamDeckComponents_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountHardware_GetSteamDeckComponents_Request {
@@ -4533,6 +4522,12 @@ pub enum EValveIndexComponent {
     k_EValveIndexComponentLeftKnuckle = 2,
     // @@protoc_insertion_point(enum_value:EValveIndexComponent.k_EValveIndexComponentRightKnuckle)
     k_EValveIndexComponentRightKnuckle = 3,
+    // @@protoc_insertion_point(enum_value:EValveIndexComponent.k_ETempDTst1)
+    k_ETempDTst1 = 4,
+    // @@protoc_insertion_point(enum_value:EValveIndexComponent.k_ETempDTst2)
+    k_ETempDTst2 = 5,
+    // @@protoc_insertion_point(enum_value:EValveIndexComponent.k_ETempDTst3)
+    k_ETempDTst3 = 6,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EValveIndexComponent {
@@ -4548,6 +4543,9 @@ impl ::steam_vent_proto_common::protobuf::Enum for EValveIndexComponent {
             1 => ::std::option::Option::Some(EValveIndexComponent::k_EValveIndexComponentHMD),
             2 => ::std::option::Option::Some(EValveIndexComponent::k_EValveIndexComponentLeftKnuckle),
             3 => ::std::option::Option::Some(EValveIndexComponent::k_EValveIndexComponentRightKnuckle),
+            4 => ::std::option::Option::Some(EValveIndexComponent::k_ETempDTst1),
+            5 => ::std::option::Option::Some(EValveIndexComponent::k_ETempDTst2),
+            6 => ::std::option::Option::Some(EValveIndexComponent::k_ETempDTst3),
             _ => ::std::option::Option::None
         }
     }
@@ -4558,6 +4556,9 @@ impl ::steam_vent_proto_common::protobuf::Enum for EValveIndexComponent {
             "k_EValveIndexComponentHMD" => ::std::option::Option::Some(EValveIndexComponent::k_EValveIndexComponentHMD),
             "k_EValveIndexComponentLeftKnuckle" => ::std::option::Option::Some(EValveIndexComponent::k_EValveIndexComponentLeftKnuckle),
             "k_EValveIndexComponentRightKnuckle" => ::std::option::Option::Some(EValveIndexComponent::k_EValveIndexComponentRightKnuckle),
+            "k_ETempDTst1" => ::std::option::Option::Some(EValveIndexComponent::k_ETempDTst1),
+            "k_ETempDTst2" => ::std::option::Option::Some(EValveIndexComponent::k_ETempDTst2),
+            "k_ETempDTst3" => ::std::option::Option::Some(EValveIndexComponent::k_ETempDTst3),
             _ => ::std::option::Option::None
         }
     }
@@ -4567,6 +4568,9 @@ impl ::steam_vent_proto_common::protobuf::Enum for EValveIndexComponent {
         EValveIndexComponent::k_EValveIndexComponentHMD,
         EValveIndexComponent::k_EValveIndexComponentLeftKnuckle,
         EValveIndexComponent::k_EValveIndexComponentRightKnuckle,
+        EValveIndexComponent::k_ETempDTst1,
+        EValveIndexComponent::k_ETempDTst2,
+        EValveIndexComponent::k_ETempDTst3,
     ];
 }
 
@@ -4934,7 +4938,7 @@ for CAccountHardware_GetSteamDeckComponents_Response {
         self.compute_size() as usize
     }
 }
-///A service to use account hardware related methods
+///
 struct AccountHardware {}
 impl ::steam_vent_proto_common::RpcService for AccountHardware {
     const SERVICE_NAME: &'static str = "AccountHardware";

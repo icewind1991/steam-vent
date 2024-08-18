@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Retrieve the status of the user's EULA acceptance."]
 // @@protoc_insertion_point(message:CWorkshop_GetEULAStatus_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CWorkshop_GetEULAStatus_Request {
@@ -374,7 +373,7 @@ impl ::steam_vent_proto_common::RpcMessage for CWorkshop_GetEULAStatus_Response 
         self.compute_size() as usize
     }
 }
-///A service to access published file data
+///
 struct Workshop {}
 impl ::steam_vent_proto_common::RpcService for Workshop {
     const SERVICE_NAME: &'static str = "Workshop";

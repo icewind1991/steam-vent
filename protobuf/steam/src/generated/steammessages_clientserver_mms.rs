@@ -253,6 +253,8 @@ pub struct CMsgClientMMSCreateLobby {
     pub persona_name_owner: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CMsgClientMMSCreateLobby.public_ip)
     pub public_ip: ::steam_vent_proto_common::protobuf::MessageField<super::steammessages_base::CMsgIPAddress>,
+    // @@protoc_insertion_point(field:CMsgClientMMSCreateLobby.network_ping_location)
+    pub network_ping_location: ::std::option::Option<::std::string::String>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgClientMMSCreateLobby.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -454,6 +456,42 @@ impl CMsgClientMMSCreateLobby {
     pub fn take_persona_name_owner(&mut self) -> ::std::string::String {
         self.persona_name_owner.take().unwrap_or_else(|| ::std::string::String::new())
     }
+
+    // optional string network_ping_location = 10;
+
+    pub fn network_ping_location(&self) -> &str {
+        match self.network_ping_location.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_network_ping_location(&mut self) {
+        self.network_ping_location = ::std::option::Option::None;
+    }
+
+    pub fn has_network_ping_location(&self) -> bool {
+        self.network_ping_location.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_network_ping_location(&mut self, v: ::std::string::String) {
+        self.network_ping_location = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_network_ping_location(&mut self) -> &mut ::std::string::String {
+        if self.network_ping_location.is_none() {
+            self.network_ping_location = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.network_ping_location.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_network_ping_location(&mut self) -> ::std::string::String {
+        self.network_ping_location.take().unwrap_or_else(|| ::std::string::String::new())
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSCreateLobby {
@@ -492,6 +530,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSCreateLobby {
                 },
                 74 => {
                     ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.public_ip)?;
+                },
+                82 => {
+                    self.network_ping_location = ::std::option::Option::Some(is.read_string()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -533,6 +574,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSCreateLobby {
             let len = v.compute_size();
             my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
         }
+        if let Some(v) = self.network_ping_location.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(10, &v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -566,6 +610,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSCreateLobby {
         if let Some(v) = self.public_ip.as_ref() {
             ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(9, v, os)?;
         }
+        if let Some(v) = self.network_ping_location.as_ref() {
+            os.write_string(10, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -592,6 +639,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSCreateLobby {
         self.metadata = ::std::option::Option::None;
         self.persona_name_owner = ::std::option::Option::None;
         self.public_ip.clear();
+        self.network_ping_location = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -606,6 +654,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSCreateLobby {
             metadata: ::std::option::Option::None,
             persona_name_owner: ::std::option::Option::None,
             public_ip: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            network_ping_location: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -795,6 +844,10 @@ pub struct CMsgClientMMSJoinLobby {
     pub steam_id_lobby: ::std::option::Option<u64>,
     // @@protoc_insertion_point(field:CMsgClientMMSJoinLobby.persona_name)
     pub persona_name: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CMsgClientMMSJoinLobby.network_ping_location)
+    pub network_ping_location: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CMsgClientMMSJoinLobby.cell_id)
+    pub cell_id: ::std::option::Option<u32>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgClientMMSJoinLobby.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -884,6 +937,61 @@ impl CMsgClientMMSJoinLobby {
     pub fn take_persona_name(&mut self) -> ::std::string::String {
         self.persona_name.take().unwrap_or_else(|| ::std::string::String::new())
     }
+
+    // optional string network_ping_location = 4;
+
+    pub fn network_ping_location(&self) -> &str {
+        match self.network_ping_location.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_network_ping_location(&mut self) {
+        self.network_ping_location = ::std::option::Option::None;
+    }
+
+    pub fn has_network_ping_location(&self) -> bool {
+        self.network_ping_location.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_network_ping_location(&mut self, v: ::std::string::String) {
+        self.network_ping_location = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_network_ping_location(&mut self) -> &mut ::std::string::String {
+        if self.network_ping_location.is_none() {
+            self.network_ping_location = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.network_ping_location.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_network_ping_location(&mut self) -> ::std::string::String {
+        self.network_ping_location.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional uint32 cell_id = 5;
+
+    pub fn cell_id(&self) -> u32 {
+        self.cell_id.unwrap_or(0)
+    }
+
+    pub fn clear_cell_id(&mut self) {
+        self.cell_id = ::std::option::Option::None;
+    }
+
+    pub fn has_cell_id(&self) -> bool {
+        self.cell_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_cell_id(&mut self, v: u32) {
+        self.cell_id = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSJoinLobby {
@@ -904,6 +1012,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSJoinLobby {
                 },
                 26 => {
                     self.persona_name = ::std::option::Option::Some(is.read_string()?);
+                },
+                34 => {
+                    self.network_ping_location = ::std::option::Option::Some(is.read_string()?);
+                },
+                40 => {
+                    self.cell_id = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -926,6 +1040,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSJoinLobby {
         if let Some(v) = self.persona_name.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(3, &v);
         }
+        if let Some(v) = self.network_ping_location.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(4, &v);
+        }
+        if let Some(v) = self.cell_id {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(5, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -940,6 +1060,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSJoinLobby {
         }
         if let Some(v) = self.persona_name.as_ref() {
             os.write_string(3, v)?;
+        }
+        if let Some(v) = self.network_ping_location.as_ref() {
+            os.write_string(4, v)?;
+        }
+        if let Some(v) = self.cell_id {
+            os.write_uint32(5, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -961,6 +1087,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSJoinLobby {
         self.app_id = ::std::option::Option::None;
         self.steam_id_lobby = ::std::option::Option::None;
         self.persona_name = ::std::option::Option::None;
+        self.network_ping_location = ::std::option::Option::None;
+        self.cell_id = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -969,6 +1097,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSJoinLobby {
             app_id: ::std::option::Option::None,
             steam_id_lobby: ::std::option::Option::None,
             persona_name: ::std::option::Option::None,
+            network_ping_location: ::std::option::Option::None,
+            cell_id: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -1879,6 +2009,8 @@ pub struct CMsgClientMMSGetLobbyList {
     pub filters: ::std::vec::Vec<cmsg_client_mmsget_lobby_list::Filter>,
     // @@protoc_insertion_point(field:CMsgClientMMSGetLobbyList.public_ip)
     pub public_ip: ::steam_vent_proto_common::protobuf::MessageField<super::steammessages_base::CMsgIPAddress>,
+    // @@protoc_insertion_point(field:CMsgClientMMSGetLobbyList.network_ping_location)
+    pub network_ping_location: ::std::option::Option<::std::string::String>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgClientMMSGetLobbyList.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -1970,6 +2102,42 @@ impl CMsgClientMMSGetLobbyList {
     pub fn set_deprecated_public_ip(&mut self, v: u32) {
         self.deprecated_public_ip = ::std::option::Option::Some(v);
     }
+
+    // optional string network_ping_location = 8;
+
+    pub fn network_ping_location(&self) -> &str {
+        match self.network_ping_location.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_network_ping_location(&mut self) {
+        self.network_ping_location = ::std::option::Option::None;
+    }
+
+    pub fn has_network_ping_location(&self) -> bool {
+        self.network_ping_location.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_network_ping_location(&mut self, v: ::std::string::String) {
+        self.network_ping_location = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_network_ping_location(&mut self) -> &mut ::std::string::String {
+        if self.network_ping_location.is_none() {
+            self.network_ping_location = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.network_ping_location.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_network_ping_location(&mut self) -> ::std::string::String {
+        self.network_ping_location.take().unwrap_or_else(|| ::std::string::String::new())
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSGetLobbyList {
@@ -1999,6 +2167,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSGetLobbyList 
                 },
                 58 => {
                     ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.public_ip)?;
+                },
+                66 => {
+                    self.network_ping_location = ::std::option::Option::Some(is.read_string()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -2032,6 +2203,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSGetLobbyList 
             let len = v.compute_size();
             my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
         }
+        if let Some(v) = self.network_ping_location.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(8, &v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2056,6 +2230,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSGetLobbyList 
         if let Some(v) = self.public_ip.as_ref() {
             ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(7, v, os)?;
         }
+        if let Some(v) = self.network_ping_location.as_ref() {
+            os.write_string(8, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -2079,6 +2256,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSGetLobbyList 
         self.deprecated_public_ip = ::std::option::Option::None;
         self.filters.clear();
         self.public_ip.clear();
+        self.network_ping_location = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -2090,6 +2268,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSGetLobbyList 
             deprecated_public_ip: ::std::option::Option::None,
             filters: ::std::vec::Vec::new(),
             public_ip: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            network_ping_location: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -2515,6 +2694,10 @@ pub mod cmsg_client_mmsget_lobby_list_response {
         pub distance: ::std::option::Option<f32>,
         // @@protoc_insertion_point(field:CMsgClientMMSGetLobbyListResponse.Lobby.weight)
         pub weight: ::std::option::Option<i64>,
+        // @@protoc_insertion_point(field:CMsgClientMMSGetLobbyListResponse.Lobby.ping)
+        pub ping: ::std::option::Option<i32>,
+        // @@protoc_insertion_point(field:CMsgClientMMSGetLobbyListResponse.Lobby.missing_ping)
+        pub missing_ping: ::std::option::Option<i32>,
         // special fields
         // @@protoc_insertion_point(special_field:CMsgClientMMSGetLobbyListResponse.Lobby.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -2699,6 +2882,44 @@ pub mod cmsg_client_mmsget_lobby_list_response {
         pub fn set_weight(&mut self, v: i64) {
             self.weight = ::std::option::Option::Some(v);
         }
+
+        // optional int32 ping = 9;
+
+        pub fn ping(&self) -> i32 {
+            self.ping.unwrap_or(0)
+        }
+
+        pub fn clear_ping(&mut self) {
+            self.ping = ::std::option::Option::None;
+        }
+
+        pub fn has_ping(&self) -> bool {
+            self.ping.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_ping(&mut self, v: i32) {
+            self.ping = ::std::option::Option::Some(v);
+        }
+
+        // optional int32 missing_ping = 10;
+
+        pub fn missing_ping(&self) -> i32 {
+            self.missing_ping.unwrap_or(0)
+        }
+
+        pub fn clear_missing_ping(&mut self) {
+            self.missing_ping = ::std::option::Option::None;
+        }
+
+        pub fn has_missing_ping(&self) -> bool {
+            self.missing_ping.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_missing_ping(&mut self, v: i32) {
+            self.missing_ping = ::std::option::Option::Some(v);
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for Lobby {
@@ -2734,6 +2955,12 @@ pub mod cmsg_client_mmsget_lobby_list_response {
                     },
                     64 => {
                         self.weight = ::std::option::Option::Some(is.read_int64()?);
+                    },
+                    72 => {
+                        self.ping = ::std::option::Option::Some(is.read_int32()?);
+                    },
+                    80 => {
+                        self.missing_ping = ::std::option::Option::Some(is.read_int32()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -2771,6 +2998,12 @@ pub mod cmsg_client_mmsget_lobby_list_response {
             if let Some(v) = self.weight {
                 my_size += ::steam_vent_proto_common::protobuf::rt::int64_size(8, v);
             }
+            if let Some(v) = self.ping {
+                my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(9, v);
+            }
+            if let Some(v) = self.missing_ping {
+                my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(10, v);
+            }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -2801,6 +3034,12 @@ pub mod cmsg_client_mmsget_lobby_list_response {
             if let Some(v) = self.weight {
                 os.write_int64(8, v)?;
             }
+            if let Some(v) = self.ping {
+                os.write_int32(9, v)?;
+            }
+            if let Some(v) = self.missing_ping {
+                os.write_int32(10, v)?;
+            }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
         }
@@ -2826,6 +3065,8 @@ pub mod cmsg_client_mmsget_lobby_list_response {
             self.num_members = ::std::option::Option::None;
             self.distance = ::std::option::Option::None;
             self.weight = ::std::option::Option::None;
+            self.ping = ::std::option::Option::None;
+            self.missing_ping = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -2839,6 +3080,8 @@ pub mod cmsg_client_mmsget_lobby_list_response {
                 num_members: ::std::option::Option::None,
                 distance: ::std::option::Option::None,
                 weight: ::std::option::Option::None,
+                ping: ::std::option::Option::None,
+                missing_ping: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -2864,6 +3107,8 @@ pub struct CMsgClientMMSSetLobbyData {
     pub lobby_flags: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CMsgClientMMSSetLobbyData.metadata)
     pub metadata: ::std::option::Option<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:CMsgClientMMSSetLobbyData.network_ping_location)
+    pub network_ping_location: ::std::option::Option<::std::string::String>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgClientMMSSetLobbyData.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -3029,6 +3274,42 @@ impl CMsgClientMMSSetLobbyData {
     pub fn take_metadata(&mut self) -> ::std::vec::Vec<u8> {
         self.metadata.take().unwrap_or_else(|| ::std::vec::Vec::new())
     }
+
+    // optional string network_ping_location = 8;
+
+    pub fn network_ping_location(&self) -> &str {
+        match self.network_ping_location.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_network_ping_location(&mut self) {
+        self.network_ping_location = ::std::option::Option::None;
+    }
+
+    pub fn has_network_ping_location(&self) -> bool {
+        self.network_ping_location.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_network_ping_location(&mut self, v: ::std::string::String) {
+        self.network_ping_location = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_network_ping_location(&mut self) -> &mut ::std::string::String {
+        if self.network_ping_location.is_none() {
+            self.network_ping_location = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.network_ping_location.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_network_ping_location(&mut self) -> ::std::string::String {
+        self.network_ping_location.take().unwrap_or_else(|| ::std::string::String::new())
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyData {
@@ -3061,6 +3342,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyData 
                 },
                 58 => {
                     self.metadata = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                66 => {
+                    self.network_ping_location = ::std::option::Option::Some(is.read_string()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -3095,6 +3379,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyData 
         if let Some(v) = self.metadata.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(7, &v);
         }
+        if let Some(v) = self.network_ping_location.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(8, &v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -3122,6 +3409,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyData 
         if let Some(v) = self.metadata.as_ref() {
             os.write_bytes(7, v)?;
         }
+        if let Some(v) = self.network_ping_location.as_ref() {
+            os.write_string(8, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -3146,6 +3436,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyData 
         self.lobby_type = ::std::option::Option::None;
         self.lobby_flags = ::std::option::Option::None;
         self.metadata = ::std::option::Option::None;
+        self.network_ping_location = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -3158,6 +3449,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyData 
             lobby_type: ::std::option::Option::None,
             lobby_flags: ::std::option::Option::None,
             metadata: ::std::option::Option::None,
+            network_ping_location: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -3918,6 +4210,8 @@ pub mod cmsg_client_mmslobby_data {
         pub persona_name: ::std::option::Option<::std::string::String>,
         // @@protoc_insertion_point(field:CMsgClientMMSLobbyData.Member.metadata)
         pub metadata: ::std::option::Option<::std::vec::Vec<u8>>,
+        // @@protoc_insertion_point(field:CMsgClientMMSLobbyData.Member.ping_data)
+        pub ping_data: ::std::option::Option<::std::string::String>,
         // special fields
         // @@protoc_insertion_point(special_field:CMsgClientMMSLobbyData.Member.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -4024,6 +4318,42 @@ pub mod cmsg_client_mmslobby_data {
         pub fn take_metadata(&mut self) -> ::std::vec::Vec<u8> {
             self.metadata.take().unwrap_or_else(|| ::std::vec::Vec::new())
         }
+
+        // optional string ping_data = 4;
+
+        pub fn ping_data(&self) -> &str {
+            match self.ping_data.as_ref() {
+                Some(v) => v,
+                None => "",
+            }
+        }
+
+        pub fn clear_ping_data(&mut self) {
+            self.ping_data = ::std::option::Option::None;
+        }
+
+        pub fn has_ping_data(&self) -> bool {
+            self.ping_data.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_ping_data(&mut self, v: ::std::string::String) {
+            self.ping_data = ::std::option::Option::Some(v);
+        }
+
+        // Mutable pointer to the field.
+        // If field is not initialized, it is initialized with default value first.
+        pub fn mut_ping_data(&mut self) -> &mut ::std::string::String {
+            if self.ping_data.is_none() {
+                self.ping_data = ::std::option::Option::Some(::std::string::String::new());
+            }
+            self.ping_data.as_mut().unwrap()
+        }
+
+        // Take field
+        pub fn take_ping_data(&mut self) -> ::std::string::String {
+            self.ping_data.take().unwrap_or_else(|| ::std::string::String::new())
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for Member {
@@ -4044,6 +4374,9 @@ pub mod cmsg_client_mmslobby_data {
                     },
                     26 => {
                         self.metadata = ::std::option::Option::Some(is.read_bytes()?);
+                    },
+                    34 => {
+                        self.ping_data = ::std::option::Option::Some(is.read_string()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -4066,6 +4399,9 @@ pub mod cmsg_client_mmslobby_data {
             if let Some(v) = self.metadata.as_ref() {
                 my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(3, &v);
             }
+            if let Some(v) = self.ping_data.as_ref() {
+                my_size += ::steam_vent_proto_common::protobuf::rt::string_size(4, &v);
+            }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -4080,6 +4416,9 @@ pub mod cmsg_client_mmslobby_data {
             }
             if let Some(v) = self.metadata.as_ref() {
                 os.write_bytes(3, v)?;
+            }
+            if let Some(v) = self.ping_data.as_ref() {
+                os.write_string(4, v)?;
             }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
@@ -4101,6 +4440,7 @@ pub mod cmsg_client_mmslobby_data {
             self.steam_id = ::std::option::Option::None;
             self.persona_name = ::std::option::Option::None;
             self.metadata = ::std::option::Option::None;
+            self.ping_data = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -4109,6 +4449,7 @@ pub mod cmsg_client_mmslobby_data {
                 steam_id: ::std::option::Option::None,
                 persona_name: ::std::option::Option::None,
                 metadata: ::std::option::Option::None,
+                ping_data: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -5095,6 +5436,8 @@ pub struct CMsgClientMMSSetLobbyGameServer {
     pub game_server_steam_id: ::std::option::Option<u64>,
     // @@protoc_insertion_point(field:CMsgClientMMSSetLobbyGameServer.game_server_ip)
     pub game_server_ip: ::steam_vent_proto_common::protobuf::MessageField<super::steammessages_base::CMsgIPAddress>,
+    // @@protoc_insertion_point(field:CMsgClientMMSSetLobbyGameServer.network_ping_location)
+    pub network_ping_location: ::std::option::Option<::std::string::String>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgClientMMSSetLobbyGameServer.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -5205,6 +5548,42 @@ impl CMsgClientMMSSetLobbyGameServer {
     pub fn set_game_server_steam_id(&mut self, v: u64) {
         self.game_server_steam_id = ::std::option::Option::Some(v);
     }
+
+    // optional string network_ping_location = 7;
+
+    pub fn network_ping_location(&self) -> &str {
+        match self.network_ping_location.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_network_ping_location(&mut self) {
+        self.network_ping_location = ::std::option::Option::None;
+    }
+
+    pub fn has_network_ping_location(&self) -> bool {
+        self.network_ping_location.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_network_ping_location(&mut self, v: ::std::string::String) {
+        self.network_ping_location = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_network_ping_location(&mut self) -> &mut ::std::string::String {
+        if self.network_ping_location.is_none() {
+            self.network_ping_location = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.network_ping_location.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_network_ping_location(&mut self) -> ::std::string::String {
+        self.network_ping_location.take().unwrap_or_else(|| ::std::string::String::new())
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyGameServer {
@@ -5234,6 +5613,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyGameS
                 },
                 50 => {
                     ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.game_server_ip)?;
+                },
+                58 => {
+                    self.network_ping_location = ::std::option::Option::Some(is.read_string()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -5266,6 +5648,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyGameS
             let len = v.compute_size();
             my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
         }
+        if let Some(v) = self.network_ping_location.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(7, &v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -5290,6 +5675,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyGameS
         if let Some(v) = self.game_server_ip.as_ref() {
             ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(6, v, os)?;
         }
+        if let Some(v) = self.network_ping_location.as_ref() {
+            os.write_string(7, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -5313,6 +5701,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyGameS
         self.game_server_port = ::std::option::Option::None;
         self.game_server_steam_id = ::std::option::Option::None;
         self.game_server_ip.clear();
+        self.network_ping_location = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -5324,6 +5713,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientMMSSetLobbyGameS
             game_server_port: ::std::option::Option::None,
             game_server_steam_id: ::std::option::Option::None,
             game_server_ip: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            network_ping_location: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance

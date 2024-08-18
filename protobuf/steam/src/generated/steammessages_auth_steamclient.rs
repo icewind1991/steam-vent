@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Fetches RSA public key to use to encrypt passwords for a given account name"]
 // @@protoc_insertion_point(message:CAuthentication_GetPasswordRSAPublicKey_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_GetPasswordRSAPublicKey_Request {
@@ -666,7 +665,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_DeviceDeta
     }
 }
 
-#[doc = "start authentication process"]
 // @@protoc_insertion_point(message:CAuthentication_BeginAuthSessionViaQR_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_BeginAuthSessionViaQR_Request {
@@ -1337,7 +1335,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_BeginAuthS
     }
 }
 
-#[doc = "start authentication process"]
 // @@protoc_insertion_point(message:CAuthentication_BeginAuthSessionViaCredentials_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_BeginAuthSessionViaCredentials_Request {
@@ -2255,7 +2252,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_BeginAuthS
     }
 }
 
-#[doc = "poll during authentication process"]
 // @@protoc_insertion_point(message:CAuthentication_PollAuthSessionStatus_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_PollAuthSessionStatus_Request {
@@ -2881,7 +2877,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_PollAuthSe
     }
 }
 
-#[doc = "get metadata of specific auth session, this will also implicitly bind the calling account"]
 // @@protoc_insertion_point(message:CAuthentication_GetAuthSessionInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_GetAuthSessionInfo_Request {
@@ -3563,7 +3558,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_GetAuthSes
     }
 }
 
-#[doc = "approve an authentication session via mobile 2fa"]
 // @@protoc_insertion_point(message:CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request {
@@ -3929,7 +3923,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_UpdateAuth
     }
 }
 
-#[doc = "approve an authentication session via steam guard code"]
 // @@protoc_insertion_point(message:CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request {
@@ -4281,7 +4274,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_UpdateAuth
     }
 }
 
-#[doc = "Given a refresh token for a client app audience (e.g. desktop client / mobile client), generate an access token"]
 // @@protoc_insertion_point(message:CAuthentication_AccessToken_GenerateForApp_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_AccessToken_GenerateForApp_Request {
@@ -4650,7 +4642,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_AccessToke
     }
 }
 
-#[doc = "Enumerate durable (refresh) tokens for the given subject account"]
 // @@protoc_insertion_point(message:CAuthentication_RefreshToken_Enumerate_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_RefreshToken_Enumerate_Request {
@@ -5197,6 +5188,8 @@ pub mod cauthentication_refresh_token_enumerate_response {
         pub last_seen: ::steam_vent_proto_common::protobuf::MessageField<TokenUsageEvent>,
         // @@protoc_insertion_point(field:CAuthentication_RefreshToken_Enumerate_Response.RefreshTokenDescription.os_type)
         pub os_type: ::std::option::Option<i32>,
+        // @@protoc_insertion_point(field:CAuthentication_RefreshToken_Enumerate_Response.RefreshTokenDescription.authentication_type)
+        pub authentication_type: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::EAuthenticationType>>,
         // special fields
         // @@protoc_insertion_point(special_field:CAuthentication_RefreshToken_Enumerate_Response.RefreshTokenDescription.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -5403,6 +5396,28 @@ pub mod cauthentication_refresh_token_enumerate_response {
         pub fn set_os_type(&mut self, v: i32) {
             self.os_type = ::std::option::Option::Some(v);
         }
+
+        // optional .EAuthenticationType authentication_type = 12;
+
+        pub fn authentication_type(&self) -> super::EAuthenticationType {
+            match self.authentication_type {
+                Some(e) => e.enum_value_or(super::EAuthenticationType::k_EAuthenticationType_Unknown),
+                None => super::EAuthenticationType::k_EAuthenticationType_Unknown,
+            }
+        }
+
+        pub fn clear_authentication_type(&mut self) {
+            self.authentication_type = ::std::option::Option::None;
+        }
+
+        pub fn has_authentication_type(&self) -> bool {
+            self.authentication_type.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_authentication_type(&mut self, v: super::EAuthenticationType) {
+            self.authentication_type = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for RefreshTokenDescription {
@@ -5447,6 +5462,9 @@ pub mod cauthentication_refresh_token_enumerate_response {
                     },
                     88 => {
                         self.os_type = ::std::option::Option::Some(is.read_int32()?);
+                    },
+                    96 => {
+                        self.authentication_type = ::std::option::Option::Some(is.read_enum_or_unknown()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -5495,6 +5513,9 @@ pub mod cauthentication_refresh_token_enumerate_response {
             if let Some(v) = self.os_type {
                 my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(11, v);
             }
+            if let Some(v) = self.authentication_type {
+                my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(12, v.value());
+            }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -5534,6 +5555,9 @@ pub mod cauthentication_refresh_token_enumerate_response {
             if let Some(v) = self.os_type {
                 os.write_int32(11, v)?;
             }
+            if let Some(v) = self.authentication_type {
+                os.write_enum(12, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+            }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
         }
@@ -5562,6 +5586,7 @@ pub mod cauthentication_refresh_token_enumerate_response {
             self.first_seen.clear();
             self.last_seen.clear();
             self.os_type = ::std::option::Option::None;
+            self.authentication_type = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -5578,6 +5603,7 @@ pub mod cauthentication_refresh_token_enumerate_response {
                 first_seen: ::steam_vent_proto_common::protobuf::MessageField::none(),
                 last_seen: ::steam_vent_proto_common::protobuf::MessageField::none(),
                 os_type: ::std::option::Option::None,
+                authentication_type: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -5585,7 +5611,6 @@ pub mod cauthentication_refresh_token_enumerate_response {
     }
 }
 
-#[doc = "Gets all active auth sessions for an account for reference by the mobile app"]
 // @@protoc_insertion_point(message:CAuthentication_GetAuthSessionsForAccount_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_GetAuthSessionsForAccount_Request {
@@ -5755,7 +5780,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_GetAuthSes
     }
 }
 
-#[doc = "Migrates a WG token to an access and refresh token using a signature generated with the user's 2FA secret"]
 // @@protoc_insertion_point(message:CAuthentication_MigrateMobileSession_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_MigrateMobileSession_Request {
@@ -6138,7 +6162,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_MigrateMob
     }
 }
 
-#[doc = "Revoke a single token immediately, making it unable to renew or generate new access tokens"]
 // @@protoc_insertion_point(message:CAuthentication_Token_Revoke_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_Token_Revoke_Request {
@@ -6376,7 +6399,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_Token_Revo
     }
 }
 
-#[doc = "Mark the given refresh token as revoked"]
 // @@protoc_insertion_point(message:CAuthentication_RefreshToken_Revoke_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthentication_RefreshToken_Revoke_Request {
@@ -6678,7 +6700,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthentication_RefreshTok
     }
 }
 
-#[doc = "Asks the server for a list of refresh tokens associated with an account"]
 // @@protoc_insertion_point(message:CAuthenticationSupport_QueryRefreshTokensByAccount_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthenticationSupport_QueryRefreshTokensByAccount_Request {
@@ -7664,7 +7685,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthenticationSupport_Que
     }
 }
 
-#[doc = "Asks the server for a list of refresh tokens associated with an account"]
 // @@protoc_insertion_point(message:CAuthenticationSupport_QueryRefreshTokenByID_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthenticationSupport_QueryRefreshTokenByID_Request {
@@ -7865,7 +7885,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthenticationSupport_Que
     }
 }
 
-#[doc = "Revokes a user's auth token"]
 // @@protoc_insertion_point(message:CAuthenticationSupport_RevokeToken_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthenticationSupport_RevokeToken_Request {
@@ -8083,7 +8102,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthenticationSupport_Rev
     }
 }
 
-#[doc = "Gets the audit history for a user's auth token"]
 // @@protoc_insertion_point(message:CAuthenticationSupport_GetTokenHistory_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAuthenticationSupport_GetTokenHistory_Request {
@@ -8471,7 +8489,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAuthenticationSupport_Get
     }
 }
 
-#[doc = "Create a nonce for a cloud gaming service session"]
 // @@protoc_insertion_point(message:CCloudGaming_CreateNonce_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloudGaming_CreateNonce_Request {
@@ -8788,7 +8805,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloudGaming_CreateNonce_R
     }
 }
 
-#[doc = "Get the amount of streaming time remaining for a set of apps"]
 // @@protoc_insertion_point(message:CCloudGaming_GetTimeRemaining_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloudGaming_GetTimeRemaining_Request {
@@ -9384,6 +9400,66 @@ impl ::steam_vent_proto_common::protobuf::Enum for ETokenRenewalType {
 impl ::std::default::Default for ETokenRenewalType {
     fn default() -> Self {
         ETokenRenewalType::k_ETokenRenewalType_None
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EAuthenticationType)
+pub enum EAuthenticationType {
+    // @@protoc_insertion_point(enum_value:EAuthenticationType.k_EAuthenticationType_Unknown)
+    k_EAuthenticationType_Unknown = 0,
+    // @@protoc_insertion_point(enum_value:EAuthenticationType.k_EAuthenticationType_Password)
+    k_EAuthenticationType_Password = 1,
+    // @@protoc_insertion_point(enum_value:EAuthenticationType.k_EAuthenticationType_QR)
+    k_EAuthenticationType_QR = 2,
+    // @@protoc_insertion_point(enum_value:EAuthenticationType.k_EAuthenticationType_AccountCreation)
+    k_EAuthenticationType_AccountCreation = 3,
+    // @@protoc_insertion_point(enum_value:EAuthenticationType.k_EAuthenticationType_GuestAccount)
+    k_EAuthenticationType_GuestAccount = 4,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EAuthenticationType {
+    const NAME: &'static str = "EAuthenticationType";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EAuthenticationType> {
+        match value {
+            0 => ::std::option::Option::Some(EAuthenticationType::k_EAuthenticationType_Unknown),
+            1 => ::std::option::Option::Some(EAuthenticationType::k_EAuthenticationType_Password),
+            2 => ::std::option::Option::Some(EAuthenticationType::k_EAuthenticationType_QR),
+            3 => ::std::option::Option::Some(EAuthenticationType::k_EAuthenticationType_AccountCreation),
+            4 => ::std::option::Option::Some(EAuthenticationType::k_EAuthenticationType_GuestAccount),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EAuthenticationType> {
+        match str {
+            "k_EAuthenticationType_Unknown" => ::std::option::Option::Some(EAuthenticationType::k_EAuthenticationType_Unknown),
+            "k_EAuthenticationType_Password" => ::std::option::Option::Some(EAuthenticationType::k_EAuthenticationType_Password),
+            "k_EAuthenticationType_QR" => ::std::option::Option::Some(EAuthenticationType::k_EAuthenticationType_QR),
+            "k_EAuthenticationType_AccountCreation" => ::std::option::Option::Some(EAuthenticationType::k_EAuthenticationType_AccountCreation),
+            "k_EAuthenticationType_GuestAccount" => ::std::option::Option::Some(EAuthenticationType::k_EAuthenticationType_GuestAccount),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EAuthenticationType] = &[
+        EAuthenticationType::k_EAuthenticationType_Unknown,
+        EAuthenticationType::k_EAuthenticationType_Password,
+        EAuthenticationType::k_EAuthenticationType_QR,
+        EAuthenticationType::k_EAuthenticationType_AccountCreation,
+        EAuthenticationType::k_EAuthenticationType_GuestAccount,
+    ];
+}
+
+impl ::std::default::Default for EAuthenticationType {
+    fn default() -> Self {
+        EAuthenticationType::k_EAuthenticationType_Unknown
     }
 }
 
@@ -10138,17 +10214,17 @@ impl ::steam_vent_proto_common::RpcMessage for CCloudGaming_GetTimeRemaining_Res
         self.compute_size() as usize
     }
 }
-///Authentication Service
+///
 struct Authentication {}
 impl ::steam_vent_proto_common::RpcService for Authentication {
     const SERVICE_NAME: &'static str = "Authentication";
 }
-///Authentication Support Service
+///
 struct AuthenticationSupport {}
 impl ::steam_vent_proto_common::RpcService for AuthenticationSupport {
     const SERVICE_NAME: &'static str = "AuthenticationSupport";
 }
-///Methods for Steam cloud gaming operations
+///
 struct CloudGaming {}
 impl ::steam_vent_proto_common::RpcService for CloudGaming {
     const SERVICE_NAME: &'static str = "CloudGaming";

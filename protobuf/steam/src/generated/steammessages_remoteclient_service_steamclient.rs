@@ -35,12 +35,12 @@ use crate::steammessages_base::*;
 use crate::steammessages_unified_base_steamclient::*;
 #[allow(unused_imports)]
 use crate::steammessages_remoteclient_service_messages::*;
-///Methods for Steam remote client operations
+///
 struct RemoteClient {}
 impl ::steam_vent_proto_common::RpcService for RemoteClient {
     const SERVICE_NAME: &'static str = "RemoteClient";
 }
-///Methods for Steam remote client operations
+///
 struct RemoteClientSteamClient {}
 impl ::steam_vent_proto_common::RpcService for RemoteClientSteamClient {
     const SERVICE_NAME: &'static str = "RemoteClientSteamClient";
@@ -52,10 +52,6 @@ impl ::steam_vent_proto_common::RpcMethod for CRemoteClient_AllocateRelayServer_
 impl ::steam_vent_proto_common::RpcMethod for CRemoteClient_AllocateSDR_Request {
     const METHOD_NAME: &'static str = "RemoteClient.AllocateSDR#1";
     type Response = CRemoteClient_AllocateSDR_Response;
-}
-impl ::steam_vent_proto_common::RpcMethod for CRemoteClient_AllocateTURNServer_Request {
-    const METHOD_NAME: &'static str = "RemoteClient.AllocateTURNServer#1";
-    type Response = CRemoteClient_AllocateTURNServer_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod
 for CRemoteClient_CreateRemotePlayTogetherInvitation_Request {
@@ -70,6 +66,14 @@ for CRemoteClient_DeleteRemotePlayTogetherInvitation_Request {
 impl ::steam_vent_proto_common::RpcMethod for CRemoteClient_GetPairingInfo_Request {
     const METHOD_NAME: &'static str = "RemoteClient.GetPairingInfo#1";
     type Response = CRemoteClient_GetPairingInfo_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod for CRemoteClient_GetRecentClients_Request {
+    const METHOD_NAME: &'static str = "RemoteClient.GetRecentClients#1";
+    type Response = CRemoteClient_GetRecentClients_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod for CRemoteClient_MarkTaskComplete_Request {
+    const METHOD_NAME: &'static str = "RemoteClient.MarkTaskComplete#1";
+    type Response = CRemoteClient_MarkTaskComplete_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod for CRemoteClient_Online_Notification {
     const METHOD_NAME: &'static str = "RemoteClient.NotifyOnline#1";
@@ -94,6 +98,10 @@ impl ::steam_vent_proto_common::RpcMethod for CRemoteClient_SteamBroadcast_Notif
 }
 impl ::steam_vent_proto_common::RpcMethod for CRemoteClient_SteamToSteam_Notification {
     const METHOD_NAME: &'static str = "RemoteClient.SendSteamToSteamPacket#1";
+    type Response = ();
+}
+impl ::steam_vent_proto_common::RpcMethod for CRemoteClient_TaskList_Notification {
+    const METHOD_NAME: &'static str = "RemoteClientSteamClient.NotifyTaskList#1";
     type Response = ();
 }
 impl ::steam_vent_proto_common::RpcMethod

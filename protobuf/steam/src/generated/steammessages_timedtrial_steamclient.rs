@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Returns the amount of time a user has left on a timed trial for an app"]
 // @@protoc_insertion_point(message:CTimedTrial_GetTimeRemaining_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTimedTrial_GetTimeRemaining_Request {
@@ -341,7 +340,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTimedTrial_GetTimeRemaini
     }
 }
 
-#[doc = "Updates the user's remaining playtime while in game"]
 // @@protoc_insertion_point(message:CTimedTrial_RecordPlaytime_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTimedTrial_RecordPlaytime_Request {
@@ -624,7 +622,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CTimedTrial_RecordPlaytime
     }
 }
 
-#[doc = "Reset the user's remaining playtime (developer only)"]
 // @@protoc_insertion_point(message:CTimedTrial_ResetPlaytime_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CTimedTrial_ResetPlaytime_Request {
@@ -960,7 +957,7 @@ impl ::steam_vent_proto_common::RpcMessage for CTimedTrial_ResetPlaytime_Respons
         self.compute_size() as usize
     }
 }
-///A service to get user timed trial information
+///
 struct TimedTrial {}
 impl ::steam_vent_proto_common::RpcService for TimedTrial {
     const SERVICE_NAME: &'static str = "TimedTrial";

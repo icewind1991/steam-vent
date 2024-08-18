@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Gets a set of items from a users inventory, along with descriptions"]
 // @@protoc_insertion_point(message:CEcon_GetInventoryItemsWithDescriptions_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CEcon_GetInventoryItemsWithDescriptions_Request {
@@ -3045,7 +3044,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CEcon_GetInventoryItemsWit
     }
 }
 
-#[doc = "Get the user's trade offer access token"]
 // @@protoc_insertion_point(message:CEcon_GetTradeOfferAccessToken_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CEcon_GetTradeOfferAccessToken_Request {
@@ -3281,7 +3279,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CEcon_GetTradeOfferAccessT
     }
 }
 
-#[doc = "Generates a URL which sets a secure cookie for in-game-browser itemshop purchases"]
 // @@protoc_insertion_point(message:CEcon_ClientGetItemShopOverlayAuthURL_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CEcon_ClientGetItemShopOverlayAuthURL_Request {
@@ -3534,7 +3531,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CEcon_ClientGetItemShopOve
     }
 }
 
-#[doc = "Returns description information about the passed in asset classes"]
 // @@protoc_insertion_point(message:CEcon_GetAssetClassInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CEcon_GetAssetClassInfo_Request {
@@ -4154,7 +4150,7 @@ impl ::steam_vent_proto_common::RpcMessage for CEcon_GetAssetClassInfo_Response 
         self.compute_size() as usize
     }
 }
-///A service that provides communication with the econ servers
+///
 struct Econ {}
 impl ::steam_vent_proto_common::RpcService for Econ {
     const SERVICE_NAME: &'static str = "Econ";

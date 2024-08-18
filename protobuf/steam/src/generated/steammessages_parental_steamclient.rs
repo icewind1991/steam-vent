@@ -26,641 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-// @@protoc_insertion_point(message:ParentalApp)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct ParentalApp {
-    // message fields
-    // @@protoc_insertion_point(field:ParentalApp.appid)
-    pub appid: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:ParentalApp.is_allowed)
-    pub is_allowed: ::std::option::Option<bool>,
-    // special fields
-    // @@protoc_insertion_point(special_field:ParentalApp.special_fields)
-    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a ParentalApp {
-    fn default() -> &'a ParentalApp {
-        <ParentalApp as ::steam_vent_proto_common::protobuf::Message>::default_instance()
-    }
-}
-
-impl ParentalApp {
-    pub fn new() -> ParentalApp {
-        ::std::default::Default::default()
-    }
-
-    // optional uint32 appid = 1;
-
-    pub fn appid(&self) -> u32 {
-        self.appid.unwrap_or(0)
-    }
-
-    pub fn clear_appid(&mut self) {
-        self.appid = ::std::option::Option::None;
-    }
-
-    pub fn has_appid(&self) -> bool {
-        self.appid.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_appid(&mut self, v: u32) {
-        self.appid = ::std::option::Option::Some(v);
-    }
-
-    // optional bool is_allowed = 2;
-
-    pub fn is_allowed(&self) -> bool {
-        self.is_allowed.unwrap_or(false)
-    }
-
-    pub fn clear_is_allowed(&mut self) {
-        self.is_allowed = ::std::option::Option::None;
-    }
-
-    pub fn has_is_allowed(&self) -> bool {
-        self.is_allowed.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_is_allowed(&mut self, v: bool) {
-        self.is_allowed = ::std::option::Option::Some(v);
-    }
-}
-
-impl ::steam_vent_proto_common::protobuf::Message for ParentalApp {
-    const NAME: &'static str = "ParentalApp";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                8 => {
-                    self.appid = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                16 => {
-                    self.is_allowed = ::std::option::Option::Some(is.read_bool()?);
-                },
-                tag => {
-                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.appid {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
-        }
-        if let Some(v) = self.is_allowed {
-            my_size += 1 + 1;
-        }
-        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        if let Some(v) = self.appid {
-            os.write_uint32(1, v)?;
-        }
-        if let Some(v) = self.is_allowed {
-            os.write_bool(2, v)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> ParentalApp {
-        ParentalApp::new()
-    }
-
-    fn clear(&mut self) {
-        self.appid = ::std::option::Option::None;
-        self.is_allowed = ::std::option::Option::None;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static ParentalApp {
-        static instance: ParentalApp = ParentalApp {
-            appid: ::std::option::Option::None,
-            is_allowed: ::std::option::Option::None,
-            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-// @@protoc_insertion_point(message:ParentalSettings)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct ParentalSettings {
-    // message fields
-    // @@protoc_insertion_point(field:ParentalSettings.steamid)
-    pub steamid: ::std::option::Option<u64>,
-    // @@protoc_insertion_point(field:ParentalSettings.applist_base_id)
-    pub applist_base_id: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:ParentalSettings.applist_base_description)
-    pub applist_base_description: ::std::option::Option<::std::string::String>,
-    // @@protoc_insertion_point(field:ParentalSettings.applist_base)
-    pub applist_base: ::std::vec::Vec<ParentalApp>,
-    // @@protoc_insertion_point(field:ParentalSettings.applist_custom)
-    pub applist_custom: ::std::vec::Vec<ParentalApp>,
-    // @@protoc_insertion_point(field:ParentalSettings.passwordhashtype)
-    pub passwordhashtype: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:ParentalSettings.salt)
-    pub salt: ::std::option::Option<::std::vec::Vec<u8>>,
-    // @@protoc_insertion_point(field:ParentalSettings.passwordhash)
-    pub passwordhash: ::std::option::Option<::std::vec::Vec<u8>>,
-    // @@protoc_insertion_point(field:ParentalSettings.is_enabled)
-    pub is_enabled: ::std::option::Option<bool>,
-    // @@protoc_insertion_point(field:ParentalSettings.enabled_features)
-    pub enabled_features: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:ParentalSettings.recovery_email)
-    pub recovery_email: ::std::option::Option<::std::string::String>,
-    // @@protoc_insertion_point(field:ParentalSettings.is_site_license_lock)
-    pub is_site_license_lock: ::std::option::Option<bool>,
-    // special fields
-    // @@protoc_insertion_point(special_field:ParentalSettings.special_fields)
-    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a ParentalSettings {
-    fn default() -> &'a ParentalSettings {
-        <ParentalSettings as ::steam_vent_proto_common::protobuf::Message>::default_instance()
-    }
-}
-
-impl ParentalSettings {
-    pub fn new() -> ParentalSettings {
-        ::std::default::Default::default()
-    }
-
-    // optional fixed64 steamid = 1;
-
-    pub fn steamid(&self) -> u64 {
-        self.steamid.unwrap_or(0)
-    }
-
-    pub fn clear_steamid(&mut self) {
-        self.steamid = ::std::option::Option::None;
-    }
-
-    pub fn has_steamid(&self) -> bool {
-        self.steamid.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_steamid(&mut self, v: u64) {
-        self.steamid = ::std::option::Option::Some(v);
-    }
-
-    // optional uint32 applist_base_id = 2;
-
-    pub fn applist_base_id(&self) -> u32 {
-        self.applist_base_id.unwrap_or(0)
-    }
-
-    pub fn clear_applist_base_id(&mut self) {
-        self.applist_base_id = ::std::option::Option::None;
-    }
-
-    pub fn has_applist_base_id(&self) -> bool {
-        self.applist_base_id.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_applist_base_id(&mut self, v: u32) {
-        self.applist_base_id = ::std::option::Option::Some(v);
-    }
-
-    // optional string applist_base_description = 3;
-
-    pub fn applist_base_description(&self) -> &str {
-        match self.applist_base_description.as_ref() {
-            Some(v) => v,
-            None => "",
-        }
-    }
-
-    pub fn clear_applist_base_description(&mut self) {
-        self.applist_base_description = ::std::option::Option::None;
-    }
-
-    pub fn has_applist_base_description(&self) -> bool {
-        self.applist_base_description.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_applist_base_description(&mut self, v: ::std::string::String) {
-        self.applist_base_description = ::std::option::Option::Some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_applist_base_description(&mut self) -> &mut ::std::string::String {
-        if self.applist_base_description.is_none() {
-            self.applist_base_description = ::std::option::Option::Some(::std::string::String::new());
-        }
-        self.applist_base_description.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_applist_base_description(&mut self) -> ::std::string::String {
-        self.applist_base_description.take().unwrap_or_else(|| ::std::string::String::new())
-    }
-
-    // optional uint32 passwordhashtype = 6;
-
-    pub fn passwordhashtype(&self) -> u32 {
-        self.passwordhashtype.unwrap_or(0)
-    }
-
-    pub fn clear_passwordhashtype(&mut self) {
-        self.passwordhashtype = ::std::option::Option::None;
-    }
-
-    pub fn has_passwordhashtype(&self) -> bool {
-        self.passwordhashtype.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_passwordhashtype(&mut self, v: u32) {
-        self.passwordhashtype = ::std::option::Option::Some(v);
-    }
-
-    // optional bytes salt = 7;
-
-    pub fn salt(&self) -> &[u8] {
-        match self.salt.as_ref() {
-            Some(v) => v,
-            None => &[],
-        }
-    }
-
-    pub fn clear_salt(&mut self) {
-        self.salt = ::std::option::Option::None;
-    }
-
-    pub fn has_salt(&self) -> bool {
-        self.salt.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_salt(&mut self, v: ::std::vec::Vec<u8>) {
-        self.salt = ::std::option::Option::Some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_salt(&mut self) -> &mut ::std::vec::Vec<u8> {
-        if self.salt.is_none() {
-            self.salt = ::std::option::Option::Some(::std::vec::Vec::new());
-        }
-        self.salt.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_salt(&mut self) -> ::std::vec::Vec<u8> {
-        self.salt.take().unwrap_or_else(|| ::std::vec::Vec::new())
-    }
-
-    // optional bytes passwordhash = 8;
-
-    pub fn passwordhash(&self) -> &[u8] {
-        match self.passwordhash.as_ref() {
-            Some(v) => v,
-            None => &[],
-        }
-    }
-
-    pub fn clear_passwordhash(&mut self) {
-        self.passwordhash = ::std::option::Option::None;
-    }
-
-    pub fn has_passwordhash(&self) -> bool {
-        self.passwordhash.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_passwordhash(&mut self, v: ::std::vec::Vec<u8>) {
-        self.passwordhash = ::std::option::Option::Some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_passwordhash(&mut self) -> &mut ::std::vec::Vec<u8> {
-        if self.passwordhash.is_none() {
-            self.passwordhash = ::std::option::Option::Some(::std::vec::Vec::new());
-        }
-        self.passwordhash.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_passwordhash(&mut self) -> ::std::vec::Vec<u8> {
-        self.passwordhash.take().unwrap_or_else(|| ::std::vec::Vec::new())
-    }
-
-    // optional bool is_enabled = 9;
-
-    pub fn is_enabled(&self) -> bool {
-        self.is_enabled.unwrap_or(false)
-    }
-
-    pub fn clear_is_enabled(&mut self) {
-        self.is_enabled = ::std::option::Option::None;
-    }
-
-    pub fn has_is_enabled(&self) -> bool {
-        self.is_enabled.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_is_enabled(&mut self, v: bool) {
-        self.is_enabled = ::std::option::Option::Some(v);
-    }
-
-    // optional uint32 enabled_features = 10;
-
-    pub fn enabled_features(&self) -> u32 {
-        self.enabled_features.unwrap_or(0)
-    }
-
-    pub fn clear_enabled_features(&mut self) {
-        self.enabled_features = ::std::option::Option::None;
-    }
-
-    pub fn has_enabled_features(&self) -> bool {
-        self.enabled_features.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_enabled_features(&mut self, v: u32) {
-        self.enabled_features = ::std::option::Option::Some(v);
-    }
-
-    // optional string recovery_email = 11;
-
-    pub fn recovery_email(&self) -> &str {
-        match self.recovery_email.as_ref() {
-            Some(v) => v,
-            None => "",
-        }
-    }
-
-    pub fn clear_recovery_email(&mut self) {
-        self.recovery_email = ::std::option::Option::None;
-    }
-
-    pub fn has_recovery_email(&self) -> bool {
-        self.recovery_email.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_recovery_email(&mut self, v: ::std::string::String) {
-        self.recovery_email = ::std::option::Option::Some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_recovery_email(&mut self) -> &mut ::std::string::String {
-        if self.recovery_email.is_none() {
-            self.recovery_email = ::std::option::Option::Some(::std::string::String::new());
-        }
-        self.recovery_email.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_recovery_email(&mut self) -> ::std::string::String {
-        self.recovery_email.take().unwrap_or_else(|| ::std::string::String::new())
-    }
-
-    // optional bool is_site_license_lock = 12;
-
-    pub fn is_site_license_lock(&self) -> bool {
-        self.is_site_license_lock.unwrap_or(false)
-    }
-
-    pub fn clear_is_site_license_lock(&mut self) {
-        self.is_site_license_lock = ::std::option::Option::None;
-    }
-
-    pub fn has_is_site_license_lock(&self) -> bool {
-        self.is_site_license_lock.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_is_site_license_lock(&mut self, v: bool) {
-        self.is_site_license_lock = ::std::option::Option::Some(v);
-    }
-}
-
-impl ::steam_vent_proto_common::protobuf::Message for ParentalSettings {
-    const NAME: &'static str = "ParentalSettings";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                9 => {
-                    self.steamid = ::std::option::Option::Some(is.read_fixed64()?);
-                },
-                16 => {
-                    self.applist_base_id = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                26 => {
-                    self.applist_base_description = ::std::option::Option::Some(is.read_string()?);
-                },
-                34 => {
-                    self.applist_base.push(is.read_message()?);
-                },
-                42 => {
-                    self.applist_custom.push(is.read_message()?);
-                },
-                48 => {
-                    self.passwordhashtype = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                58 => {
-                    self.salt = ::std::option::Option::Some(is.read_bytes()?);
-                },
-                66 => {
-                    self.passwordhash = ::std::option::Option::Some(is.read_bytes()?);
-                },
-                72 => {
-                    self.is_enabled = ::std::option::Option::Some(is.read_bool()?);
-                },
-                80 => {
-                    self.enabled_features = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                90 => {
-                    self.recovery_email = ::std::option::Option::Some(is.read_string()?);
-                },
-                96 => {
-                    self.is_site_license_lock = ::std::option::Option::Some(is.read_bool()?);
-                },
-                tag => {
-                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.steamid {
-            my_size += 1 + 8;
-        }
-        if let Some(v) = self.applist_base_id {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
-        }
-        if let Some(v) = self.applist_base_description.as_ref() {
-            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(3, &v);
-        }
-        for value in &self.applist_base {
-            let len = value.compute_size();
-            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
-        };
-        for value in &self.applist_custom {
-            let len = value.compute_size();
-            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
-        };
-        if let Some(v) = self.passwordhashtype {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(6, v);
-        }
-        if let Some(v) = self.salt.as_ref() {
-            my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(7, &v);
-        }
-        if let Some(v) = self.passwordhash.as_ref() {
-            my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(8, &v);
-        }
-        if let Some(v) = self.is_enabled {
-            my_size += 1 + 1;
-        }
-        if let Some(v) = self.enabled_features {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(10, v);
-        }
-        if let Some(v) = self.recovery_email.as_ref() {
-            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(11, &v);
-        }
-        if let Some(v) = self.is_site_license_lock {
-            my_size += 1 + 1;
-        }
-        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        if let Some(v) = self.steamid {
-            os.write_fixed64(1, v)?;
-        }
-        if let Some(v) = self.applist_base_id {
-            os.write_uint32(2, v)?;
-        }
-        if let Some(v) = self.applist_base_description.as_ref() {
-            os.write_string(3, v)?;
-        }
-        for v in &self.applist_base {
-            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(4, v, os)?;
-        };
-        for v in &self.applist_custom {
-            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(5, v, os)?;
-        };
-        if let Some(v) = self.passwordhashtype {
-            os.write_uint32(6, v)?;
-        }
-        if let Some(v) = self.salt.as_ref() {
-            os.write_bytes(7, v)?;
-        }
-        if let Some(v) = self.passwordhash.as_ref() {
-            os.write_bytes(8, v)?;
-        }
-        if let Some(v) = self.is_enabled {
-            os.write_bool(9, v)?;
-        }
-        if let Some(v) = self.enabled_features {
-            os.write_uint32(10, v)?;
-        }
-        if let Some(v) = self.recovery_email.as_ref() {
-            os.write_string(11, v)?;
-        }
-        if let Some(v) = self.is_site_license_lock {
-            os.write_bool(12, v)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> ParentalSettings {
-        ParentalSettings::new()
-    }
-
-    fn clear(&mut self) {
-        self.steamid = ::std::option::Option::None;
-        self.applist_base_id = ::std::option::Option::None;
-        self.applist_base_description = ::std::option::Option::None;
-        self.applist_base.clear();
-        self.applist_custom.clear();
-        self.passwordhashtype = ::std::option::Option::None;
-        self.salt = ::std::option::Option::None;
-        self.passwordhash = ::std::option::Option::None;
-        self.is_enabled = ::std::option::Option::None;
-        self.enabled_features = ::std::option::Option::None;
-        self.recovery_email = ::std::option::Option::None;
-        self.is_site_license_lock = ::std::option::Option::None;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static ParentalSettings {
-        static instance: ParentalSettings = ParentalSettings {
-            steamid: ::std::option::Option::None,
-            applist_base_id: ::std::option::Option::None,
-            applist_base_description: ::std::option::Option::None,
-            applist_base: ::std::vec::Vec::new(),
-            applist_custom: ::std::vec::Vec::new(),
-            passwordhashtype: ::std::option::Option::None,
-            salt: ::std::option::Option::None,
-            passwordhash: ::std::option::Option::None,
-            is_enabled: ::std::option::Option::None,
-            enabled_features: ::std::option::Option::None,
-            recovery_email: ::std::option::Option::None,
-            is_site_license_lock: ::std::option::Option::None,
-            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-#[doc = "Enable parental settings for the logged in account, optionally setting the current settings"]
 // @@protoc_insertion_point(message:CParental_EnableParentalSettings_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_EnableParentalSettings_Request {
@@ -668,7 +33,7 @@ pub struct CParental_EnableParentalSettings_Request {
     // @@protoc_insertion_point(field:CParental_EnableParentalSettings_Request.password)
     pub password: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CParental_EnableParentalSettings_Request.settings)
-    pub settings: ::steam_vent_proto_common::protobuf::MessageField<ParentalSettings>,
+    pub settings: ::steam_vent_proto_common::protobuf::MessageField<super::steammessages_parental_objects::ParentalSettings>,
     // @@protoc_insertion_point(field:CParental_EnableParentalSettings_Request.sessionid)
     pub sessionid: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CParental_EnableParentalSettings_Request.enablecode)
@@ -990,7 +355,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_EnableParentalSe
     }
 }
 
-#[doc = "Disable parental settings for the logged in account"]
 // @@protoc_insertion_point(message:CParental_DisableParentalSettings_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_DisableParentalSettings_Request {
@@ -1225,7 +589,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_DisableParentalS
     }
 }
 
-#[doc = "Get the current parental settings for the logged in account"]
 // @@protoc_insertion_point(message:CParental_GetParentalSettings_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_GetParentalSettings_Request {
@@ -1340,7 +703,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_GetParentalSetti
 pub struct CParental_GetParentalSettings_Response {
     // message fields
     // @@protoc_insertion_point(field:CParental_GetParentalSettings_Response.settings)
-    pub settings: ::steam_vent_proto_common::protobuf::MessageField<ParentalSettings>,
+    pub settings: ::steam_vent_proto_common::protobuf::MessageField<super::steammessages_parental_objects::ParentalSettings>,
     // special fields
     // @@protoc_insertion_point(special_field:CParental_GetParentalSettings_Response.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -1426,7 +789,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_GetParentalSetti
     }
 }
 
-#[doc = "Get the current parental settings for the logged in account in a form that can by verified by the receiver"]
 // @@protoc_insertion_point(message:CParental_GetSignedParentalSettings_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_GetSignedParentalSettings_Request {
@@ -1711,7 +1073,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_GetSignedParenta
     }
 }
 
-#[doc = "Set the current parental settings for the logged in account"]
 // @@protoc_insertion_point(message:CParental_SetParentalSettings_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_SetParentalSettings_Request {
@@ -1719,7 +1080,7 @@ pub struct CParental_SetParentalSettings_Request {
     // @@protoc_insertion_point(field:CParental_SetParentalSettings_Request.password)
     pub password: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CParental_SetParentalSettings_Request.settings)
-    pub settings: ::steam_vent_proto_common::protobuf::MessageField<ParentalSettings>,
+    pub settings: ::steam_vent_proto_common::protobuf::MessageField<super::steammessages_parental_objects::ParentalSettings>,
     // @@protoc_insertion_point(field:CParental_SetParentalSettings_Request.new_password)
     pub new_password: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CParental_SetParentalSettings_Request.sessionid)
@@ -2058,7 +1419,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_SetParentalSetti
     }
 }
 
-#[doc = "Check if the given parental unlock token is correct for the logged in account"]
 // @@protoc_insertion_point(message:CParental_ValidateToken_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_ValidateToken_Request {
@@ -2261,7 +1621,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_ValidateToken_Re
     }
 }
 
-#[doc = "Validate the plaintext password for the logged in account and return an unlock token"]
 // @@protoc_insertion_point(message:CParental_ValidatePassword_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_ValidatePassword_Request {
@@ -2595,7 +1954,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_ValidatePassword
     }
 }
 
-#[doc = "Notify connected clients that a lock has occurred in a browser"]
 // @@protoc_insertion_point(message:CParental_LockClient_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_LockClient_Request {
@@ -2798,7 +2156,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_LockClient_Respo
     }
 }
 
-#[doc = "Request a recovery code be sent to the recovery email address for the specified account"]
 // @@protoc_insertion_point(message:CParental_RequestRecoveryCode_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_RequestRecoveryCode_Request {
@@ -2951,7 +2308,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_RequestRecoveryC
     }
 }
 
-#[doc = "Attempt a recovery unlock on the specified account"]
 // @@protoc_insertion_point(message:CParental_DisableWithRecoveryCode_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_DisableWithRecoveryCode_Request {
@@ -3169,7 +2525,1591 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_DisableWithRecov
     }
 }
 
-#[doc = "Notification from server to client of a change in parental settings"]
+// @@protoc_insertion_point(message:CParental_RequestFeatureAccess_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_RequestFeatureAccess_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CParental_RequestFeatureAccess_Request.features)
+    pub features: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CParental_RequestFeatureAccess_Request.steamid)
+    pub steamid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_RequestFeatureAccess_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_RequestFeatureAccess_Request {
+    fn default() -> &'a CParental_RequestFeatureAccess_Request {
+        <CParental_RequestFeatureAccess_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_RequestFeatureAccess_Request {
+    pub fn new() -> CParental_RequestFeatureAccess_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 features = 1;
+
+    pub fn features(&self) -> u32 {
+        self.features.unwrap_or(0)
+    }
+
+    pub fn clear_features(&mut self) {
+        self.features = ::std::option::Option::None;
+    }
+
+    pub fn has_features(&self) -> bool {
+        self.features.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_features(&mut self, v: u32) {
+        self.features = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 steamid = 10;
+
+    pub fn steamid(&self) -> u64 {
+        self.steamid.unwrap_or(0)
+    }
+
+    pub fn clear_steamid(&mut self) {
+        self.steamid = ::std::option::Option::None;
+    }
+
+    pub fn has_steamid(&self) -> bool {
+        self.steamid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_steamid(&mut self, v: u64) {
+        self.steamid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_RequestFeatureAccess_Request {
+    const NAME: &'static str = "CParental_RequestFeatureAccess_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.features = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                81 => {
+                    self.steamid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.features {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.steamid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.features {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.steamid {
+            os.write_fixed64(10, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_RequestFeatureAccess_Request {
+        CParental_RequestFeatureAccess_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.features = ::std::option::Option::None;
+        self.steamid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_RequestFeatureAccess_Request {
+        static instance: CParental_RequestFeatureAccess_Request = CParental_RequestFeatureAccess_Request {
+            features: ::std::option::Option::None,
+            steamid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CParental_RequestFeatureAccess_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_RequestFeatureAccess_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CParental_RequestFeatureAccess_Response.requestid)
+    pub requestid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_RequestFeatureAccess_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_RequestFeatureAccess_Response {
+    fn default() -> &'a CParental_RequestFeatureAccess_Response {
+        <CParental_RequestFeatureAccess_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_RequestFeatureAccess_Response {
+    pub fn new() -> CParental_RequestFeatureAccess_Response {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 requestid = 1;
+
+    pub fn requestid(&self) -> u64 {
+        self.requestid.unwrap_or(0)
+    }
+
+    pub fn clear_requestid(&mut self) {
+        self.requestid = ::std::option::Option::None;
+    }
+
+    pub fn has_requestid(&self) -> bool {
+        self.requestid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_requestid(&mut self, v: u64) {
+        self.requestid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_RequestFeatureAccess_Response {
+    const NAME: &'static str = "CParental_RequestFeatureAccess_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.requestid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.requestid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.requestid {
+            os.write_fixed64(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_RequestFeatureAccess_Response {
+        CParental_RequestFeatureAccess_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.requestid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_RequestFeatureAccess_Response {
+        static instance: CParental_RequestFeatureAccess_Response = CParental_RequestFeatureAccess_Response {
+            requestid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CParental_ApproveFeatureAccess_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_ApproveFeatureAccess_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CParental_ApproveFeatureAccess_Request.approve)
+    pub approve: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CParental_ApproveFeatureAccess_Request.requestid)
+    pub requestid: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CParental_ApproveFeatureAccess_Request.features)
+    pub features: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CParental_ApproveFeatureAccess_Request.duration)
+    pub duration: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CParental_ApproveFeatureAccess_Request.steamid)
+    pub steamid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_ApproveFeatureAccess_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_ApproveFeatureAccess_Request {
+    fn default() -> &'a CParental_ApproveFeatureAccess_Request {
+        <CParental_ApproveFeatureAccess_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_ApproveFeatureAccess_Request {
+    pub fn new() -> CParental_ApproveFeatureAccess_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional bool approve = 1;
+
+    pub fn approve(&self) -> bool {
+        self.approve.unwrap_or(false)
+    }
+
+    pub fn clear_approve(&mut self) {
+        self.approve = ::std::option::Option::None;
+    }
+
+    pub fn has_approve(&self) -> bool {
+        self.approve.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_approve(&mut self, v: bool) {
+        self.approve = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 requestid = 2;
+
+    pub fn requestid(&self) -> u64 {
+        self.requestid.unwrap_or(0)
+    }
+
+    pub fn clear_requestid(&mut self) {
+        self.requestid = ::std::option::Option::None;
+    }
+
+    pub fn has_requestid(&self) -> bool {
+        self.requestid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_requestid(&mut self, v: u64) {
+        self.requestid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 features = 3;
+
+    pub fn features(&self) -> u32 {
+        self.features.unwrap_or(0)
+    }
+
+    pub fn clear_features(&mut self) {
+        self.features = ::std::option::Option::None;
+    }
+
+    pub fn has_features(&self) -> bool {
+        self.features.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_features(&mut self, v: u32) {
+        self.features = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 duration = 4;
+
+    pub fn duration(&self) -> u32 {
+        self.duration.unwrap_or(0)
+    }
+
+    pub fn clear_duration(&mut self) {
+        self.duration = ::std::option::Option::None;
+    }
+
+    pub fn has_duration(&self) -> bool {
+        self.duration.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_duration(&mut self, v: u32) {
+        self.duration = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 steamid = 10;
+
+    pub fn steamid(&self) -> u64 {
+        self.steamid.unwrap_or(0)
+    }
+
+    pub fn clear_steamid(&mut self) {
+        self.steamid = ::std::option::Option::None;
+    }
+
+    pub fn has_steamid(&self) -> bool {
+        self.steamid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_steamid(&mut self, v: u64) {
+        self.steamid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_ApproveFeatureAccess_Request {
+    const NAME: &'static str = "CParental_ApproveFeatureAccess_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.approve = ::std::option::Option::Some(is.read_bool()?);
+                },
+                17 => {
+                    self.requestid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                24 => {
+                    self.features = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                32 => {
+                    self.duration = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                81 => {
+                    self.steamid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.approve {
+            my_size += 1 + 1;
+        }
+        if let Some(v) = self.requestid {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.features {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
+        }
+        if let Some(v) = self.duration {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(4, v);
+        }
+        if let Some(v) = self.steamid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.approve {
+            os.write_bool(1, v)?;
+        }
+        if let Some(v) = self.requestid {
+            os.write_fixed64(2, v)?;
+        }
+        if let Some(v) = self.features {
+            os.write_uint32(3, v)?;
+        }
+        if let Some(v) = self.duration {
+            os.write_uint32(4, v)?;
+        }
+        if let Some(v) = self.steamid {
+            os.write_fixed64(10, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_ApproveFeatureAccess_Request {
+        CParental_ApproveFeatureAccess_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.approve = ::std::option::Option::None;
+        self.requestid = ::std::option::Option::None;
+        self.features = ::std::option::Option::None;
+        self.duration = ::std::option::Option::None;
+        self.steamid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_ApproveFeatureAccess_Request {
+        static instance: CParental_ApproveFeatureAccess_Request = CParental_ApproveFeatureAccess_Request {
+            approve: ::std::option::Option::None,
+            requestid: ::std::option::Option::None,
+            features: ::std::option::Option::None,
+            duration: ::std::option::Option::None,
+            steamid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CParental_ApproveFeatureAccess_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_ApproveFeatureAccess_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_ApproveFeatureAccess_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_ApproveFeatureAccess_Response {
+    fn default() -> &'a CParental_ApproveFeatureAccess_Response {
+        <CParental_ApproveFeatureAccess_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_ApproveFeatureAccess_Response {
+    pub fn new() -> CParental_ApproveFeatureAccess_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_ApproveFeatureAccess_Response {
+    const NAME: &'static str = "CParental_ApproveFeatureAccess_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_ApproveFeatureAccess_Response {
+        CParental_ApproveFeatureAccess_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_ApproveFeatureAccess_Response {
+        static instance: CParental_ApproveFeatureAccess_Response = CParental_ApproveFeatureAccess_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CParental_RequestPlaytime_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_RequestPlaytime_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CParental_RequestPlaytime_Request.time_expires)
+    pub time_expires: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CParental_RequestPlaytime_Request.current_playtime_restrictions)
+    pub current_playtime_restrictions: ::steam_vent_proto_common::protobuf::MessageField<super::steammessages_parental_objects::ParentalPlaytimeDay>,
+    // @@protoc_insertion_point(field:CParental_RequestPlaytime_Request.steamid)
+    pub steamid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_RequestPlaytime_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_RequestPlaytime_Request {
+    fn default() -> &'a CParental_RequestPlaytime_Request {
+        <CParental_RequestPlaytime_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_RequestPlaytime_Request {
+    pub fn new() -> CParental_RequestPlaytime_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 time_expires = 1;
+
+    pub fn time_expires(&self) -> u32 {
+        self.time_expires.unwrap_or(0)
+    }
+
+    pub fn clear_time_expires(&mut self) {
+        self.time_expires = ::std::option::Option::None;
+    }
+
+    pub fn has_time_expires(&self) -> bool {
+        self.time_expires.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_time_expires(&mut self, v: u32) {
+        self.time_expires = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 steamid = 10;
+
+    pub fn steamid(&self) -> u64 {
+        self.steamid.unwrap_or(0)
+    }
+
+    pub fn clear_steamid(&mut self) {
+        self.steamid = ::std::option::Option::None;
+    }
+
+    pub fn has_steamid(&self) -> bool {
+        self.steamid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_steamid(&mut self, v: u64) {
+        self.steamid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_RequestPlaytime_Request {
+    const NAME: &'static str = "CParental_RequestPlaytime_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.time_expires = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                18 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.current_playtime_restrictions)?;
+                },
+                81 => {
+                    self.steamid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.time_expires {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.current_playtime_restrictions.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.steamid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.time_expires {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.current_playtime_restrictions.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        }
+        if let Some(v) = self.steamid {
+            os.write_fixed64(10, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_RequestPlaytime_Request {
+        CParental_RequestPlaytime_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.time_expires = ::std::option::Option::None;
+        self.current_playtime_restrictions.clear();
+        self.steamid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_RequestPlaytime_Request {
+        static instance: CParental_RequestPlaytime_Request = CParental_RequestPlaytime_Request {
+            time_expires: ::std::option::Option::None,
+            current_playtime_restrictions: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            steamid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CParental_RequestPlaytime_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_RequestPlaytime_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CParental_RequestPlaytime_Response.requestid)
+    pub requestid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_RequestPlaytime_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_RequestPlaytime_Response {
+    fn default() -> &'a CParental_RequestPlaytime_Response {
+        <CParental_RequestPlaytime_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_RequestPlaytime_Response {
+    pub fn new() -> CParental_RequestPlaytime_Response {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 requestid = 1;
+
+    pub fn requestid(&self) -> u64 {
+        self.requestid.unwrap_or(0)
+    }
+
+    pub fn clear_requestid(&mut self) {
+        self.requestid = ::std::option::Option::None;
+    }
+
+    pub fn has_requestid(&self) -> bool {
+        self.requestid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_requestid(&mut self, v: u64) {
+        self.requestid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_RequestPlaytime_Response {
+    const NAME: &'static str = "CParental_RequestPlaytime_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.requestid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.requestid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.requestid {
+            os.write_fixed64(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_RequestPlaytime_Response {
+        CParental_RequestPlaytime_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.requestid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_RequestPlaytime_Response {
+        static instance: CParental_RequestPlaytime_Response = CParental_RequestPlaytime_Response {
+            requestid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CParental_ApprovePlaytime_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_ApprovePlaytime_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CParental_ApprovePlaytime_Request.approve)
+    pub approve: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CParental_ApprovePlaytime_Request.requestid)
+    pub requestid: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CParental_ApprovePlaytime_Request.restrictions_approved)
+    pub restrictions_approved: ::steam_vent_proto_common::protobuf::MessageField<super::steammessages_parental_objects::ParentalTemporaryPlaytimeRestrictions>,
+    // @@protoc_insertion_point(field:CParental_ApprovePlaytime_Request.steamid)
+    pub steamid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_ApprovePlaytime_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_ApprovePlaytime_Request {
+    fn default() -> &'a CParental_ApprovePlaytime_Request {
+        <CParental_ApprovePlaytime_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_ApprovePlaytime_Request {
+    pub fn new() -> CParental_ApprovePlaytime_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional bool approve = 1;
+
+    pub fn approve(&self) -> bool {
+        self.approve.unwrap_or(false)
+    }
+
+    pub fn clear_approve(&mut self) {
+        self.approve = ::std::option::Option::None;
+    }
+
+    pub fn has_approve(&self) -> bool {
+        self.approve.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_approve(&mut self, v: bool) {
+        self.approve = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 requestid = 2;
+
+    pub fn requestid(&self) -> u64 {
+        self.requestid.unwrap_or(0)
+    }
+
+    pub fn clear_requestid(&mut self) {
+        self.requestid = ::std::option::Option::None;
+    }
+
+    pub fn has_requestid(&self) -> bool {
+        self.requestid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_requestid(&mut self, v: u64) {
+        self.requestid = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 steamid = 10;
+
+    pub fn steamid(&self) -> u64 {
+        self.steamid.unwrap_or(0)
+    }
+
+    pub fn clear_steamid(&mut self) {
+        self.steamid = ::std::option::Option::None;
+    }
+
+    pub fn has_steamid(&self) -> bool {
+        self.steamid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_steamid(&mut self, v: u64) {
+        self.steamid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_ApprovePlaytime_Request {
+    const NAME: &'static str = "CParental_ApprovePlaytime_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.approve = ::std::option::Option::Some(is.read_bool()?);
+                },
+                17 => {
+                    self.requestid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                26 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.restrictions_approved)?;
+                },
+                81 => {
+                    self.steamid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.approve {
+            my_size += 1 + 1;
+        }
+        if let Some(v) = self.requestid {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.restrictions_approved.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.steamid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.approve {
+            os.write_bool(1, v)?;
+        }
+        if let Some(v) = self.requestid {
+            os.write_fixed64(2, v)?;
+        }
+        if let Some(v) = self.restrictions_approved.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
+        }
+        if let Some(v) = self.steamid {
+            os.write_fixed64(10, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_ApprovePlaytime_Request {
+        CParental_ApprovePlaytime_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.approve = ::std::option::Option::None;
+        self.requestid = ::std::option::Option::None;
+        self.restrictions_approved.clear();
+        self.steamid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_ApprovePlaytime_Request {
+        static instance: CParental_ApprovePlaytime_Request = CParental_ApprovePlaytime_Request {
+            approve: ::std::option::Option::None,
+            requestid: ::std::option::Option::None,
+            restrictions_approved: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            steamid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CParental_ApprovePlaytime_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_ApprovePlaytime_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_ApprovePlaytime_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_ApprovePlaytime_Response {
+    fn default() -> &'a CParental_ApprovePlaytime_Response {
+        <CParental_ApprovePlaytime_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_ApprovePlaytime_Response {
+    pub fn new() -> CParental_ApprovePlaytime_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_ApprovePlaytime_Response {
+    const NAME: &'static str = "CParental_ApprovePlaytime_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_ApprovePlaytime_Response {
+        CParental_ApprovePlaytime_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_ApprovePlaytime_Response {
+        static instance: CParental_ApprovePlaytime_Response = CParental_ApprovePlaytime_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CParental_GetRequests_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_GetRequests_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CParental_GetRequests_Request.rt_include_completed_since)
+    pub rt_include_completed_since: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CParental_GetRequests_Request.family_groupid)
+    pub family_groupid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_GetRequests_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_GetRequests_Request {
+    fn default() -> &'a CParental_GetRequests_Request {
+        <CParental_GetRequests_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_GetRequests_Request {
+    pub fn new() -> CParental_GetRequests_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 rt_include_completed_since = 1;
+
+    pub fn rt_include_completed_since(&self) -> u32 {
+        self.rt_include_completed_since.unwrap_or(0)
+    }
+
+    pub fn clear_rt_include_completed_since(&mut self) {
+        self.rt_include_completed_since = ::std::option::Option::None;
+    }
+
+    pub fn has_rt_include_completed_since(&self) -> bool {
+        self.rt_include_completed_since.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_rt_include_completed_since(&mut self, v: u32) {
+        self.rt_include_completed_since = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 family_groupid = 2;
+
+    pub fn family_groupid(&self) -> u64 {
+        self.family_groupid.unwrap_or(0)
+    }
+
+    pub fn clear_family_groupid(&mut self) {
+        self.family_groupid = ::std::option::Option::None;
+    }
+
+    pub fn has_family_groupid(&self) -> bool {
+        self.family_groupid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_family_groupid(&mut self, v: u64) {
+        self.family_groupid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_GetRequests_Request {
+    const NAME: &'static str = "CParental_GetRequests_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.rt_include_completed_since = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                17 => {
+                    self.family_groupid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.rt_include_completed_since {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.family_groupid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.rt_include_completed_since {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.family_groupid {
+            os.write_fixed64(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_GetRequests_Request {
+        CParental_GetRequests_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.rt_include_completed_since = ::std::option::Option::None;
+        self.family_groupid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_GetRequests_Request {
+        static instance: CParental_GetRequests_Request = CParental_GetRequests_Request {
+            rt_include_completed_since: ::std::option::Option::None,
+            family_groupid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CParental_GetRequests_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_GetRequests_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CParental_GetRequests_Response.feature_requests)
+    pub feature_requests: ::std::vec::Vec<super::steammessages_parental_objects::ParentalFeatureRequest>,
+    // @@protoc_insertion_point(field:CParental_GetRequests_Response.playtime_requests)
+    pub playtime_requests: ::std::vec::Vec<super::steammessages_parental_objects::ParentalPlaytimeRequest>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_GetRequests_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_GetRequests_Response {
+    fn default() -> &'a CParental_GetRequests_Response {
+        <CParental_GetRequests_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_GetRequests_Response {
+    pub fn new() -> CParental_GetRequests_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_GetRequests_Response {
+    const NAME: &'static str = "CParental_GetRequests_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.feature_requests.push(is.read_message()?);
+                },
+                18 => {
+                    self.playtime_requests.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.feature_requests {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        for value in &self.playtime_requests {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.feature_requests {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        for v in &self.playtime_requests {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_GetRequests_Response {
+        CParental_GetRequests_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.feature_requests.clear();
+        self.playtime_requests.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_GetRequests_Response {
+        static instance: CParental_GetRequests_Response = CParental_GetRequests_Response {
+            feature_requests: ::std::vec::Vec::new(),
+            playtime_requests: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CParental_ReportPlaytimeAndNotify_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_ReportPlaytimeAndNotify_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CParental_ReportPlaytimeAndNotify_Request.day_of_week)
+    pub day_of_week: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CParental_ReportPlaytimeAndNotify_Request.minutes_used)
+    pub minutes_used: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CParental_ReportPlaytimeAndNotify_Request.steamid)
+    pub steamid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_ReportPlaytimeAndNotify_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_ReportPlaytimeAndNotify_Request {
+    fn default() -> &'a CParental_ReportPlaytimeAndNotify_Request {
+        <CParental_ReportPlaytimeAndNotify_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_ReportPlaytimeAndNotify_Request {
+    pub fn new() -> CParental_ReportPlaytimeAndNotify_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 day_of_week = 1;
+
+    pub fn day_of_week(&self) -> u32 {
+        self.day_of_week.unwrap_or(0)
+    }
+
+    pub fn clear_day_of_week(&mut self) {
+        self.day_of_week = ::std::option::Option::None;
+    }
+
+    pub fn has_day_of_week(&self) -> bool {
+        self.day_of_week.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_day_of_week(&mut self, v: u32) {
+        self.day_of_week = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 minutes_used = 2;
+
+    pub fn minutes_used(&self) -> u32 {
+        self.minutes_used.unwrap_or(0)
+    }
+
+    pub fn clear_minutes_used(&mut self) {
+        self.minutes_used = ::std::option::Option::None;
+    }
+
+    pub fn has_minutes_used(&self) -> bool {
+        self.minutes_used.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_minutes_used(&mut self, v: u32) {
+        self.minutes_used = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 steamid = 10;
+
+    pub fn steamid(&self) -> u64 {
+        self.steamid.unwrap_or(0)
+    }
+
+    pub fn clear_steamid(&mut self) {
+        self.steamid = ::std::option::Option::None;
+    }
+
+    pub fn has_steamid(&self) -> bool {
+        self.steamid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_steamid(&mut self, v: u64) {
+        self.steamid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_ReportPlaytimeAndNotify_Request {
+    const NAME: &'static str = "CParental_ReportPlaytimeAndNotify_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.day_of_week = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.minutes_used = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                81 => {
+                    self.steamid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.day_of_week {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.minutes_used {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        if let Some(v) = self.steamid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.day_of_week {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.minutes_used {
+            os.write_uint32(2, v)?;
+        }
+        if let Some(v) = self.steamid {
+            os.write_fixed64(10, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_ReportPlaytimeAndNotify_Request {
+        CParental_ReportPlaytimeAndNotify_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.day_of_week = ::std::option::Option::None;
+        self.minutes_used = ::std::option::Option::None;
+        self.steamid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_ReportPlaytimeAndNotify_Request {
+        static instance: CParental_ReportPlaytimeAndNotify_Request = CParental_ReportPlaytimeAndNotify_Request {
+            day_of_week: ::std::option::Option::None,
+            minutes_used: ::std::option::Option::None,
+            steamid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CParental_ReportPlaytimeAndNotify_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_ReportPlaytimeAndNotify_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_ReportPlaytimeAndNotify_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_ReportPlaytimeAndNotify_Response {
+    fn default() -> &'a CParental_ReportPlaytimeAndNotify_Response {
+        <CParental_ReportPlaytimeAndNotify_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_ReportPlaytimeAndNotify_Response {
+    pub fn new() -> CParental_ReportPlaytimeAndNotify_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_ReportPlaytimeAndNotify_Response {
+    const NAME: &'static str = "CParental_ReportPlaytimeAndNotify_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_ReportPlaytimeAndNotify_Response {
+        CParental_ReportPlaytimeAndNotify_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_ReportPlaytimeAndNotify_Response {
+        static instance: CParental_ReportPlaytimeAndNotify_Response = CParental_ReportPlaytimeAndNotify_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CParental_ParentalSettingsChange_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_ParentalSettingsChange_Notification {
@@ -3443,7 +4383,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_ParentalSettings
     }
 }
 
-#[doc = "Notification from server to client that an unlock has occurred in a browser"]
 // @@protoc_insertion_point(message:CParental_ParentalUnlock_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_ParentalUnlock_Notification {
@@ -3619,7 +4558,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_ParentalUnlock_N
     }
 }
 
-#[doc = "Notification from server to client that a lock has occurred in a browser"]
 // @@protoc_insertion_point(message:CParental_ParentalLock_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CParental_ParentalLock_Notification {
@@ -3746,6 +4684,147 @@ impl ::steam_vent_proto_common::protobuf::Message for CParental_ParentalLock_Not
     }
 }
 
+// @@protoc_insertion_point(message:CParental_PlaytimeUsed_Notification)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CParental_PlaytimeUsed_Notification {
+    // message fields
+    // @@protoc_insertion_point(field:CParental_PlaytimeUsed_Notification.day_of_week)
+    pub day_of_week: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CParental_PlaytimeUsed_Notification.minutes_used)
+    pub minutes_used: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CParental_PlaytimeUsed_Notification.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CParental_PlaytimeUsed_Notification {
+    fn default() -> &'a CParental_PlaytimeUsed_Notification {
+        <CParental_PlaytimeUsed_Notification as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CParental_PlaytimeUsed_Notification {
+    pub fn new() -> CParental_PlaytimeUsed_Notification {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 day_of_week = 1;
+
+    pub fn day_of_week(&self) -> u32 {
+        self.day_of_week.unwrap_or(0)
+    }
+
+    pub fn clear_day_of_week(&mut self) {
+        self.day_of_week = ::std::option::Option::None;
+    }
+
+    pub fn has_day_of_week(&self) -> bool {
+        self.day_of_week.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_day_of_week(&mut self, v: u32) {
+        self.day_of_week = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 minutes_used = 2;
+
+    pub fn minutes_used(&self) -> u32 {
+        self.minutes_used.unwrap_or(0)
+    }
+
+    pub fn clear_minutes_used(&mut self) {
+        self.minutes_used = ::std::option::Option::None;
+    }
+
+    pub fn has_minutes_used(&self) -> bool {
+        self.minutes_used.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_minutes_used(&mut self, v: u32) {
+        self.minutes_used = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CParental_PlaytimeUsed_Notification {
+    const NAME: &'static str = "CParental_PlaytimeUsed_Notification";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.day_of_week = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.minutes_used = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.day_of_week {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.minutes_used {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.day_of_week {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.minutes_used {
+            os.write_uint32(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CParental_PlaytimeUsed_Notification {
+        CParental_PlaytimeUsed_Notification::new()
+    }
+
+    fn clear(&mut self) {
+        self.day_of_week = ::std::option::Option::None;
+        self.minutes_used = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CParental_PlaytimeUsed_Notification {
+        static instance: CParental_PlaytimeUsed_Notification = CParental_PlaytimeUsed_Notification {
+            day_of_week: ::std::option::Option::None,
+            minutes_used: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 
 const _VENT_PROTO_VERSION_CHECK: () = ::steam_vent_proto_common::VERSION_0_5_0;
 
@@ -3753,32 +4832,8 @@ const _VENT_PROTO_VERSION_CHECK: () = ::steam_vent_proto_common::VERSION_0_5_0;
 use crate::steammessages_base::*;
 #[allow(unused_imports)]
 use crate::steammessages_unified_base_steamclient::*;
-impl ::steam_vent_proto_common::RpcMessage for ParentalApp {
-    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
-        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
-    }
-    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.write_to_writer(writer)
-    }
-    fn encode_size(&self) -> usize {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.compute_size() as usize
-    }
-}
-impl ::steam_vent_proto_common::RpcMessage for ParentalSettings {
-    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
-        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
-    }
-    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.write_to_writer(writer)
-    }
-    fn encode_size(&self) -> usize {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.compute_size() as usize
-    }
-}
+#[allow(unused_imports)]
+use crate::steammessages_parental_objects::*;
 impl ::steam_vent_proto_common::RpcMessage for CParental_EnableParentalSettings_Request {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -4046,6 +5101,164 @@ for CParental_DisableWithRecoveryCode_Response {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessage for CParental_RequestFeatureAccess_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CParental_RequestFeatureAccess_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CParental_ApproveFeatureAccess_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CParental_ApproveFeatureAccess_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CParental_RequestPlaytime_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CParental_RequestPlaytime_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CParental_ApprovePlaytime_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CParental_ApprovePlaytime_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CParental_GetRequests_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CParental_GetRequests_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CParental_ReportPlaytimeAndNotify_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CParental_ReportPlaytimeAndNotify_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CParental_ParentalSettingsChange_Notification {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -4086,15 +5299,36 @@ impl ::steam_vent_proto_common::RpcMessage for CParental_ParentalLock_Notificati
         self.compute_size() as usize
     }
 }
-///Parental settings service
+impl ::steam_vent_proto_common::RpcMessage for CParental_PlaytimeUsed_Notification {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+///
 struct Parental {}
 impl ::steam_vent_proto_common::RpcService for Parental {
     const SERVICE_NAME: &'static str = "Parental";
 }
-///Parental settings client notifications
+///
 struct ParentalClient {}
 impl ::steam_vent_proto_common::RpcService for ParentalClient {
     const SERVICE_NAME: &'static str = "ParentalClient";
+}
+impl ::steam_vent_proto_common::RpcMethod for CParental_ApproveFeatureAccess_Request {
+    const METHOD_NAME: &'static str = "Parental.ApproveFeatureAccess#1";
+    type Response = CParental_ApproveFeatureAccess_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod for CParental_ApprovePlaytime_Request {
+    const METHOD_NAME: &'static str = "Parental.ApprovePlaytime#1";
+    type Response = CParental_ApprovePlaytime_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod for CParental_DisableParentalSettings_Request {
     const METHOD_NAME: &'static str = "Parental.DisableParentalSettings#1";
@@ -4111,6 +5345,10 @@ impl ::steam_vent_proto_common::RpcMethod for CParental_EnableParentalSettings_R
 impl ::steam_vent_proto_common::RpcMethod for CParental_GetParentalSettings_Request {
     const METHOD_NAME: &'static str = "Parental.GetParentalSettings#1";
     type Response = CParental_GetParentalSettings_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod for CParental_GetRequests_Request {
+    const METHOD_NAME: &'static str = "Parental.GetRequests#1";
+    type Response = CParental_GetRequests_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod
 for CParental_GetSignedParentalSettings_Request {
@@ -4133,6 +5371,22 @@ for CParental_ParentalSettingsChange_Notification {
 impl ::steam_vent_proto_common::RpcMethod for CParental_ParentalUnlock_Notification {
     const METHOD_NAME: &'static str = "ParentalClient.NotifyUnlock#1";
     type Response = ();
+}
+impl ::steam_vent_proto_common::RpcMethod for CParental_PlaytimeUsed_Notification {
+    const METHOD_NAME: &'static str = "ParentalClient.NotifyPlaytimeUsed#1";
+    type Response = ();
+}
+impl ::steam_vent_proto_common::RpcMethod for CParental_ReportPlaytimeAndNotify_Request {
+    const METHOD_NAME: &'static str = "Parental.ReportPlaytimeAndNotify#1";
+    type Response = CParental_ReportPlaytimeAndNotify_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod for CParental_RequestFeatureAccess_Request {
+    const METHOD_NAME: &'static str = "Parental.RequestFeatureAccess#1";
+    type Response = CParental_RequestFeatureAccess_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod for CParental_RequestPlaytime_Request {
+    const METHOD_NAME: &'static str = "Parental.RequestPlaytime#1";
+    type Response = CParental_RequestPlaytime_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod for CParental_RequestRecoveryCode_Request {
     const METHOD_NAME: &'static str = "Parental.RequestRecoveryCode#1";

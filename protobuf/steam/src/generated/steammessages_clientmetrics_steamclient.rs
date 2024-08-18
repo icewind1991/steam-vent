@@ -2593,6 +2593,10 @@ pub struct CClientMetrics_DownloadRates_Notification {
     pub stats: ::std::vec::Vec<cclient_metrics_download_rates_notification::StatsInfo>,
     // @@protoc_insertion_point(field:CClientMetrics_DownloadRates_Notification.throttling_kbps)
     pub throttling_kbps: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CClientMetrics_DownloadRates_Notification.os_type)
+    pub os_type: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CClientMetrics_DownloadRates_Notification.device_type)
+    pub device_type: ::std::option::Option<u32>,
     // special fields
     // @@protoc_insertion_point(special_field:CClientMetrics_DownloadRates_Notification.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -2646,6 +2650,44 @@ impl CClientMetrics_DownloadRates_Notification {
     pub fn set_throttling_kbps(&mut self, v: u32) {
         self.throttling_kbps = ::std::option::Option::Some(v);
     }
+
+    // optional uint32 os_type = 4;
+
+    pub fn os_type(&self) -> u32 {
+        self.os_type.unwrap_or(0)
+    }
+
+    pub fn clear_os_type(&mut self) {
+        self.os_type = ::std::option::Option::None;
+    }
+
+    pub fn has_os_type(&self) -> bool {
+        self.os_type.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_os_type(&mut self, v: u32) {
+        self.os_type = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 device_type = 5;
+
+    pub fn device_type(&self) -> u32 {
+        self.device_type.unwrap_or(0)
+    }
+
+    pub fn clear_device_type(&mut self) {
+        self.device_type = ::std::option::Option::None;
+    }
+
+    pub fn has_device_type(&self) -> bool {
+        self.device_type.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_device_type(&mut self, v: u32) {
+        self.device_type = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_DownloadRates_Notification {
@@ -2666,6 +2708,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_DownloadRat
                 },
                 24 => {
                     self.throttling_kbps = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                32 => {
+                    self.os_type = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                40 => {
+                    self.device_type = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -2689,6 +2737,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_DownloadRat
         if let Some(v) = self.throttling_kbps {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
         }
+        if let Some(v) = self.os_type {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(4, v);
+        }
+        if let Some(v) = self.device_type {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(5, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2703,6 +2757,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_DownloadRat
         };
         if let Some(v) = self.throttling_kbps {
             os.write_uint32(3, v)?;
+        }
+        if let Some(v) = self.os_type {
+            os.write_uint32(4, v)?;
+        }
+        if let Some(v) = self.device_type {
+            os.write_uint32(5, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -2724,6 +2784,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_DownloadRat
         self.cell_id = ::std::option::Option::None;
         self.stats.clear();
         self.throttling_kbps = ::std::option::Option::None;
+        self.os_type = ::std::option::Option::None;
+        self.device_type = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -2732,6 +2794,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_DownloadRat
             cell_id: ::std::option::Option::None,
             stats: ::std::vec::Vec::new(),
             throttling_kbps: ::std::option::Option::None,
+            os_type: ::std::option::Option::None,
+            device_type: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -4510,6 +4574,8 @@ pub struct CClientMetrics_ReportClientArgs_Notification {
     pub library_low_bandwidth_mode_enabled: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CClientMetrics_ReportClientArgs_Notification.library_low_perf_mode_enabled)
     pub library_low_perf_mode_enabled: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CClientMetrics_ReportClientArgs_Notification.gr_mode)
+    pub gr_mode: ::std::option::Option<i32>,
     // special fields
     // @@protoc_insertion_point(special_field:CClientMetrics_ReportClientArgs_Notification.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -4677,6 +4743,25 @@ impl CClientMetrics_ReportClientArgs_Notification {
     pub fn set_library_low_perf_mode_enabled(&mut self, v: bool) {
         self.library_low_perf_mode_enabled = ::std::option::Option::Some(v);
     }
+
+    // optional int32 gr_mode = 10;
+
+    pub fn gr_mode(&self) -> i32 {
+        self.gr_mode.unwrap_or(0)
+    }
+
+    pub fn clear_gr_mode(&mut self) {
+        self.gr_mode = ::std::option::Option::None;
+    }
+
+    pub fn has_gr_mode(&self) -> bool {
+        self.gr_mode.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_gr_mode(&mut self, v: i32) {
+        self.gr_mode = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_ReportClientArgs_Notification {
@@ -4715,6 +4800,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_ReportClien
                 },
                 72 => {
                     self.library_low_perf_mode_enabled = ::std::option::Option::Some(is.read_bool()?);
+                },
+                80 => {
+                    self.gr_mode = ::std::option::Option::Some(is.read_int32()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -4755,6 +4843,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_ReportClien
         if let Some(v) = self.library_low_perf_mode_enabled {
             my_size += 1 + 1;
         }
+        if let Some(v) = self.gr_mode {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(10, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -4788,6 +4879,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_ReportClien
         if let Some(v) = self.library_low_perf_mode_enabled {
             os.write_bool(9, v)?;
         }
+        if let Some(v) = self.gr_mode {
+            os.write_int32(10, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -4814,6 +4908,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_ReportClien
         self.fps_counter_enabled = ::std::option::Option::None;
         self.library_low_bandwidth_mode_enabled = ::std::option::Option::None;
         self.library_low_perf_mode_enabled = ::std::option::Option::None;
+        self.gr_mode = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -4828,6 +4923,841 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_ReportClien
             fps_counter_enabled: ::std::option::Option::None,
             library_low_bandwidth_mode_enabled: ::std::option::Option::None,
             library_low_perf_mode_enabled: ::std::option::Option::None,
+            gr_mode: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CClientMetrics_ClipShare_Notification)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CClientMetrics_ClipShare_Notification {
+    // message fields
+    // @@protoc_insertion_point(field:CClientMetrics_ClipShare_Notification.eresult)
+    pub eresult: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CClientMetrics_ClipShare_Notification.share_method)
+    pub share_method: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EClipShareMethod>>,
+    // @@protoc_insertion_point(field:CClientMetrics_ClipShare_Notification.seconds)
+    pub seconds: ::std::option::Option<f32>,
+    // @@protoc_insertion_point(field:CClientMetrics_ClipShare_Notification.bytes)
+    pub bytes: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CClientMetrics_ClipShare_Notification.gameid)
+    pub gameid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CClientMetrics_ClipShare_Notification.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CClientMetrics_ClipShare_Notification {
+    fn default() -> &'a CClientMetrics_ClipShare_Notification {
+        <CClientMetrics_ClipShare_Notification as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CClientMetrics_ClipShare_Notification {
+    pub fn new() -> CClientMetrics_ClipShare_Notification {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 eresult = 1;
+
+    pub fn eresult(&self) -> u32 {
+        self.eresult.unwrap_or(2u32)
+    }
+
+    pub fn clear_eresult(&mut self) {
+        self.eresult = ::std::option::Option::None;
+    }
+
+    pub fn has_eresult(&self) -> bool {
+        self.eresult.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_eresult(&mut self, v: u32) {
+        self.eresult = ::std::option::Option::Some(v);
+    }
+
+    // optional .EClipShareMethod share_method = 2;
+
+    pub fn share_method(&self) -> EClipShareMethod {
+        match self.share_method {
+            Some(e) => e.enum_value_or(EClipShareMethod::k_EClipShareMethod_Chat),
+            None => EClipShareMethod::k_EClipShareMethod_Chat,
+        }
+    }
+
+    pub fn clear_share_method(&mut self) {
+        self.share_method = ::std::option::Option::None;
+    }
+
+    pub fn has_share_method(&self) -> bool {
+        self.share_method.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_share_method(&mut self, v: EClipShareMethod) {
+        self.share_method = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
+
+    // optional float seconds = 3;
+
+    pub fn seconds(&self) -> f32 {
+        self.seconds.unwrap_or(0.)
+    }
+
+    pub fn clear_seconds(&mut self) {
+        self.seconds = ::std::option::Option::None;
+    }
+
+    pub fn has_seconds(&self) -> bool {
+        self.seconds.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_seconds(&mut self, v: f32) {
+        self.seconds = ::std::option::Option::Some(v);
+    }
+
+    // optional uint64 bytes = 4;
+
+    pub fn bytes(&self) -> u64 {
+        self.bytes.unwrap_or(0)
+    }
+
+    pub fn clear_bytes(&mut self) {
+        self.bytes = ::std::option::Option::None;
+    }
+
+    pub fn has_bytes(&self) -> bool {
+        self.bytes.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_bytes(&mut self, v: u64) {
+        self.bytes = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 gameid = 5;
+
+    pub fn gameid(&self) -> u64 {
+        self.gameid.unwrap_or(0)
+    }
+
+    pub fn clear_gameid(&mut self) {
+        self.gameid = ::std::option::Option::None;
+    }
+
+    pub fn has_gameid(&self) -> bool {
+        self.gameid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_gameid(&mut self, v: u64) {
+        self.gameid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_ClipShare_Notification {
+    const NAME: &'static str = "CClientMetrics_ClipShare_Notification";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.eresult = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.share_method = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                },
+                29 => {
+                    self.seconds = ::std::option::Option::Some(is.read_float()?);
+                },
+                32 => {
+                    self.bytes = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                41 => {
+                    self.gameid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.eresult {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.share_method {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(2, v.value());
+        }
+        if let Some(v) = self.seconds {
+            my_size += 1 + 4;
+        }
+        if let Some(v) = self.bytes {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(4, v);
+        }
+        if let Some(v) = self.gameid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.eresult {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.share_method {
+            os.write_enum(2, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        if let Some(v) = self.seconds {
+            os.write_float(3, v)?;
+        }
+        if let Some(v) = self.bytes {
+            os.write_uint64(4, v)?;
+        }
+        if let Some(v) = self.gameid {
+            os.write_fixed64(5, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CClientMetrics_ClipShare_Notification {
+        CClientMetrics_ClipShare_Notification::new()
+    }
+
+    fn clear(&mut self) {
+        self.eresult = ::std::option::Option::None;
+        self.share_method = ::std::option::Option::None;
+        self.seconds = ::std::option::Option::None;
+        self.bytes = ::std::option::Option::None;
+        self.gameid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CClientMetrics_ClipShare_Notification {
+        static instance: CClientMetrics_ClipShare_Notification = CClientMetrics_ClipShare_Notification {
+            eresult: ::std::option::Option::None,
+            share_method: ::std::option::Option::None,
+            seconds: ::std::option::Option::None,
+            bytes: ::std::option::Option::None,
+            gameid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CClientMetrics_ClipRange_Notification)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CClientMetrics_ClipRange_Notification {
+    // message fields
+    // @@protoc_insertion_point(field:CClientMetrics_ClipRange_Notification.original_range_method)
+    pub original_range_method: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EClipRangeMethod>>,
+    // @@protoc_insertion_point(field:CClientMetrics_ClipRange_Notification.start)
+    pub start: ::steam_vent_proto_common::protobuf::MessageField<cclient_metrics_clip_range_notification::RelativeRangeEdge>,
+    // @@protoc_insertion_point(field:CClientMetrics_ClipRange_Notification.end)
+    pub end: ::steam_vent_proto_common::protobuf::MessageField<cclient_metrics_clip_range_notification::RelativeRangeEdge>,
+    // @@protoc_insertion_point(field:CClientMetrics_ClipRange_Notification.seconds)
+    pub seconds: ::std::option::Option<f32>,
+    // @@protoc_insertion_point(field:CClientMetrics_ClipRange_Notification.gameid)
+    pub gameid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CClientMetrics_ClipRange_Notification.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CClientMetrics_ClipRange_Notification {
+    fn default() -> &'a CClientMetrics_ClipRange_Notification {
+        <CClientMetrics_ClipRange_Notification as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CClientMetrics_ClipRange_Notification {
+    pub fn new() -> CClientMetrics_ClipRange_Notification {
+        ::std::default::Default::default()
+    }
+
+    // optional .EClipRangeMethod original_range_method = 1;
+
+    pub fn original_range_method(&self) -> EClipRangeMethod {
+        match self.original_range_method {
+            Some(e) => e.enum_value_or(EClipRangeMethod::k_EClipRangeMethod_CreateClipButton),
+            None => EClipRangeMethod::k_EClipRangeMethod_CreateClipButton,
+        }
+    }
+
+    pub fn clear_original_range_method(&mut self) {
+        self.original_range_method = ::std::option::Option::None;
+    }
+
+    pub fn has_original_range_method(&self) -> bool {
+        self.original_range_method.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_original_range_method(&mut self, v: EClipRangeMethod) {
+        self.original_range_method = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
+
+    // optional float seconds = 4;
+
+    pub fn seconds(&self) -> f32 {
+        self.seconds.unwrap_or(0.)
+    }
+
+    pub fn clear_seconds(&mut self) {
+        self.seconds = ::std::option::Option::None;
+    }
+
+    pub fn has_seconds(&self) -> bool {
+        self.seconds.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_seconds(&mut self, v: f32) {
+        self.seconds = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 gameid = 5;
+
+    pub fn gameid(&self) -> u64 {
+        self.gameid.unwrap_or(0)
+    }
+
+    pub fn clear_gameid(&mut self) {
+        self.gameid = ::std::option::Option::None;
+    }
+
+    pub fn has_gameid(&self) -> bool {
+        self.gameid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_gameid(&mut self, v: u64) {
+        self.gameid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_ClipRange_Notification {
+    const NAME: &'static str = "CClientMetrics_ClipRange_Notification";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.original_range_method = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                },
+                18 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.start)?;
+                },
+                26 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.end)?;
+                },
+                37 => {
+                    self.seconds = ::std::option::Option::Some(is.read_float()?);
+                },
+                41 => {
+                    self.gameid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.original_range_method {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(1, v.value());
+        }
+        if let Some(v) = self.start.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.end.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.seconds {
+            my_size += 1 + 4;
+        }
+        if let Some(v) = self.gameid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.original_range_method {
+            os.write_enum(1, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        if let Some(v) = self.start.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        }
+        if let Some(v) = self.end.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
+        }
+        if let Some(v) = self.seconds {
+            os.write_float(4, v)?;
+        }
+        if let Some(v) = self.gameid {
+            os.write_fixed64(5, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CClientMetrics_ClipRange_Notification {
+        CClientMetrics_ClipRange_Notification::new()
+    }
+
+    fn clear(&mut self) {
+        self.original_range_method = ::std::option::Option::None;
+        self.start.clear();
+        self.end.clear();
+        self.seconds = ::std::option::Option::None;
+        self.gameid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CClientMetrics_ClipRange_Notification {
+        static instance: CClientMetrics_ClipRange_Notification = CClientMetrics_ClipRange_Notification {
+            original_range_method: ::std::option::Option::None,
+            start: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            end: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            seconds: ::std::option::Option::None,
+            gameid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+/// Nested message and enums of message `CClientMetrics_ClipRange_Notification`
+pub mod cclient_metrics_clip_range_notification {
+    // @@protoc_insertion_point(message:CClientMetrics_ClipRange_Notification.RelativeRangeEdge)
+    #[derive(PartialEq,Clone,Default,Debug)]
+    pub struct RelativeRangeEdge {
+        // message fields
+        // @@protoc_insertion_point(field:CClientMetrics_ClipRange_Notification.RelativeRangeEdge.original_range_method)
+        pub original_range_method: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::EClipRangeMethod>>,
+        // @@protoc_insertion_point(field:CClientMetrics_ClipRange_Notification.RelativeRangeEdge.latest_range_method)
+        pub latest_range_method: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::EClipRangeMethod>>,
+        // @@protoc_insertion_point(field:CClientMetrics_ClipRange_Notification.RelativeRangeEdge.delta_ms)
+        pub delta_ms: ::std::option::Option<i32>,
+        // special fields
+        // @@protoc_insertion_point(special_field:CClientMetrics_ClipRange_Notification.RelativeRangeEdge.special_fields)
+        pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+    }
+
+    impl<'a> ::std::default::Default for &'a RelativeRangeEdge {
+        fn default() -> &'a RelativeRangeEdge {
+            <RelativeRangeEdge as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+        }
+    }
+
+    impl RelativeRangeEdge {
+        pub fn new() -> RelativeRangeEdge {
+            ::std::default::Default::default()
+        }
+
+        // optional .EClipRangeMethod original_range_method = 1;
+
+        pub fn original_range_method(&self) -> super::EClipRangeMethod {
+            match self.original_range_method {
+                Some(e) => e.enum_value_or(super::EClipRangeMethod::k_EClipRangeMethod_CreateClipButton),
+                None => super::EClipRangeMethod::k_EClipRangeMethod_CreateClipButton,
+            }
+        }
+
+        pub fn clear_original_range_method(&mut self) {
+            self.original_range_method = ::std::option::Option::None;
+        }
+
+        pub fn has_original_range_method(&self) -> bool {
+            self.original_range_method.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_original_range_method(&mut self, v: super::EClipRangeMethod) {
+            self.original_range_method = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+        }
+
+        // optional .EClipRangeMethod latest_range_method = 2;
+
+        pub fn latest_range_method(&self) -> super::EClipRangeMethod {
+            match self.latest_range_method {
+                Some(e) => e.enum_value_or(super::EClipRangeMethod::k_EClipRangeMethod_CreateClipButton),
+                None => super::EClipRangeMethod::k_EClipRangeMethod_CreateClipButton,
+            }
+        }
+
+        pub fn clear_latest_range_method(&mut self) {
+            self.latest_range_method = ::std::option::Option::None;
+        }
+
+        pub fn has_latest_range_method(&self) -> bool {
+            self.latest_range_method.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_latest_range_method(&mut self, v: super::EClipRangeMethod) {
+            self.latest_range_method = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+        }
+
+        // optional int32 delta_ms = 3;
+
+        pub fn delta_ms(&self) -> i32 {
+            self.delta_ms.unwrap_or(0)
+        }
+
+        pub fn clear_delta_ms(&mut self) {
+            self.delta_ms = ::std::option::Option::None;
+        }
+
+        pub fn has_delta_ms(&self) -> bool {
+            self.delta_ms.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_delta_ms(&mut self, v: i32) {
+            self.delta_ms = ::std::option::Option::Some(v);
+        }
+    }
+
+    impl ::steam_vent_proto_common::protobuf::Message for RelativeRangeEdge {
+        const NAME: &'static str = "RelativeRangeEdge";
+
+        fn is_initialized(&self) -> bool {
+            true
+        }
+
+        fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+            while let Some(tag) = is.read_raw_tag_or_eof()? {
+                match tag {
+                    8 => {
+                        self.original_range_method = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                    },
+                    16 => {
+                        self.latest_range_method = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                    },
+                    24 => {
+                        self.delta_ms = ::std::option::Option::Some(is.read_int32()?);
+                    },
+                    tag => {
+                        ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                    },
+                };
+            }
+            ::std::result::Result::Ok(())
+        }
+
+        // Compute sizes of nested messages
+        #[allow(unused_variables)]
+        fn compute_size(&self) -> u64 {
+            let mut my_size = 0;
+            if let Some(v) = self.original_range_method {
+                my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(1, v.value());
+            }
+            if let Some(v) = self.latest_range_method {
+                my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(2, v.value());
+            }
+            if let Some(v) = self.delta_ms {
+                my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(3, v);
+            }
+            my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+            self.special_fields.cached_size().set(my_size as u32);
+            my_size
+        }
+
+        fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+            if let Some(v) = self.original_range_method {
+                os.write_enum(1, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+            }
+            if let Some(v) = self.latest_range_method {
+                os.write_enum(2, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+            }
+            if let Some(v) = self.delta_ms {
+                os.write_int32(3, v)?;
+            }
+            os.write_unknown_fields(self.special_fields.unknown_fields())?;
+            ::std::result::Result::Ok(())
+        }
+
+        fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+            &self.special_fields
+        }
+
+        fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+            &mut self.special_fields
+        }
+
+        fn new() -> RelativeRangeEdge {
+            RelativeRangeEdge::new()
+        }
+
+        fn clear(&mut self) {
+            self.original_range_method = ::std::option::Option::None;
+            self.latest_range_method = ::std::option::Option::None;
+            self.delta_ms = ::std::option::Option::None;
+            self.special_fields.clear();
+        }
+
+        fn default_instance() -> &'static RelativeRangeEdge {
+            static instance: RelativeRangeEdge = RelativeRangeEdge {
+                original_range_method: ::std::option::Option::None,
+                latest_range_method: ::std::option::Option::None,
+                delta_ms: ::std::option::Option::None,
+                special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+            };
+            &instance
+        }
+    }
+}
+
+// @@protoc_insertion_point(message:CClientMetrics_EndGameRecording_Notification)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CClientMetrics_EndGameRecording_Notification {
+    // message fields
+    // @@protoc_insertion_point(field:CClientMetrics_EndGameRecording_Notification.recording_type)
+    pub recording_type: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::enums::EGameRecordingType>>,
+    // @@protoc_insertion_point(field:CClientMetrics_EndGameRecording_Notification.seconds)
+    pub seconds: ::std::option::Option<f32>,
+    // @@protoc_insertion_point(field:CClientMetrics_EndGameRecording_Notification.bytes)
+    pub bytes: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CClientMetrics_EndGameRecording_Notification.gameid)
+    pub gameid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CClientMetrics_EndGameRecording_Notification.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CClientMetrics_EndGameRecording_Notification {
+    fn default() -> &'a CClientMetrics_EndGameRecording_Notification {
+        <CClientMetrics_EndGameRecording_Notification as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CClientMetrics_EndGameRecording_Notification {
+    pub fn new() -> CClientMetrics_EndGameRecording_Notification {
+        ::std::default::Default::default()
+    }
+
+    // optional .EGameRecordingType recording_type = 1;
+
+    pub fn recording_type(&self) -> super::enums::EGameRecordingType {
+        match self.recording_type {
+            Some(e) => e.enum_value_or(super::enums::EGameRecordingType::k_EGameRecordingType_Unknown),
+            None => super::enums::EGameRecordingType::k_EGameRecordingType_Unknown,
+        }
+    }
+
+    pub fn clear_recording_type(&mut self) {
+        self.recording_type = ::std::option::Option::None;
+    }
+
+    pub fn has_recording_type(&self) -> bool {
+        self.recording_type.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_recording_type(&mut self, v: super::enums::EGameRecordingType) {
+        self.recording_type = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
+
+    // optional float seconds = 2;
+
+    pub fn seconds(&self) -> f32 {
+        self.seconds.unwrap_or(0.)
+    }
+
+    pub fn clear_seconds(&mut self) {
+        self.seconds = ::std::option::Option::None;
+    }
+
+    pub fn has_seconds(&self) -> bool {
+        self.seconds.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_seconds(&mut self, v: f32) {
+        self.seconds = ::std::option::Option::Some(v);
+    }
+
+    // optional uint64 bytes = 3;
+
+    pub fn bytes(&self) -> u64 {
+        self.bytes.unwrap_or(0)
+    }
+
+    pub fn clear_bytes(&mut self) {
+        self.bytes = ::std::option::Option::None;
+    }
+
+    pub fn has_bytes(&self) -> bool {
+        self.bytes.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_bytes(&mut self, v: u64) {
+        self.bytes = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 gameid = 4;
+
+    pub fn gameid(&self) -> u64 {
+        self.gameid.unwrap_or(0)
+    }
+
+    pub fn clear_gameid(&mut self) {
+        self.gameid = ::std::option::Option::None;
+    }
+
+    pub fn has_gameid(&self) -> bool {
+        self.gameid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_gameid(&mut self, v: u64) {
+        self.gameid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CClientMetrics_EndGameRecording_Notification {
+    const NAME: &'static str = "CClientMetrics_EndGameRecording_Notification";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.recording_type = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                },
+                21 => {
+                    self.seconds = ::std::option::Option::Some(is.read_float()?);
+                },
+                24 => {
+                    self.bytes = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                33 => {
+                    self.gameid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.recording_type {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(1, v.value());
+        }
+        if let Some(v) = self.seconds {
+            my_size += 1 + 4;
+        }
+        if let Some(v) = self.bytes {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(3, v);
+        }
+        if let Some(v) = self.gameid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.recording_type {
+            os.write_enum(1, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        if let Some(v) = self.seconds {
+            os.write_float(2, v)?;
+        }
+        if let Some(v) = self.bytes {
+            os.write_uint64(3, v)?;
+        }
+        if let Some(v) = self.gameid {
+            os.write_fixed64(4, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CClientMetrics_EndGameRecording_Notification {
+        CClientMetrics_EndGameRecording_Notification::new()
+    }
+
+    fn clear(&mut self) {
+        self.recording_type = ::std::option::Option::None;
+        self.seconds = ::std::option::Option::None;
+        self.bytes = ::std::option::Option::None;
+        self.gameid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CClientMetrics_EndGameRecording_Notification {
+        static instance: CClientMetrics_EndGameRecording_Notification = CClientMetrics_EndGameRecording_Notification {
+            recording_type: ::std::option::Option::None,
+            seconds: ::std::option::Option::None,
+            bytes: ::std::option::Option::None,
+            gameid: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -4934,6 +5864,138 @@ impl ::std::default::Default for ESteamPipeOperationType {
 }
 
 
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EClipShareMethod)
+pub enum EClipShareMethod {
+    // @@protoc_insertion_point(enum_value:EClipShareMethod.k_EClipShareMethod_Chat)
+    k_EClipShareMethod_Chat = 1,
+    // @@protoc_insertion_point(enum_value:EClipShareMethod.k_EClipShareMethod_Clipboard)
+    k_EClipShareMethod_Clipboard = 2,
+    // @@protoc_insertion_point(enum_value:EClipShareMethod.k_EClipShareMethod_File)
+    k_EClipShareMethod_File = 3,
+    // @@protoc_insertion_point(enum_value:EClipShareMethod.k_EClipShareMethod_SendClip)
+    k_EClipShareMethod_SendClip = 4,
+    // @@protoc_insertion_point(enum_value:EClipShareMethod.k_EClipShareMethod_SaveToMedia)
+    k_EClipShareMethod_SaveToMedia = 5,
+    // @@protoc_insertion_point(enum_value:EClipShareMethod.k_EClipShareMethod_CreateLink)
+    k_EClipShareMethod_CreateLink = 6,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EClipShareMethod {
+    const NAME: &'static str = "EClipShareMethod";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EClipShareMethod> {
+        match value {
+            1 => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_Chat),
+            2 => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_Clipboard),
+            3 => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_File),
+            4 => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_SendClip),
+            5 => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_SaveToMedia),
+            6 => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_CreateLink),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EClipShareMethod> {
+        match str {
+            "k_EClipShareMethod_Chat" => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_Chat),
+            "k_EClipShareMethod_Clipboard" => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_Clipboard),
+            "k_EClipShareMethod_File" => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_File),
+            "k_EClipShareMethod_SendClip" => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_SendClip),
+            "k_EClipShareMethod_SaveToMedia" => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_SaveToMedia),
+            "k_EClipShareMethod_CreateLink" => ::std::option::Option::Some(EClipShareMethod::k_EClipShareMethod_CreateLink),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EClipShareMethod] = &[
+        EClipShareMethod::k_EClipShareMethod_Chat,
+        EClipShareMethod::k_EClipShareMethod_Clipboard,
+        EClipShareMethod::k_EClipShareMethod_File,
+        EClipShareMethod::k_EClipShareMethod_SendClip,
+        EClipShareMethod::k_EClipShareMethod_SaveToMedia,
+        EClipShareMethod::k_EClipShareMethod_CreateLink,
+    ];
+}
+
+// Note, `Default` is implemented although default value is not 0
+impl ::std::default::Default for EClipShareMethod {
+    fn default() -> Self {
+        EClipShareMethod::k_EClipShareMethod_Chat
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EClipRangeMethod)
+pub enum EClipRangeMethod {
+    // @@protoc_insertion_point(enum_value:EClipRangeMethod.k_EClipRangeMethod_CreateClipButton)
+    k_EClipRangeMethod_CreateClipButton = 1,
+    // @@protoc_insertion_point(enum_value:EClipRangeMethod.k_EClipRangeMethod_Highlight)
+    k_EClipRangeMethod_Highlight = 2,
+    // @@protoc_insertion_point(enum_value:EClipRangeMethod.k_EClipRangeMethod_BeginEndButtons)
+    k_EClipRangeMethod_BeginEndButtons = 3,
+    // @@protoc_insertion_point(enum_value:EClipRangeMethod.k_EClipRangeMethod_ContextMenu)
+    k_EClipRangeMethod_ContextMenu = 4,
+    // @@protoc_insertion_point(enum_value:EClipRangeMethod.k_EClipRangeMethod_Drag)
+    k_EClipRangeMethod_Drag = 5,
+    // @@protoc_insertion_point(enum_value:EClipRangeMethod.k_EClipRangeMethod_EntireClip)
+    k_EClipRangeMethod_EntireClip = 6,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EClipRangeMethod {
+    const NAME: &'static str = "EClipRangeMethod";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EClipRangeMethod> {
+        match value {
+            1 => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_CreateClipButton),
+            2 => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_Highlight),
+            3 => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_BeginEndButtons),
+            4 => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_ContextMenu),
+            5 => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_Drag),
+            6 => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_EntireClip),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EClipRangeMethod> {
+        match str {
+            "k_EClipRangeMethod_CreateClipButton" => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_CreateClipButton),
+            "k_EClipRangeMethod_Highlight" => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_Highlight),
+            "k_EClipRangeMethod_BeginEndButtons" => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_BeginEndButtons),
+            "k_EClipRangeMethod_ContextMenu" => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_ContextMenu),
+            "k_EClipRangeMethod_Drag" => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_Drag),
+            "k_EClipRangeMethod_EntireClip" => ::std::option::Option::Some(EClipRangeMethod::k_EClipRangeMethod_EntireClip),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EClipRangeMethod] = &[
+        EClipRangeMethod::k_EClipRangeMethod_CreateClipButton,
+        EClipRangeMethod::k_EClipRangeMethod_Highlight,
+        EClipRangeMethod::k_EClipRangeMethod_BeginEndButtons,
+        EClipRangeMethod::k_EClipRangeMethod_ContextMenu,
+        EClipRangeMethod::k_EClipRangeMethod_Drag,
+        EClipRangeMethod::k_EClipRangeMethod_EntireClip,
+    ];
+}
+
+// Note, `Default` is implemented although default value is not 0
+impl ::std::default::Default for EClipRangeMethod {
+    fn default() -> Self {
+        EClipRangeMethod::k_EClipRangeMethod_CreateClipButton
+    }
+}
+
+
 
 const _VENT_PROTO_VERSION_CHECK: () = ::steam_vent_proto_common::VERSION_0_5_0;
 
@@ -4943,6 +6005,8 @@ use crate::steammessages_base::*;
 use crate::steammessages_unified_base_steamclient::*;
 #[allow(unused_imports)]
 use crate::clientmetrics::*;
+#[allow(unused_imports)]
+use crate::enums::*;
 impl ::steam_vent_proto_common::RpcMessage for CClientMetrics_AppInterfaceCreation {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5150,7 +6214,47 @@ for CClientMetrics_ReportClientArgs_Notification {
         self.compute_size() as usize
     }
 }
-///A service for client-reported metrics
+impl ::steam_vent_proto_common::RpcMessage for CClientMetrics_ClipShare_Notification {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CClientMetrics_ClipRange_Notification {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CClientMetrics_EndGameRecording_Notification {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+///
 struct ClientMetrics {}
 impl ::steam_vent_proto_common::RpcService for ClientMetrics {
     const SERVICE_NAME: &'static str = "ClientMetrics";
@@ -5163,6 +6267,14 @@ for CClientMetrics_AppInterfaceStats_Notification {
 impl ::steam_vent_proto_common::RpcMethod
 for CClientMetrics_ClientBootstrap_Notification {
     const METHOD_NAME: &'static str = "ClientMetrics.ClientBootstrapReport#1";
+    type Response = ();
+}
+impl ::steam_vent_proto_common::RpcMethod for CClientMetrics_ClipRange_Notification {
+    const METHOD_NAME: &'static str = "ClientMetrics.ReportClipRange#1";
+    type Response = ();
+}
+impl ::steam_vent_proto_common::RpcMethod for CClientMetrics_ClipShare_Notification {
+    const METHOD_NAME: &'static str = "ClientMetrics.ReportClipShare#1";
     type Response = ();
 }
 impl ::steam_vent_proto_common::RpcMethod
@@ -5182,6 +6294,11 @@ for CClientMetrics_ContentValidation_Notification {
 }
 impl ::steam_vent_proto_common::RpcMethod for CClientMetrics_DownloadRates_Notification {
     const METHOD_NAME: &'static str = "ClientMetrics.ClientDownloadRatesReport#1";
+    type Response = ();
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CClientMetrics_EndGameRecording_Notification {
+    const METHOD_NAME: &'static str = "ClientMetrics.ReportEndGameRecording#1";
     type Response = ();
 }
 impl ::steam_vent_proto_common::RpcMethod

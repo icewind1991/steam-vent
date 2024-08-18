@@ -36,8 +36,8 @@ pub struct CMsgRemoteClientBroadcastHeader {
     pub msg_type: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<ERemoteClientBroadcastMsg>>,
     // @@protoc_insertion_point(field:CMsgRemoteClientBroadcastHeader.instance_id)
     pub instance_id: ::std::option::Option<u64>,
-    // @@protoc_insertion_point(field:CMsgRemoteClientBroadcastHeader.device_id)
-    pub device_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CMsgRemoteClientBroadcastHeader.device_id_OBSOLETE)
+    pub device_id_OBSOLETE: ::std::option::Option<u64>,
     // @@protoc_insertion_point(field:CMsgRemoteClientBroadcastHeader.device_token)
     pub device_token: ::std::option::Option<::std::vec::Vec<u8>>,
     // special fields
@@ -116,23 +116,23 @@ impl CMsgRemoteClientBroadcastHeader {
         self.instance_id = ::std::option::Option::Some(v);
     }
 
-    // optional uint64 device_id = 4;
+    // optional uint64 device_id_OBSOLETE = 4;
 
-    pub fn device_id(&self) -> u64 {
-        self.device_id.unwrap_or(0)
+    pub fn device_id_OBSOLETE(&self) -> u64 {
+        self.device_id_OBSOLETE.unwrap_or(0)
     }
 
-    pub fn clear_device_id(&mut self) {
-        self.device_id = ::std::option::Option::None;
+    pub fn clear_device_id_OBSOLETE(&mut self) {
+        self.device_id_OBSOLETE = ::std::option::Option::None;
     }
 
-    pub fn has_device_id(&self) -> bool {
-        self.device_id.is_some()
+    pub fn has_device_id_OBSOLETE(&self) -> bool {
+        self.device_id_OBSOLETE.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_device_id(&mut self, v: u64) {
-        self.device_id = ::std::option::Option::Some(v);
+    pub fn set_device_id_OBSOLETE(&mut self, v: u64) {
+        self.device_id_OBSOLETE = ::std::option::Option::Some(v);
     }
 
     // optional bytes device_token = 5;
@@ -192,7 +192,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientBroadcastH
                     self.instance_id = ::std::option::Option::Some(is.read_uint64()?);
                 },
                 32 => {
-                    self.device_id = ::std::option::Option::Some(is.read_uint64()?);
+                    self.device_id_OBSOLETE = ::std::option::Option::Some(is.read_uint64()?);
                 },
                 42 => {
                     self.device_token = ::std::option::Option::Some(is.read_bytes()?);
@@ -218,7 +218,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientBroadcastH
         if let Some(v) = self.instance_id {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(3, v);
         }
-        if let Some(v) = self.device_id {
+        if let Some(v) = self.device_id_OBSOLETE {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(4, v);
         }
         if let Some(v) = self.device_token.as_ref() {
@@ -239,7 +239,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientBroadcastH
         if let Some(v) = self.instance_id {
             os.write_uint64(3, v)?;
         }
-        if let Some(v) = self.device_id {
+        if let Some(v) = self.device_id_OBSOLETE {
             os.write_uint64(4, v)?;
         }
         if let Some(v) = self.device_token.as_ref() {
@@ -265,7 +265,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientBroadcastH
         self.client_id = ::std::option::Option::None;
         self.msg_type = ::std::option::Option::None;
         self.instance_id = ::std::option::Option::None;
-        self.device_id = ::std::option::Option::None;
+        self.device_id_OBSOLETE = ::std::option::Option::None;
         self.device_token = ::std::option::Option::None;
         self.special_fields.clear();
     }
@@ -275,7 +275,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientBroadcastH
             client_id: ::std::option::Option::None,
             msg_type: ::std::option::Option::None,
             instance_id: ::std::option::Option::None,
-            device_id: ::std::option::Option::None,
+            device_id_OBSOLETE: ::std::option::Option::None,
             device_token: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
@@ -333,6 +333,8 @@ pub struct CMsgRemoteClientBroadcastStatus {
     pub steam_deck: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgRemoteClientBroadcastStatus.steam_version)
     pub steam_version: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CMsgRemoteClientBroadcastStatus.vr_link_caps)
+    pub vr_link_caps: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EVRLinkCaps>>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgRemoteClientBroadcastStatus.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -762,6 +764,28 @@ impl CMsgRemoteClientBroadcastStatus {
     pub fn set_steam_version(&mut self, v: u64) {
         self.steam_version = ::std::option::Option::Some(v);
     }
+
+    // optional .EVRLinkCaps vr_link_caps = 26;
+
+    pub fn vr_link_caps(&self) -> EVRLinkCaps {
+        match self.vr_link_caps {
+            Some(e) => e.enum_value_or(EVRLinkCaps::k_EVRLinkCapsUnknown),
+            None => EVRLinkCaps::k_EVRLinkCapsUnknown,
+        }
+    }
+
+    pub fn clear_vr_link_caps(&mut self) {
+        self.vr_link_caps = ::std::option::Option::None;
+    }
+
+    pub fn has_vr_link_caps(&self) -> bool {
+        self.vr_link_caps.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_vr_link_caps(&mut self, v: EVRLinkCaps) {
+        self.vr_link_caps = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientBroadcastStatus {
@@ -842,6 +866,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientBroadcastS
                 },
                 200 => {
                     self.steam_version = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                208 => {
+                    self.vr_link_caps = ::std::option::Option::Some(is.read_enum_or_unknown()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -925,6 +952,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientBroadcastS
         if let Some(v) = self.steam_version {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(25, v);
         }
+        if let Some(v) = self.vr_link_caps {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(26, v.value());
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -1000,6 +1030,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientBroadcastS
         if let Some(v) = self.steam_version {
             os.write_uint64(25, v)?;
         }
+        if let Some(v) = self.vr_link_caps {
+            os.write_enum(26, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -1040,6 +1073,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientBroadcastS
         self.supported_services = ::std::option::Option::None;
         self.steam_deck = ::std::option::Option::None;
         self.steam_version = ::std::option::Option::None;
+        self.vr_link_caps = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -1068,6 +1102,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteClientBroadcastS
             supported_services: ::std::option::Option::None,
             steam_deck: ::std::option::Option::None,
             steam_version: ::std::option::Option::None,
+            vr_link_caps: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -1448,6 +1483,8 @@ pub struct CMsgRemoteDeviceAuthorizationRequest {
     pub encrypted_request: ::std::option::Option<::std::vec::Vec<u8>>,
     // @@protoc_insertion_point(field:CMsgRemoteDeviceAuthorizationRequest.auth_key)
     pub auth_key: ::std::option::Option<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:CMsgRemoteDeviceAuthorizationRequest.request_id)
+    pub request_id: ::std::option::Option<u32>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgRemoteDeviceAuthorizationRequest.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -1607,6 +1644,25 @@ impl CMsgRemoteDeviceAuthorizationRequest {
     pub fn take_auth_key(&mut self) -> ::std::vec::Vec<u8> {
         self.auth_key.take().unwrap_or_else(|| ::std::vec::Vec::new())
     }
+
+    // optional uint32 request_id = 5;
+
+    pub fn request_id(&self) -> u32 {
+        self.request_id.unwrap_or(0)
+    }
+
+    pub fn clear_request_id(&mut self) {
+        self.request_id = ::std::option::Option::None;
+    }
+
+    pub fn has_request_id(&self) -> bool {
+        self.request_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_request_id(&mut self, v: u32) {
+        self.request_id = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteDeviceAuthorizationRequest {
@@ -1637,6 +1693,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteDeviceAuthorizat
                 34 => {
                     self.auth_key = ::std::option::Option::Some(is.read_bytes()?);
                 },
+                40 => {
+                    self.request_id = ::std::option::Option::Some(is.read_uint32()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -1661,6 +1720,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteDeviceAuthorizat
         if let Some(v) = self.auth_key.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(4, &v);
         }
+        if let Some(v) = self.request_id {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(5, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -1678,6 +1740,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteDeviceAuthorizat
         }
         if let Some(v) = self.auth_key.as_ref() {
             os.write_bytes(4, v)?;
+        }
+        if let Some(v) = self.request_id {
+            os.write_uint32(5, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -1700,6 +1765,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteDeviceAuthorizat
         self.device_name = ::std::option::Option::None;
         self.encrypted_request = ::std::option::Option::None;
         self.auth_key = ::std::option::Option::None;
+        self.request_id = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -1709,6 +1775,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgRemoteDeviceAuthorizat
             device_name: ::std::option::Option::None,
             encrypted_request: ::std::option::Option::None,
             auth_key: ::std::option::Option::None,
+            request_id: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -4896,6 +4963,61 @@ impl ::std::default::Default for ERemoteClientService {
 
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EVRLinkCaps)
+pub enum EVRLinkCaps {
+    // @@protoc_insertion_point(enum_value:EVRLinkCaps.k_EVRLinkCapsUnknown)
+    k_EVRLinkCapsUnknown = 0,
+    // @@protoc_insertion_point(enum_value:EVRLinkCaps.k_EVRLinkCapsAvailable)
+    k_EVRLinkCapsAvailable = 1,
+    // @@protoc_insertion_point(enum_value:EVRLinkCaps.k_EVRLinkCapsUnimplemented)
+    k_EVRLinkCapsUnimplemented = 2,
+    // @@protoc_insertion_point(enum_value:EVRLinkCaps.k_EVRLinkCapsMissingHardwareEncoding)
+    k_EVRLinkCapsMissingHardwareEncoding = 3,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EVRLinkCaps {
+    const NAME: &'static str = "EVRLinkCaps";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EVRLinkCaps> {
+        match value {
+            0 => ::std::option::Option::Some(EVRLinkCaps::k_EVRLinkCapsUnknown),
+            1 => ::std::option::Option::Some(EVRLinkCaps::k_EVRLinkCapsAvailable),
+            2 => ::std::option::Option::Some(EVRLinkCaps::k_EVRLinkCapsUnimplemented),
+            3 => ::std::option::Option::Some(EVRLinkCaps::k_EVRLinkCapsMissingHardwareEncoding),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EVRLinkCaps> {
+        match str {
+            "k_EVRLinkCapsUnknown" => ::std::option::Option::Some(EVRLinkCaps::k_EVRLinkCapsUnknown),
+            "k_EVRLinkCapsAvailable" => ::std::option::Option::Some(EVRLinkCaps::k_EVRLinkCapsAvailable),
+            "k_EVRLinkCapsUnimplemented" => ::std::option::Option::Some(EVRLinkCaps::k_EVRLinkCapsUnimplemented),
+            "k_EVRLinkCapsMissingHardwareEncoding" => ::std::option::Option::Some(EVRLinkCaps::k_EVRLinkCapsMissingHardwareEncoding),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EVRLinkCaps] = &[
+        EVRLinkCaps::k_EVRLinkCapsUnknown,
+        EVRLinkCaps::k_EVRLinkCapsAvailable,
+        EVRLinkCaps::k_EVRLinkCapsUnimplemented,
+        EVRLinkCaps::k_EVRLinkCapsMissingHardwareEncoding,
+    ];
+}
+
+impl ::std::default::Default for EVRLinkCaps {
+    fn default() -> Self {
+        EVRLinkCaps::k_EVRLinkCapsUnknown
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:ERemoteDeviceAuthorizationResult)
 pub enum ERemoteDeviceAuthorizationResult {
     // @@protoc_insertion_point(enum_value:ERemoteDeviceAuthorizationResult.k_ERemoteDeviceAuthorizationSuccess)
@@ -4988,6 +5110,8 @@ pub enum EStreamDeviceFormFactor {
     k_EStreamDeviceFormFactorComputer = 3,
     // @@protoc_insertion_point(enum_value:EStreamDeviceFormFactor.k_EStreamDeviceFormFactorTV)
     k_EStreamDeviceFormFactorTV = 4,
+    // @@protoc_insertion_point(enum_value:EStreamDeviceFormFactor.k_EStreamDeviceFormFactorVRHeadset)
+    k_EStreamDeviceFormFactorVRHeadset = 5,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EStreamDeviceFormFactor {
@@ -5004,6 +5128,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamDeviceFormFactor {
             2 => ::std::option::Option::Some(EStreamDeviceFormFactor::k_EStreamDeviceFormFactorTablet),
             3 => ::std::option::Option::Some(EStreamDeviceFormFactor::k_EStreamDeviceFormFactorComputer),
             4 => ::std::option::Option::Some(EStreamDeviceFormFactor::k_EStreamDeviceFormFactorTV),
+            5 => ::std::option::Option::Some(EStreamDeviceFormFactor::k_EStreamDeviceFormFactorVRHeadset),
             _ => ::std::option::Option::None
         }
     }
@@ -5015,6 +5140,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamDeviceFormFactor {
             "k_EStreamDeviceFormFactorTablet" => ::std::option::Option::Some(EStreamDeviceFormFactor::k_EStreamDeviceFormFactorTablet),
             "k_EStreamDeviceFormFactorComputer" => ::std::option::Option::Some(EStreamDeviceFormFactor::k_EStreamDeviceFormFactorComputer),
             "k_EStreamDeviceFormFactorTV" => ::std::option::Option::Some(EStreamDeviceFormFactor::k_EStreamDeviceFormFactorTV),
+            "k_EStreamDeviceFormFactorVRHeadset" => ::std::option::Option::Some(EStreamDeviceFormFactor::k_EStreamDeviceFormFactorVRHeadset),
             _ => ::std::option::Option::None
         }
     }
@@ -5025,6 +5151,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamDeviceFormFactor {
         EStreamDeviceFormFactor::k_EStreamDeviceFormFactorTablet,
         EStreamDeviceFormFactor::k_EStreamDeviceFormFactorComputer,
         EStreamDeviceFormFactor::k_EStreamDeviceFormFactorTV,
+        EStreamDeviceFormFactor::k_EStreamDeviceFormFactorVRHeadset,
     ];
 }
 
@@ -5044,8 +5171,8 @@ pub enum EStreamTransport {
     k_EStreamTransportUDP = 1,
     // @@protoc_insertion_point(enum_value:EStreamTransport.k_EStreamTransportUDPRelay)
     k_EStreamTransportUDPRelay = 2,
-    // @@protoc_insertion_point(enum_value:EStreamTransport.k_EStreamTransportWebRTC)
-    k_EStreamTransportWebRTC = 3,
+    // @@protoc_insertion_point(enum_value:EStreamTransport.k_EStreamTransportWebRTC_OBSOLETE)
+    k_EStreamTransportWebRTC_OBSOLETE = 3,
     // @@protoc_insertion_point(enum_value:EStreamTransport.k_EStreamTransportSDR)
     k_EStreamTransportSDR = 4,
     // @@protoc_insertion_point(enum_value:EStreamTransport.k_EStreamTransportUDP_SNS)
@@ -5066,7 +5193,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamTransport {
             0 => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportNone),
             1 => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportUDP),
             2 => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportUDPRelay),
-            3 => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportWebRTC),
+            3 => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportWebRTC_OBSOLETE),
             4 => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportSDR),
             5 => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportUDP_SNS),
             6 => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportUDPRelay_SNS),
@@ -5079,7 +5206,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamTransport {
             "k_EStreamTransportNone" => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportNone),
             "k_EStreamTransportUDP" => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportUDP),
             "k_EStreamTransportUDPRelay" => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportUDPRelay),
-            "k_EStreamTransportWebRTC" => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportWebRTC),
+            "k_EStreamTransportWebRTC_OBSOLETE" => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportWebRTC_OBSOLETE),
             "k_EStreamTransportSDR" => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportSDR),
             "k_EStreamTransportUDP_SNS" => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportUDP_SNS),
             "k_EStreamTransportUDPRelay_SNS" => ::std::option::Option::Some(EStreamTransport::k_EStreamTransportUDPRelay_SNS),
@@ -5091,7 +5218,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamTransport {
         EStreamTransport::k_EStreamTransportNone,
         EStreamTransport::k_EStreamTransportUDP,
         EStreamTransport::k_EStreamTransportUDPRelay,
-        EStreamTransport::k_EStreamTransportWebRTC,
+        EStreamTransport::k_EStreamTransportWebRTC_OBSOLETE,
         EStreamTransport::k_EStreamTransportSDR,
         EStreamTransport::k_EStreamTransportUDP_SNS,
         EStreamTransport::k_EStreamTransportUDPRelay_SNS,
@@ -5116,6 +5243,8 @@ pub enum EStreamInterface {
     k_EStreamInterfaceBigPicture = 2,
     // @@protoc_insertion_point(enum_value:EStreamInterface.k_EStreamInterfaceDesktop)
     k_EStreamInterfaceDesktop = 3,
+    // @@protoc_insertion_point(enum_value:EStreamInterface.k_EStreamInterfaceSteamVR)
+    k_EStreamInterfaceSteamVR = 4,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EStreamInterface {
@@ -5131,6 +5260,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamInterface {
             1 => ::std::option::Option::Some(EStreamInterface::k_EStreamInterfaceRecentGames),
             2 => ::std::option::Option::Some(EStreamInterface::k_EStreamInterfaceBigPicture),
             3 => ::std::option::Option::Some(EStreamInterface::k_EStreamInterfaceDesktop),
+            4 => ::std::option::Option::Some(EStreamInterface::k_EStreamInterfaceSteamVR),
             _ => ::std::option::Option::None
         }
     }
@@ -5141,6 +5271,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamInterface {
             "k_EStreamInterfaceRecentGames" => ::std::option::Option::Some(EStreamInterface::k_EStreamInterfaceRecentGames),
             "k_EStreamInterfaceBigPicture" => ::std::option::Option::Some(EStreamInterface::k_EStreamInterfaceBigPicture),
             "k_EStreamInterfaceDesktop" => ::std::option::Option::Some(EStreamInterface::k_EStreamInterfaceDesktop),
+            "k_EStreamInterfaceSteamVR" => ::std::option::Option::Some(EStreamInterface::k_EStreamInterfaceSteamVR),
             _ => ::std::option::Option::None
         }
     }
@@ -5150,6 +5281,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamInterface {
         EStreamInterface::k_EStreamInterfaceRecentGames,
         EStreamInterface::k_EStreamInterfaceBigPicture,
         EStreamInterface::k_EStreamInterfaceDesktop,
+        EStreamInterface::k_EStreamInterfaceSteamVR,
     ];
 }
 
@@ -5193,6 +5325,8 @@ pub enum ERemoteDeviceStreamingResult {
     k_ERemoteDeviceStreamingInvisible = 13,
     // @@protoc_insertion_point(enum_value:ERemoteDeviceStreamingResult.k_ERemoteDeviceStreamingGameLaunchFailed)
     k_ERemoteDeviceStreamingGameLaunchFailed = 14,
+    // @@protoc_insertion_point(enum_value:ERemoteDeviceStreamingResult.k_ERemoteDeviceStreamingSteamVRNotInstalled)
+    k_ERemoteDeviceStreamingSteamVRNotInstalled = 15,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for ERemoteDeviceStreamingResult {
@@ -5219,6 +5353,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for ERemoteDeviceStreamingResult 
             12 => ::std::option::Option::Some(ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingTransportUnavailable),
             13 => ::std::option::Option::Some(ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingInvisible),
             14 => ::std::option::Option::Some(ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingGameLaunchFailed),
+            15 => ::std::option::Option::Some(ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingSteamVRNotInstalled),
             _ => ::std::option::Option::None
         }
     }
@@ -5240,6 +5375,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for ERemoteDeviceStreamingResult 
             "k_ERemoteDeviceStreamingTransportUnavailable" => ::std::option::Option::Some(ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingTransportUnavailable),
             "k_ERemoteDeviceStreamingInvisible" => ::std::option::Option::Some(ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingInvisible),
             "k_ERemoteDeviceStreamingGameLaunchFailed" => ::std::option::Option::Some(ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingGameLaunchFailed),
+            "k_ERemoteDeviceStreamingSteamVRNotInstalled" => ::std::option::Option::Some(ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingSteamVRNotInstalled),
             _ => ::std::option::Option::None
         }
     }
@@ -5260,6 +5396,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for ERemoteDeviceStreamingResult 
         ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingTransportUnavailable,
         ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingInvisible,
         ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingGameLaunchFailed,
+        ERemoteDeviceStreamingResult::k_ERemoteDeviceStreamingSteamVRNotInstalled,
     ];
 }
 

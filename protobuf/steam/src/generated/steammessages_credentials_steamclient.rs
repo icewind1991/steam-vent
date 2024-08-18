@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "TestAvailablePassword."]
 // @@protoc_insertion_point(message:CCredentials_TestAvailablePassword_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCredentials_TestAvailablePassword_Request {
@@ -360,7 +359,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCredentials_TestAvailable
     }
 }
 
-#[doc = "GetSteamGuardDetails."]
 // @@protoc_insertion_point(message:CCredentials_GetSteamGuardDetails_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCredentials_GetSteamGuardDetails_Request {
@@ -1299,7 +1297,6 @@ pub mod ccredentials_get_steam_guard_details_response {
     }
 }
 
-#[doc = "Validate an email address given a token"]
 // @@protoc_insertion_point(message:CCredentials_ValidateEmailAddress_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCredentials_ValidateEmailAddress_Request {
@@ -1535,7 +1532,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCredentials_ValidateEmail
     }
 }
 
-#[doc = "SteamGuardPhishingReport"]
 // @@protoc_insertion_point(message:CCredentials_SteamGuardPhishingReport_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCredentials_SteamGuardPhishingReport_Request {
@@ -2229,7 +2225,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCredentials_SteamGuardPhi
     }
 }
 
-#[doc = "GetCredentialChangeTimeDetails."]
 // @@protoc_insertion_point(message:CCredentials_LastCredentialChangeTime_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCredentials_LastCredentialChangeTime_Request {
@@ -2512,7 +2507,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCredentials_LastCredentia
     }
 }
 
-#[doc = "GetAccountAuthSecret"]
 // @@protoc_insertion_point(message:CCredentials_GetAccountAuthSecret_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCredentials_GetAccountAuthSecret_Request {
@@ -2922,7 +2916,7 @@ for CCredentials_GetAccountAuthSecret_Response {
         self.compute_size() as usize
     }
 }
-///Credentials service
+///
 struct Credentials {}
 impl ::steam_vent_proto_common::RpcService for Credentials {
     const SERVICE_NAME: &'static str = "Credentials";

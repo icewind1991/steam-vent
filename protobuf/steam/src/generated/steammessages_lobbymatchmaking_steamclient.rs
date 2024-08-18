@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "GetLobbyStatus"]
 // @@protoc_insertion_point(message:LobbyMatchmakingLegacy_GetLobbyStatus_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct LobbyMatchmakingLegacy_GetLobbyStatus_Request {
@@ -530,7 +529,7 @@ for LobbyMatchmakingLegacy_GetLobbyStatus_Response {
         self.compute_size() as usize
     }
 }
-///Lobby matchmaking legacy service
+///
 struct LobbyMatchmakingLegacy {}
 impl ::steam_vent_proto_common::RpcService for LobbyMatchmakingLegacy {
     const SERVICE_NAME: &'static str = "LobbyMatchmakingLegacy";

@@ -525,16 +525,6 @@ message CMsgNeedsSharedTexturePaint {
 	optional uint32 pageserial = 8;
 }
 
-message CMsgGameOverlayTexturePaint {
-	optional uint32 browser_handle = 1;
-	optional uint32 width = 3;
-	optional uint32 height = 4;
-	optional uint32 scrollx = 5;
-	optional uint32 scrolly = 6;
-	optional float pagescale = 7;
-	optional uint32 pageserial = 8;
-}
-
 message CMsgGetZoom {
 	optional uint32 browser_handle = 1;
 }
@@ -637,6 +627,7 @@ message CMsgSetCookie {
 	optional uint32 expires = 5;
 	optional bool secure = 6;
 	optional bool httponly = 7;
+	optional int32 samesite = 8;
 }
 
 message CMsgSetTargetFrameRate {
@@ -706,14 +697,6 @@ message CMsgNodeHasFocus {
 }
 
 message CMsgZoomToFocusedElement {
-	optional uint32 browser_handle = 1;
-}
-
-message CMsgCloseFullScreenFlashIfOpen {
-	optional uint32 browser_handle = 1;
-}
-
-message CMsgPauseFullScreenFlashMovieIfOpen {
 	optional uint32 browser_handle = 1;
 }
 
@@ -821,6 +804,14 @@ message CMsgJSExecuteCallback {
 	repeated .CMsgJSValue arguments = 4;
 }
 
+message CMsgJSExecutePromise {
+	optional uint32 browser_handle = 1;
+	optional uint32 owning_browser_handle = 2;
+	optional uint64 promise_handle = 3;
+	optional string reject_reason = 4;
+	optional .CMsgJSValue argument = 5;
+}
+
 message CMsgJSReleaseCallback {
 	optional uint32 browser_handle = 1;
 	optional uint32 owning_browser_handle = 2;
@@ -847,17 +838,6 @@ message CMsgSetNetFakeLocalSystemState {
 	optional uint32 state = 1;
 }
 
-message CMsgSetGameOverlayTargetPIDs {
-	optional uint32 browser_handle = 1;
-	repeated uint32 target_pid = 2;
-}
-
-message CMsgGameOverlayTargetTextureID {
-	optional uint32 browser_handle = 1;
-	optional uint32 target_pid = 2;
-	optional uint32 texture_handle = 3;
-}
-
 message CMsgDraggableRegionsChanged {
 	message DraggableRects {
 		optional int32 x = 1;
@@ -865,6 +845,7 @@ message CMsgDraggableRegionsChanged {
 		optional int32 width = 3;
 		optional int32 height = 4;
 		optional bool draggable = 5;
+		optional bool transparent = 6;
 	}
 
 	optional uint32 browser_handle = 1;
@@ -990,8 +971,9 @@ message CMsgStartDownload {
 	optional string url = 2;
 }
 
-message CMsgSetTopWindow {
+message CMsgSetWindowStackingOrder {
 	optional uint32 browser_handle = 1;
+	optional uint32 estackingorder = 2;
 }
 
 message CMsgBrowserViewPostMessageToParentRequest {
@@ -1025,6 +1007,10 @@ message CMsgSetUIMode {
 	optional int32 ui_mode = 1;
 }
 
+message CMsgSetSteamBetaName {
+	optional string steam_beta_name = 1;
+}
+
 message CMsgPopupCreated {
 	optional uint32 browser_handle = 1;
 }
@@ -1032,4 +1018,7 @@ message CMsgPopupCreated {
 message CMsgSetVRKeyboardVisibility {
 	optional uint32 browser_handle = 1;
 	optional bool visible = 2;
+}
+
+message CMsgRestartJSContext {
 }

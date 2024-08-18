@@ -576,7 +576,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CGameNotifications_UserSta
     }
 }
 
-#[doc = "Creates an async game session"]
 // @@protoc_insertion_point(message:CGameNotifications_CreateSession_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CGameNotifications_CreateSession_Request {
@@ -887,7 +886,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CGameNotifications_CreateS
     }
 }
 
-#[doc = "Deletes an async game session"]
 // @@protoc_insertion_point(message:CGameNotifications_DeleteSession_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CGameNotifications_DeleteSession_Request {
@@ -1137,7 +1135,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CGameNotifications_DeleteS
     }
 }
 
-#[doc = "Updates an async game session"]
 // @@protoc_insertion_point(message:CGameNotifications_UpdateSession_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CGameNotifications_UpdateSession_Request {
@@ -1415,7 +1412,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CGameNotifications_UpdateS
     }
 }
 
-#[doc = "Enumerates a user's sessions"]
 // @@protoc_insertion_point(message:CGameNotifications_EnumerateSessions_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CGameNotifications_EnumerateSessions_Request {
@@ -1994,7 +1990,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CGameNotifications_Enumera
     }
 }
 
-#[doc = "Get the details for a specific session"]
 // @@protoc_insertion_point(message:CGameNotifications_GetSessionDetails_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CGameNotifications_GetSessionDetails_Request {
@@ -2543,7 +2538,6 @@ impl ::steam_vent_proto_common::protobuf::Message for GameNotificationSettings {
     }
 }
 
-#[doc = "Updates whether a user allows game notifications for a specific app"]
 // @@protoc_insertion_point(message:CGameNotifications_UpdateNotificationSettings_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CGameNotifications_UpdateNotificationSettings_Request {
@@ -2711,7 +2705,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CGameNotifications_UpdateN
     }
 }
 
-#[doc = "Requests that the user opt into notifications"]
 // @@protoc_insertion_point(message:CGameNotifications_OnNotificationsRequested_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CGameNotifications_OnNotificationsRequested_Notification {
@@ -2853,7 +2846,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CGameNotifications_OnNotif
     }
 }
 
-#[doc = "Notification that the user's status has changed"]
 // @@protoc_insertion_point(message:CGameNotifications_OnUserStatusChanged_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CGameNotifications_OnUserStatusChanged_Notification {
@@ -3338,12 +3330,12 @@ for CGameNotifications_OnUserStatusChanged_Notification {
         self.compute_size() as usize
     }
 }
-///A service for functions related to the asyncronous game notification server.
+///
 struct GameNotifications {}
 impl ::steam_vent_proto_common::RpcService for GameNotifications {
     const SERVICE_NAME: &'static str = "GameNotifications";
 }
-///Client notifications
+///
 struct GameNotificationsClient {}
 impl ::steam_vent_proto_common::RpcService for GameNotificationsClient {
     const SERVICE_NAME: &'static str = "GameNotificationsClient";

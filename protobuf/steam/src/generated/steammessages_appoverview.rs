@@ -26,167 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-// @@protoc_insertion_point(message:CAppOverview_AppAssociation)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct CAppOverview_AppAssociation {
-    // message fields
-    // @@protoc_insertion_point(field:CAppOverview_AppAssociation.type)
-    pub type_: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EAppAssociationType>>,
-    // @@protoc_insertion_point(field:CAppOverview_AppAssociation.name)
-    pub name: ::std::option::Option<::std::string::String>,
-    // special fields
-    // @@protoc_insertion_point(special_field:CAppOverview_AppAssociation.special_fields)
-    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a CAppOverview_AppAssociation {
-    fn default() -> &'a CAppOverview_AppAssociation {
-        <CAppOverview_AppAssociation as ::steam_vent_proto_common::protobuf::Message>::default_instance()
-    }
-}
-
-impl CAppOverview_AppAssociation {
-    pub fn new() -> CAppOverview_AppAssociation {
-        ::std::default::Default::default()
-    }
-
-    // optional .EAppAssociationType type = 1;
-
-    pub fn type_(&self) -> EAppAssociationType {
-        match self.type_ {
-            Some(e) => e.enum_value_or(EAppAssociationType::k_EAppAssociationTypeInvalid),
-            None => EAppAssociationType::k_EAppAssociationTypeInvalid,
-        }
-    }
-
-    pub fn clear_type_(&mut self) {
-        self.type_ = ::std::option::Option::None;
-    }
-
-    pub fn has_type(&self) -> bool {
-        self.type_.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_type(&mut self, v: EAppAssociationType) {
-        self.type_ = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
-    }
-
-    // optional string name = 2;
-
-    pub fn name(&self) -> &str {
-        match self.name.as_ref() {
-            Some(v) => v,
-            None => "",
-        }
-    }
-
-    pub fn clear_name(&mut self) {
-        self.name = ::std::option::Option::None;
-    }
-
-    pub fn has_name(&self) -> bool {
-        self.name.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_name(&mut self, v: ::std::string::String) {
-        self.name = ::std::option::Option::Some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_name(&mut self) -> &mut ::std::string::String {
-        if self.name.is_none() {
-            self.name = ::std::option::Option::Some(::std::string::String::new());
-        }
-        self.name.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_name(&mut self) -> ::std::string::String {
-        self.name.take().unwrap_or_else(|| ::std::string::String::new())
-    }
-}
-
-impl ::steam_vent_proto_common::protobuf::Message for CAppOverview_AppAssociation {
-    const NAME: &'static str = "CAppOverview_AppAssociation";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                8 => {
-                    self.type_ = ::std::option::Option::Some(is.read_enum_or_unknown()?);
-                },
-                18 => {
-                    self.name = ::std::option::Option::Some(is.read_string()?);
-                },
-                tag => {
-                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.type_ {
-            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(1, v.value());
-        }
-        if let Some(v) = self.name.as_ref() {
-            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(2, &v);
-        }
-        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        if let Some(v) = self.type_ {
-            os.write_enum(1, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
-        }
-        if let Some(v) = self.name.as_ref() {
-            os.write_string(2, v)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> CAppOverview_AppAssociation {
-        CAppOverview_AppAssociation::new()
-    }
-
-    fn clear(&mut self) {
-        self.type_ = ::std::option::Option::None;
-        self.name = ::std::option::Option::None;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static CAppOverview_AppAssociation {
-        static instance: CAppOverview_AppAssociation = CAppOverview_AppAssociation {
-            type_: ::std::option::Option::None,
-            name: ::std::option::Option::None,
-            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
 // @@protoc_insertion_point(message:CAppOverview_PerClientData)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAppOverview_PerClientData {
@@ -215,8 +54,8 @@ pub struct CAppOverview_PerClientData {
     pub is_invalid_os_type: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CAppOverview_PerClientData.playtime_left)
     pub playtime_left: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CAppOverview_PerClientData.cloud_status)
-    pub cloud_status: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EAppCloudStatus>>,
+    // @@protoc_insertion_point(field:CAppOverview_PerClientData.update_available_but_disabled_by_app)
+    pub update_available_but_disabled_by_app: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:CAppOverview_PerClientData.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -236,7 +75,7 @@ impl CAppOverview_PerClientData {
     // optional uint64 clientid = 1;
 
     pub fn clientid(&self) -> u64 {
-        self.clientid.unwrap_or(0)
+        self.clientid.unwrap_or(0u64)
     }
 
     pub fn clear_clientid(&mut self) {
@@ -498,26 +337,23 @@ impl CAppOverview_PerClientData {
         self.playtime_left = ::std::option::Option::Some(v);
     }
 
-    // optional .EAppCloudStatus cloud_status = 13;
+    // optional bool update_available_but_disabled_by_app = 14;
 
-    pub fn cloud_status(&self) -> EAppCloudStatus {
-        match self.cloud_status {
-            Some(e) => e.enum_value_or(EAppCloudStatus::k_EAppCloudStatusInvalid),
-            None => EAppCloudStatus::k_EAppCloudStatusInvalid,
-        }
+    pub fn update_available_but_disabled_by_app(&self) -> bool {
+        self.update_available_but_disabled_by_app.unwrap_or(false)
     }
 
-    pub fn clear_cloud_status(&mut self) {
-        self.cloud_status = ::std::option::Option::None;
+    pub fn clear_update_available_but_disabled_by_app(&mut self) {
+        self.update_available_but_disabled_by_app = ::std::option::Option::None;
     }
 
-    pub fn has_cloud_status(&self) -> bool {
-        self.cloud_status.is_some()
+    pub fn has_update_available_but_disabled_by_app(&self) -> bool {
+        self.update_available_but_disabled_by_app.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_cloud_status(&mut self, v: EAppCloudStatus) {
-        self.cloud_status = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    pub fn set_update_available_but_disabled_by_app(&mut self, v: bool) {
+        self.update_available_but_disabled_by_app = ::std::option::Option::Some(v);
     }
 }
 
@@ -567,8 +403,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview_PerClientData
                 96 => {
                     self.playtime_left = ::std::option::Option::Some(is.read_uint32()?);
                 },
-                104 => {
-                    self.cloud_status = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                112 => {
+                    self.update_available_but_disabled_by_app = ::std::option::Option::Some(is.read_bool()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -618,8 +454,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview_PerClientData
         if let Some(v) = self.playtime_left {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(12, v);
         }
-        if let Some(v) = self.cloud_status {
-            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(13, v.value());
+        if let Some(v) = self.update_available_but_disabled_by_app {
+            my_size += 1 + 1;
         }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
@@ -663,8 +499,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview_PerClientData
         if let Some(v) = self.playtime_left {
             os.write_uint32(12, v)?;
         }
-        if let Some(v) = self.cloud_status {
-            os.write_enum(13, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        if let Some(v) = self.update_available_but_disabled_by_app {
+            os.write_bool(14, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -695,7 +531,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview_PerClientData
         self.is_available_on_current_platform = ::std::option::Option::None;
         self.is_invalid_os_type = ::std::option::Option::None;
         self.playtime_left = ::std::option::Option::None;
-        self.cloud_status = ::std::option::Option::None;
+        self.update_available_but_disabled_by_app = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -713,7 +549,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview_PerClientData
             is_available_on_current_platform: ::std::option::Option::None,
             is_invalid_os_type: ::std::option::Option::None,
             playtime_left: ::std::option::Option::None,
-            cloud_status: ::std::option::Option::None,
+            update_available_but_disabled_by_app: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -730,10 +566,12 @@ pub struct CAppOverview {
     pub display_name: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CAppOverview.visible_in_game_list)
     pub visible_in_game_list: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CAppOverview.subscribed_to)
+    pub subscribed_to: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CAppOverview.sort_as)
     pub sort_as: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CAppOverview.app_type)
-    pub app_type: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EProtoAppType>>,
+    pub app_type: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::enums::EProtoAppType>>,
     // @@protoc_insertion_point(field:CAppOverview.mru_index)
     pub mru_index: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CAppOverview.rt_recent_activity_time)
@@ -746,8 +584,6 @@ pub struct CAppOverview {
     pub rt_last_time_played: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CAppOverview.store_tag)
     pub store_tag: ::std::vec::Vec<u32>,
-    // @@protoc_insertion_point(field:CAppOverview.association)
-    pub association: ::std::vec::Vec<CAppOverview_AppAssociation>,
     // @@protoc_insertion_point(field:CAppOverview.store_category)
     pub store_category: ::std::vec::Vec<u32>,
     // @@protoc_insertion_point(field:CAppOverview.rt_original_release_date)
@@ -756,8 +592,8 @@ pub struct CAppOverview {
     pub rt_steam_release_date: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CAppOverview.icon_hash)
     pub icon_hash: ::std::option::Option<::std::string::String>,
-    // @@protoc_insertion_point(field:CAppOverview.controller_support)
-    pub controller_support: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EAppControllerSupportLevel>>,
+    // @@protoc_insertion_point(field:CAppOverview.xbox_controller_support)
+    pub xbox_controller_support: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EAppControllerSupportLevel>>,
     // @@protoc_insertion_point(field:CAppOverview.vr_supported)
     pub vr_supported: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CAppOverview.metacritic_score)
@@ -808,14 +644,18 @@ pub struct CAppOverview {
     pub site_license_site_name: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CAppOverview.shortcut_override_appid)
     pub shortcut_override_appid: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CAppOverview.steam_deck_compat_category)
-    pub steam_deck_compat_category: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::enums::ESteamDeckCompatibilityCategory>>,
     // @@protoc_insertion_point(field:CAppOverview.rt_last_time_locally_played)
     pub rt_last_time_locally_played: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CAppOverview.rt_purchased_time)
     pub rt_purchased_time: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CAppOverview.header_filename)
     pub header_filename: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CAppOverview.local_cache_version)
+    pub local_cache_version: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CAppOverview.number_of_copies)
+    pub number_of_copies: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CAppOverview.steam_hw_compat_category_packed)
+    pub steam_hw_compat_category_packed: ::std::option::Option<u32>,
     // special fields
     // @@protoc_insertion_point(special_field:CAppOverview.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -906,6 +746,25 @@ impl CAppOverview {
         self.visible_in_game_list = ::std::option::Option::Some(v);
     }
 
+    // optional bool subscribed_to = 5;
+
+    pub fn subscribed_to(&self) -> bool {
+        self.subscribed_to.unwrap_or(false)
+    }
+
+    pub fn clear_subscribed_to(&mut self) {
+        self.subscribed_to = ::std::option::Option::None;
+    }
+
+    pub fn has_subscribed_to(&self) -> bool {
+        self.subscribed_to.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_subscribed_to(&mut self, v: bool) {
+        self.subscribed_to = ::std::option::Option::Some(v);
+    }
+
     // optional string sort_as = 6;
 
     pub fn sort_as(&self) -> &str {
@@ -944,10 +803,10 @@ impl CAppOverview {
 
     // optional .EProtoAppType app_type = 7;
 
-    pub fn app_type(&self) -> EProtoAppType {
+    pub fn app_type(&self) -> super::enums::EProtoAppType {
         match self.app_type {
-            Some(e) => e.enum_value_or(EProtoAppType::k_EAppTypeInvalid),
-            None => EProtoAppType::k_EAppTypeInvalid,
+            Some(e) => e.enum_value_or(super::enums::EProtoAppType::k_EAppTypeInvalid),
+            None => super::enums::EProtoAppType::k_EAppTypeInvalid,
         }
     }
 
@@ -960,7 +819,7 @@ impl CAppOverview {
     }
 
     // Param is passed by value, moved
-    pub fn set_app_type(&mut self, v: EProtoAppType) {
+    pub fn set_app_type(&mut self, v: super::enums::EProtoAppType) {
         self.app_type = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
     }
 
@@ -1133,26 +992,26 @@ impl CAppOverview {
         self.icon_hash.take().unwrap_or_else(|| ::std::string::String::new())
     }
 
-    // optional .EAppControllerSupportLevel controller_support = 31;
+    // optional .EAppControllerSupportLevel xbox_controller_support = 31;
 
-    pub fn controller_support(&self) -> EAppControllerSupportLevel {
-        match self.controller_support {
+    pub fn xbox_controller_support(&self) -> EAppControllerSupportLevel {
+        match self.xbox_controller_support {
             Some(e) => e.enum_value_or(EAppControllerSupportLevel::k_EAppControllerSupportLevelNone),
             None => EAppControllerSupportLevel::k_EAppControllerSupportLevelNone,
         }
     }
 
-    pub fn clear_controller_support(&mut self) {
-        self.controller_support = ::std::option::Option::None;
+    pub fn clear_xbox_controller_support(&mut self) {
+        self.xbox_controller_support = ::std::option::Option::None;
     }
 
-    pub fn has_controller_support(&self) -> bool {
-        self.controller_support.is_some()
+    pub fn has_xbox_controller_support(&self) -> bool {
+        self.xbox_controller_support.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_controller_support(&mut self, v: EAppControllerSupportLevel) {
-        self.controller_support = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    pub fn set_xbox_controller_support(&mut self, v: EAppControllerSupportLevel) {
+        self.xbox_controller_support = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
     }
 
     // optional bool vr_supported = 32;
@@ -1378,7 +1237,7 @@ impl CAppOverview {
     // optional uint64 most_available_clientid = 44;
 
     pub fn most_available_clientid(&self) -> u64 {
-        self.most_available_clientid.unwrap_or(0)
+        self.most_available_clientid.unwrap_or(0u64)
     }
 
     pub fn clear_most_available_clientid(&mut self) {
@@ -1397,7 +1256,7 @@ impl CAppOverview {
     // optional uint64 selected_clientid = 45;
 
     pub fn selected_clientid(&self) -> u64 {
-        self.selected_clientid.unwrap_or(0)
+        self.selected_clientid.unwrap_or(0u64)
     }
 
     pub fn clear_selected_clientid(&mut self) {
@@ -1492,7 +1351,7 @@ impl CAppOverview {
     // optional uint32 review_score_with_bombs = 53;
 
     pub fn review_score_with_bombs(&self) -> u32 {
-        self.review_score_with_bombs.unwrap_or(0)
+        self.review_score_with_bombs.unwrap_or(0u32)
     }
 
     pub fn clear_review_score_with_bombs(&mut self) {
@@ -1511,7 +1370,7 @@ impl CAppOverview {
     // optional uint32 review_percentage_with_bombs = 54;
 
     pub fn review_percentage_with_bombs(&self) -> u32 {
-        self.review_percentage_with_bombs.unwrap_or(0)
+        self.review_percentage_with_bombs.unwrap_or(0u32)
     }
 
     pub fn clear_review_percentage_with_bombs(&mut self) {
@@ -1530,7 +1389,7 @@ impl CAppOverview {
     // optional uint32 review_score_without_bombs = 55;
 
     pub fn review_score_without_bombs(&self) -> u32 {
-        self.review_score_without_bombs.unwrap_or(0)
+        self.review_score_without_bombs.unwrap_or(0u32)
     }
 
     pub fn clear_review_score_without_bombs(&mut self) {
@@ -1549,7 +1408,7 @@ impl CAppOverview {
     // optional uint32 review_percentage_without_bombs = 56;
 
     pub fn review_percentage_without_bombs(&self) -> u32 {
-        self.review_percentage_without_bombs.unwrap_or(0)
+        self.review_percentage_without_bombs.unwrap_or(0u32)
     }
 
     pub fn clear_review_percentage_without_bombs(&mut self) {
@@ -1730,28 +1589,6 @@ impl CAppOverview {
         self.shortcut_override_appid = ::std::option::Option::Some(v);
     }
 
-    // optional .ESteamDeckCompatibilityCategory steam_deck_compat_category = 64;
-
-    pub fn steam_deck_compat_category(&self) -> super::enums::ESteamDeckCompatibilityCategory {
-        match self.steam_deck_compat_category {
-            Some(e) => e.enum_value_or(super::enums::ESteamDeckCompatibilityCategory::k_ESteamDeckCompatibilityCategory_Unknown),
-            None => super::enums::ESteamDeckCompatibilityCategory::k_ESteamDeckCompatibilityCategory_Unknown,
-        }
-    }
-
-    pub fn clear_steam_deck_compat_category(&mut self) {
-        self.steam_deck_compat_category = ::std::option::Option::None;
-    }
-
-    pub fn has_steam_deck_compat_category(&self) -> bool {
-        self.steam_deck_compat_category.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_steam_deck_compat_category(&mut self, v: super::enums::ESteamDeckCompatibilityCategory) {
-        self.steam_deck_compat_category = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
-    }
-
     // optional uint32 rt_last_time_locally_played = 65;
 
     pub fn rt_last_time_locally_played(&self) -> u32 {
@@ -1825,6 +1662,63 @@ impl CAppOverview {
     pub fn take_header_filename(&mut self) -> ::std::string::String {
         self.header_filename.take().unwrap_or_else(|| ::std::string::String::new())
     }
+
+    // optional uint32 local_cache_version = 68;
+
+    pub fn local_cache_version(&self) -> u32 {
+        self.local_cache_version.unwrap_or(0)
+    }
+
+    pub fn clear_local_cache_version(&mut self) {
+        self.local_cache_version = ::std::option::Option::None;
+    }
+
+    pub fn has_local_cache_version(&self) -> bool {
+        self.local_cache_version.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_local_cache_version(&mut self, v: u32) {
+        self.local_cache_version = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 number_of_copies = 72;
+
+    pub fn number_of_copies(&self) -> u32 {
+        self.number_of_copies.unwrap_or(1u32)
+    }
+
+    pub fn clear_number_of_copies(&mut self) {
+        self.number_of_copies = ::std::option::Option::None;
+    }
+
+    pub fn has_number_of_copies(&self) -> bool {
+        self.number_of_copies.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_number_of_copies(&mut self, v: u32) {
+        self.number_of_copies = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 steam_hw_compat_category_packed = 73;
+
+    pub fn steam_hw_compat_category_packed(&self) -> u32 {
+        self.steam_hw_compat_category_packed.unwrap_or(0u32)
+    }
+
+    pub fn clear_steam_hw_compat_category_packed(&mut self) {
+        self.steam_hw_compat_category_packed = ::std::option::Option::None;
+    }
+
+    pub fn has_steam_hw_compat_category_packed(&self) -> bool {
+        self.steam_hw_compat_category_packed.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_steam_hw_compat_category_packed(&mut self, v: u32) {
+        self.steam_hw_compat_category_packed = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
@@ -1845,6 +1739,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
                 },
                 32 => {
                     self.visible_in_game_list = ::std::option::Option::Some(is.read_bool()?);
+                },
+                40 => {
+                    self.subscribed_to = ::std::option::Option::Some(is.read_bool()?);
                 },
                 50 => {
                     self.sort_as = ::std::option::Option::Some(is.read_string()?);
@@ -1873,9 +1770,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
                 152 => {
                     self.store_tag.push(is.read_uint32()?);
                 },
-                162 => {
-                    self.association.push(is.read_message()?);
-                },
                 186 => {
                     is.read_repeated_packed_uint32_into(&mut self.store_category)?;
                 },
@@ -1892,7 +1786,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
                     self.icon_hash = ::std::option::Option::Some(is.read_string()?);
                 },
                 248 => {
-                    self.controller_support = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                    self.xbox_controller_support = ::std::option::Option::Some(is.read_enum_or_unknown()?);
                 },
                 256 => {
                     self.vr_supported = ::std::option::Option::Some(is.read_bool()?);
@@ -1969,9 +1863,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
                 504 => {
                     self.shortcut_override_appid = ::std::option::Option::Some(is.read_uint32()?);
                 },
-                512 => {
-                    self.steam_deck_compat_category = ::std::option::Option::Some(is.read_enum_or_unknown()?);
-                },
                 520 => {
                     self.rt_last_time_locally_played = ::std::option::Option::Some(is.read_uint32()?);
                 },
@@ -1980,6 +1871,15 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
                 },
                 538 => {
                     self.header_filename = ::std::option::Option::Some(is.read_string()?);
+                },
+                544 => {
+                    self.local_cache_version = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                576 => {
+                    self.number_of_copies = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                584 => {
+                    self.steam_hw_compat_category_packed = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -2000,6 +1900,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(2, &v);
         }
         if let Some(v) = self.visible_in_game_list {
+            my_size += 1 + 1;
+        }
+        if let Some(v) = self.subscribed_to {
             my_size += 1 + 1;
         }
         if let Some(v) = self.sort_as.as_ref() {
@@ -2026,10 +1929,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         for value in &self.store_tag {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(19, *value);
         };
-        for value in &self.association {
-            let len = value.compute_size();
-            my_size += 2 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
-        };
         for value in &self.store_category {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(23, *value);
         };
@@ -2042,7 +1941,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         if let Some(v) = self.icon_hash.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(27, &v);
         }
-        if let Some(v) = self.controller_support {
+        if let Some(v) = self.xbox_controller_support {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(31, v.value());
         }
         if let Some(v) = self.vr_supported {
@@ -2121,9 +2020,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         if let Some(v) = self.shortcut_override_appid {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(63, v);
         }
-        if let Some(v) = self.steam_deck_compat_category {
-            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(64, v.value());
-        }
         if let Some(v) = self.rt_last_time_locally_played {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(65, v);
         }
@@ -2132,6 +2028,15 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         }
         if let Some(v) = self.header_filename.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(67, &v);
+        }
+        if let Some(v) = self.local_cache_version {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(68, v);
+        }
+        if let Some(v) = self.number_of_copies {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(72, v);
+        }
+        if let Some(v) = self.steam_hw_compat_category_packed {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(73, v);
         }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
@@ -2147,6 +2052,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         }
         if let Some(v) = self.visible_in_game_list {
             os.write_bool(4, v)?;
+        }
+        if let Some(v) = self.subscribed_to {
+            os.write_bool(5, v)?;
         }
         if let Some(v) = self.sort_as.as_ref() {
             os.write_string(6, v)?;
@@ -2172,9 +2080,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         for v in &self.store_tag {
             os.write_uint32(19, *v)?;
         };
-        for v in &self.association {
-            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(20, v, os)?;
-        };
         for v in &self.store_category {
             os.write_uint32(23, *v)?;
         };
@@ -2187,7 +2092,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         if let Some(v) = self.icon_hash.as_ref() {
             os.write_string(27, v)?;
         }
-        if let Some(v) = self.controller_support {
+        if let Some(v) = self.xbox_controller_support {
             os.write_enum(31, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
         }
         if let Some(v) = self.vr_supported {
@@ -2265,9 +2170,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         if let Some(v) = self.shortcut_override_appid {
             os.write_uint32(63, v)?;
         }
-        if let Some(v) = self.steam_deck_compat_category {
-            os.write_enum(64, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
-        }
         if let Some(v) = self.rt_last_time_locally_played {
             os.write_uint32(65, v)?;
         }
@@ -2276,6 +2178,15 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         }
         if let Some(v) = self.header_filename.as_ref() {
             os.write_string(67, v)?;
+        }
+        if let Some(v) = self.local_cache_version {
+            os.write_uint32(68, v)?;
+        }
+        if let Some(v) = self.number_of_copies {
+            os.write_uint32(72, v)?;
+        }
+        if let Some(v) = self.steam_hw_compat_category_packed {
+            os.write_uint32(73, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -2297,6 +2208,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         self.appid = ::std::option::Option::None;
         self.display_name = ::std::option::Option::None;
         self.visible_in_game_list = ::std::option::Option::None;
+        self.subscribed_to = ::std::option::Option::None;
         self.sort_as = ::std::option::Option::None;
         self.app_type = ::std::option::Option::None;
         self.mru_index = ::std::option::Option::None;
@@ -2305,12 +2217,11 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         self.minutes_playtime_last_two_weeks = ::std::option::Option::None;
         self.rt_last_time_played = ::std::option::Option::None;
         self.store_tag.clear();
-        self.association.clear();
         self.store_category.clear();
         self.rt_original_release_date = ::std::option::Option::None;
         self.rt_steam_release_date = ::std::option::Option::None;
         self.icon_hash = ::std::option::Option::None;
-        self.controller_support = ::std::option::Option::None;
+        self.xbox_controller_support = ::std::option::Option::None;
         self.vr_supported = ::std::option::Option::None;
         self.metacritic_score = ::std::option::Option::None;
         self.size_on_disk = ::std::option::Option::None;
@@ -2336,10 +2247,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
         self.mastersub_includedwith_logo = ::std::option::Option::None;
         self.site_license_site_name = ::std::option::Option::None;
         self.shortcut_override_appid = ::std::option::Option::None;
-        self.steam_deck_compat_category = ::std::option::Option::None;
         self.rt_last_time_locally_played = ::std::option::Option::None;
         self.rt_purchased_time = ::std::option::Option::None;
         self.header_filename = ::std::option::Option::None;
+        self.local_cache_version = ::std::option::Option::None;
+        self.number_of_copies = ::std::option::Option::None;
+        self.steam_hw_compat_category_packed = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -2348,6 +2261,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
             appid: ::std::option::Option::None,
             display_name: ::std::option::Option::None,
             visible_in_game_list: ::std::option::Option::None,
+            subscribed_to: ::std::option::Option::None,
             sort_as: ::std::option::Option::None,
             app_type: ::std::option::Option::None,
             mru_index: ::std::option::Option::None,
@@ -2356,12 +2270,11 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
             minutes_playtime_last_two_weeks: ::std::option::Option::None,
             rt_last_time_played: ::std::option::Option::None,
             store_tag: ::std::vec::Vec::new(),
-            association: ::std::vec::Vec::new(),
             store_category: ::std::vec::Vec::new(),
             rt_original_release_date: ::std::option::Option::None,
             rt_steam_release_date: ::std::option::Option::None,
             icon_hash: ::std::option::Option::None,
-            controller_support: ::std::option::Option::None,
+            xbox_controller_support: ::std::option::Option::None,
             vr_supported: ::std::option::Option::None,
             metacritic_score: ::std::option::Option::None,
             size_on_disk: ::std::option::Option::None,
@@ -2387,10 +2300,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CAppOverview {
             mastersub_includedwith_logo: ::std::option::Option::None,
             site_license_site_name: ::std::option::Option::None,
             shortcut_override_appid: ::std::option::Option::None,
-            steam_deck_compat_category: ::std::option::Option::None,
             rt_last_time_locally_played: ::std::option::Option::None,
             rt_purchased_time: ::std::option::Option::None,
             header_filename: ::std::option::Option::None,
+            local_cache_version: ::std::option::Option::None,
+            number_of_copies: ::std::option::Option::None,
+            steam_hw_compat_category_packed: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -2888,6 +2803,12 @@ pub enum EDisplayStatus {
     k_EDisplayStatusCloudOutOfDate = 35,
     // @@protoc_insertion_point(enum_value:EDisplayStatus.k_EDisplayStatusTerminating)
     k_EDisplayStatusTerminating = 36,
+    // @@protoc_insertion_point(enum_value:EDisplayStatus.k_EDisplayStatusOwnerLocked)
+    k_EDisplayStatusOwnerLocked = 37,
+    // @@protoc_insertion_point(enum_value:EDisplayStatus.k_EDisplayStatusDownloadFailed)
+    k_EDisplayStatusDownloadFailed = 38,
+    // @@protoc_insertion_point(enum_value:EDisplayStatus.k_EDisplayStatusUpdateFailed)
+    k_EDisplayStatusUpdateFailed = 39,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EDisplayStatus {
@@ -2935,6 +2856,9 @@ impl ::steam_vent_proto_common::protobuf::Enum for EDisplayStatus {
             34 => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusCloudError),
             35 => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusCloudOutOfDate),
             36 => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusTerminating),
+            37 => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusOwnerLocked),
+            38 => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusDownloadFailed),
+            39 => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusUpdateFailed),
             _ => ::std::option::Option::None
         }
     }
@@ -2977,6 +2901,9 @@ impl ::steam_vent_proto_common::protobuf::Enum for EDisplayStatus {
             "k_EDisplayStatusCloudError" => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusCloudError),
             "k_EDisplayStatusCloudOutOfDate" => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusCloudOutOfDate),
             "k_EDisplayStatusTerminating" => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusTerminating),
+            "k_EDisplayStatusOwnerLocked" => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusOwnerLocked),
+            "k_EDisplayStatusDownloadFailed" => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusDownloadFailed),
+            "k_EDisplayStatusUpdateFailed" => ::std::option::Option::Some(EDisplayStatus::k_EDisplayStatusUpdateFailed),
             _ => ::std::option::Option::None
         }
     }
@@ -3018,6 +2945,9 @@ impl ::steam_vent_proto_common::protobuf::Enum for EDisplayStatus {
         EDisplayStatus::k_EDisplayStatusCloudError,
         EDisplayStatus::k_EDisplayStatusCloudOutOfDate,
         EDisplayStatus::k_EDisplayStatusTerminating,
+        EDisplayStatus::k_EDisplayStatusOwnerLocked,
+        EDisplayStatus::k_EDisplayStatusDownloadFailed,
+        EDisplayStatus::k_EDisplayStatusUpdateFailed,
     ];
 }
 
@@ -3114,196 +3044,6 @@ impl ::steam_vent_proto_common::protobuf::Enum for EAppCloudStatus {
 impl ::std::default::Default for EAppCloudStatus {
     fn default() -> Self {
         EAppCloudStatus::k_EAppCloudStatusInvalid
-    }
-}
-
-
-#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
-// @@protoc_insertion_point(enum:EProtoAppType)
-pub enum EProtoAppType {
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeInvalid)
-    k_EAppTypeInvalid = 0,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeGame)
-    k_EAppTypeGame = 1,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeApplication)
-    k_EAppTypeApplication = 2,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeTool)
-    k_EAppTypeTool = 4,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeDemo)
-    k_EAppTypeDemo = 8,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeDeprected)
-    k_EAppTypeDeprected = 16,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeDLC)
-    k_EAppTypeDLC = 32,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeGuide)
-    k_EAppTypeGuide = 64,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeDriver)
-    k_EAppTypeDriver = 128,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeConfig)
-    k_EAppTypeConfig = 256,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeHardware)
-    k_EAppTypeHardware = 512,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeFranchise)
-    k_EAppTypeFranchise = 1024,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeVideo)
-    k_EAppTypeVideo = 2048,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypePlugin)
-    k_EAppTypePlugin = 4096,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeMusicAlbum)
-    k_EAppTypeMusicAlbum = 8192,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeSeries)
-    k_EAppTypeSeries = 16384,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeComic)
-    k_EAppTypeComic = 32768,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeBeta)
-    k_EAppTypeBeta = 65536,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeShortcut)
-    k_EAppTypeShortcut = 1073741824,
-    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeDepotOnly)
-    k_EAppTypeDepotOnly = -2147483648,
-}
-
-impl ::steam_vent_proto_common::protobuf::Enum for EProtoAppType {
-    const NAME: &'static str = "EProtoAppType";
-
-    fn value(&self) -> i32 {
-        *self as i32
-    }
-
-    fn from_i32(value: i32) -> ::std::option::Option<EProtoAppType> {
-        match value {
-            0 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeInvalid),
-            1 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeGame),
-            2 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeApplication),
-            4 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeTool),
-            8 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDemo),
-            16 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDeprected),
-            32 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDLC),
-            64 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeGuide),
-            128 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDriver),
-            256 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeConfig),
-            512 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeHardware),
-            1024 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeFranchise),
-            2048 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeVideo),
-            4096 => ::std::option::Option::Some(EProtoAppType::k_EAppTypePlugin),
-            8192 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeMusicAlbum),
-            16384 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeSeries),
-            32768 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeComic),
-            65536 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeBeta),
-            1073741824 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeShortcut),
-            -2147483648 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDepotOnly),
-            _ => ::std::option::Option::None
-        }
-    }
-
-    fn from_str(str: &str) -> ::std::option::Option<EProtoAppType> {
-        match str {
-            "k_EAppTypeInvalid" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeInvalid),
-            "k_EAppTypeGame" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeGame),
-            "k_EAppTypeApplication" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeApplication),
-            "k_EAppTypeTool" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeTool),
-            "k_EAppTypeDemo" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDemo),
-            "k_EAppTypeDeprected" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDeprected),
-            "k_EAppTypeDLC" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDLC),
-            "k_EAppTypeGuide" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeGuide),
-            "k_EAppTypeDriver" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDriver),
-            "k_EAppTypeConfig" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeConfig),
-            "k_EAppTypeHardware" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeHardware),
-            "k_EAppTypeFranchise" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeFranchise),
-            "k_EAppTypeVideo" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeVideo),
-            "k_EAppTypePlugin" => ::std::option::Option::Some(EProtoAppType::k_EAppTypePlugin),
-            "k_EAppTypeMusicAlbum" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeMusicAlbum),
-            "k_EAppTypeSeries" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeSeries),
-            "k_EAppTypeComic" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeComic),
-            "k_EAppTypeBeta" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeBeta),
-            "k_EAppTypeShortcut" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeShortcut),
-            "k_EAppTypeDepotOnly" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDepotOnly),
-            _ => ::std::option::Option::None
-        }
-    }
-
-    const VALUES: &'static [EProtoAppType] = &[
-        EProtoAppType::k_EAppTypeInvalid,
-        EProtoAppType::k_EAppTypeGame,
-        EProtoAppType::k_EAppTypeApplication,
-        EProtoAppType::k_EAppTypeTool,
-        EProtoAppType::k_EAppTypeDemo,
-        EProtoAppType::k_EAppTypeDeprected,
-        EProtoAppType::k_EAppTypeDLC,
-        EProtoAppType::k_EAppTypeGuide,
-        EProtoAppType::k_EAppTypeDriver,
-        EProtoAppType::k_EAppTypeConfig,
-        EProtoAppType::k_EAppTypeHardware,
-        EProtoAppType::k_EAppTypeFranchise,
-        EProtoAppType::k_EAppTypeVideo,
-        EProtoAppType::k_EAppTypePlugin,
-        EProtoAppType::k_EAppTypeMusicAlbum,
-        EProtoAppType::k_EAppTypeSeries,
-        EProtoAppType::k_EAppTypeComic,
-        EProtoAppType::k_EAppTypeBeta,
-        EProtoAppType::k_EAppTypeShortcut,
-        EProtoAppType::k_EAppTypeDepotOnly,
-    ];
-}
-
-impl ::std::default::Default for EProtoAppType {
-    fn default() -> Self {
-        EProtoAppType::k_EAppTypeInvalid
-    }
-}
-
-
-#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
-// @@protoc_insertion_point(enum:EAppAssociationType)
-pub enum EAppAssociationType {
-    // @@protoc_insertion_point(enum_value:EAppAssociationType.k_EAppAssociationTypeInvalid)
-    k_EAppAssociationTypeInvalid = 0,
-    // @@protoc_insertion_point(enum_value:EAppAssociationType.k_EAppAssociationTypePublisher)
-    k_EAppAssociationTypePublisher = 1,
-    // @@protoc_insertion_point(enum_value:EAppAssociationType.k_EAppAssociationTypeDeveloper)
-    k_EAppAssociationTypeDeveloper = 2,
-    // @@protoc_insertion_point(enum_value:EAppAssociationType.k_EAppAssociationTypeFranchise)
-    k_EAppAssociationTypeFranchise = 3,
-}
-
-impl ::steam_vent_proto_common::protobuf::Enum for EAppAssociationType {
-    const NAME: &'static str = "EAppAssociationType";
-
-    fn value(&self) -> i32 {
-        *self as i32
-    }
-
-    fn from_i32(value: i32) -> ::std::option::Option<EAppAssociationType> {
-        match value {
-            0 => ::std::option::Option::Some(EAppAssociationType::k_EAppAssociationTypeInvalid),
-            1 => ::std::option::Option::Some(EAppAssociationType::k_EAppAssociationTypePublisher),
-            2 => ::std::option::Option::Some(EAppAssociationType::k_EAppAssociationTypeDeveloper),
-            3 => ::std::option::Option::Some(EAppAssociationType::k_EAppAssociationTypeFranchise),
-            _ => ::std::option::Option::None
-        }
-    }
-
-    fn from_str(str: &str) -> ::std::option::Option<EAppAssociationType> {
-        match str {
-            "k_EAppAssociationTypeInvalid" => ::std::option::Option::Some(EAppAssociationType::k_EAppAssociationTypeInvalid),
-            "k_EAppAssociationTypePublisher" => ::std::option::Option::Some(EAppAssociationType::k_EAppAssociationTypePublisher),
-            "k_EAppAssociationTypeDeveloper" => ::std::option::Option::Some(EAppAssociationType::k_EAppAssociationTypeDeveloper),
-            "k_EAppAssociationTypeFranchise" => ::std::option::Option::Some(EAppAssociationType::k_EAppAssociationTypeFranchise),
-            _ => ::std::option::Option::None
-        }
-    }
-
-    const VALUES: &'static [EAppAssociationType] = &[
-        EAppAssociationType::k_EAppAssociationTypeInvalid,
-        EAppAssociationType::k_EAppAssociationTypePublisher,
-        EAppAssociationType::k_EAppAssociationTypeDeveloper,
-        EAppAssociationType::k_EAppAssociationTypeFranchise,
-    ];
-}
-
-impl ::std::default::Default for EAppAssociationType {
-    fn default() -> Self {
-        EAppAssociationType::k_EAppAssociationTypeInvalid
     }
 }
 
@@ -3414,24 +3154,71 @@ impl ::std::default::Default for EAppGamepadGyroTrackpadSupportLevel {
 }
 
 
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EAppHDRSupport)
+pub enum EAppHDRSupport {
+    // @@protoc_insertion_point(enum_value:EAppHDRSupport.k_EHDRSupport_Unknown)
+    k_EHDRSupport_Unknown = 0,
+    // @@protoc_insertion_point(enum_value:EAppHDRSupport.k_EHDRSupport_SDR)
+    k_EHDRSupport_SDR = 1,
+    // @@protoc_insertion_point(enum_value:EAppHDRSupport.k_EHDRSupport_HDR)
+    k_EHDRSupport_HDR = 2,
+    // @@protoc_insertion_point(enum_value:EAppHDRSupport.k_EHDRSupport_HDR_Broken)
+    k_EHDRSupport_HDR_Broken = 3,
+    // @@protoc_insertion_point(enum_value:EAppHDRSupport.k_EHDRSupport_HDR_RequiresUserAction)
+    k_EHDRSupport_HDR_RequiresUserAction = 4,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EAppHDRSupport {
+    const NAME: &'static str = "EAppHDRSupport";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EAppHDRSupport> {
+        match value {
+            0 => ::std::option::Option::Some(EAppHDRSupport::k_EHDRSupport_Unknown),
+            1 => ::std::option::Option::Some(EAppHDRSupport::k_EHDRSupport_SDR),
+            2 => ::std::option::Option::Some(EAppHDRSupport::k_EHDRSupport_HDR),
+            3 => ::std::option::Option::Some(EAppHDRSupport::k_EHDRSupport_HDR_Broken),
+            4 => ::std::option::Option::Some(EAppHDRSupport::k_EHDRSupport_HDR_RequiresUserAction),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EAppHDRSupport> {
+        match str {
+            "k_EHDRSupport_Unknown" => ::std::option::Option::Some(EAppHDRSupport::k_EHDRSupport_Unknown),
+            "k_EHDRSupport_SDR" => ::std::option::Option::Some(EAppHDRSupport::k_EHDRSupport_SDR),
+            "k_EHDRSupport_HDR" => ::std::option::Option::Some(EAppHDRSupport::k_EHDRSupport_HDR),
+            "k_EHDRSupport_HDR_Broken" => ::std::option::Option::Some(EAppHDRSupport::k_EHDRSupport_HDR_Broken),
+            "k_EHDRSupport_HDR_RequiresUserAction" => ::std::option::Option::Some(EAppHDRSupport::k_EHDRSupport_HDR_RequiresUserAction),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EAppHDRSupport] = &[
+        EAppHDRSupport::k_EHDRSupport_Unknown,
+        EAppHDRSupport::k_EHDRSupport_SDR,
+        EAppHDRSupport::k_EHDRSupport_HDR,
+        EAppHDRSupport::k_EHDRSupport_HDR_Broken,
+        EAppHDRSupport::k_EHDRSupport_HDR_RequiresUserAction,
+    ];
+}
+
+impl ::std::default::Default for EAppHDRSupport {
+    fn default() -> Self {
+        EAppHDRSupport::k_EHDRSupport_Unknown
+    }
+}
+
+
 
 const _VENT_PROTO_VERSION_CHECK: () = ::steam_vent_proto_common::VERSION_0_5_0;
 
 #[allow(unused_imports)]
 use crate::enums::*;
-impl ::steam_vent_proto_common::RpcMessage for CAppOverview_AppAssociation {
-    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
-        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
-    }
-    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.write_to_writer(writer)
-    }
-    fn encode_size(&self) -> usize {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.compute_size() as usize
-    }
-}
 impl ::steam_vent_proto_common::RpcMessage for CAppOverview_PerClientData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)

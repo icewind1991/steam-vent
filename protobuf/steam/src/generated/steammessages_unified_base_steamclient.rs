@@ -147,6 +147,51 @@ impl ::std::default::Default for EProtoExecutionSite {
 }
 
 
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EProtoServiceType)
+pub enum EProtoServiceType {
+    // @@protoc_insertion_point(enum_value:EProtoServiceType.k_EProtoServiceTypeSteamMessages)
+    k_EProtoServiceTypeSteamMessages = 0,
+    // @@protoc_insertion_point(enum_value:EProtoServiceType.k_EProtoServiceTypeVRGamepadUIMessages)
+    k_EProtoServiceTypeVRGamepadUIMessages = 1,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EProtoServiceType {
+    const NAME: &'static str = "EProtoServiceType";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EProtoServiceType> {
+        match value {
+            0 => ::std::option::Option::Some(EProtoServiceType::k_EProtoServiceTypeSteamMessages),
+            1 => ::std::option::Option::Some(EProtoServiceType::k_EProtoServiceTypeVRGamepadUIMessages),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EProtoServiceType> {
+        match str {
+            "k_EProtoServiceTypeSteamMessages" => ::std::option::Option::Some(EProtoServiceType::k_EProtoServiceTypeSteamMessages),
+            "k_EProtoServiceTypeVRGamepadUIMessages" => ::std::option::Option::Some(EProtoServiceType::k_EProtoServiceTypeVRGamepadUIMessages),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EProtoServiceType] = &[
+        EProtoServiceType::k_EProtoServiceTypeSteamMessages,
+        EProtoServiceType::k_EProtoServiceTypeVRGamepadUIMessages,
+    ];
+}
+
+impl ::std::default::Default for EProtoServiceType {
+    fn default() -> Self {
+        EProtoServiceType::k_EProtoServiceTypeSteamMessages
+    }
+}
+
+
 // Extension generation with lite runtime is not supported
 
 

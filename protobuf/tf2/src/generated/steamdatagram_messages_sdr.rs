@@ -12806,10 +12806,10 @@ pub enum ESteamDatagramMsgID {
     k_ESteamDatagramMsg_ConnectionClosed = 20,
     // @@protoc_insertion_point(enum_value:ESteamDatagramMsgID.k_ESteamDatagramMsg_NoConnection)
     k_ESteamDatagramMsg_NoConnection = 21,
-    // @@protoc_insertion_point(enum_value:ESteamDatagramMsgID.k_ESteamDatagramMsg_LegacyRelayToRelayPingRequest)
-    k_ESteamDatagramMsg_LegacyRelayToRelayPingRequest = 22,
-    // @@protoc_insertion_point(enum_value:ESteamDatagramMsgID.k_ESteamDatagramMsg_LegacyRelayToRelayPingReply)
-    k_ESteamDatagramMsg_LegacyRelayToRelayPingReply = 23,
+    // @@protoc_insertion_point(enum_value:ESteamDatagramMsgID.k_ESteamDatagramMsg_TicketDecryptRequest)
+    k_ESteamDatagramMsg_TicketDecryptRequest = 22,
+    // @@protoc_insertion_point(enum_value:ESteamDatagramMsgID.k_ESteamDatagramMsg_TicketDecryptReply)
+    k_ESteamDatagramMsg_TicketDecryptReply = 23,
     // @@protoc_insertion_point(enum_value:ESteamDatagramMsgID.k_ESteamDatagramMsg_P2PSessionRequest)
     k_ESteamDatagramMsg_P2PSessionRequest = 24,
     // @@protoc_insertion_point(enum_value:ESteamDatagramMsgID.k_ESteamDatagramMsg_P2PSessionEstablished)
@@ -12864,8 +12864,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for ESteamDatagramMsgID {
             19 => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_ConnectOK),
             20 => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_ConnectionClosed),
             21 => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_NoConnection),
-            22 => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_LegacyRelayToRelayPingRequest),
-            23 => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_LegacyRelayToRelayPingReply),
+            22 => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_TicketDecryptRequest),
+            23 => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_TicketDecryptReply),
             24 => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_P2PSessionRequest),
             25 => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_P2PSessionEstablished),
             26 => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_P2PStatsClient),
@@ -12904,8 +12904,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for ESteamDatagramMsgID {
             "k_ESteamDatagramMsg_ConnectOK" => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_ConnectOK),
             "k_ESteamDatagramMsg_ConnectionClosed" => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_ConnectionClosed),
             "k_ESteamDatagramMsg_NoConnection" => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_NoConnection),
-            "k_ESteamDatagramMsg_LegacyRelayToRelayPingRequest" => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_LegacyRelayToRelayPingRequest),
-            "k_ESteamDatagramMsg_LegacyRelayToRelayPingReply" => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_LegacyRelayToRelayPingReply),
+            "k_ESteamDatagramMsg_TicketDecryptRequest" => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_TicketDecryptRequest),
+            "k_ESteamDatagramMsg_TicketDecryptReply" => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_TicketDecryptReply),
             "k_ESteamDatagramMsg_P2PSessionRequest" => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_P2PSessionRequest),
             "k_ESteamDatagramMsg_P2PSessionEstablished" => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_P2PSessionEstablished),
             "k_ESteamDatagramMsg_P2PStatsClient" => ::std::option::Option::Some(ESteamDatagramMsgID::k_ESteamDatagramMsg_P2PStatsClient),
@@ -12943,8 +12943,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for ESteamDatagramMsgID {
         ESteamDatagramMsgID::k_ESteamDatagramMsg_ConnectOK,
         ESteamDatagramMsgID::k_ESteamDatagramMsg_ConnectionClosed,
         ESteamDatagramMsgID::k_ESteamDatagramMsg_NoConnection,
-        ESteamDatagramMsgID::k_ESteamDatagramMsg_LegacyRelayToRelayPingRequest,
-        ESteamDatagramMsgID::k_ESteamDatagramMsg_LegacyRelayToRelayPingReply,
+        ESteamDatagramMsgID::k_ESteamDatagramMsg_TicketDecryptRequest,
+        ESteamDatagramMsgID::k_ESteamDatagramMsg_TicketDecryptReply,
         ESteamDatagramMsgID::k_ESteamDatagramMsg_P2PSessionRequest,
         ESteamDatagramMsgID::k_ESteamDatagramMsg_P2PSessionEstablished,
         ESteamDatagramMsgID::k_ESteamDatagramMsg_P2PStatsClient,

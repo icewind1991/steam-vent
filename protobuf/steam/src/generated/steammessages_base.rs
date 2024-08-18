@@ -557,6 +557,8 @@ pub struct CMsgProtoBufHeader {
     pub wg_token: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CMsgProtoBufHeader.webui_auth_key)
     pub webui_auth_key: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CMsgProtoBufHeader.exclude_client_sessionids)
+    pub exclude_client_sessionids: ::std::vec::Vec<i32>,
     // message oneof groups
     pub ip_addr: ::std::option::Option<cmsg_proto_buf_header::Ip_addr>,
     // special fields
@@ -1395,6 +1397,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgProtoBufHeader {
                 322 => {
                     self.webui_auth_key = ::std::option::Option::Some(is.read_string()?);
                 },
+                330 => {
+                    is.read_repeated_packed_int32_into(&mut self.exclude_client_sessionids)?;
+                },
+                328 => {
+                    self.exclude_client_sessionids.push(is.read_int32()?);
+                },
                 120 => {
                     self.ip_addr = ::std::option::Option::Some(cmsg_proto_buf_header::Ip_addr::Ip(is.read_uint32()?));
                 },
@@ -1507,6 +1515,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgProtoBufHeader {
         if let Some(v) = self.webui_auth_key.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(40, &v);
         }
+        for value in &self.exclude_client_sessionids {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(41, *value);
+        };
         if let ::std::option::Option::Some(ref v) = self.ip_addr {
             match v {
                 &cmsg_proto_buf_header::Ip_addr::Ip(v) => {
@@ -1616,6 +1627,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgProtoBufHeader {
         if let Some(v) = self.webui_auth_key.as_ref() {
             os.write_string(40, v)?;
         }
+        for v in &self.exclude_client_sessionids {
+            os.write_int32(41, *v)?;
+        };
         if let ::std::option::Option::Some(ref v) = self.ip_addr {
             match v {
                 &cmsg_proto_buf_header::Ip_addr::Ip(v) => {
@@ -1674,6 +1688,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgProtoBufHeader {
         self.session_disposition = ::std::option::Option::None;
         self.wg_token = ::std::option::Option::None;
         self.webui_auth_key = ::std::option::Option::None;
+        self.exclude_client_sessionids.clear();
         self.ip_addr = ::std::option::Option::None;
         self.ip_addr = ::std::option::Option::None;
         self.special_fields.clear();
@@ -1712,6 +1727,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgProtoBufHeader {
             session_disposition: ::std::option::Option::None,
             wg_token: ::std::option::Option::None,
             webui_auth_key: ::std::option::Option::None,
+            exclude_client_sessionids: ::std::vec::Vec::new(),
             ip_addr: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
@@ -7299,6 +7315,10 @@ pub struct CPackageReservationStatus {
     pub time_expires: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CPackageReservationStatus.time_reserved)
     pub time_reserved: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CPackageReservationStatus.rtime_estimated_notification)
+    pub rtime_estimated_notification: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CPackageReservationStatus.notificaton_token)
+    pub notificaton_token: ::std::option::Option<::std::string::String>,
     // special fields
     // @@protoc_insertion_point(special_field:CPackageReservationStatus.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -7483,6 +7503,61 @@ impl CPackageReservationStatus {
     pub fn set_time_reserved(&mut self, v: u32) {
         self.time_reserved = ::std::option::Option::Some(v);
     }
+
+    // optional uint32 rtime_estimated_notification = 9;
+
+    pub fn rtime_estimated_notification(&self) -> u32 {
+        self.rtime_estimated_notification.unwrap_or(0)
+    }
+
+    pub fn clear_rtime_estimated_notification(&mut self) {
+        self.rtime_estimated_notification = ::std::option::Option::None;
+    }
+
+    pub fn has_rtime_estimated_notification(&self) -> bool {
+        self.rtime_estimated_notification.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_rtime_estimated_notification(&mut self, v: u32) {
+        self.rtime_estimated_notification = ::std::option::Option::Some(v);
+    }
+
+    // optional string notificaton_token = 10;
+
+    pub fn notificaton_token(&self) -> &str {
+        match self.notificaton_token.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_notificaton_token(&mut self) {
+        self.notificaton_token = ::std::option::Option::None;
+    }
+
+    pub fn has_notificaton_token(&self) -> bool {
+        self.notificaton_token.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_notificaton_token(&mut self, v: ::std::string::String) {
+        self.notificaton_token = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_notificaton_token(&mut self) -> &mut ::std::string::String {
+        if self.notificaton_token.is_none() {
+            self.notificaton_token = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.notificaton_token.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_notificaton_token(&mut self) -> ::std::string::String {
+        self.notificaton_token.take().unwrap_or_else(|| ::std::string::String::new())
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CPackageReservationStatus {
@@ -7518,6 +7593,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CPackageReservationStatus 
                 },
                 64 => {
                     self.time_reserved = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                72 => {
+                    self.rtime_estimated_notification = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                82 => {
+                    self.notificaton_token = ::std::option::Option::Some(is.read_string()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -7555,6 +7636,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CPackageReservationStatus 
         if let Some(v) = self.time_reserved {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(8, v);
         }
+        if let Some(v) = self.rtime_estimated_notification {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(9, v);
+        }
+        if let Some(v) = self.notificaton_token.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(10, &v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -7585,6 +7672,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CPackageReservationStatus 
         if let Some(v) = self.time_reserved {
             os.write_uint32(8, v)?;
         }
+        if let Some(v) = self.rtime_estimated_notification {
+            os.write_uint32(9, v)?;
+        }
+        if let Some(v) = self.notificaton_token.as_ref() {
+            os.write_string(10, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -7610,6 +7703,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CPackageReservationStatus 
         self.expired = ::std::option::Option::None;
         self.time_expires = ::std::option::Option::None;
         self.time_reserved = ::std::option::Option::None;
+        self.rtime_estimated_notification = ::std::option::Option::None;
+        self.notificaton_token = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -7623,6 +7718,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CPackageReservationStatus 
             expired: ::std::option::Option::None,
             time_expires: ::std::option::Option::None,
             time_reserved: ::std::option::Option::None,
+            rtime_estimated_notification: ::std::option::Option::None,
+            notificaton_token: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance

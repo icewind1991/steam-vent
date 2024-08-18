@@ -43,12 +43,34 @@ enum EClientNotificationType {
 	k_EClientNotificationType_TimerExpired = 38;
 	k_EClientNotificationType_ModeratorMsg = 39;
 	k_EClientNotificationType_SteamInputActionSetChanged = 40;
+	k_EClientNotificationType_RemoteClientConnection = 41;
+	k_EClientNotificationType_RemoteClientStartStream = 42;
+	k_EClientNotificationType_StreamingClientConnection = 43;
+	k_EClientNotificationType_FamilyInvite = 44;
+	k_EClientNotificationType_PlaytimeWarning = 45;
+	k_EClientNotificationType_FamilyPurchaseRequest = 46;
+	k_EClientNotificationType_FamilyPurchaseRequestResponse = 47;
+	k_EClientNotificationType_ParentalFeatureRequest = 48;
+	k_EClientNotificationType_ParentalPlaytimeRequest = 49;
+	k_EClientNotificationType_GameRecordingError = 50;
+	k_EClientNotificationType_ParentalFeatureResponse = 51;
+	k_EClientNotificationType_ParentalPlaytimeResponse = 52;
+	k_EClientNotificationType_RequestedGameAdded = 53;
+	k_EClientNotificationType_ClipDownloaded = 54;
+	k_EClientNotificationType_GameRecordingStart = 55;
+	k_EClientNotificationType_GameRecordingStop = 56;
+	k_EClientNotificationType_GameRecordingUserMarkerAdded = 57;
 }
 
 enum ESystemUpdateNotificationType {
 	k_ESystemUpdateNotificationType_Invalid = 0;
 	k_ESystemUpdateNotificationType_Available = 1;
 	k_ESystemUpdateNotificationType_NeedsRestart = 2;
+}
+
+enum EGameRecordingErrorType {
+	k_EGameRecordingErrorGeneral = 1;
+	k_EGameRecordingErrorLowDiskSpace = 2;
 }
 
 message CClientNotificationCloudSyncFailure {
@@ -67,6 +89,7 @@ message CClientNotificationScreenshot {
 
 message CClientNotificationDownloadCompleted {
 	optional uint32 appid = 1;
+	optional uint32 dlc_appid = 2;
 }
 
 message CClientNotificationFriendInvite {
@@ -138,6 +161,7 @@ message CClientNotificationFamilySharingDeviceAuthorizationChanged {
 message CClientNotificationFamilySharingStopPlaying {
 	optional uint32 accountid_owner = 1;
 	optional uint32 seconds_remaining = 2;
+	optional uint32 appid = 3;
 }
 
 message CClientNotificationFamilySharingLibraryAvailable {
@@ -208,4 +232,43 @@ message CClientNotificationTimerExpired {
 message CClientNotificationSteamInputActionSetChanged {
 	optional int32 controller_index = 1;
 	optional string action_set_name = 2;
+}
+
+message CClientNotificationRemoteClientConnection {
+	optional string machine = 1;
+	optional bool connected = 2;
+}
+
+message CClientNotificationRemoteClientStartStream {
+	optional string machine = 1;
+	optional string game_name = 2;
+}
+
+message CClientNotificationStreamingClientConnection {
+	optional string hostname = 1;
+	optional string machine = 2;
+	optional bool connected = 3;
+}
+
+message CClientNotificationPlaytimeWarning {
+	optional string type = 1;
+	optional uint32 playtime_remaining = 2;
+}
+
+message CClientNotificationGameRecordingError {
+	optional fixed64 game_id = 1;
+	optional .EGameRecordingErrorType error_type = 2 [default = k_EGameRecordingErrorGeneral];
+}
+
+message CClientNotificationGameRecordingStart {
+	optional fixed64 game_id = 1;
+}
+
+message CClientNotificationGameRecordingStop {
+	optional fixed64 game_id = 1;
+	optional string clip_id = 2;
+}
+
+message CClientNotificationGameRecordingUserMarkerAdded {
+	optional fixed64 game_id = 1;
 }

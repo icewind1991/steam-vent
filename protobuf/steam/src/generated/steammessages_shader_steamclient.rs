@@ -26,7 +26,223 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Client just finished playing a game, detected new shader cache entries and is notifying us about them"]
+// @@protoc_insertion_point(message:CShader_GetShaderReportingCadence_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CShader_GetShaderReportingCadence_Request {
+    // special fields
+    // @@protoc_insertion_point(special_field:CShader_GetShaderReportingCadence_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CShader_GetShaderReportingCadence_Request {
+    fn default() -> &'a CShader_GetShaderReportingCadence_Request {
+        <CShader_GetShaderReportingCadence_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CShader_GetShaderReportingCadence_Request {
+    pub fn new() -> CShader_GetShaderReportingCadence_Request {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CShader_GetShaderReportingCadence_Request {
+    const NAME: &'static str = "CShader_GetShaderReportingCadence_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CShader_GetShaderReportingCadence_Request {
+        CShader_GetShaderReportingCadence_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CShader_GetShaderReportingCadence_Request {
+        static instance: CShader_GetShaderReportingCadence_Request = CShader_GetShaderReportingCadence_Request {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CShader_GetShaderReportingCadence_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CShader_GetShaderReportingCadence_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CShader_GetShaderReportingCadence_Response.rereport_time_threshold)
+    pub rereport_time_threshold: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CShader_GetShaderReportingCadence_Response.percent_to_rereport)
+    pub percent_to_rereport: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CShader_GetShaderReportingCadence_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CShader_GetShaderReportingCadence_Response {
+    fn default() -> &'a CShader_GetShaderReportingCadence_Response {
+        <CShader_GetShaderReportingCadence_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CShader_GetShaderReportingCadence_Response {
+    pub fn new() -> CShader_GetShaderReportingCadence_Response {
+        ::std::default::Default::default()
+    }
+
+    // optional uint64 rereport_time_threshold = 1;
+
+    pub fn rereport_time_threshold(&self) -> u64 {
+        self.rereport_time_threshold.unwrap_or(0)
+    }
+
+    pub fn clear_rereport_time_threshold(&mut self) {
+        self.rereport_time_threshold = ::std::option::Option::None;
+    }
+
+    pub fn has_rereport_time_threshold(&self) -> bool {
+        self.rereport_time_threshold.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_rereport_time_threshold(&mut self, v: u64) {
+        self.rereport_time_threshold = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 percent_to_rereport = 2;
+
+    pub fn percent_to_rereport(&self) -> u32 {
+        self.percent_to_rereport.unwrap_or(0)
+    }
+
+    pub fn clear_percent_to_rereport(&mut self) {
+        self.percent_to_rereport = ::std::option::Option::None;
+    }
+
+    pub fn has_percent_to_rereport(&self) -> bool {
+        self.percent_to_rereport.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_percent_to_rereport(&mut self, v: u32) {
+        self.percent_to_rereport = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CShader_GetShaderReportingCadence_Response {
+    const NAME: &'static str = "CShader_GetShaderReportingCadence_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.rereport_time_threshold = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                16 => {
+                    self.percent_to_rereport = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.rereport_time_threshold {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(1, v);
+        }
+        if let Some(v) = self.percent_to_rereport {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.rereport_time_threshold {
+            os.write_uint64(1, v)?;
+        }
+        if let Some(v) = self.percent_to_rereport {
+            os.write_uint32(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CShader_GetShaderReportingCadence_Response {
+        CShader_GetShaderReportingCadence_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.rereport_time_threshold = ::std::option::Option::None;
+        self.percent_to_rereport = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CShader_GetShaderReportingCadence_Response {
+        static instance: CShader_GetShaderReportingCadence_Response = CShader_GetShaderReportingCadence_Response {
+            rereport_time_threshold: ::std::option::Option::None,
+            percent_to_rereport: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CShader_RegisterShader_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CShader_RegisterShader_Request {
@@ -519,7 +735,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CShader_RegisterShader_Res
     }
 }
 
-#[doc = "Client is sending us actual compiled shader code that we requested"]
 // @@protoc_insertion_point(message:CShader_SendShader_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CShader_SendShader_Request {
@@ -897,7 +1112,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CShader_SendShader_Respons
     }
 }
 
-#[doc = "Client wants to know the manifest ID to fetch (if any) for a bucket's depot"]
 // @@protoc_insertion_point(message:CShader_GetBucketManifest_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CShader_GetBucketManifest_Request {
@@ -1278,7 +1492,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CShader_GetBucketManifest_
     }
 }
 
-#[doc = "Job to get a stale bucket given a gpu and driver desc"]
 // @@protoc_insertion_point(message:CShader_GetStaleBucket_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CShader_GetStaleBucket_Request {
@@ -1774,7 +1987,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CShader_GetStaleBucket_Res
     }
 }
 
-#[doc = "Report an exernally built bucket"]
 // @@protoc_insertion_point(message:CShader_ReportExternalBuild_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CShader_ReportExternalBuild_Request {
@@ -2227,6 +2439,34 @@ const _VENT_PROTO_VERSION_CHECK: () = ::steam_vent_proto_common::VERSION_0_5_0;
 use crate::steammessages_base::*;
 #[allow(unused_imports)]
 use crate::steammessages_unified_base_steamclient::*;
+impl ::steam_vent_proto_common::RpcMessage
+for CShader_GetShaderReportingCadence_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CShader_GetShaderReportingCadence_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
 impl ::steam_vent_proto_common::RpcMessage for CShader_RegisterShader_Request {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -2357,7 +2597,7 @@ impl ::steam_vent_proto_common::RpcMessage for CShader_ReportExternalBuild_Respo
         self.compute_size() as usize
     }
 }
-///Shader methods
+///
 struct Shader {}
 impl ::steam_vent_proto_common::RpcService for Shader {
     const SERVICE_NAME: &'static str = "Shader";
@@ -2365,6 +2605,10 @@ impl ::steam_vent_proto_common::RpcService for Shader {
 impl ::steam_vent_proto_common::RpcMethod for CShader_GetBucketManifest_Request {
     const METHOD_NAME: &'static str = "Shader.GetBucketManifest#1";
     type Response = CShader_GetBucketManifest_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod for CShader_GetShaderReportingCadence_Request {
+    const METHOD_NAME: &'static str = "Shader.GetShaderReportingCadence#1";
+    type Response = CShader_GetShaderReportingCadence_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod for CShader_GetStaleBucket_Request {
     const METHOD_NAME: &'static str = "Shader.GetStaleBucket#1";

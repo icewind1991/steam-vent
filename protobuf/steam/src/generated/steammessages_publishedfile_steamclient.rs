@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "User wants to vote on the item"]
 // @@protoc_insertion_point(message:CPublishedFile_Vote_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_Vote_Request {
@@ -244,7 +243,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Vote_Respon
     }
 }
 
-#[doc = "Subscribes the user to the published file"]
 // @@protoc_insertion_point(message:CPublishedFile_Subscribe_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_Subscribe_Request {
@@ -257,6 +255,8 @@ pub struct CPublishedFile_Subscribe_Request {
     pub appid: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CPublishedFile_Subscribe_Request.notify_client)
     pub notify_client: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CPublishedFile_Subscribe_Request.include_dependencies)
+    pub include_dependencies: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:CPublishedFile_Subscribe_Request.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -348,6 +348,25 @@ impl CPublishedFile_Subscribe_Request {
     pub fn set_notify_client(&mut self, v: bool) {
         self.notify_client = ::std::option::Option::Some(v);
     }
+
+    // optional bool include_dependencies = 5;
+
+    pub fn include_dependencies(&self) -> bool {
+        self.include_dependencies.unwrap_or(false)
+    }
+
+    pub fn clear_include_dependencies(&mut self) {
+        self.include_dependencies = ::std::option::Option::None;
+    }
+
+    pub fn has_include_dependencies(&self) -> bool {
+        self.include_dependencies.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_include_dependencies(&mut self, v: bool) {
+        self.include_dependencies = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Subscribe_Request {
@@ -371,6 +390,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Subscribe_R
                 },
                 32 => {
                     self.notify_client = ::std::option::Option::Some(is.read_bool()?);
+                },
+                40 => {
+                    self.include_dependencies = ::std::option::Option::Some(is.read_bool()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -396,6 +418,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Subscribe_R
         if let Some(v) = self.notify_client {
             my_size += 1 + 1;
         }
+        if let Some(v) = self.include_dependencies {
+            my_size += 1 + 1;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -413,6 +438,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Subscribe_R
         }
         if let Some(v) = self.notify_client {
             os.write_bool(4, v)?;
+        }
+        if let Some(v) = self.include_dependencies {
+            os.write_bool(5, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -435,6 +463,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Subscribe_R
         self.list_type = ::std::option::Option::None;
         self.appid = ::std::option::Option::None;
         self.notify_client = ::std::option::Option::None;
+        self.include_dependencies = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -444,6 +473,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Subscribe_R
             list_type: ::std::option::Option::None,
             appid: ::std::option::Option::None,
             notify_client: ::std::option::Option::None,
+            include_dependencies: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -526,7 +556,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Subscribe_R
     }
 }
 
-#[doc = "Unsubscribes the user from the published file"]
 // @@protoc_insertion_point(message:CPublishedFile_Unsubscribe_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_Unsubscribe_Request {
@@ -808,7 +837,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Unsubscribe
     }
 }
 
-#[doc = "Check if the user can subscribe to the published file"]
 // @@protoc_insertion_point(message:CPublishedFile_CanSubscribe_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_CanSubscribe_Request {
@@ -1027,7 +1055,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_CanSubscrib
     }
 }
 
-#[doc = "Get sub section data (for table of contents, a specific section, or all)"]
 // @@protoc_insertion_point(message:CPublishedFile_GetSubSectionData_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_GetSubSectionData_Request {
@@ -1566,7 +1593,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetSubSecti
     }
 }
 
-#[doc = "Publishes a clouded user file to the Workshop."]
 // @@protoc_insertion_point(message:CPublishedFile_Publish_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_Publish_Request {
@@ -2482,7 +2508,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Publish_Res
     }
 }
 
-#[doc = "Retrieves information about a set of published files."]
 // @@protoc_insertion_point(message:CPublishedFile_GetDetails_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_GetDetails_Request {
@@ -2517,6 +2542,8 @@ pub struct CPublishedFile_GetDetails_Request {
     pub desired_revision: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EPublishedFileRevision>>,
     // @@protoc_insertion_point(field:CPublishedFile_GetDetails_Request.includereactions)
     pub includereactions: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CPublishedFile_GetDetails_Request.admin_query)
+    pub admin_query: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:CPublishedFile_GetDetails_Request.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -2801,6 +2828,25 @@ impl CPublishedFile_GetDetails_Request {
     pub fn set_includereactions(&mut self, v: bool) {
         self.includereactions = ::std::option::Option::Some(v);
     }
+
+    // optional bool admin_query = 18;
+
+    pub fn admin_query(&self) -> bool {
+        self.admin_query.unwrap_or(false)
+    }
+
+    pub fn clear_admin_query(&mut self) {
+        self.admin_query = ::std::option::Option::None;
+    }
+
+    pub fn has_admin_query(&self) -> bool {
+        self.admin_query.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_admin_query(&mut self, v: bool) {
+        self.admin_query = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetDetails_Request {
@@ -2861,6 +2907,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetDetails_
                 136 => {
                     self.includereactions = ::std::option::Option::Some(is.read_bool()?);
                 },
+                144 => {
+                    self.admin_query = ::std::option::Option::Some(is.read_bool()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -2916,6 +2965,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetDetails_
         if let Some(v) = self.includereactions {
             my_size += 2 + 1;
         }
+        if let Some(v) = self.admin_query {
+            my_size += 2 + 1;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2967,6 +3019,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetDetails_
         if let Some(v) = self.includereactions {
             os.write_bool(17, v)?;
         }
+        if let Some(v) = self.admin_query {
+            os.write_bool(18, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -2999,6 +3054,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetDetails_
         self.strip_description_bbcode = ::std::option::Option::None;
         self.desired_revision = ::std::option::Option::None;
         self.includereactions = ::std::option::Option::None;
+        self.admin_query = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -3019,6 +3075,246 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetDetails_
             strip_description_bbcode: ::std::option::Option::None,
             desired_revision: ::std::option::Option::None,
             includereactions: ::std::option::Option::None,
+            admin_query: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:PublishedFileAuthorSnapshot)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct PublishedFileAuthorSnapshot {
+    // message fields
+    // @@protoc_insertion_point(field:PublishedFileAuthorSnapshot.timestamp)
+    pub timestamp: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:PublishedFileAuthorSnapshot.game_branch_min)
+    pub game_branch_min: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:PublishedFileAuthorSnapshot.game_branch_max)
+    pub game_branch_max: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:PublishedFileAuthorSnapshot.manifestid)
+    pub manifestid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:PublishedFileAuthorSnapshot.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a PublishedFileAuthorSnapshot {
+    fn default() -> &'a PublishedFileAuthorSnapshot {
+        <PublishedFileAuthorSnapshot as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl PublishedFileAuthorSnapshot {
+    pub fn new() -> PublishedFileAuthorSnapshot {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 timestamp = 1;
+
+    pub fn timestamp(&self) -> u32 {
+        self.timestamp.unwrap_or(0)
+    }
+
+    pub fn clear_timestamp(&mut self) {
+        self.timestamp = ::std::option::Option::None;
+    }
+
+    pub fn has_timestamp(&self) -> bool {
+        self.timestamp.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_timestamp(&mut self, v: u32) {
+        self.timestamp = ::std::option::Option::Some(v);
+    }
+
+    // optional string game_branch_min = 2;
+
+    pub fn game_branch_min(&self) -> &str {
+        match self.game_branch_min.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_game_branch_min(&mut self) {
+        self.game_branch_min = ::std::option::Option::None;
+    }
+
+    pub fn has_game_branch_min(&self) -> bool {
+        self.game_branch_min.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_game_branch_min(&mut self, v: ::std::string::String) {
+        self.game_branch_min = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_game_branch_min(&mut self) -> &mut ::std::string::String {
+        if self.game_branch_min.is_none() {
+            self.game_branch_min = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.game_branch_min.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_game_branch_min(&mut self) -> ::std::string::String {
+        self.game_branch_min.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional string game_branch_max = 3;
+
+    pub fn game_branch_max(&self) -> &str {
+        match self.game_branch_max.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_game_branch_max(&mut self) {
+        self.game_branch_max = ::std::option::Option::None;
+    }
+
+    pub fn has_game_branch_max(&self) -> bool {
+        self.game_branch_max.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_game_branch_max(&mut self, v: ::std::string::String) {
+        self.game_branch_max = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_game_branch_max(&mut self) -> &mut ::std::string::String {
+        if self.game_branch_max.is_none() {
+            self.game_branch_max = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.game_branch_max.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_game_branch_max(&mut self) -> ::std::string::String {
+        self.game_branch_max.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional fixed64 manifestid = 4;
+
+    pub fn manifestid(&self) -> u64 {
+        self.manifestid.unwrap_or(0)
+    }
+
+    pub fn clear_manifestid(&mut self) {
+        self.manifestid = ::std::option::Option::None;
+    }
+
+    pub fn has_manifestid(&self) -> bool {
+        self.manifestid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_manifestid(&mut self, v: u64) {
+        self.manifestid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for PublishedFileAuthorSnapshot {
+    const NAME: &'static str = "PublishedFileAuthorSnapshot";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.timestamp = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                18 => {
+                    self.game_branch_min = ::std::option::Option::Some(is.read_string()?);
+                },
+                26 => {
+                    self.game_branch_max = ::std::option::Option::Some(is.read_string()?);
+                },
+                33 => {
+                    self.manifestid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.timestamp {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.game_branch_min.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(2, &v);
+        }
+        if let Some(v) = self.game_branch_max.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(3, &v);
+        }
+        if let Some(v) = self.manifestid {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.timestamp {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.game_branch_min.as_ref() {
+            os.write_string(2, v)?;
+        }
+        if let Some(v) = self.game_branch_max.as_ref() {
+            os.write_string(3, v)?;
+        }
+        if let Some(v) = self.manifestid {
+            os.write_fixed64(4, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> PublishedFileAuthorSnapshot {
+        PublishedFileAuthorSnapshot::new()
+    }
+
+    fn clear(&mut self) {
+        self.timestamp = ::std::option::Option::None;
+        self.game_branch_min = ::std::option::Option::None;
+        self.game_branch_max = ::std::option::Option::None;
+        self.manifestid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static PublishedFileAuthorSnapshot {
+        static instance: PublishedFileAuthorSnapshot = PublishedFileAuthorSnapshot {
+            timestamp: ::std::option::Option::None,
+            game_branch_min: ::std::option::Option::None,
+            game_branch_max: ::std::option::Option::None,
+            manifestid: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -3171,6 +3467,10 @@ pub struct PublishedFileDetails {
     pub ban_text_check_result: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::steammessages_base::EBanContentCheckResult>>,
     // @@protoc_insertion_point(field:PublishedFileDetails.search_score)
     pub search_score: ::std::option::Option<f32>,
+    // @@protoc_insertion_point(field:PublishedFileDetails.external_asset_id)
+    pub external_asset_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:PublishedFileDetails.author_snapshots)
+    pub author_snapshots: ::std::vec::Vec<PublishedFileAuthorSnapshot>,
     // special fields
     // @@protoc_insertion_point(special_field:PublishedFileDetails.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -4572,6 +4872,25 @@ impl PublishedFileDetails {
     pub fn set_search_score(&mut self, v: f32) {
         self.search_score = ::std::option::Option::Some(v);
     }
+
+    // optional uint64 external_asset_id = 74;
+
+    pub fn external_asset_id(&self) -> u64 {
+        self.external_asset_id.unwrap_or(0)
+    }
+
+    pub fn clear_external_asset_id(&mut self) {
+        self.external_asset_id = ::std::option::Option::None;
+    }
+
+    pub fn has_external_asset_id(&self) -> bool {
+        self.external_asset_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_external_asset_id(&mut self, v: u64) {
+        self.external_asset_id = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for PublishedFileDetails {
@@ -4802,6 +5121,12 @@ impl ::steam_vent_proto_common::protobuf::Message for PublishedFileDetails {
                 },
                 589 => {
                     self.search_score = ::std::option::Option::Some(is.read_float()?);
+                },
+                592 => {
+                    self.external_asset_id = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                602 => {
+                    self.author_snapshots.push(is.read_message()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -5036,6 +5361,13 @@ impl ::steam_vent_proto_common::protobuf::Message for PublishedFileDetails {
         if let Some(v) = self.search_score {
             my_size += 2 + 4;
         }
+        if let Some(v) = self.external_asset_id {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(74, v);
+        }
+        for value in &self.author_snapshots {
+            let len = value.compute_size();
+            my_size += 2 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -5255,6 +5587,12 @@ impl ::steam_vent_proto_common::protobuf::Message for PublishedFileDetails {
         if let Some(v) = self.search_score {
             os.write_float(73, v)?;
         }
+        if let Some(v) = self.external_asset_id {
+            os.write_uint64(74, v)?;
+        }
+        for v in &self.author_snapshots {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(75, v, os)?;
+        };
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -5343,6 +5681,8 @@ impl ::steam_vent_proto_common::protobuf::Message for PublishedFileDetails {
         self.reactions.clear();
         self.ban_text_check_result = ::std::option::Option::None;
         self.search_score = ::std::option::Option::None;
+        self.external_asset_id = ::std::option::Option::None;
+        self.author_snapshots.clear();
         self.special_fields.clear();
     }
 
@@ -5419,6 +5759,8 @@ impl ::steam_vent_proto_common::protobuf::Message for PublishedFileDetails {
             reactions: ::std::vec::Vec::new(),
             ban_text_check_result: ::std::option::Option::None,
             search_score: ::std::option::Option::None,
+            external_asset_id: ::std::option::Option::None,
+            author_snapshots: ::std::vec::Vec::new(),
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -7202,7 +7544,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetDetails_
     }
 }
 
-#[doc = "Retrieves information about a set of published files."]
 // @@protoc_insertion_point(message:CPublishedFile_GetItemInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_GetItemInfo_Request {
@@ -7688,6 +8029,10 @@ pub mod cpublished_file_get_item_info_response {
         pub manifest_id: ::std::option::Option<u64>,
         // @@protoc_insertion_point(field:CPublishedFile_GetItemInfo_Response.WorkshopItemInfo.flags)
         pub flags: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CPublishedFile_GetItemInfo_Response.WorkshopItemInfo.revision)
+        pub revision: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::EPublishedFileRevision>>,
+        // @@protoc_insertion_point(field:CPublishedFile_GetItemInfo_Response.WorkshopItemInfo.author_snapshots)
+        pub author_snapshots: ::std::vec::Vec<super::PublishedFileAuthorSnapshot>,
         // special fields
         // @@protoc_insertion_point(special_field:CPublishedFile_GetItemInfo_Response.WorkshopItemInfo.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -7779,6 +8124,28 @@ pub mod cpublished_file_get_item_info_response {
         pub fn set_flags(&mut self, v: u32) {
             self.flags = ::std::option::Option::Some(v);
         }
+
+        // optional .EPublishedFileRevision revision = 5;
+
+        pub fn revision(&self) -> super::EPublishedFileRevision {
+            match self.revision {
+                Some(e) => e.enum_value_or(super::EPublishedFileRevision::k_EPublishedFileRevision_Default),
+                None => super::EPublishedFileRevision::k_EPublishedFileRevision_Default,
+            }
+        }
+
+        pub fn clear_revision(&mut self) {
+            self.revision = ::std::option::Option::None;
+        }
+
+        pub fn has_revision(&self) -> bool {
+            self.revision.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_revision(&mut self, v: super::EPublishedFileRevision) {
+            self.revision = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for WorkshopItemInfo {
@@ -7802,6 +8169,12 @@ pub mod cpublished_file_get_item_info_response {
                     },
                     32 => {
                         self.flags = ::std::option::Option::Some(is.read_uint32()?);
+                    },
+                    40 => {
+                        self.revision = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                    },
+                    50 => {
+                        self.author_snapshots.push(is.read_message()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -7827,6 +8200,13 @@ pub mod cpublished_file_get_item_info_response {
             if let Some(v) = self.flags {
                 my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(4, v);
             }
+            if let Some(v) = self.revision {
+                my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(5, v.value());
+            }
+            for value in &self.author_snapshots {
+                let len = value.compute_size();
+                my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+            };
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -7845,6 +8225,12 @@ pub mod cpublished_file_get_item_info_response {
             if let Some(v) = self.flags {
                 os.write_uint32(4, v)?;
             }
+            if let Some(v) = self.revision {
+                os.write_enum(5, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+            }
+            for v in &self.author_snapshots {
+                ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(6, v, os)?;
+            };
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
         }
@@ -7866,6 +8252,8 @@ pub mod cpublished_file_get_item_info_response {
             self.time_updated = ::std::option::Option::None;
             self.manifest_id = ::std::option::Option::None;
             self.flags = ::std::option::Option::None;
+            self.revision = ::std::option::Option::None;
+            self.author_snapshots.clear();
             self.special_fields.clear();
         }
 
@@ -7875,6 +8263,8 @@ pub mod cpublished_file_get_item_info_response {
                 time_updated: ::std::option::Option::None,
                 manifest_id: ::std::option::Option::None,
                 flags: ::std::option::Option::None,
+                revision: ::std::option::Option::None,
+                author_snapshots: ::std::vec::Vec::new(),
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -7882,7 +8272,6 @@ pub mod cpublished_file_get_item_info_response {
     }
 }
 
-#[doc = "Retrieves a count of files published by a user. Uses the same messages as GetUserFiles but totalonly must be true."]
 // @@protoc_insertion_point(message:CPublishedFile_GetUserFiles_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_GetUserFiles_Request {
@@ -7923,6 +8312,8 @@ pub struct CPublishedFile_GetUserFiles_Request {
     pub taggroups: ::std::vec::Vec<cpublished_file_get_user_files_request::TagGroup>,
     // @@protoc_insertion_point(field:CPublishedFile_GetUserFiles_Request.excluded_content_descriptors)
     pub excluded_content_descriptors: ::std::vec::Vec<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::enums_productinfo::EContentDescriptorID>>,
+    // @@protoc_insertion_point(field:CPublishedFile_GetUserFiles_Request.admin_query)
+    pub admin_query: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CPublishedFile_GetUserFiles_Request.totalonly)
     pub totalonly: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CPublishedFile_GetUserFiles_Request.ids_only)
@@ -8267,6 +8658,25 @@ impl CPublishedFile_GetUserFiles_Request {
     // Param is passed by value, moved
     pub fn set_language(&mut self, v: i32) {
         self.language = ::std::option::Option::Some(v);
+    }
+
+    // optional bool admin_query = 38;
+
+    pub fn admin_query(&self) -> bool {
+        self.admin_query.unwrap_or(false)
+    }
+
+    pub fn clear_admin_query(&mut self) {
+        self.admin_query = ::std::option::Option::None;
+    }
+
+    pub fn has_admin_query(&self) -> bool {
+        self.admin_query.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_admin_query(&mut self, v: bool) {
+        self.admin_query = ::std::option::Option::Some(v);
     }
 
     // optional bool totalonly = 17;
@@ -8644,6 +9054,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetUserFile
                 298 => {
                     ::steam_vent_proto_common::protobuf::rt::read_repeated_packed_enum_or_unknown_into(is, &mut self.excluded_content_descriptors)?
                 },
+                304 => {
+                    self.admin_query = ::std::option::Option::Some(is.read_bool()?);
+                },
                 136 => {
                     self.totalonly = ::std::option::Option::Some(is.read_bool()?);
                 },
@@ -8760,6 +9173,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetUserFile
         for value in &self.excluded_content_descriptors {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(37, value.value());
         };
+        if let Some(v) = self.admin_query {
+            my_size += 2 + 1;
+        }
         if let Some(v) = self.totalonly {
             my_size += 2 + 1;
         }
@@ -8868,6 +9284,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetUserFile
         for v in &self.excluded_content_descriptors {
             os.write_enum(37, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(v))?;
         };
+        if let Some(v) = self.admin_query {
+            os.write_bool(38, v)?;
+        }
         if let Some(v) = self.totalonly {
             os.write_bool(17, v)?;
         }
@@ -8951,6 +9370,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetUserFile
         self.language = ::std::option::Option::None;
         self.taggroups.clear();
         self.excluded_content_descriptors.clear();
+        self.admin_query = ::std::option::Option::None;
         self.totalonly = ::std::option::Option::None;
         self.ids_only = ::std::option::Option::None;
         self.return_vote_data = ::std::option::Option::None;
@@ -8990,6 +9410,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetUserFile
             language: ::std::option::Option::None,
             taggroups: ::std::vec::Vec::new(),
             excluded_content_descriptors: ::std::vec::Vec::new(),
+            admin_query: ::std::option::Option::None,
             totalonly: ::std::option::Option::None,
             ids_only: ::std::option::Option::None,
             return_vote_data: ::std::option::Option::None,
@@ -9674,7 +10095,6 @@ pub mod cpublished_file_get_user_files_response {
     }
 }
 
-#[doc = "Determines which files in the given list are in a user's subscription list"]
 // @@protoc_insertion_point(message:CPublishedFile_AreFilesInSubscriptionList_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_AreFilesInSubscriptionList_Request {
@@ -10129,7 +10549,6 @@ pub mod cpublished_file_are_files_in_subscription_list_response {
     }
 }
 
-#[doc = "Updates information about a published file."]
 // @@protoc_insertion_point(message:CPublishedFile_Update_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_Update_Request {
@@ -10156,6 +10575,8 @@ pub struct CPublishedFile_Update_Request {
     pub image_width: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CPublishedFile_Update_Request.image_height)
     pub image_height: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CPublishedFile_Update_Request.language)
+    pub language: ::std::option::Option<i32>,
     // special fields
     // @@protoc_insertion_point(special_field:CPublishedFile_Update_Request.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -10429,6 +10850,25 @@ impl CPublishedFile_Update_Request {
     pub fn set_image_height(&mut self, v: u32) {
         self.image_height = ::std::option::Option::Some(v);
     }
+
+    // optional int32 language = 17;
+
+    pub fn language(&self) -> i32 {
+        self.language.unwrap_or(0)
+    }
+
+    pub fn clear_language(&mut self) {
+        self.language = ::std::option::Option::None;
+    }
+
+    pub fn has_language(&self) -> bool {
+        self.language.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_language(&mut self, v: i32) {
+        self.language = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Update_Request {
@@ -10473,6 +10913,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Update_Requ
                 },
                 128 => {
                     self.image_height = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                136 => {
+                    self.language = ::std::option::Option::Some(is.read_int32()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -10519,6 +10962,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Update_Requ
         if let Some(v) = self.image_height {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(16, v);
         }
+        if let Some(v) = self.language {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(17, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -10558,6 +11004,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Update_Requ
         if let Some(v) = self.image_height {
             os.write_uint32(16, v)?;
         }
+        if let Some(v) = self.language {
+            os.write_int32(17, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -10586,6 +11035,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Update_Requ
         self.spoiler_tag = ::std::option::Option::None;
         self.image_width = ::std::option::Option::None;
         self.image_height = ::std::option::Option::None;
+        self.language = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -10602,6 +11052,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Update_Requ
             spoiler_tag: ::std::option::Option::None,
             image_width: ::std::option::Option::None,
             image_height: ::std::option::Option::None,
+            language: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -10684,13 +11135,14 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Update_Resp
     }
 }
 
-#[doc = "Deletes a published file."]
 // @@protoc_insertion_point(message:CPublishedFile_Delete_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_Delete_Request {
     // message fields
     // @@protoc_insertion_point(field:CPublishedFile_Delete_Request.publishedfileid)
     pub publishedfileid: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CPublishedFile_Delete_Request.appid)
+    pub appid: ::std::option::Option<u32>,
     // special fields
     // @@protoc_insertion_point(special_field:CPublishedFile_Delete_Request.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -10725,6 +11177,25 @@ impl CPublishedFile_Delete_Request {
     pub fn set_publishedfileid(&mut self, v: u64) {
         self.publishedfileid = ::std::option::Option::Some(v);
     }
+
+    // optional uint32 appid = 5;
+
+    pub fn appid(&self) -> u32 {
+        self.appid.unwrap_or(0)
+    }
+
+    pub fn clear_appid(&mut self) {
+        self.appid = ::std::option::Option::None;
+    }
+
+    pub fn has_appid(&self) -> bool {
+        self.appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_appid(&mut self, v: u32) {
+        self.appid = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Delete_Request {
@@ -10739,6 +11210,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Delete_Requ
             match tag {
                 9 => {
                     self.publishedfileid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                40 => {
+                    self.appid = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -10755,6 +11229,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Delete_Requ
         if let Some(v) = self.publishedfileid {
             my_size += 1 + 8;
         }
+        if let Some(v) = self.appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(5, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -10763,6 +11240,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Delete_Requ
     fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
         if let Some(v) = self.publishedfileid {
             os.write_fixed64(1, v)?;
+        }
+        if let Some(v) = self.appid {
+            os.write_uint32(5, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -10782,12 +11262,14 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Delete_Requ
 
     fn clear(&mut self) {
         self.publishedfileid = ::std::option::Option::None;
+        self.appid = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
     fn default_instance() -> &'static CPublishedFile_Delete_Request {
         static instance: CPublishedFile_Delete_Request = CPublishedFile_Delete_Request {
             publishedfileid: ::std::option::Option::None,
+            appid: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -10870,7 +11352,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_Delete_Resp
     }
 }
 
-#[doc = "Returns data on a specific change history entry for a published file"]
 // @@protoc_insertion_point(message:CPublishedFile_GetChangeHistoryEntry_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_GetChangeHistoryEntry_Request {
@@ -11052,6 +11533,14 @@ pub struct CPublishedFile_GetChangeHistoryEntry_Response {
     pub change_description: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CPublishedFile_GetChangeHistoryEntry_Response.language)
     pub language: ::std::option::Option<i32>,
+    // @@protoc_insertion_point(field:CPublishedFile_GetChangeHistoryEntry_Response.saved_snapshot)
+    pub saved_snapshot: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CPublishedFile_GetChangeHistoryEntry_Response.snapshot_game_branch_min)
+    pub snapshot_game_branch_min: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CPublishedFile_GetChangeHistoryEntry_Response.snapshot_game_branch_max)
+    pub snapshot_game_branch_max: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CPublishedFile_GetChangeHistoryEntry_Response.manifest_id)
+    pub manifest_id: ::std::option::Option<u64>,
     // special fields
     // @@protoc_insertion_point(special_field:CPublishedFile_GetChangeHistoryEntry_Response.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -11122,6 +11611,116 @@ impl CPublishedFile_GetChangeHistoryEntry_Response {
     pub fn set_language(&mut self, v: i32) {
         self.language = ::std::option::Option::Some(v);
     }
+
+    // optional bool saved_snapshot = 3;
+
+    pub fn saved_snapshot(&self) -> bool {
+        self.saved_snapshot.unwrap_or(false)
+    }
+
+    pub fn clear_saved_snapshot(&mut self) {
+        self.saved_snapshot = ::std::option::Option::None;
+    }
+
+    pub fn has_saved_snapshot(&self) -> bool {
+        self.saved_snapshot.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_saved_snapshot(&mut self, v: bool) {
+        self.saved_snapshot = ::std::option::Option::Some(v);
+    }
+
+    // optional string snapshot_game_branch_min = 4;
+
+    pub fn snapshot_game_branch_min(&self) -> &str {
+        match self.snapshot_game_branch_min.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_snapshot_game_branch_min(&mut self) {
+        self.snapshot_game_branch_min = ::std::option::Option::None;
+    }
+
+    pub fn has_snapshot_game_branch_min(&self) -> bool {
+        self.snapshot_game_branch_min.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_snapshot_game_branch_min(&mut self, v: ::std::string::String) {
+        self.snapshot_game_branch_min = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_snapshot_game_branch_min(&mut self) -> &mut ::std::string::String {
+        if self.snapshot_game_branch_min.is_none() {
+            self.snapshot_game_branch_min = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.snapshot_game_branch_min.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_snapshot_game_branch_min(&mut self) -> ::std::string::String {
+        self.snapshot_game_branch_min.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional string snapshot_game_branch_max = 5;
+
+    pub fn snapshot_game_branch_max(&self) -> &str {
+        match self.snapshot_game_branch_max.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_snapshot_game_branch_max(&mut self) {
+        self.snapshot_game_branch_max = ::std::option::Option::None;
+    }
+
+    pub fn has_snapshot_game_branch_max(&self) -> bool {
+        self.snapshot_game_branch_max.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_snapshot_game_branch_max(&mut self, v: ::std::string::String) {
+        self.snapshot_game_branch_max = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_snapshot_game_branch_max(&mut self) -> &mut ::std::string::String {
+        if self.snapshot_game_branch_max.is_none() {
+            self.snapshot_game_branch_max = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.snapshot_game_branch_max.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_snapshot_game_branch_max(&mut self) -> ::std::string::String {
+        self.snapshot_game_branch_max.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional fixed64 manifest_id = 6;
+
+    pub fn manifest_id(&self) -> u64 {
+        self.manifest_id.unwrap_or(0)
+    }
+
+    pub fn clear_manifest_id(&mut self) {
+        self.manifest_id = ::std::option::Option::None;
+    }
+
+    pub fn has_manifest_id(&self) -> bool {
+        self.manifest_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_manifest_id(&mut self, v: u64) {
+        self.manifest_id = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetChangeHistoryEntry_Response {
@@ -11139,6 +11738,18 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetChangeHi
                 },
                 16 => {
                     self.language = ::std::option::Option::Some(is.read_int32()?);
+                },
+                24 => {
+                    self.saved_snapshot = ::std::option::Option::Some(is.read_bool()?);
+                },
+                34 => {
+                    self.snapshot_game_branch_min = ::std::option::Option::Some(is.read_string()?);
+                },
+                42 => {
+                    self.snapshot_game_branch_max = ::std::option::Option::Some(is.read_string()?);
+                },
+                49 => {
+                    self.manifest_id = ::std::option::Option::Some(is.read_fixed64()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -11158,6 +11769,18 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetChangeHi
         if let Some(v) = self.language {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(2, v);
         }
+        if let Some(v) = self.saved_snapshot {
+            my_size += 1 + 1;
+        }
+        if let Some(v) = self.snapshot_game_branch_min.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(4, &v);
+        }
+        if let Some(v) = self.snapshot_game_branch_max.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(5, &v);
+        }
+        if let Some(v) = self.manifest_id {
+            my_size += 1 + 8;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -11169,6 +11792,18 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetChangeHi
         }
         if let Some(v) = self.language {
             os.write_int32(2, v)?;
+        }
+        if let Some(v) = self.saved_snapshot {
+            os.write_bool(3, v)?;
+        }
+        if let Some(v) = self.snapshot_game_branch_min.as_ref() {
+            os.write_string(4, v)?;
+        }
+        if let Some(v) = self.snapshot_game_branch_max.as_ref() {
+            os.write_string(5, v)?;
+        }
+        if let Some(v) = self.manifest_id {
+            os.write_fixed64(6, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -11189,6 +11824,10 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetChangeHi
     fn clear(&mut self) {
         self.change_description = ::std::option::Option::None;
         self.language = ::std::option::Option::None;
+        self.saved_snapshot = ::std::option::Option::None;
+        self.snapshot_game_branch_min = ::std::option::Option::None;
+        self.snapshot_game_branch_max = ::std::option::Option::None;
+        self.manifest_id = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -11196,13 +11835,16 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetChangeHi
         static instance: CPublishedFile_GetChangeHistoryEntry_Response = CPublishedFile_GetChangeHistoryEntry_Response {
             change_description: ::std::option::Option::None,
             language: ::std::option::Option::None,
+            saved_snapshot: ::std::option::Option::None,
+            snapshot_game_branch_min: ::std::option::Option::None,
+            snapshot_game_branch_max: ::std::option::Option::None,
+            manifest_id: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
     }
 }
 
-#[doc = "Returns data on the change history for a published file"]
 // @@protoc_insertion_point(message:CPublishedFile_GetChangeHistory_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_GetChangeHistory_Request {
@@ -11575,6 +12217,14 @@ pub mod cpublished_file_get_change_history_response {
         pub change_description: ::std::option::Option<::std::string::String>,
         // @@protoc_insertion_point(field:CPublishedFile_GetChangeHistory_Response.ChangeLog.language)
         pub language: ::std::option::Option<i32>,
+        // @@protoc_insertion_point(field:CPublishedFile_GetChangeHistory_Response.ChangeLog.saved_snapshot)
+        pub saved_snapshot: ::std::option::Option<bool>,
+        // @@protoc_insertion_point(field:CPublishedFile_GetChangeHistory_Response.ChangeLog.snapshot_game_branch_min)
+        pub snapshot_game_branch_min: ::std::option::Option<::std::string::String>,
+        // @@protoc_insertion_point(field:CPublishedFile_GetChangeHistory_Response.ChangeLog.snapshot_game_branch_max)
+        pub snapshot_game_branch_max: ::std::option::Option<::std::string::String>,
+        // @@protoc_insertion_point(field:CPublishedFile_GetChangeHistory_Response.ChangeLog.manifest_id)
+        pub manifest_id: ::std::option::Option<u64>,
         // special fields
         // @@protoc_insertion_point(special_field:CPublishedFile_GetChangeHistory_Response.ChangeLog.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -11664,6 +12314,116 @@ pub mod cpublished_file_get_change_history_response {
         pub fn set_language(&mut self, v: i32) {
             self.language = ::std::option::Option::Some(v);
         }
+
+        // optional bool saved_snapshot = 4;
+
+        pub fn saved_snapshot(&self) -> bool {
+            self.saved_snapshot.unwrap_or(false)
+        }
+
+        pub fn clear_saved_snapshot(&mut self) {
+            self.saved_snapshot = ::std::option::Option::None;
+        }
+
+        pub fn has_saved_snapshot(&self) -> bool {
+            self.saved_snapshot.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_saved_snapshot(&mut self, v: bool) {
+            self.saved_snapshot = ::std::option::Option::Some(v);
+        }
+
+        // optional string snapshot_game_branch_min = 5;
+
+        pub fn snapshot_game_branch_min(&self) -> &str {
+            match self.snapshot_game_branch_min.as_ref() {
+                Some(v) => v,
+                None => "",
+            }
+        }
+
+        pub fn clear_snapshot_game_branch_min(&mut self) {
+            self.snapshot_game_branch_min = ::std::option::Option::None;
+        }
+
+        pub fn has_snapshot_game_branch_min(&self) -> bool {
+            self.snapshot_game_branch_min.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_snapshot_game_branch_min(&mut self, v: ::std::string::String) {
+            self.snapshot_game_branch_min = ::std::option::Option::Some(v);
+        }
+
+        // Mutable pointer to the field.
+        // If field is not initialized, it is initialized with default value first.
+        pub fn mut_snapshot_game_branch_min(&mut self) -> &mut ::std::string::String {
+            if self.snapshot_game_branch_min.is_none() {
+                self.snapshot_game_branch_min = ::std::option::Option::Some(::std::string::String::new());
+            }
+            self.snapshot_game_branch_min.as_mut().unwrap()
+        }
+
+        // Take field
+        pub fn take_snapshot_game_branch_min(&mut self) -> ::std::string::String {
+            self.snapshot_game_branch_min.take().unwrap_or_else(|| ::std::string::String::new())
+        }
+
+        // optional string snapshot_game_branch_max = 6;
+
+        pub fn snapshot_game_branch_max(&self) -> &str {
+            match self.snapshot_game_branch_max.as_ref() {
+                Some(v) => v,
+                None => "",
+            }
+        }
+
+        pub fn clear_snapshot_game_branch_max(&mut self) {
+            self.snapshot_game_branch_max = ::std::option::Option::None;
+        }
+
+        pub fn has_snapshot_game_branch_max(&self) -> bool {
+            self.snapshot_game_branch_max.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_snapshot_game_branch_max(&mut self, v: ::std::string::String) {
+            self.snapshot_game_branch_max = ::std::option::Option::Some(v);
+        }
+
+        // Mutable pointer to the field.
+        // If field is not initialized, it is initialized with default value first.
+        pub fn mut_snapshot_game_branch_max(&mut self) -> &mut ::std::string::String {
+            if self.snapshot_game_branch_max.is_none() {
+                self.snapshot_game_branch_max = ::std::option::Option::Some(::std::string::String::new());
+            }
+            self.snapshot_game_branch_max.as_mut().unwrap()
+        }
+
+        // Take field
+        pub fn take_snapshot_game_branch_max(&mut self) -> ::std::string::String {
+            self.snapshot_game_branch_max.take().unwrap_or_else(|| ::std::string::String::new())
+        }
+
+        // optional fixed64 manifest_id = 7;
+
+        pub fn manifest_id(&self) -> u64 {
+            self.manifest_id.unwrap_or(0)
+        }
+
+        pub fn clear_manifest_id(&mut self) {
+            self.manifest_id = ::std::option::Option::None;
+        }
+
+        pub fn has_manifest_id(&self) -> bool {
+            self.manifest_id.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_manifest_id(&mut self, v: u64) {
+            self.manifest_id = ::std::option::Option::Some(v);
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for ChangeLog {
@@ -11684,6 +12444,18 @@ pub mod cpublished_file_get_change_history_response {
                     },
                     24 => {
                         self.language = ::std::option::Option::Some(is.read_int32()?);
+                    },
+                    32 => {
+                        self.saved_snapshot = ::std::option::Option::Some(is.read_bool()?);
+                    },
+                    42 => {
+                        self.snapshot_game_branch_min = ::std::option::Option::Some(is.read_string()?);
+                    },
+                    50 => {
+                        self.snapshot_game_branch_max = ::std::option::Option::Some(is.read_string()?);
+                    },
+                    57 => {
+                        self.manifest_id = ::std::option::Option::Some(is.read_fixed64()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -11706,6 +12478,18 @@ pub mod cpublished_file_get_change_history_response {
             if let Some(v) = self.language {
                 my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(3, v);
             }
+            if let Some(v) = self.saved_snapshot {
+                my_size += 1 + 1;
+            }
+            if let Some(v) = self.snapshot_game_branch_min.as_ref() {
+                my_size += ::steam_vent_proto_common::protobuf::rt::string_size(5, &v);
+            }
+            if let Some(v) = self.snapshot_game_branch_max.as_ref() {
+                my_size += ::steam_vent_proto_common::protobuf::rt::string_size(6, &v);
+            }
+            if let Some(v) = self.manifest_id {
+                my_size += 1 + 8;
+            }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -11720,6 +12504,18 @@ pub mod cpublished_file_get_change_history_response {
             }
             if let Some(v) = self.language {
                 os.write_int32(3, v)?;
+            }
+            if let Some(v) = self.saved_snapshot {
+                os.write_bool(4, v)?;
+            }
+            if let Some(v) = self.snapshot_game_branch_min.as_ref() {
+                os.write_string(5, v)?;
+            }
+            if let Some(v) = self.snapshot_game_branch_max.as_ref() {
+                os.write_string(6, v)?;
+            }
+            if let Some(v) = self.manifest_id {
+                os.write_fixed64(7, v)?;
             }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
@@ -11741,6 +12537,10 @@ pub mod cpublished_file_get_change_history_response {
             self.timestamp = ::std::option::Option::None;
             self.change_description = ::std::option::Option::None;
             self.language = ::std::option::Option::None;
+            self.saved_snapshot = ::std::option::Option::None;
+            self.snapshot_game_branch_min = ::std::option::Option::None;
+            self.snapshot_game_branch_max = ::std::option::Option::None;
+            self.manifest_id = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -11749,6 +12549,10 @@ pub mod cpublished_file_get_change_history_response {
                 timestamp: ::std::option::Option::None,
                 change_description: ::std::option::Option::None,
                 language: ::std::option::Option::None,
+                saved_snapshot: ::std::option::Option::None,
+                snapshot_game_branch_min: ::std::option::Option::None,
+                snapshot_game_branch_max: ::std::option::Option::None,
+                manifest_id: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -11756,7 +12560,6 @@ pub mod cpublished_file_get_change_history_response {
     }
 }
 
-#[doc = "Refresh the voting queue for the user"]
 // @@protoc_insertion_point(message:CPublishedFile_RefreshVotingQueue_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_RefreshVotingQueue_Request {
@@ -12099,7 +12902,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_RefreshVoti
     }
 }
 
-#[doc = "Performs a search query for published files"]
 // @@protoc_insertion_point(message:CPublishedFile_QueryFiles_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_QueryFiles_Request {
@@ -12150,6 +12952,8 @@ pub struct CPublishedFile_QueryFiles_Request {
     pub date_range_updated: ::steam_vent_proto_common::protobuf::MessageField<cpublished_file_query_files_request::DateRange>,
     // @@protoc_insertion_point(field:CPublishedFile_QueryFiles_Request.excluded_content_descriptors)
     pub excluded_content_descriptors: ::std::vec::Vec<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::enums_productinfo::EContentDescriptorID>>,
+    // @@protoc_insertion_point(field:CPublishedFile_QueryFiles_Request.admin_query)
+    pub admin_query: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CPublishedFile_QueryFiles_Request.totalonly)
     pub totalonly: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CPublishedFile_QueryFiles_Request.ids_only)
@@ -12494,6 +13298,25 @@ impl CPublishedFile_QueryFiles_Request {
     // Param is passed by value, moved
     pub fn set_language(&mut self, v: i32) {
         self.language = ::std::option::Option::Some(v);
+    }
+
+    // optional bool admin_query = 47;
+
+    pub fn admin_query(&self) -> bool {
+        self.admin_query.unwrap_or(false)
+    }
+
+    pub fn clear_admin_query(&mut self) {
+        self.admin_query = ::std::option::Option::None;
+    }
+
+    pub fn has_admin_query(&self) -> bool {
+        self.admin_query.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_admin_query(&mut self, v: bool) {
+        self.admin_query = ::std::option::Option::Some(v);
     }
 
     // optional bool totalonly = 16;
@@ -12867,6 +13690,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_QueryFiles_
                 370 => {
                     ::steam_vent_proto_common::protobuf::rt::read_repeated_packed_enum_or_unknown_into(is, &mut self.excluded_content_descriptors)?
                 },
+                376 => {
+                    self.admin_query = ::std::option::Option::Some(is.read_bool()?);
+                },
                 128 => {
                     self.totalonly = ::std::option::Option::Some(is.read_bool()?);
                 },
@@ -12997,6 +13823,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_QueryFiles_
         for value in &self.excluded_content_descriptors {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(46, value.value());
         };
+        if let Some(v) = self.admin_query {
+            my_size += 2 + 1;
+        }
         if let Some(v) = self.totalonly {
             my_size += 2 + 1;
         }
@@ -13117,6 +13946,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_QueryFiles_
         for v in &self.excluded_content_descriptors {
             os.write_enum(46, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(v))?;
         };
+        if let Some(v) = self.admin_query {
+            os.write_bool(47, v)?;
+        }
         if let Some(v) = self.totalonly {
             os.write_bool(16, v)?;
         }
@@ -13202,6 +14034,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_QueryFiles_
         self.date_range_created.clear();
         self.date_range_updated.clear();
         self.excluded_content_descriptors.clear();
+        self.admin_query = ::std::option::Option::None;
         self.totalonly = ::std::option::Option::None;
         self.ids_only = ::std::option::Option::None;
         self.return_vote_data = ::std::option::Option::None;
@@ -13245,6 +14078,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_QueryFiles_
             date_range_created: ::steam_vent_proto_common::protobuf::MessageField::none(),
             date_range_updated: ::steam_vent_proto_common::protobuf::MessageField::none(),
             excluded_content_descriptors: ::std::vec::Vec::new(),
+            admin_query: ::std::option::Option::None,
             totalonly: ::std::option::Option::None,
             ids_only: ::std::option::Option::None,
             return_vote_data: ::std::option::Option::None,
@@ -13847,7 +14681,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_QueryFiles_
     }
 }
 
-#[doc = "Adds a relationship between the published file and the given app"]
 // @@protoc_insertion_point(message:CPublishedFile_AddAppRelationship_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_AddAppRelationship_Request {
@@ -14097,7 +14930,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_AddAppRelat
     }
 }
 
-#[doc = "Remove a relationship between the published file and the given app"]
 // @@protoc_insertion_point(message:CPublishedFile_RemoveAppRelationship_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_RemoveAppRelationship_Request {
@@ -14347,7 +15179,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_RemoveAppRe
     }
 }
 
-#[doc = "Returns the list of app relationships for this published file"]
 // @@protoc_insertion_point(message:CPublishedFile_GetAppRelationships_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_GetAppRelationships_Request {
@@ -14692,7 +15523,6 @@ pub mod cpublished_file_get_app_relationships_response {
     }
 }
 
-#[doc = "Returns the list of app relationships for set of published files"]
 // @@protoc_insertion_point(message:CPublishedFile_GetAppRelationshipsBatched_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_GetAppRelationshipsBatched_Request {
@@ -15208,7 +16038,6 @@ pub mod cpublished_file_get_app_relationships_batched_response {
     }
 }
 
-#[doc = "Start usage tracking for a given set of published files"]
 // @@protoc_insertion_point(message:CPublishedFile_StartPlaytimeTracking_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_StartPlaytimeTracking_Request {
@@ -15410,7 +16239,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_StartPlayti
     }
 }
 
-#[doc = "Stops usage tracking for a given set of published files"]
 // @@protoc_insertion_point(message:CPublishedFile_StopPlaytimeTracking_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_StopPlaytimeTracking_Request {
@@ -15612,7 +16440,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_StopPlaytim
     }
 }
 
-#[doc = "Stops usage tracking for all items currently tracked for the specified app"]
 // @@protoc_insertion_point(message:CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request {
@@ -15798,7 +16625,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_StopPlaytim
     }
 }
 
-#[doc = "Stops usage tracking all controller configs for the given app and set the usage time for the for the given controller configs"]
 // @@protoc_insertion_point(message:CPublishedFile_SetPlaytimeForControllerConfigs_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_SetPlaytimeForControllerConfigs_Request {
@@ -16142,7 +16968,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_SetPlaytime
     }
 }
 
-#[doc = "Adds a parent->child relationship between the given items."]
 // @@protoc_insertion_point(message:CPublishedFile_AddChild_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_AddChild_Request {
@@ -16360,7 +17185,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_AddChild_Re
     }
 }
 
-#[doc = "Removes parent->child relationship between the given items."]
 // @@protoc_insertion_point(message:CPublishedFile_RemoveChild_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_RemoveChild_Request {
@@ -16578,7 +17402,520 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_RemoveChild
     }
 }
 
-#[doc = "Get user vote summary"]
+// @@protoc_insertion_point(message:CPublishedFile_SetCollectionChildren_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CPublishedFile_SetCollectionChildren_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CPublishedFile_SetCollectionChildren_Request.appid)
+    pub appid: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CPublishedFile_SetCollectionChildren_Request.publishedfileid)
+    pub publishedfileid: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CPublishedFile_SetCollectionChildren_Request.children)
+    pub children: ::std::vec::Vec<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CPublishedFile_SetCollectionChildren_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CPublishedFile_SetCollectionChildren_Request {
+    fn default() -> &'a CPublishedFile_SetCollectionChildren_Request {
+        <CPublishedFile_SetCollectionChildren_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CPublishedFile_SetCollectionChildren_Request {
+    pub fn new() -> CPublishedFile_SetCollectionChildren_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 appid = 1;
+
+    pub fn appid(&self) -> u32 {
+        self.appid.unwrap_or(0)
+    }
+
+    pub fn clear_appid(&mut self) {
+        self.appid = ::std::option::Option::None;
+    }
+
+    pub fn has_appid(&self) -> bool {
+        self.appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_appid(&mut self, v: u32) {
+        self.appid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint64 publishedfileid = 2;
+
+    pub fn publishedfileid(&self) -> u64 {
+        self.publishedfileid.unwrap_or(0)
+    }
+
+    pub fn clear_publishedfileid(&mut self) {
+        self.publishedfileid = ::std::option::Option::None;
+    }
+
+    pub fn has_publishedfileid(&self) -> bool {
+        self.publishedfileid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_publishedfileid(&mut self, v: u64) {
+        self.publishedfileid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_SetCollectionChildren_Request {
+    const NAME: &'static str = "CPublishedFile_SetCollectionChildren_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.appid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.publishedfileid = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                26 => {
+                    is.read_repeated_packed_uint64_into(&mut self.children)?;
+                },
+                24 => {
+                    self.children.push(is.read_uint64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.publishedfileid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(2, v);
+        }
+        for value in &self.children {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(3, *value);
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.appid {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.publishedfileid {
+            os.write_uint64(2, v)?;
+        }
+        for v in &self.children {
+            os.write_uint64(3, *v)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CPublishedFile_SetCollectionChildren_Request {
+        CPublishedFile_SetCollectionChildren_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.appid = ::std::option::Option::None;
+        self.publishedfileid = ::std::option::Option::None;
+        self.children.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CPublishedFile_SetCollectionChildren_Request {
+        static instance: CPublishedFile_SetCollectionChildren_Request = CPublishedFile_SetCollectionChildren_Request {
+            appid: ::std::option::Option::None,
+            publishedfileid: ::std::option::Option::None,
+            children: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CPublishedFile_SetCollectionChildren_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CPublishedFile_SetCollectionChildren_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CPublishedFile_SetCollectionChildren_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CPublishedFile_SetCollectionChildren_Response {
+    fn default() -> &'a CPublishedFile_SetCollectionChildren_Response {
+        <CPublishedFile_SetCollectionChildren_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CPublishedFile_SetCollectionChildren_Response {
+    pub fn new() -> CPublishedFile_SetCollectionChildren_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_SetCollectionChildren_Response {
+    const NAME: &'static str = "CPublishedFile_SetCollectionChildren_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CPublishedFile_SetCollectionChildren_Response {
+        CPublishedFile_SetCollectionChildren_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CPublishedFile_SetCollectionChildren_Response {
+        static instance: CPublishedFile_SetCollectionChildren_Response = CPublishedFile_SetCollectionChildren_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CPublishedFile_SetSubscriptionListFromCollection_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CPublishedFile_SetSubscriptionListFromCollection_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CPublishedFile_SetSubscriptionListFromCollection_Request.appid)
+    pub appid: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CPublishedFile_SetSubscriptionListFromCollection_Request.list_type)
+    pub list_type: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CPublishedFile_SetSubscriptionListFromCollection_Request.publishedfileid)
+    pub publishedfileid: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CPublishedFile_SetSubscriptionListFromCollection_Request.add_only)
+    pub add_only: ::std::option::Option<bool>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CPublishedFile_SetSubscriptionListFromCollection_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CPublishedFile_SetSubscriptionListFromCollection_Request {
+    fn default() -> &'a CPublishedFile_SetSubscriptionListFromCollection_Request {
+        <CPublishedFile_SetSubscriptionListFromCollection_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CPublishedFile_SetSubscriptionListFromCollection_Request {
+    pub fn new() -> CPublishedFile_SetSubscriptionListFromCollection_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 appid = 1;
+
+    pub fn appid(&self) -> u32 {
+        self.appid.unwrap_or(0)
+    }
+
+    pub fn clear_appid(&mut self) {
+        self.appid = ::std::option::Option::None;
+    }
+
+    pub fn has_appid(&self) -> bool {
+        self.appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_appid(&mut self, v: u32) {
+        self.appid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 list_type = 2;
+
+    pub fn list_type(&self) -> u32 {
+        self.list_type.unwrap_or(0)
+    }
+
+    pub fn clear_list_type(&mut self) {
+        self.list_type = ::std::option::Option::None;
+    }
+
+    pub fn has_list_type(&self) -> bool {
+        self.list_type.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_list_type(&mut self, v: u32) {
+        self.list_type = ::std::option::Option::Some(v);
+    }
+
+    // optional uint64 publishedfileid = 3;
+
+    pub fn publishedfileid(&self) -> u64 {
+        self.publishedfileid.unwrap_or(0)
+    }
+
+    pub fn clear_publishedfileid(&mut self) {
+        self.publishedfileid = ::std::option::Option::None;
+    }
+
+    pub fn has_publishedfileid(&self) -> bool {
+        self.publishedfileid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_publishedfileid(&mut self, v: u64) {
+        self.publishedfileid = ::std::option::Option::Some(v);
+    }
+
+    // optional bool add_only = 4;
+
+    pub fn add_only(&self) -> bool {
+        self.add_only.unwrap_or(false)
+    }
+
+    pub fn clear_add_only(&mut self) {
+        self.add_only = ::std::option::Option::None;
+    }
+
+    pub fn has_add_only(&self) -> bool {
+        self.add_only.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_add_only(&mut self, v: bool) {
+        self.add_only = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_SetSubscriptionListFromCollection_Request {
+    const NAME: &'static str = "CPublishedFile_SetSubscriptionListFromCollection_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.appid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.list_type = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                24 => {
+                    self.publishedfileid = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                32 => {
+                    self.add_only = ::std::option::Option::Some(is.read_bool()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.list_type {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        if let Some(v) = self.publishedfileid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(3, v);
+        }
+        if let Some(v) = self.add_only {
+            my_size += 1 + 1;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.appid {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.list_type {
+            os.write_uint32(2, v)?;
+        }
+        if let Some(v) = self.publishedfileid {
+            os.write_uint64(3, v)?;
+        }
+        if let Some(v) = self.add_only {
+            os.write_bool(4, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CPublishedFile_SetSubscriptionListFromCollection_Request {
+        CPublishedFile_SetSubscriptionListFromCollection_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.appid = ::std::option::Option::None;
+        self.list_type = ::std::option::Option::None;
+        self.publishedfileid = ::std::option::Option::None;
+        self.add_only = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CPublishedFile_SetSubscriptionListFromCollection_Request {
+        static instance: CPublishedFile_SetSubscriptionListFromCollection_Request = CPublishedFile_SetSubscriptionListFromCollection_Request {
+            appid: ::std::option::Option::None,
+            list_type: ::std::option::Option::None,
+            publishedfileid: ::std::option::Option::None,
+            add_only: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CPublishedFile_SetSubscriptionListFromCollection_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CPublishedFile_SetSubscriptionListFromCollection_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CPublishedFile_SetSubscriptionListFromCollection_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CPublishedFile_SetSubscriptionListFromCollection_Response {
+    fn default() -> &'a CPublishedFile_SetSubscriptionListFromCollection_Response {
+        <CPublishedFile_SetSubscriptionListFromCollection_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CPublishedFile_SetSubscriptionListFromCollection_Response {
+    pub fn new() -> CPublishedFile_SetSubscriptionListFromCollection_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_SetSubscriptionListFromCollection_Response {
+    const NAME: &'static str = "CPublishedFile_SetSubscriptionListFromCollection_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CPublishedFile_SetSubscriptionListFromCollection_Response {
+        CPublishedFile_SetSubscriptionListFromCollection_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CPublishedFile_SetSubscriptionListFromCollection_Response {
+        static instance: CPublishedFile_SetSubscriptionListFromCollection_Response = CPublishedFile_SetSubscriptionListFromCollection_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CPublishedFile_GetUserVoteSummary_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_GetUserVoteSummary_Request {
@@ -16969,7 +18306,6 @@ pub mod cpublished_file_get_user_vote_summary_response {
     }
 }
 
-#[doc = "Get list of updated items since given date"]
 // @@protoc_insertion_point(message:CPublishedFile_GetItemChanges_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_GetItemChanges_Request {
@@ -16980,6 +18316,8 @@ pub struct CPublishedFile_GetItemChanges_Request {
     pub last_time_updated: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CPublishedFile_GetItemChanges_Request.num_items_max)
     pub num_items_max: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CPublishedFile_GetItemChanges_Request.desired_revision)
+    pub desired_revision: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EPublishedFileRevision>>,
     // special fields
     // @@protoc_insertion_point(special_field:CPublishedFile_GetItemChanges_Request.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -17052,6 +18390,28 @@ impl CPublishedFile_GetItemChanges_Request {
     pub fn set_num_items_max(&mut self, v: u32) {
         self.num_items_max = ::std::option::Option::Some(v);
     }
+
+    // optional .EPublishedFileRevision desired_revision = 4;
+
+    pub fn desired_revision(&self) -> EPublishedFileRevision {
+        match self.desired_revision {
+            Some(e) => e.enum_value_or(EPublishedFileRevision::k_EPublishedFileRevision_Default),
+            None => EPublishedFileRevision::k_EPublishedFileRevision_Default,
+        }
+    }
+
+    pub fn clear_desired_revision(&mut self) {
+        self.desired_revision = ::std::option::Option::None;
+    }
+
+    pub fn has_desired_revision(&self) -> bool {
+        self.desired_revision.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_desired_revision(&mut self, v: EPublishedFileRevision) {
+        self.desired_revision = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetItemChanges_Request {
@@ -17072,6 +18432,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetItemChan
                 },
                 24 => {
                     self.num_items_max = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                32 => {
+                    self.desired_revision = ::std::option::Option::Some(is.read_enum_or_unknown()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -17094,6 +18457,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetItemChan
         if let Some(v) = self.num_items_max {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
         }
+        if let Some(v) = self.desired_revision {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(4, v.value());
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -17108,6 +18474,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetItemChan
         }
         if let Some(v) = self.num_items_max {
             os.write_uint32(3, v)?;
+        }
+        if let Some(v) = self.desired_revision {
+            os.write_enum(4, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -17129,6 +18498,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetItemChan
         self.appid = ::std::option::Option::None;
         self.last_time_updated = ::std::option::Option::None;
         self.num_items_max = ::std::option::Option::None;
+        self.desired_revision = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -17137,6 +18507,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_GetItemChan
             appid: ::std::option::Option::None,
             last_time_updated: ::std::option::Option::None,
             num_items_max: ::std::option::Option::None,
+            desired_revision: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -17278,6 +18649,8 @@ pub mod cpublished_file_get_item_changes_response {
         pub time_updated: ::std::option::Option<u32>,
         // @@protoc_insertion_point(field:CPublishedFile_GetItemChanges_Response.WorkshopItemInfo.manifest_id)
         pub manifest_id: ::std::option::Option<u64>,
+        // @@protoc_insertion_point(field:CPublishedFile_GetItemChanges_Response.WorkshopItemInfo.author_snapshots)
+        pub author_snapshots: ::std::vec::Vec<super::PublishedFileAuthorSnapshot>,
         // special fields
         // @@protoc_insertion_point(special_field:CPublishedFile_GetItemChanges_Response.WorkshopItemInfo.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -17371,6 +18744,9 @@ pub mod cpublished_file_get_item_changes_response {
                     25 => {
                         self.manifest_id = ::std::option::Option::Some(is.read_fixed64()?);
                     },
+                    34 => {
+                        self.author_snapshots.push(is.read_message()?);
+                    },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                     },
@@ -17392,6 +18768,10 @@ pub mod cpublished_file_get_item_changes_response {
             if let Some(v) = self.manifest_id {
                 my_size += 1 + 8;
             }
+            for value in &self.author_snapshots {
+                let len = value.compute_size();
+                my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+            };
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -17407,6 +18787,9 @@ pub mod cpublished_file_get_item_changes_response {
             if let Some(v) = self.manifest_id {
                 os.write_fixed64(3, v)?;
             }
+            for v in &self.author_snapshots {
+                ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(4, v, os)?;
+            };
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
         }
@@ -17427,6 +18810,7 @@ pub mod cpublished_file_get_item_changes_response {
             self.published_file_id = ::std::option::Option::None;
             self.time_updated = ::std::option::Option::None;
             self.manifest_id = ::std::option::Option::None;
+            self.author_snapshots.clear();
             self.special_fields.clear();
         }
 
@@ -17435,6 +18819,7 @@ pub mod cpublished_file_get_item_changes_response {
                 published_file_id: ::std::option::Option::None,
                 time_updated: ::std::option::Option::None,
                 manifest_id: ::std::option::Option::None,
+                author_snapshots: ::std::vec::Vec::new(),
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -17442,7 +18827,6 @@ pub mod cpublished_file_get_item_changes_response {
     }
 }
 
-#[doc = "Returns more detailed information about the content descriptors for the published file"]
 // @@protoc_insertion_point(message:CPublishedFile_GetContentDescriptors_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_GetContentDescriptors_Request {
@@ -17854,7 +19238,6 @@ pub mod cpublished_file_get_content_descriptors_response {
     }
 }
 
-#[doc = "Updates content descriptors on the published file"]
 // @@protoc_insertion_point(message:CPublishedFile_UpdateContentDescriptors_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_UpdateContentDescriptors_Request {
@@ -18105,7 +19488,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_UpdateConte
     }
 }
 
-#[doc = "Notification from the server when a user subscribes to a file"]
 // @@protoc_insertion_point(message:CPublishedFile_FileSubscribed_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_FileSubscribed_Notification {
@@ -18124,6 +19506,8 @@ pub struct CPublishedFile_FileSubscribed_Notification {
     pub is_depot_content: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CPublishedFile_FileSubscribed_Notification.rtime_updated)
     pub rtime_updated: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CPublishedFile_FileSubscribed_Notification.revision)
+    pub revision: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EPublishedFileRevision>>,
     // @@protoc_insertion_point(field:CPublishedFile_FileSubscribed_Notification.revisions)
     pub revisions: ::std::vec::Vec<cpublished_file_file_subscribed_notification::RevisionData>,
     // special fields
@@ -18274,6 +19658,28 @@ impl CPublishedFile_FileSubscribed_Notification {
     pub fn set_rtime_updated(&mut self, v: u32) {
         self.rtime_updated = ::std::option::Option::Some(v);
     }
+
+    // optional .EPublishedFileRevision revision = 9;
+
+    pub fn revision(&self) -> EPublishedFileRevision {
+        match self.revision {
+            Some(e) => e.enum_value_or(EPublishedFileRevision::k_EPublishedFileRevision_Default),
+            None => EPublishedFileRevision::k_EPublishedFileRevision_Default,
+        }
+    }
+
+    pub fn clear_revision(&mut self) {
+        self.revision = ::std::option::Option::None;
+    }
+
+    pub fn has_revision(&self) -> bool {
+        self.revision.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_revision(&mut self, v: EPublishedFileRevision) {
+        self.revision = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_FileSubscribed_Notification {
@@ -18306,6 +19712,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_FileSubscri
                 },
                 56 => {
                     self.rtime_updated = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                72 => {
+                    self.revision = ::std::option::Option::Some(is.read_enum_or_unknown()?);
                 },
                 66 => {
                     self.revisions.push(is.read_message()?);
@@ -18343,6 +19752,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_FileSubscri
         if let Some(v) = self.rtime_updated {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(7, v);
         }
+        if let Some(v) = self.revision {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(9, v.value());
+        }
         for value in &self.revisions {
             let len = value.compute_size();
             my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
@@ -18374,6 +19786,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_FileSubscri
         if let Some(v) = self.rtime_updated {
             os.write_uint32(7, v)?;
         }
+        if let Some(v) = self.revision {
+            os.write_enum(9, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
         for v in &self.revisions {
             ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(8, v, os)?;
         };
@@ -18401,6 +19816,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_FileSubscri
         self.rtime_subscribed = ::std::option::Option::None;
         self.is_depot_content = ::std::option::Option::None;
         self.rtime_updated = ::std::option::Option::None;
+        self.revision = ::std::option::Option::None;
         self.revisions.clear();
         self.special_fields.clear();
     }
@@ -18414,6 +19830,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_FileSubscri
             rtime_subscribed: ::std::option::Option::None,
             is_depot_content: ::std::option::Option::None,
             rtime_updated: ::std::option::Option::None,
+            revision: ::std::option::Option::None,
             revisions: ::std::vec::Vec::new(),
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
@@ -18433,6 +19850,10 @@ pub mod cpublished_file_file_subscribed_notification {
         pub file_hcontent: ::std::option::Option<u64>,
         // @@protoc_insertion_point(field:CPublishedFile_FileSubscribed_Notification.RevisionData.rtime_updated)
         pub rtime_updated: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CPublishedFile_FileSubscribed_Notification.RevisionData.game_branch_min)
+        pub game_branch_min: ::std::option::Option<::std::string::String>,
+        // @@protoc_insertion_point(field:CPublishedFile_FileSubscribed_Notification.RevisionData.game_branch_max)
+        pub game_branch_max: ::std::option::Option<::std::string::String>,
         // special fields
         // @@protoc_insertion_point(special_field:CPublishedFile_FileSubscribed_Notification.RevisionData.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -18508,6 +19929,78 @@ pub mod cpublished_file_file_subscribed_notification {
         pub fn set_rtime_updated(&mut self, v: u32) {
             self.rtime_updated = ::std::option::Option::Some(v);
         }
+
+        // optional string game_branch_min = 4;
+
+        pub fn game_branch_min(&self) -> &str {
+            match self.game_branch_min.as_ref() {
+                Some(v) => v,
+                None => "",
+            }
+        }
+
+        pub fn clear_game_branch_min(&mut self) {
+            self.game_branch_min = ::std::option::Option::None;
+        }
+
+        pub fn has_game_branch_min(&self) -> bool {
+            self.game_branch_min.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_game_branch_min(&mut self, v: ::std::string::String) {
+            self.game_branch_min = ::std::option::Option::Some(v);
+        }
+
+        // Mutable pointer to the field.
+        // If field is not initialized, it is initialized with default value first.
+        pub fn mut_game_branch_min(&mut self) -> &mut ::std::string::String {
+            if self.game_branch_min.is_none() {
+                self.game_branch_min = ::std::option::Option::Some(::std::string::String::new());
+            }
+            self.game_branch_min.as_mut().unwrap()
+        }
+
+        // Take field
+        pub fn take_game_branch_min(&mut self) -> ::std::string::String {
+            self.game_branch_min.take().unwrap_or_else(|| ::std::string::String::new())
+        }
+
+        // optional string game_branch_max = 5;
+
+        pub fn game_branch_max(&self) -> &str {
+            match self.game_branch_max.as_ref() {
+                Some(v) => v,
+                None => "",
+            }
+        }
+
+        pub fn clear_game_branch_max(&mut self) {
+            self.game_branch_max = ::std::option::Option::None;
+        }
+
+        pub fn has_game_branch_max(&self) -> bool {
+            self.game_branch_max.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_game_branch_max(&mut self, v: ::std::string::String) {
+            self.game_branch_max = ::std::option::Option::Some(v);
+        }
+
+        // Mutable pointer to the field.
+        // If field is not initialized, it is initialized with default value first.
+        pub fn mut_game_branch_max(&mut self) -> &mut ::std::string::String {
+            if self.game_branch_max.is_none() {
+                self.game_branch_max = ::std::option::Option::Some(::std::string::String::new());
+            }
+            self.game_branch_max.as_mut().unwrap()
+        }
+
+        // Take field
+        pub fn take_game_branch_max(&mut self) -> ::std::string::String {
+            self.game_branch_max.take().unwrap_or_else(|| ::std::string::String::new())
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for RevisionData {
@@ -18528,6 +20021,12 @@ pub mod cpublished_file_file_subscribed_notification {
                     },
                     24 => {
                         self.rtime_updated = ::std::option::Option::Some(is.read_uint32()?);
+                    },
+                    34 => {
+                        self.game_branch_min = ::std::option::Option::Some(is.read_string()?);
+                    },
+                    42 => {
+                        self.game_branch_max = ::std::option::Option::Some(is.read_string()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -18550,6 +20049,12 @@ pub mod cpublished_file_file_subscribed_notification {
             if let Some(v) = self.rtime_updated {
                 my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
             }
+            if let Some(v) = self.game_branch_min.as_ref() {
+                my_size += ::steam_vent_proto_common::protobuf::rt::string_size(4, &v);
+            }
+            if let Some(v) = self.game_branch_max.as_ref() {
+                my_size += ::steam_vent_proto_common::protobuf::rt::string_size(5, &v);
+            }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -18564,6 +20069,12 @@ pub mod cpublished_file_file_subscribed_notification {
             }
             if let Some(v) = self.rtime_updated {
                 os.write_uint32(3, v)?;
+            }
+            if let Some(v) = self.game_branch_min.as_ref() {
+                os.write_string(4, v)?;
+            }
+            if let Some(v) = self.game_branch_max.as_ref() {
+                os.write_string(5, v)?;
             }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
@@ -18585,6 +20096,8 @@ pub mod cpublished_file_file_subscribed_notification {
             self.revision = ::std::option::Option::None;
             self.file_hcontent = ::std::option::Option::None;
             self.rtime_updated = ::std::option::Option::None;
+            self.game_branch_min = ::std::option::Option::None;
+            self.game_branch_max = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -18593,6 +20106,8 @@ pub mod cpublished_file_file_subscribed_notification {
                 revision: ::std::option::Option::None,
                 file_hcontent: ::std::option::Option::None,
                 rtime_updated: ::std::option::Option::None,
+                game_branch_min: ::std::option::Option::None,
+                game_branch_max: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -18600,7 +20115,6 @@ pub mod cpublished_file_file_subscribed_notification {
     }
 }
 
-#[doc = "Notification from the server when a user unsubscribes from a file"]
 // @@protoc_insertion_point(message:CPublishedFile_FileUnsubscribed_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_FileUnsubscribed_Notification {
@@ -18742,7 +20256,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPublishedFile_FileUnsubsc
     }
 }
 
-#[doc = "Notification from the server when a published file is deleted"]
 // @@protoc_insertion_point(message:CPublishedFile_FileDeleted_Client_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPublishedFile_FileDeleted_Client_Notification {
@@ -18899,6 +20412,8 @@ pub enum EPublishedFileRevision {
     k_EPublishedFileRevision_RejectedSnapshot = 4,
     // @@protoc_insertion_point(enum_value:EPublishedFileRevision.k_EPublishedFileRevision_RejectedSnapshot_China)
     k_EPublishedFileRevision_RejectedSnapshot_China = 5,
+    // @@protoc_insertion_point(enum_value:EPublishedFileRevision.k_EPublishedFileRevision_AuthorSnapshot)
+    k_EPublishedFileRevision_AuthorSnapshot = 6,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EPublishedFileRevision {
@@ -18916,6 +20431,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EPublishedFileRevision {
             3 => ::std::option::Option::Some(EPublishedFileRevision::k_EPublishedFileRevision_ApprovedSnapshot_China),
             4 => ::std::option::Option::Some(EPublishedFileRevision::k_EPublishedFileRevision_RejectedSnapshot),
             5 => ::std::option::Option::Some(EPublishedFileRevision::k_EPublishedFileRevision_RejectedSnapshot_China),
+            6 => ::std::option::Option::Some(EPublishedFileRevision::k_EPublishedFileRevision_AuthorSnapshot),
             _ => ::std::option::Option::None
         }
     }
@@ -18928,6 +20444,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EPublishedFileRevision {
             "k_EPublishedFileRevision_ApprovedSnapshot_China" => ::std::option::Option::Some(EPublishedFileRevision::k_EPublishedFileRevision_ApprovedSnapshot_China),
             "k_EPublishedFileRevision_RejectedSnapshot" => ::std::option::Option::Some(EPublishedFileRevision::k_EPublishedFileRevision_RejectedSnapshot),
             "k_EPublishedFileRevision_RejectedSnapshot_China" => ::std::option::Option::Some(EPublishedFileRevision::k_EPublishedFileRevision_RejectedSnapshot_China),
+            "k_EPublishedFileRevision_AuthorSnapshot" => ::std::option::Option::Some(EPublishedFileRevision::k_EPublishedFileRevision_AuthorSnapshot),
             _ => ::std::option::Option::None
         }
     }
@@ -18939,6 +20456,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EPublishedFileRevision {
         EPublishedFileRevision::k_EPublishedFileRevision_ApprovedSnapshot_China,
         EPublishedFileRevision::k_EPublishedFileRevision_RejectedSnapshot,
         EPublishedFileRevision::k_EPublishedFileRevision_RejectedSnapshot_China,
+        EPublishedFileRevision::k_EPublishedFileRevision_AuthorSnapshot,
     ];
 }
 
@@ -19194,6 +20712,19 @@ impl ::steam_vent_proto_common::RpcMessage for CPublishedFile_Publish_Response {
     }
 }
 impl ::steam_vent_proto_common::RpcMessage for CPublishedFile_GetDetails_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for PublishedFileAuthorSnapshot {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }
@@ -19749,6 +21280,62 @@ impl ::steam_vent_proto_common::RpcMessage for CPublishedFile_RemoveChild_Respon
     }
 }
 impl ::steam_vent_proto_common::RpcMessage
+for CPublishedFile_SetCollectionChildren_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CPublishedFile_SetCollectionChildren_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CPublishedFile_SetSubscriptionListFromCollection_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CPublishedFile_SetSubscriptionListFromCollection_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
 for CPublishedFile_GetUserVoteSummary_Request {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -19900,12 +21487,12 @@ for CPublishedFile_FileDeleted_Client_Notification {
         self.compute_size() as usize
     }
 }
-///A service to access published file data
+///
 struct PublishedFile {}
 impl ::steam_vent_proto_common::RpcService for PublishedFile {
     const SERVICE_NAME: &'static str = "PublishedFile";
 }
-///Published file client notifications
+///
 struct PublishedFileClient {}
 impl ::steam_vent_proto_common::RpcService for PublishedFileClient {
     const SERVICE_NAME: &'static str = "PublishedFileClient";
@@ -20016,9 +21603,19 @@ impl ::steam_vent_proto_common::RpcMethod for CPublishedFile_RemoveChild_Request
     type Response = CPublishedFile_RemoveChild_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod
+for CPublishedFile_SetCollectionChildren_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.SetCollectionChildren#1";
+    type Response = CPublishedFile_SetCollectionChildren_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod
 for CPublishedFile_SetPlaytimeForControllerConfigs_Request {
     const METHOD_NAME: &'static str = "PublishedFile.SetPlaytimeForControllerConfigs#1";
     type Response = CPublishedFile_SetPlaytimeForControllerConfigs_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CPublishedFile_SetSubscriptionListFromCollection_Request {
+    const METHOD_NAME: &'static str = "PublishedFile.SetSubscriptionListFromCollection#1";
+    type Response = CPublishedFile_SetSubscriptionListFromCollection_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod
 for CPublishedFile_StartPlaytimeTracking_Request {

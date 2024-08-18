@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Get a list of active marketing messages."]
 // @@protoc_insertion_point(message:CMarketingMessages_GetActiveMarketingMessages_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_GetActiveMarketingMessages_Request {
@@ -1364,7 +1363,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_GetActi
     }
 }
 
-#[doc = "Get a list of active marketing messages filtered for a specific user."]
 // @@protoc_insertion_point(message:CMarketingMessages_GetMarketingMessagesForUser_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_GetMarketingMessagesForUser_Request {
@@ -2232,7 +2230,6 @@ pub mod cmarketing_messages_get_marketing_messages_for_user_response {
     }
 }
 
-#[doc = "Returns a boolean if the user has pending marketing messages.  Intended to be fast."]
 // @@protoc_insertion_point(message:CMarketingMessages_DoesUserHavePendingMarketingMessages_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_DoesUserHavePendingMarketingMessages_Request {
@@ -2596,7 +2593,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_DoesUse
     }
 }
 
-#[doc = "Get a single marketing message for Admin, not cacheable."]
 // @@protoc_insertion_point(message:CMarketingMessages_GetDisplayMarketingMessage_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_GetDisplayMarketingMessage_Request {
@@ -2825,7 +2821,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_GetDisp
     }
 }
 
-#[doc = "Mark that a user has viewed a message (so we won't show it again)'."]
 // @@protoc_insertion_point(message:CMarketingMessages_MarkMessageSeen_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_MarkMessageSeen_Notification {
@@ -3002,7 +2997,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_MarkMes
     }
 }
 
-#[doc = "Get a single marketing message.  Admin account needed for non-active messages"]
 // @@protoc_insertion_point(message:CMarketingMessages_GetMarketingMessage_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_GetMarketingMessage_Request {
@@ -3203,7 +3197,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_GetMark
     }
 }
 
-#[doc = "Create a new marketing message."]
 // @@protoc_insertion_point(message:CMarketingMessages_CreateMarketingMessage_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_CreateMarketingMessage_Request {
@@ -3436,7 +3429,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_CreateM
     }
 }
 
-#[doc = "Modify a marketing message."]
 // @@protoc_insertion_point(message:CMarketingMessages_UpdateMarketingMessage_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_UpdateMarketingMessage_Request {
@@ -3668,7 +3660,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_UpdateM
     }
 }
 
-#[doc = "Delete a marketing message."]
 // @@protoc_insertion_point(message:CMarketingMessages_DeleteMarketingMessage_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_DeleteMarketingMessage_Request {
@@ -3854,7 +3845,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_DeleteM
     }
 }
 
-#[doc = "Search for marketing messages by name, type, etc."]
 // @@protoc_insertion_point(message:CMarketingMessages_FindMarketingMessages_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_FindMarketingMessages_Request {
@@ -4188,7 +4178,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_FindMar
     }
 }
 
-#[doc = "For a specific marketing message, then all of the viewership stats for the date range it was intended to be visible to customers"]
 // @@protoc_insertion_point(message:CMarketingMessages_GetMarketingMessageViewerStats_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_GetMarketingMessageViewerStats_Request {
@@ -4597,7 +4586,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_GetMark
     }
 }
 
-#[doc = "For a time range, return the seen stats across all of the marketing messages"]
 // @@protoc_insertion_point(message:CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request {
@@ -4830,6 +4818,1039 @@ impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_GetMark
     }
 }
 
+// @@protoc_insertion_point(message:CMarketingMessages_GetPartnerReadyToPublishMessages_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMarketingMessages_GetPartnerReadyToPublishMessages_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CMarketingMessages_GetPartnerReadyToPublishMessages_Request.partnerid)
+    pub partnerid: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMarketingMessages_GetPartnerReadyToPublishMessages_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMarketingMessages_GetPartnerReadyToPublishMessages_Request {
+    fn default() -> &'a CMarketingMessages_GetPartnerReadyToPublishMessages_Request {
+        <CMarketingMessages_GetPartnerReadyToPublishMessages_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMarketingMessages_GetPartnerReadyToPublishMessages_Request {
+    pub fn new() -> CMarketingMessages_GetPartnerReadyToPublishMessages_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 partnerid = 1;
+
+    pub fn partnerid(&self) -> u32 {
+        self.partnerid.unwrap_or(0)
+    }
+
+    pub fn clear_partnerid(&mut self) {
+        self.partnerid = ::std::option::Option::None;
+    }
+
+    pub fn has_partnerid(&self) -> bool {
+        self.partnerid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_partnerid(&mut self, v: u32) {
+        self.partnerid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_GetPartnerReadyToPublishMessages_Request {
+    const NAME: &'static str = "CMarketingMessages_GetPartnerReadyToPublishMessages_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.partnerid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.partnerid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.partnerid {
+            os.write_uint32(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMarketingMessages_GetPartnerReadyToPublishMessages_Request {
+        CMarketingMessages_GetPartnerReadyToPublishMessages_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.partnerid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMarketingMessages_GetPartnerReadyToPublishMessages_Request {
+        static instance: CMarketingMessages_GetPartnerReadyToPublishMessages_Request = CMarketingMessages_GetPartnerReadyToPublishMessages_Request {
+            partnerid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMarketingMessages_GetPartnerReadyToPublishMessages_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMarketingMessages_GetPartnerReadyToPublishMessages_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CMarketingMessages_GetPartnerReadyToPublishMessages_Response.messages)
+    pub messages: ::std::vec::Vec<CDisplayMarketingMessage>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMarketingMessages_GetPartnerReadyToPublishMessages_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMarketingMessages_GetPartnerReadyToPublishMessages_Response {
+    fn default() -> &'a CMarketingMessages_GetPartnerReadyToPublishMessages_Response {
+        <CMarketingMessages_GetPartnerReadyToPublishMessages_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMarketingMessages_GetPartnerReadyToPublishMessages_Response {
+    pub fn new() -> CMarketingMessages_GetPartnerReadyToPublishMessages_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_GetPartnerReadyToPublishMessages_Response {
+    const NAME: &'static str = "CMarketingMessages_GetPartnerReadyToPublishMessages_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.messages.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.messages {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.messages {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMarketingMessages_GetPartnerReadyToPublishMessages_Response {
+        CMarketingMessages_GetPartnerReadyToPublishMessages_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.messages.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMarketingMessages_GetPartnerReadyToPublishMessages_Response {
+        static instance: CMarketingMessages_GetPartnerReadyToPublishMessages_Response = CMarketingMessages_GetPartnerReadyToPublishMessages_Response {
+            messages: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMarketingMessages_PartnerPublishMessage_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMarketingMessages_PartnerPublishMessage_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CMarketingMessages_PartnerPublishMessage_Request.gid)
+    pub gid: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CMarketingMessages_PartnerPublishMessage_Request.partnerid)
+    pub partnerid: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMarketingMessages_PartnerPublishMessage_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMarketingMessages_PartnerPublishMessage_Request {
+    fn default() -> &'a CMarketingMessages_PartnerPublishMessage_Request {
+        <CMarketingMessages_PartnerPublishMessage_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMarketingMessages_PartnerPublishMessage_Request {
+    pub fn new() -> CMarketingMessages_PartnerPublishMessage_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 gid = 1;
+
+    pub fn gid(&self) -> u64 {
+        self.gid.unwrap_or(0)
+    }
+
+    pub fn clear_gid(&mut self) {
+        self.gid = ::std::option::Option::None;
+    }
+
+    pub fn has_gid(&self) -> bool {
+        self.gid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_gid(&mut self, v: u64) {
+        self.gid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 partnerid = 2;
+
+    pub fn partnerid(&self) -> u32 {
+        self.partnerid.unwrap_or(0)
+    }
+
+    pub fn clear_partnerid(&mut self) {
+        self.partnerid = ::std::option::Option::None;
+    }
+
+    pub fn has_partnerid(&self) -> bool {
+        self.partnerid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_partnerid(&mut self, v: u32) {
+        self.partnerid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_PartnerPublishMessage_Request {
+    const NAME: &'static str = "CMarketingMessages_PartnerPublishMessage_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.gid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                16 => {
+                    self.partnerid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.gid {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.partnerid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.gid {
+            os.write_fixed64(1, v)?;
+        }
+        if let Some(v) = self.partnerid {
+            os.write_uint32(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMarketingMessages_PartnerPublishMessage_Request {
+        CMarketingMessages_PartnerPublishMessage_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.gid = ::std::option::Option::None;
+        self.partnerid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMarketingMessages_PartnerPublishMessage_Request {
+        static instance: CMarketingMessages_PartnerPublishMessage_Request = CMarketingMessages_PartnerPublishMessage_Request {
+            gid: ::std::option::Option::None,
+            partnerid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMarketingMessages_PartnerPublishMessage_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMarketingMessages_PartnerPublishMessage_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CMarketingMessages_PartnerPublishMessage_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMarketingMessages_PartnerPublishMessage_Response {
+    fn default() -> &'a CMarketingMessages_PartnerPublishMessage_Response {
+        <CMarketingMessages_PartnerPublishMessage_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMarketingMessages_PartnerPublishMessage_Response {
+    pub fn new() -> CMarketingMessages_PartnerPublishMessage_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_PartnerPublishMessage_Response {
+    const NAME: &'static str = "CMarketingMessages_PartnerPublishMessage_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMarketingMessages_PartnerPublishMessage_Response {
+        CMarketingMessages_PartnerPublishMessage_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMarketingMessages_PartnerPublishMessage_Response {
+        static instance: CMarketingMessages_PartnerPublishMessage_Response = CMarketingMessages_PartnerPublishMessage_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMarketingMessages_GetPartnerMessagePreview_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMarketingMessages_GetPartnerMessagePreview_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CMarketingMessages_GetPartnerMessagePreview_Request.gid)
+    pub gid: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CMarketingMessages_GetPartnerMessagePreview_Request.partnerid)
+    pub partnerid: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMarketingMessages_GetPartnerMessagePreview_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMarketingMessages_GetPartnerMessagePreview_Request {
+    fn default() -> &'a CMarketingMessages_GetPartnerMessagePreview_Request {
+        <CMarketingMessages_GetPartnerMessagePreview_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMarketingMessages_GetPartnerMessagePreview_Request {
+    pub fn new() -> CMarketingMessages_GetPartnerMessagePreview_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 gid = 1;
+
+    pub fn gid(&self) -> u64 {
+        self.gid.unwrap_or(0)
+    }
+
+    pub fn clear_gid(&mut self) {
+        self.gid = ::std::option::Option::None;
+    }
+
+    pub fn has_gid(&self) -> bool {
+        self.gid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_gid(&mut self, v: u64) {
+        self.gid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 partnerid = 2;
+
+    pub fn partnerid(&self) -> u32 {
+        self.partnerid.unwrap_or(0)
+    }
+
+    pub fn clear_partnerid(&mut self) {
+        self.partnerid = ::std::option::Option::None;
+    }
+
+    pub fn has_partnerid(&self) -> bool {
+        self.partnerid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_partnerid(&mut self, v: u32) {
+        self.partnerid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_GetPartnerMessagePreview_Request {
+    const NAME: &'static str = "CMarketingMessages_GetPartnerMessagePreview_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.gid = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                16 => {
+                    self.partnerid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.gid {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.partnerid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.gid {
+            os.write_fixed64(1, v)?;
+        }
+        if let Some(v) = self.partnerid {
+            os.write_uint32(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMarketingMessages_GetPartnerMessagePreview_Request {
+        CMarketingMessages_GetPartnerMessagePreview_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.gid = ::std::option::Option::None;
+        self.partnerid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMarketingMessages_GetPartnerMessagePreview_Request {
+        static instance: CMarketingMessages_GetPartnerMessagePreview_Request = CMarketingMessages_GetPartnerMessagePreview_Request {
+            gid: ::std::option::Option::None,
+            partnerid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMarketingMessages_GetPartnerMessagePreview_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMarketingMessages_GetPartnerMessagePreview_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CMarketingMessages_GetPartnerMessagePreview_Response.message)
+    pub message: ::steam_vent_proto_common::protobuf::MessageField<CMarketingMessageProto>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMarketingMessages_GetPartnerMessagePreview_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMarketingMessages_GetPartnerMessagePreview_Response {
+    fn default() -> &'a CMarketingMessages_GetPartnerMessagePreview_Response {
+        <CMarketingMessages_GetPartnerMessagePreview_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMarketingMessages_GetPartnerMessagePreview_Response {
+    pub fn new() -> CMarketingMessages_GetPartnerMessagePreview_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessages_GetPartnerMessagePreview_Response {
+    const NAME: &'static str = "CMarketingMessages_GetPartnerMessagePreview_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.message)?;
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.message.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.message.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMarketingMessages_GetPartnerMessagePreview_Response {
+        CMarketingMessages_GetPartnerMessagePreview_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.message.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMarketingMessages_GetPartnerMessagePreview_Response {
+        static instance: CMarketingMessages_GetPartnerMessagePreview_Response = CMarketingMessages_GetPartnerMessagePreview_Response {
+            message: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMarketingMessage_GetMarketingMessagesForPartner_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMarketingMessage_GetMarketingMessagesForPartner_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CMarketingMessage_GetMarketingMessagesForPartner_Request.partnerid)
+    pub partnerid: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMarketingMessage_GetMarketingMessagesForPartner_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMarketingMessage_GetMarketingMessagesForPartner_Request {
+    fn default() -> &'a CMarketingMessage_GetMarketingMessagesForPartner_Request {
+        <CMarketingMessage_GetMarketingMessagesForPartner_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMarketingMessage_GetMarketingMessagesForPartner_Request {
+    pub fn new() -> CMarketingMessage_GetMarketingMessagesForPartner_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 partnerid = 1;
+
+    pub fn partnerid(&self) -> u32 {
+        self.partnerid.unwrap_or(0)
+    }
+
+    pub fn clear_partnerid(&mut self) {
+        self.partnerid = ::std::option::Option::None;
+    }
+
+    pub fn has_partnerid(&self) -> bool {
+        self.partnerid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_partnerid(&mut self, v: u32) {
+        self.partnerid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessage_GetMarketingMessagesForPartner_Request {
+    const NAME: &'static str = "CMarketingMessage_GetMarketingMessagesForPartner_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.partnerid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.partnerid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.partnerid {
+            os.write_uint32(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMarketingMessage_GetMarketingMessagesForPartner_Request {
+        CMarketingMessage_GetMarketingMessagesForPartner_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.partnerid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMarketingMessage_GetMarketingMessagesForPartner_Request {
+        static instance: CMarketingMessage_GetMarketingMessagesForPartner_Request = CMarketingMessage_GetMarketingMessagesForPartner_Request {
+            partnerid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMarketingMessage_GetMarketingMessagesForPartner_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMarketingMessage_GetMarketingMessagesForPartner_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CMarketingMessage_GetMarketingMessagesForPartner_Response.messages)
+    pub messages: ::std::vec::Vec<CMarketingMessageProto>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMarketingMessage_GetMarketingMessagesForPartner_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMarketingMessage_GetMarketingMessagesForPartner_Response {
+    fn default() -> &'a CMarketingMessage_GetMarketingMessagesForPartner_Response {
+        <CMarketingMessage_GetMarketingMessagesForPartner_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMarketingMessage_GetMarketingMessagesForPartner_Response {
+    pub fn new() -> CMarketingMessage_GetMarketingMessagesForPartner_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessage_GetMarketingMessagesForPartner_Response {
+    const NAME: &'static str = "CMarketingMessage_GetMarketingMessagesForPartner_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.messages.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.messages {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.messages {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMarketingMessage_GetMarketingMessagesForPartner_Response {
+        CMarketingMessage_GetMarketingMessagesForPartner_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.messages.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMarketingMessage_GetMarketingMessagesForPartner_Response {
+        static instance: CMarketingMessage_GetMarketingMessagesForPartner_Response = CMarketingMessage_GetMarketingMessagesForPartner_Response {
+            messages: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMarketingMessage_GetMarketingMessagesForApps_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMarketingMessage_GetMarketingMessagesForApps_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CMarketingMessage_GetMarketingMessagesForApps_Request.appids)
+    pub appids: ::std::vec::Vec<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMarketingMessage_GetMarketingMessagesForApps_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMarketingMessage_GetMarketingMessagesForApps_Request {
+    fn default() -> &'a CMarketingMessage_GetMarketingMessagesForApps_Request {
+        <CMarketingMessage_GetMarketingMessagesForApps_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMarketingMessage_GetMarketingMessagesForApps_Request {
+    pub fn new() -> CMarketingMessage_GetMarketingMessagesForApps_Request {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessage_GetMarketingMessagesForApps_Request {
+    const NAME: &'static str = "CMarketingMessage_GetMarketingMessagesForApps_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    is.read_repeated_packed_uint32_into(&mut self.appids)?;
+                },
+                8 => {
+                    self.appids.push(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.appids {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, *value);
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.appids {
+            os.write_uint32(1, *v)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMarketingMessage_GetMarketingMessagesForApps_Request {
+        CMarketingMessage_GetMarketingMessagesForApps_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.appids.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMarketingMessage_GetMarketingMessagesForApps_Request {
+        static instance: CMarketingMessage_GetMarketingMessagesForApps_Request = CMarketingMessage_GetMarketingMessagesForApps_Request {
+            appids: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMarketingMessage_GetMarketingMessagesForApps_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMarketingMessage_GetMarketingMessagesForApps_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CMarketingMessage_GetMarketingMessagesForApps_Response.messages)
+    pub messages: ::std::vec::Vec<CMarketingMessageProto>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMarketingMessage_GetMarketingMessagesForApps_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMarketingMessage_GetMarketingMessagesForApps_Response {
+    fn default() -> &'a CMarketingMessage_GetMarketingMessagesForApps_Response {
+        <CMarketingMessage_GetMarketingMessagesForApps_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMarketingMessage_GetMarketingMessagesForApps_Response {
+    pub fn new() -> CMarketingMessage_GetMarketingMessagesForApps_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMarketingMessage_GetMarketingMessagesForApps_Response {
+    const NAME: &'static str = "CMarketingMessage_GetMarketingMessagesForApps_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.messages.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.messages {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.messages {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMarketingMessage_GetMarketingMessagesForApps_Response {
+        CMarketingMessage_GetMarketingMessagesForApps_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.messages.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMarketingMessage_GetMarketingMessagesForApps_Response {
+        static instance: CMarketingMessage_GetMarketingMessagesForApps_Response = CMarketingMessage_GetMarketingMessagesForApps_Response {
+            messages: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:EMarketingMessageType)
 pub enum EMarketingMessageType {
@@ -4859,6 +5880,8 @@ pub enum EMarketingMessageType {
     k_EMarketingMessageMidweekDeal = 11,
     // @@protoc_insertion_point(enum_value:EMarketingMessageType.k_EMarketingMessageDailyDeal)
     k_EMarketingMessageDailyDeal = 12,
+    // @@protoc_insertion_point(enum_value:EMarketingMessageType.k_EMarketingMessageNewDLC)
+    k_EMarketingMessageNewDLC = 13,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EMarketingMessageType {
@@ -4883,6 +5906,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMarketingMessageType {
             10 => ::std::option::Option::Some(EMarketingMessageType::k_EMarketingMessageUpdate),
             11 => ::std::option::Option::Some(EMarketingMessageType::k_EMarketingMessageMidweekDeal),
             12 => ::std::option::Option::Some(EMarketingMessageType::k_EMarketingMessageDailyDeal),
+            13 => ::std::option::Option::Some(EMarketingMessageType::k_EMarketingMessageNewDLC),
             _ => ::std::option::Option::None
         }
     }
@@ -4902,6 +5926,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMarketingMessageType {
             "k_EMarketingMessageUpdate" => ::std::option::Option::Some(EMarketingMessageType::k_EMarketingMessageUpdate),
             "k_EMarketingMessageMidweekDeal" => ::std::option::Option::Some(EMarketingMessageType::k_EMarketingMessageMidweekDeal),
             "k_EMarketingMessageDailyDeal" => ::std::option::Option::Some(EMarketingMessageType::k_EMarketingMessageDailyDeal),
+            "k_EMarketingMessageNewDLC" => ::std::option::Option::Some(EMarketingMessageType::k_EMarketingMessageNewDLC),
             _ => ::std::option::Option::None
         }
     }
@@ -4920,6 +5945,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMarketingMessageType {
         EMarketingMessageType::k_EMarketingMessageUpdate,
         EMarketingMessageType::k_EMarketingMessageMidweekDeal,
         EMarketingMessageType::k_EMarketingMessageDailyDeal,
+        EMarketingMessageType::k_EMarketingMessageNewDLC,
     ];
 }
 
@@ -4937,6 +5963,8 @@ pub enum EMarketingMessageVisibility {
     k_EMarketingMessageVisibleBeta = 1,
     // @@protoc_insertion_point(enum_value:EMarketingMessageVisibility.k_EMarketingMessageVisiblePublic)
     k_EMarketingMessageVisiblePublic = 2,
+    // @@protoc_insertion_point(enum_value:EMarketingMessageVisibility.k_EMarketingMessageVisibleApprovedForPublish)
+    k_EMarketingMessageVisibleApprovedForPublish = 3,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EMarketingMessageVisibility {
@@ -4950,6 +5978,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMarketingMessageVisibility {
         match value {
             1 => ::std::option::Option::Some(EMarketingMessageVisibility::k_EMarketingMessageVisibleBeta),
             2 => ::std::option::Option::Some(EMarketingMessageVisibility::k_EMarketingMessageVisiblePublic),
+            3 => ::std::option::Option::Some(EMarketingMessageVisibility::k_EMarketingMessageVisibleApprovedForPublish),
             _ => ::std::option::Option::None
         }
     }
@@ -4958,6 +5987,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMarketingMessageVisibility {
         match str {
             "k_EMarketingMessageVisibleBeta" => ::std::option::Option::Some(EMarketingMessageVisibility::k_EMarketingMessageVisibleBeta),
             "k_EMarketingMessageVisiblePublic" => ::std::option::Option::Some(EMarketingMessageVisibility::k_EMarketingMessageVisiblePublic),
+            "k_EMarketingMessageVisibleApprovedForPublish" => ::std::option::Option::Some(EMarketingMessageVisibility::k_EMarketingMessageVisibleApprovedForPublish),
             _ => ::std::option::Option::None
         }
     }
@@ -4965,6 +5995,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EMarketingMessageVisibility {
     const VALUES: &'static [EMarketingMessageVisibility] = &[
         EMarketingMessageVisibility::k_EMarketingMessageVisibleBeta,
         EMarketingMessageVisibility::k_EMarketingMessageVisiblePublic,
+        EMarketingMessageVisibility::k_EMarketingMessageVisibleApprovedForPublish,
     ];
 }
 
@@ -5541,10 +6572,160 @@ for CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response {
         self.compute_size() as usize
     }
 }
-///Marketing message data ("Steam News" updates at client startup).
+impl ::steam_vent_proto_common::RpcMessage
+for CMarketingMessages_GetPartnerReadyToPublishMessages_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CMarketingMessages_GetPartnerReadyToPublishMessages_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CMarketingMessages_PartnerPublishMessage_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CMarketingMessages_PartnerPublishMessage_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CMarketingMessages_GetPartnerMessagePreview_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CMarketingMessages_GetPartnerMessagePreview_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CMarketingMessage_GetMarketingMessagesForPartner_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CMarketingMessage_GetMarketingMessagesForPartner_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CMarketingMessage_GetMarketingMessagesForApps_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CMarketingMessage_GetMarketingMessagesForApps_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+///
 struct MarketingMessages {}
 impl ::steam_vent_proto_common::RpcService for MarketingMessages {
     const SERVICE_NAME: &'static str = "MarketingMessages";
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CMarketingMessage_GetMarketingMessagesForApps_Request {
+    const METHOD_NAME: &'static str = "MarketingMessages.GetMarketingMessagesForApps#1";
+    type Response = CMarketingMessage_GetMarketingMessagesForApps_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CMarketingMessage_GetMarketingMessagesForPartner_Request {
+    const METHOD_NAME: &'static str = "MarketingMessages.GetMarketingMessagesForPartner#1";
+    type Response = CMarketingMessage_GetMarketingMessagesForPartner_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod
 for CMarketingMessages_CreateMarketingMessage_Request {
@@ -5597,9 +6778,24 @@ for CMarketingMessages_GetMarketingMessagesViewerRangeStats_Request {
     type Response = CMarketingMessages_GetMarketingMessagesViewerRangeStats_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod
+for CMarketingMessages_GetPartnerMessagePreview_Request {
+    const METHOD_NAME: &'static str = "MarketingMessages.GetPartnerMessagePreview#1";
+    type Response = CMarketingMessages_GetPartnerMessagePreview_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CMarketingMessages_GetPartnerReadyToPublishMessages_Request {
+    const METHOD_NAME: &'static str = "MarketingMessages.GetPartnerReadyToPublishMessages#1";
+    type Response = CMarketingMessages_GetPartnerReadyToPublishMessages_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod
 for CMarketingMessages_MarkMessageSeen_Notification {
     const METHOD_NAME: &'static str = "MarketingMessages.MarkMessageSeen#1";
     type Response = ();
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CMarketingMessages_PartnerPublishMessage_Request {
+    const METHOD_NAME: &'static str = "MarketingMessages.PublishPartnerMessage#1";
+    type Response = CMarketingMessages_PartnerPublishMessage_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod
 for CMarketingMessages_UpdateMarketingMessage_Request {

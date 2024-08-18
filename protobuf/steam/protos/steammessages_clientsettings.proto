@@ -15,6 +15,9 @@ extend .google.protobuf.FieldOptions {
 	optional string setting_default_string = 60007;
 	optional bool setting_readonly = 60008;
 	optional string setting_description = 60009;
+	optional .ESettingProfileMode setting_profile_mode = 60010 [default = k_ESettingProfileMode_None];
+	optional int64 setting_clamp_min = 60011;
+	optional int64 setting_clamp_max = 60012;
 }
 
 enum EClientSettingStore {
@@ -33,6 +36,24 @@ enum EOverlayToggleBarLocation {
 	k_EOverlayToggleBarLocation_Top = 3;
 }
 
+enum ESettingProfileMode {
+	k_ESettingProfileMode_None = 0;
+	k_ESettingProfileMode_PerGame = 1;
+	k_ESettingProfileMode_PerGamePerDisplay = 2;
+}
+
+enum EGRMode {
+	k_EGRMode_Never = 0;
+	k_EGRMode_Always = 1;
+	k_EGRMode_Manual = 2;
+}
+
+enum EGRAudio {
+	k_EGRAudio_Game = 0;
+	k_EGRAudio_System = 1;
+	k_EGRAudio_Select = 2;
+}
+
 message CMsgHotkey {
 	optional uint32 key_code = 1;
 	optional bool alt_key = 2;
@@ -40,6 +61,18 @@ message CMsgHotkey {
 	optional bool ctrl_key = 4;
 	optional bool meta_key = 5;
 	optional string display_name = 6;
+}
+
+message CMsgSettingVariant {
+	oneof value {
+		bool value_bool = 1;
+		int32 value_int32 = 2;
+		uint32 value_uint32 = 3;
+		int64 value_uint64 = 5;
+		float value_float = 6;
+		string value_string = 7;
+		.CMsgHotkey value_hotkey = 8;
+	}
 }
 
 message CMsgClientSettings {
@@ -57,19 +90,18 @@ message CMsgClientSettings {
 	optional float min_scale_factor = 12 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "UI/Display/Current/MinScaleFactor"];
 	optional float max_scale_factor = 13 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "UI/Display/Current/MaxScaleFactor"];
 	optional float auto_scale_factor = 14 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "UI/Display/Current/AutoScaleFactor"];
-	optional bool enable_test_updaters = 15 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "EnableTestUpdaters"];
 	optional bool small_mode = 16 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Software\\Valve\\Steam\\SmallMode"];
 	optional bool skip_steamvr_install_dialog = 19 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\SteamVRHMDVGUIWarning"];
 	optional bool always_show_user_chooser = 20 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "WebStorage\\Auth\\AlwaysShowUserChooser"];
 	optional bool show_family_sharing_notifications = 3000 [(setting_store) = k_EClientSettingStore_CustomFunc];
+	optional bool show_copy_count_in_library = 3001 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "ShowCopyCountInLibrary", (setting_default_bool) = true];
 	optional int32 overlay_fps_counter_corner = 4000 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\InGameOverlayShowFPSCorner"];
 	optional bool overlay_fps_counter_high_contrast = 4001 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\InGameOverlayShowFPSContrast"];
 	optional .CMsgHotkey overlay_key = 4002 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\InGameOverlayShortcutKey", (setting_default_string) = "Shift\tKEY_TAB"];
 	optional .CMsgHotkey screenshot_key = 4003 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\InGameOverlayScreenshotHotKey", (setting_default_string) = "KEY_F12"];
-	optional bool enable_overlay = 4004 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\EnableGameOverlay"];
-	optional bool disable_desktop_game_theater = 4005 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\DisableLaunchInVR"];
-	optional bool enable_screenshot_notification = 4006 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\InGameOverlayScreenshotNotification"];
-	optional bool enable_screenshot_sound = 4007 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\InGameOverlayScreenshotPlaySound"];
+	optional bool enable_overlay = 4004 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\EnableGameOverlay", (setting_default_bool) = true];
+	optional bool enable_screenshot_notification = 4006 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\InGameOverlayScreenshotNotification", (setting_default_bool) = true];
+	optional bool enable_screenshot_sound = 4007 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\InGameOverlayScreenshotPlaySound", (setting_default_bool) = true];
 	optional bool save_uncompressed_screenshots = 4008 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\InGameOverlayScreenshotSaveUncompressed"];
 	optional string screenshots_path = 4009 [(setting_store) = k_EClientSettingStore_CustomFunc];
 	optional int32 default_ping_rate = 4010 [(setting_store) = k_EClientSettingStore_CustomFunc, (setting_readonly) = true, (setting_description) = "Computed default (automatic) server ping rate based on network speed"];
@@ -85,12 +117,14 @@ message CMsgClientSettings {
 	optional bool always_use_gamepadui_overlay = 4020 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\EnableSCTenFootOverlayCheckNew"];
 	optional string overlay_tabs = 4021 [(setting_store) = k_EClientSettingStore_ConfigStore_UserRoaming, (setting_name) = "OverlayTabs"];
 	optional bool overlay_scale_interface = 4022 [(setting_store) = k_EClientSettingStore_Registry, (setting_name) = "HKEY_CURRENT_USER\\Software\\Valve\\Steam\\OverlayScaleInterface", (setting_default_bool) = true];
+	optional bool overlay_restore_browser_tabs = 4023 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\InGameOverlayRestoreBrowserTabs", (setting_default_bool) = true];
+	optional bool enable_avif_screenshots = 4024 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\InGameOverlayScreenshotEnableAVIF"];
 	optional bool smooth_scroll_webviews = 5000 [(setting_store) = k_EClientSettingStore_Registry, (setting_name) = "HKEY_CURRENT_USER\\Software\\Valve\\Steam\\SmoothScrollWebViews", (setting_default_bool) = true];
 	optional bool enable_gpu_accelerated_webviews = 5001 [(setting_store) = k_EClientSettingStore_CustomFunc];
 	optional bool enable_hardware_video_decoding = 5003 [(setting_store) = k_EClientSettingStore_CustomFunc];
 	optional bool run_at_startup = 5004 [(setting_store) = k_EClientSettingStore_CustomFunc];
 	optional bool enable_dpi_scaling = 5005 [(setting_store) = k_EClientSettingStore_CustomFunc];
-	optional bool enable_marketing_messages = 5006 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "news\\NotifyAvailableGames"];
+	optional bool enable_marketing_messages = 5006 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "news\\NotifyAvailableGames", (setting_default_bool) = true];
 	optional bool start_in_big_picture_mode = 5007 [(setting_store) = k_EClientSettingStore_CustomFunc];
 	optional uint32 jumplist_flags = 5008 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\JumplistSettings", (setting_default_uint) = 77680];
 	optional bool enable_ui_sounds = 5009 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "system\\EnableUISounds", (setting_default_bool) = true];
@@ -129,8 +163,8 @@ message CMsgClientSettings {
 	optional bool music_playlist_notification = 11004 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "Music\\PlaylistNowPlayingNotification"];
 	optional .EBroadcastPermission broadcast_permissions = 12000 [default = k_EBroadcastPermissionDisabled, (setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\Permissions", (setting_default_int) = 1];
 	optional int32 broadcast_output_width = 12001 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\OutputWidth"];
-	optional int32 broadcast_output_height = 12002 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\OutputHeight"];
-	optional int32 broadcast_bitrate = 12003 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\MaxKbps"];
+	optional int32 broadcast_output_height = 12002 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\OutputHeight", (setting_default_int) = 720];
+	optional int32 broadcast_bitrate = 12003 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\MaxKbps", (setting_default_int) = 2500];
 	optional .EBroadcastEncoderSetting broadcast_encoding_option = 12004 [default = k_EBroadcastEncoderBestQuality, (setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\EncoderSetting"];
 	optional bool broadcast_record_all_video = 12005 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\IncludeDesktop"];
 	optional bool broadcast_record_all_audio = 12006 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\RecordSystemAudio"];
@@ -138,9 +172,10 @@ message CMsgClientSettings {
 	optional bool broadcast_show_upload_stats = 12008 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\ShowDebugInfo"];
 	optional bool broadcast_show_live_reminder = 12009 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\ShowReminder", (setting_default_bool) = true];
 	optional int32 broadcast_chat_corner = 12010 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Broadcast\\ShowChat", (setting_default_int) = 1];
+	optional bool gamestream_hardware_video_encode = 13000 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "GameStream\\HardwareVideoEncode", (setting_default_bool) = true];
 	optional bool steam_input_configurator_error_msg_enable = 14001 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SteamInput/Configurator/ErrorMsgEnabled"];
-	optional bool controller_guide_button_focus_steam = 14002 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Controller_CheckGuideButton"];
-	optional bool controller_ps4_support = 14003 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "SteamController_PS4Support"];
+	optional bool controller_guide_button_focus_steam = 14002 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Controller_CheckGuideButton", (setting_default_bool) = true];
+	optional int32 controller_ps_support = 14003 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "SteamController_PSSupport", (setting_default_int) = 1];
 	optional bool controller_xbox_support = 14004 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "SteamController_XBoxSupport"];
 	optional bool controller_xbox_driver = 14005 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "SteamController_XBoxDriver"];
 	optional bool controller_switch_support = 14006 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "SteamController_SwitchSupport"];
@@ -154,8 +189,49 @@ message CMsgClientSettings {
 	optional bool startup_movie_used_for_resume = 16003 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Customization/StartupMovie/UsedForResume"];
 	optional bool game_notes_enable_spellcheck = 17001 [(setting_store) = k_EClientSettingStore_ConfigStore_UserRoaming, (setting_name) = "GameNotesEnableSpellcheck", (setting_default_bool) = true];
 	optional int32 screenshot_items_per_row = 18000 [(setting_store) = k_EClientSettingStore_ConfigStore_UserRoaming, (setting_name) = "ScreenshotViewItemsPerRow", (setting_default_int) = 1];
-	optional bool g_background_enabled = 18200 [(setting_store) = k_EClientSettingStore_CustomFunc];
 	optional string g_background_path = 18201 [(setting_store) = k_EClientSettingStore_CustomFunc];
 	optional string g_background_max_keep = 18202 [(setting_store) = k_EClientSettingStore_CustomFunc];
+	optional int32 g_background_time_resolution = 18203 [(setting_store) = k_EClientSettingStore_CustomFunc];
+	optional .CMsgHotkey g_background_mk = 18207 [(setting_store) = k_EClientSettingStore_CustomFunc];
+	optional .CMsgHotkey g_background_tg = 18208 [(setting_store) = k_EClientSettingStore_CustomFunc];
+	optional bool g_background_a_m = 18209 [(setting_store) = k_EClientSettingStore_CustomFunc];
+	optional int32 g_background_br = 18210 [(setting_store) = k_EClientSettingStore_CustomFunc];
+	optional bool g_background_a_s = 18211 [(setting_store) = k_EClientSettingStore_CustomFunc];
+	optional .EGRMode g_background_mode = 18212 [default = k_EGRMode_Never, (setting_store) = k_EClientSettingStore_CustomFunc];
+	optional .EGRAudio g_background_audio = 18213 [default = k_EGRAudio_Game, (setting_store) = k_EClientSettingStore_CustomFunc];
+	optional int32 g_max_fps = 18214 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "GameRecording\\MaxFPS", (setting_default_int) = 60, (setting_clamp_min) = 24, (setting_clamp_max) = 120];
 	optional bool show_timestamps_in_console = 20000 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Developer\\ShowTimestampsInConsole"];
+	optional bool force_oobe = 20001 [(setting_store) = k_EClientSettingStore_Registry, (setting_name) = "HKEY_CURRENT_USER\\Software\\Valve\\Steam\\ForceOOBE"];
+	optional int32 override_browser_composer_mode = 20002 [(setting_store) = k_EClientSettingStore_CustomFunc];
+	optional bool cef_remote_debugging_enabled = 20003 [(setting_store) = k_EClientSettingStore_CustomFunc];
+	optional bool force_deck_perf_tab = 20004 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "Developer/ForceDeckPerfTab"];
+	optional bool force_fake_mandatory_update = 20005 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "Developer/FakeMandatoryUpdate"];
+	optional bool hdr_compat_testing = 20006 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "Developer/HDRCompatTesting"];
+	optional .EHDRVisualization gamescope_hdr_visualization = 21001 [default = k_EHDRVisualization_None, (setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Gamescope/HDRVisualization2"];
+	optional int32 gamescope_app_target_framerate = 21002 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Gamescope/AppTargetFrameRate", (setting_default_int) = 0, (setting_profile_mode) = k_ESettingProfileMode_PerGamePerDisplay];
+	optional bool gamescope_enable_app_target_framerate = 21003 [(setting_store) = k_EClientSettingStore_Registry, (setting_name) = "HKEY_CURRENT_USER\\Software\\Valve\\Steam\\GamescopeEnableAppTargetRefreshRate2", (setting_default_bool) = true];
+	optional bool gamescope_disable_framelimit = 21004 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Gamescope/DisableFrameLimit", (setting_default_bool) = false, (setting_profile_mode) = k_ESettingProfileMode_PerGamePerDisplay];
+	optional int32 gamescope_display_refresh_rate = 21005 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Gamescope/RefreshRate", (setting_default_int) = 0, (setting_profile_mode) = k_ESettingProfileMode_PerGamePerDisplay];
+	optional bool gamescope_use_game_refresh_rate_in_steam = 21006 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Developer/DynamicRefreshRateInSteam", (setting_default_bool) = true];
+	optional bool gamescope_disable_mura_correction = 21007 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Gamescope/MuraCorrectionDisabled", (setting_default_bool) = false];
+	optional bool gamescope_include_steamui_in_screenshots = 21008 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Gamescope/IncludeSteamUIInScreenshots", (setting_default_bool) = true];
+	optional bool gamescope_allow_tearing = 21009 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Gamescope/AllowTearing", (setting_default_bool) = false, (setting_profile_mode) = k_ESettingProfileMode_PerGame];
+	optional bool gamescope_composite_debug = 21010 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Gamescope/CompositeDebug", (setting_default_bool) = false];
+	optional bool gamescope_force_composite = 21011 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "Gamescope/ForceComposite", (setting_default_bool) = false];
+	optional int32 steamos_status_led_brightness = 22000 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "SteamOS/StatusLEDBrightness", (setting_default_int) = 100];
+	optional bool steamos_tdp_limit_enabled = 22001 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SteamOS/TDPLimitEnabled", (setting_default_bool) = false, (setting_profile_mode) = k_ESettingProfileMode_PerGame];
+	optional int32 steamos_tdp_limit = 22002 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SteamOS/TDPLimit", (setting_default_int) = 0, (setting_profile_mode) = k_ESettingProfileMode_PerGame];
+	optional bool steamos_cec_enabled = 22003 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SteamOS/CECEnabled", (setting_default_bool) = true];
+	optional bool steamos_cec_wake_on_resume = 22004 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SteamOS/WakeOnResume", (setting_default_bool) = true];
+	optional bool steamos_wifi_debug = 22005 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SteamOS/WifiDebug", (setting_default_bool) = false];
+	optional bool steamos_wifi_force_wpa_supplicant = 22006 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SteamOS/WifiForceWPASupplicant", (setting_default_bool) = false];
+	optional int32 steamos_magnifier_scale = 22007 [(setting_store) = k_EClientSettingStore_ConfigStore_UserLocal, (setting_name) = "SteamOS/MagnifierScale", (setting_default_int) = 150];
+	optional bool setting_validation_bool = 23001 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SettingValidation/DummyBool"];
+	optional .EHDRVisualization setting_validation_enum = 23002 [default = k_EHDRVisualization_None, (setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SettingValidation/DummyEnum"];
+	optional int32 setting_validation_int32 = 23003 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SettingValidation/DummyInt32"];
+	optional uint32 setting_validation_uint32 = 23004 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SettingValidation/DummyUInt32"];
+	optional uint64 setting_validation_uint64 = 23005 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SettingValidation/DummyUInt64"];
+	optional float setting_validation_float = 23006 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SettingValidation/DummyFloat"];
+	optional string setting_validation_string = 23007 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "SettingValidation/DummyString"];
+	optional bool system_bluetooth_enabled = 24000 [(setting_store) = k_EClientSettingStore_ConfigStore_Install, (setting_name) = "System/Bluetooth/Enabled", (setting_default_bool) = false];
 }

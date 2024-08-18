@@ -178,6 +178,257 @@ impl ::steam_vent_proto_common::protobuf::Message for CSystemManager_Hibernate_R
     }
 }
 
+// @@protoc_insertion_point(message:CSystemManager_WriteFile_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CSystemManager_WriteFile_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CSystemManager_WriteFile_Request.path)
+    pub path: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CSystemManager_WriteFile_Request.data)
+    pub data: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CSystemManager_WriteFile_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CSystemManager_WriteFile_Request {
+    fn default() -> &'a CSystemManager_WriteFile_Request {
+        <CSystemManager_WriteFile_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CSystemManager_WriteFile_Request {
+    pub fn new() -> CSystemManager_WriteFile_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional string path = 1;
+
+    pub fn path(&self) -> &str {
+        match self.path.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_path(&mut self) {
+        self.path = ::std::option::Option::None;
+    }
+
+    pub fn has_path(&self) -> bool {
+        self.path.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_path(&mut self, v: ::std::string::String) {
+        self.path = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_path(&mut self) -> &mut ::std::string::String {
+        if self.path.is_none() {
+            self.path = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.path.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_path(&mut self) -> ::std::string::String {
+        self.path.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional bytes data = 2;
+
+    pub fn data(&self) -> &[u8] {
+        match self.data.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_data(&mut self) {
+        self.data = ::std::option::Option::None;
+    }
+
+    pub fn has_data(&self) -> bool {
+        self.data.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_data(&mut self, v: ::std::vec::Vec<u8>) {
+        self.data = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_data(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.data.is_none() {
+            self.data = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.data.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_data(&mut self) -> ::std::vec::Vec<u8> {
+        self.data.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CSystemManager_WriteFile_Request {
+    const NAME: &'static str = "CSystemManager_WriteFile_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.path = ::std::option::Option::Some(is.read_string()?);
+                },
+                18 => {
+                    self.data = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.path.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(1, &v);
+        }
+        if let Some(v) = self.data.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(2, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.path.as_ref() {
+            os.write_string(1, v)?;
+        }
+        if let Some(v) = self.data.as_ref() {
+            os.write_bytes(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CSystemManager_WriteFile_Request {
+        CSystemManager_WriteFile_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.path = ::std::option::Option::None;
+        self.data = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CSystemManager_WriteFile_Request {
+        static instance: CSystemManager_WriteFile_Request = CSystemManager_WriteFile_Request {
+            path: ::std::option::Option::None,
+            data: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CSystemManager_WriteFile_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CSystemManager_WriteFile_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CSystemManager_WriteFile_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CSystemManager_WriteFile_Response {
+    fn default() -> &'a CSystemManager_WriteFile_Response {
+        <CSystemManager_WriteFile_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CSystemManager_WriteFile_Response {
+    pub fn new() -> CSystemManager_WriteFile_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CSystemManager_WriteFile_Response {
+    const NAME: &'static str = "CSystemManager_WriteFile_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CSystemManager_WriteFile_Response {
+        CSystemManager_WriteFile_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CSystemManager_WriteFile_Response {
+        static instance: CSystemManager_WriteFile_Response = CSystemManager_WriteFile_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 
 const _VENT_PROTO_VERSION_CHECK: () = ::steam_vent_proto_common::VERSION_0_5_0;
 
@@ -211,6 +462,32 @@ impl ::steam_vent_proto_common::RpcMessage for CSystemManager_Hibernate_Response
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessage for CSystemManager_WriteFile_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CSystemManager_WriteFile_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
 ///
 struct SystemManager {}
 impl ::steam_vent_proto_common::RpcService for SystemManager {
@@ -219,4 +496,8 @@ impl ::steam_vent_proto_common::RpcService for SystemManager {
 impl ::steam_vent_proto_common::RpcMethod for CSystemManager_Hibernate_Request {
     const METHOD_NAME: &'static str = "SystemManager.Hibernate#1";
     type Response = CSystemManager_Hibernate_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod for CSystemManager_WriteFile_Request {
+    const METHOD_NAME: &'static str = "SystemManager.WriteFile#1";
+    type Response = CSystemManager_WriteFile_Response;
 }

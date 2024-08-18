@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Service to perform authenticated key-exchange involving Steam Client"]
 // @@protoc_insertion_point(message:CKeyEscrow_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CKeyEscrow_Request {
@@ -916,7 +915,7 @@ impl ::steam_vent_proto_common::RpcMessage for CKeyEscrow_Response {
         self.compute_size() as usize
     }
 }
-///Service for accessing credentials and guarding secrets
+///
 struct Secrets {}
 impl ::steam_vent_proto_common::RpcService for Secrets {
     const SERVICE_NAME: &'static str = "Secrets";

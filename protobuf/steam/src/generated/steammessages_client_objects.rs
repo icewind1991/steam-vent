@@ -4828,6 +4828,12 @@ pub mod cmsg_bluetooth_devices_data {
         pub is_paired: ::std::option::Option<bool>,
         // @@protoc_insertion_point(field:CMsgBluetoothDevicesData.Device.strength_raw)
         pub strength_raw: ::std::option::Option<i32>,
+        // @@protoc_insertion_point(field:CMsgBluetoothDevicesData.Device.wake_allowed)
+        pub wake_allowed: ::std::option::Option<bool>,
+        // @@protoc_insertion_point(field:CMsgBluetoothDevicesData.Device.wake_allowed_supported)
+        pub wake_allowed_supported: ::std::option::Option<bool>,
+        // @@protoc_insertion_point(field:CMsgBluetoothDevicesData.Device.battery_percent)
+        pub battery_percent: ::std::option::Option<i32>,
         // special fields
         // @@protoc_insertion_point(special_field:CMsgBluetoothDevicesData.Device.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -5032,6 +5038,63 @@ pub mod cmsg_bluetooth_devices_data {
         pub fn set_strength_raw(&mut self, v: i32) {
             self.strength_raw = ::std::option::Option::Some(v);
         }
+
+        // optional bool wake_allowed = 9;
+
+        pub fn wake_allowed(&self) -> bool {
+            self.wake_allowed.unwrap_or(false)
+        }
+
+        pub fn clear_wake_allowed(&mut self) {
+            self.wake_allowed = ::std::option::Option::None;
+        }
+
+        pub fn has_wake_allowed(&self) -> bool {
+            self.wake_allowed.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_wake_allowed(&mut self, v: bool) {
+            self.wake_allowed = ::std::option::Option::Some(v);
+        }
+
+        // optional bool wake_allowed_supported = 10;
+
+        pub fn wake_allowed_supported(&self) -> bool {
+            self.wake_allowed_supported.unwrap_or(false)
+        }
+
+        pub fn clear_wake_allowed_supported(&mut self) {
+            self.wake_allowed_supported = ::std::option::Option::None;
+        }
+
+        pub fn has_wake_allowed_supported(&self) -> bool {
+            self.wake_allowed_supported.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_wake_allowed_supported(&mut self, v: bool) {
+            self.wake_allowed_supported = ::std::option::Option::Some(v);
+        }
+
+        // optional int32 battery_percent = 11;
+
+        pub fn battery_percent(&self) -> i32 {
+            self.battery_percent.unwrap_or(0)
+        }
+
+        pub fn clear_battery_percent(&mut self) {
+            self.battery_percent = ::std::option::Option::None;
+        }
+
+        pub fn has_battery_percent(&self) -> bool {
+            self.battery_percent.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_battery_percent(&mut self, v: i32) {
+            self.battery_percent = ::std::option::Option::Some(v);
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for Device {
@@ -5067,6 +5130,15 @@ pub mod cmsg_bluetooth_devices_data {
                     },
                     64 => {
                         self.strength_raw = ::std::option::Option::Some(is.read_int32()?);
+                    },
+                    72 => {
+                        self.wake_allowed = ::std::option::Option::Some(is.read_bool()?);
+                    },
+                    80 => {
+                        self.wake_allowed_supported = ::std::option::Option::Some(is.read_bool()?);
+                    },
+                    88 => {
+                        self.battery_percent = ::std::option::Option::Some(is.read_int32()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -5104,6 +5176,15 @@ pub mod cmsg_bluetooth_devices_data {
             if let Some(v) = self.strength_raw {
                 my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(8, v);
             }
+            if let Some(v) = self.wake_allowed {
+                my_size += 1 + 1;
+            }
+            if let Some(v) = self.wake_allowed_supported {
+                my_size += 1 + 1;
+            }
+            if let Some(v) = self.battery_percent {
+                my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(11, v);
+            }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -5134,6 +5215,15 @@ pub mod cmsg_bluetooth_devices_data {
             if let Some(v) = self.strength_raw {
                 os.write_int32(8, v)?;
             }
+            if let Some(v) = self.wake_allowed {
+                os.write_bool(9, v)?;
+            }
+            if let Some(v) = self.wake_allowed_supported {
+                os.write_bool(10, v)?;
+            }
+            if let Some(v) = self.battery_percent {
+                os.write_int32(11, v)?;
+            }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
         }
@@ -5159,6 +5249,9 @@ pub mod cmsg_bluetooth_devices_data {
             self.is_connected = ::std::option::Option::None;
             self.is_paired = ::std::option::Option::None;
             self.strength_raw = ::std::option::Option::None;
+            self.wake_allowed = ::std::option::Option::None;
+            self.wake_allowed_supported = ::std::option::Option::None;
+            self.battery_percent = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -5172,6 +5265,9 @@ pub mod cmsg_bluetooth_devices_data {
                 is_connected: ::std::option::Option::None,
                 is_paired: ::std::option::Option::None,
                 strength_raw: ::std::option::Option::None,
+                wake_allowed: ::std::option::Option::None,
+                wake_allowed_supported: ::std::option::Option::None,
+                battery_percent: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -5932,8 +6028,6 @@ pub struct CMsgSystemPerfLimits {
     pub display_external_refresh_manual_hz_max: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CMsgSystemPerfLimits.fps_limit_options_external)
     pub fps_limit_options_external: ::std::vec::Vec<i32>,
-    // @@protoc_insertion_point(field:CMsgSystemPerfLimits.is_tearing_supported)
-    pub is_tearing_supported: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgSystemPerfLimits.is_vrr_supported)
     pub is_vrr_supported: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgSystemPerfLimits.is_dynamic_refresh_rate_in_steam_supported)
@@ -5948,6 +6042,8 @@ pub struct CMsgSystemPerfLimits {
     pub is_hdr_supported: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgSystemPerfLimits.display_refresh_manual_hz_oc_max)
     pub display_refresh_manual_hz_oc_max: ::std::option::Option<i32>,
+    // @@protoc_insertion_point(field:CMsgSystemPerfLimits.disable_refresh_rate_management)
+    pub disable_refresh_rate_management: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgSystemPerfLimits.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -6306,25 +6402,6 @@ impl CMsgSystemPerfLimits {
         self.display_external_refresh_manual_hz_max = ::std::option::Option::Some(v);
     }
 
-    // optional bool is_tearing_supported = 22;
-
-    pub fn is_tearing_supported(&self) -> bool {
-        self.is_tearing_supported.unwrap_or(false)
-    }
-
-    pub fn clear_is_tearing_supported(&mut self) {
-        self.is_tearing_supported = ::std::option::Option::None;
-    }
-
-    pub fn has_is_tearing_supported(&self) -> bool {
-        self.is_tearing_supported.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_is_tearing_supported(&mut self, v: bool) {
-        self.is_tearing_supported = ::std::option::Option::Some(v);
-    }
-
     // optional bool is_vrr_supported = 23;
 
     pub fn is_vrr_supported(&self) -> bool {
@@ -6419,6 +6496,25 @@ impl CMsgSystemPerfLimits {
     pub fn set_display_refresh_manual_hz_oc_max(&mut self, v: i32) {
         self.display_refresh_manual_hz_oc_max = ::std::option::Option::Some(v);
     }
+
+    // optional bool disable_refresh_rate_management = 30;
+
+    pub fn disable_refresh_rate_management(&self) -> bool {
+        self.disable_refresh_rate_management.unwrap_or(false)
+    }
+
+    pub fn clear_disable_refresh_rate_management(&mut self) {
+        self.disable_refresh_rate_management = ::std::option::Option::None;
+    }
+
+    pub fn has_disable_refresh_rate_management(&self) -> bool {
+        self.disable_refresh_rate_management.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_disable_refresh_rate_management(&mut self, v: bool) {
+        self.disable_refresh_rate_management = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLimits {
@@ -6503,9 +6599,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLimits {
                 168 => {
                     self.fps_limit_options_external.push(is.read_int32()?);
                 },
-                176 => {
-                    self.is_tearing_supported = ::std::option::Option::Some(is.read_bool()?);
-                },
                 184 => {
                     self.is_vrr_supported = ::std::option::Option::Some(is.read_bool()?);
                 },
@@ -6532,6 +6625,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLimits {
                 },
                 232 => {
                     self.display_refresh_manual_hz_oc_max = ::std::option::Option::Some(is.read_int32()?);
+                },
+                240 => {
+                    self.disable_refresh_rate_management = ::std::option::Option::Some(is.read_bool()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -6608,9 +6704,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLimits {
         for value in &self.fps_limit_options_external {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(21, *value);
         };
-        if let Some(v) = self.is_tearing_supported {
-            my_size += 2 + 1;
-        }
         if let Some(v) = self.is_vrr_supported {
             my_size += 2 + 1;
         }
@@ -6631,6 +6724,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLimits {
         }
         if let Some(v) = self.display_refresh_manual_hz_oc_max {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(29, v);
+        }
+        if let Some(v) = self.disable_refresh_rate_management {
+            my_size += 2 + 1;
         }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
@@ -6701,9 +6797,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLimits {
         for v in &self.fps_limit_options_external {
             os.write_int32(21, *v)?;
         };
-        if let Some(v) = self.is_tearing_supported {
-            os.write_bool(22, v)?;
-        }
         if let Some(v) = self.is_vrr_supported {
             os.write_bool(23, v)?;
         }
@@ -6724,6 +6817,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLimits {
         }
         if let Some(v) = self.display_refresh_manual_hz_oc_max {
             os.write_int32(29, v)?;
+        }
+        if let Some(v) = self.disable_refresh_rate_management {
+            os.write_bool(30, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -6763,7 +6859,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLimits {
         self.display_external_refresh_manual_hz_min = ::std::option::Option::None;
         self.display_external_refresh_manual_hz_max = ::std::option::Option::None;
         self.fps_limit_options_external.clear();
-        self.is_tearing_supported = ::std::option::Option::None;
         self.is_vrr_supported = ::std::option::Option::None;
         self.is_dynamic_refresh_rate_in_steam_supported = ::std::option::Option::None;
         self.is_split_scaling_and_filtering_supported = ::std::option::Option::None;
@@ -6771,6 +6866,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLimits {
         self.split_scaling_scalers_available.clear();
         self.is_hdr_supported = ::std::option::Option::None;
         self.display_refresh_manual_hz_oc_max = ::std::option::Option::None;
+        self.disable_refresh_rate_management = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -6797,7 +6893,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLimits {
             display_external_refresh_manual_hz_min: ::std::option::Option::None,
             display_external_refresh_manual_hz_max: ::std::option::Option::None,
             fps_limit_options_external: ::std::vec::Vec::new(),
-            is_tearing_supported: ::std::option::Option::None,
             is_vrr_supported: ::std::option::Option::None,
             is_dynamic_refresh_rate_in_steam_supported: ::std::option::Option::None,
             is_split_scaling_and_filtering_supported: ::std::option::Option::None,
@@ -6805,6 +6900,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLimits {
             split_scaling_scalers_available: ::std::vec::Vec::new(),
             is_hdr_supported: ::std::option::Option::None,
             display_refresh_manual_hz_oc_max: ::std::option::Option::None,
+            disable_refresh_rate_management: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -7129,7 +7225,7 @@ impl CMsgSystemPerfSettingsGlobal {
         self.allow_experimental_hdr = ::std::option::Option::Some(v);
     }
 
-    // optional float sdr_to_hdr_brightness = 17;
+    // optional float sdr_to_hdr_brightness = 22;
 
     pub fn sdr_to_hdr_brightness(&self) -> f32 {
         self.sdr_to_hdr_brightness.unwrap_or(0.)
@@ -7274,7 +7370,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfSettingsGlob
                 128 => {
                     self.allow_experimental_hdr = ::std::option::Option::Some(is.read_bool()?);
                 },
-                141 => {
+                181 => {
                     self.sdr_to_hdr_brightness = ::std::option::Option::Some(is.read_float()?);
                 },
                 144 => {
@@ -7401,7 +7497,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfSettingsGlob
             os.write_bool(16, v)?;
         }
         if let Some(v) = self.sdr_to_hdr_brightness {
-            os.write_float(17, v)?;
+            os.write_float(22, v)?;
         }
         if let Some(v) = self.debug_force_hdr_support {
             os.write_bool(18, v)?;
@@ -7523,10 +7619,6 @@ pub struct CMsgSystemPerfSettingsPerApp {
     pub is_tearing_enabled: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgSystemPerfSettingsPerApp.is_vrr_enabled)
     pub is_vrr_enabled: ::std::option::Option<bool>,
-    // @@protoc_insertion_point(field:CMsgSystemPerfSettingsPerApp.is_composite_debug_enabled)
-    pub is_composite_debug_enabled: ::std::option::Option<bool>,
-    // @@protoc_insertion_point(field:CMsgSystemPerfSettingsPerApp.force_composite)
-    pub force_composite: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgSystemPerfSettingsPerApp.use_dynamic_refresh_rate_in_steam)
     pub use_dynamic_refresh_rate_in_steam: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgSystemPerfSettingsPerApp.split_scaling_filter)
@@ -7935,44 +8027,6 @@ impl CMsgSystemPerfSettingsPerApp {
         self.is_vrr_enabled = ::std::option::Option::Some(v);
     }
 
-    // optional bool is_composite_debug_enabled = 21;
-
-    pub fn is_composite_debug_enabled(&self) -> bool {
-        self.is_composite_debug_enabled.unwrap_or(false)
-    }
-
-    pub fn clear_is_composite_debug_enabled(&mut self) {
-        self.is_composite_debug_enabled = ::std::option::Option::None;
-    }
-
-    pub fn has_is_composite_debug_enabled(&self) -> bool {
-        self.is_composite_debug_enabled.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_is_composite_debug_enabled(&mut self, v: bool) {
-        self.is_composite_debug_enabled = ::std::option::Option::Some(v);
-    }
-
-    // optional bool force_composite = 22;
-
-    pub fn force_composite(&self) -> bool {
-        self.force_composite.unwrap_or(false)
-    }
-
-    pub fn clear_force_composite(&mut self) {
-        self.force_composite = ::std::option::Option::None;
-    }
-
-    pub fn has_force_composite(&self) -> bool {
-        self.force_composite.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_force_composite(&mut self, v: bool) {
-        self.force_composite = ::std::option::Option::Some(v);
-    }
-
     // optional bool use_dynamic_refresh_rate_in_steam = 23;
 
     pub fn use_dynamic_refresh_rate_in_steam(&self) -> bool {
@@ -8107,12 +8161,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfSettingsPerA
                 160 => {
                     self.is_vrr_enabled = ::std::option::Option::Some(is.read_bool()?);
                 },
-                168 => {
-                    self.is_composite_debug_enabled = ::std::option::Option::Some(is.read_bool()?);
-                },
-                176 => {
-                    self.force_composite = ::std::option::Option::Some(is.read_bool()?);
-                },
                 184 => {
                     self.use_dynamic_refresh_rate_in_steam = ::std::option::Option::Some(is.read_bool()?);
                 },
@@ -8194,12 +8242,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfSettingsPerA
         if let Some(v) = self.is_vrr_enabled {
             my_size += 2 + 1;
         }
-        if let Some(v) = self.is_composite_debug_enabled {
-            my_size += 2 + 1;
-        }
-        if let Some(v) = self.force_composite {
-            my_size += 2 + 1;
-        }
         if let Some(v) = self.use_dynamic_refresh_rate_in_steam {
             my_size += 2 + 1;
         }
@@ -8275,12 +8317,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfSettingsPerA
         if let Some(v) = self.is_vrr_enabled {
             os.write_bool(20, v)?;
         }
-        if let Some(v) = self.is_composite_debug_enabled {
-            os.write_bool(21, v)?;
-        }
-        if let Some(v) = self.force_composite {
-            os.write_bool(22, v)?;
-        }
         if let Some(v) = self.use_dynamic_refresh_rate_in_steam {
             os.write_bool(23, v)?;
         }
@@ -8327,8 +8363,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfSettingsPerA
         self.fps_limit_external = ::std::option::Option::None;
         self.is_tearing_enabled = ::std::option::Option::None;
         self.is_vrr_enabled = ::std::option::Option::None;
-        self.is_composite_debug_enabled = ::std::option::Option::None;
-        self.force_composite = ::std::option::Option::None;
         self.use_dynamic_refresh_rate_in_steam = ::std::option::Option::None;
         self.split_scaling_filter = ::std::option::Option::None;
         self.split_scaling_scaler = ::std::option::Option::None;
@@ -8357,8 +8391,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfSettingsPerA
             fps_limit_external: ::std::option::Option::None,
             is_tearing_enabled: ::std::option::Option::None,
             is_vrr_enabled: ::std::option::Option::None,
-            is_composite_debug_enabled: ::std::option::Option::None,
-            force_composite: ::std::option::Option::None,
             use_dynamic_refresh_rate_in_steam: ::std::option::Option::None,
             split_scaling_filter: ::std::option::Option::None,
             split_scaling_scaler: ::std::option::Option::None,
@@ -9673,6 +9705,234 @@ pub mod cmsg_system_perf_update_settings {
     }
 
     impl Update {
+    }
+}
+
+// @@protoc_insertion_point(message:CMsgSystemPerfLegacySettingEntry)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgSystemPerfLegacySettingEntry {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgSystemPerfLegacySettingEntry.profile_game_id)
+    pub profile_game_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CMsgSystemPerfLegacySettingEntry.settings)
+    pub settings: ::steam_vent_proto_common::protobuf::MessageField<CMsgSystemPerfSettingsPerApp>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgSystemPerfLegacySettingEntry.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgSystemPerfLegacySettingEntry {
+    fn default() -> &'a CMsgSystemPerfLegacySettingEntry {
+        <CMsgSystemPerfLegacySettingEntry as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgSystemPerfLegacySettingEntry {
+    pub fn new() -> CMsgSystemPerfLegacySettingEntry {
+        ::std::default::Default::default()
+    }
+
+    // optional uint64 profile_game_id = 1;
+
+    pub fn profile_game_id(&self) -> u64 {
+        self.profile_game_id.unwrap_or(0)
+    }
+
+    pub fn clear_profile_game_id(&mut self) {
+        self.profile_game_id = ::std::option::Option::None;
+    }
+
+    pub fn has_profile_game_id(&self) -> bool {
+        self.profile_game_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_profile_game_id(&mut self, v: u64) {
+        self.profile_game_id = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLegacySettingEntry {
+    const NAME: &'static str = "CMsgSystemPerfLegacySettingEntry";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.profile_game_id = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                18 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.settings)?;
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.profile_game_id {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(1, v);
+        }
+        if let Some(v) = self.settings.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.profile_game_id {
+            os.write_uint64(1, v)?;
+        }
+        if let Some(v) = self.settings.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgSystemPerfLegacySettingEntry {
+        CMsgSystemPerfLegacySettingEntry::new()
+    }
+
+    fn clear(&mut self) {
+        self.profile_game_id = ::std::option::Option::None;
+        self.settings.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgSystemPerfLegacySettingEntry {
+        static instance: CMsgSystemPerfLegacySettingEntry = CMsgSystemPerfLegacySettingEntry {
+            profile_game_id: ::std::option::Option::None,
+            settings: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMsgSystemPerfLegacySettings)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgSystemPerfLegacySettings {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgSystemPerfLegacySettings.global)
+    pub global: ::steam_vent_proto_common::protobuf::MessageField<CMsgSystemPerfSettingsGlobal>,
+    // @@protoc_insertion_point(field:CMsgSystemPerfLegacySettings.per_app_settings)
+    pub per_app_settings: ::std::vec::Vec<CMsgSystemPerfLegacySettingEntry>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgSystemPerfLegacySettings.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgSystemPerfLegacySettings {
+    fn default() -> &'a CMsgSystemPerfLegacySettings {
+        <CMsgSystemPerfLegacySettings as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgSystemPerfLegacySettings {
+    pub fn new() -> CMsgSystemPerfLegacySettings {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemPerfLegacySettings {
+    const NAME: &'static str = "CMsgSystemPerfLegacySettings";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.global)?;
+                },
+                18 => {
+                    self.per_app_settings.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.global.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        for value in &self.per_app_settings {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.global.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        for v in &self.per_app_settings {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgSystemPerfLegacySettings {
+        CMsgSystemPerfLegacySettings::new()
+    }
+
+    fn clear(&mut self) {
+        self.global.clear();
+        self.per_app_settings.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgSystemPerfLegacySettings {
+        static instance: CMsgSystemPerfLegacySettings = CMsgSystemPerfLegacySettings {
+            global: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            per_app_settings: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
     }
 }
 
@@ -12509,6 +12769,8 @@ pub struct CMsgSystemDisplay {
     pub is_hdr_capable: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgSystemDisplay.is_hdr_enabled)
     pub is_hdr_enabled: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CMsgSystemDisplay.supported_refresh_rates)
+    pub supported_refresh_rates: ::std::vec::Vec<i32>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgSystemDisplay.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -12925,6 +13187,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemDisplay {
                 136 => {
                     self.is_hdr_enabled = ::std::option::Option::Some(is.read_bool()?);
                 },
+                146 => {
+                    is.read_repeated_packed_int32_into(&mut self.supported_refresh_rates)?;
+                },
+                144 => {
+                    self.supported_refresh_rates.push(is.read_int32()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -12989,6 +13257,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemDisplay {
         if let Some(v) = self.is_hdr_enabled {
             my_size += 2 + 1;
         }
+        for value in &self.supported_refresh_rates {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(18, *value);
+        };
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -13046,6 +13317,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemDisplay {
         if let Some(v) = self.is_hdr_enabled {
             os.write_bool(17, v)?;
         }
+        for v in &self.supported_refresh_rates {
+            os.write_int32(18, *v)?;
+        };
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -13080,6 +13354,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemDisplay {
         self.is_vrr_enabled = ::std::option::Option::None;
         self.is_hdr_capable = ::std::option::Option::None;
         self.is_hdr_enabled = ::std::option::Option::None;
+        self.supported_refresh_rates.clear();
         self.special_fields.clear();
     }
 
@@ -13102,6 +13377,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemDisplay {
             is_vrr_enabled: ::std::option::Option::None,
             is_hdr_capable: ::std::option::Option::None,
             is_hdr_enabled: ::std::option::Option::None,
+            supported_refresh_rates: ::std::vec::Vec::new(),
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -13447,8 +13723,8 @@ pub struct CMsgSystemManagerSettings {
     pub display_nightmode_schedule_endtime: ::std::option::Option<f32>,
     // @@protoc_insertion_point(field:CMsgSystemManagerSettings.display_diagnostics_enabled)
     pub display_diagnostics_enabled: ::std::option::Option<bool>,
-    // @@protoc_insertion_point(field:CMsgSystemManagerSettings.als_lux_latest)
-    pub als_lux_latest: ::std::option::Option<f32>,
+    // @@protoc_insertion_point(field:CMsgSystemManagerSettings.als_lux_primary)
+    pub als_lux_primary: ::std::option::Option<f32>,
     // @@protoc_insertion_point(field:CMsgSystemManagerSettings.als_lux_median)
     pub als_lux_median: ::std::option::Option<f32>,
     // @@protoc_insertion_point(field:CMsgSystemManagerSettings.display_backlight_raw)
@@ -13469,6 +13745,20 @@ pub struct CMsgSystemManagerSettings {
     pub is_display_colormanagement_available: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgSystemManagerSettings.display_colorgamut)
     pub display_colorgamut: ::std::option::Option<f32>,
+    // @@protoc_insertion_point(field:CMsgSystemManagerSettings.als_lux_alternate)
+    pub als_lux_alternate: ::std::option::Option<f32>,
+    // @@protoc_insertion_point(field:CMsgSystemManagerSettings.is_display_colortemp_available)
+    pub is_display_colortemp_available: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CMsgSystemManagerSettings.display_colortemp)
+    pub display_colortemp: ::std::option::Option<f32>,
+    // @@protoc_insertion_point(field:CMsgSystemManagerSettings.display_colortemp_default)
+    pub display_colortemp_default: ::std::option::Option<f32>,
+    // @@protoc_insertion_point(field:CMsgSystemManagerSettings.display_colortemp_enabled)
+    pub display_colortemp_enabled: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CMsgSystemManagerSettings.display_colorgamut_labelset)
+    pub display_colorgamut_labelset: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::enums::EColorGamutLabelSet>>,
+    // @@protoc_insertion_point(field:CMsgSystemManagerSettings.display_brightness_overdrive_hdr_split)
+    pub display_brightness_overdrive_hdr_split: ::std::option::Option<f32>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgSystemManagerSettings.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -13827,23 +14117,23 @@ impl CMsgSystemManagerSettings {
         self.display_diagnostics_enabled = ::std::option::Option::Some(v);
     }
 
-    // optional float als_lux_latest = 21;
+    // optional float als_lux_primary = 21;
 
-    pub fn als_lux_latest(&self) -> f32 {
-        self.als_lux_latest.unwrap_or(0.)
+    pub fn als_lux_primary(&self) -> f32 {
+        self.als_lux_primary.unwrap_or(0.)
     }
 
-    pub fn clear_als_lux_latest(&mut self) {
-        self.als_lux_latest = ::std::option::Option::None;
+    pub fn clear_als_lux_primary(&mut self) {
+        self.als_lux_primary = ::std::option::Option::None;
     }
 
-    pub fn has_als_lux_latest(&self) -> bool {
-        self.als_lux_latest.is_some()
+    pub fn has_als_lux_primary(&self) -> bool {
+        self.als_lux_primary.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_als_lux_latest(&mut self, v: f32) {
-        self.als_lux_latest = ::std::option::Option::Some(v);
+    pub fn set_als_lux_primary(&mut self, v: f32) {
+        self.als_lux_primary = ::std::option::Option::Some(v);
     }
 
     // optional float als_lux_median = 22;
@@ -14038,6 +14328,142 @@ impl CMsgSystemManagerSettings {
     pub fn set_display_colorgamut(&mut self, v: f32) {
         self.display_colorgamut = ::std::option::Option::Some(v);
     }
+
+    // optional float als_lux_alternate = 33;
+
+    pub fn als_lux_alternate(&self) -> f32 {
+        self.als_lux_alternate.unwrap_or(0.)
+    }
+
+    pub fn clear_als_lux_alternate(&mut self) {
+        self.als_lux_alternate = ::std::option::Option::None;
+    }
+
+    pub fn has_als_lux_alternate(&self) -> bool {
+        self.als_lux_alternate.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_als_lux_alternate(&mut self, v: f32) {
+        self.als_lux_alternate = ::std::option::Option::Some(v);
+    }
+
+    // optional bool is_display_colortemp_available = 34;
+
+    pub fn is_display_colortemp_available(&self) -> bool {
+        self.is_display_colortemp_available.unwrap_or(false)
+    }
+
+    pub fn clear_is_display_colortemp_available(&mut self) {
+        self.is_display_colortemp_available = ::std::option::Option::None;
+    }
+
+    pub fn has_is_display_colortemp_available(&self) -> bool {
+        self.is_display_colortemp_available.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_is_display_colortemp_available(&mut self, v: bool) {
+        self.is_display_colortemp_available = ::std::option::Option::Some(v);
+    }
+
+    // optional float display_colortemp = 35;
+
+    pub fn display_colortemp(&self) -> f32 {
+        self.display_colortemp.unwrap_or(0.)
+    }
+
+    pub fn clear_display_colortemp(&mut self) {
+        self.display_colortemp = ::std::option::Option::None;
+    }
+
+    pub fn has_display_colortemp(&self) -> bool {
+        self.display_colortemp.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_display_colortemp(&mut self, v: f32) {
+        self.display_colortemp = ::std::option::Option::Some(v);
+    }
+
+    // optional float display_colortemp_default = 36;
+
+    pub fn display_colortemp_default(&self) -> f32 {
+        self.display_colortemp_default.unwrap_or(0.)
+    }
+
+    pub fn clear_display_colortemp_default(&mut self) {
+        self.display_colortemp_default = ::std::option::Option::None;
+    }
+
+    pub fn has_display_colortemp_default(&self) -> bool {
+        self.display_colortemp_default.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_display_colortemp_default(&mut self, v: f32) {
+        self.display_colortemp_default = ::std::option::Option::Some(v);
+    }
+
+    // optional bool display_colortemp_enabled = 37;
+
+    pub fn display_colortemp_enabled(&self) -> bool {
+        self.display_colortemp_enabled.unwrap_or(false)
+    }
+
+    pub fn clear_display_colortemp_enabled(&mut self) {
+        self.display_colortemp_enabled = ::std::option::Option::None;
+    }
+
+    pub fn has_display_colortemp_enabled(&self) -> bool {
+        self.display_colortemp_enabled.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_display_colortemp_enabled(&mut self, v: bool) {
+        self.display_colortemp_enabled = ::std::option::Option::Some(v);
+    }
+
+    // optional .EColorGamutLabelSet display_colorgamut_labelset = 38;
+
+    pub fn display_colorgamut_labelset(&self) -> super::enums::EColorGamutLabelSet {
+        match self.display_colorgamut_labelset {
+            Some(e) => e.enum_value_or(super::enums::EColorGamutLabelSet::k_ColorGamutLabelSet_Default),
+            None => super::enums::EColorGamutLabelSet::k_ColorGamutLabelSet_Default,
+        }
+    }
+
+    pub fn clear_display_colorgamut_labelset(&mut self) {
+        self.display_colorgamut_labelset = ::std::option::Option::None;
+    }
+
+    pub fn has_display_colorgamut_labelset(&self) -> bool {
+        self.display_colorgamut_labelset.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_display_colorgamut_labelset(&mut self, v: super::enums::EColorGamutLabelSet) {
+        self.display_colorgamut_labelset = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
+
+    // optional float display_brightness_overdrive_hdr_split = 39;
+
+    pub fn display_brightness_overdrive_hdr_split(&self) -> f32 {
+        self.display_brightness_overdrive_hdr_split.unwrap_or(0.)
+    }
+
+    pub fn clear_display_brightness_overdrive_hdr_split(&mut self) {
+        self.display_brightness_overdrive_hdr_split = ::std::option::Option::None;
+    }
+
+    pub fn has_display_brightness_overdrive_hdr_split(&self) -> bool {
+        self.display_brightness_overdrive_hdr_split.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_display_brightness_overdrive_hdr_split(&mut self, v: f32) {
+        self.display_brightness_overdrive_hdr_split = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemManagerSettings {
@@ -14105,7 +14531,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemManagerSettings 
                     self.display_diagnostics_enabled = ::std::option::Option::Some(is.read_bool()?);
                 },
                 173 => {
-                    self.als_lux_latest = ::std::option::Option::Some(is.read_float()?);
+                    self.als_lux_primary = ::std::option::Option::Some(is.read_float()?);
                 },
                 181 => {
                     self.als_lux_median = ::std::option::Option::Some(is.read_float()?);
@@ -14136,6 +14562,27 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemManagerSettings 
                 },
                 261 => {
                     self.display_colorgamut = ::std::option::Option::Some(is.read_float()?);
+                },
+                269 => {
+                    self.als_lux_alternate = ::std::option::Option::Some(is.read_float()?);
+                },
+                272 => {
+                    self.is_display_colortemp_available = ::std::option::Option::Some(is.read_bool()?);
+                },
+                285 => {
+                    self.display_colortemp = ::std::option::Option::Some(is.read_float()?);
+                },
+                293 => {
+                    self.display_colortemp_default = ::std::option::Option::Some(is.read_float()?);
+                },
+                296 => {
+                    self.display_colortemp_enabled = ::std::option::Option::Some(is.read_bool()?);
+                },
+                304 => {
+                    self.display_colorgamut_labelset = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                },
+                317 => {
+                    self.display_brightness_overdrive_hdr_split = ::std::option::Option::Some(is.read_float()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -14203,7 +14650,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemManagerSettings 
         if let Some(v) = self.display_diagnostics_enabled {
             my_size += 2 + 1;
         }
-        if let Some(v) = self.als_lux_latest {
+        if let Some(v) = self.als_lux_primary {
             my_size += 2 + 4;
         }
         if let Some(v) = self.als_lux_median {
@@ -14234,6 +14681,27 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemManagerSettings 
             my_size += 2 + 1;
         }
         if let Some(v) = self.display_colorgamut {
+            my_size += 2 + 4;
+        }
+        if let Some(v) = self.als_lux_alternate {
+            my_size += 2 + 4;
+        }
+        if let Some(v) = self.is_display_colortemp_available {
+            my_size += 2 + 1;
+        }
+        if let Some(v) = self.display_colortemp {
+            my_size += 2 + 4;
+        }
+        if let Some(v) = self.display_colortemp_default {
+            my_size += 2 + 4;
+        }
+        if let Some(v) = self.display_colortemp_enabled {
+            my_size += 2 + 1;
+        }
+        if let Some(v) = self.display_colorgamut_labelset {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(38, v.value());
+        }
+        if let Some(v) = self.display_brightness_overdrive_hdr_split {
             my_size += 2 + 4;
         }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
@@ -14296,7 +14764,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemManagerSettings 
         if let Some(v) = self.display_diagnostics_enabled {
             os.write_bool(20, v)?;
         }
-        if let Some(v) = self.als_lux_latest {
+        if let Some(v) = self.als_lux_primary {
             os.write_float(21, v)?;
         }
         if let Some(v) = self.als_lux_median {
@@ -14328,6 +14796,27 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemManagerSettings 
         }
         if let Some(v) = self.display_colorgamut {
             os.write_float(32, v)?;
+        }
+        if let Some(v) = self.als_lux_alternate {
+            os.write_float(33, v)?;
+        }
+        if let Some(v) = self.is_display_colortemp_available {
+            os.write_bool(34, v)?;
+        }
+        if let Some(v) = self.display_colortemp {
+            os.write_float(35, v)?;
+        }
+        if let Some(v) = self.display_colortemp_default {
+            os.write_float(36, v)?;
+        }
+        if let Some(v) = self.display_colortemp_enabled {
+            os.write_bool(37, v)?;
+        }
+        if let Some(v) = self.display_colorgamut_labelset {
+            os.write_enum(38, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        if let Some(v) = self.display_brightness_overdrive_hdr_split {
+            os.write_float(39, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -14364,7 +14853,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemManagerSettings 
         self.display_nightmode_schedule_starttime = ::std::option::Option::None;
         self.display_nightmode_schedule_endtime = ::std::option::Option::None;
         self.display_diagnostics_enabled = ::std::option::Option::None;
-        self.als_lux_latest = ::std::option::Option::None;
+        self.als_lux_primary = ::std::option::Option::None;
         self.als_lux_median = ::std::option::Option::None;
         self.display_backlight_raw = ::std::option::Option::None;
         self.display_brightness_adaptivemin = ::std::option::Option::None;
@@ -14375,6 +14864,13 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemManagerSettings 
         self.is_display_brightness_available = ::std::option::Option::None;
         self.is_display_colormanagement_available = ::std::option::Option::None;
         self.display_colorgamut = ::std::option::Option::None;
+        self.als_lux_alternate = ::std::option::Option::None;
+        self.is_display_colortemp_available = ::std::option::Option::None;
+        self.display_colortemp = ::std::option::Option::None;
+        self.display_colortemp_default = ::std::option::Option::None;
+        self.display_colortemp_enabled = ::std::option::Option::None;
+        self.display_colorgamut_labelset = ::std::option::Option::None;
+        self.display_brightness_overdrive_hdr_split = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -14398,7 +14894,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemManagerSettings 
             display_nightmode_schedule_starttime: ::std::option::Option::None,
             display_nightmode_schedule_endtime: ::std::option::Option::None,
             display_diagnostics_enabled: ::std::option::Option::None,
-            als_lux_latest: ::std::option::Option::None,
+            als_lux_primary: ::std::option::Option::None,
             als_lux_median: ::std::option::Option::None,
             display_backlight_raw: ::std::option::Option::None,
             display_brightness_adaptivemin: ::std::option::Option::None,
@@ -14409,6 +14905,13 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemManagerSettings 
             is_display_brightness_available: ::std::option::Option::None,
             is_display_colormanagement_available: ::std::option::Option::None,
             display_colorgamut: ::std::option::Option::None,
+            als_lux_alternate: ::std::option::Option::None,
+            is_display_colortemp_available: ::std::option::Option::None,
+            display_colortemp: ::std::option::Option::None,
+            display_colortemp_default: ::std::option::Option::None,
+            display_colortemp_enabled: ::std::option::Option::None,
+            display_colorgamut_labelset: ::std::option::Option::None,
+            display_brightness_overdrive_hdr_split: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -14765,6 +15268,8 @@ pub struct CMsgSystemUpdateCheckResult {
     pub version: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CMsgSystemUpdateCheckResult.auto_message)
     pub auto_message: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CMsgSystemUpdateCheckResult.system_restart_pending)
+    pub system_restart_pending: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgSystemUpdateCheckResult.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -14931,6 +15436,25 @@ impl CMsgSystemUpdateCheckResult {
     pub fn take_auto_message(&mut self) -> ::std::string::String {
         self.auto_message.take().unwrap_or_else(|| ::std::string::String::new())
     }
+
+    // optional bool system_restart_pending = 7;
+
+    pub fn system_restart_pending(&self) -> bool {
+        self.system_restart_pending.unwrap_or(false)
+    }
+
+    pub fn clear_system_restart_pending(&mut self) {
+        self.system_restart_pending = ::std::option::Option::None;
+    }
+
+    pub fn has_system_restart_pending(&self) -> bool {
+        self.system_restart_pending.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_system_restart_pending(&mut self, v: bool) {
+        self.system_restart_pending = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemUpdateCheckResult {
@@ -14960,6 +15484,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemUpdateCheckResul
                 },
                 50 => {
                     self.auto_message = ::std::option::Option::Some(is.read_string()?);
+                },
+                56 => {
+                    self.system_restart_pending = ::std::option::Option::Some(is.read_bool()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -14991,6 +15518,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemUpdateCheckResul
         if let Some(v) = self.auto_message.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(6, &v);
         }
+        if let Some(v) = self.system_restart_pending {
+            my_size += 1 + 1;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -15015,6 +15545,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemUpdateCheckResul
         if let Some(v) = self.auto_message.as_ref() {
             os.write_string(6, v)?;
         }
+        if let Some(v) = self.system_restart_pending {
+            os.write_bool(7, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -15038,6 +15571,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemUpdateCheckResul
         self.available = ::std::option::Option::None;
         self.version = ::std::option::Option::None;
         self.auto_message = ::std::option::Option::None;
+        self.system_restart_pending = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -15049,6 +15583,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSystemUpdateCheckResul
             available: ::std::option::Option::None,
             version: ::std::option::Option::None,
             auto_message: ::std::option::Option::None,
+            system_restart_pending: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -17414,6 +17949,413 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgWebUITransportInfo {
     }
 }
 
+// @@protoc_insertion_point(message:CMsgWebUITransportFailure)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgWebUITransportFailure {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgWebUITransportFailure.connect_count)
+    pub connect_count: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgWebUITransportFailure.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgWebUITransportFailure {
+    fn default() -> &'a CMsgWebUITransportFailure {
+        <CMsgWebUITransportFailure as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgWebUITransportFailure {
+    pub fn new() -> CMsgWebUITransportFailure {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 connect_count = 1;
+
+    pub fn connect_count(&self) -> u32 {
+        self.connect_count.unwrap_or(0)
+    }
+
+    pub fn clear_connect_count(&mut self) {
+        self.connect_count = ::std::option::Option::None;
+    }
+
+    pub fn has_connect_count(&self) -> bool {
+        self.connect_count.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_connect_count(&mut self, v: u32) {
+        self.connect_count = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgWebUITransportFailure {
+    const NAME: &'static str = "CMsgWebUITransportFailure";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.connect_count = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.connect_count {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.connect_count {
+            os.write_uint32(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgWebUITransportFailure {
+        CMsgWebUITransportFailure::new()
+    }
+
+    fn clear(&mut self) {
+        self.connect_count = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgWebUITransportFailure {
+        static instance: CMsgWebUITransportFailure = CMsgWebUITransportFailure {
+            connect_count: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMsgClientShaderHitCacheEntry)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgClientShaderHitCacheEntry {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgClientShaderHitCacheEntry.key_sha)
+    pub key_sha: ::std::option::Option<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:CMsgClientShaderHitCacheEntry.code_sha)
+    pub code_sha: ::std::option::Option<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:CMsgClientShaderHitCacheEntry.time_last_reported)
+    pub time_last_reported: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgClientShaderHitCacheEntry.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgClientShaderHitCacheEntry {
+    fn default() -> &'a CMsgClientShaderHitCacheEntry {
+        <CMsgClientShaderHitCacheEntry as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgClientShaderHitCacheEntry {
+    pub fn new() -> CMsgClientShaderHitCacheEntry {
+        ::std::default::Default::default()
+    }
+
+    // optional bytes key_sha = 1;
+
+    pub fn key_sha(&self) -> &[u8] {
+        match self.key_sha.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_key_sha(&mut self) {
+        self.key_sha = ::std::option::Option::None;
+    }
+
+    pub fn has_key_sha(&self) -> bool {
+        self.key_sha.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_key_sha(&mut self, v: ::std::vec::Vec<u8>) {
+        self.key_sha = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_key_sha(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.key_sha.is_none() {
+            self.key_sha = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.key_sha.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_key_sha(&mut self) -> ::std::vec::Vec<u8> {
+        self.key_sha.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    // optional bytes code_sha = 2;
+
+    pub fn code_sha(&self) -> &[u8] {
+        match self.code_sha.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_code_sha(&mut self) {
+        self.code_sha = ::std::option::Option::None;
+    }
+
+    pub fn has_code_sha(&self) -> bool {
+        self.code_sha.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_code_sha(&mut self, v: ::std::vec::Vec<u8>) {
+        self.code_sha = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_code_sha(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.code_sha.is_none() {
+            self.code_sha = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.code_sha.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_code_sha(&mut self) -> ::std::vec::Vec<u8> {
+        self.code_sha.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    // optional uint64 time_last_reported = 3;
+
+    pub fn time_last_reported(&self) -> u64 {
+        self.time_last_reported.unwrap_or(0)
+    }
+
+    pub fn clear_time_last_reported(&mut self) {
+        self.time_last_reported = ::std::option::Option::None;
+    }
+
+    pub fn has_time_last_reported(&self) -> bool {
+        self.time_last_reported.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_time_last_reported(&mut self, v: u64) {
+        self.time_last_reported = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgClientShaderHitCacheEntry {
+    const NAME: &'static str = "CMsgClientShaderHitCacheEntry";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.key_sha = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                18 => {
+                    self.code_sha = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                24 => {
+                    self.time_last_reported = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.key_sha.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(1, &v);
+        }
+        if let Some(v) = self.code_sha.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(2, &v);
+        }
+        if let Some(v) = self.time_last_reported {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(3, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.key_sha.as_ref() {
+            os.write_bytes(1, v)?;
+        }
+        if let Some(v) = self.code_sha.as_ref() {
+            os.write_bytes(2, v)?;
+        }
+        if let Some(v) = self.time_last_reported {
+            os.write_uint64(3, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgClientShaderHitCacheEntry {
+        CMsgClientShaderHitCacheEntry::new()
+    }
+
+    fn clear(&mut self) {
+        self.key_sha = ::std::option::Option::None;
+        self.code_sha = ::std::option::Option::None;
+        self.time_last_reported = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgClientShaderHitCacheEntry {
+        static instance: CMsgClientShaderHitCacheEntry = CMsgClientShaderHitCacheEntry {
+            key_sha: ::std::option::Option::None,
+            code_sha: ::std::option::Option::None,
+            time_last_reported: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMsgClientShaderHitCache)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgClientShaderHitCache {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgClientShaderHitCache.entries)
+    pub entries: ::std::vec::Vec<CMsgClientShaderHitCacheEntry>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgClientShaderHitCache.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgClientShaderHitCache {
+    fn default() -> &'a CMsgClientShaderHitCache {
+        <CMsgClientShaderHitCache as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgClientShaderHitCache {
+    pub fn new() -> CMsgClientShaderHitCache {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgClientShaderHitCache {
+    const NAME: &'static str = "CMsgClientShaderHitCache";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.entries.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.entries {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.entries {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgClientShaderHitCache {
+        CMsgClientShaderHitCache::new()
+    }
+
+    fn clear(&mut self) {
+        self.entries.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgClientShaderHitCache {
+        static instance: CMsgClientShaderHitCache = CMsgClientShaderHitCache {
+            entries: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:ECloudPendingRemoteOperation)
 pub enum ECloudPendingRemoteOperation {
@@ -17547,6 +18489,8 @@ pub enum ESteamDeckKeyboardLayout {
     k_ESteamDeckKeyboardLayout_Japanese_Kana = 33,
     // @@protoc_insertion_point(enum_value:ESteamDeckKeyboardLayout.k_ESteamDeckKeyboardLayout_Chinese_Traditional_Quick)
     k_ESteamDeckKeyboardLayout_Chinese_Traditional_Quick = 34,
+    // @@protoc_insertion_point(enum_value:ESteamDeckKeyboardLayout.k_ESteamDeckKeyboardLayout_Indonesian)
+    k_ESteamDeckKeyboardLayout_Indonesian = 35,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for ESteamDeckKeyboardLayout {
@@ -17593,6 +18537,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for ESteamDeckKeyboardLayout {
             32 => ::std::option::Option::Some(ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Chinese_Traditional_Cangjie),
             33 => ::std::option::Option::Some(ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Japanese_Kana),
             34 => ::std::option::Option::Some(ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Chinese_Traditional_Quick),
+            35 => ::std::option::Option::Some(ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Indonesian),
             _ => ::std::option::Option::None
         }
     }
@@ -17634,6 +18579,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for ESteamDeckKeyboardLayout {
             "k_ESteamDeckKeyboardLayout_Chinese_Traditional_Cangjie" => ::std::option::Option::Some(ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Chinese_Traditional_Cangjie),
             "k_ESteamDeckKeyboardLayout_Japanese_Kana" => ::std::option::Option::Some(ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Japanese_Kana),
             "k_ESteamDeckKeyboardLayout_Chinese_Traditional_Quick" => ::std::option::Option::Some(ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Chinese_Traditional_Quick),
+            "k_ESteamDeckKeyboardLayout_Indonesian" => ::std::option::Option::Some(ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Indonesian),
             _ => ::std::option::Option::None
         }
     }
@@ -17674,6 +18620,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for ESteamDeckKeyboardLayout {
         ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Chinese_Traditional_Cangjie,
         ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Japanese_Kana,
         ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Chinese_Traditional_Quick,
+        ESteamDeckKeyboardLayout::k_ESteamDeckKeyboardLayout_Indonesian,
     ];
 }
 
@@ -17951,6 +18898,32 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgSystemPerfState {
     }
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgSystemPerfUpdateSettings {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgSystemPerfLegacySettingEntry {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgSystemPerfLegacySettings {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }
@@ -18341,6 +19314,45 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGenerateSystemReportReply {
     }
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgWebUITransportInfo {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgWebUITransportFailure {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgClientShaderHitCacheEntry {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgClientShaderHitCache {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }

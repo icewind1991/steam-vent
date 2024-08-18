@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Gets the available promotional discounts available to the user"]
 // @@protoc_insertion_point(message:CUserAccount_GetAvailableValveDiscountPromotions_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CUserAccount_GetAvailableValveDiscountPromotions_Request {
@@ -710,7 +709,6 @@ pub mod cuser_account_get_available_valve_discount_promotions_response {
     }
 }
 
-#[doc = "Returns balance and details about any users wallet"]
 // @@protoc_insertion_point(message:CUserAccount_GetClientWalletDetails_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CUserAccount_GetClientWalletDetails_Request {
@@ -916,6 +914,14 @@ pub struct CUserAccount_GetWalletDetails_Response {
     pub other_regions: ::std::vec::Vec<i32>,
     // @@protoc_insertion_point(field:CUserAccount_GetWalletDetails_Response.formatted_balance)
     pub formatted_balance: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CUserAccount_GetWalletDetails_Response.formatted_delayed_balance)
+    pub formatted_delayed_balance: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CUserAccount_GetWalletDetails_Response.delayed_balance_available_min_time)
+    pub delayed_balance_available_min_time: ::std::option::Option<i32>,
+    // @@protoc_insertion_point(field:CUserAccount_GetWalletDetails_Response.delayed_balance_available_max_time)
+    pub delayed_balance_available_max_time: ::std::option::Option<i32>,
+    // @@protoc_insertion_point(field:CUserAccount_GetWalletDetails_Response.delayed_balance_newest_source)
+    pub delayed_balance_newest_source: ::std::option::Option<i32>,
     // special fields
     // @@protoc_insertion_point(special_field:CUserAccount_GetWalletDetails_Response.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -1246,6 +1252,99 @@ impl CUserAccount_GetWalletDetails_Response {
     pub fn take_formatted_balance(&mut self) -> ::std::string::String {
         self.formatted_balance.take().unwrap_or_else(|| ::std::string::String::new())
     }
+
+    // optional string formatted_delayed_balance = 15;
+
+    pub fn formatted_delayed_balance(&self) -> &str {
+        match self.formatted_delayed_balance.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_formatted_delayed_balance(&mut self) {
+        self.formatted_delayed_balance = ::std::option::Option::None;
+    }
+
+    pub fn has_formatted_delayed_balance(&self) -> bool {
+        self.formatted_delayed_balance.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_formatted_delayed_balance(&mut self, v: ::std::string::String) {
+        self.formatted_delayed_balance = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_formatted_delayed_balance(&mut self) -> &mut ::std::string::String {
+        if self.formatted_delayed_balance.is_none() {
+            self.formatted_delayed_balance = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.formatted_delayed_balance.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_formatted_delayed_balance(&mut self) -> ::std::string::String {
+        self.formatted_delayed_balance.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional int32 delayed_balance_available_min_time = 16;
+
+    pub fn delayed_balance_available_min_time(&self) -> i32 {
+        self.delayed_balance_available_min_time.unwrap_or(0)
+    }
+
+    pub fn clear_delayed_balance_available_min_time(&mut self) {
+        self.delayed_balance_available_min_time = ::std::option::Option::None;
+    }
+
+    pub fn has_delayed_balance_available_min_time(&self) -> bool {
+        self.delayed_balance_available_min_time.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_delayed_balance_available_min_time(&mut self, v: i32) {
+        self.delayed_balance_available_min_time = ::std::option::Option::Some(v);
+    }
+
+    // optional int32 delayed_balance_available_max_time = 17;
+
+    pub fn delayed_balance_available_max_time(&self) -> i32 {
+        self.delayed_balance_available_max_time.unwrap_or(0)
+    }
+
+    pub fn clear_delayed_balance_available_max_time(&mut self) {
+        self.delayed_balance_available_max_time = ::std::option::Option::None;
+    }
+
+    pub fn has_delayed_balance_available_max_time(&self) -> bool {
+        self.delayed_balance_available_max_time.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_delayed_balance_available_max_time(&mut self, v: i32) {
+        self.delayed_balance_available_max_time = ::std::option::Option::Some(v);
+    }
+
+    // optional int32 delayed_balance_newest_source = 18;
+
+    pub fn delayed_balance_newest_source(&self) -> i32 {
+        self.delayed_balance_newest_source.unwrap_or(0)
+    }
+
+    pub fn clear_delayed_balance_newest_source(&mut self) {
+        self.delayed_balance_newest_source = ::std::option::Option::None;
+    }
+
+    pub fn has_delayed_balance_newest_source(&self) -> bool {
+        self.delayed_balance_newest_source.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_delayed_balance_newest_source(&mut self, v: i32) {
+        self.delayed_balance_newest_source = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_GetWalletDetails_Response {
@@ -1303,6 +1402,18 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_GetWalletDeta
                 114 => {
                     self.formatted_balance = ::std::option::Option::Some(is.read_string()?);
                 },
+                122 => {
+                    self.formatted_delayed_balance = ::std::option::Option::Some(is.read_string()?);
+                },
+                128 => {
+                    self.delayed_balance_available_min_time = ::std::option::Option::Some(is.read_int32()?);
+                },
+                136 => {
+                    self.delayed_balance_available_max_time = ::std::option::Option::Some(is.read_int32()?);
+                },
+                144 => {
+                    self.delayed_balance_newest_source = ::std::option::Option::Some(is.read_int32()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -1357,6 +1468,18 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_GetWalletDeta
         if let Some(v) = self.formatted_balance.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(14, &v);
         }
+        if let Some(v) = self.formatted_delayed_balance.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(15, &v);
+        }
+        if let Some(v) = self.delayed_balance_available_min_time {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(16, v);
+        }
+        if let Some(v) = self.delayed_balance_available_max_time {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(17, v);
+        }
+        if let Some(v) = self.delayed_balance_newest_source {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(18, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -1405,6 +1528,18 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_GetWalletDeta
         if let Some(v) = self.formatted_balance.as_ref() {
             os.write_string(14, v)?;
         }
+        if let Some(v) = self.formatted_delayed_balance.as_ref() {
+            os.write_string(15, v)?;
+        }
+        if let Some(v) = self.delayed_balance_available_min_time {
+            os.write_int32(16, v)?;
+        }
+        if let Some(v) = self.delayed_balance_available_max_time {
+            os.write_int32(17, v)?;
+        }
+        if let Some(v) = self.delayed_balance_newest_source {
+            os.write_int32(18, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -1436,6 +1571,10 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_GetWalletDeta
         self.has_wallet_in_other_regions = ::std::option::Option::None;
         self.other_regions.clear();
         self.formatted_balance = ::std::option::Option::None;
+        self.formatted_delayed_balance = ::std::option::Option::None;
+        self.delayed_balance_available_min_time = ::std::option::Option::None;
+        self.delayed_balance_available_max_time = ::std::option::Option::None;
+        self.delayed_balance_newest_source = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -1455,13 +1594,16 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_GetWalletDeta
             has_wallet_in_other_regions: ::std::option::Option::None,
             other_regions: ::std::vec::Vec::new(),
             formatted_balance: ::std::option::Option::None,
+            formatted_delayed_balance: ::std::option::Option::None,
+            delayed_balance_available_min_time: ::std::option::Option::None,
+            delayed_balance_available_max_time: ::std::option::Option::None,
+            delayed_balance_newest_source: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
     }
 }
 
-#[doc = "Fetches account link status"]
 // @@protoc_insertion_point(message:CUserAccount_GetAccountLinkStatus_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CUserAccount_GetAccountLinkStatus_Request {
@@ -1711,7 +1853,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_GetAccountLin
     }
 }
 
-#[doc = "Cancels a free license for a user"]
 // @@protoc_insertion_point(message:CUserAccount_CancelLicenseForApp_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CUserAccount_CancelLicenseForApp_Request {
@@ -1897,7 +2038,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_CancelLicense
     }
 }
 
-#[doc = "Get the country code associated with the passed steamid (only available for logged-in user or support)"]
 // @@protoc_insertion_point(message:CUserAccount_GetUserCountry_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CUserAccount_GetUserCountry_Request {
@@ -2133,7 +2273,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_GetUserCountr
     }
 }
 
-#[doc = "Create a limited-use token that can be used to create a friend request"]
 // @@protoc_insertion_point(message:CUserAccount_CreateFriendInviteToken_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CUserAccount_CreateFriendInviteToken_Request {
@@ -2578,7 +2717,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_CreateFriendI
     }
 }
 
-#[doc = "Get the set of active tokens for the user"]
 // @@protoc_insertion_point(message:CUserAccount_GetFriendInviteTokens_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CUserAccount_GetFriendInviteTokens_Request {
@@ -2746,7 +2884,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_GetFriendInvi
     }
 }
 
-#[doc = "View details about an invite token "]
 // @@protoc_insertion_point(message:CUserAccount_ViewFriendInviteToken_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CUserAccount_ViewFriendInviteToken_Request {
@@ -3078,7 +3215,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_ViewFriendInv
     }
 }
 
-#[doc = "Create a friend relationship using the given invite token"]
 // @@protoc_insertion_point(message:CUserAccount_RedeemFriendInviteToken_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CUserAccount_RedeemFriendInviteToken_Request {
@@ -3313,7 +3449,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_RedeemFriendI
     }
 }
 
-#[doc = "Revoke an active friend invite token"]
 // @@protoc_insertion_point(message:CUserAccount_RevokeFriendInviteToken_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CUserAccount_RevokeFriendInviteToken_Request {
@@ -3516,7 +3651,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_RevokeFriendI
     }
 }
 
-#[doc = "Register intended account usage of a tool"]
 // @@protoc_insertion_point(message:CUserAccount_RegisterCompatTool_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CUserAccount_RegisterCompatTool_Request {
@@ -3702,7 +3836,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CUserAccount_RegisterCompa
     }
 }
 
-#[doc = "List all my active linked external accounts; may be requested to return the access token"]
 // @@protoc_insertion_point(message:CAccountLinking_GetLinkedAccountInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CAccountLinking_GetLinkedAccountInfo_Request {
@@ -4397,7 +4530,6 @@ pub mod caccount_linking_get_linked_account_info_response {
     }
 }
 
-#[doc = "Use a logged-in (password/etc) session to create a durable access token"]
 // @@protoc_insertion_point(message:CEmbeddedClient_AuthorizeCurrentDevice_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CEmbeddedClient_AuthorizeCurrentDevice_Request {
@@ -5473,17 +5605,17 @@ impl ::steam_vent_proto_common::RpcMessage for CEmbeddedClient_AuthorizeDevice_R
         self.compute_size() as usize
     }
 }
-///A service to get user account information
+///
 struct UserAccount {}
 impl ::steam_vent_proto_common::RpcService for UserAccount {
     const SERVICE_NAME: &'static str = "UserAccount";
 }
-///A service to manage and link to external accounts
+///
 struct AccountLinking {}
 impl ::steam_vent_proto_common::RpcService for AccountLinking {
     const SERVICE_NAME: &'static str = "AccountLinking";
 }
-///Service to authorize and manage Steam functions directly embedded in games
+///
 struct EmbeddedClient {}
 impl ::steam_vent_proto_common::RpcService for EmbeddedClient {
     const SERVICE_NAME: &'static str = "EmbeddedClient";

@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Get a log of recent chat messages between two users"]
 // @@protoc_insertion_point(message:CFriendMessages_GetRecentMessages_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CFriendMessages_GetRecentMessages_Request {
@@ -934,7 +933,6 @@ pub mod cfriend_messages_get_recent_messages_response {
     }
 }
 
-#[doc = "Get information about recent offline messages and chats"]
 // @@protoc_insertion_point(message:CFriendsMessages_GetActiveMessageSessions_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CFriendsMessages_GetActiveMessageSessions_Request {
@@ -1407,7 +1405,6 @@ pub mod cfriends_messages_get_active_message_sessions_response {
     }
 }
 
-#[doc = "Send a chat message to a friend"]
 // @@protoc_insertion_point(message:CFriendMessages_SendMessage_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CFriendMessages_SendMessage_Request {
@@ -1982,7 +1979,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CFriendMessages_SendMessag
     }
 }
 
-#[doc = "A session acked an unread message, echo to other sessions."]
 // @@protoc_insertion_point(message:CFriendMessages_AckMessage_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CFriendMessages_AckMessage_Notification {
@@ -2124,7 +2120,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CFriendMessages_AckMessage
     }
 }
 
-#[doc = "See if a friend is in the friendsui beta."]
 // @@protoc_insertion_point(message:CFriendMessages_IsInFriendsUIBeta_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CFriendMessages_IsInFriendsUIBeta_Request {
@@ -2375,7 +2370,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CFriendMessages_IsInFriend
     }
 }
 
-#[doc = "Adds/removes a reaction to/from a friend message"]
 // @@protoc_insertion_point(message:CFriendMessages_UpdateMessageReaction_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CFriendMessages_UpdateMessageReaction_Request {
@@ -2758,7 +2752,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CFriendMessages_UpdateMess
     }
 }
 
-#[doc = "New chat message from a friend."]
 // @@protoc_insertion_point(message:CFriendMessages_IncomingMessage_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CFriendMessages_IncomingMessage_Notification {
@@ -3158,7 +3151,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CFriendMessages_IncomingMe
     }
 }
 
-#[doc = "New message reaction from a friend."]
 // @@protoc_insertion_point(message:CFriendMessages_MessageReaction_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CFriendMessages_MessageReaction_Notification {
@@ -3716,7 +3708,7 @@ for CFriendMessages_MessageReaction_Notification {
         self.compute_size() as usize
     }
 }
-///A service for relaying and logging friend messages (user-to-user chats and offline messaging)
+///
 struct FriendMessages {}
 impl ::steam_vent_proto_common::RpcService for FriendMessages {
     const SERVICE_NAME: &'static str = "FriendMessages";

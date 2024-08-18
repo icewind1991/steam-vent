@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "File signature check was performed"]
 // @@protoc_insertion_point(message:CFileVerification_SignatureCheck_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CFileVerification_SignatureCheck_Request {
@@ -535,7 +534,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CFileVerification_Signatur
     }
 }
 
-#[doc = "Steam Service check was performed"]
 // @@protoc_insertion_point(message:CFileVerification_SteamServiceCheck_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CFileVerification_SteamServiceCheck_Request {
@@ -944,7 +942,7 @@ for CFileVerification_SteamServiceCheck_Response {
         self.compute_size() as usize
     }
 }
-///File verification services
+///
 struct FileVerification {}
 impl ::steam_vent_proto_common::RpcService for FileVerification {
     const SERVICE_NAME: &'static str = "FileVerification";

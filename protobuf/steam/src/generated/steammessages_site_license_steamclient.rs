@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Rack informing site manager of new inbound client PSK connection"]
 // @@protoc_insertion_point(message:CSiteManagerClient_IncomingClient_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSiteManagerClient_IncomingClient_Request {
@@ -325,7 +324,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSiteManagerClient_Incomin
     }
 }
 
-#[doc = "Notify client directly about seat checkout result"]
 // @@protoc_insertion_point(message:CSiteLicense_ClientSeatCheckout_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSiteLicense_ClientSeatCheckout_Notification {
@@ -467,7 +465,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSiteLicense_ClientSeatChe
     }
 }
 
-#[doc = "Rack informing site manager of existing tracked payments"]
 // @@protoc_insertion_point(message:CSiteManagerClient_TrackedPayments_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSiteManagerClient_TrackedPayments_Notification {
@@ -1059,7 +1056,6 @@ pub mod csite_manager_client_tracked_payments_notification {
     }
 }
 
-#[doc = "Client is requesting connetion info for local site"]
 // @@protoc_insertion_point(message:CSiteLicense_InitiateAssociation_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSiteLicense_InitiateAssociation_Request {
@@ -1359,7 +1355,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSiteLicense_InitiateAssoc
     }
 }
 
-#[doc = "Local cafe server authentication"]
 // @@protoc_insertion_point(message:CSiteLicense_LCSAuthenticate_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSiteLicense_LCSAuthenticate_Request {
@@ -1691,7 +1686,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSiteLicense_LCSAuthentica
     }
 }
 
-#[doc = "Local cafe server wants to grant user access to site"]
 // @@protoc_insertion_point(message:CSiteLicense_LCSAssociateUser_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSiteLicense_LCSAssociateUser_Request {
@@ -1990,7 +1984,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSiteLicense_LCSAssociateU
     }
 }
 
-#[doc = "Client is requesting use of a site license seat"]
 // @@protoc_insertion_point(message:CSiteLicense_ClientSeatCheckout_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSiteLicense_ClientSeatCheckout_Request {
@@ -2240,7 +2233,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSiteLicense_ClientSeatChe
     }
 }
 
-#[doc = "Client is requesting the number of currently available seats"]
 // @@protoc_insertion_point(message:CSiteLicense_ClientGetAvailableSeats_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSiteLicense_ClientGetAvailableSeats_Request {
@@ -2719,12 +2711,12 @@ for CSiteLicense_ClientGetAvailableSeats_Response {
         self.compute_size() as usize
     }
 }
-///Local site manager client service
+///
 struct SiteManagerClient {}
 impl ::steam_vent_proto_common::RpcService for SiteManagerClient {
     const SERVICE_NAME: &'static str = "SiteManagerClient";
 }
-///Site License service
+///
 struct SiteLicense {}
 impl ::steam_vent_proto_common::RpcService for SiteLicense {
     const SERVICE_NAME: &'static str = "SiteLicense";

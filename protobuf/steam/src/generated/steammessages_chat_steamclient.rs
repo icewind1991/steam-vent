@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Request to be notified of online friend persona state information.  Responses sent via CMsgClientPersonaState."]
 // @@protoc_insertion_point(message:CChat_RequestFriendPersonaStates_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChat_RequestFriendPersonaStates_Request {
@@ -179,7 +178,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChat_RequestFriendPersona
     }
 }
 
-#[doc = "Create's a chat group that can contain other chat rooms"]
 // @@protoc_insertion_point(message:CChatRoom_CreateChatRoomGroup_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_CreateChatRoomGroup_Request {
@@ -3432,7 +3430,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_CreateChatRoomGr
     }
 }
 
-#[doc = "Saves's a chat group"]
 // @@protoc_insertion_point(message:CChatRoom_SaveChatRoomGroup_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_SaveChatRoomGroup_Request {
@@ -3667,7 +3664,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_SaveChatRoomGrou
     }
 }
 
-#[doc = "Rename a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_RenameChatRoomGroup_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_RenameChatRoomGroup_Request {
@@ -3952,7 +3948,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_RenameChatRoomGr
     }
 }
 
-#[doc = "Set tagline for a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_SetChatRoomGroupTagline_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_SetChatRoomGroupTagline_Request {
@@ -4187,7 +4182,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_SetChatRoomGroup
     }
 }
 
-#[doc = "Set avatar SHA for a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_SetChatRoomGroupAvatar_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_SetChatRoomGroupAvatar_Request {
@@ -4422,7 +4416,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_SetChatRoomGroup
     }
 }
 
-#[doc = "Sets a broadcast that the chat room group is watching"]
 // @@protoc_insertion_point(message:CChatRoom_SetChatRoomGroupWatchingBroadcast_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_SetChatRoomGroupWatchingBroadcast_Request {
@@ -4672,7 +4665,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_SetChatRoomGroup
     }
 }
 
-#[doc = "Joins the minigame for the chat room group or starts a new one (Winter 2019 sale party game)"]
 // @@protoc_insertion_point(message:CChatRoom_JoinMiniGameForChatRoomGroup_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_JoinMiniGameForChatRoomGroup_Request {
@@ -4923,7 +4915,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_JoinMiniGameForC
     }
 }
 
-#[doc = "Ends the minigame in the chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_EndMiniGameForChatRoomGroup_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_EndMiniGameForChatRoomGroup_Request {
@@ -5173,7 +5164,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_EndMiniGameForCh
     }
 }
 
-#[doc = "Mute user in group"]
 // @@protoc_insertion_point(message:CChatRoom_MuteUser_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_MuteUser_Request {
@@ -5423,7 +5413,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_MuteUser_Respons
     }
 }
 
-#[doc = "Kick user from group"]
 // @@protoc_insertion_point(message:CChatRoom_KickUser_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_KickUser_Request {
@@ -5673,7 +5662,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_KickUser_Respons
     }
 }
 
-#[doc = "Ban/unban user from group"]
 // @@protoc_insertion_point(message:CChatRoom_SetUserBanState_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_SetUserBanState_Request {
@@ -5923,7 +5911,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_SetUserBanState_
     }
 }
 
-#[doc = "Revoke a direct invitation of a user"]
 // @@protoc_insertion_point(message:CChatRoom_RevokeInvite_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_RevokeInvite_Request {
@@ -6141,7 +6128,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_RevokeInvite_Res
     }
 }
 
-#[doc = "Create role for goup"]
 // @@protoc_insertion_point(message:CChatRoom_CreateRole_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_CreateRole_Request {
@@ -6391,7 +6377,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_CreateRole_Respo
     }
 }
 
-#[doc = "Get all roles in group"]
 // @@protoc_insertion_point(message:CChatRoom_GetRoles_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetRoles_Request {
@@ -6592,7 +6577,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_GetRoles_Respons
     }
 }
 
-#[doc = "Rename role for goup"]
 // @@protoc_insertion_point(message:CChatRoom_RenameRole_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_RenameRole_Request {
@@ -6859,7 +6843,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_RenameRole_Respo
     }
 }
 
-#[doc = "Reorder role with a goup"]
 // @@protoc_insertion_point(message:CChatRoom_ReorderRole_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_ReorderRole_Request {
@@ -7109,7 +7092,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_ReorderRole_Resp
     }
 }
 
-#[doc = "Delete role from group"]
 // @@protoc_insertion_point(message:CChatRoom_DeleteRole_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_DeleteRole_Request {
@@ -7327,7 +7309,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_DeleteRole_Respo
     }
 }
 
-#[doc = "Get all defined roles and actions in group"]
 // @@protoc_insertion_point(message:CChatRoom_GetRoleActions_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetRoleActions_Request {
@@ -7560,7 +7541,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_GetRoleActions_R
     }
 }
 
-#[doc = "Replace role actions in group"]
 // @@protoc_insertion_point(message:CChatRoom_ReplaceRoleActions_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_ReplaceRoleActions_Request {
@@ -7792,7 +7772,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_ReplaceRoleActio
     }
 }
 
-#[doc = "Add role to user in group"]
 // @@protoc_insertion_point(message:CChatRoom_AddRoleToUser_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_AddRoleToUser_Request {
@@ -8042,7 +8021,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_AddRoleToUser_Re
     }
 }
 
-#[doc = "Get all roles assigned to user in group"]
 // @@protoc_insertion_point(message:CChatRoom_GetRolesForUser_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetRolesForUser_Request {
@@ -8277,7 +8255,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_GetRolesForUser_
     }
 }
 
-#[doc = "Delete role from user in group"]
 // @@protoc_insertion_point(message:CChatRoom_DeleteRoleFromUser_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_DeleteRoleFromUser_Request {
@@ -8527,7 +8504,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_DeleteRoleFromUs
     }
 }
 
-#[doc = "Join a multi-user chat room"]
 // @@protoc_insertion_point(message:CChatRoom_JoinChatRoomGroup_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_JoinChatRoomGroup_Request {
@@ -8887,7 +8863,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_JoinChatRoomGrou
     }
 }
 
-#[doc = "Invite a friend to a multi-user chat room"]
 // @@protoc_insertion_point(message:CChatRoom_InviteFriendToChatRoomGroup_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_InviteFriendToChatRoomGroup_Request {
@@ -9169,7 +9144,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_InviteFriendToCh
     }
 }
 
-#[doc = "Leaves a chat room group and all related chats"]
 // @@protoc_insertion_point(message:CChatRoom_LeaveChatRoomGroup_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_LeaveChatRoomGroup_Request {
@@ -9355,7 +9329,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_LeaveChatRoomGro
     }
 }
 
-#[doc = "Creates a chat room inside a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_CreateChatRoom_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_CreateChatRoom_Request {
@@ -9637,7 +9610,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_CreateChatRoom_R
     }
 }
 
-#[doc = "Deletes a chat room inside a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_DeleteChatRoom_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_DeleteChatRoom_Request {
@@ -9855,7 +9827,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_DeleteChatRoom_R
     }
 }
 
-#[doc = "Renames a chat room inside a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_RenameChatRoom_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_RenameChatRoom_Request {
@@ -10122,7 +10093,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_RenameChatRoom_R
     }
 }
 
-#[doc = "Reorders a chat room inside a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_ReorderChatRoom_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_ReorderChatRoom_Request {
@@ -10372,7 +10342,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_ReorderChatRoom_
     }
 }
 
-#[doc = "Send a chat message to a multi-user chat room"]
 // @@protoc_insertion_point(message:CChatRoom_SendChatMessage_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_SendChatMessage_Request {
@@ -10834,7 +10803,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_SendChatMessage_
     }
 }
 
-#[doc = "Join the voice chat in a multi-room chat (should already be in the chat room)"]
 // @@protoc_insertion_point(message:CChatRoom_JoinVoiceChat_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_JoinVoiceChat_Request {
@@ -11085,7 +11053,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_JoinVoiceChat_Re
     }
 }
 
-#[doc = "Leave the voice chat in a multi-room chat"]
 // @@protoc_insertion_point(message:CChatRoom_LeaveVoiceChat_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_LeaveVoiceChat_Request {
@@ -11303,7 +11270,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_LeaveVoiceChat_R
     }
 }
 
-#[doc = "Get the history of messages in a chat room.  You must currently be a member of the chat room."]
 // @@protoc_insertion_point(message:CChatRoom_GetMessageHistory_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetMessageHistory_Request {
@@ -12434,7 +12400,6 @@ pub mod cchat_room_get_message_history_response {
     }
 }
 
-#[doc = "Get a list of our chat rooms"]
 // @@protoc_insertion_point(message:CChatRoom_GetMyChatRoomGroups_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetMyChatRoomGroups_Request {
@@ -13473,7 +13438,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_GetMyChatRoomGro
     }
 }
 
-#[doc = "Get information about a single chat room"]
 // @@protoc_insertion_point(message:CChatRoom_GetChatRoomGroupState_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetChatRoomGroupState_Request {
@@ -13674,7 +13638,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_GetChatRoomGroup
     }
 }
 
-#[doc = "Get basic information about a chat room group"]
 // @@protoc_insertion_point(message:CChatRoom_GetChatRoomGroupSummary_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetChatRoomGroupSummary_Request {
@@ -13784,7 +13747,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_GetChatRoomGroup
     }
 }
 
-#[doc = "Force a group chat to be considered active on the server for this user"]
 // @@protoc_insertion_point(message:CChatRoom_SetAppChatRoomGroupForceActive_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_SetAppChatRoomGroupForceActive_Request {
@@ -14051,7 +14013,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_SetAppChatRoomGr
     }
 }
 
-#[doc = "If a group chat is forced active (see SetAppChatRoomGroupForceActive), decrement the force count"]
 // @@protoc_insertion_point(message:CChatRoom_SetAppChatRoomGroupStopForceActive_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_SetAppChatRoomGroupStopForceActive_Notification {
@@ -14193,7 +14154,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_SetAppChatRoomGr
     }
 }
 
-#[doc = "A session acked an unread message, echo to other sessions."]
 // @@protoc_insertion_point(message:CChatRoom_AckChatMessage_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_AckChatMessage_Notification {
@@ -14367,7 +14327,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_AckChatMessage_N
     }
 }
 
-#[doc = "Creates a chatroom invite link"]
 // @@protoc_insertion_point(message:CChatRoom_CreateInviteLink_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_CreateInviteLink_Request {
@@ -14699,7 +14658,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_CreateInviteLink
     }
 }
 
-#[doc = "Returns chat room info about provided link"]
 // @@protoc_insertion_point(message:CChatRoom_GetInviteLinkInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetInviteLinkInfo_Request {
@@ -15091,7 +15049,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_GetInviteLinkInf
     }
 }
 
-#[doc = "Returns chat room info about any invite involving the sender and passed group id"]
 // @@protoc_insertion_point(message:CChatRoom_GetInviteInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetInviteInfo_Request {
@@ -15469,7 +15426,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_GetInviteInfo_Re
     }
 }
 
-#[doc = "Returns all invite links for the specified group"]
 // @@protoc_insertion_point(message:CChatRoom_GetInviteLinksForGroup_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetInviteLinksForGroup_Request {
@@ -15895,7 +15851,6 @@ pub mod cchat_room_get_invite_links_for_group_response {
     }
 }
 
-#[doc = "Gets a list of users who have been banned from a chat room"]
 // @@protoc_insertion_point(message:CChatRoom_GetBanList_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetBanList_Request {
@@ -16321,7 +16276,6 @@ pub mod cchat_room_get_ban_list_response {
     }
 }
 
-#[doc = "Gets a list of users who have been invited to a chat room"]
 // @@protoc_insertion_point(message:CChatRoom_GetInviteList_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetInviteList_Request {
@@ -16695,7 +16649,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_GetInviteList_Re
     }
 }
 
-#[doc = "Deletes specified invite link"]
 // @@protoc_insertion_point(message:CChatRoom_DeleteInviteLink_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_DeleteInviteLink_Request {
@@ -16930,7 +16883,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_DeleteInviteLink
     }
 }
 
-#[doc = "Set which chat rooms we are using in the active session"]
 // @@protoc_insertion_point(message:CChatRoom_SetSessionActiveChatRoomGroups_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_SetSessionActiveChatRoomGroups_Request {
@@ -17179,7 +17131,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_SetSessionActive
     }
 }
 
-#[doc = "Set preferences around chat notifications for a group"]
 // @@protoc_insertion_point(message:CChatRoom_SetUserChatGroupPreferences_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_SetUserChatGroupPreferences_Request {
@@ -17786,7 +17737,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_SetUserChatGroup
     }
 }
 
-#[doc = "Deletes specified chat messages"]
 // @@protoc_insertion_point(message:CChatRoom_DeleteChatMessages_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_DeleteChatMessages_Request {
@@ -18162,7 +18112,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_DeleteChatMessag
     }
 }
 
-#[doc = "A client is indicating it has an active view into the members list."]
 // @@protoc_insertion_point(message:CChatRoom_UpdateMemberListView_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_UpdateMemberListView_Notification {
@@ -18464,7 +18413,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_UpdateMemberList
     }
 }
 
-#[doc = "Search chat room members by name."]
 // @@protoc_insertion_point(message:CChatRoom_SearchMembers_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_SearchMembers_Request {
@@ -18936,7 +18884,6 @@ pub mod cchat_room_search_members_response {
     }
 }
 
-#[doc = "Adds/removes a reaction to/from a chat room message"]
 // @@protoc_insertion_point(message:CChatRoom_UpdateMessageReaction_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_UpdateMessageReaction_Request {
@@ -19367,7 +19314,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_UpdateMessageRea
     }
 }
 
-#[doc = "Fetches a list of reactors for a specified reaction"]
 // @@protoc_insertion_point(message:CChatRoom_GetMessageReactionReactors_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_GetMessageReactionReactors_Request {
@@ -19782,7 +19728,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_GetMessageReacti
     }
 }
 
-#[doc = "Get a list of chat rooms for a clan, optionally creating a new one"]
 // @@protoc_insertion_point(message:CClanChatRooms_GetClanChatRoomInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CClanChatRooms_GetClanChatRoomInfo_Request {
@@ -20015,7 +19960,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CClanChatRooms_GetClanChat
     }
 }
 
-#[doc = "Set a clan chat room to be members only (or public)"]
 // @@protoc_insertion_point(message:CClanChatRooms_SetClanChatRoomPrivate_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CClanChatRooms_SetClanChatRoomPrivate_Request {
@@ -20423,7 +20367,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatMentions {
     }
 }
 
-#[doc = "New chat message for a chat room"]
 // @@protoc_insertion_point(message:CChatRoom_IncomingChatMessage_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_IncomingChatMessage_Notification {
@@ -20448,6 +20391,8 @@ pub struct CChatRoom_IncomingChatMessage_Notification {
     pub message_no_bbcode: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CChatRoom_IncomingChatMessage_Notification.chat_name)
     pub chat_name: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CChatRoom_IncomingChatMessage_Notification.notification_key)
+    pub notification_key: ::std::option::Option<::std::string::String>,
     // special fields
     // @@protoc_insertion_point(special_field:CChatRoom_IncomingChatMessage_Notification.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -20666,6 +20611,42 @@ impl CChatRoom_IncomingChatMessage_Notification {
     pub fn take_chat_name(&mut self) -> ::std::string::String {
         self.chat_name.take().unwrap_or_else(|| ::std::string::String::new())
     }
+
+    // optional string notification_key = 11;
+
+    pub fn notification_key(&self) -> &str {
+        match self.notification_key.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_notification_key(&mut self) {
+        self.notification_key = ::std::option::Option::None;
+    }
+
+    pub fn has_notification_key(&self) -> bool {
+        self.notification_key.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_notification_key(&mut self, v: ::std::string::String) {
+        self.notification_key = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_notification_key(&mut self) -> &mut ::std::string::String {
+        if self.notification_key.is_none() {
+            self.notification_key = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.notification_key.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_notification_key(&mut self) -> ::std::string::String {
+        self.notification_key.take().unwrap_or_else(|| ::std::string::String::new())
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_IncomingChatMessage_Notification {
@@ -20707,6 +20688,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_IncomingChatMess
                 },
                 82 => {
                     self.chat_name = ::std::option::Option::Some(is.read_string()?);
+                },
+                90 => {
+                    self.notification_key = ::std::option::Option::Some(is.read_string()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -20752,6 +20736,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_IncomingChatMess
         if let Some(v) = self.chat_name.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(10, &v);
         }
+        if let Some(v) = self.notification_key.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(11, &v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -20788,6 +20775,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_IncomingChatMess
         if let Some(v) = self.chat_name.as_ref() {
             os.write_string(10, v)?;
         }
+        if let Some(v) = self.notification_key.as_ref() {
+            os.write_string(11, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -20815,6 +20805,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_IncomingChatMess
         self.server_message.clear();
         self.message_no_bbcode = ::std::option::Option::None;
         self.chat_name = ::std::option::Option::None;
+        self.notification_key = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -20830,13 +20821,13 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_IncomingChatMess
             server_message: ::steam_vent_proto_common::protobuf::MessageField::none(),
             message_no_bbcode: ::std::option::Option::None,
             chat_name: ::std::option::Option::None,
+            notification_key: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
     }
 }
 
-#[doc = "An existing chat message has been modified on the backend"]
 // @@protoc_insertion_point(message:CChatRoom_ChatMessageModified_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_ChatMessageModified_Notification {
@@ -21168,7 +21159,6 @@ pub mod cchat_room_chat_message_modified_notification {
     }
 }
 
-#[doc = "A chat room member's state has changed (join/part/permissions)"]
 // @@protoc_insertion_point(message:CChatRoom_MemberStateChange_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_MemberStateChange_Notification {
@@ -21327,7 +21317,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_MemberStateChang
     }
 }
 
-#[doc = "Chat Room header / metadata has changed"]
 // @@protoc_insertion_point(message:CChatRoom_ChatRoomHeaderState_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_ChatRoomHeaderState_Notification {
@@ -21419,7 +21408,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_ChatRoomHeaderSt
     }
 }
 
-#[doc = "Something about a chatroom group changed (created, deleted, etc.)"]
 // @@protoc_insertion_point(message:CChatRoom_ChatRoomGroupRoomsChange_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_ChatRoomGroupRoomsChange_Notification {
@@ -21575,7 +21563,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_ChatRoomGroupRoo
     }
 }
 
-#[doc = "Voice chat was recreated or dropped on the backend and client needs to rejoin to remain in chat."]
 // @@protoc_insertion_point(message:CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification {
@@ -21717,7 +21704,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_NotifyShouldRejo
     }
 }
 
-#[doc = "User chat group state (preferences, ack state, etc) have changed."]
 // @@protoc_insertion_point(message:ChatRoomClient_NotifyChatGroupUserStateChanged_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct ChatRoomClient_NotifyChatGroupUserStateChanged_Notification {
@@ -21890,7 +21876,6 @@ impl ::steam_vent_proto_common::protobuf::Message for ChatRoomClient_NotifyChatG
     }
 }
 
-#[doc = "The ChatRoom server hosting the chat rooms has reconnected to the user's Chat server (may have restarted), client should refresh state."]
 // @@protoc_insertion_point(message:ChatRoomClient_NotifyChatRoomDisconnect_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct ChatRoomClient_NotifyChatRoomDisconnect_Notification {
@@ -22394,7 +22379,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoomMemberSummaryCoun
     }
 }
 
-#[doc = "The list of members for a chat room with virtualized member list has changed on the server (or client requested)"]
 // @@protoc_insertion_point(message:CChatRoomClient_MemberListViewUpdated_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoomClient_MemberListViewUpdated_Notification {
@@ -22782,7 +22766,6 @@ pub mod cchat_room_client_member_list_view_updated_notification {
     }
 }
 
-#[doc = "New message reaction"]
 // @@protoc_insertion_point(message:CChatRoom_MessageReaction_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatRoom_MessageReaction_Notification {
@@ -23136,7 +23119,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CChatRoom_MessageReaction_
     }
 }
 
-#[doc = "Incoming metrics from the client"]
 // @@protoc_insertion_point(message:CChatUsability_ClientUsabilityMetrics_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatUsability_ClientUsabilityMetrics_Notification {
@@ -25915,7 +25897,6 @@ pub mod cchat_usability_client_usability_metrics_notification {
     }
 }
 
-#[doc = "Request client send usability metrics"]
 // @@protoc_insertion_point(message:CChatUsability_RequestClientUsabilityMetrics_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CChatUsability_RequestClientUsabilityMetrics_Notification {
@@ -28251,32 +28232,32 @@ for CChatUsability_RequestClientUsabilityMetrics_Notification {
         self.compute_size() as usize
     }
 }
-///Chat-related services
+///
 struct Chat {}
 impl ::steam_vent_proto_common::RpcService for Chat {
     const SERVICE_NAME: &'static str = "Chat";
 }
-///Service for joining, managing, and using multi-user chat rooms
+///
 struct ChatRoom {}
 impl ::steam_vent_proto_common::RpcService for ChatRoom {
     const SERVICE_NAME: &'static str = "ChatRoom";
 }
-///Methods for getting clan chat information
+///
 struct ClanChatRooms {}
 impl ::steam_vent_proto_common::RpcService for ClanChatRooms {
     const SERVICE_NAME: &'static str = "ClanChatRooms";
 }
-///Client notifications for chat events
+///
 struct ChatRoomClient {}
 impl ::steam_vent_proto_common::RpcService for ChatRoomClient {
     const SERVICE_NAME: &'static str = "ChatRoomClient";
 }
-///Client notifications for chat events
+///
 struct ChatUsability {}
 impl ::steam_vent_proto_common::RpcService for ChatUsability {
     const SERVICE_NAME: &'static str = "ChatUsability";
 }
-///Client notifications for chat usability
+///
 struct ChatUsabilityClient {}
 impl ::steam_vent_proto_common::RpcService for ChatUsabilityClient {
     const SERVICE_NAME: &'static str = "ChatUsabilityClient";

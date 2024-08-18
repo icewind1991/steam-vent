@@ -377,12 +377,14 @@ impl ::std::default::Default for EPersonaStateFlag {
 pub enum EContentCheckProvider {
     // @@protoc_insertion_point(enum_value:EContentCheckProvider.k_EContentCheckProvider_Invalid)
     k_EContentCheckProvider_Invalid = 0,
-    // @@protoc_insertion_point(enum_value:EContentCheckProvider.k_EContentCheckProvider_Google)
-    k_EContentCheckProvider_Google = 1,
+    // @@protoc_insertion_point(enum_value:EContentCheckProvider.k_EContentCheckProvider_Google_DEPRECATED)
+    k_EContentCheckProvider_Google_DEPRECATED = 1,
     // @@protoc_insertion_point(enum_value:EContentCheckProvider.k_EContentCheckProvider_Amazon)
     k_EContentCheckProvider_Amazon = 2,
     // @@protoc_insertion_point(enum_value:EContentCheckProvider.k_EContentCheckProvider_Local)
     k_EContentCheckProvider_Local = 3,
+    // @@protoc_insertion_point(enum_value:EContentCheckProvider.k_EContentCheckProvider_GoogleVertexAI)
+    k_EContentCheckProvider_GoogleVertexAI = 4,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EContentCheckProvider {
@@ -395,9 +397,10 @@ impl ::steam_vent_proto_common::protobuf::Enum for EContentCheckProvider {
     fn from_i32(value: i32) -> ::std::option::Option<EContentCheckProvider> {
         match value {
             0 => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_Invalid),
-            1 => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_Google),
+            1 => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_Google_DEPRECATED),
             2 => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_Amazon),
             3 => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_Local),
+            4 => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_GoogleVertexAI),
             _ => ::std::option::Option::None
         }
     }
@@ -405,18 +408,20 @@ impl ::steam_vent_proto_common::protobuf::Enum for EContentCheckProvider {
     fn from_str(str: &str) -> ::std::option::Option<EContentCheckProvider> {
         match str {
             "k_EContentCheckProvider_Invalid" => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_Invalid),
-            "k_EContentCheckProvider_Google" => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_Google),
+            "k_EContentCheckProvider_Google_DEPRECATED" => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_Google_DEPRECATED),
             "k_EContentCheckProvider_Amazon" => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_Amazon),
             "k_EContentCheckProvider_Local" => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_Local),
+            "k_EContentCheckProvider_GoogleVertexAI" => ::std::option::Option::Some(EContentCheckProvider::k_EContentCheckProvider_GoogleVertexAI),
             _ => ::std::option::Option::None
         }
     }
 
     const VALUES: &'static [EContentCheckProvider] = &[
         EContentCheckProvider::k_EContentCheckProvider_Invalid,
-        EContentCheckProvider::k_EContentCheckProvider_Google,
+        EContentCheckProvider::k_EContentCheckProvider_Google_DEPRECATED,
         EContentCheckProvider::k_EContentCheckProvider_Amazon,
         EContentCheckProvider::k_EContentCheckProvider_Local,
+        EContentCheckProvider::k_EContentCheckProvider_GoogleVertexAI,
     ];
 }
 
@@ -758,6 +763,76 @@ impl ::std::default::Default for ESDCardFormatStage {
 
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EStorageFormatStage)
+pub enum EStorageFormatStage {
+    // @@protoc_insertion_point(enum_value:EStorageFormatStage.k_EStorageFormatStage_Invalid)
+    k_EStorageFormatStage_Invalid = 0,
+    // @@protoc_insertion_point(enum_value:EStorageFormatStage.k_EStorageFormatStage_NotRunning)
+    k_EStorageFormatStage_NotRunning = 1,
+    // @@protoc_insertion_point(enum_value:EStorageFormatStage.k_EStorageFormatStage_Starting)
+    k_EStorageFormatStage_Starting = 2,
+    // @@protoc_insertion_point(enum_value:EStorageFormatStage.k_EStorageFormatStage_Testing)
+    k_EStorageFormatStage_Testing = 3,
+    // @@protoc_insertion_point(enum_value:EStorageFormatStage.k_EStorageFormatStage_Rescuing)
+    k_EStorageFormatStage_Rescuing = 4,
+    // @@protoc_insertion_point(enum_value:EStorageFormatStage.k_EStorageFormatStage_Formatting)
+    k_EStorageFormatStage_Formatting = 5,
+    // @@protoc_insertion_point(enum_value:EStorageFormatStage.k_EStorageFormatStage_Finalizing)
+    k_EStorageFormatStage_Finalizing = 6,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EStorageFormatStage {
+    const NAME: &'static str = "EStorageFormatStage";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EStorageFormatStage> {
+        match value {
+            0 => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Invalid),
+            1 => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_NotRunning),
+            2 => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Starting),
+            3 => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Testing),
+            4 => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Rescuing),
+            5 => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Formatting),
+            6 => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Finalizing),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EStorageFormatStage> {
+        match str {
+            "k_EStorageFormatStage_Invalid" => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Invalid),
+            "k_EStorageFormatStage_NotRunning" => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_NotRunning),
+            "k_EStorageFormatStage_Starting" => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Starting),
+            "k_EStorageFormatStage_Testing" => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Testing),
+            "k_EStorageFormatStage_Rescuing" => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Rescuing),
+            "k_EStorageFormatStage_Formatting" => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Formatting),
+            "k_EStorageFormatStage_Finalizing" => ::std::option::Option::Some(EStorageFormatStage::k_EStorageFormatStage_Finalizing),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EStorageFormatStage] = &[
+        EStorageFormatStage::k_EStorageFormatStage_Invalid,
+        EStorageFormatStage::k_EStorageFormatStage_NotRunning,
+        EStorageFormatStage::k_EStorageFormatStage_Starting,
+        EStorageFormatStage::k_EStorageFormatStage_Testing,
+        EStorageFormatStage::k_EStorageFormatStage_Rescuing,
+        EStorageFormatStage::k_EStorageFormatStage_Formatting,
+        EStorageFormatStage::k_EStorageFormatStage_Finalizing,
+    ];
+}
+
+impl ::std::default::Default for EStorageFormatStage {
+    fn default() -> Self {
+        EStorageFormatStage::k_EStorageFormatStage_Invalid
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:ESystemFanControlMode)
 pub enum ESystemFanControlMode {
     // @@protoc_insertion_point(enum_value:ESystemFanControlMode.k_SystemFanControlMode_Invalid)
@@ -803,6 +878,156 @@ impl ::steam_vent_proto_common::protobuf::Enum for ESystemFanControlMode {
 impl ::std::default::Default for ESystemFanControlMode {
     fn default() -> Self {
         ESystemFanControlMode::k_SystemFanControlMode_Invalid
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EStartupMovieVariant)
+pub enum EStartupMovieVariant {
+    // @@protoc_insertion_point(enum_value:EStartupMovieVariant.k_EStartupMovieVariant_Invalid)
+    k_EStartupMovieVariant_Invalid = 0,
+    // @@protoc_insertion_point(enum_value:EStartupMovieVariant.k_EStartupMovieVariant_Default)
+    k_EStartupMovieVariant_Default = 1,
+    // @@protoc_insertion_point(enum_value:EStartupMovieVariant.k_EStartupMovieVariant_Orange)
+    k_EStartupMovieVariant_Orange = 2,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EStartupMovieVariant {
+    const NAME: &'static str = "EStartupMovieVariant";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EStartupMovieVariant> {
+        match value {
+            0 => ::std::option::Option::Some(EStartupMovieVariant::k_EStartupMovieVariant_Invalid),
+            1 => ::std::option::Option::Some(EStartupMovieVariant::k_EStartupMovieVariant_Default),
+            2 => ::std::option::Option::Some(EStartupMovieVariant::k_EStartupMovieVariant_Orange),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EStartupMovieVariant> {
+        match str {
+            "k_EStartupMovieVariant_Invalid" => ::std::option::Option::Some(EStartupMovieVariant::k_EStartupMovieVariant_Invalid),
+            "k_EStartupMovieVariant_Default" => ::std::option::Option::Some(EStartupMovieVariant::k_EStartupMovieVariant_Default),
+            "k_EStartupMovieVariant_Orange" => ::std::option::Option::Some(EStartupMovieVariant::k_EStartupMovieVariant_Orange),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EStartupMovieVariant] = &[
+        EStartupMovieVariant::k_EStartupMovieVariant_Invalid,
+        EStartupMovieVariant::k_EStartupMovieVariant_Default,
+        EStartupMovieVariant::k_EStartupMovieVariant_Orange,
+    ];
+}
+
+impl ::std::default::Default for EStartupMovieVariant {
+    fn default() -> Self {
+        EStartupMovieVariant::k_EStartupMovieVariant_Invalid
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EColorGamutLabelSet)
+pub enum EColorGamutLabelSet {
+    // @@protoc_insertion_point(enum_value:EColorGamutLabelSet.k_ColorGamutLabelSet_Default)
+    k_ColorGamutLabelSet_Default = 0,
+    // @@protoc_insertion_point(enum_value:EColorGamutLabelSet.k_ColorGamutLabelSet_sRGB_Native)
+    k_ColorGamutLabelSet_sRGB_Native = 1,
+    // @@protoc_insertion_point(enum_value:EColorGamutLabelSet.k_ColorGamutLabelSet_Native_sRGB_Boosted)
+    k_ColorGamutLabelSet_Native_sRGB_Boosted = 2,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EColorGamutLabelSet {
+    const NAME: &'static str = "EColorGamutLabelSet";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EColorGamutLabelSet> {
+        match value {
+            0 => ::std::option::Option::Some(EColorGamutLabelSet::k_ColorGamutLabelSet_Default),
+            1 => ::std::option::Option::Some(EColorGamutLabelSet::k_ColorGamutLabelSet_sRGB_Native),
+            2 => ::std::option::Option::Some(EColorGamutLabelSet::k_ColorGamutLabelSet_Native_sRGB_Boosted),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EColorGamutLabelSet> {
+        match str {
+            "k_ColorGamutLabelSet_Default" => ::std::option::Option::Some(EColorGamutLabelSet::k_ColorGamutLabelSet_Default),
+            "k_ColorGamutLabelSet_sRGB_Native" => ::std::option::Option::Some(EColorGamutLabelSet::k_ColorGamutLabelSet_sRGB_Native),
+            "k_ColorGamutLabelSet_Native_sRGB_Boosted" => ::std::option::Option::Some(EColorGamutLabelSet::k_ColorGamutLabelSet_Native_sRGB_Boosted),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EColorGamutLabelSet] = &[
+        EColorGamutLabelSet::k_ColorGamutLabelSet_Default,
+        EColorGamutLabelSet::k_ColorGamutLabelSet_sRGB_Native,
+        EColorGamutLabelSet::k_ColorGamutLabelSet_Native_sRGB_Boosted,
+    ];
+}
+
+impl ::std::default::Default for EColorGamutLabelSet {
+    fn default() -> Self {
+        EColorGamutLabelSet::k_ColorGamutLabelSet_Default
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EWindowStackingOrder)
+pub enum EWindowStackingOrder {
+    // @@protoc_insertion_point(enum_value:EWindowStackingOrder.k_EWindowStackingOrder_Invalid)
+    k_EWindowStackingOrder_Invalid = 0,
+    // @@protoc_insertion_point(enum_value:EWindowStackingOrder.k_EWindowStackingOrder_Top)
+    k_EWindowStackingOrder_Top = 1,
+    // @@protoc_insertion_point(enum_value:EWindowStackingOrder.k_EWindowStackingOrder_Bottom)
+    k_EWindowStackingOrder_Bottom = 2,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EWindowStackingOrder {
+    const NAME: &'static str = "EWindowStackingOrder";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EWindowStackingOrder> {
+        match value {
+            0 => ::std::option::Option::Some(EWindowStackingOrder::k_EWindowStackingOrder_Invalid),
+            1 => ::std::option::Option::Some(EWindowStackingOrder::k_EWindowStackingOrder_Top),
+            2 => ::std::option::Option::Some(EWindowStackingOrder::k_EWindowStackingOrder_Bottom),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EWindowStackingOrder> {
+        match str {
+            "k_EWindowStackingOrder_Invalid" => ::std::option::Option::Some(EWindowStackingOrder::k_EWindowStackingOrder_Invalid),
+            "k_EWindowStackingOrder_Top" => ::std::option::Option::Some(EWindowStackingOrder::k_EWindowStackingOrder_Top),
+            "k_EWindowStackingOrder_Bottom" => ::std::option::Option::Some(EWindowStackingOrder::k_EWindowStackingOrder_Bottom),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EWindowStackingOrder] = &[
+        EWindowStackingOrder::k_EWindowStackingOrder_Invalid,
+        EWindowStackingOrder::k_EWindowStackingOrder_Top,
+        EWindowStackingOrder::k_EWindowStackingOrder_Bottom,
+    ];
+}
+
+impl ::std::default::Default for EWindowStackingOrder {
+    fn default() -> Self {
+        EWindowStackingOrder::k_EWindowStackingOrder_Invalid
     }
 }
 
@@ -1513,6 +1738,181 @@ impl ::std::default::Default for ESplitScalingScaler {
 
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EGamescopeBlurMode)
+pub enum EGamescopeBlurMode {
+    // @@protoc_insertion_point(enum_value:EGamescopeBlurMode.k_EGamescopeBlurMode_Disabled)
+    k_EGamescopeBlurMode_Disabled = 0,
+    // @@protoc_insertion_point(enum_value:EGamescopeBlurMode.k_EGamescopeBlurMode_IfOccluded)
+    k_EGamescopeBlurMode_IfOccluded = 1,
+    // @@protoc_insertion_point(enum_value:EGamescopeBlurMode.k_EGamescopeBlurMode_Always)
+    k_EGamescopeBlurMode_Always = 2,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EGamescopeBlurMode {
+    const NAME: &'static str = "EGamescopeBlurMode";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EGamescopeBlurMode> {
+        match value {
+            0 => ::std::option::Option::Some(EGamescopeBlurMode::k_EGamescopeBlurMode_Disabled),
+            1 => ::std::option::Option::Some(EGamescopeBlurMode::k_EGamescopeBlurMode_IfOccluded),
+            2 => ::std::option::Option::Some(EGamescopeBlurMode::k_EGamescopeBlurMode_Always),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EGamescopeBlurMode> {
+        match str {
+            "k_EGamescopeBlurMode_Disabled" => ::std::option::Option::Some(EGamescopeBlurMode::k_EGamescopeBlurMode_Disabled),
+            "k_EGamescopeBlurMode_IfOccluded" => ::std::option::Option::Some(EGamescopeBlurMode::k_EGamescopeBlurMode_IfOccluded),
+            "k_EGamescopeBlurMode_Always" => ::std::option::Option::Some(EGamescopeBlurMode::k_EGamescopeBlurMode_Always),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EGamescopeBlurMode] = &[
+        EGamescopeBlurMode::k_EGamescopeBlurMode_Disabled,
+        EGamescopeBlurMode::k_EGamescopeBlurMode_IfOccluded,
+        EGamescopeBlurMode::k_EGamescopeBlurMode_Always,
+    ];
+}
+
+impl ::std::default::Default for EGamescopeBlurMode {
+    fn default() -> Self {
+        EGamescopeBlurMode::k_EGamescopeBlurMode_Disabled
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:ESLSHelper)
+pub enum ESLSHelper {
+    // @@protoc_insertion_point(enum_value:ESLSHelper.k_ESLSHelper_Invalid)
+    k_ESLSHelper_Invalid = 0,
+    // @@protoc_insertion_point(enum_value:ESLSHelper.k_ESLSHelper_Minidump)
+    k_ESLSHelper_Minidump = 1,
+    // @@protoc_insertion_point(enum_value:ESLSHelper.k_ESLSHelper_Kdump)
+    k_ESLSHelper_Kdump = 2,
+    // @@protoc_insertion_point(enum_value:ESLSHelper.k_ESLSHelper_Journal)
+    k_ESLSHelper_Journal = 3,
+    // @@protoc_insertion_point(enum_value:ESLSHelper.k_ESLSHelper_Gpu)
+    k_ESLSHelper_Gpu = 4,
+    // @@protoc_insertion_point(enum_value:ESLSHelper.k_ESLSHelper_SystemInfo)
+    k_ESLSHelper_SystemInfo = 5,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for ESLSHelper {
+    const NAME: &'static str = "ESLSHelper";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<ESLSHelper> {
+        match value {
+            0 => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_Invalid),
+            1 => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_Minidump),
+            2 => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_Kdump),
+            3 => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_Journal),
+            4 => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_Gpu),
+            5 => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_SystemInfo),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<ESLSHelper> {
+        match str {
+            "k_ESLSHelper_Invalid" => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_Invalid),
+            "k_ESLSHelper_Minidump" => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_Minidump),
+            "k_ESLSHelper_Kdump" => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_Kdump),
+            "k_ESLSHelper_Journal" => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_Journal),
+            "k_ESLSHelper_Gpu" => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_Gpu),
+            "k_ESLSHelper_SystemInfo" => ::std::option::Option::Some(ESLSHelper::k_ESLSHelper_SystemInfo),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [ESLSHelper] = &[
+        ESLSHelper::k_ESLSHelper_Invalid,
+        ESLSHelper::k_ESLSHelper_Minidump,
+        ESLSHelper::k_ESLSHelper_Kdump,
+        ESLSHelper::k_ESLSHelper_Journal,
+        ESLSHelper::k_ESLSHelper_Gpu,
+        ESLSHelper::k_ESLSHelper_SystemInfo,
+    ];
+}
+
+impl ::std::default::Default for ESLSHelper {
+    fn default() -> Self {
+        ESLSHelper::k_ESLSHelper_Invalid
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EHDRVisualization)
+pub enum EHDRVisualization {
+    // @@protoc_insertion_point(enum_value:EHDRVisualization.k_EHDRVisualization_None)
+    k_EHDRVisualization_None = 0,
+    // @@protoc_insertion_point(enum_value:EHDRVisualization.k_EHDRVisualization_Heatmap)
+    k_EHDRVisualization_Heatmap = 1,
+    // @@protoc_insertion_point(enum_value:EHDRVisualization.k_EHDRVisualization_Analysis)
+    k_EHDRVisualization_Analysis = 2,
+    // @@protoc_insertion_point(enum_value:EHDRVisualization.k_EHDRVisualization_HeatmapExtended)
+    k_EHDRVisualization_HeatmapExtended = 3,
+    // @@protoc_insertion_point(enum_value:EHDRVisualization.k_EHDRVisualization_HeatmapClassic)
+    k_EHDRVisualization_HeatmapClassic = 4,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EHDRVisualization {
+    const NAME: &'static str = "EHDRVisualization";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EHDRVisualization> {
+        match value {
+            0 => ::std::option::Option::Some(EHDRVisualization::k_EHDRVisualization_None),
+            1 => ::std::option::Option::Some(EHDRVisualization::k_EHDRVisualization_Heatmap),
+            2 => ::std::option::Option::Some(EHDRVisualization::k_EHDRVisualization_Analysis),
+            3 => ::std::option::Option::Some(EHDRVisualization::k_EHDRVisualization_HeatmapExtended),
+            4 => ::std::option::Option::Some(EHDRVisualization::k_EHDRVisualization_HeatmapClassic),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EHDRVisualization> {
+        match str {
+            "k_EHDRVisualization_None" => ::std::option::Option::Some(EHDRVisualization::k_EHDRVisualization_None),
+            "k_EHDRVisualization_Heatmap" => ::std::option::Option::Some(EHDRVisualization::k_EHDRVisualization_Heatmap),
+            "k_EHDRVisualization_Analysis" => ::std::option::Option::Some(EHDRVisualization::k_EHDRVisualization_Analysis),
+            "k_EHDRVisualization_HeatmapExtended" => ::std::option::Option::Some(EHDRVisualization::k_EHDRVisualization_HeatmapExtended),
+            "k_EHDRVisualization_HeatmapClassic" => ::std::option::Option::Some(EHDRVisualization::k_EHDRVisualization_HeatmapClassic),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EHDRVisualization] = &[
+        EHDRVisualization::k_EHDRVisualization_None,
+        EHDRVisualization::k_EHDRVisualization_Heatmap,
+        EHDRVisualization::k_EHDRVisualization_Analysis,
+        EHDRVisualization::k_EHDRVisualization_HeatmapExtended,
+        EHDRVisualization::k_EHDRVisualization_HeatmapClassic,
+    ];
+}
+
+impl ::std::default::Default for EHDRVisualization {
+    fn default() -> Self {
+        EHDRVisualization::k_EHDRVisualization_None
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:EHDRToneMapOperator)
 pub enum EHDRToneMapOperator {
     // @@protoc_insertion_point(enum_value:EHDRToneMapOperator.k_EHDRToneMapOperator_Invalid)
@@ -1709,6 +2109,8 @@ pub enum EUpdaterState {
     k_EUpdaterState_ClientRestartPending = 6,
     // @@protoc_insertion_point(enum_value:EUpdaterState.k_EUpdaterState_SystemRestartPending)
     k_EUpdaterState_SystemRestartPending = 7,
+    // @@protoc_insertion_point(enum_value:EUpdaterState.k_EUpdaterState_RollBack)
+    k_EUpdaterState_RollBack = 8,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EUpdaterState {
@@ -1727,6 +2129,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EUpdaterState {
             5 => ::std::option::Option::Some(EUpdaterState::k_EUpdaterState_Applying),
             6 => ::std::option::Option::Some(EUpdaterState::k_EUpdaterState_ClientRestartPending),
             7 => ::std::option::Option::Some(EUpdaterState::k_EUpdaterState_SystemRestartPending),
+            8 => ::std::option::Option::Some(EUpdaterState::k_EUpdaterState_RollBack),
             _ => ::std::option::Option::None
         }
     }
@@ -1740,6 +2143,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EUpdaterState {
             "k_EUpdaterState_Applying" => ::std::option::Option::Some(EUpdaterState::k_EUpdaterState_Applying),
             "k_EUpdaterState_ClientRestartPending" => ::std::option::Option::Some(EUpdaterState::k_EUpdaterState_ClientRestartPending),
             "k_EUpdaterState_SystemRestartPending" => ::std::option::Option::Some(EUpdaterState::k_EUpdaterState_SystemRestartPending),
+            "k_EUpdaterState_RollBack" => ::std::option::Option::Some(EUpdaterState::k_EUpdaterState_RollBack),
             _ => ::std::option::Option::None
         }
     }
@@ -1752,6 +2156,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EUpdaterState {
         EUpdaterState::k_EUpdaterState_Applying,
         EUpdaterState::k_EUpdaterState_ClientRestartPending,
         EUpdaterState::k_EUpdaterState_SystemRestartPending,
+        EUpdaterState::k_EUpdaterState_RollBack,
     ];
 }
 
@@ -2103,6 +2508,66 @@ impl ::std::default::Default for ESteamDeckCompatibilityResultDisplayType {
 
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:ESteamDeckCompatibilityTestResult)
+pub enum ESteamDeckCompatibilityTestResult {
+    // @@protoc_insertion_point(enum_value:ESteamDeckCompatibilityTestResult.k_ESteamDeckCompatibilityTestResult_Invalid)
+    k_ESteamDeckCompatibilityTestResult_Invalid = 0,
+    // @@protoc_insertion_point(enum_value:ESteamDeckCompatibilityTestResult.k_ESteamDeckCompatibilityTestResult_NotApplicable)
+    k_ESteamDeckCompatibilityTestResult_NotApplicable = 1,
+    // @@protoc_insertion_point(enum_value:ESteamDeckCompatibilityTestResult.k_ESteamDeckCompatibilityTestResult_Pass)
+    k_ESteamDeckCompatibilityTestResult_Pass = 2,
+    // @@protoc_insertion_point(enum_value:ESteamDeckCompatibilityTestResult.k_ESteamDeckCompatibilityTestResult_Fail)
+    k_ESteamDeckCompatibilityTestResult_Fail = 3,
+    // @@protoc_insertion_point(enum_value:ESteamDeckCompatibilityTestResult.k_ESteamDeckCompatibilityTestResult_FailMinor)
+    k_ESteamDeckCompatibilityTestResult_FailMinor = 4,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for ESteamDeckCompatibilityTestResult {
+    const NAME: &'static str = "ESteamDeckCompatibilityTestResult";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<ESteamDeckCompatibilityTestResult> {
+        match value {
+            0 => ::std::option::Option::Some(ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_Invalid),
+            1 => ::std::option::Option::Some(ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_NotApplicable),
+            2 => ::std::option::Option::Some(ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_Pass),
+            3 => ::std::option::Option::Some(ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_Fail),
+            4 => ::std::option::Option::Some(ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_FailMinor),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<ESteamDeckCompatibilityTestResult> {
+        match str {
+            "k_ESteamDeckCompatibilityTestResult_Invalid" => ::std::option::Option::Some(ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_Invalid),
+            "k_ESteamDeckCompatibilityTestResult_NotApplicable" => ::std::option::Option::Some(ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_NotApplicable),
+            "k_ESteamDeckCompatibilityTestResult_Pass" => ::std::option::Option::Some(ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_Pass),
+            "k_ESteamDeckCompatibilityTestResult_Fail" => ::std::option::Option::Some(ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_Fail),
+            "k_ESteamDeckCompatibilityTestResult_FailMinor" => ::std::option::Option::Some(ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_FailMinor),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [ESteamDeckCompatibilityTestResult] = &[
+        ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_Invalid,
+        ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_NotApplicable,
+        ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_Pass,
+        ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_Fail,
+        ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_FailMinor,
+    ];
+}
+
+impl ::std::default::Default for ESteamDeckCompatibilityTestResult {
+    fn default() -> Self {
+        ESteamDeckCompatibilityTestResult::k_ESteamDeckCompatibilityTestResult_Invalid
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:EACState)
 pub enum EACState {
     // @@protoc_insertion_point(enum_value:EACState.k_EACState_Unknown)
@@ -2225,10 +2690,14 @@ pub enum EOSBranch {
     k_EOSBranch_Beta = 3,
     // @@protoc_insertion_point(enum_value:EOSBranch.k_EOSBranch_BetaCandidate)
     k_EOSBranch_BetaCandidate = 4,
+    // @@protoc_insertion_point(enum_value:EOSBranch.k_EOSBranch_Preview)
+    k_EOSBranch_Preview = 5,
+    // @@protoc_insertion_point(enum_value:EOSBranch.k_EOSBranch_PreviewCandidate)
+    k_EOSBranch_PreviewCandidate = 6,
     // @@protoc_insertion_point(enum_value:EOSBranch.k_EOSBranch_Main)
-    k_EOSBranch_Main = 5,
+    k_EOSBranch_Main = 7,
     // @@protoc_insertion_point(enum_value:EOSBranch.k_EOSBranch_Staging)
-    k_EOSBranch_Staging = 6,
+    k_EOSBranch_Staging = 8,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EOSBranch {
@@ -2245,8 +2714,10 @@ impl ::steam_vent_proto_common::protobuf::Enum for EOSBranch {
             2 => ::std::option::Option::Some(EOSBranch::k_EOSBranch_ReleaseCandidate),
             3 => ::std::option::Option::Some(EOSBranch::k_EOSBranch_Beta),
             4 => ::std::option::Option::Some(EOSBranch::k_EOSBranch_BetaCandidate),
-            5 => ::std::option::Option::Some(EOSBranch::k_EOSBranch_Main),
-            6 => ::std::option::Option::Some(EOSBranch::k_EOSBranch_Staging),
+            5 => ::std::option::Option::Some(EOSBranch::k_EOSBranch_Preview),
+            6 => ::std::option::Option::Some(EOSBranch::k_EOSBranch_PreviewCandidate),
+            7 => ::std::option::Option::Some(EOSBranch::k_EOSBranch_Main),
+            8 => ::std::option::Option::Some(EOSBranch::k_EOSBranch_Staging),
             _ => ::std::option::Option::None
         }
     }
@@ -2258,6 +2729,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for EOSBranch {
             "k_EOSBranch_ReleaseCandidate" => ::std::option::Option::Some(EOSBranch::k_EOSBranch_ReleaseCandidate),
             "k_EOSBranch_Beta" => ::std::option::Option::Some(EOSBranch::k_EOSBranch_Beta),
             "k_EOSBranch_BetaCandidate" => ::std::option::Option::Some(EOSBranch::k_EOSBranch_BetaCandidate),
+            "k_EOSBranch_Preview" => ::std::option::Option::Some(EOSBranch::k_EOSBranch_Preview),
+            "k_EOSBranch_PreviewCandidate" => ::std::option::Option::Some(EOSBranch::k_EOSBranch_PreviewCandidate),
             "k_EOSBranch_Main" => ::std::option::Option::Some(EOSBranch::k_EOSBranch_Main),
             "k_EOSBranch_Staging" => ::std::option::Option::Some(EOSBranch::k_EOSBranch_Staging),
             _ => ::std::option::Option::None
@@ -2270,6 +2743,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for EOSBranch {
         EOSBranch::k_EOSBranch_ReleaseCandidate,
         EOSBranch::k_EOSBranch_Beta,
         EOSBranch::k_EOSBranch_BetaCandidate,
+        EOSBranch::k_EOSBranch_Preview,
+        EOSBranch::k_EOSBranch_PreviewCandidate,
         EOSBranch::k_EOSBranch_Main,
         EOSBranch::k_EOSBranch_Staging,
     ];
@@ -2724,6 +3199,86 @@ impl ::std::default::Default for ENewSteamAnnouncementState {
 
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EForumType)
+pub enum EForumType {
+    // @@protoc_insertion_point(enum_value:EForumType.k_EForumType_Invalid)
+    k_EForumType_Invalid = 0,
+    // @@protoc_insertion_point(enum_value:EForumType.k_EForumType_General)
+    k_EForumType_General = 1,
+    // @@protoc_insertion_point(enum_value:EForumType.k_EForumType_ReportedPosts)
+    k_EForumType_ReportedPosts = 2,
+    // @@protoc_insertion_point(enum_value:EForumType.k_EForumType_Workshop)
+    k_EForumType_Workshop = 3,
+    // @@protoc_insertion_point(enum_value:EForumType.k_EForumType_PublishedFile)
+    k_EForumType_PublishedFile = 4,
+    // @@protoc_insertion_point(enum_value:EForumType.k_EForumType_Trading)
+    k_EForumType_Trading = 5,
+    // @@protoc_insertion_point(enum_value:EForumType.k_EForumType_PlayTest)
+    k_EForumType_PlayTest = 6,
+    // @@protoc_insertion_point(enum_value:EForumType.k_EForumType_Event)
+    k_EForumType_Event = 7,
+    // @@protoc_insertion_point(enum_value:EForumType.k_EForumType_Max)
+    k_EForumType_Max = 8,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EForumType {
+    const NAME: &'static str = "EForumType";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EForumType> {
+        match value {
+            0 => ::std::option::Option::Some(EForumType::k_EForumType_Invalid),
+            1 => ::std::option::Option::Some(EForumType::k_EForumType_General),
+            2 => ::std::option::Option::Some(EForumType::k_EForumType_ReportedPosts),
+            3 => ::std::option::Option::Some(EForumType::k_EForumType_Workshop),
+            4 => ::std::option::Option::Some(EForumType::k_EForumType_PublishedFile),
+            5 => ::std::option::Option::Some(EForumType::k_EForumType_Trading),
+            6 => ::std::option::Option::Some(EForumType::k_EForumType_PlayTest),
+            7 => ::std::option::Option::Some(EForumType::k_EForumType_Event),
+            8 => ::std::option::Option::Some(EForumType::k_EForumType_Max),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EForumType> {
+        match str {
+            "k_EForumType_Invalid" => ::std::option::Option::Some(EForumType::k_EForumType_Invalid),
+            "k_EForumType_General" => ::std::option::Option::Some(EForumType::k_EForumType_General),
+            "k_EForumType_ReportedPosts" => ::std::option::Option::Some(EForumType::k_EForumType_ReportedPosts),
+            "k_EForumType_Workshop" => ::std::option::Option::Some(EForumType::k_EForumType_Workshop),
+            "k_EForumType_PublishedFile" => ::std::option::Option::Some(EForumType::k_EForumType_PublishedFile),
+            "k_EForumType_Trading" => ::std::option::Option::Some(EForumType::k_EForumType_Trading),
+            "k_EForumType_PlayTest" => ::std::option::Option::Some(EForumType::k_EForumType_PlayTest),
+            "k_EForumType_Event" => ::std::option::Option::Some(EForumType::k_EForumType_Event),
+            "k_EForumType_Max" => ::std::option::Option::Some(EForumType::k_EForumType_Max),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EForumType] = &[
+        EForumType::k_EForumType_Invalid,
+        EForumType::k_EForumType_General,
+        EForumType::k_EForumType_ReportedPosts,
+        EForumType::k_EForumType_Workshop,
+        EForumType::k_EForumType_PublishedFile,
+        EForumType::k_EForumType_Trading,
+        EForumType::k_EForumType_PlayTest,
+        EForumType::k_EForumType_Event,
+        EForumType::k_EForumType_Max,
+    ];
+}
+
+impl ::std::default::Default for EForumType {
+    fn default() -> Self {
+        EForumType::k_EForumType_Invalid
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:ECommentThreadType)
 pub enum ECommentThreadType {
     // @@protoc_insertion_point(enum_value:ECommentThreadType.k_ECommentThreadTypeInvalid)
@@ -3019,6 +3574,539 @@ impl ::steam_vent_proto_common::protobuf::Enum for ECloudGamingPlatform {
 impl ::std::default::Default for ECloudGamingPlatform {
     fn default() -> Self {
         ECloudGamingPlatform::k_ECloudGamingPlatformNone
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:ECompromiseDetectionType)
+pub enum ECompromiseDetectionType {
+    // @@protoc_insertion_point(enum_value:ECompromiseDetectionType.k_ECompromiseDetectionType_None)
+    k_ECompromiseDetectionType_None = 0,
+    // @@protoc_insertion_point(enum_value:ECompromiseDetectionType.k_ECompromiseDetectionType_TradeEvent)
+    k_ECompromiseDetectionType_TradeEvent = 1,
+    // @@protoc_insertion_point(enum_value:ECompromiseDetectionType.k_ECompromiseDetectionType_ApiCallRate)
+    k_ECompromiseDetectionType_ApiCallRate = 2,
+    // @@protoc_insertion_point(enum_value:ECompromiseDetectionType.k_ECompromiseDetectionType_Manual)
+    k_ECompromiseDetectionType_Manual = 3,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for ECompromiseDetectionType {
+    const NAME: &'static str = "ECompromiseDetectionType";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<ECompromiseDetectionType> {
+        match value {
+            0 => ::std::option::Option::Some(ECompromiseDetectionType::k_ECompromiseDetectionType_None),
+            1 => ::std::option::Option::Some(ECompromiseDetectionType::k_ECompromiseDetectionType_TradeEvent),
+            2 => ::std::option::Option::Some(ECompromiseDetectionType::k_ECompromiseDetectionType_ApiCallRate),
+            3 => ::std::option::Option::Some(ECompromiseDetectionType::k_ECompromiseDetectionType_Manual),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<ECompromiseDetectionType> {
+        match str {
+            "k_ECompromiseDetectionType_None" => ::std::option::Option::Some(ECompromiseDetectionType::k_ECompromiseDetectionType_None),
+            "k_ECompromiseDetectionType_TradeEvent" => ::std::option::Option::Some(ECompromiseDetectionType::k_ECompromiseDetectionType_TradeEvent),
+            "k_ECompromiseDetectionType_ApiCallRate" => ::std::option::Option::Some(ECompromiseDetectionType::k_ECompromiseDetectionType_ApiCallRate),
+            "k_ECompromiseDetectionType_Manual" => ::std::option::Option::Some(ECompromiseDetectionType::k_ECompromiseDetectionType_Manual),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [ECompromiseDetectionType] = &[
+        ECompromiseDetectionType::k_ECompromiseDetectionType_None,
+        ECompromiseDetectionType::k_ECompromiseDetectionType_TradeEvent,
+        ECompromiseDetectionType::k_ECompromiseDetectionType_ApiCallRate,
+        ECompromiseDetectionType::k_ECompromiseDetectionType_Manual,
+    ];
+}
+
+impl ::std::default::Default for ECompromiseDetectionType {
+    fn default() -> Self {
+        ECompromiseDetectionType::k_ECompromiseDetectionType_None
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EAsyncGameSessionUserState)
+pub enum EAsyncGameSessionUserState {
+    // @@protoc_insertion_point(enum_value:EAsyncGameSessionUserState.k_EAsyncGameSessionUserStateUnknown)
+    k_EAsyncGameSessionUserStateUnknown = -1,
+    // @@protoc_insertion_point(enum_value:EAsyncGameSessionUserState.k_EAsyncGameSessionUserStateWaitingForOthers)
+    k_EAsyncGameSessionUserStateWaitingForOthers = 0,
+    // @@protoc_insertion_point(enum_value:EAsyncGameSessionUserState.k_EAsyncGameSessionUserStateReadyForAction)
+    k_EAsyncGameSessionUserStateReadyForAction = 1,
+    // @@protoc_insertion_point(enum_value:EAsyncGameSessionUserState.k_EAsyncGameSessionUserStateDone)
+    k_EAsyncGameSessionUserStateDone = 2,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EAsyncGameSessionUserState {
+    const NAME: &'static str = "EAsyncGameSessionUserState";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EAsyncGameSessionUserState> {
+        match value {
+            -1 => ::std::option::Option::Some(EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateUnknown),
+            0 => ::std::option::Option::Some(EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateWaitingForOthers),
+            1 => ::std::option::Option::Some(EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateReadyForAction),
+            2 => ::std::option::Option::Some(EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateDone),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EAsyncGameSessionUserState> {
+        match str {
+            "k_EAsyncGameSessionUserStateUnknown" => ::std::option::Option::Some(EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateUnknown),
+            "k_EAsyncGameSessionUserStateWaitingForOthers" => ::std::option::Option::Some(EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateWaitingForOthers),
+            "k_EAsyncGameSessionUserStateReadyForAction" => ::std::option::Option::Some(EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateReadyForAction),
+            "k_EAsyncGameSessionUserStateDone" => ::std::option::Option::Some(EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateDone),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EAsyncGameSessionUserState] = &[
+        EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateUnknown,
+        EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateWaitingForOthers,
+        EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateReadyForAction,
+        EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateDone,
+    ];
+}
+
+// Note, `Default` is implemented although default value is not 0
+impl ::std::default::Default for EAsyncGameSessionUserState {
+    fn default() -> Self {
+        EAsyncGameSessionUserState::k_EAsyncGameSessionUserStateUnknown
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EAsyncGameSessionUserVisibility)
+pub enum EAsyncGameSessionUserVisibility {
+    // @@protoc_insertion_point(enum_value:EAsyncGameSessionUserVisibility.k_EAsyncGameSessionUserVisibilityEnvelopeAndSessionList)
+    k_EAsyncGameSessionUserVisibilityEnvelopeAndSessionList = 0,
+    // @@protoc_insertion_point(enum_value:EAsyncGameSessionUserVisibility.k_EAsyncGameSessionUserVisibilitySessionListOnly)
+    k_EAsyncGameSessionUserVisibilitySessionListOnly = 1,
+    // @@protoc_insertion_point(enum_value:EAsyncGameSessionUserVisibility.k_EAsyncGameSessionUserVisibilityDismissed)
+    k_EAsyncGameSessionUserVisibilityDismissed = 2,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EAsyncGameSessionUserVisibility {
+    const NAME: &'static str = "EAsyncGameSessionUserVisibility";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EAsyncGameSessionUserVisibility> {
+        match value {
+            0 => ::std::option::Option::Some(EAsyncGameSessionUserVisibility::k_EAsyncGameSessionUserVisibilityEnvelopeAndSessionList),
+            1 => ::std::option::Option::Some(EAsyncGameSessionUserVisibility::k_EAsyncGameSessionUserVisibilitySessionListOnly),
+            2 => ::std::option::Option::Some(EAsyncGameSessionUserVisibility::k_EAsyncGameSessionUserVisibilityDismissed),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EAsyncGameSessionUserVisibility> {
+        match str {
+            "k_EAsyncGameSessionUserVisibilityEnvelopeAndSessionList" => ::std::option::Option::Some(EAsyncGameSessionUserVisibility::k_EAsyncGameSessionUserVisibilityEnvelopeAndSessionList),
+            "k_EAsyncGameSessionUserVisibilitySessionListOnly" => ::std::option::Option::Some(EAsyncGameSessionUserVisibility::k_EAsyncGameSessionUserVisibilitySessionListOnly),
+            "k_EAsyncGameSessionUserVisibilityDismissed" => ::std::option::Option::Some(EAsyncGameSessionUserVisibility::k_EAsyncGameSessionUserVisibilityDismissed),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EAsyncGameSessionUserVisibility] = &[
+        EAsyncGameSessionUserVisibility::k_EAsyncGameSessionUserVisibilityEnvelopeAndSessionList,
+        EAsyncGameSessionUserVisibility::k_EAsyncGameSessionUserVisibilitySessionListOnly,
+        EAsyncGameSessionUserVisibility::k_EAsyncGameSessionUserVisibilityDismissed,
+    ];
+}
+
+impl ::std::default::Default for EAsyncGameSessionUserVisibility {
+    fn default() -> Self {
+        EAsyncGameSessionUserVisibility::k_EAsyncGameSessionUserVisibilityEnvelopeAndSessionList
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EGameRecordingType)
+pub enum EGameRecordingType {
+    // @@protoc_insertion_point(enum_value:EGameRecordingType.k_EGameRecordingType_Unknown)
+    k_EGameRecordingType_Unknown = 0,
+    // @@protoc_insertion_point(enum_value:EGameRecordingType.k_EGameRecordingType_NotRecording)
+    k_EGameRecordingType_NotRecording = 1,
+    // @@protoc_insertion_point(enum_value:EGameRecordingType.k_EGameRecordingType_ManualRecording)
+    k_EGameRecordingType_ManualRecording = 2,
+    // @@protoc_insertion_point(enum_value:EGameRecordingType.k_EGameRecordingType_BackgroundRecording)
+    k_EGameRecordingType_BackgroundRecording = 3,
+    // @@protoc_insertion_point(enum_value:EGameRecordingType.k_EGameRecordingType_Clip)
+    k_EGameRecordingType_Clip = 4,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EGameRecordingType {
+    const NAME: &'static str = "EGameRecordingType";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EGameRecordingType> {
+        match value {
+            0 => ::std::option::Option::Some(EGameRecordingType::k_EGameRecordingType_Unknown),
+            1 => ::std::option::Option::Some(EGameRecordingType::k_EGameRecordingType_NotRecording),
+            2 => ::std::option::Option::Some(EGameRecordingType::k_EGameRecordingType_ManualRecording),
+            3 => ::std::option::Option::Some(EGameRecordingType::k_EGameRecordingType_BackgroundRecording),
+            4 => ::std::option::Option::Some(EGameRecordingType::k_EGameRecordingType_Clip),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EGameRecordingType> {
+        match str {
+            "k_EGameRecordingType_Unknown" => ::std::option::Option::Some(EGameRecordingType::k_EGameRecordingType_Unknown),
+            "k_EGameRecordingType_NotRecording" => ::std::option::Option::Some(EGameRecordingType::k_EGameRecordingType_NotRecording),
+            "k_EGameRecordingType_ManualRecording" => ::std::option::Option::Some(EGameRecordingType::k_EGameRecordingType_ManualRecording),
+            "k_EGameRecordingType_BackgroundRecording" => ::std::option::Option::Some(EGameRecordingType::k_EGameRecordingType_BackgroundRecording),
+            "k_EGameRecordingType_Clip" => ::std::option::Option::Some(EGameRecordingType::k_EGameRecordingType_Clip),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EGameRecordingType] = &[
+        EGameRecordingType::k_EGameRecordingType_Unknown,
+        EGameRecordingType::k_EGameRecordingType_NotRecording,
+        EGameRecordingType::k_EGameRecordingType_ManualRecording,
+        EGameRecordingType::k_EGameRecordingType_BackgroundRecording,
+        EGameRecordingType::k_EGameRecordingType_Clip,
+    ];
+}
+
+impl ::std::default::Default for EGameRecordingType {
+    fn default() -> Self {
+        EGameRecordingType::k_EGameRecordingType_Unknown
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EProtoAppType)
+pub enum EProtoAppType {
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeInvalid)
+    k_EAppTypeInvalid = 0,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeGame)
+    k_EAppTypeGame = 1,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeApplication)
+    k_EAppTypeApplication = 2,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeTool)
+    k_EAppTypeTool = 4,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeDemo)
+    k_EAppTypeDemo = 8,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeDeprected)
+    k_EAppTypeDeprected = 16,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeDLC)
+    k_EAppTypeDLC = 32,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeGuide)
+    k_EAppTypeGuide = 64,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeDriver)
+    k_EAppTypeDriver = 128,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeConfig)
+    k_EAppTypeConfig = 256,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeHardware)
+    k_EAppTypeHardware = 512,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeFranchise)
+    k_EAppTypeFranchise = 1024,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeVideo)
+    k_EAppTypeVideo = 2048,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypePlugin)
+    k_EAppTypePlugin = 4096,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeMusicAlbum)
+    k_EAppTypeMusicAlbum = 8192,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeSeries)
+    k_EAppTypeSeries = 16384,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeComic)
+    k_EAppTypeComic = 32768,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeBeta)
+    k_EAppTypeBeta = 65536,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeShortcut)
+    k_EAppTypeShortcut = 1073741824,
+    // @@protoc_insertion_point(enum_value:EProtoAppType.k_EAppTypeDepotOnly)
+    k_EAppTypeDepotOnly = -2147483648,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EProtoAppType {
+    const NAME: &'static str = "EProtoAppType";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EProtoAppType> {
+        match value {
+            0 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeInvalid),
+            1 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeGame),
+            2 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeApplication),
+            4 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeTool),
+            8 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDemo),
+            16 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDeprected),
+            32 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDLC),
+            64 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeGuide),
+            128 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDriver),
+            256 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeConfig),
+            512 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeHardware),
+            1024 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeFranchise),
+            2048 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeVideo),
+            4096 => ::std::option::Option::Some(EProtoAppType::k_EAppTypePlugin),
+            8192 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeMusicAlbum),
+            16384 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeSeries),
+            32768 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeComic),
+            65536 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeBeta),
+            1073741824 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeShortcut),
+            -2147483648 => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDepotOnly),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EProtoAppType> {
+        match str {
+            "k_EAppTypeInvalid" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeInvalid),
+            "k_EAppTypeGame" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeGame),
+            "k_EAppTypeApplication" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeApplication),
+            "k_EAppTypeTool" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeTool),
+            "k_EAppTypeDemo" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDemo),
+            "k_EAppTypeDeprected" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDeprected),
+            "k_EAppTypeDLC" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDLC),
+            "k_EAppTypeGuide" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeGuide),
+            "k_EAppTypeDriver" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDriver),
+            "k_EAppTypeConfig" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeConfig),
+            "k_EAppTypeHardware" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeHardware),
+            "k_EAppTypeFranchise" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeFranchise),
+            "k_EAppTypeVideo" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeVideo),
+            "k_EAppTypePlugin" => ::std::option::Option::Some(EProtoAppType::k_EAppTypePlugin),
+            "k_EAppTypeMusicAlbum" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeMusicAlbum),
+            "k_EAppTypeSeries" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeSeries),
+            "k_EAppTypeComic" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeComic),
+            "k_EAppTypeBeta" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeBeta),
+            "k_EAppTypeShortcut" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeShortcut),
+            "k_EAppTypeDepotOnly" => ::std::option::Option::Some(EProtoAppType::k_EAppTypeDepotOnly),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EProtoAppType] = &[
+        EProtoAppType::k_EAppTypeInvalid,
+        EProtoAppType::k_EAppTypeGame,
+        EProtoAppType::k_EAppTypeApplication,
+        EProtoAppType::k_EAppTypeTool,
+        EProtoAppType::k_EAppTypeDemo,
+        EProtoAppType::k_EAppTypeDeprected,
+        EProtoAppType::k_EAppTypeDLC,
+        EProtoAppType::k_EAppTypeGuide,
+        EProtoAppType::k_EAppTypeDriver,
+        EProtoAppType::k_EAppTypeConfig,
+        EProtoAppType::k_EAppTypeHardware,
+        EProtoAppType::k_EAppTypeFranchise,
+        EProtoAppType::k_EAppTypeVideo,
+        EProtoAppType::k_EAppTypePlugin,
+        EProtoAppType::k_EAppTypeMusicAlbum,
+        EProtoAppType::k_EAppTypeSeries,
+        EProtoAppType::k_EAppTypeComic,
+        EProtoAppType::k_EAppTypeBeta,
+        EProtoAppType::k_EAppTypeShortcut,
+        EProtoAppType::k_EAppTypeDepotOnly,
+    ];
+}
+
+impl ::std::default::Default for EProtoAppType {
+    fn default() -> Self {
+        EProtoAppType::k_EAppTypeInvalid
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EWindowsUpdateInstallationImpact)
+pub enum EWindowsUpdateInstallationImpact {
+    // @@protoc_insertion_point(enum_value:EWindowsUpdateInstallationImpact.k_EWindowsUpdateInstallationImpact_Unknown)
+    k_EWindowsUpdateInstallationImpact_Unknown = -1,
+    // @@protoc_insertion_point(enum_value:EWindowsUpdateInstallationImpact.k_EWindowsUpdateInstallationImpact_Normal)
+    k_EWindowsUpdateInstallationImpact_Normal = 0,
+    // @@protoc_insertion_point(enum_value:EWindowsUpdateInstallationImpact.k_EWindowsUpdateInstallationImpact_Minor)
+    k_EWindowsUpdateInstallationImpact_Minor = 1,
+    // @@protoc_insertion_point(enum_value:EWindowsUpdateInstallationImpact.k_EWindowsUpdateInstallationImpact_ExclusiveHandling)
+    k_EWindowsUpdateInstallationImpact_ExclusiveHandling = 2,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EWindowsUpdateInstallationImpact {
+    const NAME: &'static str = "EWindowsUpdateInstallationImpact";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EWindowsUpdateInstallationImpact> {
+        match value {
+            -1 => ::std::option::Option::Some(EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_Unknown),
+            0 => ::std::option::Option::Some(EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_Normal),
+            1 => ::std::option::Option::Some(EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_Minor),
+            2 => ::std::option::Option::Some(EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_ExclusiveHandling),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EWindowsUpdateInstallationImpact> {
+        match str {
+            "k_EWindowsUpdateInstallationImpact_Unknown" => ::std::option::Option::Some(EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_Unknown),
+            "k_EWindowsUpdateInstallationImpact_Normal" => ::std::option::Option::Some(EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_Normal),
+            "k_EWindowsUpdateInstallationImpact_Minor" => ::std::option::Option::Some(EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_Minor),
+            "k_EWindowsUpdateInstallationImpact_ExclusiveHandling" => ::std::option::Option::Some(EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_ExclusiveHandling),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EWindowsUpdateInstallationImpact] = &[
+        EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_Unknown,
+        EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_Normal,
+        EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_Minor,
+        EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_ExclusiveHandling,
+    ];
+}
+
+// Note, `Default` is implemented although default value is not 0
+impl ::std::default::Default for EWindowsUpdateInstallationImpact {
+    fn default() -> Self {
+        EWindowsUpdateInstallationImpact::k_EWindowsUpdateInstallationImpact_Unknown
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EWindowsUpdateRebootBehavior)
+pub enum EWindowsUpdateRebootBehavior {
+    // @@protoc_insertion_point(enum_value:EWindowsUpdateRebootBehavior.k_EWindowsUpdateRebootBehavior_Unknown)
+    k_EWindowsUpdateRebootBehavior_Unknown = -1,
+    // @@protoc_insertion_point(enum_value:EWindowsUpdateRebootBehavior.k_EWindowsUpdateRebootBehavior_NeverNeedsReboot)
+    k_EWindowsUpdateRebootBehavior_NeverNeedsReboot = 0,
+    // @@protoc_insertion_point(enum_value:EWindowsUpdateRebootBehavior.k_EWindowsUpdateRebootBehavior_AlwaysNeedsReboot)
+    k_EWindowsUpdateRebootBehavior_AlwaysNeedsReboot = 1,
+    // @@protoc_insertion_point(enum_value:EWindowsUpdateRebootBehavior.k_EWindowsUpdateRebootBehavior_MightNeedReboot)
+    k_EWindowsUpdateRebootBehavior_MightNeedReboot = 2,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EWindowsUpdateRebootBehavior {
+    const NAME: &'static str = "EWindowsUpdateRebootBehavior";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EWindowsUpdateRebootBehavior> {
+        match value {
+            -1 => ::std::option::Option::Some(EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_Unknown),
+            0 => ::std::option::Option::Some(EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_NeverNeedsReboot),
+            1 => ::std::option::Option::Some(EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_AlwaysNeedsReboot),
+            2 => ::std::option::Option::Some(EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_MightNeedReboot),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EWindowsUpdateRebootBehavior> {
+        match str {
+            "k_EWindowsUpdateRebootBehavior_Unknown" => ::std::option::Option::Some(EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_Unknown),
+            "k_EWindowsUpdateRebootBehavior_NeverNeedsReboot" => ::std::option::Option::Some(EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_NeverNeedsReboot),
+            "k_EWindowsUpdateRebootBehavior_AlwaysNeedsReboot" => ::std::option::Option::Some(EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_AlwaysNeedsReboot),
+            "k_EWindowsUpdateRebootBehavior_MightNeedReboot" => ::std::option::Option::Some(EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_MightNeedReboot),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EWindowsUpdateRebootBehavior] = &[
+        EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_Unknown,
+        EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_NeverNeedsReboot,
+        EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_AlwaysNeedsReboot,
+        EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_MightNeedReboot,
+    ];
+}
+
+// Note, `Default` is implemented although default value is not 0
+impl ::std::default::Default for EWindowsUpdateRebootBehavior {
+    fn default() -> Self {
+        EWindowsUpdateRebootBehavior::k_EWindowsUpdateRebootBehavior_Unknown
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EExternalSaleEventType)
+pub enum EExternalSaleEventType {
+    // @@protoc_insertion_point(enum_value:EExternalSaleEventType.k_EExternalSaleEventType_Unknown)
+    k_EExternalSaleEventType_Unknown = 0,
+    // @@protoc_insertion_point(enum_value:EExternalSaleEventType.k_EExternalSaleEventType_Publisher)
+    k_EExternalSaleEventType_Publisher = 1,
+    // @@protoc_insertion_point(enum_value:EExternalSaleEventType.k_EExternalSaleEventType_Showcase)
+    k_EExternalSaleEventType_Showcase = 2,
+    // @@protoc_insertion_point(enum_value:EExternalSaleEventType.k_EExternalSaleEventType_Region)
+    k_EExternalSaleEventType_Region = 3,
+    // @@protoc_insertion_point(enum_value:EExternalSaleEventType.k_EExternalSaleEventType_Theme)
+    k_EExternalSaleEventType_Theme = 4,
+    // @@protoc_insertion_point(enum_value:EExternalSaleEventType.k_EExternalSaleEventType_Franchise)
+    k_EExternalSaleEventType_Franchise = 5,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EExternalSaleEventType {
+    const NAME: &'static str = "EExternalSaleEventType";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EExternalSaleEventType> {
+        match value {
+            0 => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Unknown),
+            1 => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Publisher),
+            2 => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Showcase),
+            3 => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Region),
+            4 => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Theme),
+            5 => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Franchise),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EExternalSaleEventType> {
+        match str {
+            "k_EExternalSaleEventType_Unknown" => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Unknown),
+            "k_EExternalSaleEventType_Publisher" => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Publisher),
+            "k_EExternalSaleEventType_Showcase" => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Showcase),
+            "k_EExternalSaleEventType_Region" => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Region),
+            "k_EExternalSaleEventType_Theme" => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Theme),
+            "k_EExternalSaleEventType_Franchise" => ::std::option::Option::Some(EExternalSaleEventType::k_EExternalSaleEventType_Franchise),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EExternalSaleEventType] = &[
+        EExternalSaleEventType::k_EExternalSaleEventType_Unknown,
+        EExternalSaleEventType::k_EExternalSaleEventType_Publisher,
+        EExternalSaleEventType::k_EExternalSaleEventType_Showcase,
+        EExternalSaleEventType::k_EExternalSaleEventType_Region,
+        EExternalSaleEventType::k_EExternalSaleEventType_Theme,
+        EExternalSaleEventType::k_EExternalSaleEventType_Franchise,
+    ];
+}
+
+impl ::std::default::Default for EExternalSaleEventType {
+    fn default() -> Self {
+        EExternalSaleEventType::k_EExternalSaleEventType_Unknown
     }
 }
 

@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Request upload token for steampipe depot upload"]
 // @@protoc_insertion_point(message:CPartnerApps_RequestUploadToken_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPartnerApps_RequestUploadToken_Request {
@@ -375,7 +374,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPartnerApps_RequestUpload
     }
 }
 
-#[doc = "Commit method for custom executable file processing"]
 // @@protoc_insertion_point(message:CPartnerApps_FinishUpload_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPartnerApps_FinishUpload_Request {
@@ -675,7 +673,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPartnerApps_FinishUploadK
     }
 }
 
-#[doc = "Commit method for executable file processing"]
 // @@protoc_insertion_point(message:CPartnerApps_FinishUploadLegacyDRM_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPartnerApps_FinishUploadLegacyDRM_Request {
@@ -1164,7 +1161,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPartnerApps_FinishUpload_
     }
 }
 
-#[doc = "Commit method for custom executable file processing"]
 // @@protoc_insertion_point(message:CPartnerApps_FinishUploadDepot_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPartnerApps_FinishUploadDepot_Request {
@@ -1511,7 +1507,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPartnerApps_FinishUploadD
     }
 }
 
-#[doc = "Get build status for previously uploaded depot ZIP"]
 // @@protoc_insertion_point(message:CPartnerApps_GetDepotBuildResult_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPartnerApps_GetDepotBuildResult_Request {
@@ -1811,7 +1806,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPartnerApps_GetDepotBuild
     }
 }
 
-#[doc = "Finds N most recent prior uploads by appid"]
 // @@protoc_insertion_point(message:CPartnerApps_FindDRMUploads_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPartnerApps_FindDRMUploads_Request {
@@ -2947,7 +2941,7 @@ impl ::steam_vent_proto_common::RpcMessage for CPartnerApps_Download_Response {
         self.compute_size() as usize
     }
 }
-///Service methods for app management by partners
+///
 struct PartnerApps {}
 impl ::steam_vent_proto_common::RpcService for PartnerApps {
     const SERVICE_NAME: &'static str = "PartnerApps";

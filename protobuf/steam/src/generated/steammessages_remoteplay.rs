@@ -1668,6 +1668,201 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamVideoMode {
     }
 }
 
+// @@protoc_insertion_point(message:CStreamVideoLimit)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStreamVideoLimit {
+    // message fields
+    // @@protoc_insertion_point(field:CStreamVideoLimit.codec)
+    pub codec: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EStreamVideoCodec>>,
+    // @@protoc_insertion_point(field:CStreamVideoLimit.mode)
+    pub mode: ::steam_vent_proto_common::protobuf::MessageField<CStreamVideoMode>,
+    // @@protoc_insertion_point(field:CStreamVideoLimit.bitrate_kbps)
+    pub bitrate_kbps: ::std::option::Option<i32>,
+    // @@protoc_insertion_point(field:CStreamVideoLimit.burst_bitrate_kbps)
+    pub burst_bitrate_kbps: ::std::option::Option<i32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CStreamVideoLimit.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStreamVideoLimit {
+    fn default() -> &'a CStreamVideoLimit {
+        <CStreamVideoLimit as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStreamVideoLimit {
+    pub fn new() -> CStreamVideoLimit {
+        ::std::default::Default::default()
+    }
+
+    // optional .EStreamVideoCodec codec = 1;
+
+    pub fn codec(&self) -> EStreamVideoCodec {
+        match self.codec {
+            Some(e) => e.enum_value_or(EStreamVideoCodec::k_EStreamVideoCodecNone),
+            None => EStreamVideoCodec::k_EStreamVideoCodecNone,
+        }
+    }
+
+    pub fn clear_codec(&mut self) {
+        self.codec = ::std::option::Option::None;
+    }
+
+    pub fn has_codec(&self) -> bool {
+        self.codec.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_codec(&mut self, v: EStreamVideoCodec) {
+        self.codec = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
+
+    // optional int32 bitrate_kbps = 3;
+
+    pub fn bitrate_kbps(&self) -> i32 {
+        self.bitrate_kbps.unwrap_or(0)
+    }
+
+    pub fn clear_bitrate_kbps(&mut self) {
+        self.bitrate_kbps = ::std::option::Option::None;
+    }
+
+    pub fn has_bitrate_kbps(&self) -> bool {
+        self.bitrate_kbps.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_bitrate_kbps(&mut self, v: i32) {
+        self.bitrate_kbps = ::std::option::Option::Some(v);
+    }
+
+    // optional int32 burst_bitrate_kbps = 4;
+
+    pub fn burst_bitrate_kbps(&self) -> i32 {
+        self.burst_bitrate_kbps.unwrap_or(0)
+    }
+
+    pub fn clear_burst_bitrate_kbps(&mut self) {
+        self.burst_bitrate_kbps = ::std::option::Option::None;
+    }
+
+    pub fn has_burst_bitrate_kbps(&self) -> bool {
+        self.burst_bitrate_kbps.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_burst_bitrate_kbps(&mut self, v: i32) {
+        self.burst_bitrate_kbps = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStreamVideoLimit {
+    const NAME: &'static str = "CStreamVideoLimit";
+
+    fn is_initialized(&self) -> bool {
+        for v in &self.mode {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.codec = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                },
+                18 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.mode)?;
+                },
+                24 => {
+                    self.bitrate_kbps = ::std::option::Option::Some(is.read_int32()?);
+                },
+                32 => {
+                    self.burst_bitrate_kbps = ::std::option::Option::Some(is.read_int32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.codec {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(1, v.value());
+        }
+        if let Some(v) = self.mode.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.bitrate_kbps {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(3, v);
+        }
+        if let Some(v) = self.burst_bitrate_kbps {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(4, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.codec {
+            os.write_enum(1, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        if let Some(v) = self.mode.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        }
+        if let Some(v) = self.bitrate_kbps {
+            os.write_int32(3, v)?;
+        }
+        if let Some(v) = self.burst_bitrate_kbps {
+            os.write_int32(4, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStreamVideoLimit {
+        CStreamVideoLimit::new()
+    }
+
+    fn clear(&mut self) {
+        self.codec = ::std::option::Option::None;
+        self.mode.clear();
+        self.bitrate_kbps = ::std::option::Option::None;
+        self.burst_bitrate_kbps = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStreamVideoLimit {
+        static instance: CStreamVideoLimit = CStreamVideoLimit {
+            codec: ::std::option::Option::None,
+            mode: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            bitrate_kbps: ::std::option::Option::None,
+            burst_bitrate_kbps: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CStreamingClientCaps)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStreamingClientCaps {
@@ -2168,16 +2363,16 @@ pub struct CStreamingClientConfig {
     // message fields
     // @@protoc_insertion_point(field:CStreamingClientConfig.quality)
     pub quality: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EStreamQualityPreference>>,
-    // @@protoc_insertion_point(field:CStreamingClientConfig.maximum_resolution_x)
-    pub maximum_resolution_x: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CStreamingClientConfig.maximum_resolution_y)
-    pub maximum_resolution_y: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CStreamingClientConfig.maximum_framerate_numerator)
-    pub maximum_framerate_numerator: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CStreamingClientConfig.maximum_framerate_denominator)
-    pub maximum_framerate_denominator: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CStreamingClientConfig.maximum_bitrate_kbps)
-    pub maximum_bitrate_kbps: ::std::option::Option<i32>,
+    // @@protoc_insertion_point(field:CStreamingClientConfig.desired_resolution_x)
+    pub desired_resolution_x: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CStreamingClientConfig.desired_resolution_y)
+    pub desired_resolution_y: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CStreamingClientConfig.desired_framerate_numerator)
+    pub desired_framerate_numerator: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CStreamingClientConfig.desired_framerate_denominator)
+    pub desired_framerate_denominator: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CStreamingClientConfig.desired_bitrate_kbps)
+    pub desired_bitrate_kbps: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CStreamingClientConfig.enable_hardware_decoding)
     pub enable_hardware_decoding: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CStreamingClientConfig.enable_performance_overlay)
@@ -2204,6 +2399,16 @@ pub struct CStreamingClientConfig {
     pub p2p_scope: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EStreamP2PScope>>,
     // @@protoc_insertion_point(field:CStreamingClientConfig.enable_audio_uncompressed)
     pub enable_audio_uncompressed: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CStreamingClientConfig.display_limit)
+    pub display_limit: ::steam_vent_proto_common::protobuf::MessageField<CStreamVideoLimit>,
+    // @@protoc_insertion_point(field:CStreamingClientConfig.quality_limit)
+    pub quality_limit: ::steam_vent_proto_common::protobuf::MessageField<CStreamVideoLimit>,
+    // @@protoc_insertion_point(field:CStreamingClientConfig.runtime_limit)
+    pub runtime_limit: ::steam_vent_proto_common::protobuf::MessageField<CStreamVideoLimit>,
+    // @@protoc_insertion_point(field:CStreamingClientConfig.decoder_limit)
+    pub decoder_limit: ::std::vec::Vec<CStreamVideoLimit>,
+    // @@protoc_insertion_point(field:CStreamingClientConfig.enable_unreliable_fec)
+    pub enable_unreliable_fec: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:CStreamingClientConfig.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -2242,99 +2447,99 @@ impl CStreamingClientConfig {
         self.quality = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
     }
 
-    // optional uint32 maximum_resolution_x = 2;
+    // optional uint32 desired_resolution_x = 2;
 
-    pub fn maximum_resolution_x(&self) -> u32 {
-        self.maximum_resolution_x.unwrap_or(0)
+    pub fn desired_resolution_x(&self) -> u32 {
+        self.desired_resolution_x.unwrap_or(0)
     }
 
-    pub fn clear_maximum_resolution_x(&mut self) {
-        self.maximum_resolution_x = ::std::option::Option::None;
+    pub fn clear_desired_resolution_x(&mut self) {
+        self.desired_resolution_x = ::std::option::Option::None;
     }
 
-    pub fn has_maximum_resolution_x(&self) -> bool {
-        self.maximum_resolution_x.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_maximum_resolution_x(&mut self, v: u32) {
-        self.maximum_resolution_x = ::std::option::Option::Some(v);
-    }
-
-    // optional uint32 maximum_resolution_y = 3;
-
-    pub fn maximum_resolution_y(&self) -> u32 {
-        self.maximum_resolution_y.unwrap_or(0)
-    }
-
-    pub fn clear_maximum_resolution_y(&mut self) {
-        self.maximum_resolution_y = ::std::option::Option::None;
-    }
-
-    pub fn has_maximum_resolution_y(&self) -> bool {
-        self.maximum_resolution_y.is_some()
+    pub fn has_desired_resolution_x(&self) -> bool {
+        self.desired_resolution_x.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_maximum_resolution_y(&mut self, v: u32) {
-        self.maximum_resolution_y = ::std::option::Option::Some(v);
+    pub fn set_desired_resolution_x(&mut self, v: u32) {
+        self.desired_resolution_x = ::std::option::Option::Some(v);
     }
 
-    // optional uint32 maximum_framerate_numerator = 4;
+    // optional uint32 desired_resolution_y = 3;
 
-    pub fn maximum_framerate_numerator(&self) -> u32 {
-        self.maximum_framerate_numerator.unwrap_or(0)
+    pub fn desired_resolution_y(&self) -> u32 {
+        self.desired_resolution_y.unwrap_or(0)
     }
 
-    pub fn clear_maximum_framerate_numerator(&mut self) {
-        self.maximum_framerate_numerator = ::std::option::Option::None;
+    pub fn clear_desired_resolution_y(&mut self) {
+        self.desired_resolution_y = ::std::option::Option::None;
     }
 
-    pub fn has_maximum_framerate_numerator(&self) -> bool {
-        self.maximum_framerate_numerator.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_maximum_framerate_numerator(&mut self, v: u32) {
-        self.maximum_framerate_numerator = ::std::option::Option::Some(v);
-    }
-
-    // optional uint32 maximum_framerate_denominator = 5;
-
-    pub fn maximum_framerate_denominator(&self) -> u32 {
-        self.maximum_framerate_denominator.unwrap_or(0)
-    }
-
-    pub fn clear_maximum_framerate_denominator(&mut self) {
-        self.maximum_framerate_denominator = ::std::option::Option::None;
-    }
-
-    pub fn has_maximum_framerate_denominator(&self) -> bool {
-        self.maximum_framerate_denominator.is_some()
+    pub fn has_desired_resolution_y(&self) -> bool {
+        self.desired_resolution_y.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_maximum_framerate_denominator(&mut self, v: u32) {
-        self.maximum_framerate_denominator = ::std::option::Option::Some(v);
+    pub fn set_desired_resolution_y(&mut self, v: u32) {
+        self.desired_resolution_y = ::std::option::Option::Some(v);
     }
 
-    // optional int32 maximum_bitrate_kbps = 6;
+    // optional uint32 desired_framerate_numerator = 4;
 
-    pub fn maximum_bitrate_kbps(&self) -> i32 {
-        self.maximum_bitrate_kbps.unwrap_or(-1i32)
+    pub fn desired_framerate_numerator(&self) -> u32 {
+        self.desired_framerate_numerator.unwrap_or(0)
     }
 
-    pub fn clear_maximum_bitrate_kbps(&mut self) {
-        self.maximum_bitrate_kbps = ::std::option::Option::None;
+    pub fn clear_desired_framerate_numerator(&mut self) {
+        self.desired_framerate_numerator = ::std::option::Option::None;
     }
 
-    pub fn has_maximum_bitrate_kbps(&self) -> bool {
-        self.maximum_bitrate_kbps.is_some()
+    pub fn has_desired_framerate_numerator(&self) -> bool {
+        self.desired_framerate_numerator.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_maximum_bitrate_kbps(&mut self, v: i32) {
-        self.maximum_bitrate_kbps = ::std::option::Option::Some(v);
+    pub fn set_desired_framerate_numerator(&mut self, v: u32) {
+        self.desired_framerate_numerator = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 desired_framerate_denominator = 5;
+
+    pub fn desired_framerate_denominator(&self) -> u32 {
+        self.desired_framerate_denominator.unwrap_or(0)
+    }
+
+    pub fn clear_desired_framerate_denominator(&mut self) {
+        self.desired_framerate_denominator = ::std::option::Option::None;
+    }
+
+    pub fn has_desired_framerate_denominator(&self) -> bool {
+        self.desired_framerate_denominator.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_desired_framerate_denominator(&mut self, v: u32) {
+        self.desired_framerate_denominator = ::std::option::Option::Some(v);
+    }
+
+    // optional int32 desired_bitrate_kbps = 6;
+
+    pub fn desired_bitrate_kbps(&self) -> i32 {
+        self.desired_bitrate_kbps.unwrap_or(-1i32)
+    }
+
+    pub fn clear_desired_bitrate_kbps(&mut self) {
+        self.desired_bitrate_kbps = ::std::option::Option::None;
+    }
+
+    pub fn has_desired_bitrate_kbps(&self) -> bool {
+        self.desired_bitrate_kbps.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_desired_bitrate_kbps(&mut self, v: i32) {
+        self.desired_bitrate_kbps = ::std::option::Option::Some(v);
     }
 
     // optional bool enable_hardware_decoding = 7;
@@ -2603,12 +2808,51 @@ impl CStreamingClientConfig {
     pub fn set_enable_audio_uncompressed(&mut self, v: bool) {
         self.enable_audio_uncompressed = ::std::option::Option::Some(v);
     }
+
+    // optional bool enable_unreliable_fec = 25;
+
+    pub fn enable_unreliable_fec(&self) -> bool {
+        self.enable_unreliable_fec.unwrap_or(false)
+    }
+
+    pub fn clear_enable_unreliable_fec(&mut self) {
+        self.enable_unreliable_fec = ::std::option::Option::None;
+    }
+
+    pub fn has_enable_unreliable_fec(&self) -> bool {
+        self.enable_unreliable_fec.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_enable_unreliable_fec(&mut self, v: bool) {
+        self.enable_unreliable_fec = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CStreamingClientConfig {
     const NAME: &'static str = "CStreamingClientConfig";
 
     fn is_initialized(&self) -> bool {
+        for v in &self.display_limit {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        for v in &self.quality_limit {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        for v in &self.runtime_limit {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        for v in &self.decoder_limit {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
         true
     }
 
@@ -2619,19 +2863,19 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingClientConfig {
                     self.quality = ::std::option::Option::Some(is.read_enum_or_unknown()?);
                 },
                 16 => {
-                    self.maximum_resolution_x = ::std::option::Option::Some(is.read_uint32()?);
+                    self.desired_resolution_x = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 24 => {
-                    self.maximum_resolution_y = ::std::option::Option::Some(is.read_uint32()?);
+                    self.desired_resolution_y = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 32 => {
-                    self.maximum_framerate_numerator = ::std::option::Option::Some(is.read_uint32()?);
+                    self.desired_framerate_numerator = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 40 => {
-                    self.maximum_framerate_denominator = ::std::option::Option::Some(is.read_uint32()?);
+                    self.desired_framerate_denominator = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 48 => {
-                    self.maximum_bitrate_kbps = ::std::option::Option::Some(is.read_int32()?);
+                    self.desired_bitrate_kbps = ::std::option::Option::Some(is.read_int32()?);
                 },
                 56 => {
                     self.enable_hardware_decoding = ::std::option::Option::Some(is.read_bool()?);
@@ -2672,6 +2916,21 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingClientConfig {
                 160 => {
                     self.enable_audio_uncompressed = ::std::option::Option::Some(is.read_bool()?);
                 },
+                170 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.display_limit)?;
+                },
+                178 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.quality_limit)?;
+                },
+                186 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.runtime_limit)?;
+                },
+                194 => {
+                    self.decoder_limit.push(is.read_message()?);
+                },
+                200 => {
+                    self.enable_unreliable_fec = ::std::option::Option::Some(is.read_bool()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -2687,19 +2946,19 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingClientConfig {
         if let Some(v) = self.quality {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(1, v.value());
         }
-        if let Some(v) = self.maximum_resolution_x {
+        if let Some(v) = self.desired_resolution_x {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
         }
-        if let Some(v) = self.maximum_resolution_y {
+        if let Some(v) = self.desired_resolution_y {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
         }
-        if let Some(v) = self.maximum_framerate_numerator {
+        if let Some(v) = self.desired_framerate_numerator {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(4, v);
         }
-        if let Some(v) = self.maximum_framerate_denominator {
+        if let Some(v) = self.desired_framerate_denominator {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(5, v);
         }
-        if let Some(v) = self.maximum_bitrate_kbps {
+        if let Some(v) = self.desired_bitrate_kbps {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(6, v);
         }
         if let Some(v) = self.enable_hardware_decoding {
@@ -2741,6 +3000,25 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingClientConfig {
         if let Some(v) = self.enable_audio_uncompressed {
             my_size += 2 + 1;
         }
+        if let Some(v) = self.display_limit.as_ref() {
+            let len = v.compute_size();
+            my_size += 2 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.quality_limit.as_ref() {
+            let len = v.compute_size();
+            my_size += 2 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.runtime_limit.as_ref() {
+            let len = v.compute_size();
+            my_size += 2 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        for value in &self.decoder_limit {
+            let len = value.compute_size();
+            my_size += 2 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        if let Some(v) = self.enable_unreliable_fec {
+            my_size += 2 + 1;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2750,19 +3028,19 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingClientConfig {
         if let Some(v) = self.quality {
             os.write_enum(1, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
         }
-        if let Some(v) = self.maximum_resolution_x {
+        if let Some(v) = self.desired_resolution_x {
             os.write_uint32(2, v)?;
         }
-        if let Some(v) = self.maximum_resolution_y {
+        if let Some(v) = self.desired_resolution_y {
             os.write_uint32(3, v)?;
         }
-        if let Some(v) = self.maximum_framerate_numerator {
+        if let Some(v) = self.desired_framerate_numerator {
             os.write_uint32(4, v)?;
         }
-        if let Some(v) = self.maximum_framerate_denominator {
+        if let Some(v) = self.desired_framerate_denominator {
             os.write_uint32(5, v)?;
         }
-        if let Some(v) = self.maximum_bitrate_kbps {
+        if let Some(v) = self.desired_bitrate_kbps {
             os.write_int32(6, v)?;
         }
         if let Some(v) = self.enable_hardware_decoding {
@@ -2804,6 +3082,21 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingClientConfig {
         if let Some(v) = self.enable_audio_uncompressed {
             os.write_bool(20, v)?;
         }
+        if let Some(v) = self.display_limit.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(21, v, os)?;
+        }
+        if let Some(v) = self.quality_limit.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(22, v, os)?;
+        }
+        if let Some(v) = self.runtime_limit.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(23, v, os)?;
+        }
+        for v in &self.decoder_limit {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(24, v, os)?;
+        };
+        if let Some(v) = self.enable_unreliable_fec {
+            os.write_bool(25, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -2822,11 +3115,11 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingClientConfig {
 
     fn clear(&mut self) {
         self.quality = ::std::option::Option::None;
-        self.maximum_resolution_x = ::std::option::Option::None;
-        self.maximum_resolution_y = ::std::option::Option::None;
-        self.maximum_framerate_numerator = ::std::option::Option::None;
-        self.maximum_framerate_denominator = ::std::option::Option::None;
-        self.maximum_bitrate_kbps = ::std::option::Option::None;
+        self.desired_resolution_x = ::std::option::Option::None;
+        self.desired_resolution_y = ::std::option::Option::None;
+        self.desired_framerate_numerator = ::std::option::Option::None;
+        self.desired_framerate_denominator = ::std::option::Option::None;
+        self.desired_bitrate_kbps = ::std::option::Option::None;
         self.enable_hardware_decoding = ::std::option::Option::None;
         self.enable_performance_overlay = ::std::option::Option::None;
         self.enable_video_streaming = ::std::option::Option::None;
@@ -2840,17 +3133,22 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingClientConfig {
         self.enable_touch_controller_OBSOLETE = ::std::option::Option::None;
         self.p2p_scope = ::std::option::Option::None;
         self.enable_audio_uncompressed = ::std::option::Option::None;
+        self.display_limit.clear();
+        self.quality_limit.clear();
+        self.runtime_limit.clear();
+        self.decoder_limit.clear();
+        self.enable_unreliable_fec = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
     fn default_instance() -> &'static CStreamingClientConfig {
         static instance: CStreamingClientConfig = CStreamingClientConfig {
             quality: ::std::option::Option::None,
-            maximum_resolution_x: ::std::option::Option::None,
-            maximum_resolution_y: ::std::option::Option::None,
-            maximum_framerate_numerator: ::std::option::Option::None,
-            maximum_framerate_denominator: ::std::option::Option::None,
-            maximum_bitrate_kbps: ::std::option::Option::None,
+            desired_resolution_x: ::std::option::Option::None,
+            desired_resolution_y: ::std::option::Option::None,
+            desired_framerate_numerator: ::std::option::Option::None,
+            desired_framerate_denominator: ::std::option::Option::None,
+            desired_bitrate_kbps: ::std::option::Option::None,
             enable_hardware_decoding: ::std::option::Option::None,
             enable_performance_overlay: ::std::option::Option::None,
             enable_video_streaming: ::std::option::Option::None,
@@ -2864,6 +3162,11 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingClientConfig {
             enable_touch_controller_OBSOLETE: ::std::option::Option::None,
             p2p_scope: ::std::option::Option::None,
             enable_audio_uncompressed: ::std::option::Option::None,
+            display_limit: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            quality_limit: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            runtime_limit: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            decoder_limit: ::std::vec::Vec::new(),
+            enable_unreliable_fec: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -2876,22 +3179,24 @@ pub struct CStreamingServerConfig {
     // message fields
     // @@protoc_insertion_point(field:CStreamingServerConfig.change_desktop_resolution)
     pub change_desktop_resolution: ::std::option::Option<bool>,
-    // @@protoc_insertion_point(field:CStreamingServerConfig.dynamically_adjust_resolution)
-    pub dynamically_adjust_resolution: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CStreamingServerConfig.dynamically_adjust_resolution_OBSOLETE)
+    pub dynamically_adjust_resolution_OBSOLETE: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CStreamingServerConfig.enable_capture_nvfbc)
     pub enable_capture_nvfbc: ::std::option::Option<bool>,
-    // @@protoc_insertion_point(field:CStreamingServerConfig.enable_hardware_encoding_nvidia)
-    pub enable_hardware_encoding_nvidia: ::std::option::Option<bool>,
-    // @@protoc_insertion_point(field:CStreamingServerConfig.enable_hardware_encoding_amd)
-    pub enable_hardware_encoding_amd: ::std::option::Option<bool>,
-    // @@protoc_insertion_point(field:CStreamingServerConfig.enable_hardware_encoding_intel)
-    pub enable_hardware_encoding_intel: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CStreamingServerConfig.enable_hardware_encoding_nvidia_OBSOLETE)
+    pub enable_hardware_encoding_nvidia_OBSOLETE: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CStreamingServerConfig.enable_hardware_encoding_amd_OBSOLETE)
+    pub enable_hardware_encoding_amd_OBSOLETE: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CStreamingServerConfig.enable_hardware_encoding_intel_OBSOLETE)
+    pub enable_hardware_encoding_intel_OBSOLETE: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CStreamingServerConfig.software_encoding_threads)
     pub software_encoding_threads: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CStreamingServerConfig.enable_traffic_priority)
     pub enable_traffic_priority: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CStreamingServerConfig.host_play_audio)
     pub host_play_audio: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EStreamHostPlayAudioPreference>>,
+    // @@protoc_insertion_point(field:CStreamingServerConfig.enable_hardware_encoding)
+    pub enable_hardware_encoding: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:CStreamingServerConfig.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -2927,23 +3232,23 @@ impl CStreamingServerConfig {
         self.change_desktop_resolution = ::std::option::Option::Some(v);
     }
 
-    // optional bool dynamically_adjust_resolution = 2;
+    // optional bool dynamically_adjust_resolution_OBSOLETE = 2;
 
-    pub fn dynamically_adjust_resolution(&self) -> bool {
-        self.dynamically_adjust_resolution.unwrap_or(false)
+    pub fn dynamically_adjust_resolution_OBSOLETE(&self) -> bool {
+        self.dynamically_adjust_resolution_OBSOLETE.unwrap_or(false)
     }
 
-    pub fn clear_dynamically_adjust_resolution(&mut self) {
-        self.dynamically_adjust_resolution = ::std::option::Option::None;
+    pub fn clear_dynamically_adjust_resolution_OBSOLETE(&mut self) {
+        self.dynamically_adjust_resolution_OBSOLETE = ::std::option::Option::None;
     }
 
-    pub fn has_dynamically_adjust_resolution(&self) -> bool {
-        self.dynamically_adjust_resolution.is_some()
+    pub fn has_dynamically_adjust_resolution_OBSOLETE(&self) -> bool {
+        self.dynamically_adjust_resolution_OBSOLETE.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_dynamically_adjust_resolution(&mut self, v: bool) {
-        self.dynamically_adjust_resolution = ::std::option::Option::Some(v);
+    pub fn set_dynamically_adjust_resolution_OBSOLETE(&mut self, v: bool) {
+        self.dynamically_adjust_resolution_OBSOLETE = ::std::option::Option::Some(v);
     }
 
     // optional bool enable_capture_nvfbc = 3;
@@ -2965,61 +3270,61 @@ impl CStreamingServerConfig {
         self.enable_capture_nvfbc = ::std::option::Option::Some(v);
     }
 
-    // optional bool enable_hardware_encoding_nvidia = 4;
+    // optional bool enable_hardware_encoding_nvidia_OBSOLETE = 4;
 
-    pub fn enable_hardware_encoding_nvidia(&self) -> bool {
-        self.enable_hardware_encoding_nvidia.unwrap_or(false)
+    pub fn enable_hardware_encoding_nvidia_OBSOLETE(&self) -> bool {
+        self.enable_hardware_encoding_nvidia_OBSOLETE.unwrap_or(false)
     }
 
-    pub fn clear_enable_hardware_encoding_nvidia(&mut self) {
-        self.enable_hardware_encoding_nvidia = ::std::option::Option::None;
+    pub fn clear_enable_hardware_encoding_nvidia_OBSOLETE(&mut self) {
+        self.enable_hardware_encoding_nvidia_OBSOLETE = ::std::option::Option::None;
     }
 
-    pub fn has_enable_hardware_encoding_nvidia(&self) -> bool {
-        self.enable_hardware_encoding_nvidia.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_enable_hardware_encoding_nvidia(&mut self, v: bool) {
-        self.enable_hardware_encoding_nvidia = ::std::option::Option::Some(v);
-    }
-
-    // optional bool enable_hardware_encoding_amd = 5;
-
-    pub fn enable_hardware_encoding_amd(&self) -> bool {
-        self.enable_hardware_encoding_amd.unwrap_or(false)
-    }
-
-    pub fn clear_enable_hardware_encoding_amd(&mut self) {
-        self.enable_hardware_encoding_amd = ::std::option::Option::None;
-    }
-
-    pub fn has_enable_hardware_encoding_amd(&self) -> bool {
-        self.enable_hardware_encoding_amd.is_some()
+    pub fn has_enable_hardware_encoding_nvidia_OBSOLETE(&self) -> bool {
+        self.enable_hardware_encoding_nvidia_OBSOLETE.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_enable_hardware_encoding_amd(&mut self, v: bool) {
-        self.enable_hardware_encoding_amd = ::std::option::Option::Some(v);
+    pub fn set_enable_hardware_encoding_nvidia_OBSOLETE(&mut self, v: bool) {
+        self.enable_hardware_encoding_nvidia_OBSOLETE = ::std::option::Option::Some(v);
     }
 
-    // optional bool enable_hardware_encoding_intel = 6;
+    // optional bool enable_hardware_encoding_amd_OBSOLETE = 5;
 
-    pub fn enable_hardware_encoding_intel(&self) -> bool {
-        self.enable_hardware_encoding_intel.unwrap_or(false)
+    pub fn enable_hardware_encoding_amd_OBSOLETE(&self) -> bool {
+        self.enable_hardware_encoding_amd_OBSOLETE.unwrap_or(false)
     }
 
-    pub fn clear_enable_hardware_encoding_intel(&mut self) {
-        self.enable_hardware_encoding_intel = ::std::option::Option::None;
+    pub fn clear_enable_hardware_encoding_amd_OBSOLETE(&mut self) {
+        self.enable_hardware_encoding_amd_OBSOLETE = ::std::option::Option::None;
     }
 
-    pub fn has_enable_hardware_encoding_intel(&self) -> bool {
-        self.enable_hardware_encoding_intel.is_some()
+    pub fn has_enable_hardware_encoding_amd_OBSOLETE(&self) -> bool {
+        self.enable_hardware_encoding_amd_OBSOLETE.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_enable_hardware_encoding_intel(&mut self, v: bool) {
-        self.enable_hardware_encoding_intel = ::std::option::Option::Some(v);
+    pub fn set_enable_hardware_encoding_amd_OBSOLETE(&mut self, v: bool) {
+        self.enable_hardware_encoding_amd_OBSOLETE = ::std::option::Option::Some(v);
+    }
+
+    // optional bool enable_hardware_encoding_intel_OBSOLETE = 6;
+
+    pub fn enable_hardware_encoding_intel_OBSOLETE(&self) -> bool {
+        self.enable_hardware_encoding_intel_OBSOLETE.unwrap_or(false)
+    }
+
+    pub fn clear_enable_hardware_encoding_intel_OBSOLETE(&mut self) {
+        self.enable_hardware_encoding_intel_OBSOLETE = ::std::option::Option::None;
+    }
+
+    pub fn has_enable_hardware_encoding_intel_OBSOLETE(&self) -> bool {
+        self.enable_hardware_encoding_intel_OBSOLETE.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_enable_hardware_encoding_intel_OBSOLETE(&mut self, v: bool) {
+        self.enable_hardware_encoding_intel_OBSOLETE = ::std::option::Option::Some(v);
     }
 
     // optional int32 software_encoding_threads = 7;
@@ -3081,6 +3386,25 @@ impl CStreamingServerConfig {
     pub fn set_host_play_audio(&mut self, v: EStreamHostPlayAudioPreference) {
         self.host_play_audio = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
     }
+
+    // optional bool enable_hardware_encoding = 10;
+
+    pub fn enable_hardware_encoding(&self) -> bool {
+        self.enable_hardware_encoding.unwrap_or(false)
+    }
+
+    pub fn clear_enable_hardware_encoding(&mut self) {
+        self.enable_hardware_encoding = ::std::option::Option::None;
+    }
+
+    pub fn has_enable_hardware_encoding(&self) -> bool {
+        self.enable_hardware_encoding.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_enable_hardware_encoding(&mut self, v: bool) {
+        self.enable_hardware_encoding = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CStreamingServerConfig {
@@ -3097,19 +3421,19 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingServerConfig {
                     self.change_desktop_resolution = ::std::option::Option::Some(is.read_bool()?);
                 },
                 16 => {
-                    self.dynamically_adjust_resolution = ::std::option::Option::Some(is.read_bool()?);
+                    self.dynamically_adjust_resolution_OBSOLETE = ::std::option::Option::Some(is.read_bool()?);
                 },
                 24 => {
                     self.enable_capture_nvfbc = ::std::option::Option::Some(is.read_bool()?);
                 },
                 32 => {
-                    self.enable_hardware_encoding_nvidia = ::std::option::Option::Some(is.read_bool()?);
+                    self.enable_hardware_encoding_nvidia_OBSOLETE = ::std::option::Option::Some(is.read_bool()?);
                 },
                 40 => {
-                    self.enable_hardware_encoding_amd = ::std::option::Option::Some(is.read_bool()?);
+                    self.enable_hardware_encoding_amd_OBSOLETE = ::std::option::Option::Some(is.read_bool()?);
                 },
                 48 => {
-                    self.enable_hardware_encoding_intel = ::std::option::Option::Some(is.read_bool()?);
+                    self.enable_hardware_encoding_intel_OBSOLETE = ::std::option::Option::Some(is.read_bool()?);
                 },
                 56 => {
                     self.software_encoding_threads = ::std::option::Option::Some(is.read_int32()?);
@@ -3119,6 +3443,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingServerConfig {
                 },
                 72 => {
                     self.host_play_audio = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                },
+                80 => {
+                    self.enable_hardware_encoding = ::std::option::Option::Some(is.read_bool()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -3135,19 +3462,19 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingServerConfig {
         if let Some(v) = self.change_desktop_resolution {
             my_size += 1 + 1;
         }
-        if let Some(v) = self.dynamically_adjust_resolution {
+        if let Some(v) = self.dynamically_adjust_resolution_OBSOLETE {
             my_size += 1 + 1;
         }
         if let Some(v) = self.enable_capture_nvfbc {
             my_size += 1 + 1;
         }
-        if let Some(v) = self.enable_hardware_encoding_nvidia {
+        if let Some(v) = self.enable_hardware_encoding_nvidia_OBSOLETE {
             my_size += 1 + 1;
         }
-        if let Some(v) = self.enable_hardware_encoding_amd {
+        if let Some(v) = self.enable_hardware_encoding_amd_OBSOLETE {
             my_size += 1 + 1;
         }
-        if let Some(v) = self.enable_hardware_encoding_intel {
+        if let Some(v) = self.enable_hardware_encoding_intel_OBSOLETE {
             my_size += 1 + 1;
         }
         if let Some(v) = self.software_encoding_threads {
@@ -3159,6 +3486,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingServerConfig {
         if let Some(v) = self.host_play_audio {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(9, v.value());
         }
+        if let Some(v) = self.enable_hardware_encoding {
+            my_size += 1 + 1;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -3168,19 +3498,19 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingServerConfig {
         if let Some(v) = self.change_desktop_resolution {
             os.write_bool(1, v)?;
         }
-        if let Some(v) = self.dynamically_adjust_resolution {
+        if let Some(v) = self.dynamically_adjust_resolution_OBSOLETE {
             os.write_bool(2, v)?;
         }
         if let Some(v) = self.enable_capture_nvfbc {
             os.write_bool(3, v)?;
         }
-        if let Some(v) = self.enable_hardware_encoding_nvidia {
+        if let Some(v) = self.enable_hardware_encoding_nvidia_OBSOLETE {
             os.write_bool(4, v)?;
         }
-        if let Some(v) = self.enable_hardware_encoding_amd {
+        if let Some(v) = self.enable_hardware_encoding_amd_OBSOLETE {
             os.write_bool(5, v)?;
         }
-        if let Some(v) = self.enable_hardware_encoding_intel {
+        if let Some(v) = self.enable_hardware_encoding_intel_OBSOLETE {
             os.write_bool(6, v)?;
         }
         if let Some(v) = self.software_encoding_threads {
@@ -3191,6 +3521,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingServerConfig {
         }
         if let Some(v) = self.host_play_audio {
             os.write_enum(9, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        if let Some(v) = self.enable_hardware_encoding {
+            os.write_bool(10, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -3210,28 +3543,30 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingServerConfig {
 
     fn clear(&mut self) {
         self.change_desktop_resolution = ::std::option::Option::None;
-        self.dynamically_adjust_resolution = ::std::option::Option::None;
+        self.dynamically_adjust_resolution_OBSOLETE = ::std::option::Option::None;
         self.enable_capture_nvfbc = ::std::option::Option::None;
-        self.enable_hardware_encoding_nvidia = ::std::option::Option::None;
-        self.enable_hardware_encoding_amd = ::std::option::Option::None;
-        self.enable_hardware_encoding_intel = ::std::option::Option::None;
+        self.enable_hardware_encoding_nvidia_OBSOLETE = ::std::option::Option::None;
+        self.enable_hardware_encoding_amd_OBSOLETE = ::std::option::Option::None;
+        self.enable_hardware_encoding_intel_OBSOLETE = ::std::option::Option::None;
         self.software_encoding_threads = ::std::option::Option::None;
         self.enable_traffic_priority = ::std::option::Option::None;
         self.host_play_audio = ::std::option::Option::None;
+        self.enable_hardware_encoding = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
     fn default_instance() -> &'static CStreamingServerConfig {
         static instance: CStreamingServerConfig = CStreamingServerConfig {
             change_desktop_resolution: ::std::option::Option::None,
-            dynamically_adjust_resolution: ::std::option::Option::None,
+            dynamically_adjust_resolution_OBSOLETE: ::std::option::Option::None,
             enable_capture_nvfbc: ::std::option::Option::None,
-            enable_hardware_encoding_nvidia: ::std::option::Option::None,
-            enable_hardware_encoding_amd: ::std::option::Option::None,
-            enable_hardware_encoding_intel: ::std::option::Option::None,
+            enable_hardware_encoding_nvidia_OBSOLETE: ::std::option::Option::None,
+            enable_hardware_encoding_amd_OBSOLETE: ::std::option::Option::None,
+            enable_hardware_encoding_intel_OBSOLETE: ::std::option::Option::None,
             software_encoding_threads: ::std::option::Option::None,
             enable_traffic_priority: ::std::option::Option::None,
             host_play_audio: ::std::option::Option::None,
+            enable_hardware_encoding: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -3248,8 +3583,8 @@ pub struct CNegotiatedConfig {
     pub selected_audio_codec: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EStreamAudioCodec>>,
     // @@protoc_insertion_point(field:CNegotiatedConfig.selected_video_codec)
     pub selected_video_codec: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EStreamVideoCodec>>,
-    // @@protoc_insertion_point(field:CNegotiatedConfig.available_video_modes)
-    pub available_video_modes: ::std::vec::Vec<CStreamVideoMode>,
+    // @@protoc_insertion_point(field:CNegotiatedConfig.available_video_modes_OBSOLETE)
+    pub available_video_modes_OBSOLETE: ::std::vec::Vec<CStreamVideoMode>,
     // @@protoc_insertion_point(field:CNegotiatedConfig.enable_remote_hid)
     pub enable_remote_hid: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CNegotiatedConfig.enable_touch_input)
@@ -3397,7 +3732,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CNegotiatedConfig {
     const NAME: &'static str = "CNegotiatedConfig";
 
     fn is_initialized(&self) -> bool {
-        for v in &self.available_video_modes {
+        for v in &self.available_video_modes_OBSOLETE {
             if !v.is_initialized() {
                 return false;
             }
@@ -3418,7 +3753,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CNegotiatedConfig {
                     self.selected_video_codec = ::std::option::Option::Some(is.read_enum_or_unknown()?);
                 },
                 34 => {
-                    self.available_video_modes.push(is.read_message()?);
+                    self.available_video_modes_OBSOLETE.push(is.read_message()?);
                 },
                 40 => {
                     self.enable_remote_hid = ::std::option::Option::Some(is.read_bool()?);
@@ -3450,7 +3785,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CNegotiatedConfig {
         if let Some(v) = self.selected_video_codec {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(3, v.value());
         }
-        for value in &self.available_video_modes {
+        for value in &self.available_video_modes_OBSOLETE {
             let len = value.compute_size();
             my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
         };
@@ -3478,7 +3813,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CNegotiatedConfig {
         if let Some(v) = self.selected_video_codec {
             os.write_enum(3, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
         }
-        for v in &self.available_video_modes {
+        for v in &self.available_video_modes_OBSOLETE {
             ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(4, v, os)?;
         };
         if let Some(v) = self.enable_remote_hid {
@@ -3510,7 +3845,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CNegotiatedConfig {
         self.reliable_data = ::std::option::Option::None;
         self.selected_audio_codec = ::std::option::Option::None;
         self.selected_video_codec = ::std::option::Option::None;
-        self.available_video_modes.clear();
+        self.available_video_modes_OBSOLETE.clear();
         self.enable_remote_hid = ::std::option::Option::None;
         self.enable_touch_input = ::std::option::Option::None;
         self.disable_client_cursor = ::std::option::Option::None;
@@ -3522,7 +3857,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CNegotiatedConfig {
             reliable_data: ::std::option::Option::None,
             selected_audio_codec: ::std::option::Option::None,
             selected_video_codec: ::std::option::Option::None,
-            available_video_modes: ::std::vec::Vec::new(),
+            available_video_modes_OBSOLETE: ::std::vec::Vec::new(),
             enable_remote_hid: ::std::option::Option::None,
             enable_touch_input: ::std::option::Option::None,
             disable_client_cursor: ::std::option::Option::None,
@@ -6818,6 +7153,8 @@ pub struct CInputMouseWheelMsg {
     pub input_mark: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CInputMouseWheelMsg.direction)
     pub direction: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EStreamMouseWheelDirection>>,
+    // @@protoc_insertion_point(field:CInputMouseWheelMsg.amount)
+    pub amount: ::std::option::Option<f32>,
     // special fields
     // @@protoc_insertion_point(special_field:CInputMouseWheelMsg.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -6874,6 +7211,25 @@ impl CInputMouseWheelMsg {
     pub fn set_direction(&mut self, v: EStreamMouseWheelDirection) {
         self.direction = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
     }
+
+    // optional float amount = 3;
+
+    pub fn amount(&self) -> f32 {
+        self.amount.unwrap_or(1.0f32)
+    }
+
+    pub fn clear_amount(&mut self) {
+        self.amount = ::std::option::Option::None;
+    }
+
+    pub fn has_amount(&self) -> bool {
+        self.amount.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_amount(&mut self, v: f32) {
+        self.amount = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CInputMouseWheelMsg {
@@ -6895,6 +7251,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CInputMouseWheelMsg {
                 16 => {
                     self.direction = ::std::option::Option::Some(is.read_enum_or_unknown()?);
                 },
+                29 => {
+                    self.amount = ::std::option::Option::Some(is.read_float()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -6913,6 +7272,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CInputMouseWheelMsg {
         if let Some(v) = self.direction {
             my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(2, v.value());
         }
+        if let Some(v) = self.amount {
+            my_size += 1 + 4;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -6924,6 +7286,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CInputMouseWheelMsg {
         }
         if let Some(v) = self.direction {
             os.write_enum(2, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        if let Some(v) = self.amount {
+            os.write_float(3, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -6944,6 +7309,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CInputMouseWheelMsg {
     fn clear(&mut self) {
         self.input_mark = ::std::option::Option::None;
         self.direction = ::std::option::Option::None;
+        self.amount = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -6951,6 +7317,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CInputMouseWheelMsg {
         static instance: CInputMouseWheelMsg = CInputMouseWheelMsg {
             input_mark: ::std::option::Option::None,
             direction: ::std::option::Option::None,
+            amount: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -9054,6 +9421,115 @@ impl ::steam_vent_proto_common::protobuf::Message for CSetCursorImageMsg {
             hot_x: ::std::option::Option::None,
             hot_y: ::std::option::Option::None,
             image: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CSetCursorScaleMsg)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CSetCursorScaleMsg {
+    // message fields
+    // @@protoc_insertion_point(field:CSetCursorScaleMsg.scale)
+    pub scale: ::std::option::Option<f32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CSetCursorScaleMsg.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CSetCursorScaleMsg {
+    fn default() -> &'a CSetCursorScaleMsg {
+        <CSetCursorScaleMsg as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CSetCursorScaleMsg {
+    pub fn new() -> CSetCursorScaleMsg {
+        ::std::default::Default::default()
+    }
+
+    // optional float scale = 1;
+
+    pub fn scale(&self) -> f32 {
+        self.scale.unwrap_or(0.)
+    }
+
+    pub fn clear_scale(&mut self) {
+        self.scale = ::std::option::Option::None;
+    }
+
+    pub fn has_scale(&self) -> bool {
+        self.scale.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_scale(&mut self, v: f32) {
+        self.scale = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CSetCursorScaleMsg {
+    const NAME: &'static str = "CSetCursorScaleMsg";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                13 => {
+                    self.scale = ::std::option::Option::Some(is.read_float()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.scale {
+            my_size += 1 + 4;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.scale {
+            os.write_float(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CSetCursorScaleMsg {
+        CSetCursorScaleMsg::new()
+    }
+
+    fn clear(&mut self) {
+        self.scale = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CSetCursorScaleMsg {
+        static instance: CSetCursorScaleMsg = CSetCursorScaleMsg {
+            scale: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -15330,6 +15806,132 @@ impl ::steam_vent_proto_common::protobuf::Message for CControllerPersonalization
     }
 }
 
+// @@protoc_insertion_point(message:CVRConnectionReady)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CVRConnectionReady {
+    // message fields
+    // @@protoc_insertion_point(field:CVRConnectionReady.connect_params)
+    pub connect_params: ::std::option::Option<::std::string::String>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CVRConnectionReady.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CVRConnectionReady {
+    fn default() -> &'a CVRConnectionReady {
+        <CVRConnectionReady as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CVRConnectionReady {
+    pub fn new() -> CVRConnectionReady {
+        ::std::default::Default::default()
+    }
+
+    // optional string connect_params = 1;
+
+    pub fn connect_params(&self) -> &str {
+        match self.connect_params.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_connect_params(&mut self) {
+        self.connect_params = ::std::option::Option::None;
+    }
+
+    pub fn has_connect_params(&self) -> bool {
+        self.connect_params.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_connect_params(&mut self, v: ::std::string::String) {
+        self.connect_params = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_connect_params(&mut self) -> &mut ::std::string::String {
+        if self.connect_params.is_none() {
+            self.connect_params = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.connect_params.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_connect_params(&mut self) -> ::std::string::String {
+        self.connect_params.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CVRConnectionReady {
+    const NAME: &'static str = "CVRConnectionReady";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.connect_params = ::std::option::Option::Some(is.read_string()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.connect_params.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(1, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.connect_params.as_ref() {
+            os.write_string(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CVRConnectionReady {
+        CVRConnectionReady::new()
+    }
+
+    fn clear(&mut self) {
+        self.connect_params = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CVRConnectionReady {
+        static instance: CVRConnectionReady = CVRConnectionReady {
+            connect_params: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CStreamDataLostMsg)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStreamDataLostMsg {
@@ -16803,6 +17405,8 @@ pub struct CStreamingSessionStats {
     pub average_network_time_ms: ::std::option::Option<f32>,
     // @@protoc_insertion_point(field:CStreamingSessionStats.stddev_network_time_ms)
     pub stddev_network_time_ms: ::std::option::Option<f32>,
+    // @@protoc_insertion_point(field:CStreamingSessionStats.test_data)
+    pub test_data: ::std::option::Option<::std::string::String>,
     // special fields
     // @@protoc_insertion_point(special_field:CStreamingSessionStats.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -16875,6 +17479,42 @@ impl CStreamingSessionStats {
     pub fn set_stddev_network_time_ms(&mut self, v: f32) {
         self.stddev_network_time_ms = ::std::option::Option::Some(v);
     }
+
+    // optional string test_data = 4;
+
+    pub fn test_data(&self) -> &str {
+        match self.test_data.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_test_data(&mut self) {
+        self.test_data = ::std::option::Option::None;
+    }
+
+    pub fn has_test_data(&self) -> bool {
+        self.test_data.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_test_data(&mut self, v: ::std::string::String) {
+        self.test_data = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_test_data(&mut self) -> &mut ::std::string::String {
+        if self.test_data.is_none() {
+            self.test_data = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.test_data.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_test_data(&mut self) -> ::std::string::String {
+        self.test_data.take().unwrap_or_else(|| ::std::string::String::new())
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CStreamingSessionStats {
@@ -16895,6 +17535,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingSessionStats {
                 },
                 29 => {
                     self.stddev_network_time_ms = ::std::option::Option::Some(is.read_float()?);
+                },
+                34 => {
+                    self.test_data = ::std::option::Option::Some(is.read_string()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -16917,6 +17560,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingSessionStats {
         if let Some(v) = self.stddev_network_time_ms {
             my_size += 1 + 4;
         }
+        if let Some(v) = self.test_data.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(4, &v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -16931,6 +17577,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingSessionStats {
         }
         if let Some(v) = self.stddev_network_time_ms {
             os.write_float(3, v)?;
+        }
+        if let Some(v) = self.test_data.as_ref() {
+            os.write_string(4, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -16952,6 +17601,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingSessionStats {
         self.frame_loss_percentage = ::std::option::Option::None;
         self.average_network_time_ms = ::std::option::Option::None;
         self.stddev_network_time_ms = ::std::option::Option::None;
+        self.test_data = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -16960,6 +17610,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CStreamingSessionStats {
             frame_loss_percentage: ::std::option::Option::None,
             average_network_time_ms: ::std::option::Option::None,
             stddev_network_time_ms: ::std::option::Option::None,
+            test_data: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -19515,6 +20166,10 @@ pub enum EStreamControlMessage {
     k_EStreamControlPauseControllerInput = 143,
     // @@protoc_insertion_point(enum_value:EStreamControlMessage.k_EStreamControlResumeControllerInput)
     k_EStreamControlResumeControllerInput = 144,
+    // @@protoc_insertion_point(enum_value:EStreamControlMessage.k_EStreamControlVRConnectionReady)
+    k_EStreamControlVRConnectionReady = 145,
+    // @@protoc_insertion_point(enum_value:EStreamControlMessage.k_EStreamControlSetCursorScale)
+    k_EStreamControlSetCursorScale = 146,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EStreamControlMessage {
@@ -19623,6 +20278,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamControlMessage {
             142 => ::std::option::Option::Some(EStreamControlMessage::k_EStreamControlStopNeptuneData),
             143 => ::std::option::Option::Some(EStreamControlMessage::k_EStreamControlPauseControllerInput),
             144 => ::std::option::Option::Some(EStreamControlMessage::k_EStreamControlResumeControllerInput),
+            145 => ::std::option::Option::Some(EStreamControlMessage::k_EStreamControlVRConnectionReady),
+            146 => ::std::option::Option::Some(EStreamControlMessage::k_EStreamControlSetCursorScale),
             _ => ::std::option::Option::None
         }
     }
@@ -19726,6 +20383,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamControlMessage {
             "k_EStreamControlStopNeptuneData" => ::std::option::Option::Some(EStreamControlMessage::k_EStreamControlStopNeptuneData),
             "k_EStreamControlPauseControllerInput" => ::std::option::Option::Some(EStreamControlMessage::k_EStreamControlPauseControllerInput),
             "k_EStreamControlResumeControllerInput" => ::std::option::Option::Some(EStreamControlMessage::k_EStreamControlResumeControllerInput),
+            "k_EStreamControlVRConnectionReady" => ::std::option::Option::Some(EStreamControlMessage::k_EStreamControlVRConnectionReady),
+            "k_EStreamControlSetCursorScale" => ::std::option::Option::Some(EStreamControlMessage::k_EStreamControlSetCursorScale),
             _ => ::std::option::Option::None
         }
     }
@@ -19828,6 +20487,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamControlMessage {
         EStreamControlMessage::k_EStreamControlStopNeptuneData,
         EStreamControlMessage::k_EStreamControlPauseControllerInput,
         EStreamControlMessage::k_EStreamControlResumeControllerInput,
+        EStreamControlMessage::k_EStreamControlVRConnectionReady,
+        EStreamControlMessage::k_EStreamControlSetCursorScale,
     ];
 }
 
@@ -20139,6 +20800,8 @@ pub enum EStreamColorspace {
     k_EStreamColorspace_BT709 = 3,
     // @@protoc_insertion_point(enum_value:EStreamColorspace.k_EStreamColorspace_BT709_Full)
     k_EStreamColorspace_BT709_Full = 4,
+    // @@protoc_insertion_point(enum_value:EStreamColorspace.k_EStreamColorspace_HDR10)
+    k_EStreamColorspace_HDR10 = 5,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EStreamColorspace {
@@ -20155,6 +20818,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamColorspace {
             2 => ::std::option::Option::Some(EStreamColorspace::k_EStreamColorspace_BT601_Full),
             3 => ::std::option::Option::Some(EStreamColorspace::k_EStreamColorspace_BT709),
             4 => ::std::option::Option::Some(EStreamColorspace::k_EStreamColorspace_BT709_Full),
+            5 => ::std::option::Option::Some(EStreamColorspace::k_EStreamColorspace_HDR10),
             _ => ::std::option::Option::None
         }
     }
@@ -20166,6 +20830,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamColorspace {
             "k_EStreamColorspace_BT601_Full" => ::std::option::Option::Some(EStreamColorspace::k_EStreamColorspace_BT601_Full),
             "k_EStreamColorspace_BT709" => ::std::option::Option::Some(EStreamColorspace::k_EStreamColorspace_BT709),
             "k_EStreamColorspace_BT709_Full" => ::std::option::Option::Some(EStreamColorspace::k_EStreamColorspace_BT709_Full),
+            "k_EStreamColorspace_HDR10" => ::std::option::Option::Some(EStreamColorspace::k_EStreamColorspace_HDR10),
             _ => ::std::option::Option::None
         }
     }
@@ -20176,6 +20841,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EStreamColorspace {
         EStreamColorspace::k_EStreamColorspace_BT601_Full,
         EStreamColorspace::k_EStreamColorspace_BT709,
         EStreamColorspace::k_EStreamColorspace_BT709_Full,
+        EStreamColorspace::k_EStreamColorspace_HDR10,
     ];
 }
 
@@ -21403,6 +22069,19 @@ impl ::steam_vent_proto_common::RpcMessage for CStreamVideoMode {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessage for CStreamVideoLimit {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
 impl ::steam_vent_proto_common::RpcMessage for CStreamingClientCaps {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -21846,6 +22525,19 @@ impl ::steam_vent_proto_common::RpcMessage for CGetCursorImageMsg {
     }
 }
 impl ::steam_vent_proto_common::RpcMessage for CSetCursorImageMsg {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CSetCursorScaleMsg {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }
@@ -22444,6 +23136,19 @@ impl ::steam_vent_proto_common::RpcMessage for CShowOnScreenKeyboardMsg {
     }
 }
 impl ::steam_vent_proto_common::RpcMessage for CControllerPersonalizationUpdateMsg {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CVRConnectionReady {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }

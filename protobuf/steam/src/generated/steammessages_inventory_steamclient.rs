@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Retrieves a users inventory as a big JSON blob"]
 // @@protoc_insertion_point(message:CInventory_GetInventory_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_GetInventory_Request {
@@ -489,7 +488,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_Response {
     }
 }
 
-#[doc = "Craft an item in a user's inventory"]
 // @@protoc_insertion_point(message:CInventory_ExchangeItem_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_ExchangeItem_Request {
@@ -695,7 +693,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_ExchangeItem_Re
     }
 }
 
-#[doc = "Returns a list of promo item defs the user is eligible for"]
 // @@protoc_insertion_point(message:CInventory_GetEligiblePromoItemDefIDs_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_GetEligiblePromoItemDefIDs_Request {
@@ -930,7 +927,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_GetEligibleProm
     }
 }
 
-#[doc = "Grant an item when in developer mode"]
 // @@protoc_insertion_point(message:CInventory_AddItem_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_AddItem_Request {
@@ -941,6 +937,8 @@ pub struct CInventory_AddItem_Request {
     pub itemdefid: ::std::vec::Vec<u64>,
     // @@protoc_insertion_point(field:CInventory_AddItem_Request.itempropsjson)
     pub itempropsjson: ::std::vec::Vec<::std::string::String>,
+    // @@protoc_insertion_point(field:CInventory_AddItem_Request.itemquantity)
+    pub itemquantity: ::std::vec::Vec<u32>,
     // @@protoc_insertion_point(field:CInventory_AddItem_Request.steamid)
     pub steamid: ::std::option::Option<u64>,
     // @@protoc_insertion_point(field:CInventory_AddItem_Request.notify)
@@ -1104,6 +1102,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_AddItem_Request
                 26 => {
                     self.itempropsjson.push(is.read_string()?);
                 },
+                74 => {
+                    is.read_repeated_packed_uint32_into(&mut self.itemquantity)?;
+                },
+                72 => {
+                    self.itemquantity.push(is.read_uint32()?);
+                },
                 32 => {
                     self.steamid = ::std::option::Option::Some(is.read_uint64()?);
                 },
@@ -1140,6 +1144,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_AddItem_Request
         for value in &self.itempropsjson {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(3, &value);
         };
+        for value in &self.itemquantity {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(9, *value);
+        };
         if let Some(v) = self.steamid {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(4, v);
         }
@@ -1169,6 +1176,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_AddItem_Request
         };
         for v in &self.itempropsjson {
             os.write_string(3, &v)?;
+        };
+        for v in &self.itemquantity {
+            os.write_uint32(9, *v)?;
         };
         if let Some(v) = self.steamid {
             os.write_uint64(4, v)?;
@@ -1205,6 +1215,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_AddItem_Request
         self.appid = ::std::option::Option::None;
         self.itemdefid.clear();
         self.itempropsjson.clear();
+        self.itemquantity.clear();
         self.steamid = ::std::option::Option::None;
         self.notify = ::std::option::Option::None;
         self.requestid = ::std::option::Option::None;
@@ -1218,6 +1229,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_AddItem_Request
             appid: ::std::option::Option::None,
             itemdefid: ::std::vec::Vec::new(),
             itempropsjson: ::std::vec::Vec::new(),
+            itemquantity: ::std::vec::Vec::new(),
             steamid: ::std::option::Option::None,
             notify: ::std::option::Option::None,
             requestid: ::std::option::Option::None,
@@ -1229,7 +1241,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_AddItem_Request
     }
 }
 
-#[doc = "Modify an item in a user's inventory (safe properties only)"]
 // @@protoc_insertion_point(message:CInventory_ModifyItems_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_ModifyItems_Request {
@@ -1755,7 +1766,6 @@ pub mod cinventory_modify_items_request {
     }
 }
 
-#[doc = "Consumes playtime and possibly returns a granted item"]
 // @@protoc_insertion_point(message:CInventory_ConsumePlaytime_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_ConsumePlaytime_Request {
@@ -1897,7 +1907,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_ConsumePlaytime
     }
 }
 
-#[doc = "Consume an item"]
 // @@protoc_insertion_point(message:CInventory_ConsumeItem_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_ConsumeItem_Request {
@@ -2184,7 +2193,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_ConsumeItem_Req
     }
 }
 
-#[doc = "Consume an item"]
 // @@protoc_insertion_point(message:CInventory_DevSetNextDrop_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_DevSetNextDrop_Request {
@@ -2375,7 +2383,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_DevSetNextDrop_
     }
 }
 
-#[doc = "Split an item stack into two stacks"]
 // @@protoc_insertion_point(message:CInventory_SplitItemStack_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_SplitItemStack_Request {
@@ -2581,7 +2588,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_SplitItemStack_
     }
 }
 
-#[doc = "Combine two stacks of items"]
 // @@protoc_insertion_point(message:CInventory_CombineItemStacks_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_CombineItemStacks_Request {
@@ -2819,7 +2825,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_CombineItemStac
     }
 }
 
-#[doc = "Get metadata about the current item definition for this game."]
 // @@protoc_insertion_point(message:CInventory_GetItemDefMeta_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_GetItemDefMeta_Request {
@@ -3087,7 +3092,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_GetItemDefMeta_
     }
 }
 
-#[doc = "Returns information about the user such as their currency"]
 // @@protoc_insertion_point(message:CInventory_GetUserPurchaseInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_GetUserPurchaseInfo_Request {
@@ -3273,7 +3277,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_GetUserPurchase
     }
 }
 
-#[doc = "Initializes a purchase for the user"]
 // @@protoc_insertion_point(message:CInventory_PurchaseInit_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_PurchaseInit_Request {
@@ -3714,7 +3717,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_PurchaseInit_Re
     }
 }
 
-#[doc = "Finalizes a purchase for the user"]
 // @@protoc_insertion_point(message:CInventory_PurchaseFinalize_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_PurchaseFinalize_Request {
@@ -3888,7 +3890,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_PurchaseFinaliz
     }
 }
 
-#[doc = "Get item detail given a valid inspection token"]
 // @@protoc_insertion_point(message:CInventory_InspectItem_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventory_InspectItem_Request {
@@ -4079,7 +4080,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CInventory_InspectItem_Req
     }
 }
 
-#[doc = "Notify client that the user received new items"]
 // @@protoc_insertion_point(message:CInventoryClient_NewItems_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CInventoryClient_NewItems_Notification {
@@ -4485,12 +4485,12 @@ impl ::steam_vent_proto_common::RpcMessage for CInventoryClient_NewItems_Notific
         self.compute_size() as usize
     }
 }
-///A service that provides access to inventory
+///
 struct Inventory {}
 impl ::steam_vent_proto_common::RpcService for Inventory {
     const SERVICE_NAME: &'static str = "Inventory";
 }
-///Client notifications inventory service events
+///
 struct InventoryClient {}
 impl ::steam_vent_proto_common::RpcService for InventoryClient {
     const SERVICE_NAME: &'static str = "InventoryClient";

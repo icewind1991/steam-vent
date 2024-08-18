@@ -474,6 +474,8 @@ pub struct CClientNotificationDownloadCompleted {
     // message fields
     // @@protoc_insertion_point(field:CClientNotificationDownloadCompleted.appid)
     pub appid: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CClientNotificationDownloadCompleted.dlc_appid)
+    pub dlc_appid: ::std::option::Option<u32>,
     // special fields
     // @@protoc_insertion_point(special_field:CClientNotificationDownloadCompleted.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -508,6 +510,25 @@ impl CClientNotificationDownloadCompleted {
     pub fn set_appid(&mut self, v: u32) {
         self.appid = ::std::option::Option::Some(v);
     }
+
+    // optional uint32 dlc_appid = 2;
+
+    pub fn dlc_appid(&self) -> u32 {
+        self.dlc_appid.unwrap_or(0)
+    }
+
+    pub fn clear_dlc_appid(&mut self) {
+        self.dlc_appid = ::std::option::Option::None;
+    }
+
+    pub fn has_dlc_appid(&self) -> bool {
+        self.dlc_appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_dlc_appid(&mut self, v: u32) {
+        self.dlc_appid = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationDownloadCompleted {
@@ -522,6 +543,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationDownloa
             match tag {
                 8 => {
                     self.appid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.dlc_appid = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -538,6 +562,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationDownloa
         if let Some(v) = self.appid {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
         }
+        if let Some(v) = self.dlc_appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -546,6 +573,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationDownloa
     fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
         if let Some(v) = self.appid {
             os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.dlc_appid {
+            os.write_uint32(2, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -565,12 +595,14 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationDownloa
 
     fn clear(&mut self) {
         self.appid = ::std::option::Option::None;
+        self.dlc_appid = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
     fn default_instance() -> &'static CClientNotificationDownloadCompleted {
         static instance: CClientNotificationDownloadCompleted = CClientNotificationDownloadCompleted {
             appid: ::std::option::Option::None,
+            dlc_appid: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -2833,6 +2865,8 @@ pub struct CClientNotificationFamilySharingStopPlaying {
     pub accountid_owner: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CClientNotificationFamilySharingStopPlaying.seconds_remaining)
     pub seconds_remaining: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CClientNotificationFamilySharingStopPlaying.appid)
+    pub appid: ::std::option::Option<u32>,
     // special fields
     // @@protoc_insertion_point(special_field:CClientNotificationFamilySharingStopPlaying.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -2886,6 +2920,25 @@ impl CClientNotificationFamilySharingStopPlaying {
     pub fn set_seconds_remaining(&mut self, v: u32) {
         self.seconds_remaining = ::std::option::Option::Some(v);
     }
+
+    // optional uint32 appid = 3;
+
+    pub fn appid(&self) -> u32 {
+        self.appid.unwrap_or(0)
+    }
+
+    pub fn clear_appid(&mut self) {
+        self.appid = ::std::option::Option::None;
+    }
+
+    pub fn has_appid(&self) -> bool {
+        self.appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_appid(&mut self, v: u32) {
+        self.appid = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationFamilySharingStopPlaying {
@@ -2903,6 +2956,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationFamilyS
                 },
                 16 => {
                     self.seconds_remaining = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                24 => {
+                    self.appid = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -2922,6 +2978,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationFamilyS
         if let Some(v) = self.seconds_remaining {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
         }
+        if let Some(v) = self.appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2933,6 +2992,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationFamilyS
         }
         if let Some(v) = self.seconds_remaining {
             os.write_uint32(2, v)?;
+        }
+        if let Some(v) = self.appid {
+            os.write_uint32(3, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -2953,6 +3015,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationFamilyS
     fn clear(&mut self) {
         self.accountid_owner = ::std::option::Option::None;
         self.seconds_remaining = ::std::option::Option::None;
+        self.appid = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -2960,6 +3023,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationFamilyS
         static instance: CClientNotificationFamilySharingStopPlaying = CClientNotificationFamilySharingStopPlaying {
             accountid_owner: ::std::option::Option::None,
             seconds_remaining: ::std::option::Option::None,
+            appid: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -4962,6 +5026,1224 @@ impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationSteamIn
     }
 }
 
+// @@protoc_insertion_point(message:CClientNotificationRemoteClientConnection)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CClientNotificationRemoteClientConnection {
+    // message fields
+    // @@protoc_insertion_point(field:CClientNotificationRemoteClientConnection.machine)
+    pub machine: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CClientNotificationRemoteClientConnection.connected)
+    pub connected: ::std::option::Option<bool>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CClientNotificationRemoteClientConnection.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CClientNotificationRemoteClientConnection {
+    fn default() -> &'a CClientNotificationRemoteClientConnection {
+        <CClientNotificationRemoteClientConnection as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CClientNotificationRemoteClientConnection {
+    pub fn new() -> CClientNotificationRemoteClientConnection {
+        ::std::default::Default::default()
+    }
+
+    // optional string machine = 1;
+
+    pub fn machine(&self) -> &str {
+        match self.machine.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_machine(&mut self) {
+        self.machine = ::std::option::Option::None;
+    }
+
+    pub fn has_machine(&self) -> bool {
+        self.machine.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_machine(&mut self, v: ::std::string::String) {
+        self.machine = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_machine(&mut self) -> &mut ::std::string::String {
+        if self.machine.is_none() {
+            self.machine = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.machine.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_machine(&mut self) -> ::std::string::String {
+        self.machine.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional bool connected = 2;
+
+    pub fn connected(&self) -> bool {
+        self.connected.unwrap_or(false)
+    }
+
+    pub fn clear_connected(&mut self) {
+        self.connected = ::std::option::Option::None;
+    }
+
+    pub fn has_connected(&self) -> bool {
+        self.connected.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_connected(&mut self, v: bool) {
+        self.connected = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationRemoteClientConnection {
+    const NAME: &'static str = "CClientNotificationRemoteClientConnection";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.machine = ::std::option::Option::Some(is.read_string()?);
+                },
+                16 => {
+                    self.connected = ::std::option::Option::Some(is.read_bool()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.machine.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(1, &v);
+        }
+        if let Some(v) = self.connected {
+            my_size += 1 + 1;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.machine.as_ref() {
+            os.write_string(1, v)?;
+        }
+        if let Some(v) = self.connected {
+            os.write_bool(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CClientNotificationRemoteClientConnection {
+        CClientNotificationRemoteClientConnection::new()
+    }
+
+    fn clear(&mut self) {
+        self.machine = ::std::option::Option::None;
+        self.connected = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CClientNotificationRemoteClientConnection {
+        static instance: CClientNotificationRemoteClientConnection = CClientNotificationRemoteClientConnection {
+            machine: ::std::option::Option::None,
+            connected: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CClientNotificationRemoteClientStartStream)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CClientNotificationRemoteClientStartStream {
+    // message fields
+    // @@protoc_insertion_point(field:CClientNotificationRemoteClientStartStream.machine)
+    pub machine: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CClientNotificationRemoteClientStartStream.game_name)
+    pub game_name: ::std::option::Option<::std::string::String>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CClientNotificationRemoteClientStartStream.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CClientNotificationRemoteClientStartStream {
+    fn default() -> &'a CClientNotificationRemoteClientStartStream {
+        <CClientNotificationRemoteClientStartStream as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CClientNotificationRemoteClientStartStream {
+    pub fn new() -> CClientNotificationRemoteClientStartStream {
+        ::std::default::Default::default()
+    }
+
+    // optional string machine = 1;
+
+    pub fn machine(&self) -> &str {
+        match self.machine.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_machine(&mut self) {
+        self.machine = ::std::option::Option::None;
+    }
+
+    pub fn has_machine(&self) -> bool {
+        self.machine.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_machine(&mut self, v: ::std::string::String) {
+        self.machine = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_machine(&mut self) -> &mut ::std::string::String {
+        if self.machine.is_none() {
+            self.machine = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.machine.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_machine(&mut self) -> ::std::string::String {
+        self.machine.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional string game_name = 2;
+
+    pub fn game_name(&self) -> &str {
+        match self.game_name.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_game_name(&mut self) {
+        self.game_name = ::std::option::Option::None;
+    }
+
+    pub fn has_game_name(&self) -> bool {
+        self.game_name.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_game_name(&mut self, v: ::std::string::String) {
+        self.game_name = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_game_name(&mut self) -> &mut ::std::string::String {
+        if self.game_name.is_none() {
+            self.game_name = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.game_name.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_game_name(&mut self) -> ::std::string::String {
+        self.game_name.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationRemoteClientStartStream {
+    const NAME: &'static str = "CClientNotificationRemoteClientStartStream";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.machine = ::std::option::Option::Some(is.read_string()?);
+                },
+                18 => {
+                    self.game_name = ::std::option::Option::Some(is.read_string()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.machine.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(1, &v);
+        }
+        if let Some(v) = self.game_name.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(2, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.machine.as_ref() {
+            os.write_string(1, v)?;
+        }
+        if let Some(v) = self.game_name.as_ref() {
+            os.write_string(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CClientNotificationRemoteClientStartStream {
+        CClientNotificationRemoteClientStartStream::new()
+    }
+
+    fn clear(&mut self) {
+        self.machine = ::std::option::Option::None;
+        self.game_name = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CClientNotificationRemoteClientStartStream {
+        static instance: CClientNotificationRemoteClientStartStream = CClientNotificationRemoteClientStartStream {
+            machine: ::std::option::Option::None,
+            game_name: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CClientNotificationStreamingClientConnection)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CClientNotificationStreamingClientConnection {
+    // message fields
+    // @@protoc_insertion_point(field:CClientNotificationStreamingClientConnection.hostname)
+    pub hostname: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CClientNotificationStreamingClientConnection.machine)
+    pub machine: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CClientNotificationStreamingClientConnection.connected)
+    pub connected: ::std::option::Option<bool>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CClientNotificationStreamingClientConnection.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CClientNotificationStreamingClientConnection {
+    fn default() -> &'a CClientNotificationStreamingClientConnection {
+        <CClientNotificationStreamingClientConnection as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CClientNotificationStreamingClientConnection {
+    pub fn new() -> CClientNotificationStreamingClientConnection {
+        ::std::default::Default::default()
+    }
+
+    // optional string hostname = 1;
+
+    pub fn hostname(&self) -> &str {
+        match self.hostname.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_hostname(&mut self) {
+        self.hostname = ::std::option::Option::None;
+    }
+
+    pub fn has_hostname(&self) -> bool {
+        self.hostname.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_hostname(&mut self, v: ::std::string::String) {
+        self.hostname = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_hostname(&mut self) -> &mut ::std::string::String {
+        if self.hostname.is_none() {
+            self.hostname = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.hostname.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_hostname(&mut self) -> ::std::string::String {
+        self.hostname.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional string machine = 2;
+
+    pub fn machine(&self) -> &str {
+        match self.machine.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_machine(&mut self) {
+        self.machine = ::std::option::Option::None;
+    }
+
+    pub fn has_machine(&self) -> bool {
+        self.machine.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_machine(&mut self, v: ::std::string::String) {
+        self.machine = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_machine(&mut self) -> &mut ::std::string::String {
+        if self.machine.is_none() {
+            self.machine = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.machine.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_machine(&mut self) -> ::std::string::String {
+        self.machine.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional bool connected = 3;
+
+    pub fn connected(&self) -> bool {
+        self.connected.unwrap_or(false)
+    }
+
+    pub fn clear_connected(&mut self) {
+        self.connected = ::std::option::Option::None;
+    }
+
+    pub fn has_connected(&self) -> bool {
+        self.connected.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_connected(&mut self, v: bool) {
+        self.connected = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationStreamingClientConnection {
+    const NAME: &'static str = "CClientNotificationStreamingClientConnection";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.hostname = ::std::option::Option::Some(is.read_string()?);
+                },
+                18 => {
+                    self.machine = ::std::option::Option::Some(is.read_string()?);
+                },
+                24 => {
+                    self.connected = ::std::option::Option::Some(is.read_bool()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.hostname.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(1, &v);
+        }
+        if let Some(v) = self.machine.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(2, &v);
+        }
+        if let Some(v) = self.connected {
+            my_size += 1 + 1;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.hostname.as_ref() {
+            os.write_string(1, v)?;
+        }
+        if let Some(v) = self.machine.as_ref() {
+            os.write_string(2, v)?;
+        }
+        if let Some(v) = self.connected {
+            os.write_bool(3, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CClientNotificationStreamingClientConnection {
+        CClientNotificationStreamingClientConnection::new()
+    }
+
+    fn clear(&mut self) {
+        self.hostname = ::std::option::Option::None;
+        self.machine = ::std::option::Option::None;
+        self.connected = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CClientNotificationStreamingClientConnection {
+        static instance: CClientNotificationStreamingClientConnection = CClientNotificationStreamingClientConnection {
+            hostname: ::std::option::Option::None,
+            machine: ::std::option::Option::None,
+            connected: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CClientNotificationPlaytimeWarning)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CClientNotificationPlaytimeWarning {
+    // message fields
+    // @@protoc_insertion_point(field:CClientNotificationPlaytimeWarning.type)
+    pub type_: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CClientNotificationPlaytimeWarning.playtime_remaining)
+    pub playtime_remaining: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CClientNotificationPlaytimeWarning.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CClientNotificationPlaytimeWarning {
+    fn default() -> &'a CClientNotificationPlaytimeWarning {
+        <CClientNotificationPlaytimeWarning as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CClientNotificationPlaytimeWarning {
+    pub fn new() -> CClientNotificationPlaytimeWarning {
+        ::std::default::Default::default()
+    }
+
+    // optional string type = 1;
+
+    pub fn type_(&self) -> &str {
+        match self.type_.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_type_(&mut self) {
+        self.type_ = ::std::option::Option::None;
+    }
+
+    pub fn has_type(&self) -> bool {
+        self.type_.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_type(&mut self, v: ::std::string::String) {
+        self.type_ = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_type(&mut self) -> &mut ::std::string::String {
+        if self.type_.is_none() {
+            self.type_ = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.type_.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_type_(&mut self) -> ::std::string::String {
+        self.type_.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional uint32 playtime_remaining = 2;
+
+    pub fn playtime_remaining(&self) -> u32 {
+        self.playtime_remaining.unwrap_or(0)
+    }
+
+    pub fn clear_playtime_remaining(&mut self) {
+        self.playtime_remaining = ::std::option::Option::None;
+    }
+
+    pub fn has_playtime_remaining(&self) -> bool {
+        self.playtime_remaining.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_playtime_remaining(&mut self, v: u32) {
+        self.playtime_remaining = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationPlaytimeWarning {
+    const NAME: &'static str = "CClientNotificationPlaytimeWarning";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.type_ = ::std::option::Option::Some(is.read_string()?);
+                },
+                16 => {
+                    self.playtime_remaining = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.type_.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(1, &v);
+        }
+        if let Some(v) = self.playtime_remaining {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.type_.as_ref() {
+            os.write_string(1, v)?;
+        }
+        if let Some(v) = self.playtime_remaining {
+            os.write_uint32(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CClientNotificationPlaytimeWarning {
+        CClientNotificationPlaytimeWarning::new()
+    }
+
+    fn clear(&mut self) {
+        self.type_ = ::std::option::Option::None;
+        self.playtime_remaining = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CClientNotificationPlaytimeWarning {
+        static instance: CClientNotificationPlaytimeWarning = CClientNotificationPlaytimeWarning {
+            type_: ::std::option::Option::None,
+            playtime_remaining: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CClientNotificationGameRecordingError)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CClientNotificationGameRecordingError {
+    // message fields
+    // @@protoc_insertion_point(field:CClientNotificationGameRecordingError.game_id)
+    pub game_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CClientNotificationGameRecordingError.error_type)
+    pub error_type: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EGameRecordingErrorType>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CClientNotificationGameRecordingError.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CClientNotificationGameRecordingError {
+    fn default() -> &'a CClientNotificationGameRecordingError {
+        <CClientNotificationGameRecordingError as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CClientNotificationGameRecordingError {
+    pub fn new() -> CClientNotificationGameRecordingError {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 game_id = 1;
+
+    pub fn game_id(&self) -> u64 {
+        self.game_id.unwrap_or(0)
+    }
+
+    pub fn clear_game_id(&mut self) {
+        self.game_id = ::std::option::Option::None;
+    }
+
+    pub fn has_game_id(&self) -> bool {
+        self.game_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_game_id(&mut self, v: u64) {
+        self.game_id = ::std::option::Option::Some(v);
+    }
+
+    // optional .EGameRecordingErrorType error_type = 2;
+
+    pub fn error_type(&self) -> EGameRecordingErrorType {
+        match self.error_type {
+            Some(e) => e.enum_value_or(EGameRecordingErrorType::k_EGameRecordingErrorGeneral),
+            None => EGameRecordingErrorType::k_EGameRecordingErrorGeneral,
+        }
+    }
+
+    pub fn clear_error_type(&mut self) {
+        self.error_type = ::std::option::Option::None;
+    }
+
+    pub fn has_error_type(&self) -> bool {
+        self.error_type.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_error_type(&mut self, v: EGameRecordingErrorType) {
+        self.error_type = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationGameRecordingError {
+    const NAME: &'static str = "CClientNotificationGameRecordingError";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.game_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                16 => {
+                    self.error_type = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.game_id {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.error_type {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(2, v.value());
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.game_id {
+            os.write_fixed64(1, v)?;
+        }
+        if let Some(v) = self.error_type {
+            os.write_enum(2, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CClientNotificationGameRecordingError {
+        CClientNotificationGameRecordingError::new()
+    }
+
+    fn clear(&mut self) {
+        self.game_id = ::std::option::Option::None;
+        self.error_type = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CClientNotificationGameRecordingError {
+        static instance: CClientNotificationGameRecordingError = CClientNotificationGameRecordingError {
+            game_id: ::std::option::Option::None,
+            error_type: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CClientNotificationGameRecordingStart)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CClientNotificationGameRecordingStart {
+    // message fields
+    // @@protoc_insertion_point(field:CClientNotificationGameRecordingStart.game_id)
+    pub game_id: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CClientNotificationGameRecordingStart.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CClientNotificationGameRecordingStart {
+    fn default() -> &'a CClientNotificationGameRecordingStart {
+        <CClientNotificationGameRecordingStart as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CClientNotificationGameRecordingStart {
+    pub fn new() -> CClientNotificationGameRecordingStart {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 game_id = 1;
+
+    pub fn game_id(&self) -> u64 {
+        self.game_id.unwrap_or(0)
+    }
+
+    pub fn clear_game_id(&mut self) {
+        self.game_id = ::std::option::Option::None;
+    }
+
+    pub fn has_game_id(&self) -> bool {
+        self.game_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_game_id(&mut self, v: u64) {
+        self.game_id = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationGameRecordingStart {
+    const NAME: &'static str = "CClientNotificationGameRecordingStart";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.game_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.game_id {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.game_id {
+            os.write_fixed64(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CClientNotificationGameRecordingStart {
+        CClientNotificationGameRecordingStart::new()
+    }
+
+    fn clear(&mut self) {
+        self.game_id = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CClientNotificationGameRecordingStart {
+        static instance: CClientNotificationGameRecordingStart = CClientNotificationGameRecordingStart {
+            game_id: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CClientNotificationGameRecordingStop)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CClientNotificationGameRecordingStop {
+    // message fields
+    // @@protoc_insertion_point(field:CClientNotificationGameRecordingStop.game_id)
+    pub game_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CClientNotificationGameRecordingStop.clip_id)
+    pub clip_id: ::std::option::Option<::std::string::String>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CClientNotificationGameRecordingStop.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CClientNotificationGameRecordingStop {
+    fn default() -> &'a CClientNotificationGameRecordingStop {
+        <CClientNotificationGameRecordingStop as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CClientNotificationGameRecordingStop {
+    pub fn new() -> CClientNotificationGameRecordingStop {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 game_id = 1;
+
+    pub fn game_id(&self) -> u64 {
+        self.game_id.unwrap_or(0)
+    }
+
+    pub fn clear_game_id(&mut self) {
+        self.game_id = ::std::option::Option::None;
+    }
+
+    pub fn has_game_id(&self) -> bool {
+        self.game_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_game_id(&mut self, v: u64) {
+        self.game_id = ::std::option::Option::Some(v);
+    }
+
+    // optional string clip_id = 2;
+
+    pub fn clip_id(&self) -> &str {
+        match self.clip_id.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_clip_id(&mut self) {
+        self.clip_id = ::std::option::Option::None;
+    }
+
+    pub fn has_clip_id(&self) -> bool {
+        self.clip_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_clip_id(&mut self, v: ::std::string::String) {
+        self.clip_id = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_clip_id(&mut self) -> &mut ::std::string::String {
+        if self.clip_id.is_none() {
+            self.clip_id = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.clip_id.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_clip_id(&mut self) -> ::std::string::String {
+        self.clip_id.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationGameRecordingStop {
+    const NAME: &'static str = "CClientNotificationGameRecordingStop";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.game_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                18 => {
+                    self.clip_id = ::std::option::Option::Some(is.read_string()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.game_id {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.clip_id.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(2, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.game_id {
+            os.write_fixed64(1, v)?;
+        }
+        if let Some(v) = self.clip_id.as_ref() {
+            os.write_string(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CClientNotificationGameRecordingStop {
+        CClientNotificationGameRecordingStop::new()
+    }
+
+    fn clear(&mut self) {
+        self.game_id = ::std::option::Option::None;
+        self.clip_id = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CClientNotificationGameRecordingStop {
+        static instance: CClientNotificationGameRecordingStop = CClientNotificationGameRecordingStop {
+            game_id: ::std::option::Option::None,
+            clip_id: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CClientNotificationGameRecordingUserMarkerAdded)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CClientNotificationGameRecordingUserMarkerAdded {
+    // message fields
+    // @@protoc_insertion_point(field:CClientNotificationGameRecordingUserMarkerAdded.game_id)
+    pub game_id: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CClientNotificationGameRecordingUserMarkerAdded.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CClientNotificationGameRecordingUserMarkerAdded {
+    fn default() -> &'a CClientNotificationGameRecordingUserMarkerAdded {
+        <CClientNotificationGameRecordingUserMarkerAdded as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CClientNotificationGameRecordingUserMarkerAdded {
+    pub fn new() -> CClientNotificationGameRecordingUserMarkerAdded {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 game_id = 1;
+
+    pub fn game_id(&self) -> u64 {
+        self.game_id.unwrap_or(0)
+    }
+
+    pub fn clear_game_id(&mut self) {
+        self.game_id = ::std::option::Option::None;
+    }
+
+    pub fn has_game_id(&self) -> bool {
+        self.game_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_game_id(&mut self, v: u64) {
+        self.game_id = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CClientNotificationGameRecordingUserMarkerAdded {
+    const NAME: &'static str = "CClientNotificationGameRecordingUserMarkerAdded";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.game_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.game_id {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.game_id {
+            os.write_fixed64(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CClientNotificationGameRecordingUserMarkerAdded {
+        CClientNotificationGameRecordingUserMarkerAdded::new()
+    }
+
+    fn clear(&mut self) {
+        self.game_id = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CClientNotificationGameRecordingUserMarkerAdded {
+        static instance: CClientNotificationGameRecordingUserMarkerAdded = CClientNotificationGameRecordingUserMarkerAdded {
+            game_id: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:EClientNotificationType)
 pub enum EClientNotificationType {
@@ -5047,6 +6329,40 @@ pub enum EClientNotificationType {
     k_EClientNotificationType_ModeratorMsg = 39,
     // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_SteamInputActionSetChanged)
     k_EClientNotificationType_SteamInputActionSetChanged = 40,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_RemoteClientConnection)
+    k_EClientNotificationType_RemoteClientConnection = 41,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_RemoteClientStartStream)
+    k_EClientNotificationType_RemoteClientStartStream = 42,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_StreamingClientConnection)
+    k_EClientNotificationType_StreamingClientConnection = 43,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_FamilyInvite)
+    k_EClientNotificationType_FamilyInvite = 44,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_PlaytimeWarning)
+    k_EClientNotificationType_PlaytimeWarning = 45,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_FamilyPurchaseRequest)
+    k_EClientNotificationType_FamilyPurchaseRequest = 46,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_FamilyPurchaseRequestResponse)
+    k_EClientNotificationType_FamilyPurchaseRequestResponse = 47,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_ParentalFeatureRequest)
+    k_EClientNotificationType_ParentalFeatureRequest = 48,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_ParentalPlaytimeRequest)
+    k_EClientNotificationType_ParentalPlaytimeRequest = 49,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_GameRecordingError)
+    k_EClientNotificationType_GameRecordingError = 50,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_ParentalFeatureResponse)
+    k_EClientNotificationType_ParentalFeatureResponse = 51,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_ParentalPlaytimeResponse)
+    k_EClientNotificationType_ParentalPlaytimeResponse = 52,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_RequestedGameAdded)
+    k_EClientNotificationType_RequestedGameAdded = 53,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_ClipDownloaded)
+    k_EClientNotificationType_ClipDownloaded = 54,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_GameRecordingStart)
+    k_EClientNotificationType_GameRecordingStart = 55,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_GameRecordingStop)
+    k_EClientNotificationType_GameRecordingStop = 56,
+    // @@protoc_insertion_point(enum_value:EClientNotificationType.k_EClientNotificationType_GameRecordingUserMarkerAdded)
+    k_EClientNotificationType_GameRecordingUserMarkerAdded = 57,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EClientNotificationType {
@@ -5099,6 +6415,23 @@ impl ::steam_vent_proto_common::protobuf::Enum for EClientNotificationType {
             38 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_TimerExpired),
             39 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ModeratorMsg),
             40 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_SteamInputActionSetChanged),
+            41 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_RemoteClientConnection),
+            42 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_RemoteClientStartStream),
+            43 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_StreamingClientConnection),
+            44 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_FamilyInvite),
+            45 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_PlaytimeWarning),
+            46 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_FamilyPurchaseRequest),
+            47 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_FamilyPurchaseRequestResponse),
+            48 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ParentalFeatureRequest),
+            49 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ParentalPlaytimeRequest),
+            50 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_GameRecordingError),
+            51 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ParentalFeatureResponse),
+            52 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ParentalPlaytimeResponse),
+            53 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_RequestedGameAdded),
+            54 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ClipDownloaded),
+            55 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_GameRecordingStart),
+            56 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_GameRecordingStop),
+            57 => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_GameRecordingUserMarkerAdded),
             _ => ::std::option::Option::None
         }
     }
@@ -5146,6 +6479,23 @@ impl ::steam_vent_proto_common::protobuf::Enum for EClientNotificationType {
             "k_EClientNotificationType_TimerExpired" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_TimerExpired),
             "k_EClientNotificationType_ModeratorMsg" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ModeratorMsg),
             "k_EClientNotificationType_SteamInputActionSetChanged" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_SteamInputActionSetChanged),
+            "k_EClientNotificationType_RemoteClientConnection" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_RemoteClientConnection),
+            "k_EClientNotificationType_RemoteClientStartStream" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_RemoteClientStartStream),
+            "k_EClientNotificationType_StreamingClientConnection" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_StreamingClientConnection),
+            "k_EClientNotificationType_FamilyInvite" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_FamilyInvite),
+            "k_EClientNotificationType_PlaytimeWarning" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_PlaytimeWarning),
+            "k_EClientNotificationType_FamilyPurchaseRequest" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_FamilyPurchaseRequest),
+            "k_EClientNotificationType_FamilyPurchaseRequestResponse" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_FamilyPurchaseRequestResponse),
+            "k_EClientNotificationType_ParentalFeatureRequest" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ParentalFeatureRequest),
+            "k_EClientNotificationType_ParentalPlaytimeRequest" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ParentalPlaytimeRequest),
+            "k_EClientNotificationType_GameRecordingError" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_GameRecordingError),
+            "k_EClientNotificationType_ParentalFeatureResponse" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ParentalFeatureResponse),
+            "k_EClientNotificationType_ParentalPlaytimeResponse" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ParentalPlaytimeResponse),
+            "k_EClientNotificationType_RequestedGameAdded" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_RequestedGameAdded),
+            "k_EClientNotificationType_ClipDownloaded" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_ClipDownloaded),
+            "k_EClientNotificationType_GameRecordingStart" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_GameRecordingStart),
+            "k_EClientNotificationType_GameRecordingStop" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_GameRecordingStop),
+            "k_EClientNotificationType_GameRecordingUserMarkerAdded" => ::std::option::Option::Some(EClientNotificationType::k_EClientNotificationType_GameRecordingUserMarkerAdded),
             _ => ::std::option::Option::None
         }
     }
@@ -5192,6 +6542,23 @@ impl ::steam_vent_proto_common::protobuf::Enum for EClientNotificationType {
         EClientNotificationType::k_EClientNotificationType_TimerExpired,
         EClientNotificationType::k_EClientNotificationType_ModeratorMsg,
         EClientNotificationType::k_EClientNotificationType_SteamInputActionSetChanged,
+        EClientNotificationType::k_EClientNotificationType_RemoteClientConnection,
+        EClientNotificationType::k_EClientNotificationType_RemoteClientStartStream,
+        EClientNotificationType::k_EClientNotificationType_StreamingClientConnection,
+        EClientNotificationType::k_EClientNotificationType_FamilyInvite,
+        EClientNotificationType::k_EClientNotificationType_PlaytimeWarning,
+        EClientNotificationType::k_EClientNotificationType_FamilyPurchaseRequest,
+        EClientNotificationType::k_EClientNotificationType_FamilyPurchaseRequestResponse,
+        EClientNotificationType::k_EClientNotificationType_ParentalFeatureRequest,
+        EClientNotificationType::k_EClientNotificationType_ParentalPlaytimeRequest,
+        EClientNotificationType::k_EClientNotificationType_GameRecordingError,
+        EClientNotificationType::k_EClientNotificationType_ParentalFeatureResponse,
+        EClientNotificationType::k_EClientNotificationType_ParentalPlaytimeResponse,
+        EClientNotificationType::k_EClientNotificationType_RequestedGameAdded,
+        EClientNotificationType::k_EClientNotificationType_ClipDownloaded,
+        EClientNotificationType::k_EClientNotificationType_GameRecordingStart,
+        EClientNotificationType::k_EClientNotificationType_GameRecordingStop,
+        EClientNotificationType::k_EClientNotificationType_GameRecordingUserMarkerAdded,
     ];
 }
 
@@ -5248,6 +6615,52 @@ impl ::steam_vent_proto_common::protobuf::Enum for ESystemUpdateNotificationType
 impl ::std::default::Default for ESystemUpdateNotificationType {
     fn default() -> Self {
         ESystemUpdateNotificationType::k_ESystemUpdateNotificationType_Invalid
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EGameRecordingErrorType)
+pub enum EGameRecordingErrorType {
+    // @@protoc_insertion_point(enum_value:EGameRecordingErrorType.k_EGameRecordingErrorGeneral)
+    k_EGameRecordingErrorGeneral = 1,
+    // @@protoc_insertion_point(enum_value:EGameRecordingErrorType.k_EGameRecordingErrorLowDiskSpace)
+    k_EGameRecordingErrorLowDiskSpace = 2,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EGameRecordingErrorType {
+    const NAME: &'static str = "EGameRecordingErrorType";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EGameRecordingErrorType> {
+        match value {
+            1 => ::std::option::Option::Some(EGameRecordingErrorType::k_EGameRecordingErrorGeneral),
+            2 => ::std::option::Option::Some(EGameRecordingErrorType::k_EGameRecordingErrorLowDiskSpace),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EGameRecordingErrorType> {
+        match str {
+            "k_EGameRecordingErrorGeneral" => ::std::option::Option::Some(EGameRecordingErrorType::k_EGameRecordingErrorGeneral),
+            "k_EGameRecordingErrorLowDiskSpace" => ::std::option::Option::Some(EGameRecordingErrorType::k_EGameRecordingErrorLowDiskSpace),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EGameRecordingErrorType] = &[
+        EGameRecordingErrorType::k_EGameRecordingErrorGeneral,
+        EGameRecordingErrorType::k_EGameRecordingErrorLowDiskSpace,
+    ];
+}
+
+// Note, `Default` is implemented although default value is not 0
+impl ::std::default::Default for EGameRecordingErrorType {
+    fn default() -> Self {
+        EGameRecordingErrorType::k_EGameRecordingErrorGeneral
     }
 }
 
@@ -5666,6 +7079,114 @@ impl ::steam_vent_proto_common::RpcMessage for CClientNotificationTimerExpired {
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CClientNotificationSteamInputActionSetChanged {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CClientNotificationRemoteClientConnection {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CClientNotificationRemoteClientStartStream {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CClientNotificationStreamingClientConnection {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CClientNotificationPlaytimeWarning {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CClientNotificationGameRecordingError {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CClientNotificationGameRecordingStart {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CClientNotificationGameRecordingStop {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CClientNotificationGameRecordingUserMarkerAdded {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }

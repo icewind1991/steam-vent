@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Request from client to directory to begin a broadcast session. No data being sent to relay; just available for broadcast."]
 // @@protoc_insertion_point(message:CBroadcast_BeginBroadcastSession_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_BeginBroadcastSession_Request {
@@ -45,8 +44,6 @@ pub struct CBroadcast_BeginBroadcastSession_Request {
     pub rtmp_token: ::std::option::Option<u64>,
     // @@protoc_insertion_point(field:CBroadcast_BeginBroadcastSession_Request.thumbnail_upload)
     pub thumbnail_upload: ::std::option::Option<bool>,
-    // @@protoc_insertion_point(field:CBroadcast_BeginBroadcastSession_Request.client_beta)
-    pub client_beta: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CBroadcast_BeginBroadcastSession_Request.sysid)
     pub sysid: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CBroadcast_BeginBroadcastSession_Request.allow_webrtc)
@@ -217,42 +214,6 @@ impl CBroadcast_BeginBroadcastSession_Request {
         self.thumbnail_upload = ::std::option::Option::Some(v);
     }
 
-    // optional string client_beta = 8;
-
-    pub fn client_beta(&self) -> &str {
-        match self.client_beta.as_ref() {
-            Some(v) => v,
-            None => "",
-        }
-    }
-
-    pub fn clear_client_beta(&mut self) {
-        self.client_beta = ::std::option::Option::None;
-    }
-
-    pub fn has_client_beta(&self) -> bool {
-        self.client_beta.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_client_beta(&mut self, v: ::std::string::String) {
-        self.client_beta = ::std::option::Option::Some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_client_beta(&mut self) -> &mut ::std::string::String {
-        if self.client_beta.is_none() {
-            self.client_beta = ::std::option::Option::Some(::std::string::String::new());
-        }
-        self.client_beta.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_client_beta(&mut self) -> ::std::string::String {
-        self.client_beta.take().unwrap_or_else(|| ::std::string::String::new())
-    }
-
     // optional uint32 sysid = 9;
 
     pub fn sysid(&self) -> u32 {
@@ -323,9 +284,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_BeginBroadcastS
                 56 => {
                     self.thumbnail_upload = ::std::option::Option::Some(is.read_bool()?);
                 },
-                66 => {
-                    self.client_beta = ::std::option::Option::Some(is.read_string()?);
-                },
                 72 => {
                     self.sysid = ::std::option::Option::Some(is.read_uint32()?);
                 },
@@ -365,9 +323,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_BeginBroadcastS
         if let Some(v) = self.thumbnail_upload {
             my_size += 1 + 1;
         }
-        if let Some(v) = self.client_beta.as_ref() {
-            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(8, &v);
-        }
         if let Some(v) = self.sysid {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(9, v);
         }
@@ -401,9 +356,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_BeginBroadcastS
         if let Some(v) = self.thumbnail_upload {
             os.write_bool(7, v)?;
         }
-        if let Some(v) = self.client_beta.as_ref() {
-            os.write_string(8, v)?;
-        }
         if let Some(v) = self.sysid {
             os.write_uint32(9, v)?;
         }
@@ -434,7 +386,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_BeginBroadcastS
         self.cellid = ::std::option::Option::None;
         self.rtmp_token = ::std::option::Option::None;
         self.thumbnail_upload = ::std::option::Option::None;
-        self.client_beta = ::std::option::Option::None;
         self.sysid = ::std::option::Option::None;
         self.allow_webrtc = ::std::option::Option::None;
         self.special_fields.clear();
@@ -449,7 +400,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_BeginBroadcastS
             cellid: ::std::option::Option::None,
             rtmp_token: ::std::option::Option::None,
             thumbnail_upload: ::std::option::Option::None,
-            client_beta: ::std::option::Option::None,
             sysid: ::std::option::Option::None,
             allow_webrtc: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
@@ -729,7 +679,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_BeginBroadcastS
     }
 }
 
-#[doc = "Request from client to stop a broadcast session. Any uploads will terminate."]
 // @@protoc_insertion_point(message:CBroadcast_EndBroadcastSession_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_EndBroadcastSession_Request {
@@ -915,7 +864,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_EndBroadcastSes
     }
 }
 
-#[doc = "Request from client to begin sending video for a broadcast."]
 // @@protoc_insertion_point(message:CBroadcast_StartBroadcastUpload_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_StartBroadcastUpload_Request {
@@ -1537,7 +1485,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_StartBroadcastU
     }
 }
 
-#[doc = "Tells directory that client stopped uploading broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_NotifyBroadcastUploadStop_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_NotifyBroadcastUploadStop_Notification {
@@ -1679,7 +1626,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_NotifyBroadcast
     }
 }
 
-#[doc = "Request from viewer to watch a broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_WatchBroadcast_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WatchBroadcast_Request {
@@ -2820,6 +2766,8 @@ pub mod cbroadcast_watch_broadcast_response {
         k_EWatchResponsePoorUploadQuality = 11,
         // @@protoc_insertion_point(enum_value:CBroadcast_WatchBroadcast_Response.EWatchResponse.k_EWatchResponseMissingSubscription)
         k_EWatchResponseMissingSubscription = 12,
+        // @@protoc_insertion_point(enum_value:CBroadcast_WatchBroadcast_Response.EWatchResponse.k_EWatchResponseTooManyViewers)
+        k_EWatchResponseTooManyViewers = 13,
     }
 
     impl ::steam_vent_proto_common::protobuf::Enum for EWatchResponse {
@@ -2843,6 +2791,7 @@ pub mod cbroadcast_watch_broadcast_response {
                 10 => ::std::option::Option::Some(EWatchResponse::k_EWatchResponseClientOutOfDate),
                 11 => ::std::option::Option::Some(EWatchResponse::k_EWatchResponsePoorUploadQuality),
                 12 => ::std::option::Option::Some(EWatchResponse::k_EWatchResponseMissingSubscription),
+                13 => ::std::option::Option::Some(EWatchResponse::k_EWatchResponseTooManyViewers),
                 _ => ::std::option::Option::None
             }
         }
@@ -2861,6 +2810,7 @@ pub mod cbroadcast_watch_broadcast_response {
                 "k_EWatchResponseClientOutOfDate" => ::std::option::Option::Some(EWatchResponse::k_EWatchResponseClientOutOfDate),
                 "k_EWatchResponsePoorUploadQuality" => ::std::option::Option::Some(EWatchResponse::k_EWatchResponsePoorUploadQuality),
                 "k_EWatchResponseMissingSubscription" => ::std::option::Option::Some(EWatchResponse::k_EWatchResponseMissingSubscription),
+                "k_EWatchResponseTooManyViewers" => ::std::option::Option::Some(EWatchResponse::k_EWatchResponseTooManyViewers),
                 _ => ::std::option::Option::None
             }
         }
@@ -2878,6 +2828,7 @@ pub mod cbroadcast_watch_broadcast_response {
             EWatchResponse::k_EWatchResponseClientOutOfDate,
             EWatchResponse::k_EWatchResponsePoorUploadQuality,
             EWatchResponse::k_EWatchResponseMissingSubscription,
+            EWatchResponse::k_EWatchResponseTooManyViewers,
         ];
     }
 
@@ -2890,7 +2841,6 @@ pub mod cbroadcast_watch_broadcast_response {
 
 }
 
-#[doc = "Notify directory that user is still watching."]
 // @@protoc_insertion_point(message:CBroadcast_HeartbeatBroadcast_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_HeartbeatBroadcast_Notification {
@@ -3096,7 +3046,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_HeartbeatBroadc
     }
 }
 
-#[doc = "Request to immediately stop watching a broadcast. Optional Method, if not called, viewer will time out."]
 // @@protoc_insertion_point(message:CBroadcast_StopWatchingBroadcast_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_StopWatchingBroadcast_Notification {
@@ -3270,7 +3219,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_StopWatchingBro
     }
 }
 
-#[doc = "Request from viewer about broadcast details"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastStatus_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_GetBroadcastStatus_Request {
@@ -3971,7 +3919,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_GetBroadcastSta
     }
 }
 
-#[doc = "Request thumbnail URL for broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastThumbnail_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_GetBroadcastThumbnail_Request {
@@ -4335,7 +4282,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_GetBroadcastThu
     }
 }
 
-#[doc = "Invites another steam user to watch the caller's broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_InviteToBroadcast_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_InviteToBroadcast_Request {
@@ -4586,7 +4532,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_InviteToBroadca
     }
 }
 
-#[doc = "Sends users current broadcast state (permissions, game) to the server"]
 // @@protoc_insertion_point(message:CBroadcast_SendBroadcastStateToServer_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_SendBroadcastStateToServer_Request {
@@ -4902,7 +4847,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_SendBroadcastSt
     }
 }
 
-#[doc = "Tells directory broadcast session is still available"]
 // @@protoc_insertion_point(message:CBroadcast_NotifyBroadcastSessionHeartbeat_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_NotifyBroadcastSessionHeartbeat_Notification {
@@ -5012,7 +4956,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_NotifyBroadcast
     }
 }
 
-#[doc = "Gets chat room info for a broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastChatInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_GetBroadcastChatInfo_Request {
@@ -5392,7 +5335,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_GetBroadcastCha
     }
 }
 
-#[doc = "Post chat message to specified chat room"]
 // @@protoc_insertion_point(message:CBroadcast_PostChatMessage_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_PostChatMessage_Request {
@@ -5886,7 +5828,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_PostChatMessage
     }
 }
 
-#[doc = "Update chat message flair in the specified chat room"]
 // @@protoc_insertion_point(message:CBroadcast_UpdateChatMessageFlair_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_UpdateChatMessageFlair_Request {
@@ -6235,7 +6176,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_UpdateChatMessa
     }
 }
 
-#[doc = "Mute a user in your broadcast chat"]
 // @@protoc_insertion_point(message:CBroadcast_MuteBroadcastChatUser_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_MuteBroadcastChatUser_Request {
@@ -6485,7 +6425,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_MuteBroadcastCh
     }
 }
 
-#[doc = "Tell all viewers to remove user chat text"]
 // @@protoc_insertion_point(message:CBroadcast_RemoveUserChatText_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_RemoveUserChatText_Request {
@@ -6703,7 +6642,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_RemoveUserChatT
     }
 }
 
-#[doc = "Get names for list of users in chat"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastChatUserNames_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_GetBroadcastChatUserNames_Request {
@@ -7079,7 +7017,6 @@ pub mod cbroadcast_get_broadcast_chat_user_names_response {
     }
 }
 
-#[doc = "Start building a broadcast clip"]
 // @@protoc_insertion_point(message:CBroadcast_StartBuildClip_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_StartBuildClip_Request {
@@ -7443,7 +7380,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_StartBuildClip_
     }
 }
 
-#[doc = "Start building a broadcast clip"]
 // @@protoc_insertion_point(message:CBroadcast_GetBuildClipStatus_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_GetBuildClipStatus_Request {
@@ -7629,7 +7565,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_GetBuildClipSta
     }
 }
 
-#[doc = "Updates a broadcast clip"]
 // @@protoc_insertion_point(message:CBroadcast_SetClipDetails_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_SetClipDetails_Request {
@@ -7928,7 +7863,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_SetClipDetails_
     }
 }
 
-#[doc = "Get details for Broadcast Clips"]
 // @@protoc_insertion_point(message:CBroadcast_GetClipDetails_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_GetClipDetails_Request {
@@ -8469,7 +8403,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_GetClipDetails_
     }
 }
 
-#[doc = "Sets RTMP broadcast info"]
 // @@protoc_insertion_point(message:CBroadcast_SetRTMPInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_SetRTMPInfo_Request {
@@ -9027,7 +8960,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_SetRTMPInfo_Res
     }
 }
 
-#[doc = "Gets RTMP broadcast info"]
 // @@protoc_insertion_point(message:CBroadcast_GetRTMPInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_GetRTMPInfo_Request {
@@ -9716,7 +9648,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_GetRTMPInfo_Res
     }
 }
 
-#[doc = "Notification from client to server with the client's TURN server"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCHaveTURNServer_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCHaveTURNServer_Notification {
@@ -9875,7 +9806,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WebRTCHaveTURNS
     }
 }
 
-#[doc = "Notify the server that a WebRTC session has been created by the host"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCStartResult_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCStartResult_Request {
@@ -10238,7 +10168,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WebRTCStartResu
     }
 }
 
-#[doc = "Notify the server that a WebRTC session has been stopped by the host"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCStopped_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCStopped_Request {
@@ -10424,7 +10353,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WebRTCStopped_R
     }
 }
 
-#[doc = "Notify the server that a WebRTC session has been created by the viewer"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCSetAnswer_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCSetAnswer_Request {
@@ -10691,7 +10619,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WebRTCSetAnswer
     }
 }
 
-#[doc = "Lookup the best TURN server for this client"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCLookupTURNServer_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCLookupTURNServer_Request {
@@ -11134,7 +11061,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WebRTC_Candidat
     }
 }
 
-#[doc = "Add an ICE candidate for the host side of a WebRTC session"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCAddHostCandidate_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCAddHostCandidate_Request {
@@ -11334,7 +11260,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WebRTCAddHostCa
     }
 }
 
-#[doc = "Add an ICE candidate for the viewer side of a WebRTC session"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCAddViewerCandidate_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCAddViewerCandidate_Request {
@@ -11566,7 +11491,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WebRTCAddViewer
     }
 }
 
-#[doc = "Get the ICE candidates for the host side of a WebRTC session"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCGetHostCandidates_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCGetHostCandidates_Request {
@@ -11863,7 +11787,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WebRTCGetHostCa
     }
 }
 
-#[doc = "Gets broadcast upload stats for user"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastUploadStats_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_GetBroadcastUploadStats_Request {
@@ -12963,7 +12886,6 @@ pub mod cbroadcast_get_broadcast_upload_stats_response {
     }
 }
 
-#[doc = "Gets viewer stats for given broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_GetBroadcastViewerStats_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_GetBroadcastViewerStats_Request {
@@ -13512,7 +13434,6 @@ pub mod cbroadcast_get_broadcast_viewer_stats_response {
     }
 }
 
-#[doc = "Notification from server to client that a viewers state has changed"]
 // @@protoc_insertion_point(message:CBroadcast_BroadcastViewerState_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_BroadcastViewerState_Notification {
@@ -13711,7 +13632,6 @@ pub mod cbroadcast_broadcast_viewer_state_notification {
 
 }
 
-#[doc = "Notification from server to client one or more users is waiting for user to start broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_WaitingBroadcastViewer_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WaitingBroadcastViewer_Notification {
@@ -13821,7 +13741,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WaitingBroadcas
     }
 }
 
-#[doc = "Notification from server to client with information about a broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_BroadcastUploadStarted_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_BroadcastUploadStarted_Notification {
@@ -14174,7 +14093,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_BroadcastUpload
     }
 }
 
-#[doc = "Notification from server to client telling it to stop uploading when the last viewer has disconnected from their broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_StopBroadcastUpload_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_StopBroadcastUpload_Notification {
@@ -14380,7 +14298,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_StopBroadcastUp
     }
 }
 
-#[doc = "Notification from server to client telling it a session has been closed unexpectedly by the directory"]
 // @@protoc_insertion_point(message:CBroadcast_SessionClosed_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_SessionClosed_Notification {
@@ -14490,7 +14407,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_SessionClosed_N
     }
 }
 
-#[doc = "Notification from server to client that a broadcaster is inviting a viewer to watch their broadcast"]
 // @@protoc_insertion_point(message:CBroadcast_ViewerBroadcastInvite_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_ViewerBroadcastInvite_Notification {
@@ -14600,7 +14516,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_ViewerBroadcast
     }
 }
 
-#[doc = "Notification from server to client about current broadcast status"]
 // @@protoc_insertion_point(message:CBroadcast_BroadcastStatus_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_BroadcastStatus_Notification {
@@ -14742,7 +14657,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_BroadcastStatus
     }
 }
 
-#[doc = "Notification from server to client about current broadcast status"]
 // @@protoc_insertion_point(message:CBroadcast_BroadcastChannelLive_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_BroadcastChannelLive_Notification {
@@ -14950,7 +14864,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_BroadcastChanne
     }
 }
 
-#[doc = "Send thumbnails to relay"]
 // @@protoc_insertion_point(message:CBroadcast_SendThumbnailToRelay_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_SendThumbnailToRelay_Notification {
@@ -15222,7 +15135,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_SendThumbnailTo
     }
 }
 
-#[doc = "Notification from server to client that it needs the client's TURN server"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCNeedTURNServer_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCNeedTURNServer_Notification {
@@ -15332,7 +15244,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WebRTCNeedTURNS
     }
 }
 
-#[doc = "Notification from server to client that it should start a WebRTC session"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCStart_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCStart_Notification {
@@ -15538,7 +15449,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WebRTCStart_Not
     }
 }
 
-#[doc = "Notification from server to client about the broadcast viewer WebRTC answer"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCSetAnswer_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCSetAnswer_Notification {
@@ -15729,7 +15639,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CBroadcast_WebRTCSetAnswer
     }
 }
 
-#[doc = "Notification from server to client about a broadcast viewer WebRTC ICE candidate"]
 // @@protoc_insertion_point(message:CBroadcast_WebRTCAddViewerCandidate_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CBroadcast_WebRTCAddViewerCandidate_Notification {
@@ -17083,7 +16992,7 @@ for CBroadcast_WebRTCAddViewerCandidate_Notification {
         self.compute_size() as usize
     }
 }
-///Methods for Steam broadcast operations
+///
 struct Broadcast {}
 impl ::steam_vent_proto_common::RpcService for Broadcast {
     const SERVICE_NAME: &'static str = "Broadcast";

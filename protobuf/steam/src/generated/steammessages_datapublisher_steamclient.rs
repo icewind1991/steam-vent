@@ -503,6 +503,10 @@ pub struct CDataPublisher_ClientUpdateAppJob_Notification {
     pub total_bytes_saved: ::std::option::Option<u64>,
     // @@protoc_insertion_point(field:CDataPublisher_ClientUpdateAppJob_Notification.cell_id)
     pub cell_id: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CDataPublisher_ClientUpdateAppJob_Notification.is_workshop)
+    pub is_workshop: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CDataPublisher_ClientUpdateAppJob_Notification.is_shader)
+    pub is_shader: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:CDataPublisher_ClientUpdateAppJob_Notification.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -932,6 +936,44 @@ impl CDataPublisher_ClientUpdateAppJob_Notification {
     pub fn set_cell_id(&mut self, v: u32) {
         self.cell_id = ::std::option::Option::Some(v);
     }
+
+    // optional bool is_workshop = 23;
+
+    pub fn is_workshop(&self) -> bool {
+        self.is_workshop.unwrap_or(false)
+    }
+
+    pub fn clear_is_workshop(&mut self) {
+        self.is_workshop = ::std::option::Option::None;
+    }
+
+    pub fn has_is_workshop(&self) -> bool {
+        self.is_workshop.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_is_workshop(&mut self, v: bool) {
+        self.is_workshop = ::std::option::Option::Some(v);
+    }
+
+    // optional bool is_shader = 24;
+
+    pub fn is_shader(&self) -> bool {
+        self.is_shader.unwrap_or(false)
+    }
+
+    pub fn clear_is_shader(&mut self) {
+        self.is_shader = ::std::option::Option::None;
+    }
+
+    pub fn has_is_shader(&self) -> bool {
+        self.is_shader.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_is_shader(&mut self, v: bool) {
+        self.is_shader = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CDataPublisher_ClientUpdateAppJob_Notification {
@@ -1010,6 +1052,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CDataPublisher_ClientUpdat
                 176 => {
                     self.cell_id = ::std::option::Option::Some(is.read_uint32()?);
                 },
+                184 => {
+                    self.is_workshop = ::std::option::Option::Some(is.read_bool()?);
+                },
+                192 => {
+                    self.is_shader = ::std::option::Option::Some(is.read_bool()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -1085,6 +1133,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CDataPublisher_ClientUpdat
         if let Some(v) = self.cell_id {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(22, v);
         }
+        if let Some(v) = self.is_workshop {
+            my_size += 2 + 1;
+        }
+        if let Some(v) = self.is_shader {
+            my_size += 2 + 1;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -1154,6 +1208,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CDataPublisher_ClientUpdat
         if let Some(v) = self.cell_id {
             os.write_uint32(22, v)?;
         }
+        if let Some(v) = self.is_workshop {
+            os.write_bool(23, v)?;
+        }
+        if let Some(v) = self.is_shader {
+            os.write_bool(24, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -1192,6 +1252,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CDataPublisher_ClientUpdat
         self.total_bytes_patched = ::std::option::Option::None;
         self.total_bytes_saved = ::std::option::Option::None;
         self.cell_id = ::std::option::Option::None;
+        self.is_workshop = ::std::option::Option::None;
+        self.is_shader = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -1218,13 +1280,14 @@ impl ::steam_vent_proto_common::protobuf::Message for CDataPublisher_ClientUpdat
             total_bytes_patched: ::std::option::Option::None,
             total_bytes_saved: ::std::option::Option::None,
             cell_id: ::std::option::Option::None,
+            is_workshop: ::std::option::Option::None,
+            is_shader: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
     }
 }
 
-#[doc = "Generate a debug report of what devices are in the survey"]
 // @@protoc_insertion_point(message:CDataPublisher_GetVRDeviceInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDataPublisher_GetVRDeviceInfo_Request {
@@ -1731,7 +1794,6 @@ pub mod cdata_publisher_get_vrdevice_info_response {
     }
 }
 
-#[doc = "Set the rollup reference of a single VR device"]
 // @@protoc_insertion_point(message:CDataPublisher_SetVRDeviceInfoAggregationReference_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDataPublisher_SetVRDeviceInfoAggregationReference_Request {
@@ -1982,7 +2044,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CDataPublisher_SetVRDevice
     }
 }
 
-#[doc = "Adds a device to the VRDeviceInfo table for the hardware survey"]
 // @@protoc_insertion_point(message:CDataPublisher_AddVRDeviceInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDataPublisher_AddVRDeviceInfo_Request {
@@ -2429,7 +2490,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CDataPublisher_AddVRDevice
     }
 }
 
-#[doc = "Should I run the survey"]
 // @@protoc_insertion_point(message:CValveHWSurvey_GetSurveySchedule_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CValveHWSurvey_GetSurveySchedule_Request {
@@ -2871,12 +2931,12 @@ for CValveHWSurvey_GetSurveySchedule_Response {
         self.compute_size() as usize
     }
 }
-///Data Publisher (DP) server services
+///
 struct DataPublisher {}
 impl ::steam_vent_proto_common::RpcService for DataPublisher {
     const SERVICE_NAME: &'static str = "DataPublisher";
 }
-///ValveHWSurvey
+///
 struct ValveHWSurvey {}
 impl ::steam_vent_proto_common::RpcService for ValveHWSurvey {
     const SERVICE_NAME: &'static str = "ValveHWSurvey";

@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Get inital parameters to start building a depot"]
 // @@protoc_insertion_point(message:CContentBuilder_InitDepotBuild_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CContentBuilder_InitDepotBuild_Request {
@@ -761,7 +760,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentBuilder_InitDepotB
     }
 }
 
-#[doc = "Start uploading manifest and chunks for a depot"]
 // @@protoc_insertion_point(message:CContentBuilder_StartDepotUpload_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CContentBuilder_StartDepotUpload_Request {
@@ -1140,7 +1138,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentBuilder_StartDepot
     }
 }
 
-#[doc = "Get list of missing chunks for depot upload"]
 // @@protoc_insertion_point(message:CContentBuilder_GetMissingDepotChunks_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CContentBuilder_GetMissingDepotChunks_Request {
@@ -1566,7 +1563,6 @@ pub mod ccontent_builder_get_missing_depot_chunks_response {
     }
 }
 
-#[doc = "Commit a depot build after manifest and all chunks are uploaded"]
 // @@protoc_insertion_point(message:CContentBuilder_FinishDepotUpload_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CContentBuilder_FinishDepotUpload_Request {
@@ -1849,7 +1845,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentBuilder_FinishDepo
     }
 }
 
-#[doc = "Combine previous depot uploads into an app build and commit it"]
 // @@protoc_insertion_point(message:CContentBuilder_CommitAppBuild_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CContentBuilder_CommitAppBuild_Request {
@@ -2324,7 +2319,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentBuilder_CommitAppB
     }
 }
 
-#[doc = "Sign an install script"]
 // @@protoc_insertion_point(message:CContentBuilder_SignInstallScript_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CContentBuilder_SignInstallScript_Request {
@@ -2811,7 +2805,7 @@ for CContentBuilder_SignInstallScript_Response {
         self.compute_size() as usize
     }
 }
-///Interface to build and upload depot content
+///
 struct ContentBuilder {}
 impl ::steam_vent_proto_common::RpcService for ContentBuilder {
     const SERVICE_NAME: &'static str = "ContentBuilder";

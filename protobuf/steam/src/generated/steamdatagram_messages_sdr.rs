@@ -1351,8 +1351,6 @@ pub mod cmsg_steam_datagram_router_ping_reply {
         pub enum Protocol {
             // @@protoc_insertion_point(enum_value:CMsgSteamDatagramRouterPingReply.AltAddress.Protocol.DefaultProtocol)
             DefaultProtocol = 0,
-            // @@protoc_insertion_point(enum_value:CMsgSteamDatagramRouterPingReply.AltAddress.Protocol.NetworkNext)
-            NetworkNext = 1,
         }
 
         impl ::steam_vent_proto_common::protobuf::Enum for Protocol {
@@ -1365,7 +1363,6 @@ pub mod cmsg_steam_datagram_router_ping_reply {
             fn from_i32(value: i32) -> ::std::option::Option<Protocol> {
                 match value {
                     0 => ::std::option::Option::Some(Protocol::DefaultProtocol),
-                    1 => ::std::option::Option::Some(Protocol::NetworkNext),
                     _ => ::std::option::Option::None
                 }
             }
@@ -1373,14 +1370,12 @@ pub mod cmsg_steam_datagram_router_ping_reply {
             fn from_str(str: &str) -> ::std::option::Option<Protocol> {
                 match str {
                     "DefaultProtocol" => ::std::option::Option::Some(Protocol::DefaultProtocol),
-                    "NetworkNext" => ::std::option::Option::Some(Protocol::NetworkNext),
                     _ => ::std::option::Option::None
                 }
             }
 
             const VALUES: &'static [Protocol] = &[
                 Protocol::DefaultProtocol,
-                Protocol::NetworkNext,
             ];
         }
 
@@ -2143,6 +2138,8 @@ pub struct CMsgSteamDatagramGameserverPingReplyData {
     pub network_config_version: ::std::option::Option<u64>,
     // @@protoc_insertion_point(field:CMsgSteamDatagramGameserverPingReplyData.my_unix_time)
     pub my_unix_time: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgSteamDatagramGameserverPingReplyData.routing_blob)
+    pub routing_blob: ::std::option::Option<::std::vec::Vec<u8>>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgSteamDatagramGameserverPingReplyData.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -2382,6 +2379,42 @@ impl CMsgSteamDatagramGameserverPingReplyData {
     pub fn set_my_unix_time(&mut self, v: u32) {
         self.my_unix_time = ::std::option::Option::Some(v);
     }
+
+    // optional bytes routing_blob = 12;
+
+    pub fn routing_blob(&self) -> &[u8] {
+        match self.routing_blob.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_routing_blob(&mut self) {
+        self.routing_blob = ::std::option::Option::None;
+    }
+
+    pub fn has_routing_blob(&self) -> bool {
+        self.routing_blob.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_routing_blob(&mut self, v: ::std::vec::Vec<u8>) {
+        self.routing_blob = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_routing_blob(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.routing_blob.is_none() {
+            self.routing_blob = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.routing_blob.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_routing_blob(&mut self) -> ::std::vec::Vec<u8> {
+        self.routing_blob.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CMsgSteamDatagramGameserverPingReplyData {
@@ -2423,6 +2456,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSteamDatagramGameserve
                 },
                 93 => {
                     self.my_unix_time = ::std::option::Option::Some(is.read_fixed32()?);
+                },
+                98 => {
+                    self.routing_blob = ::std::option::Option::Some(is.read_bytes()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -2466,6 +2502,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSteamDatagramGameserve
         if let Some(v) = self.my_unix_time {
             my_size += 1 + 4;
         }
+        if let Some(v) = self.routing_blob.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(12, &v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2502,6 +2541,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSteamDatagramGameserve
         if let Some(v) = self.my_unix_time {
             os.write_fixed32(11, v)?;
         }
+        if let Some(v) = self.routing_blob.as_ref() {
+            os.write_bytes(12, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -2529,6 +2571,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSteamDatagramGameserve
         self.build = ::std::option::Option::None;
         self.network_config_version = ::std::option::Option::None;
         self.my_unix_time = ::std::option::Option::None;
+        self.routing_blob = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -2544,6 +2587,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSteamDatagramGameserve
             build: ::std::option::Option::None,
             network_config_version: ::std::option::Option::None,
             my_unix_time: ::std::option::Option::None,
+            routing_blob: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance

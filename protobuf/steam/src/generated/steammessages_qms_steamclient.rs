@@ -165,7 +165,6 @@ impl ::steam_vent_proto_common::protobuf::Message for GameSearchParam {
     }
 }
 
-#[doc = "Search for a game"]
 // @@protoc_insertion_point(message:CQueuedMatchmaking_SearchForGame_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CQueuedMatchmaking_SearchForGame_Request {
@@ -933,7 +932,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CQueuedMatchmaking_SearchF
     }
 }
 
-#[doc = "SearchForPlayers"]
 // @@protoc_insertion_point(message:CQueuedMatchmakingGameHost_SearchForPlayers_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CQueuedMatchmakingGameHost_SearchForPlayers_Request {
@@ -1886,7 +1884,6 @@ impl ::steam_vent_proto_common::protobuf::Message for PlayerResult {
     }
 }
 
-#[doc = "SubmitPlayerResult"]
 // @@protoc_insertion_point(message:CQueuedMatchmakingGameHost_SubmitPlayerResult_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CQueuedMatchmakingGameHost_SubmitPlayerResult_Request {
@@ -2118,7 +2115,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CQueuedMatchmakingGameHost
     }
 }
 
-#[doc = "EndGame"]
 // @@protoc_insertion_point(message:CQueuedMatchmakingGameHost_EndGame_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CQueuedMatchmakingGameHost_EndGame_Request {
@@ -2618,12 +2614,12 @@ for CQueuedMatchmakingGameHost_EndGame_Response {
         self.compute_size() as usize
     }
 }
-///Queued matchmaking service
+///
 struct QueuedMatchmaking {}
 impl ::steam_vent_proto_common::RpcService for QueuedMatchmaking {
     const SERVICE_NAME: &'static str = "QueuedMatchmaking";
 }
-///Queued matchmaking host service
+///
 struct QueuedMatchmakingGameHost {}
 impl ::steam_vent_proto_common::RpcService for QueuedMatchmakingGameHost {
     const SERVICE_NAME: &'static str = "QueuedMatchmakingGameHost";

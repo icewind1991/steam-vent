@@ -26,6 +26,213 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
+// @@protoc_insertion_point(message:CContentServerDirectory_ConnectedSteamPipeServerInfo)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CContentServerDirectory_ConnectedSteamPipeServerInfo {
+    // message fields
+    // @@protoc_insertion_point(field:CContentServerDirectory_ConnectedSteamPipeServerInfo.type)
+    pub type_: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CContentServerDirectory_ConnectedSteamPipeServerInfo.source_id)
+    pub source_id: ::std::option::Option<i32>,
+    // @@protoc_insertion_point(field:CContentServerDirectory_ConnectedSteamPipeServerInfo.hostname)
+    pub hostname: ::std::option::Option<::std::string::String>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CContentServerDirectory_ConnectedSteamPipeServerInfo.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CContentServerDirectory_ConnectedSteamPipeServerInfo {
+    fn default() -> &'a CContentServerDirectory_ConnectedSteamPipeServerInfo {
+        <CContentServerDirectory_ConnectedSteamPipeServerInfo as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CContentServerDirectory_ConnectedSteamPipeServerInfo {
+    pub fn new() -> CContentServerDirectory_ConnectedSteamPipeServerInfo {
+        ::std::default::Default::default()
+    }
+
+    // optional string type = 1;
+
+    pub fn type_(&self) -> &str {
+        match self.type_.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_type_(&mut self) {
+        self.type_ = ::std::option::Option::None;
+    }
+
+    pub fn has_type(&self) -> bool {
+        self.type_.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_type(&mut self, v: ::std::string::String) {
+        self.type_ = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_type(&mut self) -> &mut ::std::string::String {
+        if self.type_.is_none() {
+            self.type_ = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.type_.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_type_(&mut self) -> ::std::string::String {
+        self.type_.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional int32 source_id = 2;
+
+    pub fn source_id(&self) -> i32 {
+        self.source_id.unwrap_or(0)
+    }
+
+    pub fn clear_source_id(&mut self) {
+        self.source_id = ::std::option::Option::None;
+    }
+
+    pub fn has_source_id(&self) -> bool {
+        self.source_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_source_id(&mut self, v: i32) {
+        self.source_id = ::std::option::Option::Some(v);
+    }
+
+    // optional string hostname = 3;
+
+    pub fn hostname(&self) -> &str {
+        match self.hostname.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_hostname(&mut self) {
+        self.hostname = ::std::option::Option::None;
+    }
+
+    pub fn has_hostname(&self) -> bool {
+        self.hostname.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_hostname(&mut self, v: ::std::string::String) {
+        self.hostname = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_hostname(&mut self) -> &mut ::std::string::String {
+        if self.hostname.is_none() {
+            self.hostname = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.hostname.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_hostname(&mut self) -> ::std::string::String {
+        self.hostname.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_ConnectedSteamPipeServerInfo {
+    const NAME: &'static str = "CContentServerDirectory_ConnectedSteamPipeServerInfo";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.type_ = ::std::option::Option::Some(is.read_string()?);
+                },
+                16 => {
+                    self.source_id = ::std::option::Option::Some(is.read_int32()?);
+                },
+                26 => {
+                    self.hostname = ::std::option::Option::Some(is.read_string()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.type_.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(1, &v);
+        }
+        if let Some(v) = self.source_id {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(2, v);
+        }
+        if let Some(v) = self.hostname.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(3, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.type_.as_ref() {
+            os.write_string(1, v)?;
+        }
+        if let Some(v) = self.source_id {
+            os.write_int32(2, v)?;
+        }
+        if let Some(v) = self.hostname.as_ref() {
+            os.write_string(3, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CContentServerDirectory_ConnectedSteamPipeServerInfo {
+        CContentServerDirectory_ConnectedSteamPipeServerInfo::new()
+    }
+
+    fn clear(&mut self) {
+        self.type_ = ::std::option::Option::None;
+        self.source_id = ::std::option::Option::None;
+        self.hostname = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CContentServerDirectory_ConnectedSteamPipeServerInfo {
+        static instance: CContentServerDirectory_ConnectedSteamPipeServerInfo = CContentServerDirectory_ConnectedSteamPipeServerInfo {
+            type_: ::std::option::Option::None,
+            source_id: ::std::option::Option::None,
+            hostname: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CContentServerDirectory_GetServersForSteamPipe_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CContentServerDirectory_GetServersForSteamPipe_Request {
@@ -40,6 +247,8 @@ pub struct CContentServerDirectory_GetServersForSteamPipe_Request {
     pub launcher_type: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CContentServerDirectory_GetServersForSteamPipe_Request.ipv6_public)
     pub ipv6_public: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CContentServerDirectory_GetServersForSteamPipe_Request.current_connections)
+    pub current_connections: ::std::vec::Vec<CContentServerDirectory_ConnectedSteamPipeServerInfo>,
     // special fields
     // @@protoc_insertion_point(special_field:CContentServerDirectory_GetServersForSteamPipe_Request.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -211,6 +420,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Ge
                 42 => {
                     self.ipv6_public = ::std::option::Option::Some(is.read_string()?);
                 },
+                50 => {
+                    self.current_connections.push(is.read_message()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -238,6 +450,10 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Ge
         if let Some(v) = self.ipv6_public.as_ref() {
             my_size += ::steam_vent_proto_common::protobuf::rt::string_size(5, &v);
         }
+        for value in &self.current_connections {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -259,6 +475,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Ge
         if let Some(v) = self.ipv6_public.as_ref() {
             os.write_string(5, v)?;
         }
+        for v in &self.current_connections {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(6, v, os)?;
+        };
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -281,6 +500,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Ge
         self.ip_override = ::std::option::Option::None;
         self.launcher_type = ::std::option::Option::None;
         self.ipv6_public = ::std::option::Option::None;
+        self.current_connections.clear();
         self.special_fields.clear();
     }
 
@@ -291,6 +511,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Ge
             ip_override: ::std::option::Option::None,
             launcher_type: ::std::option::Option::None,
             ipv6_public: ::std::option::Option::None,
+            current_connections: ::std::vec::Vec::new(),
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -327,8 +548,10 @@ pub struct CContentServerDirectory_ServerInfo {
     pub https_support: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CContentServerDirectory_ServerInfo.allowed_app_ids)
     pub allowed_app_ids: ::std::vec::Vec<u32>,
-    // @@protoc_insertion_point(field:CContentServerDirectory_ServerInfo.preferred_server)
-    pub preferred_server: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CContentServerDirectory_ServerInfo.priority_class)
+    pub priority_class: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CContentServerDirectory_ServerInfo.bypass_proxies_of_type)
+    pub bypass_proxies_of_type: ::std::vec::Vec<::std::string::String>,
     // special fields
     // @@protoc_insertion_point(special_field:CContentServerDirectory_ServerInfo.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -658,23 +881,23 @@ impl CContentServerDirectory_ServerInfo {
         self.https_support.take().unwrap_or_else(|| ::std::string::String::new())
     }
 
-    // optional bool preferred_server = 14;
+    // optional uint32 priority_class = 15;
 
-    pub fn preferred_server(&self) -> bool {
-        self.preferred_server.unwrap_or(false)
+    pub fn priority_class(&self) -> u32 {
+        self.priority_class.unwrap_or(0)
     }
 
-    pub fn clear_preferred_server(&mut self) {
-        self.preferred_server = ::std::option::Option::None;
+    pub fn clear_priority_class(&mut self) {
+        self.priority_class = ::std::option::Option::None;
     }
 
-    pub fn has_preferred_server(&self) -> bool {
-        self.preferred_server.is_some()
+    pub fn has_priority_class(&self) -> bool {
+        self.priority_class.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_preferred_server(&mut self, v: bool) {
-        self.preferred_server = ::std::option::Option::Some(v);
+    pub fn set_priority_class(&mut self, v: u32) {
+        self.priority_class = ::std::option::Option::Some(v);
     }
 }
 
@@ -730,8 +953,11 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Se
                 104 => {
                     self.allowed_app_ids.push(is.read_uint32()?);
                 },
-                112 => {
-                    self.preferred_server = ::std::option::Option::Some(is.read_bool()?);
+                120 => {
+                    self.priority_class = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                130 => {
+                    self.bypass_proxies_of_type.push(is.read_string()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -784,9 +1010,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Se
         for value in &self.allowed_app_ids {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(13, *value);
         };
-        if let Some(v) = self.preferred_server {
-            my_size += 1 + 1;
+        if let Some(v) = self.priority_class {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(15, v);
         }
+        for value in &self.bypass_proxies_of_type {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(16, &value);
+        };
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -832,9 +1061,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Se
         for v in &self.allowed_app_ids {
             os.write_uint32(13, *v)?;
         };
-        if let Some(v) = self.preferred_server {
-            os.write_bool(14, v)?;
+        if let Some(v) = self.priority_class {
+            os.write_uint32(15, v)?;
         }
+        for v in &self.bypass_proxies_of_type {
+            os.write_string(16, &v)?;
+        };
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -865,7 +1097,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Se
         self.proxy_request_path_template = ::std::option::Option::None;
         self.https_support = ::std::option::Option::None;
         self.allowed_app_ids.clear();
-        self.preferred_server = ::std::option::Option::None;
+        self.priority_class = ::std::option::Option::None;
+        self.bypass_proxies_of_type.clear();
         self.special_fields.clear();
     }
 
@@ -884,7 +1117,8 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Se
             proxy_request_path_template: ::std::option::Option::None,
             https_support: ::std::option::Option::None,
             allowed_app_ids: ::std::vec::Vec::new(),
-            preferred_server: ::std::option::Option::None,
+            priority_class: ::std::option::Option::None,
+            bypass_proxies_of_type: ::std::vec::Vec::new(),
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -897,6 +1131,8 @@ pub struct CContentServerDirectory_GetServersForSteamPipe_Response {
     // message fields
     // @@protoc_insertion_point(field:CContentServerDirectory_GetServersForSteamPipe_Response.servers)
     pub servers: ::std::vec::Vec<CContentServerDirectory_ServerInfo>,
+    // @@protoc_insertion_point(field:CContentServerDirectory_GetServersForSteamPipe_Response.no_change)
+    pub no_change: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:CContentServerDirectory_GetServersForSteamPipe_Response.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -912,6 +1148,25 @@ impl CContentServerDirectory_GetServersForSteamPipe_Response {
     pub fn new() -> CContentServerDirectory_GetServersForSteamPipe_Response {
         ::std::default::Default::default()
     }
+
+    // optional bool no_change = 2;
+
+    pub fn no_change(&self) -> bool {
+        self.no_change.unwrap_or(false)
+    }
+
+    pub fn clear_no_change(&mut self) {
+        self.no_change = ::std::option::Option::None;
+    }
+
+    pub fn has_no_change(&self) -> bool {
+        self.no_change.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_no_change(&mut self, v: bool) {
+        self.no_change = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_GetServersForSteamPipe_Response {
@@ -926,6 +1181,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Ge
             match tag {
                 10 => {
                     self.servers.push(is.read_message()?);
+                },
+                16 => {
+                    self.no_change = ::std::option::Option::Some(is.read_bool()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -943,6 +1201,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Ge
             let len = value.compute_size();
             my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
         };
+        if let Some(v) = self.no_change {
+            my_size += 1 + 1;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -952,6 +1213,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Ge
         for v in &self.servers {
             ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
         };
+        if let Some(v) = self.no_change {
+            os.write_bool(2, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -970,12 +1234,14 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Ge
 
     fn clear(&mut self) {
         self.servers.clear();
+        self.no_change = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
     fn default_instance() -> &'static CContentServerDirectory_GetServersForSteamPipe_Response {
         static instance: CContentServerDirectory_GetServersForSteamPipe_Response = CContentServerDirectory_GetServersForSteamPipe_Response {
             servers: ::std::vec::Vec::new(),
+            no_change: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -2666,6 +2932,8 @@ pub struct CContentServerDirectory_RequestPeerContentServer_Response {
     pub server_port: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CContentServerDirectory_RequestPeerContentServer_Response.installed_depots)
     pub installed_depots: ::std::vec::Vec<u32>,
+    // @@protoc_insertion_point(field:CContentServerDirectory_RequestPeerContentServer_Response.access_token)
+    pub access_token: ::std::option::Option<u64>,
     // special fields
     // @@protoc_insertion_point(special_field:CContentServerDirectory_RequestPeerContentServer_Response.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -2700,6 +2968,25 @@ impl CContentServerDirectory_RequestPeerContentServer_Response {
     pub fn set_server_port(&mut self, v: u32) {
         self.server_port = ::std::option::Option::Some(v);
     }
+
+    // optional uint64 access_token = 3;
+
+    pub fn access_token(&self) -> u64 {
+        self.access_token.unwrap_or(0)
+    }
+
+    pub fn clear_access_token(&mut self) {
+        self.access_token = ::std::option::Option::None;
+    }
+
+    pub fn has_access_token(&self) -> bool {
+        self.access_token.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_access_token(&mut self, v: u64) {
+        self.access_token = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_RequestPeerContentServer_Response {
@@ -2721,6 +3008,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Re
                 16 => {
                     self.installed_depots.push(is.read_uint32()?);
                 },
+                24 => {
+                    self.access_token = ::std::option::Option::Some(is.read_uint64()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -2739,6 +3029,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Re
         for value in &self.installed_depots {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, *value);
         };
+        if let Some(v) = self.access_token {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(3, v);
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2751,6 +3044,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Re
         for v in &self.installed_depots {
             os.write_uint32(2, *v)?;
         };
+        if let Some(v) = self.access_token {
+            os.write_uint64(3, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -2770,6 +3066,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Re
     fn clear(&mut self) {
         self.server_port = ::std::option::Option::None;
         self.installed_depots.clear();
+        self.access_token = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -2777,6 +3074,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CContentServerDirectory_Re
         static instance: CContentServerDirectory_RequestPeerContentServer_Response = CContentServerDirectory_RequestPeerContentServer_Response {
             server_port: ::std::option::Option::None,
             installed_depots: ::std::vec::Vec::new(),
+            access_token: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -3106,6 +3404,20 @@ use crate::steammessages_base::*;
 #[allow(unused_imports)]
 use crate::steammessages_unified_base_steamclient::*;
 impl ::steam_vent_proto_common::RpcMessage
+for CContentServerDirectory_ConnectedSteamPipeServerInfo {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
 for CContentServerDirectory_GetServersForSteamPipe_Request {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -3314,7 +3626,7 @@ for CContentServerDirectory_GetPeerContentInfo_Response {
         self.compute_size() as usize
     }
 }
-///Content Server and CDN directory
+///
 struct ContentServerDirectory {}
 impl ::steam_vent_proto_common::RpcService for ContentServerDirectory {
     const SERVICE_NAME: &'static str = "ContentServerDirectory";

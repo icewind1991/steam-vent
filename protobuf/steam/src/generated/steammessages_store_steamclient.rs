@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Registers a CD key with Steam on the logged in user's account"]
 // @@protoc_insertion_point(message:CStore_RegisterCDKey_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_RegisterCDKey_Request {
@@ -1253,7 +1252,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CStore_RegisterCDKey_Respo
     }
 }
 
-#[doc = "Get all whitelisted tags, with localized names."]
 // @@protoc_insertion_point(message:CStore_GetMostPopularTags_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_GetMostPopularTags_Request {
@@ -1632,7 +1630,6 @@ pub mod cstore_get_most_popular_tags_response {
     }
 }
 
-#[doc = "Gets tag names in a different language"]
 // @@protoc_insertion_point(message:CStore_GetLocalizedNameForTags_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_GetLocalizedNameForTags_Request {
@@ -2125,7 +2122,6 @@ pub mod cstore_get_localized_name_for_tags_response {
     }
 }
 
-#[doc = "Get the list of tags, localized"]
 // @@protoc_insertion_point(message:CStore_GetTagList_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_GetTagList_Request {
@@ -3063,7 +3059,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CStoreDiscoveryQueueSettin
     }
 }
 
-#[doc = "Get a list of games for the user to explore on the store."]
 // @@protoc_insertion_point(message:CStore_GetDiscoveryQueue_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_GetDiscoveryQueue_Request {
@@ -3778,7 +3773,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CStore_GetDiscoveryQueue_R
     }
 }
 
-#[doc = "Get the settings that were used to generate a user's discovery queue."]
 // @@protoc_insertion_point(message:CStore_GetDiscoveryQueueSettings_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_GetDiscoveryQueueSettings_Request {
@@ -4045,7 +4039,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CStore_GetDiscoveryQueueSe
     }
 }
 
-#[doc = "Skip an item in the user's queue."]
 // @@protoc_insertion_point(message:CStore_SkipDiscoveryQueueItem_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_SkipDiscoveryQueueItem_Request {
@@ -4280,7 +4273,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CStore_SkipDiscoveryQueueI
     }
 }
 
-#[doc = "Get information about a user's relationship to a game - ownership, wishlist, discovery queue state, etc."]
 // @@protoc_insertion_point(message:CStore_GetUserGameInterestState_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_GetUserGameInterestState_Request {
@@ -5079,7 +5071,6 @@ pub mod cstore_get_user_game_interest_state_response {
     }
 }
 
-#[doc = "Returns all the apps skipped so far in the given discovery queue for the given user."]
 // @@protoc_insertion_point(message:CStore_GetDiscoveryQueueSkippedApps_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_GetDiscoveryQueueSkippedApps_Request {
@@ -5331,7 +5322,275 @@ impl ::steam_vent_proto_common::protobuf::Message for CStore_GetDiscoveryQueueSk
     }
 }
 
-#[doc = "Returns the desired ratings board and maximum rating to show on the store"]
+// @@protoc_insertion_point(message:CStore_ReportApp_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_ReportApp_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CStore_ReportApp_Request.appid)
+    pub appid: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CStore_ReportApp_Request.report_type)
+    pub report_type: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EAppReportType>>,
+    // @@protoc_insertion_point(field:CStore_ReportApp_Request.report)
+    pub report: ::std::option::Option<::std::string::String>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_ReportApp_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_ReportApp_Request {
+    fn default() -> &'a CStore_ReportApp_Request {
+        <CStore_ReportApp_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_ReportApp_Request {
+    pub fn new() -> CStore_ReportApp_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 appid = 1;
+
+    pub fn appid(&self) -> u32 {
+        self.appid.unwrap_or(0)
+    }
+
+    pub fn clear_appid(&mut self) {
+        self.appid = ::std::option::Option::None;
+    }
+
+    pub fn has_appid(&self) -> bool {
+        self.appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_appid(&mut self, v: u32) {
+        self.appid = ::std::option::Option::Some(v);
+    }
+
+    // optional .EAppReportType report_type = 2;
+
+    pub fn report_type(&self) -> EAppReportType {
+        match self.report_type {
+            Some(e) => e.enum_value_or(EAppReportType::k_EAppReportType_Invalid),
+            None => EAppReportType::k_EAppReportType_Invalid,
+        }
+    }
+
+    pub fn clear_report_type(&mut self) {
+        self.report_type = ::std::option::Option::None;
+    }
+
+    pub fn has_report_type(&self) -> bool {
+        self.report_type.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_report_type(&mut self, v: EAppReportType) {
+        self.report_type = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
+
+    // optional string report = 3;
+
+    pub fn report(&self) -> &str {
+        match self.report.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_report(&mut self) {
+        self.report = ::std::option::Option::None;
+    }
+
+    pub fn has_report(&self) -> bool {
+        self.report.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_report(&mut self, v: ::std::string::String) {
+        self.report = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_report(&mut self) -> &mut ::std::string::String {
+        if self.report.is_none() {
+            self.report = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.report.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_report(&mut self) -> ::std::string::String {
+        self.report.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_ReportApp_Request {
+    const NAME: &'static str = "CStore_ReportApp_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.appid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.report_type = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                },
+                26 => {
+                    self.report = ::std::option::Option::Some(is.read_string()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.report_type {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(2, v.value());
+        }
+        if let Some(v) = self.report.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(3, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.appid {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.report_type {
+            os.write_enum(2, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        if let Some(v) = self.report.as_ref() {
+            os.write_string(3, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_ReportApp_Request {
+        CStore_ReportApp_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.appid = ::std::option::Option::None;
+        self.report_type = ::std::option::Option::None;
+        self.report = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_ReportApp_Request {
+        static instance: CStore_ReportApp_Request = CStore_ReportApp_Request {
+            appid: ::std::option::Option::None,
+            report_type: ::std::option::Option::None,
+            report: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_ReportApp_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_ReportApp_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_ReportApp_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_ReportApp_Response {
+    fn default() -> &'a CStore_ReportApp_Response {
+        <CStore_ReportApp_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_ReportApp_Response {
+    pub fn new() -> CStore_ReportApp_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_ReportApp_Response {
+    const NAME: &'static str = "CStore_ReportApp_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_ReportApp_Response {
+        CStore_ReportApp_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_ReportApp_Response {
+        static instance: CStore_ReportApp_Response = CStore_ReportApp_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CStore_GetStorePreferences_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_GetStorePreferences_Request {
@@ -6263,7 +6522,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CStore_GetStorePreferences
     }
 }
 
-#[doc = "Get trending apps among friends"]
 // @@protoc_insertion_point(message:CStore_GetTrendingAppsAmongFriends_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_GetTrendingAppsAmongFriends_Request {
@@ -6656,7 +6914,1973 @@ pub mod cstore_get_trending_apps_among_friends_response {
     }
 }
 
-#[doc = "Upserts user feedback regarding the published Steam Deck Compatibility rating for a game"]
+// @@protoc_insertion_point(message:CStore_MigratePartnerLinkTracking_Notification)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_MigratePartnerLinkTracking_Notification {
+    // message fields
+    // @@protoc_insertion_point(field:CStore_MigratePartnerLinkTracking_Notification.accountid)
+    pub accountid: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CStore_MigratePartnerLinkTracking_Notification.browserid)
+    pub browserid: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CStore_MigratePartnerLinkTracking_Notification.backfill_source)
+    pub backfill_source: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<EPartnerLinkTrackingBackfillSource>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_MigratePartnerLinkTracking_Notification.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_MigratePartnerLinkTracking_Notification {
+    fn default() -> &'a CStore_MigratePartnerLinkTracking_Notification {
+        <CStore_MigratePartnerLinkTracking_Notification as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_MigratePartnerLinkTracking_Notification {
+    pub fn new() -> CStore_MigratePartnerLinkTracking_Notification {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 accountid = 1;
+
+    pub fn accountid(&self) -> u32 {
+        self.accountid.unwrap_or(0)
+    }
+
+    pub fn clear_accountid(&mut self) {
+        self.accountid = ::std::option::Option::None;
+    }
+
+    pub fn has_accountid(&self) -> bool {
+        self.accountid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_accountid(&mut self, v: u32) {
+        self.accountid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint64 browserid = 2;
+
+    pub fn browserid(&self) -> u64 {
+        self.browserid.unwrap_or(0)
+    }
+
+    pub fn clear_browserid(&mut self) {
+        self.browserid = ::std::option::Option::None;
+    }
+
+    pub fn has_browserid(&self) -> bool {
+        self.browserid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_browserid(&mut self, v: u64) {
+        self.browserid = ::std::option::Option::Some(v);
+    }
+
+    // optional .EPartnerLinkTrackingBackfillSource backfill_source = 3;
+
+    pub fn backfill_source(&self) -> EPartnerLinkTrackingBackfillSource {
+        match self.backfill_source {
+            Some(e) => e.enum_value_or(EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_None),
+            None => EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_None,
+        }
+    }
+
+    pub fn clear_backfill_source(&mut self) {
+        self.backfill_source = ::std::option::Option::None;
+    }
+
+    pub fn has_backfill_source(&self) -> bool {
+        self.backfill_source.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_backfill_source(&mut self, v: EPartnerLinkTrackingBackfillSource) {
+        self.backfill_source = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_MigratePartnerLinkTracking_Notification {
+    const NAME: &'static str = "CStore_MigratePartnerLinkTracking_Notification";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.accountid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.browserid = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                24 => {
+                    self.backfill_source = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.accountid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.browserid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(2, v);
+        }
+        if let Some(v) = self.backfill_source {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(3, v.value());
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.accountid {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.browserid {
+            os.write_uint64(2, v)?;
+        }
+        if let Some(v) = self.backfill_source {
+            os.write_enum(3, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_MigratePartnerLinkTracking_Notification {
+        CStore_MigratePartnerLinkTracking_Notification::new()
+    }
+
+    fn clear(&mut self) {
+        self.accountid = ::std::option::Option::None;
+        self.browserid = ::std::option::Option::None;
+        self.backfill_source = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_MigratePartnerLinkTracking_Notification {
+        static instance: CStore_MigratePartnerLinkTracking_Notification = CStore_MigratePartnerLinkTracking_Notification {
+            accountid: ::std::option::Option::None,
+            browserid: ::std::option::Option::None,
+            backfill_source: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_UpdatePackageReservations_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_UpdatePackageReservations_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CStore_UpdatePackageReservations_Request.packages_to_reserve)
+    pub packages_to_reserve: ::std::vec::Vec<u32>,
+    // @@protoc_insertion_point(field:CStore_UpdatePackageReservations_Request.packages_to_unreserve)
+    pub packages_to_unreserve: ::std::vec::Vec<u32>,
+    // @@protoc_insertion_point(field:CStore_UpdatePackageReservations_Request.country_code)
+    pub country_code: ::std::option::Option<::std::string::String>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_UpdatePackageReservations_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_UpdatePackageReservations_Request {
+    fn default() -> &'a CStore_UpdatePackageReservations_Request {
+        <CStore_UpdatePackageReservations_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_UpdatePackageReservations_Request {
+    pub fn new() -> CStore_UpdatePackageReservations_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional string country_code = 3;
+
+    pub fn country_code(&self) -> &str {
+        match self.country_code.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_country_code(&mut self) {
+        self.country_code = ::std::option::Option::None;
+    }
+
+    pub fn has_country_code(&self) -> bool {
+        self.country_code.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_country_code(&mut self, v: ::std::string::String) {
+        self.country_code = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_country_code(&mut self) -> &mut ::std::string::String {
+        if self.country_code.is_none() {
+            self.country_code = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.country_code.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_country_code(&mut self) -> ::std::string::String {
+        self.country_code.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_UpdatePackageReservations_Request {
+    const NAME: &'static str = "CStore_UpdatePackageReservations_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    is.read_repeated_packed_uint32_into(&mut self.packages_to_reserve)?;
+                },
+                8 => {
+                    self.packages_to_reserve.push(is.read_uint32()?);
+                },
+                18 => {
+                    is.read_repeated_packed_uint32_into(&mut self.packages_to_unreserve)?;
+                },
+                16 => {
+                    self.packages_to_unreserve.push(is.read_uint32()?);
+                },
+                26 => {
+                    self.country_code = ::std::option::Option::Some(is.read_string()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.packages_to_reserve {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, *value);
+        };
+        for value in &self.packages_to_unreserve {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, *value);
+        };
+        if let Some(v) = self.country_code.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(3, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.packages_to_reserve {
+            os.write_uint32(1, *v)?;
+        };
+        for v in &self.packages_to_unreserve {
+            os.write_uint32(2, *v)?;
+        };
+        if let Some(v) = self.country_code.as_ref() {
+            os.write_string(3, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_UpdatePackageReservations_Request {
+        CStore_UpdatePackageReservations_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.packages_to_reserve.clear();
+        self.packages_to_unreserve.clear();
+        self.country_code = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_UpdatePackageReservations_Request {
+        static instance: CStore_UpdatePackageReservations_Request = CStore_UpdatePackageReservations_Request {
+            packages_to_reserve: ::std::vec::Vec::new(),
+            packages_to_unreserve: ::std::vec::Vec::new(),
+            country_code: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_UpdatePackageReservations_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_UpdatePackageReservations_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CStore_UpdatePackageReservations_Response.reservation_status)
+    pub reservation_status: ::std::vec::Vec<super::steammessages_base::CPackageReservationStatus>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_UpdatePackageReservations_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_UpdatePackageReservations_Response {
+    fn default() -> &'a CStore_UpdatePackageReservations_Response {
+        <CStore_UpdatePackageReservations_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_UpdatePackageReservations_Response {
+    pub fn new() -> CStore_UpdatePackageReservations_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_UpdatePackageReservations_Response {
+    const NAME: &'static str = "CStore_UpdatePackageReservations_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.reservation_status.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.reservation_status {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.reservation_status {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_UpdatePackageReservations_Response {
+        CStore_UpdatePackageReservations_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.reservation_status.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_UpdatePackageReservations_Response {
+        static instance: CStore_UpdatePackageReservations_Response = CStore_UpdatePackageReservations_Response {
+            reservation_status: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_GetWishlistDemoEmailStatus_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_GetWishlistDemoEmailStatus_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CStore_GetWishlistDemoEmailStatus_Request.appid)
+    pub appid: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CStore_GetWishlistDemoEmailStatus_Request.demo_appid)
+    pub demo_appid: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_GetWishlistDemoEmailStatus_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_GetWishlistDemoEmailStatus_Request {
+    fn default() -> &'a CStore_GetWishlistDemoEmailStatus_Request {
+        <CStore_GetWishlistDemoEmailStatus_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_GetWishlistDemoEmailStatus_Request {
+    pub fn new() -> CStore_GetWishlistDemoEmailStatus_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 appid = 1;
+
+    pub fn appid(&self) -> u32 {
+        self.appid.unwrap_or(0)
+    }
+
+    pub fn clear_appid(&mut self) {
+        self.appid = ::std::option::Option::None;
+    }
+
+    pub fn has_appid(&self) -> bool {
+        self.appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_appid(&mut self, v: u32) {
+        self.appid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 demo_appid = 2;
+
+    pub fn demo_appid(&self) -> u32 {
+        self.demo_appid.unwrap_or(0)
+    }
+
+    pub fn clear_demo_appid(&mut self) {
+        self.demo_appid = ::std::option::Option::None;
+    }
+
+    pub fn has_demo_appid(&self) -> bool {
+        self.demo_appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_demo_appid(&mut self, v: u32) {
+        self.demo_appid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_GetWishlistDemoEmailStatus_Request {
+    const NAME: &'static str = "CStore_GetWishlistDemoEmailStatus_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.appid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.demo_appid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.demo_appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.appid {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.demo_appid {
+            os.write_uint32(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_GetWishlistDemoEmailStatus_Request {
+        CStore_GetWishlistDemoEmailStatus_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.appid = ::std::option::Option::None;
+        self.demo_appid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_GetWishlistDemoEmailStatus_Request {
+        static instance: CStore_GetWishlistDemoEmailStatus_Request = CStore_GetWishlistDemoEmailStatus_Request {
+            appid: ::std::option::Option::None,
+            demo_appid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_GetWishlistDemoEmailStatus_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_GetWishlistDemoEmailStatus_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CStore_GetWishlistDemoEmailStatus_Response.can_fire)
+    pub can_fire: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CStore_GetWishlistDemoEmailStatus_Response.time_staged)
+    pub time_staged: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CStore_GetWishlistDemoEmailStatus_Response.demo_release_date)
+    pub demo_release_date: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_GetWishlistDemoEmailStatus_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_GetWishlistDemoEmailStatus_Response {
+    fn default() -> &'a CStore_GetWishlistDemoEmailStatus_Response {
+        <CStore_GetWishlistDemoEmailStatus_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_GetWishlistDemoEmailStatus_Response {
+    pub fn new() -> CStore_GetWishlistDemoEmailStatus_Response {
+        ::std::default::Default::default()
+    }
+
+    // optional bool can_fire = 1;
+
+    pub fn can_fire(&self) -> bool {
+        self.can_fire.unwrap_or(false)
+    }
+
+    pub fn clear_can_fire(&mut self) {
+        self.can_fire = ::std::option::Option::None;
+    }
+
+    pub fn has_can_fire(&self) -> bool {
+        self.can_fire.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_can_fire(&mut self, v: bool) {
+        self.can_fire = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 time_staged = 2;
+
+    pub fn time_staged(&self) -> u32 {
+        self.time_staged.unwrap_or(0)
+    }
+
+    pub fn clear_time_staged(&mut self) {
+        self.time_staged = ::std::option::Option::None;
+    }
+
+    pub fn has_time_staged(&self) -> bool {
+        self.time_staged.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_time_staged(&mut self, v: u32) {
+        self.time_staged = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 demo_release_date = 3;
+
+    pub fn demo_release_date(&self) -> u32 {
+        self.demo_release_date.unwrap_or(0)
+    }
+
+    pub fn clear_demo_release_date(&mut self) {
+        self.demo_release_date = ::std::option::Option::None;
+    }
+
+    pub fn has_demo_release_date(&self) -> bool {
+        self.demo_release_date.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_demo_release_date(&mut self, v: u32) {
+        self.demo_release_date = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_GetWishlistDemoEmailStatus_Response {
+    const NAME: &'static str = "CStore_GetWishlistDemoEmailStatus_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.can_fire = ::std::option::Option::Some(is.read_bool()?);
+                },
+                16 => {
+                    self.time_staged = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                24 => {
+                    self.demo_release_date = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.can_fire {
+            my_size += 1 + 1;
+        }
+        if let Some(v) = self.time_staged {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        if let Some(v) = self.demo_release_date {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.can_fire {
+            os.write_bool(1, v)?;
+        }
+        if let Some(v) = self.time_staged {
+            os.write_uint32(2, v)?;
+        }
+        if let Some(v) = self.demo_release_date {
+            os.write_uint32(3, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_GetWishlistDemoEmailStatus_Response {
+        CStore_GetWishlistDemoEmailStatus_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.can_fire = ::std::option::Option::None;
+        self.time_staged = ::std::option::Option::None;
+        self.demo_release_date = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_GetWishlistDemoEmailStatus_Response {
+        static instance: CStore_GetWishlistDemoEmailStatus_Response = CStore_GetWishlistDemoEmailStatus_Response {
+            can_fire: ::std::option::Option::None,
+            time_staged: ::std::option::Option::None,
+            demo_release_date: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_QueueWishlistDemoEmailToFire_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_QueueWishlistDemoEmailToFire_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CStore_QueueWishlistDemoEmailToFire_Request.appid)
+    pub appid: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CStore_QueueWishlistDemoEmailToFire_Request.demo_appid)
+    pub demo_appid: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_QueueWishlistDemoEmailToFire_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_QueueWishlistDemoEmailToFire_Request {
+    fn default() -> &'a CStore_QueueWishlistDemoEmailToFire_Request {
+        <CStore_QueueWishlistDemoEmailToFire_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_QueueWishlistDemoEmailToFire_Request {
+    pub fn new() -> CStore_QueueWishlistDemoEmailToFire_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 appid = 1;
+
+    pub fn appid(&self) -> u32 {
+        self.appid.unwrap_or(0)
+    }
+
+    pub fn clear_appid(&mut self) {
+        self.appid = ::std::option::Option::None;
+    }
+
+    pub fn has_appid(&self) -> bool {
+        self.appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_appid(&mut self, v: u32) {
+        self.appid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 demo_appid = 2;
+
+    pub fn demo_appid(&self) -> u32 {
+        self.demo_appid.unwrap_or(0)
+    }
+
+    pub fn clear_demo_appid(&mut self) {
+        self.demo_appid = ::std::option::Option::None;
+    }
+
+    pub fn has_demo_appid(&self) -> bool {
+        self.demo_appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_demo_appid(&mut self, v: u32) {
+        self.demo_appid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_QueueWishlistDemoEmailToFire_Request {
+    const NAME: &'static str = "CStore_QueueWishlistDemoEmailToFire_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.appid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.demo_appid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.demo_appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.appid {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.demo_appid {
+            os.write_uint32(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_QueueWishlistDemoEmailToFire_Request {
+        CStore_QueueWishlistDemoEmailToFire_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.appid = ::std::option::Option::None;
+        self.demo_appid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_QueueWishlistDemoEmailToFire_Request {
+        static instance: CStore_QueueWishlistDemoEmailToFire_Request = CStore_QueueWishlistDemoEmailToFire_Request {
+            appid: ::std::option::Option::None,
+            demo_appid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_QueueWishlistDemoEmailToFire_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_QueueWishlistDemoEmailToFire_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_QueueWishlistDemoEmailToFire_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_QueueWishlistDemoEmailToFire_Response {
+    fn default() -> &'a CStore_QueueWishlistDemoEmailToFire_Response {
+        <CStore_QueueWishlistDemoEmailToFire_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_QueueWishlistDemoEmailToFire_Response {
+    pub fn new() -> CStore_QueueWishlistDemoEmailToFire_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_QueueWishlistDemoEmailToFire_Response {
+    const NAME: &'static str = "CStore_QueueWishlistDemoEmailToFire_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_QueueWishlistDemoEmailToFire_Response {
+        CStore_QueueWishlistDemoEmailToFire_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_QueueWishlistDemoEmailToFire_Response {
+        static instance: CStore_QueueWishlistDemoEmailToFire_Response = CStore_QueueWishlistDemoEmailToFire_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CReservationPositionMessage)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CReservationPositionMessage {
+    // message fields
+    // @@protoc_insertion_point(field:CReservationPositionMessage.edistributor)
+    pub edistributor: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CReservationPositionMessage.product_identifier)
+    pub product_identifier: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CReservationPositionMessage.start_queue_position)
+    pub start_queue_position: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CReservationPositionMessage.rtime_estimated_notification)
+    pub rtime_estimated_notification: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CReservationPositionMessage.localization_token)
+    pub localization_token: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CReservationPositionMessage.accountid)
+    pub accountid: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CReservationPositionMessage.rtime_created)
+    pub rtime_created: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CReservationPositionMessage.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CReservationPositionMessage {
+    fn default() -> &'a CReservationPositionMessage {
+        <CReservationPositionMessage as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CReservationPositionMessage {
+    pub fn new() -> CReservationPositionMessage {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 edistributor = 1;
+
+    pub fn edistributor(&self) -> u32 {
+        self.edistributor.unwrap_or(0)
+    }
+
+    pub fn clear_edistributor(&mut self) {
+        self.edistributor = ::std::option::Option::None;
+    }
+
+    pub fn has_edistributor(&self) -> bool {
+        self.edistributor.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_edistributor(&mut self, v: u32) {
+        self.edistributor = ::std::option::Option::Some(v);
+    }
+
+    // optional string product_identifier = 2;
+
+    pub fn product_identifier(&self) -> &str {
+        match self.product_identifier.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_product_identifier(&mut self) {
+        self.product_identifier = ::std::option::Option::None;
+    }
+
+    pub fn has_product_identifier(&self) -> bool {
+        self.product_identifier.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_product_identifier(&mut self, v: ::std::string::String) {
+        self.product_identifier = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_product_identifier(&mut self) -> &mut ::std::string::String {
+        if self.product_identifier.is_none() {
+            self.product_identifier = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.product_identifier.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_product_identifier(&mut self) -> ::std::string::String {
+        self.product_identifier.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional uint32 start_queue_position = 3;
+
+    pub fn start_queue_position(&self) -> u32 {
+        self.start_queue_position.unwrap_or(0)
+    }
+
+    pub fn clear_start_queue_position(&mut self) {
+        self.start_queue_position = ::std::option::Option::None;
+    }
+
+    pub fn has_start_queue_position(&self) -> bool {
+        self.start_queue_position.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_start_queue_position(&mut self, v: u32) {
+        self.start_queue_position = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 rtime_estimated_notification = 4;
+
+    pub fn rtime_estimated_notification(&self) -> u32 {
+        self.rtime_estimated_notification.unwrap_or(0)
+    }
+
+    pub fn clear_rtime_estimated_notification(&mut self) {
+        self.rtime_estimated_notification = ::std::option::Option::None;
+    }
+
+    pub fn has_rtime_estimated_notification(&self) -> bool {
+        self.rtime_estimated_notification.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_rtime_estimated_notification(&mut self, v: u32) {
+        self.rtime_estimated_notification = ::std::option::Option::Some(v);
+    }
+
+    // optional string localization_token = 5;
+
+    pub fn localization_token(&self) -> &str {
+        match self.localization_token.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_localization_token(&mut self) {
+        self.localization_token = ::std::option::Option::None;
+    }
+
+    pub fn has_localization_token(&self) -> bool {
+        self.localization_token.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_localization_token(&mut self, v: ::std::string::String) {
+        self.localization_token = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_localization_token(&mut self) -> &mut ::std::string::String {
+        if self.localization_token.is_none() {
+            self.localization_token = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.localization_token.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_localization_token(&mut self) -> ::std::string::String {
+        self.localization_token.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional uint32 accountid = 6;
+
+    pub fn accountid(&self) -> u32 {
+        self.accountid.unwrap_or(0)
+    }
+
+    pub fn clear_accountid(&mut self) {
+        self.accountid = ::std::option::Option::None;
+    }
+
+    pub fn has_accountid(&self) -> bool {
+        self.accountid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_accountid(&mut self, v: u32) {
+        self.accountid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 rtime_created = 7;
+
+    pub fn rtime_created(&self) -> u32 {
+        self.rtime_created.unwrap_or(0)
+    }
+
+    pub fn clear_rtime_created(&mut self) {
+        self.rtime_created = ::std::option::Option::None;
+    }
+
+    pub fn has_rtime_created(&self) -> bool {
+        self.rtime_created.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_rtime_created(&mut self, v: u32) {
+        self.rtime_created = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CReservationPositionMessage {
+    const NAME: &'static str = "CReservationPositionMessage";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.edistributor = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                18 => {
+                    self.product_identifier = ::std::option::Option::Some(is.read_string()?);
+                },
+                24 => {
+                    self.start_queue_position = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                32 => {
+                    self.rtime_estimated_notification = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                42 => {
+                    self.localization_token = ::std::option::Option::Some(is.read_string()?);
+                },
+                48 => {
+                    self.accountid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                56 => {
+                    self.rtime_created = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.edistributor {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.product_identifier.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(2, &v);
+        }
+        if let Some(v) = self.start_queue_position {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
+        }
+        if let Some(v) = self.rtime_estimated_notification {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(4, v);
+        }
+        if let Some(v) = self.localization_token.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(5, &v);
+        }
+        if let Some(v) = self.accountid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(6, v);
+        }
+        if let Some(v) = self.rtime_created {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(7, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.edistributor {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.product_identifier.as_ref() {
+            os.write_string(2, v)?;
+        }
+        if let Some(v) = self.start_queue_position {
+            os.write_uint32(3, v)?;
+        }
+        if let Some(v) = self.rtime_estimated_notification {
+            os.write_uint32(4, v)?;
+        }
+        if let Some(v) = self.localization_token.as_ref() {
+            os.write_string(5, v)?;
+        }
+        if let Some(v) = self.accountid {
+            os.write_uint32(6, v)?;
+        }
+        if let Some(v) = self.rtime_created {
+            os.write_uint32(7, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CReservationPositionMessage {
+        CReservationPositionMessage::new()
+    }
+
+    fn clear(&mut self) {
+        self.edistributor = ::std::option::Option::None;
+        self.product_identifier = ::std::option::Option::None;
+        self.start_queue_position = ::std::option::Option::None;
+        self.rtime_estimated_notification = ::std::option::Option::None;
+        self.localization_token = ::std::option::Option::None;
+        self.accountid = ::std::option::Option::None;
+        self.rtime_created = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CReservationPositionMessage {
+        static instance: CReservationPositionMessage = CReservationPositionMessage {
+            edistributor: ::std::option::Option::None,
+            product_identifier: ::std::option::Option::None,
+            start_queue_position: ::std::option::Option::None,
+            rtime_estimated_notification: ::std::option::Option::None,
+            localization_token: ::std::option::Option::None,
+            accountid: ::std::option::Option::None,
+            rtime_created: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_SetReservationPositionMessage_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_SetReservationPositionMessage_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CStore_SetReservationPositionMessage_Request.settings)
+    pub settings: ::std::vec::Vec<CReservationPositionMessage>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_SetReservationPositionMessage_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_SetReservationPositionMessage_Request {
+    fn default() -> &'a CStore_SetReservationPositionMessage_Request {
+        <CStore_SetReservationPositionMessage_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_SetReservationPositionMessage_Request {
+    pub fn new() -> CStore_SetReservationPositionMessage_Request {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_SetReservationPositionMessage_Request {
+    const NAME: &'static str = "CStore_SetReservationPositionMessage_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.settings.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.settings {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.settings {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_SetReservationPositionMessage_Request {
+        CStore_SetReservationPositionMessage_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.settings.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_SetReservationPositionMessage_Request {
+        static instance: CStore_SetReservationPositionMessage_Request = CStore_SetReservationPositionMessage_Request {
+            settings: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_SetReservationPositionMessage_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_SetReservationPositionMessage_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_SetReservationPositionMessage_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_SetReservationPositionMessage_Response {
+    fn default() -> &'a CStore_SetReservationPositionMessage_Response {
+        <CStore_SetReservationPositionMessage_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_SetReservationPositionMessage_Response {
+    pub fn new() -> CStore_SetReservationPositionMessage_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_SetReservationPositionMessage_Response {
+    const NAME: &'static str = "CStore_SetReservationPositionMessage_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_SetReservationPositionMessage_Response {
+        CStore_SetReservationPositionMessage_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_SetReservationPositionMessage_Response {
+        static instance: CStore_SetReservationPositionMessage_Response = CStore_SetReservationPositionMessage_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_DeleteReservationPositionMessage_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_DeleteReservationPositionMessage_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CStore_DeleteReservationPositionMessage_Request.edistributor)
+    pub edistributor: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CStore_DeleteReservationPositionMessage_Request.product_identifier)
+    pub product_identifier: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CStore_DeleteReservationPositionMessage_Request.start_queue_position)
+    pub start_queue_position: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_DeleteReservationPositionMessage_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_DeleteReservationPositionMessage_Request {
+    fn default() -> &'a CStore_DeleteReservationPositionMessage_Request {
+        <CStore_DeleteReservationPositionMessage_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_DeleteReservationPositionMessage_Request {
+    pub fn new() -> CStore_DeleteReservationPositionMessage_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 edistributor = 1;
+
+    pub fn edistributor(&self) -> u32 {
+        self.edistributor.unwrap_or(0)
+    }
+
+    pub fn clear_edistributor(&mut self) {
+        self.edistributor = ::std::option::Option::None;
+    }
+
+    pub fn has_edistributor(&self) -> bool {
+        self.edistributor.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_edistributor(&mut self, v: u32) {
+        self.edistributor = ::std::option::Option::Some(v);
+    }
+
+    // optional string product_identifier = 2;
+
+    pub fn product_identifier(&self) -> &str {
+        match self.product_identifier.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_product_identifier(&mut self) {
+        self.product_identifier = ::std::option::Option::None;
+    }
+
+    pub fn has_product_identifier(&self) -> bool {
+        self.product_identifier.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_product_identifier(&mut self, v: ::std::string::String) {
+        self.product_identifier = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_product_identifier(&mut self) -> &mut ::std::string::String {
+        if self.product_identifier.is_none() {
+            self.product_identifier = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.product_identifier.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_product_identifier(&mut self) -> ::std::string::String {
+        self.product_identifier.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional uint32 start_queue_position = 3;
+
+    pub fn start_queue_position(&self) -> u32 {
+        self.start_queue_position.unwrap_or(0)
+    }
+
+    pub fn clear_start_queue_position(&mut self) {
+        self.start_queue_position = ::std::option::Option::None;
+    }
+
+    pub fn has_start_queue_position(&self) -> bool {
+        self.start_queue_position.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_start_queue_position(&mut self, v: u32) {
+        self.start_queue_position = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_DeleteReservationPositionMessage_Request {
+    const NAME: &'static str = "CStore_DeleteReservationPositionMessage_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.edistributor = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                18 => {
+                    self.product_identifier = ::std::option::Option::Some(is.read_string()?);
+                },
+                24 => {
+                    self.start_queue_position = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.edistributor {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.product_identifier.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(2, &v);
+        }
+        if let Some(v) = self.start_queue_position {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.edistributor {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.product_identifier.as_ref() {
+            os.write_string(2, v)?;
+        }
+        if let Some(v) = self.start_queue_position {
+            os.write_uint32(3, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_DeleteReservationPositionMessage_Request {
+        CStore_DeleteReservationPositionMessage_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.edistributor = ::std::option::Option::None;
+        self.product_identifier = ::std::option::Option::None;
+        self.start_queue_position = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_DeleteReservationPositionMessage_Request {
+        static instance: CStore_DeleteReservationPositionMessage_Request = CStore_DeleteReservationPositionMessage_Request {
+            edistributor: ::std::option::Option::None,
+            product_identifier: ::std::option::Option::None,
+            start_queue_position: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_DeleteReservationPositionMessage_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_DeleteReservationPositionMessage_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_DeleteReservationPositionMessage_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_DeleteReservationPositionMessage_Response {
+    fn default() -> &'a CStore_DeleteReservationPositionMessage_Response {
+        <CStore_DeleteReservationPositionMessage_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_DeleteReservationPositionMessage_Response {
+    pub fn new() -> CStore_DeleteReservationPositionMessage_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_DeleteReservationPositionMessage_Response {
+    const NAME: &'static str = "CStore_DeleteReservationPositionMessage_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_DeleteReservationPositionMessage_Response {
+        CStore_DeleteReservationPositionMessage_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_DeleteReservationPositionMessage_Response {
+        static instance: CStore_DeleteReservationPositionMessage_Response = CStore_DeleteReservationPositionMessage_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_GetAllReservationPositionMessages_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_GetAllReservationPositionMessages_Request {
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_GetAllReservationPositionMessages_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_GetAllReservationPositionMessages_Request {
+    fn default() -> &'a CStore_GetAllReservationPositionMessages_Request {
+        <CStore_GetAllReservationPositionMessages_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_GetAllReservationPositionMessages_Request {
+    pub fn new() -> CStore_GetAllReservationPositionMessages_Request {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_GetAllReservationPositionMessages_Request {
+    const NAME: &'static str = "CStore_GetAllReservationPositionMessages_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_GetAllReservationPositionMessages_Request {
+        CStore_GetAllReservationPositionMessages_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_GetAllReservationPositionMessages_Request {
+        static instance: CStore_GetAllReservationPositionMessages_Request = CStore_GetAllReservationPositionMessages_Request {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_GetAllReservationPositionMessages_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_GetAllReservationPositionMessages_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CStore_GetAllReservationPositionMessages_Response.settings)
+    pub settings: ::std::vec::Vec<CReservationPositionMessage>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_GetAllReservationPositionMessages_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_GetAllReservationPositionMessages_Response {
+    fn default() -> &'a CStore_GetAllReservationPositionMessages_Response {
+        <CStore_GetAllReservationPositionMessages_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_GetAllReservationPositionMessages_Response {
+    pub fn new() -> CStore_GetAllReservationPositionMessages_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_GetAllReservationPositionMessages_Response {
+    const NAME: &'static str = "CStore_GetAllReservationPositionMessages_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.settings.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.settings {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.settings {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_GetAllReservationPositionMessages_Response {
+        CStore_GetAllReservationPositionMessages_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.settings.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_GetAllReservationPositionMessages_Response {
+        static instance: CStore_GetAllReservationPositionMessages_Response = CStore_GetAllReservationPositionMessages_Response {
+            settings: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CStore_ReloadAllReservationPositionMessages_Notification)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CStore_ReloadAllReservationPositionMessages_Notification {
+    // special fields
+    // @@protoc_insertion_point(special_field:CStore_ReloadAllReservationPositionMessages_Notification.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CStore_ReloadAllReservationPositionMessages_Notification {
+    fn default() -> &'a CStore_ReloadAllReservationPositionMessages_Notification {
+        <CStore_ReloadAllReservationPositionMessages_Notification as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CStore_ReloadAllReservationPositionMessages_Notification {
+    pub fn new() -> CStore_ReloadAllReservationPositionMessages_Notification {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CStore_ReloadAllReservationPositionMessages_Notification {
+    const NAME: &'static str = "CStore_ReloadAllReservationPositionMessages_Notification";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CStore_ReloadAllReservationPositionMessages_Notification {
+        CStore_ReloadAllReservationPositionMessages_Notification::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CStore_ReloadAllReservationPositionMessages_Notification {
+        static instance: CStore_ReloadAllReservationPositionMessages_Notification = CStore_ReloadAllReservationPositionMessages_Notification {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CSteamDeckCompatibility_SetFeedback_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamDeckCompatibility_SetFeedback_Request {
@@ -6877,7 +9101,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamDeckCompatibility_Se
     }
 }
 
-#[doc = "Returns whether we should ask the user if the compatibility rating is correct"]
 // @@protoc_insertion_point(message:CSteamDeckCompatibility_ShouldPrompt_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CSteamDeckCompatibility_ShouldPrompt_Request {
@@ -7163,7 +9386,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CSteamDeckCompatibility_Sh
     }
 }
 
-#[doc = "Notification from server to client that the user's store preferences have changed"]
 // @@protoc_insertion_point(message:CStore_StorePreferencesChanged_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CStore_StorePreferencesChanged_Notification {
@@ -7449,6 +9671,116 @@ impl ::std::default::Default for EPlaytestStatus {
 
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EAppReportType)
+pub enum EAppReportType {
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_Invalid)
+    k_EAppReportType_Invalid = 0,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_Scam)
+    k_EAppReportType_Scam = 1,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_Malware)
+    k_EAppReportType_Malware = 2,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_HateSpeech)
+    k_EAppReportType_HateSpeech = 3,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_Pornography)
+    k_EAppReportType_Pornography = 4,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_NonLabeledAdultContent)
+    k_EAppReportType_NonLabeledAdultContent = 5,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_Libelous)
+    k_EAppReportType_Libelous = 6,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_Offensive)
+    k_EAppReportType_Offensive = 7,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_ExploitsChildren)
+    k_EAppReportType_ExploitsChildren = 8,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_MtxWithNonSteamWalletPaymentMethods)
+    k_EAppReportType_MtxWithNonSteamWalletPaymentMethods = 9,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_CopyrightViolation)
+    k_EAppReportType_CopyrightViolation = 10,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_ViolatesLaws)
+    k_EAppReportType_ViolatesLaws = 11,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_Other)
+    k_EAppReportType_Other = 12,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_Broken)
+    k_EAppReportType_Broken = 13,
+    // @@protoc_insertion_point(enum_value:EAppReportType.k_EAppReportType_AIContentReport)
+    k_EAppReportType_AIContentReport = 14,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EAppReportType {
+    const NAME: &'static str = "EAppReportType";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EAppReportType> {
+        match value {
+            0 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Invalid),
+            1 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Scam),
+            2 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Malware),
+            3 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_HateSpeech),
+            4 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Pornography),
+            5 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_NonLabeledAdultContent),
+            6 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Libelous),
+            7 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Offensive),
+            8 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_ExploitsChildren),
+            9 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_MtxWithNonSteamWalletPaymentMethods),
+            10 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_CopyrightViolation),
+            11 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_ViolatesLaws),
+            12 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Other),
+            13 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Broken),
+            14 => ::std::option::Option::Some(EAppReportType::k_EAppReportType_AIContentReport),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EAppReportType> {
+        match str {
+            "k_EAppReportType_Invalid" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Invalid),
+            "k_EAppReportType_Scam" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Scam),
+            "k_EAppReportType_Malware" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Malware),
+            "k_EAppReportType_HateSpeech" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_HateSpeech),
+            "k_EAppReportType_Pornography" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Pornography),
+            "k_EAppReportType_NonLabeledAdultContent" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_NonLabeledAdultContent),
+            "k_EAppReportType_Libelous" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Libelous),
+            "k_EAppReportType_Offensive" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Offensive),
+            "k_EAppReportType_ExploitsChildren" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_ExploitsChildren),
+            "k_EAppReportType_MtxWithNonSteamWalletPaymentMethods" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_MtxWithNonSteamWalletPaymentMethods),
+            "k_EAppReportType_CopyrightViolation" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_CopyrightViolation),
+            "k_EAppReportType_ViolatesLaws" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_ViolatesLaws),
+            "k_EAppReportType_Other" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Other),
+            "k_EAppReportType_Broken" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_Broken),
+            "k_EAppReportType_AIContentReport" => ::std::option::Option::Some(EAppReportType::k_EAppReportType_AIContentReport),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EAppReportType] = &[
+        EAppReportType::k_EAppReportType_Invalid,
+        EAppReportType::k_EAppReportType_Scam,
+        EAppReportType::k_EAppReportType_Malware,
+        EAppReportType::k_EAppReportType_HateSpeech,
+        EAppReportType::k_EAppReportType_Pornography,
+        EAppReportType::k_EAppReportType_NonLabeledAdultContent,
+        EAppReportType::k_EAppReportType_Libelous,
+        EAppReportType::k_EAppReportType_Offensive,
+        EAppReportType::k_EAppReportType_ExploitsChildren,
+        EAppReportType::k_EAppReportType_MtxWithNonSteamWalletPaymentMethods,
+        EAppReportType::k_EAppReportType_CopyrightViolation,
+        EAppReportType::k_EAppReportType_ViolatesLaws,
+        EAppReportType::k_EAppReportType_Other,
+        EAppReportType::k_EAppReportType_Broken,
+        EAppReportType::k_EAppReportType_AIContentReport,
+    ];
+}
+
+impl ::std::default::Default for EAppReportType {
+    fn default() -> Self {
+        EAppReportType::k_EAppReportType_Invalid
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:EUserReviewScorePreference)
 pub enum EUserReviewScorePreference {
     // @@protoc_insertion_point(enum_value:EUserReviewScorePreference.k_EUserReviewScorePreference_Unset)
@@ -7494,6 +9826,61 @@ impl ::steam_vent_proto_common::protobuf::Enum for EUserReviewScorePreference {
 impl ::std::default::Default for EUserReviewScorePreference {
     fn default() -> Self {
         EUserReviewScorePreference::k_EUserReviewScorePreference_Unset
+    }
+}
+
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:EPartnerLinkTrackingBackfillSource)
+pub enum EPartnerLinkTrackingBackfillSource {
+    // @@protoc_insertion_point(enum_value:EPartnerLinkTrackingBackfillSource.k_EPartnerLinkTrackingBackfillSource_None)
+    k_EPartnerLinkTrackingBackfillSource_None = 0,
+    // @@protoc_insertion_point(enum_value:EPartnerLinkTrackingBackfillSource.k_EPartnerLinkTrackingBackfillSource_Web)
+    k_EPartnerLinkTrackingBackfillSource_Web = 1,
+    // @@protoc_insertion_point(enum_value:EPartnerLinkTrackingBackfillSource.k_EPartnerLinkTrackingBackfillSource_Mobile)
+    k_EPartnerLinkTrackingBackfillSource_Mobile = 2,
+    // @@protoc_insertion_point(enum_value:EPartnerLinkTrackingBackfillSource.k_EPartnerLinkTrackingBackfillSource_Desktop)
+    k_EPartnerLinkTrackingBackfillSource_Desktop = 3,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for EPartnerLinkTrackingBackfillSource {
+    const NAME: &'static str = "EPartnerLinkTrackingBackfillSource";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<EPartnerLinkTrackingBackfillSource> {
+        match value {
+            0 => ::std::option::Option::Some(EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_None),
+            1 => ::std::option::Option::Some(EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_Web),
+            2 => ::std::option::Option::Some(EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_Mobile),
+            3 => ::std::option::Option::Some(EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_Desktop),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<EPartnerLinkTrackingBackfillSource> {
+        match str {
+            "k_EPartnerLinkTrackingBackfillSource_None" => ::std::option::Option::Some(EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_None),
+            "k_EPartnerLinkTrackingBackfillSource_Web" => ::std::option::Option::Some(EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_Web),
+            "k_EPartnerLinkTrackingBackfillSource_Mobile" => ::std::option::Option::Some(EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_Mobile),
+            "k_EPartnerLinkTrackingBackfillSource_Desktop" => ::std::option::Option::Some(EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_Desktop),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [EPartnerLinkTrackingBackfillSource] = &[
+        EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_None,
+        EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_Web,
+        EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_Mobile,
+        EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_Desktop,
+    ];
+}
+
+impl ::std::default::Default for EPartnerLinkTrackingBackfillSource {
+    fn default() -> Self {
+        EPartnerLinkTrackingBackfillSource::k_EPartnerLinkTrackingBackfillSource_None
     }
 }
 
@@ -7772,6 +10159,32 @@ for CStore_GetDiscoveryQueueSkippedApps_Response {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessage for CStore_ReportApp_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CStore_ReportApp_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
 impl ::steam_vent_proto_common::RpcMessage for CStore_GetStorePreferences_Request {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7840,6 +10253,214 @@ for CStore_GetTrendingAppsAmongFriends_Request {
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CStore_GetTrendingAppsAmongFriends_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_MigratePartnerLinkTracking_Notification {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CStore_UpdatePackageReservations_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_UpdatePackageReservations_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_GetWishlistDemoEmailStatus_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_GetWishlistDemoEmailStatus_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_QueueWishlistDemoEmailToFire_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_QueueWishlistDemoEmailToFire_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CReservationPositionMessage {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_SetReservationPositionMessage_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_SetReservationPositionMessage_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_DeleteReservationPositionMessage_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_DeleteReservationPositionMessage_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_GetAllReservationPositionMessages_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_GetAllReservationPositionMessages_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CStore_ReloadAllReservationPositionMessages_Notification {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }
@@ -7922,12 +10543,12 @@ for CStore_StorePreferencesChanged_Notification {
         self.compute_size() as usize
     }
 }
-///A service to access store data.
+///
 struct Store {}
 impl ::steam_vent_proto_common::RpcService for Store {
     const SERVICE_NAME: &'static str = "Store";
 }
-///Steam store to client notifications
+///
 struct StoreClient {}
 impl ::steam_vent_proto_common::RpcService for StoreClient {
     const SERVICE_NAME: &'static str = "StoreClient";
@@ -7941,6 +10562,16 @@ impl ::steam_vent_proto_common::RpcMethod
 for CSteamDeckCompatibility_ShouldPrompt_Request {
     const METHOD_NAME: &'static str = "Store.ShouldPromptForCompatibilityFeedback#1";
     type Response = CSteamDeckCompatibility_ShouldPrompt_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CStore_DeleteReservationPositionMessage_Request {
+    const METHOD_NAME: &'static str = "Store.DeleteReservationPositionMessage#1";
+    type Response = CStore_DeleteReservationPositionMessage_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CStore_GetAllReservationPositionMessages_Request {
+    const METHOD_NAME: &'static str = "Store.GetAllReservationPositionMessages#1";
+    type Response = CStore_GetAllReservationPositionMessages_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod for CStore_GetDiscoveryQueueSettings_Request {
     const METHOD_NAME: &'static str = "Store.GetDiscoveryQueueSettings#1";
@@ -7980,9 +10611,37 @@ impl ::steam_vent_proto_common::RpcMethod for CStore_GetUserGameInterestState_Re
     const METHOD_NAME: &'static str = "Store.GetUserGameInterestState#1";
     type Response = CStore_GetUserGameInterestState_Response;
 }
+impl ::steam_vent_proto_common::RpcMethod for CStore_GetWishlistDemoEmailStatus_Request {
+    const METHOD_NAME: &'static str = "Store.GetWishlistDemoEmailStatus#1";
+    type Response = CStore_GetWishlistDemoEmailStatus_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CStore_MigratePartnerLinkTracking_Notification {
+    const METHOD_NAME: &'static str = "Store.MigratePartnerLinkTracking#1";
+    type Response = ();
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CStore_QueueWishlistDemoEmailToFire_Request {
+    const METHOD_NAME: &'static str = "Store.QueueWishlistDemoEmailToFire#1";
+    type Response = CStore_QueueWishlistDemoEmailToFire_Response;
+}
 impl ::steam_vent_proto_common::RpcMethod for CStore_RegisterCDKey_Request {
     const METHOD_NAME: &'static str = "Store.RegisterCDKey#1";
     type Response = CStore_RegisterCDKey_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CStore_ReloadAllReservationPositionMessages_Notification {
+    const METHOD_NAME: &'static str = "Store.ReloadAllReservationPositionMessages#1";
+    type Response = ();
+}
+impl ::steam_vent_proto_common::RpcMethod for CStore_ReportApp_Request {
+    const METHOD_NAME: &'static str = "Store.ReportApp#1";
+    type Response = CStore_ReportApp_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CStore_SetReservationPositionMessage_Request {
+    const METHOD_NAME: &'static str = "Store.SetReservationPositionMessage#1";
+    type Response = CStore_SetReservationPositionMessage_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod for CStore_SkipDiscoveryQueueItem_Request {
     const METHOD_NAME: &'static str = "Store.SkipDiscoveryQueueItem#1";
@@ -7992,4 +10651,8 @@ impl ::steam_vent_proto_common::RpcMethod
 for CStore_StorePreferencesChanged_Notification {
     const METHOD_NAME: &'static str = "StoreClient.NotifyStorePreferencesChanged#1";
     type Response = ();
+}
+impl ::steam_vent_proto_common::RpcMethod for CStore_UpdatePackageReservations_Request {
+    const METHOD_NAME: &'static str = "Store.UpdatePackageReservations#1";
+    type Response = CStore_UpdatePackageReservations_Response;
 }

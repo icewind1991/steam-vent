@@ -243,6 +243,115 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_CreateSessio
     }
 }
 
+// @@protoc_insertion_point(message:CRemoteClient_DeleteSession_Notification)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_DeleteSession_Notification {
+    // message fields
+    // @@protoc_insertion_point(field:CRemoteClient_DeleteSession_Notification.session_id)
+    pub session_id: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_DeleteSession_Notification.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_DeleteSession_Notification {
+    fn default() -> &'a CRemoteClient_DeleteSession_Notification {
+        <CRemoteClient_DeleteSession_Notification as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_DeleteSession_Notification {
+    pub fn new() -> CRemoteClient_DeleteSession_Notification {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 session_id = 1;
+
+    pub fn session_id(&self) -> u64 {
+        self.session_id.unwrap_or(0)
+    }
+
+    pub fn clear_session_id(&mut self) {
+        self.session_id = ::std::option::Option::None;
+    }
+
+    pub fn has_session_id(&self) -> bool {
+        self.session_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_session_id(&mut self, v: u64) {
+        self.session_id = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_DeleteSession_Notification {
+    const NAME: &'static str = "CRemoteClient_DeleteSession_Notification";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.session_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.session_id {
+            my_size += 1 + 8;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.session_id {
+            os.write_fixed64(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_DeleteSession_Notification {
+        CRemoteClient_DeleteSession_Notification::new()
+    }
+
+    fn clear(&mut self) {
+        self.session_id = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_DeleteSession_Notification {
+        static instance: CRemoteClient_DeleteSession_Notification = CRemoteClient_DeleteSession_Notification {
+            session_id: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CRemoteClient_StartPairing_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_StartPairing_Request {
@@ -727,7 +836,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_SetPairingIn
     }
 }
 
-#[doc = "Get pairing info for an entered PIN"]
 // @@protoc_insertion_point(message:CRemoteClient_GetPairingInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_GetPairingInfo_Request {
@@ -1212,7 +1320,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_CancelPairin
     }
 }
 
-#[doc = "Register for status updates with a Steam client"]
 // @@protoc_insertion_point(message:CRemoteClient_RegisterStatusUpdate_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_RegisterStatusUpdate_Notification {
@@ -1386,7 +1493,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_RegisterStat
     }
 }
 
-#[doc = "Unregister for status updates with a Steam client"]
 // @@protoc_insertion_point(message:CRemoteClient_UnregisterStatusUpdate_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_UnregisterStatusUpdate_Notification {
@@ -1528,7 +1634,196 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_UnregisterSt
     }
 }
 
-#[doc = "Let the service know we're available for status listeners"]
+// @@protoc_insertion_point(message:CRemoteClient_DeviceDetails)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_DeviceDetails {
+    // message fields
+    // @@protoc_insertion_point(field:CRemoteClient_DeviceDetails.device_friendly_name)
+    pub device_friendly_name: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CRemoteClient_DeviceDetails.os_type)
+    pub os_type: ::std::option::Option<i32>,
+    // @@protoc_insertion_point(field:CRemoteClient_DeviceDetails.gaming_device_type)
+    pub gaming_device_type: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_DeviceDetails.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_DeviceDetails {
+    fn default() -> &'a CRemoteClient_DeviceDetails {
+        <CRemoteClient_DeviceDetails as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_DeviceDetails {
+    pub fn new() -> CRemoteClient_DeviceDetails {
+        ::std::default::Default::default()
+    }
+
+    // optional string device_friendly_name = 1;
+
+    pub fn device_friendly_name(&self) -> &str {
+        match self.device_friendly_name.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_device_friendly_name(&mut self) {
+        self.device_friendly_name = ::std::option::Option::None;
+    }
+
+    pub fn has_device_friendly_name(&self) -> bool {
+        self.device_friendly_name.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_device_friendly_name(&mut self, v: ::std::string::String) {
+        self.device_friendly_name = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_device_friendly_name(&mut self) -> &mut ::std::string::String {
+        if self.device_friendly_name.is_none() {
+            self.device_friendly_name = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.device_friendly_name.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_device_friendly_name(&mut self) -> ::std::string::String {
+        self.device_friendly_name.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional int32 os_type = 2;
+
+    pub fn os_type(&self) -> i32 {
+        self.os_type.unwrap_or(0)
+    }
+
+    pub fn clear_os_type(&mut self) {
+        self.os_type = ::std::option::Option::None;
+    }
+
+    pub fn has_os_type(&self) -> bool {
+        self.os_type.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_os_type(&mut self, v: i32) {
+        self.os_type = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 gaming_device_type = 3;
+
+    pub fn gaming_device_type(&self) -> u32 {
+        self.gaming_device_type.unwrap_or(0)
+    }
+
+    pub fn clear_gaming_device_type(&mut self) {
+        self.gaming_device_type = ::std::option::Option::None;
+    }
+
+    pub fn has_gaming_device_type(&self) -> bool {
+        self.gaming_device_type.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_gaming_device_type(&mut self, v: u32) {
+        self.gaming_device_type = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_DeviceDetails {
+    const NAME: &'static str = "CRemoteClient_DeviceDetails";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.device_friendly_name = ::std::option::Option::Some(is.read_string()?);
+                },
+                16 => {
+                    self.os_type = ::std::option::Option::Some(is.read_int32()?);
+                },
+                24 => {
+                    self.gaming_device_type = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.device_friendly_name.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(1, &v);
+        }
+        if let Some(v) = self.os_type {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(2, v);
+        }
+        if let Some(v) = self.gaming_device_type {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.device_friendly_name.as_ref() {
+            os.write_string(1, v)?;
+        }
+        if let Some(v) = self.os_type {
+            os.write_int32(2, v)?;
+        }
+        if let Some(v) = self.gaming_device_type {
+            os.write_uint32(3, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_DeviceDetails {
+        CRemoteClient_DeviceDetails::new()
+    }
+
+    fn clear(&mut self) {
+        self.device_friendly_name = ::std::option::Option::None;
+        self.os_type = ::std::option::Option::None;
+        self.gaming_device_type = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_DeviceDetails {
+        static instance: CRemoteClient_DeviceDetails = CRemoteClient_DeviceDetails {
+            device_friendly_name: ::std::option::Option::None,
+            os_type: ::std::option::Option::None,
+            gaming_device_type: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CRemoteClient_Online_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_Online_Notification {
@@ -1537,6 +1832,8 @@ pub struct CRemoteClient_Online_Notification {
     pub steamid: ::std::option::Option<u64>,
     // @@protoc_insertion_point(field:CRemoteClient_Online_Notification.remote_client_id)
     pub remote_client_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CRemoteClient_Online_Notification.device_details)
+    pub device_details: ::steam_vent_proto_common::protobuf::MessageField<CRemoteClient_DeviceDetails>,
     // special fields
     // @@protoc_insertion_point(special_field:CRemoteClient_Online_Notification.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -1608,6 +1905,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_Online_Notif
                 17 => {
                     self.remote_client_id = ::std::option::Option::Some(is.read_fixed64()?);
                 },
+                26 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.device_details)?;
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -1626,6 +1926,10 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_Online_Notif
         if let Some(v) = self.remote_client_id {
             my_size += 1 + 8;
         }
+        if let Some(v) = self.device_details.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -1637,6 +1941,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_Online_Notif
         }
         if let Some(v) = self.remote_client_id {
             os.write_fixed64(2, v)?;
+        }
+        if let Some(v) = self.device_details.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -1657,6 +1964,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_Online_Notif
     fn clear(&mut self) {
         self.steamid = ::std::option::Option::None;
         self.remote_client_id = ::std::option::Option::None;
+        self.device_details.clear();
         self.special_fields.clear();
     }
 
@@ -1664,13 +1972,1482 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_Online_Notif
         static instance: CRemoteClient_Online_Notification = CRemoteClient_Online_Notification {
             steamid: ::std::option::Option::None,
             remote_client_id: ::std::option::Option::None,
+            device_details: ::steam_vent_proto_common::protobuf::MessageField::none(),
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
     }
 }
 
-#[doc = "Send a packet to a Steam client"]
+// @@protoc_insertion_point(message:CRemoteClient_GetRecentClients_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_GetRecentClients_Request {
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_GetRecentClients_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_GetRecentClients_Request {
+    fn default() -> &'a CRemoteClient_GetRecentClients_Request {
+        <CRemoteClient_GetRecentClients_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_GetRecentClients_Request {
+    pub fn new() -> CRemoteClient_GetRecentClients_Request {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_GetRecentClients_Request {
+    const NAME: &'static str = "CRemoteClient_GetRecentClients_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_GetRecentClients_Request {
+        CRemoteClient_GetRecentClients_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_GetRecentClients_Request {
+        static instance: CRemoteClient_GetRecentClients_Request = CRemoteClient_GetRecentClients_Request {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CRemoteClient_ClientLogin)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_ClientLogin {
+    // message fields
+    // @@protoc_insertion_point(field:CRemoteClient_ClientLogin.remote_client_id)
+    pub remote_client_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CRemoteClient_ClientLogin.token_id)
+    pub token_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CRemoteClient_ClientLogin.device_details)
+    pub device_details: ::steam_vent_proto_common::protobuf::MessageField<CRemoteClient_DeviceDetails>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_ClientLogin.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_ClientLogin {
+    fn default() -> &'a CRemoteClient_ClientLogin {
+        <CRemoteClient_ClientLogin as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_ClientLogin {
+    pub fn new() -> CRemoteClient_ClientLogin {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 remote_client_id = 1;
+
+    pub fn remote_client_id(&self) -> u64 {
+        self.remote_client_id.unwrap_or(0)
+    }
+
+    pub fn clear_remote_client_id(&mut self) {
+        self.remote_client_id = ::std::option::Option::None;
+    }
+
+    pub fn has_remote_client_id(&self) -> bool {
+        self.remote_client_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_remote_client_id(&mut self, v: u64) {
+        self.remote_client_id = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 token_id = 2;
+
+    pub fn token_id(&self) -> u64 {
+        self.token_id.unwrap_or(0)
+    }
+
+    pub fn clear_token_id(&mut self) {
+        self.token_id = ::std::option::Option::None;
+    }
+
+    pub fn has_token_id(&self) -> bool {
+        self.token_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_token_id(&mut self, v: u64) {
+        self.token_id = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_ClientLogin {
+    const NAME: &'static str = "CRemoteClient_ClientLogin";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.remote_client_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                17 => {
+                    self.token_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                26 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.device_details)?;
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.remote_client_id {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.token_id {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.device_details.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.remote_client_id {
+            os.write_fixed64(1, v)?;
+        }
+        if let Some(v) = self.token_id {
+            os.write_fixed64(2, v)?;
+        }
+        if let Some(v) = self.device_details.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_ClientLogin {
+        CRemoteClient_ClientLogin::new()
+    }
+
+    fn clear(&mut self) {
+        self.remote_client_id = ::std::option::Option::None;
+        self.token_id = ::std::option::Option::None;
+        self.device_details.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_ClientLogin {
+        static instance: CRemoteClient_ClientLogin = CRemoteClient_ClientLogin {
+            remote_client_id: ::std::option::Option::None,
+            token_id: ::std::option::Option::None,
+            device_details: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CRemoteClient_ClientDetails)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_ClientDetails {
+    // message fields
+    // @@protoc_insertion_point(field:CRemoteClient_ClientDetails.remote_client_id)
+    pub remote_client_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CRemoteClient_ClientDetails.device_details)
+    pub device_details: ::steam_vent_proto_common::protobuf::MessageField<CRemoteClient_DeviceDetails>,
+    // @@protoc_insertion_point(field:CRemoteClient_ClientDetails.last_seen)
+    pub last_seen: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CRemoteClient_ClientDetails.city)
+    pub city: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CRemoteClient_ClientDetails.state)
+    pub state: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CRemoteClient_ClientDetails.country)
+    pub country: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CRemoteClient_ClientDetails.is_online)
+    pub is_online: ::std::option::Option<bool>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_ClientDetails.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_ClientDetails {
+    fn default() -> &'a CRemoteClient_ClientDetails {
+        <CRemoteClient_ClientDetails as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_ClientDetails {
+    pub fn new() -> CRemoteClient_ClientDetails {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 remote_client_id = 1;
+
+    pub fn remote_client_id(&self) -> u64 {
+        self.remote_client_id.unwrap_or(0)
+    }
+
+    pub fn clear_remote_client_id(&mut self) {
+        self.remote_client_id = ::std::option::Option::None;
+    }
+
+    pub fn has_remote_client_id(&self) -> bool {
+        self.remote_client_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_remote_client_id(&mut self, v: u64) {
+        self.remote_client_id = ::std::option::Option::Some(v);
+    }
+
+    // optional uint64 last_seen = 4;
+
+    pub fn last_seen(&self) -> u64 {
+        self.last_seen.unwrap_or(0)
+    }
+
+    pub fn clear_last_seen(&mut self) {
+        self.last_seen = ::std::option::Option::None;
+    }
+
+    pub fn has_last_seen(&self) -> bool {
+        self.last_seen.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_last_seen(&mut self, v: u64) {
+        self.last_seen = ::std::option::Option::Some(v);
+    }
+
+    // optional string city = 5;
+
+    pub fn city(&self) -> &str {
+        match self.city.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_city(&mut self) {
+        self.city = ::std::option::Option::None;
+    }
+
+    pub fn has_city(&self) -> bool {
+        self.city.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_city(&mut self, v: ::std::string::String) {
+        self.city = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_city(&mut self) -> &mut ::std::string::String {
+        if self.city.is_none() {
+            self.city = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.city.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_city(&mut self) -> ::std::string::String {
+        self.city.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional string state = 6;
+
+    pub fn state(&self) -> &str {
+        match self.state.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_state(&mut self) {
+        self.state = ::std::option::Option::None;
+    }
+
+    pub fn has_state(&self) -> bool {
+        self.state.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_state(&mut self, v: ::std::string::String) {
+        self.state = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_state(&mut self) -> &mut ::std::string::String {
+        if self.state.is_none() {
+            self.state = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.state.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_state(&mut self) -> ::std::string::String {
+        self.state.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional string country = 7;
+
+    pub fn country(&self) -> &str {
+        match self.country.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_country(&mut self) {
+        self.country = ::std::option::Option::None;
+    }
+
+    pub fn has_country(&self) -> bool {
+        self.country.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_country(&mut self, v: ::std::string::String) {
+        self.country = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_country(&mut self) -> &mut ::std::string::String {
+        if self.country.is_none() {
+            self.country = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.country.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_country(&mut self) -> ::std::string::String {
+        self.country.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional bool is_online = 8;
+
+    pub fn is_online(&self) -> bool {
+        self.is_online.unwrap_or(false)
+    }
+
+    pub fn clear_is_online(&mut self) {
+        self.is_online = ::std::option::Option::None;
+    }
+
+    pub fn has_is_online(&self) -> bool {
+        self.is_online.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_is_online(&mut self, v: bool) {
+        self.is_online = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_ClientDetails {
+    const NAME: &'static str = "CRemoteClient_ClientDetails";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.remote_client_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                18 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.device_details)?;
+                },
+                32 => {
+                    self.last_seen = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                42 => {
+                    self.city = ::std::option::Option::Some(is.read_string()?);
+                },
+                50 => {
+                    self.state = ::std::option::Option::Some(is.read_string()?);
+                },
+                58 => {
+                    self.country = ::std::option::Option::Some(is.read_string()?);
+                },
+                64 => {
+                    self.is_online = ::std::option::Option::Some(is.read_bool()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.remote_client_id {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.device_details.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.last_seen {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(4, v);
+        }
+        if let Some(v) = self.city.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(5, &v);
+        }
+        if let Some(v) = self.state.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(6, &v);
+        }
+        if let Some(v) = self.country.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(7, &v);
+        }
+        if let Some(v) = self.is_online {
+            my_size += 1 + 1;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.remote_client_id {
+            os.write_fixed64(1, v)?;
+        }
+        if let Some(v) = self.device_details.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        }
+        if let Some(v) = self.last_seen {
+            os.write_uint64(4, v)?;
+        }
+        if let Some(v) = self.city.as_ref() {
+            os.write_string(5, v)?;
+        }
+        if let Some(v) = self.state.as_ref() {
+            os.write_string(6, v)?;
+        }
+        if let Some(v) = self.country.as_ref() {
+            os.write_string(7, v)?;
+        }
+        if let Some(v) = self.is_online {
+            os.write_bool(8, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_ClientDetails {
+        CRemoteClient_ClientDetails::new()
+    }
+
+    fn clear(&mut self) {
+        self.remote_client_id = ::std::option::Option::None;
+        self.device_details.clear();
+        self.last_seen = ::std::option::Option::None;
+        self.city = ::std::option::Option::None;
+        self.state = ::std::option::Option::None;
+        self.country = ::std::option::Option::None;
+        self.is_online = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_ClientDetails {
+        static instance: CRemoteClient_ClientDetails = CRemoteClient_ClientDetails {
+            remote_client_id: ::std::option::Option::None,
+            device_details: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            last_seen: ::std::option::Option::None,
+            city: ::std::option::Option::None,
+            state: ::std::option::Option::None,
+            country: ::std::option::Option::None,
+            is_online: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CRemoteClient_GetRecentClients_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_GetRecentClients_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CRemoteClient_GetRecentClients_Response.clients)
+    pub clients: ::std::vec::Vec<CRemoteClient_ClientDetails>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_GetRecentClients_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_GetRecentClients_Response {
+    fn default() -> &'a CRemoteClient_GetRecentClients_Response {
+        <CRemoteClient_GetRecentClients_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_GetRecentClients_Response {
+    pub fn new() -> CRemoteClient_GetRecentClients_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_GetRecentClients_Response {
+    const NAME: &'static str = "CRemoteClient_GetRecentClients_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.clients.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.clients {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.clients {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_GetRecentClients_Response {
+        CRemoteClient_GetRecentClients_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.clients.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_GetRecentClients_Response {
+        static instance: CRemoteClient_GetRecentClients_Response = CRemoteClient_GetRecentClients_Response {
+            clients: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CRemoteClient_Task)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_Task {
+    // message fields
+    // @@protoc_insertion_point(field:CRemoteClient_Task.type)
+    pub type_: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<ECLientTaskListType>>,
+    // @@protoc_insertion_point(field:CRemoteClient_Task.task_id)
+    pub task_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CRemoteClient_Task.url)
+    pub url: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CRemoteClient_Task.file_id)
+    pub file_id: ::std::option::Option<i64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_Task.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_Task {
+    fn default() -> &'a CRemoteClient_Task {
+        <CRemoteClient_Task as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_Task {
+    pub fn new() -> CRemoteClient_Task {
+        ::std::default::Default::default()
+    }
+
+    // optional .ECLientTaskListType type = 1;
+
+    pub fn type_(&self) -> ECLientTaskListType {
+        match self.type_ {
+            Some(e) => e.enum_value_or(ECLientTaskListType::k_EClientTask_DownloadClip),
+            None => ECLientTaskListType::k_EClientTask_DownloadClip,
+        }
+    }
+
+    pub fn clear_type_(&mut self) {
+        self.type_ = ::std::option::Option::None;
+    }
+
+    pub fn has_type(&self) -> bool {
+        self.type_.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_type(&mut self, v: ECLientTaskListType) {
+        self.type_ = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
+    }
+
+    // optional fixed64 task_id = 2;
+
+    pub fn task_id(&self) -> u64 {
+        self.task_id.unwrap_or(0)
+    }
+
+    pub fn clear_task_id(&mut self) {
+        self.task_id = ::std::option::Option::None;
+    }
+
+    pub fn has_task_id(&self) -> bool {
+        self.task_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_task_id(&mut self, v: u64) {
+        self.task_id = ::std::option::Option::Some(v);
+    }
+
+    // optional string url = 3;
+
+    pub fn url(&self) -> &str {
+        match self.url.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_url(&mut self) {
+        self.url = ::std::option::Option::None;
+    }
+
+    pub fn has_url(&self) -> bool {
+        self.url.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_url(&mut self, v: ::std::string::String) {
+        self.url = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_url(&mut self) -> &mut ::std::string::String {
+        if self.url.is_none() {
+            self.url = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.url.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_url(&mut self) -> ::std::string::String {
+        self.url.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional int64 file_id = 4;
+
+    pub fn file_id(&self) -> i64 {
+        self.file_id.unwrap_or(0)
+    }
+
+    pub fn clear_file_id(&mut self) {
+        self.file_id = ::std::option::Option::None;
+    }
+
+    pub fn has_file_id(&self) -> bool {
+        self.file_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_file_id(&mut self, v: i64) {
+        self.file_id = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_Task {
+    const NAME: &'static str = "CRemoteClient_Task";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.type_ = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                },
+                17 => {
+                    self.task_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                26 => {
+                    self.url = ::std::option::Option::Some(is.read_string()?);
+                },
+                32 => {
+                    self.file_id = ::std::option::Option::Some(is.read_int64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.type_ {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(1, v.value());
+        }
+        if let Some(v) = self.task_id {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.url.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(3, &v);
+        }
+        if let Some(v) = self.file_id {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int64_size(4, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.type_ {
+            os.write_enum(1, ::steam_vent_proto_common::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        if let Some(v) = self.task_id {
+            os.write_fixed64(2, v)?;
+        }
+        if let Some(v) = self.url.as_ref() {
+            os.write_string(3, v)?;
+        }
+        if let Some(v) = self.file_id {
+            os.write_int64(4, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_Task {
+        CRemoteClient_Task::new()
+    }
+
+    fn clear(&mut self) {
+        self.type_ = ::std::option::Option::None;
+        self.task_id = ::std::option::Option::None;
+        self.url = ::std::option::Option::None;
+        self.file_id = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_Task {
+        static instance: CRemoteClient_Task = CRemoteClient_Task {
+            type_: ::std::option::Option::None,
+            task_id: ::std::option::Option::None,
+            url: ::std::option::Option::None,
+            file_id: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CRemoteClient_AddClientTask_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_AddClientTask_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CRemoteClient_AddClientTask_Request.remote_client_id)
+    pub remote_client_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CRemoteClient_AddClientTask_Request.task)
+    pub task: ::steam_vent_proto_common::protobuf::MessageField<CRemoteClient_Task>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_AddClientTask_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_AddClientTask_Request {
+    fn default() -> &'a CRemoteClient_AddClientTask_Request {
+        <CRemoteClient_AddClientTask_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_AddClientTask_Request {
+    pub fn new() -> CRemoteClient_AddClientTask_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 remote_client_id = 1;
+
+    pub fn remote_client_id(&self) -> u64 {
+        self.remote_client_id.unwrap_or(0)
+    }
+
+    pub fn clear_remote_client_id(&mut self) {
+        self.remote_client_id = ::std::option::Option::None;
+    }
+
+    pub fn has_remote_client_id(&self) -> bool {
+        self.remote_client_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_remote_client_id(&mut self, v: u64) {
+        self.remote_client_id = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_AddClientTask_Request {
+    const NAME: &'static str = "CRemoteClient_AddClientTask_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.remote_client_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                18 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.task)?;
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.remote_client_id {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.task.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.remote_client_id {
+            os.write_fixed64(1, v)?;
+        }
+        if let Some(v) = self.task.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_AddClientTask_Request {
+        CRemoteClient_AddClientTask_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.remote_client_id = ::std::option::Option::None;
+        self.task.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_AddClientTask_Request {
+        static instance: CRemoteClient_AddClientTask_Request = CRemoteClient_AddClientTask_Request {
+            remote_client_id: ::std::option::Option::None,
+            task: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CRemoteClient_AddClientTask_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_AddClientTask_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_AddClientTask_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_AddClientTask_Response {
+    fn default() -> &'a CRemoteClient_AddClientTask_Response {
+        <CRemoteClient_AddClientTask_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_AddClientTask_Response {
+    pub fn new() -> CRemoteClient_AddClientTask_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_AddClientTask_Response {
+    const NAME: &'static str = "CRemoteClient_AddClientTask_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_AddClientTask_Response {
+        CRemoteClient_AddClientTask_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_AddClientTask_Response {
+        static instance: CRemoteClient_AddClientTask_Response = CRemoteClient_AddClientTask_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CRemoteClient_TaskList_Notification)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_TaskList_Notification {
+    // message fields
+    // @@protoc_insertion_point(field:CRemoteClient_TaskList_Notification.remote_client_id)
+    pub remote_client_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CRemoteClient_TaskList_Notification.tasklist)
+    pub tasklist: ::std::vec::Vec<CRemoteClient_Task>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_TaskList_Notification.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_TaskList_Notification {
+    fn default() -> &'a CRemoteClient_TaskList_Notification {
+        <CRemoteClient_TaskList_Notification as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_TaskList_Notification {
+    pub fn new() -> CRemoteClient_TaskList_Notification {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 remote_client_id = 1;
+
+    pub fn remote_client_id(&self) -> u64 {
+        self.remote_client_id.unwrap_or(0)
+    }
+
+    pub fn clear_remote_client_id(&mut self) {
+        self.remote_client_id = ::std::option::Option::None;
+    }
+
+    pub fn has_remote_client_id(&self) -> bool {
+        self.remote_client_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_remote_client_id(&mut self, v: u64) {
+        self.remote_client_id = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_TaskList_Notification {
+    const NAME: &'static str = "CRemoteClient_TaskList_Notification";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.remote_client_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                18 => {
+                    self.tasklist.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.remote_client_id {
+            my_size += 1 + 8;
+        }
+        for value in &self.tasklist {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.remote_client_id {
+            os.write_fixed64(1, v)?;
+        }
+        for v in &self.tasklist {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_TaskList_Notification {
+        CRemoteClient_TaskList_Notification::new()
+    }
+
+    fn clear(&mut self) {
+        self.remote_client_id = ::std::option::Option::None;
+        self.tasklist.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_TaskList_Notification {
+        static instance: CRemoteClient_TaskList_Notification = CRemoteClient_TaskList_Notification {
+            remote_client_id: ::std::option::Option::None,
+            tasklist: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CRemoteClient_MarkTaskComplete_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_MarkTaskComplete_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CRemoteClient_MarkTaskComplete_Request.remote_client_id)
+    pub remote_client_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CRemoteClient_MarkTaskComplete_Request.task_id)
+    pub task_id: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CRemoteClient_MarkTaskComplete_Request.content_id)
+    pub content_id: ::std::option::Option<::std::string::String>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_MarkTaskComplete_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_MarkTaskComplete_Request {
+    fn default() -> &'a CRemoteClient_MarkTaskComplete_Request {
+        <CRemoteClient_MarkTaskComplete_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_MarkTaskComplete_Request {
+    pub fn new() -> CRemoteClient_MarkTaskComplete_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional fixed64 remote_client_id = 1;
+
+    pub fn remote_client_id(&self) -> u64 {
+        self.remote_client_id.unwrap_or(0)
+    }
+
+    pub fn clear_remote_client_id(&mut self) {
+        self.remote_client_id = ::std::option::Option::None;
+    }
+
+    pub fn has_remote_client_id(&self) -> bool {
+        self.remote_client_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_remote_client_id(&mut self, v: u64) {
+        self.remote_client_id = ::std::option::Option::Some(v);
+    }
+
+    // optional fixed64 task_id = 2;
+
+    pub fn task_id(&self) -> u64 {
+        self.task_id.unwrap_or(0)
+    }
+
+    pub fn clear_task_id(&mut self) {
+        self.task_id = ::std::option::Option::None;
+    }
+
+    pub fn has_task_id(&self) -> bool {
+        self.task_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_task_id(&mut self, v: u64) {
+        self.task_id = ::std::option::Option::Some(v);
+    }
+
+    // optional string content_id = 3;
+
+    pub fn content_id(&self) -> &str {
+        match self.content_id.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_content_id(&mut self) {
+        self.content_id = ::std::option::Option::None;
+    }
+
+    pub fn has_content_id(&self) -> bool {
+        self.content_id.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_content_id(&mut self, v: ::std::string::String) {
+        self.content_id = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_content_id(&mut self) -> &mut ::std::string::String {
+        if self.content_id.is_none() {
+            self.content_id = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.content_id.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_content_id(&mut self) -> ::std::string::String {
+        self.content_id.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_MarkTaskComplete_Request {
+    const NAME: &'static str = "CRemoteClient_MarkTaskComplete_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                9 => {
+                    self.remote_client_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                17 => {
+                    self.task_id = ::std::option::Option::Some(is.read_fixed64()?);
+                },
+                26 => {
+                    self.content_id = ::std::option::Option::Some(is.read_string()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.remote_client_id {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.task_id {
+            my_size += 1 + 8;
+        }
+        if let Some(v) = self.content_id.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(3, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.remote_client_id {
+            os.write_fixed64(1, v)?;
+        }
+        if let Some(v) = self.task_id {
+            os.write_fixed64(2, v)?;
+        }
+        if let Some(v) = self.content_id.as_ref() {
+            os.write_string(3, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_MarkTaskComplete_Request {
+        CRemoteClient_MarkTaskComplete_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.remote_client_id = ::std::option::Option::None;
+        self.task_id = ::std::option::Option::None;
+        self.content_id = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_MarkTaskComplete_Request {
+        static instance: CRemoteClient_MarkTaskComplete_Request = CRemoteClient_MarkTaskComplete_Request {
+            remote_client_id: ::std::option::Option::None,
+            task_id: ::std::option::Option::None,
+            content_id: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CRemoteClient_MarkTaskComplete_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CRemoteClient_MarkTaskComplete_Response {
+    // special fields
+    // @@protoc_insertion_point(special_field:CRemoteClient_MarkTaskComplete_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CRemoteClient_MarkTaskComplete_Response {
+    fn default() -> &'a CRemoteClient_MarkTaskComplete_Response {
+        <CRemoteClient_MarkTaskComplete_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CRemoteClient_MarkTaskComplete_Response {
+    pub fn new() -> CRemoteClient_MarkTaskComplete_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_MarkTaskComplete_Response {
+    const NAME: &'static str = "CRemoteClient_MarkTaskComplete_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CRemoteClient_MarkTaskComplete_Response {
+        CRemoteClient_MarkTaskComplete_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CRemoteClient_MarkTaskComplete_Response {
+        static instance: CRemoteClient_MarkTaskComplete_Response = CRemoteClient_MarkTaskComplete_Response {
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CRemoteClient_RemotePacket_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_RemotePacket_Notification {
@@ -1861,7 +3638,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_RemotePacket
     }
 }
 
-#[doc = "Send a reply to a remote client"]
 // @@protoc_insertion_point(message:CRemoteClient_ReplyPacket_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_ReplyPacket_Notification {
@@ -2219,292 +3995,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_GetReplies_R
     }
 }
 
-#[doc = "Allocate a TURN server for a streaming session"]
-// @@protoc_insertion_point(message:CRemoteClient_AllocateTURNServer_Request)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct CRemoteClient_AllocateTURNServer_Request {
-    // message fields
-    // @@protoc_insertion_point(field:CRemoteClient_AllocateTURNServer_Request.cellid)
-    pub cellid: ::std::option::Option<u32>,
-    // @@protoc_insertion_point(field:CRemoteClient_AllocateTURNServer_Request.credentials)
-    pub credentials: ::std::option::Option<::std::string::String>,
-    // special fields
-    // @@protoc_insertion_point(special_field:CRemoteClient_AllocateTURNServer_Request.special_fields)
-    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a CRemoteClient_AllocateTURNServer_Request {
-    fn default() -> &'a CRemoteClient_AllocateTURNServer_Request {
-        <CRemoteClient_AllocateTURNServer_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
-    }
-}
-
-impl CRemoteClient_AllocateTURNServer_Request {
-    pub fn new() -> CRemoteClient_AllocateTURNServer_Request {
-        ::std::default::Default::default()
-    }
-
-    // optional uint32 cellid = 1;
-
-    pub fn cellid(&self) -> u32 {
-        self.cellid.unwrap_or(0)
-    }
-
-    pub fn clear_cellid(&mut self) {
-        self.cellid = ::std::option::Option::None;
-    }
-
-    pub fn has_cellid(&self) -> bool {
-        self.cellid.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_cellid(&mut self, v: u32) {
-        self.cellid = ::std::option::Option::Some(v);
-    }
-
-    // optional string credentials = 2;
-
-    pub fn credentials(&self) -> &str {
-        match self.credentials.as_ref() {
-            Some(v) => v,
-            None => "",
-        }
-    }
-
-    pub fn clear_credentials(&mut self) {
-        self.credentials = ::std::option::Option::None;
-    }
-
-    pub fn has_credentials(&self) -> bool {
-        self.credentials.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_credentials(&mut self, v: ::std::string::String) {
-        self.credentials = ::std::option::Option::Some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_credentials(&mut self) -> &mut ::std::string::String {
-        if self.credentials.is_none() {
-            self.credentials = ::std::option::Option::Some(::std::string::String::new());
-        }
-        self.credentials.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_credentials(&mut self) -> ::std::string::String {
-        self.credentials.take().unwrap_or_else(|| ::std::string::String::new())
-    }
-}
-
-impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_AllocateTURNServer_Request {
-    const NAME: &'static str = "CRemoteClient_AllocateTURNServer_Request";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                8 => {
-                    self.cellid = ::std::option::Option::Some(is.read_uint32()?);
-                },
-                18 => {
-                    self.credentials = ::std::option::Option::Some(is.read_string()?);
-                },
-                tag => {
-                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.cellid {
-            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
-        }
-        if let Some(v) = self.credentials.as_ref() {
-            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(2, &v);
-        }
-        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        if let Some(v) = self.cellid {
-            os.write_uint32(1, v)?;
-        }
-        if let Some(v) = self.credentials.as_ref() {
-            os.write_string(2, v)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> CRemoteClient_AllocateTURNServer_Request {
-        CRemoteClient_AllocateTURNServer_Request::new()
-    }
-
-    fn clear(&mut self) {
-        self.cellid = ::std::option::Option::None;
-        self.credentials = ::std::option::Option::None;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static CRemoteClient_AllocateTURNServer_Request {
-        static instance: CRemoteClient_AllocateTURNServer_Request = CRemoteClient_AllocateTURNServer_Request {
-            cellid: ::std::option::Option::None,
-            credentials: ::std::option::Option::None,
-            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-// @@protoc_insertion_point(message:CRemoteClient_AllocateTURNServer_Response)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct CRemoteClient_AllocateTURNServer_Response {
-    // message fields
-    // @@protoc_insertion_point(field:CRemoteClient_AllocateTURNServer_Response.turn_server)
-    pub turn_server: ::std::option::Option<::std::string::String>,
-    // special fields
-    // @@protoc_insertion_point(special_field:CRemoteClient_AllocateTURNServer_Response.special_fields)
-    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a CRemoteClient_AllocateTURNServer_Response {
-    fn default() -> &'a CRemoteClient_AllocateTURNServer_Response {
-        <CRemoteClient_AllocateTURNServer_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
-    }
-}
-
-impl CRemoteClient_AllocateTURNServer_Response {
-    pub fn new() -> CRemoteClient_AllocateTURNServer_Response {
-        ::std::default::Default::default()
-    }
-
-    // optional string turn_server = 1;
-
-    pub fn turn_server(&self) -> &str {
-        match self.turn_server.as_ref() {
-            Some(v) => v,
-            None => "",
-        }
-    }
-
-    pub fn clear_turn_server(&mut self) {
-        self.turn_server = ::std::option::Option::None;
-    }
-
-    pub fn has_turn_server(&self) -> bool {
-        self.turn_server.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_turn_server(&mut self, v: ::std::string::String) {
-        self.turn_server = ::std::option::Option::Some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_turn_server(&mut self) -> &mut ::std::string::String {
-        if self.turn_server.is_none() {
-            self.turn_server = ::std::option::Option::Some(::std::string::String::new());
-        }
-        self.turn_server.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_turn_server(&mut self) -> ::std::string::String {
-        self.turn_server.take().unwrap_or_else(|| ::std::string::String::new())
-    }
-}
-
-impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_AllocateTURNServer_Response {
-    const NAME: &'static str = "CRemoteClient_AllocateTURNServer_Response";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                10 => {
-                    self.turn_server = ::std::option::Option::Some(is.read_string()?);
-                },
-                tag => {
-                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.turn_server.as_ref() {
-            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(1, &v);
-        }
-        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        if let Some(v) = self.turn_server.as_ref() {
-            os.write_string(1, v)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> CRemoteClient_AllocateTURNServer_Response {
-        CRemoteClient_AllocateTURNServer_Response::new()
-    }
-
-    fn clear(&mut self) {
-        self.turn_server = ::std::option::Option::None;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static CRemoteClient_AllocateTURNServer_Response {
-        static instance: CRemoteClient_AllocateTURNServer_Response = CRemoteClient_AllocateTURNServer_Response {
-            turn_server: ::std::option::Option::None,
-            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-#[doc = "Allocate a UDP relay server for a streaming session"]
 // @@protoc_insertion_point(message:CRemoteClient_AllocateRelayServer_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_AllocateRelayServer_Request {
@@ -2789,7 +4279,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_AllocateRela
     }
 }
 
-#[doc = "Allocate SDR resources for an app"]
 // @@protoc_insertion_point(message:CRemoteClient_AllocateSDR_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_AllocateSDR_Request {
@@ -2975,7 +4464,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_AllocateSDR_
     }
 }
 
-#[doc = "Broadcast a packet to remote Steam clients"]
 // @@protoc_insertion_point(message:CRemoteClient_SteamBroadcast_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_SteamBroadcast_Notification {
@@ -3166,7 +4654,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_SteamBroadca
     }
 }
 
-#[doc = "Send a packet to a Steam client from a remote Steam client"]
 // @@protoc_insertion_point(message:CRemoteClient_SteamToSteam_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_SteamToSteam_Notification {
@@ -3421,7 +4908,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_SteamToSteam
     }
 }
 
-#[doc = "Let the server know that we started a Remote Play session"]
 // @@protoc_insertion_point(message:CRemotePlay_SessionStarted_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemotePlay_SessionStarted_Request {
@@ -3800,7 +5286,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemotePlay_SessionStarted
     }
 }
 
-#[doc = "Let the server know that we stopped a Remote Play session"]
 // @@protoc_insertion_point(message:CRemotePlay_SessionStopped_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemotePlay_SessionStopped_Notification {
@@ -4006,7 +5491,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemotePlay_SessionStopped
     }
 }
 
-#[doc = "Send a Remote Play Together packet to a Steam client"]
 // @@protoc_insertion_point(message:CRemotePlayTogether_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemotePlayTogether_Notification {
@@ -5047,7 +6531,6 @@ pub mod cremote_play_together_notification {
     }
 }
 
-#[doc = "Create a Remote Play Together invitation"]
 // @@protoc_insertion_point(message:CRemoteClient_CreateRemotePlayTogetherInvitation_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_CreateRemotePlayTogetherInvitation_Request {
@@ -5332,7 +6815,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_CreateRemote
     }
 }
 
-#[doc = "Delete a Remote Play Together invitation"]
 // @@protoc_insertion_point(message:CRemoteClient_DeleteRemotePlayTogetherInvitation_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CRemoteClient_DeleteRemotePlayTogetherInvitation_Request {
@@ -5787,6 +7269,1030 @@ impl ::steam_vent_proto_common::protobuf::Message for CRemoteClient_LookupRemote
     }
 }
 
+// @@protoc_insertion_point(message:CCMRemoteClient_ClientMessage)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CCMRemoteClient_ClientMessage {
+    // message oneof groups
+    pub Message: ::std::option::Option<ccmremote_client_client_message::Message>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CCMRemoteClient_ClientMessage.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CCMRemoteClient_ClientMessage {
+    fn default() -> &'a CCMRemoteClient_ClientMessage {
+        <CCMRemoteClient_ClientMessage as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CCMRemoteClient_ClientMessage {
+    pub fn new() -> CCMRemoteClient_ClientMessage {
+        ::std::default::Default::default()
+    }
+
+    // optional .CRemoteClient_CreateSession_Request create_session_request = 1;
+
+    pub fn create_session_request(&self) -> &CRemoteClient_CreateSession_Request {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::CreateSessionRequest(ref v)) => v,
+            _ => <CRemoteClient_CreateSession_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_create_session_request(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_create_session_request(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::CreateSessionRequest(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_create_session_request(&mut self, v: CRemoteClient_CreateSession_Request) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::CreateSessionRequest(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_create_session_request(&mut self) -> &mut CRemoteClient_CreateSession_Request {
+        if let ::std::option::Option::Some(ccmremote_client_client_message::Message::CreateSessionRequest(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::CreateSessionRequest(CRemoteClient_CreateSession_Request::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::CreateSessionRequest(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_create_session_request(&mut self) -> CRemoteClient_CreateSession_Request {
+        if self.has_create_session_request() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_client_message::Message::CreateSessionRequest(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_CreateSession_Request::new()
+        }
+    }
+
+    // optional .CRemoteClient_StartPairing_Request start_pairing_request = 2;
+
+    pub fn start_pairing_request(&self) -> &CRemoteClient_StartPairing_Request {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::StartPairingRequest(ref v)) => v,
+            _ => <CRemoteClient_StartPairing_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_start_pairing_request(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_start_pairing_request(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::StartPairingRequest(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_start_pairing_request(&mut self, v: CRemoteClient_StartPairing_Request) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::StartPairingRequest(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_start_pairing_request(&mut self) -> &mut CRemoteClient_StartPairing_Request {
+        if let ::std::option::Option::Some(ccmremote_client_client_message::Message::StartPairingRequest(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::StartPairingRequest(CRemoteClient_StartPairing_Request::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::StartPairingRequest(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_start_pairing_request(&mut self) -> CRemoteClient_StartPairing_Request {
+        if self.has_start_pairing_request() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_client_message::Message::StartPairingRequest(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_StartPairing_Request::new()
+        }
+    }
+
+    // optional .CRemoteClient_SetPairingInfo_Request set_pairing_info_request = 3;
+
+    pub fn set_pairing_info_request(&self) -> &CRemoteClient_SetPairingInfo_Request {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::SetPairingInfoRequest(ref v)) => v,
+            _ => <CRemoteClient_SetPairingInfo_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_set_pairing_info_request(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_set_pairing_info_request(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::SetPairingInfoRequest(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_set_pairing_info_request(&mut self, v: CRemoteClient_SetPairingInfo_Request) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::SetPairingInfoRequest(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_set_pairing_info_request(&mut self) -> &mut CRemoteClient_SetPairingInfo_Request {
+        if let ::std::option::Option::Some(ccmremote_client_client_message::Message::SetPairingInfoRequest(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::SetPairingInfoRequest(CRemoteClient_SetPairingInfo_Request::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::SetPairingInfoRequest(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_set_pairing_info_request(&mut self) -> CRemoteClient_SetPairingInfo_Request {
+        if self.has_set_pairing_info_request() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_client_message::Message::SetPairingInfoRequest(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_SetPairingInfo_Request::new()
+        }
+    }
+
+    // optional .CRemoteClient_CancelPairing_Request cancel_pairing_request = 4;
+
+    pub fn cancel_pairing_request(&self) -> &CRemoteClient_CancelPairing_Request {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::CancelPairingRequest(ref v)) => v,
+            _ => <CRemoteClient_CancelPairing_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_cancel_pairing_request(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_cancel_pairing_request(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::CancelPairingRequest(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_cancel_pairing_request(&mut self, v: CRemoteClient_CancelPairing_Request) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::CancelPairingRequest(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_cancel_pairing_request(&mut self) -> &mut CRemoteClient_CancelPairing_Request {
+        if let ::std::option::Option::Some(ccmremote_client_client_message::Message::CancelPairingRequest(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::CancelPairingRequest(CRemoteClient_CancelPairing_Request::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::CancelPairingRequest(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_cancel_pairing_request(&mut self) -> CRemoteClient_CancelPairing_Request {
+        if self.has_cancel_pairing_request() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_client_message::Message::CancelPairingRequest(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_CancelPairing_Request::new()
+        }
+    }
+
+    // optional .CRemoteClient_RegisterStatusUpdate_Notification register_status_update = 5;
+
+    pub fn register_status_update(&self) -> &CRemoteClient_RegisterStatusUpdate_Notification {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::RegisterStatusUpdate(ref v)) => v,
+            _ => <CRemoteClient_RegisterStatusUpdate_Notification as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_register_status_update(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_register_status_update(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::RegisterStatusUpdate(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_register_status_update(&mut self, v: CRemoteClient_RegisterStatusUpdate_Notification) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::RegisterStatusUpdate(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_register_status_update(&mut self) -> &mut CRemoteClient_RegisterStatusUpdate_Notification {
+        if let ::std::option::Option::Some(ccmremote_client_client_message::Message::RegisterStatusUpdate(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::RegisterStatusUpdate(CRemoteClient_RegisterStatusUpdate_Notification::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::RegisterStatusUpdate(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_register_status_update(&mut self) -> CRemoteClient_RegisterStatusUpdate_Notification {
+        if self.has_register_status_update() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_client_message::Message::RegisterStatusUpdate(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_RegisterStatusUpdate_Notification::new()
+        }
+    }
+
+    // optional .CRemoteClient_UnregisterStatusUpdate_Notification unregister_status_update = 6;
+
+    pub fn unregister_status_update(&self) -> &CRemoteClient_UnregisterStatusUpdate_Notification {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::UnregisterStatusUpdate(ref v)) => v,
+            _ => <CRemoteClient_UnregisterStatusUpdate_Notification as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_unregister_status_update(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_unregister_status_update(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::UnregisterStatusUpdate(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_unregister_status_update(&mut self, v: CRemoteClient_UnregisterStatusUpdate_Notification) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::UnregisterStatusUpdate(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_unregister_status_update(&mut self) -> &mut CRemoteClient_UnregisterStatusUpdate_Notification {
+        if let ::std::option::Option::Some(ccmremote_client_client_message::Message::UnregisterStatusUpdate(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::UnregisterStatusUpdate(CRemoteClient_UnregisterStatusUpdate_Notification::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::UnregisterStatusUpdate(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_unregister_status_update(&mut self) -> CRemoteClient_UnregisterStatusUpdate_Notification {
+        if self.has_unregister_status_update() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_client_message::Message::UnregisterStatusUpdate(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_UnregisterStatusUpdate_Notification::new()
+        }
+    }
+
+    // optional .CRemoteClient_RemotePacket_Notification remote_packet = 7;
+
+    pub fn remote_packet(&self) -> &CRemoteClient_RemotePacket_Notification {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::RemotePacket(ref v)) => v,
+            _ => <CRemoteClient_RemotePacket_Notification as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_remote_packet(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_remote_packet(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::RemotePacket(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_remote_packet(&mut self, v: CRemoteClient_RemotePacket_Notification) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::RemotePacket(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_remote_packet(&mut self) -> &mut CRemoteClient_RemotePacket_Notification {
+        if let ::std::option::Option::Some(ccmremote_client_client_message::Message::RemotePacket(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::RemotePacket(CRemoteClient_RemotePacket_Notification::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_client_message::Message::RemotePacket(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_remote_packet(&mut self) -> CRemoteClient_RemotePacket_Notification {
+        if self.has_remote_packet() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_client_message::Message::RemotePacket(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_RemotePacket_Notification::new()
+        }
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CCMRemoteClient_ClientMessage {
+    const NAME: &'static str = "CCMRemoteClient_ClientMessage";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::CreateSessionRequest(is.read_message()?));
+                },
+                18 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::StartPairingRequest(is.read_message()?));
+                },
+                26 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::SetPairingInfoRequest(is.read_message()?));
+                },
+                34 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::CancelPairingRequest(is.read_message()?));
+                },
+                42 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::RegisterStatusUpdate(is.read_message()?));
+                },
+                50 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::UnregisterStatusUpdate(is.read_message()?));
+                },
+                58 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_client_message::Message::RemotePacket(is.read_message()?));
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let ::std::option::Option::Some(ref v) = self.Message {
+            match v {
+                &ccmremote_client_client_message::Message::CreateSessionRequest(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+                &ccmremote_client_client_message::Message::StartPairingRequest(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+                &ccmremote_client_client_message::Message::SetPairingInfoRequest(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+                &ccmremote_client_client_message::Message::CancelPairingRequest(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+                &ccmremote_client_client_message::Message::RegisterStatusUpdate(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+                &ccmremote_client_client_message::Message::UnregisterStatusUpdate(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+                &ccmremote_client_client_message::Message::RemotePacket(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+            };
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let ::std::option::Option::Some(ref v) = self.Message {
+            match v {
+                &ccmremote_client_client_message::Message::CreateSessionRequest(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+                },
+                &ccmremote_client_client_message::Message::StartPairingRequest(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+                },
+                &ccmremote_client_client_message::Message::SetPairingInfoRequest(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
+                },
+                &ccmremote_client_client_message::Message::CancelPairingRequest(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(4, v, os)?;
+                },
+                &ccmremote_client_client_message::Message::RegisterStatusUpdate(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(5, v, os)?;
+                },
+                &ccmremote_client_client_message::Message::UnregisterStatusUpdate(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(6, v, os)?;
+                },
+                &ccmremote_client_client_message::Message::RemotePacket(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(7, v, os)?;
+                },
+            };
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CCMRemoteClient_ClientMessage {
+        CCMRemoteClient_ClientMessage::new()
+    }
+
+    fn clear(&mut self) {
+        self.Message = ::std::option::Option::None;
+        self.Message = ::std::option::Option::None;
+        self.Message = ::std::option::Option::None;
+        self.Message = ::std::option::Option::None;
+        self.Message = ::std::option::Option::None;
+        self.Message = ::std::option::Option::None;
+        self.Message = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CCMRemoteClient_ClientMessage {
+        static instance: CCMRemoteClient_ClientMessage = CCMRemoteClient_ClientMessage {
+            Message: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+/// Nested message and enums of message `CCMRemoteClient_ClientMessage`
+pub mod ccmremote_client_client_message {
+
+    #[derive(Clone,PartialEq,Debug)]
+    #[non_exhaustive]
+    // @@protoc_insertion_point(oneof:CCMRemoteClient_ClientMessage.Message)
+    pub enum Message {
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ClientMessage.create_session_request)
+        CreateSessionRequest(super::CRemoteClient_CreateSession_Request),
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ClientMessage.start_pairing_request)
+        StartPairingRequest(super::CRemoteClient_StartPairing_Request),
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ClientMessage.set_pairing_info_request)
+        SetPairingInfoRequest(super::CRemoteClient_SetPairingInfo_Request),
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ClientMessage.cancel_pairing_request)
+        CancelPairingRequest(super::CRemoteClient_CancelPairing_Request),
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ClientMessage.register_status_update)
+        RegisterStatusUpdate(super::CRemoteClient_RegisterStatusUpdate_Notification),
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ClientMessage.unregister_status_update)
+        UnregisterStatusUpdate(super::CRemoteClient_UnregisterStatusUpdate_Notification),
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ClientMessage.remote_packet)
+        RemotePacket(super::CRemoteClient_RemotePacket_Notification),
+    }
+
+    impl ::steam_vent_proto_common::protobuf::Oneof for Message {
+    }
+
+    impl Message {
+    }
+}
+
+// @@protoc_insertion_point(message:CCMRemoteClient_ServerMessage)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CCMRemoteClient_ServerMessage {
+    // message fields
+    // @@protoc_insertion_point(field:CCMRemoteClient_ServerMessage.result)
+    pub result: ::std::option::Option<i32>,
+    // message oneof groups
+    pub Message: ::std::option::Option<ccmremote_client_server_message::Message>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CCMRemoteClient_ServerMessage.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CCMRemoteClient_ServerMessage {
+    fn default() -> &'a CCMRemoteClient_ServerMessage {
+        <CCMRemoteClient_ServerMessage as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CCMRemoteClient_ServerMessage {
+    pub fn new() -> CCMRemoteClient_ServerMessage {
+        ::std::default::Default::default()
+    }
+
+    // optional int32 result = 1;
+
+    pub fn result(&self) -> i32 {
+        self.result.unwrap_or(0)
+    }
+
+    pub fn clear_result(&mut self) {
+        self.result = ::std::option::Option::None;
+    }
+
+    pub fn has_result(&self) -> bool {
+        self.result.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_result(&mut self, v: i32) {
+        self.result = ::std::option::Option::Some(v);
+    }
+
+    // optional .CRemoteClient_CreateSession_Response create_session_response = 2;
+
+    pub fn create_session_response(&self) -> &CRemoteClient_CreateSession_Response {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::CreateSessionResponse(ref v)) => v,
+            _ => <CRemoteClient_CreateSession_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_create_session_response(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_create_session_response(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::CreateSessionResponse(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_create_session_response(&mut self, v: CRemoteClient_CreateSession_Response) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::CreateSessionResponse(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_create_session_response(&mut self) -> &mut CRemoteClient_CreateSession_Response {
+        if let ::std::option::Option::Some(ccmremote_client_server_message::Message::CreateSessionResponse(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::CreateSessionResponse(CRemoteClient_CreateSession_Response::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::CreateSessionResponse(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_create_session_response(&mut self) -> CRemoteClient_CreateSession_Response {
+        if self.has_create_session_response() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_server_message::Message::CreateSessionResponse(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_CreateSession_Response::new()
+        }
+    }
+
+    // optional .CRemoteClient_StartPairing_Response start_pairing_response = 3;
+
+    pub fn start_pairing_response(&self) -> &CRemoteClient_StartPairing_Response {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::StartPairingResponse(ref v)) => v,
+            _ => <CRemoteClient_StartPairing_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_start_pairing_response(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_start_pairing_response(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::StartPairingResponse(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_start_pairing_response(&mut self, v: CRemoteClient_StartPairing_Response) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::StartPairingResponse(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_start_pairing_response(&mut self) -> &mut CRemoteClient_StartPairing_Response {
+        if let ::std::option::Option::Some(ccmremote_client_server_message::Message::StartPairingResponse(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::StartPairingResponse(CRemoteClient_StartPairing_Response::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::StartPairingResponse(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_start_pairing_response(&mut self) -> CRemoteClient_StartPairing_Response {
+        if self.has_start_pairing_response() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_server_message::Message::StartPairingResponse(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_StartPairing_Response::new()
+        }
+    }
+
+    // optional .CRemoteClient_SetPairingInfo_Response set_pairing_info_response = 4;
+
+    pub fn set_pairing_info_response(&self) -> &CRemoteClient_SetPairingInfo_Response {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::SetPairingInfoResponse(ref v)) => v,
+            _ => <CRemoteClient_SetPairingInfo_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_set_pairing_info_response(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_set_pairing_info_response(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::SetPairingInfoResponse(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_set_pairing_info_response(&mut self, v: CRemoteClient_SetPairingInfo_Response) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::SetPairingInfoResponse(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_set_pairing_info_response(&mut self) -> &mut CRemoteClient_SetPairingInfo_Response {
+        if let ::std::option::Option::Some(ccmremote_client_server_message::Message::SetPairingInfoResponse(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::SetPairingInfoResponse(CRemoteClient_SetPairingInfo_Response::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::SetPairingInfoResponse(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_set_pairing_info_response(&mut self) -> CRemoteClient_SetPairingInfo_Response {
+        if self.has_set_pairing_info_response() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_server_message::Message::SetPairingInfoResponse(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_SetPairingInfo_Response::new()
+        }
+    }
+
+    // optional .CRemoteClient_CancelPairing_Response cancel_pairing_response = 5;
+
+    pub fn cancel_pairing_response(&self) -> &CRemoteClient_CancelPairing_Response {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::CancelPairingResponse(ref v)) => v,
+            _ => <CRemoteClient_CancelPairing_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_cancel_pairing_response(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_cancel_pairing_response(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::CancelPairingResponse(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_cancel_pairing_response(&mut self, v: CRemoteClient_CancelPairing_Response) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::CancelPairingResponse(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_cancel_pairing_response(&mut self) -> &mut CRemoteClient_CancelPairing_Response {
+        if let ::std::option::Option::Some(ccmremote_client_server_message::Message::CancelPairingResponse(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::CancelPairingResponse(CRemoteClient_CancelPairing_Response::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::CancelPairingResponse(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_cancel_pairing_response(&mut self) -> CRemoteClient_CancelPairing_Response {
+        if self.has_cancel_pairing_response() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_server_message::Message::CancelPairingResponse(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_CancelPairing_Response::new()
+        }
+    }
+
+    // optional .CRemoteClient_GetReplies_Response reply_packet = 6;
+
+    pub fn reply_packet(&self) -> &CRemoteClient_GetReplies_Response {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::ReplyPacket(ref v)) => v,
+            _ => <CRemoteClient_GetReplies_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_reply_packet(&mut self) {
+        self.Message = ::std::option::Option::None;
+    }
+
+    pub fn has_reply_packet(&self) -> bool {
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::ReplyPacket(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_reply_packet(&mut self, v: CRemoteClient_GetReplies_Response) {
+        self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::ReplyPacket(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_reply_packet(&mut self) -> &mut CRemoteClient_GetReplies_Response {
+        if let ::std::option::Option::Some(ccmremote_client_server_message::Message::ReplyPacket(_)) = self.Message {
+        } else {
+            self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::ReplyPacket(CRemoteClient_GetReplies_Response::new()));
+        }
+        match self.Message {
+            ::std::option::Option::Some(ccmremote_client_server_message::Message::ReplyPacket(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_reply_packet(&mut self) -> CRemoteClient_GetReplies_Response {
+        if self.has_reply_packet() {
+            match self.Message.take() {
+                ::std::option::Option::Some(ccmremote_client_server_message::Message::ReplyPacket(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            CRemoteClient_GetReplies_Response::new()
+        }
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CCMRemoteClient_ServerMessage {
+    const NAME: &'static str = "CCMRemoteClient_ServerMessage";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.result = ::std::option::Option::Some(is.read_int32()?);
+                },
+                18 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::CreateSessionResponse(is.read_message()?));
+                },
+                26 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::StartPairingResponse(is.read_message()?));
+                },
+                34 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::SetPairingInfoResponse(is.read_message()?));
+                },
+                42 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::CancelPairingResponse(is.read_message()?));
+                },
+                50 => {
+                    self.Message = ::std::option::Option::Some(ccmremote_client_server_message::Message::ReplyPacket(is.read_message()?));
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.result {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(1, v);
+        }
+        if let ::std::option::Option::Some(ref v) = self.Message {
+            match v {
+                &ccmremote_client_server_message::Message::CreateSessionResponse(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+                &ccmremote_client_server_message::Message::StartPairingResponse(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+                &ccmremote_client_server_message::Message::SetPairingInfoResponse(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+                &ccmremote_client_server_message::Message::CancelPairingResponse(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+                &ccmremote_client_server_message::Message::ReplyPacket(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
+            };
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.result {
+            os.write_int32(1, v)?;
+        }
+        if let ::std::option::Option::Some(ref v) = self.Message {
+            match v {
+                &ccmremote_client_server_message::Message::CreateSessionResponse(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+                },
+                &ccmremote_client_server_message::Message::StartPairingResponse(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
+                },
+                &ccmremote_client_server_message::Message::SetPairingInfoResponse(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(4, v, os)?;
+                },
+                &ccmremote_client_server_message::Message::CancelPairingResponse(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(5, v, os)?;
+                },
+                &ccmremote_client_server_message::Message::ReplyPacket(ref v) => {
+                    ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(6, v, os)?;
+                },
+            };
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CCMRemoteClient_ServerMessage {
+        CCMRemoteClient_ServerMessage::new()
+    }
+
+    fn clear(&mut self) {
+        self.result = ::std::option::Option::None;
+        self.Message = ::std::option::Option::None;
+        self.Message = ::std::option::Option::None;
+        self.Message = ::std::option::Option::None;
+        self.Message = ::std::option::Option::None;
+        self.Message = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CCMRemoteClient_ServerMessage {
+        static instance: CCMRemoteClient_ServerMessage = CCMRemoteClient_ServerMessage {
+            result: ::std::option::Option::None,
+            Message: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+/// Nested message and enums of message `CCMRemoteClient_ServerMessage`
+pub mod ccmremote_client_server_message {
+
+    #[derive(Clone,PartialEq,Debug)]
+    #[non_exhaustive]
+    // @@protoc_insertion_point(oneof:CCMRemoteClient_ServerMessage.Message)
+    pub enum Message {
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ServerMessage.create_session_response)
+        CreateSessionResponse(super::CRemoteClient_CreateSession_Response),
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ServerMessage.start_pairing_response)
+        StartPairingResponse(super::CRemoteClient_StartPairing_Response),
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ServerMessage.set_pairing_info_response)
+        SetPairingInfoResponse(super::CRemoteClient_SetPairingInfo_Response),
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ServerMessage.cancel_pairing_response)
+        CancelPairingResponse(super::CRemoteClient_CancelPairing_Response),
+        // @@protoc_insertion_point(oneof_field:CCMRemoteClient_ServerMessage.reply_packet)
+        ReplyPacket(super::CRemoteClient_GetReplies_Response),
+    }
+
+    impl ::steam_vent_proto_common::protobuf::Oneof for Message {
+    }
+
+    impl Message {
+    }
+}
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:ECLientTaskListType)
+pub enum ECLientTaskListType {
+    // @@protoc_insertion_point(enum_value:ECLientTaskListType.k_EClientTask_DownloadClip)
+    k_EClientTask_DownloadClip = 1,
+}
+
+impl ::steam_vent_proto_common::protobuf::Enum for ECLientTaskListType {
+    const NAME: &'static str = "ECLientTaskListType";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<ECLientTaskListType> {
+        match value {
+            1 => ::std::option::Option::Some(ECLientTaskListType::k_EClientTask_DownloadClip),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<ECLientTaskListType> {
+        match str {
+            "k_EClientTask_DownloadClip" => ::std::option::Option::Some(ECLientTaskListType::k_EClientTask_DownloadClip),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [ECLientTaskListType] = &[
+        ECLientTaskListType::k_EClientTask_DownloadClip,
+    ];
+}
+
+// Note, `Default` is implemented although default value is not 0
+impl ::std::default::Default for ECLientTaskListType {
+    fn default() -> Self {
+        ECLientTaskListType::k_EClientTask_DownloadClip
+    }
+}
+
+
 
 const _VENT_PROTO_VERSION_CHECK: () = ::steam_vent_proto_common::VERSION_0_5_0;
 
@@ -5804,6 +8310,19 @@ impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_CreateSession_Reque
     }
 }
 impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_CreateSession_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_DeleteSession_Notification {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }
@@ -5948,7 +8467,150 @@ for CRemoteClient_UnregisterStatusUpdate_Notification {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_DeviceDetails {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
 impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_Online_Notification {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_GetRecentClients_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_ClientLogin {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_ClientDetails {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_GetRecentClients_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_Task {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_AddClientTask_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_AddClientTask_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_TaskList_Notification {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_MarkTaskComplete_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_MarkTaskComplete_Response {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }
@@ -6001,33 +8663,6 @@ impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_GetReplies_Request 
     }
 }
 impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_GetReplies_Response {
-    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
-        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
-    }
-    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.write_to_writer(writer)
-    }
-    fn encode_size(&self) -> usize {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.compute_size() as usize
-    }
-}
-impl ::steam_vent_proto_common::RpcMessage for CRemoteClient_AllocateTURNServer_Request {
-    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
-        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
-    }
-    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.write_to_writer(writer)
-    }
-    fn encode_size(&self) -> usize {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.compute_size() as usize
-    }
-}
-impl ::steam_vent_proto_common::RpcMessage
-for CRemoteClient_AllocateTURNServer_Response {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }
@@ -6245,6 +8880,32 @@ for CRemoteClient_LookupRemotePlayTogetherInvitation_Request {
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CRemoteClient_LookupRemotePlayTogetherInvitation_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CCMRemoteClient_ClientMessage {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CCMRemoteClient_ServerMessage {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }

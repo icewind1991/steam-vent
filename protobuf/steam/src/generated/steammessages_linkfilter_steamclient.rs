@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Get a list of hash prefixes for the specified hit type, to use for client caching."]
 // @@protoc_insertion_point(message:CCommunity_GetLinkFilterHashPrefixes_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCommunity_GetLinkFilterHashPrefixes_Request {
@@ -293,7 +292,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCommunity_GetLinkFilterHa
     }
 }
 
-#[doc = "Get a list of hashes for the specified hit type, to use for client caching."]
 // @@protoc_insertion_point(message:CCommunity_GetLinkFilterHashes_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCommunity_GetLinkFilterHashes_Request {
@@ -557,7 +555,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCommunity_GetLinkFilterHa
     }
 }
 
-#[doc = "Get a list of hashes describing the version of each chunk of the requested size."]
 // @@protoc_insertion_point(message:CCommunity_GetLinkFilterListVersion_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCommunity_GetLinkFilterListVersion_Request {
@@ -914,7 +911,7 @@ for CCommunity_GetLinkFilterListVersion_Response {
         self.compute_size() as usize
     }
 }
-///A service for recording data about Steam Community phishing link filtering
+///
 struct CommunityLinkFilter {}
 impl ::steam_vent_proto_common::RpcService for CommunityLinkFilter {
     const SERVICE_NAME: &'static str = "CommunityLinkFilter";

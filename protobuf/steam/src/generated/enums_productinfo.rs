@@ -39,6 +39,8 @@ pub enum EContentDescriptorID {
     k_EContentDescriptor_GratuitousSexualContent = 4,
     // @@protoc_insertion_point(enum_value:EContentDescriptorID.k_EContentDescriptor_AnyMatureContent)
     k_EContentDescriptor_AnyMatureContent = 5,
+    // @@protoc_insertion_point(enum_value:EContentDescriptorID.k_EContentDescriptorMAX)
+    k_EContentDescriptorMAX = 6,
 }
 
 impl ::steam_vent_proto_common::protobuf::Enum for EContentDescriptorID {
@@ -55,6 +57,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EContentDescriptorID {
             3 => ::std::option::Option::Some(EContentDescriptorID::k_EContentDescriptor_AdultOnlySexualContent),
             4 => ::std::option::Option::Some(EContentDescriptorID::k_EContentDescriptor_GratuitousSexualContent),
             5 => ::std::option::Option::Some(EContentDescriptorID::k_EContentDescriptor_AnyMatureContent),
+            6 => ::std::option::Option::Some(EContentDescriptorID::k_EContentDescriptorMAX),
             _ => ::std::option::Option::None
         }
     }
@@ -66,6 +69,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EContentDescriptorID {
             "k_EContentDescriptor_AdultOnlySexualContent" => ::std::option::Option::Some(EContentDescriptorID::k_EContentDescriptor_AdultOnlySexualContent),
             "k_EContentDescriptor_GratuitousSexualContent" => ::std::option::Option::Some(EContentDescriptorID::k_EContentDescriptor_GratuitousSexualContent),
             "k_EContentDescriptor_AnyMatureContent" => ::std::option::Option::Some(EContentDescriptorID::k_EContentDescriptor_AnyMatureContent),
+            "k_EContentDescriptorMAX" => ::std::option::Option::Some(EContentDescriptorID::k_EContentDescriptorMAX),
             _ => ::std::option::Option::None
         }
     }
@@ -76,6 +80,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for EContentDescriptorID {
         EContentDescriptorID::k_EContentDescriptor_AdultOnlySexualContent,
         EContentDescriptorID::k_EContentDescriptor_GratuitousSexualContent,
         EContentDescriptorID::k_EContentDescriptor_AnyMatureContent,
+        EContentDescriptorID::k_EContentDescriptorMAX,
     ];
 }
 

@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Get list of authorized devices"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetOwnAuthorizedDevices_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDeviceAuth_GetOwnAuthorizedDevices_Request {
@@ -612,7 +611,6 @@ pub mod cdevice_auth_get_own_authorized_devices_response {
     }
 }
 
-#[doc = "Accept an authorization request by another users"]
 // @@protoc_insertion_point(message:CDeviceAuth_AcceptAuthorizationRequest_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDeviceAuth_AcceptAuthorizationRequest_Request {
@@ -894,7 +892,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CDeviceAuth_AcceptAuthoriz
     }
 }
 
-#[doc = "Authorize own remote device that has pending request"]
 // @@protoc_insertion_point(message:CDeviceAuth_AuthorizeRemoteDevice_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDeviceAuth_AuthorizeRemoteDevice_Request {
@@ -1112,7 +1109,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CDeviceAuth_AuthorizeRemot
     }
 }
 
-#[doc = "Revoke own device authorization"]
 // @@protoc_insertion_point(message:CDeviceAuth_DeauthorizeRemoteDevice_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDeviceAuth_DeauthorizeRemoteDevice_Request {
@@ -1330,7 +1326,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CDeviceAuth_DeauthorizeRem
     }
 }
 
-#[doc = "Get list of authorized devices user played borrowed games on"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetUsedAuthorizedDevices_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDeviceAuth_GetUsedAuthorizedDevices_Request {
@@ -1788,7 +1783,6 @@ pub mod cdevice_auth_get_used_authorized_devices_response {
     }
 }
 
-#[doc = "Get list of users that can borrow on an authorized device"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetAuthorizedBorrowers_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDeviceAuth_GetAuthorizedBorrowers_Request {
@@ -2261,7 +2255,6 @@ pub mod cdevice_auth_get_authorized_borrowers_response {
     }
 }
 
-#[doc = "Add users that can borrow on limited authorized devices"]
 // @@protoc_insertion_point(message:CDeviceAuth_AddAuthorizedBorrowers_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDeviceAuth_AddAuthorizedBorrowers_Request {
@@ -2494,7 +2487,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CDeviceAuth_AddAuthorizedB
     }
 }
 
-#[doc = "Remove users that can borrow on limited authorized devices"]
 // @@protoc_insertion_point(message:CDeviceAuth_RemoveAuthorizedBorrowers_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDeviceAuth_RemoveAuthorizedBorrowers_Request {
@@ -2694,7 +2686,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CDeviceAuth_RemoveAuthoriz
     }
 }
 
-#[doc = "Get list of lenders that authorized given account as borrower"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetAuthorizedAsBorrower_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDeviceAuth_GetAuthorizedAsBorrower_Request {
@@ -3263,7 +3254,6 @@ pub mod cdevice_auth_get_authorized_as_borrower_response {
     }
 }
 
-#[doc = "Get list of excluded games in lenders library"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetExcludedGamesInLibrary_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDeviceAuth_GetExcludedGamesInLibrary_Request {
@@ -3689,7 +3679,6 @@ pub mod cdevice_auth_get_excluded_games_in_library_response {
     }
 }
 
-#[doc = "Get list played games as borrower"]
 // @@protoc_insertion_point(message:CDeviceAuth_GetBorrowerPlayHistory_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CDeviceAuth_GetBorrowerPlayHistory_Request {
@@ -4536,7 +4525,7 @@ for CDeviceAuth_GetBorrowerPlayHistory_Response {
         self.compute_size() as usize
     }
 }
-///Library Sharing settings service
+///
 struct DeviceAuth {}
 impl ::steam_vent_proto_common::RpcService for DeviceAuth {
     const SERVICE_NAME: &'static str = "DeviceAuth";

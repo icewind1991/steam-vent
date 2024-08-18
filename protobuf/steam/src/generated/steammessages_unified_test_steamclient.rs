@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Some description - MessageToClient."]
 // @@protoc_insertion_point(message:CMsgTest_MessageToClient_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMsgTest_MessageToClient_Request {
@@ -279,7 +278,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgTest_MessageToClient_R
     }
 }
 
-#[doc = "Some description - NotifyClient."]
 // @@protoc_insertion_point(message:CMsgTest_NotifyClient_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMsgTest_NotifyClient_Notification {
@@ -406,7 +404,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgTest_NotifyClient_Noti
     }
 }
 
-#[doc = "Some description - MessageToServer."]
 // @@protoc_insertion_point(message:CMsgTest_MessageToServer_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMsgTest_MessageToServer_Request {
@@ -659,7 +656,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgTest_MessageToServer_R
     }
 }
 
-#[doc = "Some description - NotifyServer."]
 // @@protoc_insertion_point(message:CMsgTest_NotifyServer_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMsgTest_NotifyServer_Notification {

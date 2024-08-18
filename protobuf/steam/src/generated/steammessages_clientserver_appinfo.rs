@@ -3494,6 +3494,403 @@ pub mod cmsg_client_picsaccess_token_response {
     }
 }
 
+// @@protoc_insertion_point(message:CMsgClientPICSPrivateBetaRequest)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgClientPICSPrivateBetaRequest {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgClientPICSPrivateBetaRequest.appid)
+    pub appid: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgClientPICSPrivateBetaRequest.access_token)
+    pub access_token: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CMsgClientPICSPrivateBetaRequest.beta_name)
+    pub beta_name: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CMsgClientPICSPrivateBetaRequest.password_hash)
+    pub password_hash: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgClientPICSPrivateBetaRequest.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgClientPICSPrivateBetaRequest {
+    fn default() -> &'a CMsgClientPICSPrivateBetaRequest {
+        <CMsgClientPICSPrivateBetaRequest as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgClientPICSPrivateBetaRequest {
+    pub fn new() -> CMsgClientPICSPrivateBetaRequest {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 appid = 1;
+
+    pub fn appid(&self) -> u32 {
+        self.appid.unwrap_or(0)
+    }
+
+    pub fn clear_appid(&mut self) {
+        self.appid = ::std::option::Option::None;
+    }
+
+    pub fn has_appid(&self) -> bool {
+        self.appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_appid(&mut self, v: u32) {
+        self.appid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint64 access_token = 2;
+
+    pub fn access_token(&self) -> u64 {
+        self.access_token.unwrap_or(0)
+    }
+
+    pub fn clear_access_token(&mut self) {
+        self.access_token = ::std::option::Option::None;
+    }
+
+    pub fn has_access_token(&self) -> bool {
+        self.access_token.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_access_token(&mut self, v: u64) {
+        self.access_token = ::std::option::Option::Some(v);
+    }
+
+    // optional string beta_name = 3;
+
+    pub fn beta_name(&self) -> &str {
+        match self.beta_name.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_beta_name(&mut self) {
+        self.beta_name = ::std::option::Option::None;
+    }
+
+    pub fn has_beta_name(&self) -> bool {
+        self.beta_name.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_beta_name(&mut self, v: ::std::string::String) {
+        self.beta_name = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_beta_name(&mut self) -> &mut ::std::string::String {
+        if self.beta_name.is_none() {
+            self.beta_name = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.beta_name.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_beta_name(&mut self) -> ::std::string::String {
+        self.beta_name.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional bytes password_hash = 4;
+
+    pub fn password_hash(&self) -> &[u8] {
+        match self.password_hash.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_password_hash(&mut self) {
+        self.password_hash = ::std::option::Option::None;
+    }
+
+    pub fn has_password_hash(&self) -> bool {
+        self.password_hash.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_password_hash(&mut self, v: ::std::vec::Vec<u8>) {
+        self.password_hash = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_password_hash(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.password_hash.is_none() {
+            self.password_hash = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.password_hash.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_password_hash(&mut self) -> ::std::vec::Vec<u8> {
+        self.password_hash.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgClientPICSPrivateBetaRequest {
+    const NAME: &'static str = "CMsgClientPICSPrivateBetaRequest";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.appid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.access_token = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                26 => {
+                    self.beta_name = ::std::option::Option::Some(is.read_string()?);
+                },
+                34 => {
+                    self.password_hash = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.access_token {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(2, v);
+        }
+        if let Some(v) = self.beta_name.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(3, &v);
+        }
+        if let Some(v) = self.password_hash.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(4, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.appid {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.access_token {
+            os.write_uint64(2, v)?;
+        }
+        if let Some(v) = self.beta_name.as_ref() {
+            os.write_string(3, v)?;
+        }
+        if let Some(v) = self.password_hash.as_ref() {
+            os.write_bytes(4, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgClientPICSPrivateBetaRequest {
+        CMsgClientPICSPrivateBetaRequest::new()
+    }
+
+    fn clear(&mut self) {
+        self.appid = ::std::option::Option::None;
+        self.access_token = ::std::option::Option::None;
+        self.beta_name = ::std::option::Option::None;
+        self.password_hash = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgClientPICSPrivateBetaRequest {
+        static instance: CMsgClientPICSPrivateBetaRequest = CMsgClientPICSPrivateBetaRequest {
+            appid: ::std::option::Option::None,
+            access_token: ::std::option::Option::None,
+            beta_name: ::std::option::Option::None,
+            password_hash: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMsgClientPICSPrivateBetaResponse)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgClientPICSPrivateBetaResponse {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgClientPICSPrivateBetaResponse.eresult)
+    pub eresult: ::std::option::Option<i32>,
+    // @@protoc_insertion_point(field:CMsgClientPICSPrivateBetaResponse.depot_section)
+    pub depot_section: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgClientPICSPrivateBetaResponse.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgClientPICSPrivateBetaResponse {
+    fn default() -> &'a CMsgClientPICSPrivateBetaResponse {
+        <CMsgClientPICSPrivateBetaResponse as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgClientPICSPrivateBetaResponse {
+    pub fn new() -> CMsgClientPICSPrivateBetaResponse {
+        ::std::default::Default::default()
+    }
+
+    // optional int32 eresult = 1;
+
+    pub fn eresult(&self) -> i32 {
+        self.eresult.unwrap_or(2i32)
+    }
+
+    pub fn clear_eresult(&mut self) {
+        self.eresult = ::std::option::Option::None;
+    }
+
+    pub fn has_eresult(&self) -> bool {
+        self.eresult.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_eresult(&mut self, v: i32) {
+        self.eresult = ::std::option::Option::Some(v);
+    }
+
+    // optional bytes depot_section = 2;
+
+    pub fn depot_section(&self) -> &[u8] {
+        match self.depot_section.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_depot_section(&mut self) {
+        self.depot_section = ::std::option::Option::None;
+    }
+
+    pub fn has_depot_section(&self) -> bool {
+        self.depot_section.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_depot_section(&mut self, v: ::std::vec::Vec<u8>) {
+        self.depot_section = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_depot_section(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.depot_section.is_none() {
+            self.depot_section = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.depot_section.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_depot_section(&mut self) -> ::std::vec::Vec<u8> {
+        self.depot_section.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgClientPICSPrivateBetaResponse {
+    const NAME: &'static str = "CMsgClientPICSPrivateBetaResponse";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.eresult = ::std::option::Option::Some(is.read_int32()?);
+                },
+                18 => {
+                    self.depot_section = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.eresult {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(1, v);
+        }
+        if let Some(v) = self.depot_section.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(2, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.eresult {
+            os.write_int32(1, v)?;
+        }
+        if let Some(v) = self.depot_section.as_ref() {
+            os.write_bytes(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgClientPICSPrivateBetaResponse {
+        CMsgClientPICSPrivateBetaResponse::new()
+    }
+
+    fn clear(&mut self) {
+        self.eresult = ::std::option::Option::None;
+        self.depot_section = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgClientPICSPrivateBetaResponse {
+        static instance: CMsgClientPICSPrivateBetaResponse = CMsgClientPICSPrivateBetaResponse {
+            eresult: ::std::option::Option::None,
+            depot_section: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 
 const _VENT_PROTO_VERSION_CHECK: () = ::steam_vent_proto_common::VERSION_0_5_0;
 
@@ -3637,4 +4034,30 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientPICSAccessTokenResponse
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientPICSAccessTokenResponse {
     const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientPICSAccessTokenResponse;
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgClientPICSPrivateBetaRequest {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgClientPICSPrivateBetaResponse {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
 }

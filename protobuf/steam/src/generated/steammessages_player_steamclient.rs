@@ -26,7 +26,2073 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Get me the mutual friends for each of my pending incoming invites (individuals and clans)."]
+// @@protoc_insertion_point(message:CPlayer_GetRecentPlaytimeSessionsForChild_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CPlayer_GetRecentPlaytimeSessionsForChild_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CPlayer_GetRecentPlaytimeSessionsForChild_Request.steamid)
+    pub steamid: ::std::option::Option<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CPlayer_GetRecentPlaytimeSessionsForChild_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CPlayer_GetRecentPlaytimeSessionsForChild_Request {
+    fn default() -> &'a CPlayer_GetRecentPlaytimeSessionsForChild_Request {
+        <CPlayer_GetRecentPlaytimeSessionsForChild_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CPlayer_GetRecentPlaytimeSessionsForChild_Request {
+    pub fn new() -> CPlayer_GetRecentPlaytimeSessionsForChild_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint64 steamid = 1;
+
+    pub fn steamid(&self) -> u64 {
+        self.steamid.unwrap_or(0)
+    }
+
+    pub fn clear_steamid(&mut self) {
+        self.steamid = ::std::option::Option::None;
+    }
+
+    pub fn has_steamid(&self) -> bool {
+        self.steamid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_steamid(&mut self, v: u64) {
+        self.steamid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetRecentPlaytimeSessionsForChild_Request {
+    const NAME: &'static str = "CPlayer_GetRecentPlaytimeSessionsForChild_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.steamid = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.steamid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(1, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.steamid {
+            os.write_uint64(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CPlayer_GetRecentPlaytimeSessionsForChild_Request {
+        CPlayer_GetRecentPlaytimeSessionsForChild_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.steamid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CPlayer_GetRecentPlaytimeSessionsForChild_Request {
+        static instance: CPlayer_GetRecentPlaytimeSessionsForChild_Request = CPlayer_GetRecentPlaytimeSessionsForChild_Request {
+            steamid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CPlayer_GetRecentPlaytimeSessionsForChild_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CPlayer_GetRecentPlaytimeSessionsForChild_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CPlayer_GetRecentPlaytimeSessionsForChild_Response.sessions)
+    pub sessions: ::std::vec::Vec<cplayer_get_recent_playtime_sessions_for_child_response::PlaytimeSession>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CPlayer_GetRecentPlaytimeSessionsForChild_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CPlayer_GetRecentPlaytimeSessionsForChild_Response {
+    fn default() -> &'a CPlayer_GetRecentPlaytimeSessionsForChild_Response {
+        <CPlayer_GetRecentPlaytimeSessionsForChild_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CPlayer_GetRecentPlaytimeSessionsForChild_Response {
+    pub fn new() -> CPlayer_GetRecentPlaytimeSessionsForChild_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetRecentPlaytimeSessionsForChild_Response {
+    const NAME: &'static str = "CPlayer_GetRecentPlaytimeSessionsForChild_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.sessions.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.sessions {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.sessions {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CPlayer_GetRecentPlaytimeSessionsForChild_Response {
+        CPlayer_GetRecentPlaytimeSessionsForChild_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.sessions.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CPlayer_GetRecentPlaytimeSessionsForChild_Response {
+        static instance: CPlayer_GetRecentPlaytimeSessionsForChild_Response = CPlayer_GetRecentPlaytimeSessionsForChild_Response {
+            sessions: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+/// Nested message and enums of message `CPlayer_GetRecentPlaytimeSessionsForChild_Response`
+pub mod cplayer_get_recent_playtime_sessions_for_child_response {
+    // @@protoc_insertion_point(message:CPlayer_GetRecentPlaytimeSessionsForChild_Response.PlaytimeSession)
+    #[derive(PartialEq,Clone,Default,Debug)]
+    pub struct PlaytimeSession {
+        // message fields
+        // @@protoc_insertion_point(field:CPlayer_GetRecentPlaytimeSessionsForChild_Response.PlaytimeSession.time_start)
+        pub time_start: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CPlayer_GetRecentPlaytimeSessionsForChild_Response.PlaytimeSession.time_end)
+        pub time_end: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CPlayer_GetRecentPlaytimeSessionsForChild_Response.PlaytimeSession.appid)
+        pub appid: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CPlayer_GetRecentPlaytimeSessionsForChild_Response.PlaytimeSession.device_type)
+        pub device_type: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CPlayer_GetRecentPlaytimeSessionsForChild_Response.PlaytimeSession.disconnected)
+        pub disconnected: ::std::option::Option<bool>,
+        // special fields
+        // @@protoc_insertion_point(special_field:CPlayer_GetRecentPlaytimeSessionsForChild_Response.PlaytimeSession.special_fields)
+        pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+    }
+
+    impl<'a> ::std::default::Default for &'a PlaytimeSession {
+        fn default() -> &'a PlaytimeSession {
+            <PlaytimeSession as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+        }
+    }
+
+    impl PlaytimeSession {
+        pub fn new() -> PlaytimeSession {
+            ::std::default::Default::default()
+        }
+
+        // optional uint32 time_start = 1;
+
+        pub fn time_start(&self) -> u32 {
+            self.time_start.unwrap_or(0)
+        }
+
+        pub fn clear_time_start(&mut self) {
+            self.time_start = ::std::option::Option::None;
+        }
+
+        pub fn has_time_start(&self) -> bool {
+            self.time_start.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_time_start(&mut self, v: u32) {
+            self.time_start = ::std::option::Option::Some(v);
+        }
+
+        // optional uint32 time_end = 2;
+
+        pub fn time_end(&self) -> u32 {
+            self.time_end.unwrap_or(0)
+        }
+
+        pub fn clear_time_end(&mut self) {
+            self.time_end = ::std::option::Option::None;
+        }
+
+        pub fn has_time_end(&self) -> bool {
+            self.time_end.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_time_end(&mut self, v: u32) {
+            self.time_end = ::std::option::Option::Some(v);
+        }
+
+        // optional uint32 appid = 3;
+
+        pub fn appid(&self) -> u32 {
+            self.appid.unwrap_or(0)
+        }
+
+        pub fn clear_appid(&mut self) {
+            self.appid = ::std::option::Option::None;
+        }
+
+        pub fn has_appid(&self) -> bool {
+            self.appid.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_appid(&mut self, v: u32) {
+            self.appid = ::std::option::Option::Some(v);
+        }
+
+        // optional uint32 device_type = 4;
+
+        pub fn device_type(&self) -> u32 {
+            self.device_type.unwrap_or(0)
+        }
+
+        pub fn clear_device_type(&mut self) {
+            self.device_type = ::std::option::Option::None;
+        }
+
+        pub fn has_device_type(&self) -> bool {
+            self.device_type.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_device_type(&mut self, v: u32) {
+            self.device_type = ::std::option::Option::Some(v);
+        }
+
+        // optional bool disconnected = 5;
+
+        pub fn disconnected(&self) -> bool {
+            self.disconnected.unwrap_or(false)
+        }
+
+        pub fn clear_disconnected(&mut self) {
+            self.disconnected = ::std::option::Option::None;
+        }
+
+        pub fn has_disconnected(&self) -> bool {
+            self.disconnected.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_disconnected(&mut self, v: bool) {
+            self.disconnected = ::std::option::Option::Some(v);
+        }
+    }
+
+    impl ::steam_vent_proto_common::protobuf::Message for PlaytimeSession {
+        const NAME: &'static str = "PlaytimeSession";
+
+        fn is_initialized(&self) -> bool {
+            true
+        }
+
+        fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+            while let Some(tag) = is.read_raw_tag_or_eof()? {
+                match tag {
+                    8 => {
+                        self.time_start = ::std::option::Option::Some(is.read_uint32()?);
+                    },
+                    16 => {
+                        self.time_end = ::std::option::Option::Some(is.read_uint32()?);
+                    },
+                    24 => {
+                        self.appid = ::std::option::Option::Some(is.read_uint32()?);
+                    },
+                    32 => {
+                        self.device_type = ::std::option::Option::Some(is.read_uint32()?);
+                    },
+                    40 => {
+                        self.disconnected = ::std::option::Option::Some(is.read_bool()?);
+                    },
+                    tag => {
+                        ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                    },
+                };
+            }
+            ::std::result::Result::Ok(())
+        }
+
+        // Compute sizes of nested messages
+        #[allow(unused_variables)]
+        fn compute_size(&self) -> u64 {
+            let mut my_size = 0;
+            if let Some(v) = self.time_start {
+                my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+            }
+            if let Some(v) = self.time_end {
+                my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+            }
+            if let Some(v) = self.appid {
+                my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
+            }
+            if let Some(v) = self.device_type {
+                my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(4, v);
+            }
+            if let Some(v) = self.disconnected {
+                my_size += 1 + 1;
+            }
+            my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+            self.special_fields.cached_size().set(my_size as u32);
+            my_size
+        }
+
+        fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+            if let Some(v) = self.time_start {
+                os.write_uint32(1, v)?;
+            }
+            if let Some(v) = self.time_end {
+                os.write_uint32(2, v)?;
+            }
+            if let Some(v) = self.appid {
+                os.write_uint32(3, v)?;
+            }
+            if let Some(v) = self.device_type {
+                os.write_uint32(4, v)?;
+            }
+            if let Some(v) = self.disconnected {
+                os.write_bool(5, v)?;
+            }
+            os.write_unknown_fields(self.special_fields.unknown_fields())?;
+            ::std::result::Result::Ok(())
+        }
+
+        fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+            &self.special_fields
+        }
+
+        fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+            &mut self.special_fields
+        }
+
+        fn new() -> PlaytimeSession {
+            PlaytimeSession::new()
+        }
+
+        fn clear(&mut self) {
+            self.time_start = ::std::option::Option::None;
+            self.time_end = ::std::option::Option::None;
+            self.appid = ::std::option::Option::None;
+            self.device_type = ::std::option::Option::None;
+            self.disconnected = ::std::option::Option::None;
+            self.special_fields.clear();
+        }
+
+        fn default_instance() -> &'static PlaytimeSession {
+            static instance: PlaytimeSession = PlaytimeSession {
+                time_start: ::std::option::Option::None,
+                time_end: ::std::option::Option::None,
+                appid: ::std::option::Option::None,
+                device_type: ::std::option::Option::None,
+                disconnected: ::std::option::Option::None,
+                special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+            };
+            &instance
+        }
+    }
+}
+
+// @@protoc_insertion_point(message:CPlayer_GetPlayerLinkDetails_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CPlayer_GetPlayerLinkDetails_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Request.steamids)
+    pub steamids: ::std::vec::Vec<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CPlayer_GetPlayerLinkDetails_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CPlayer_GetPlayerLinkDetails_Request {
+    fn default() -> &'a CPlayer_GetPlayerLinkDetails_Request {
+        <CPlayer_GetPlayerLinkDetails_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CPlayer_GetPlayerLinkDetails_Request {
+    pub fn new() -> CPlayer_GetPlayerLinkDetails_Request {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetPlayerLinkDetails_Request {
+    const NAME: &'static str = "CPlayer_GetPlayerLinkDetails_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    is.read_repeated_packed_uint64_into(&mut self.steamids)?;
+                },
+                8 => {
+                    self.steamids.push(is.read_uint64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.steamids {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(1, *value);
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.steamids {
+            os.write_uint64(1, *v)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CPlayer_GetPlayerLinkDetails_Request {
+        CPlayer_GetPlayerLinkDetails_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.steamids.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CPlayer_GetPlayerLinkDetails_Request {
+        static instance: CPlayer_GetPlayerLinkDetails_Request = CPlayer_GetPlayerLinkDetails_Request {
+            steamids: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CPlayer_GetPlayerLinkDetails_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CPlayer_GetPlayerLinkDetails_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.accounts)
+    pub accounts: ::std::vec::Vec<cplayer_get_player_link_details_response::PlayerLinkDetails>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CPlayer_GetPlayerLinkDetails_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CPlayer_GetPlayerLinkDetails_Response {
+    fn default() -> &'a CPlayer_GetPlayerLinkDetails_Response {
+        <CPlayer_GetPlayerLinkDetails_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CPlayer_GetPlayerLinkDetails_Response {
+    pub fn new() -> CPlayer_GetPlayerLinkDetails_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetPlayerLinkDetails_Response {
+    const NAME: &'static str = "CPlayer_GetPlayerLinkDetails_Response";
+
+    fn is_initialized(&self) -> bool {
+        for v in &self.accounts {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.accounts.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.accounts {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.accounts {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CPlayer_GetPlayerLinkDetails_Response {
+        CPlayer_GetPlayerLinkDetails_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.accounts.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CPlayer_GetPlayerLinkDetails_Response {
+        static instance: CPlayer_GetPlayerLinkDetails_Response = CPlayer_GetPlayerLinkDetails_Response {
+            accounts: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+/// Nested message and enums of message `CPlayer_GetPlayerLinkDetails_Response`
+pub mod cplayer_get_player_link_details_response {
+    // @@protoc_insertion_point(message:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails)
+    #[derive(PartialEq,Clone,Default,Debug)]
+    pub struct PlayerLinkDetails {
+        // message fields
+        // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.public_data)
+        pub public_data: ::steam_vent_proto_common::protobuf::MessageField<player_link_details::AccountPublicData>,
+        // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.private_data)
+        pub private_data: ::steam_vent_proto_common::protobuf::MessageField<player_link_details::AccountPrivateData>,
+        // special fields
+        // @@protoc_insertion_point(special_field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.special_fields)
+        pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+    }
+
+    impl<'a> ::std::default::Default for &'a PlayerLinkDetails {
+        fn default() -> &'a PlayerLinkDetails {
+            <PlayerLinkDetails as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+        }
+    }
+
+    impl PlayerLinkDetails {
+        pub fn new() -> PlayerLinkDetails {
+            ::std::default::Default::default()
+        }
+    }
+
+    impl ::steam_vent_proto_common::protobuf::Message for PlayerLinkDetails {
+        const NAME: &'static str = "PlayerLinkDetails";
+
+        fn is_initialized(&self) -> bool {
+            for v in &self.public_data {
+                if !v.is_initialized() {
+                    return false;
+                }
+            };
+            for v in &self.private_data {
+                if !v.is_initialized() {
+                    return false;
+                }
+            };
+            true
+        }
+
+        fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+            while let Some(tag) = is.read_raw_tag_or_eof()? {
+                match tag {
+                    10 => {
+                        ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.public_data)?;
+                    },
+                    18 => {
+                        ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.private_data)?;
+                    },
+                    tag => {
+                        ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                    },
+                };
+            }
+            ::std::result::Result::Ok(())
+        }
+
+        // Compute sizes of nested messages
+        #[allow(unused_variables)]
+        fn compute_size(&self) -> u64 {
+            let mut my_size = 0;
+            if let Some(v) = self.public_data.as_ref() {
+                let len = v.compute_size();
+                my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+            }
+            if let Some(v) = self.private_data.as_ref() {
+                let len = v.compute_size();
+                my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+            }
+            my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+            self.special_fields.cached_size().set(my_size as u32);
+            my_size
+        }
+
+        fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+            if let Some(v) = self.public_data.as_ref() {
+                ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+            }
+            if let Some(v) = self.private_data.as_ref() {
+                ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+            }
+            os.write_unknown_fields(self.special_fields.unknown_fields())?;
+            ::std::result::Result::Ok(())
+        }
+
+        fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+            &self.special_fields
+        }
+
+        fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+            &mut self.special_fields
+        }
+
+        fn new() -> PlayerLinkDetails {
+            PlayerLinkDetails::new()
+        }
+
+        fn clear(&mut self) {
+            self.public_data.clear();
+            self.private_data.clear();
+            self.special_fields.clear();
+        }
+
+        fn default_instance() -> &'static PlayerLinkDetails {
+            static instance: PlayerLinkDetails = PlayerLinkDetails {
+                public_data: ::steam_vent_proto_common::protobuf::MessageField::none(),
+                private_data: ::steam_vent_proto_common::protobuf::MessageField::none(),
+                special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+            };
+            &instance
+        }
+    }
+
+    /// Nested message and enums of message `PlayerLinkDetails`
+    pub mod player_link_details {
+        // @@protoc_insertion_point(message:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData)
+        #[derive(PartialEq,Clone,Default,Debug)]
+        pub struct AccountPublicData {
+            // message fields
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData.steamid)
+            pub steamid: ::std::option::Option<u64>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData.visibility_state)
+            pub visibility_state: ::std::option::Option<i32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData.privacy_state)
+            pub privacy_state: ::std::option::Option<i32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData.profile_state)
+            pub profile_state: ::std::option::Option<i32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData.ban_expires_time)
+            pub ban_expires_time: ::std::option::Option<u32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData.account_flags)
+            pub account_flags: ::std::option::Option<u32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData.sha_digest_avatar)
+            pub sha_digest_avatar: ::std::option::Option<::std::vec::Vec<u8>>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData.persona_name)
+            pub persona_name: ::std::option::Option<::std::string::String>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData.profile_url)
+            pub profile_url: ::std::option::Option<::std::string::String>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData.content_country_restricted)
+            pub content_country_restricted: ::std::option::Option<bool>,
+            // special fields
+            // @@protoc_insertion_point(special_field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPublicData.special_fields)
+            pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+        }
+
+        impl<'a> ::std::default::Default for &'a AccountPublicData {
+            fn default() -> &'a AccountPublicData {
+                <AccountPublicData as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+            }
+        }
+
+        impl AccountPublicData {
+            pub fn new() -> AccountPublicData {
+                ::std::default::Default::default()
+            }
+
+            // required fixed64 steamid = 1;
+
+            pub fn steamid(&self) -> u64 {
+                self.steamid.unwrap_or(0)
+            }
+
+            pub fn clear_steamid(&mut self) {
+                self.steamid = ::std::option::Option::None;
+            }
+
+            pub fn has_steamid(&self) -> bool {
+                self.steamid.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_steamid(&mut self, v: u64) {
+                self.steamid = ::std::option::Option::Some(v);
+            }
+
+            // optional int32 visibility_state = 2;
+
+            pub fn visibility_state(&self) -> i32 {
+                self.visibility_state.unwrap_or(0)
+            }
+
+            pub fn clear_visibility_state(&mut self) {
+                self.visibility_state = ::std::option::Option::None;
+            }
+
+            pub fn has_visibility_state(&self) -> bool {
+                self.visibility_state.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_visibility_state(&mut self, v: i32) {
+                self.visibility_state = ::std::option::Option::Some(v);
+            }
+
+            // optional int32 privacy_state = 3;
+
+            pub fn privacy_state(&self) -> i32 {
+                self.privacy_state.unwrap_or(0)
+            }
+
+            pub fn clear_privacy_state(&mut self) {
+                self.privacy_state = ::std::option::Option::None;
+            }
+
+            pub fn has_privacy_state(&self) -> bool {
+                self.privacy_state.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_privacy_state(&mut self, v: i32) {
+                self.privacy_state = ::std::option::Option::Some(v);
+            }
+
+            // optional int32 profile_state = 4;
+
+            pub fn profile_state(&self) -> i32 {
+                self.profile_state.unwrap_or(0)
+            }
+
+            pub fn clear_profile_state(&mut self) {
+                self.profile_state = ::std::option::Option::None;
+            }
+
+            pub fn has_profile_state(&self) -> bool {
+                self.profile_state.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_profile_state(&mut self, v: i32) {
+                self.profile_state = ::std::option::Option::Some(v);
+            }
+
+            // optional uint32 ban_expires_time = 7;
+
+            pub fn ban_expires_time(&self) -> u32 {
+                self.ban_expires_time.unwrap_or(0)
+            }
+
+            pub fn clear_ban_expires_time(&mut self) {
+                self.ban_expires_time = ::std::option::Option::None;
+            }
+
+            pub fn has_ban_expires_time(&self) -> bool {
+                self.ban_expires_time.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_ban_expires_time(&mut self, v: u32) {
+                self.ban_expires_time = ::std::option::Option::Some(v);
+            }
+
+            // optional uint32 account_flags = 8;
+
+            pub fn account_flags(&self) -> u32 {
+                self.account_flags.unwrap_or(0)
+            }
+
+            pub fn clear_account_flags(&mut self) {
+                self.account_flags = ::std::option::Option::None;
+            }
+
+            pub fn has_account_flags(&self) -> bool {
+                self.account_flags.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_account_flags(&mut self, v: u32) {
+                self.account_flags = ::std::option::Option::Some(v);
+            }
+
+            // optional bytes sha_digest_avatar = 9;
+
+            pub fn sha_digest_avatar(&self) -> &[u8] {
+                match self.sha_digest_avatar.as_ref() {
+                    Some(v) => v,
+                    None => &[],
+                }
+            }
+
+            pub fn clear_sha_digest_avatar(&mut self) {
+                self.sha_digest_avatar = ::std::option::Option::None;
+            }
+
+            pub fn has_sha_digest_avatar(&self) -> bool {
+                self.sha_digest_avatar.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_sha_digest_avatar(&mut self, v: ::std::vec::Vec<u8>) {
+                self.sha_digest_avatar = ::std::option::Option::Some(v);
+            }
+
+            // Mutable pointer to the field.
+            // If field is not initialized, it is initialized with default value first.
+            pub fn mut_sha_digest_avatar(&mut self) -> &mut ::std::vec::Vec<u8> {
+                if self.sha_digest_avatar.is_none() {
+                    self.sha_digest_avatar = ::std::option::Option::Some(::std::vec::Vec::new());
+                }
+                self.sha_digest_avatar.as_mut().unwrap()
+            }
+
+            // Take field
+            pub fn take_sha_digest_avatar(&mut self) -> ::std::vec::Vec<u8> {
+                self.sha_digest_avatar.take().unwrap_or_else(|| ::std::vec::Vec::new())
+            }
+
+            // optional string persona_name = 10;
+
+            pub fn persona_name(&self) -> &str {
+                match self.persona_name.as_ref() {
+                    Some(v) => v,
+                    None => "",
+                }
+            }
+
+            pub fn clear_persona_name(&mut self) {
+                self.persona_name = ::std::option::Option::None;
+            }
+
+            pub fn has_persona_name(&self) -> bool {
+                self.persona_name.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_persona_name(&mut self, v: ::std::string::String) {
+                self.persona_name = ::std::option::Option::Some(v);
+            }
+
+            // Mutable pointer to the field.
+            // If field is not initialized, it is initialized with default value first.
+            pub fn mut_persona_name(&mut self) -> &mut ::std::string::String {
+                if self.persona_name.is_none() {
+                    self.persona_name = ::std::option::Option::Some(::std::string::String::new());
+                }
+                self.persona_name.as_mut().unwrap()
+            }
+
+            // Take field
+            pub fn take_persona_name(&mut self) -> ::std::string::String {
+                self.persona_name.take().unwrap_or_else(|| ::std::string::String::new())
+            }
+
+            // optional string profile_url = 11;
+
+            pub fn profile_url(&self) -> &str {
+                match self.profile_url.as_ref() {
+                    Some(v) => v,
+                    None => "",
+                }
+            }
+
+            pub fn clear_profile_url(&mut self) {
+                self.profile_url = ::std::option::Option::None;
+            }
+
+            pub fn has_profile_url(&self) -> bool {
+                self.profile_url.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_profile_url(&mut self, v: ::std::string::String) {
+                self.profile_url = ::std::option::Option::Some(v);
+            }
+
+            // Mutable pointer to the field.
+            // If field is not initialized, it is initialized with default value first.
+            pub fn mut_profile_url(&mut self) -> &mut ::std::string::String {
+                if self.profile_url.is_none() {
+                    self.profile_url = ::std::option::Option::Some(::std::string::String::new());
+                }
+                self.profile_url.as_mut().unwrap()
+            }
+
+            // Take field
+            pub fn take_profile_url(&mut self) -> ::std::string::String {
+                self.profile_url.take().unwrap_or_else(|| ::std::string::String::new())
+            }
+
+            // optional bool content_country_restricted = 12;
+
+            pub fn content_country_restricted(&self) -> bool {
+                self.content_country_restricted.unwrap_or(false)
+            }
+
+            pub fn clear_content_country_restricted(&mut self) {
+                self.content_country_restricted = ::std::option::Option::None;
+            }
+
+            pub fn has_content_country_restricted(&self) -> bool {
+                self.content_country_restricted.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_content_country_restricted(&mut self, v: bool) {
+                self.content_country_restricted = ::std::option::Option::Some(v);
+            }
+        }
+
+        impl ::steam_vent_proto_common::protobuf::Message for AccountPublicData {
+            const NAME: &'static str = "AccountPublicData";
+
+            fn is_initialized(&self) -> bool {
+                if self.steamid.is_none() {
+                    return false;
+                }
+                true
+            }
+
+            fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+                while let Some(tag) = is.read_raw_tag_or_eof()? {
+                    match tag {
+                        9 => {
+                            self.steamid = ::std::option::Option::Some(is.read_fixed64()?);
+                        },
+                        16 => {
+                            self.visibility_state = ::std::option::Option::Some(is.read_int32()?);
+                        },
+                        24 => {
+                            self.privacy_state = ::std::option::Option::Some(is.read_int32()?);
+                        },
+                        32 => {
+                            self.profile_state = ::std::option::Option::Some(is.read_int32()?);
+                        },
+                        56 => {
+                            self.ban_expires_time = ::std::option::Option::Some(is.read_uint32()?);
+                        },
+                        64 => {
+                            self.account_flags = ::std::option::Option::Some(is.read_uint32()?);
+                        },
+                        74 => {
+                            self.sha_digest_avatar = ::std::option::Option::Some(is.read_bytes()?);
+                        },
+                        82 => {
+                            self.persona_name = ::std::option::Option::Some(is.read_string()?);
+                        },
+                        90 => {
+                            self.profile_url = ::std::option::Option::Some(is.read_string()?);
+                        },
+                        96 => {
+                            self.content_country_restricted = ::std::option::Option::Some(is.read_bool()?);
+                        },
+                        tag => {
+                            ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                        },
+                    };
+                }
+                ::std::result::Result::Ok(())
+            }
+
+            // Compute sizes of nested messages
+            #[allow(unused_variables)]
+            fn compute_size(&self) -> u64 {
+                let mut my_size = 0;
+                if let Some(v) = self.steamid {
+                    my_size += 1 + 8;
+                }
+                if let Some(v) = self.visibility_state {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(2, v);
+                }
+                if let Some(v) = self.privacy_state {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(3, v);
+                }
+                if let Some(v) = self.profile_state {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(4, v);
+                }
+                if let Some(v) = self.ban_expires_time {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(7, v);
+                }
+                if let Some(v) = self.account_flags {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(8, v);
+                }
+                if let Some(v) = self.sha_digest_avatar.as_ref() {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::bytes_size(9, &v);
+                }
+                if let Some(v) = self.persona_name.as_ref() {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::string_size(10, &v);
+                }
+                if let Some(v) = self.profile_url.as_ref() {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::string_size(11, &v);
+                }
+                if let Some(v) = self.content_country_restricted {
+                    my_size += 1 + 1;
+                }
+                my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+                self.special_fields.cached_size().set(my_size as u32);
+                my_size
+            }
+
+            fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+                if let Some(v) = self.steamid {
+                    os.write_fixed64(1, v)?;
+                }
+                if let Some(v) = self.visibility_state {
+                    os.write_int32(2, v)?;
+                }
+                if let Some(v) = self.privacy_state {
+                    os.write_int32(3, v)?;
+                }
+                if let Some(v) = self.profile_state {
+                    os.write_int32(4, v)?;
+                }
+                if let Some(v) = self.ban_expires_time {
+                    os.write_uint32(7, v)?;
+                }
+                if let Some(v) = self.account_flags {
+                    os.write_uint32(8, v)?;
+                }
+                if let Some(v) = self.sha_digest_avatar.as_ref() {
+                    os.write_bytes(9, v)?;
+                }
+                if let Some(v) = self.persona_name.as_ref() {
+                    os.write_string(10, v)?;
+                }
+                if let Some(v) = self.profile_url.as_ref() {
+                    os.write_string(11, v)?;
+                }
+                if let Some(v) = self.content_country_restricted {
+                    os.write_bool(12, v)?;
+                }
+                os.write_unknown_fields(self.special_fields.unknown_fields())?;
+                ::std::result::Result::Ok(())
+            }
+
+            fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+                &self.special_fields
+            }
+
+            fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+                &mut self.special_fields
+            }
+
+            fn new() -> AccountPublicData {
+                AccountPublicData::new()
+            }
+
+            fn clear(&mut self) {
+                self.steamid = ::std::option::Option::None;
+                self.visibility_state = ::std::option::Option::None;
+                self.privacy_state = ::std::option::Option::None;
+                self.profile_state = ::std::option::Option::None;
+                self.ban_expires_time = ::std::option::Option::None;
+                self.account_flags = ::std::option::Option::None;
+                self.sha_digest_avatar = ::std::option::Option::None;
+                self.persona_name = ::std::option::Option::None;
+                self.profile_url = ::std::option::Option::None;
+                self.content_country_restricted = ::std::option::Option::None;
+                self.special_fields.clear();
+            }
+
+            fn default_instance() -> &'static AccountPublicData {
+                static instance: AccountPublicData = AccountPublicData {
+                    steamid: ::std::option::Option::None,
+                    visibility_state: ::std::option::Option::None,
+                    privacy_state: ::std::option::Option::None,
+                    profile_state: ::std::option::Option::None,
+                    ban_expires_time: ::std::option::Option::None,
+                    account_flags: ::std::option::Option::None,
+                    sha_digest_avatar: ::std::option::Option::None,
+                    persona_name: ::std::option::Option::None,
+                    profile_url: ::std::option::Option::None,
+                    content_country_restricted: ::std::option::Option::None,
+                    special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+                };
+                &instance
+            }
+        }
+
+        // @@protoc_insertion_point(message:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData)
+        #[derive(PartialEq,Clone,Default,Debug)]
+        pub struct AccountPrivateData {
+            // message fields
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.persona_state)
+            pub persona_state: ::std::option::Option<i32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.persona_state_flags)
+            pub persona_state_flags: ::std::option::Option<u32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.time_created)
+            pub time_created: ::std::option::Option<u32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.game_id)
+            pub game_id: ::std::option::Option<u64>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.game_server_steam_id)
+            pub game_server_steam_id: ::std::option::Option<u64>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.game_server_ip_address)
+            pub game_server_ip_address: ::std::option::Option<u32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.game_server_port)
+            pub game_server_port: ::std::option::Option<u32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.game_extra_info)
+            pub game_extra_info: ::std::option::Option<::std::string::String>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.account_name)
+            pub account_name: ::std::option::Option<::std::string::String>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.lobby_steam_id)
+            pub lobby_steam_id: ::std::option::Option<u64>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.rich_presence_kv)
+            pub rich_presence_kv: ::std::option::Option<::std::string::String>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.broadcast_session_id)
+            pub broadcast_session_id: ::std::option::Option<u64>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.watching_broadcast_accountid)
+            pub watching_broadcast_accountid: ::std::option::Option<u32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.watching_broadcast_appid)
+            pub watching_broadcast_appid: ::std::option::Option<u32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.watching_broadcast_viewers)
+            pub watching_broadcast_viewers: ::std::option::Option<u32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.watching_broadcast_title)
+            pub watching_broadcast_title: ::std::option::Option<::std::string::String>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.last_logoff_time)
+            pub last_logoff_time: ::std::option::Option<u32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.last_seen_online)
+            pub last_seen_online: ::std::option::Option<u32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.game_os_type)
+            pub game_os_type: ::std::option::Option<i32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.game_device_type)
+            pub game_device_type: ::std::option::Option<i32>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.game_device_name)
+            pub game_device_name: ::std::option::Option<::std::string::String>,
+            // @@protoc_insertion_point(field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.game_is_private)
+            pub game_is_private: ::std::option::Option<bool>,
+            // special fields
+            // @@protoc_insertion_point(special_field:CPlayer_GetPlayerLinkDetails_Response.PlayerLinkDetails.AccountPrivateData.special_fields)
+            pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+        }
+
+        impl<'a> ::std::default::Default for &'a AccountPrivateData {
+            fn default() -> &'a AccountPrivateData {
+                <AccountPrivateData as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+            }
+        }
+
+        impl AccountPrivateData {
+            pub fn new() -> AccountPrivateData {
+                ::std::default::Default::default()
+            }
+
+            // optional int32 persona_state = 1;
+
+            pub fn persona_state(&self) -> i32 {
+                self.persona_state.unwrap_or(0)
+            }
+
+            pub fn clear_persona_state(&mut self) {
+                self.persona_state = ::std::option::Option::None;
+            }
+
+            pub fn has_persona_state(&self) -> bool {
+                self.persona_state.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_persona_state(&mut self, v: i32) {
+                self.persona_state = ::std::option::Option::Some(v);
+            }
+
+            // optional uint32 persona_state_flags = 2;
+
+            pub fn persona_state_flags(&self) -> u32 {
+                self.persona_state_flags.unwrap_or(0)
+            }
+
+            pub fn clear_persona_state_flags(&mut self) {
+                self.persona_state_flags = ::std::option::Option::None;
+            }
+
+            pub fn has_persona_state_flags(&self) -> bool {
+                self.persona_state_flags.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_persona_state_flags(&mut self, v: u32) {
+                self.persona_state_flags = ::std::option::Option::Some(v);
+            }
+
+            // optional uint32 time_created = 3;
+
+            pub fn time_created(&self) -> u32 {
+                self.time_created.unwrap_or(0)
+            }
+
+            pub fn clear_time_created(&mut self) {
+                self.time_created = ::std::option::Option::None;
+            }
+
+            pub fn has_time_created(&self) -> bool {
+                self.time_created.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_time_created(&mut self, v: u32) {
+                self.time_created = ::std::option::Option::Some(v);
+            }
+
+            // optional fixed64 game_id = 4;
+
+            pub fn game_id(&self) -> u64 {
+                self.game_id.unwrap_or(0)
+            }
+
+            pub fn clear_game_id(&mut self) {
+                self.game_id = ::std::option::Option::None;
+            }
+
+            pub fn has_game_id(&self) -> bool {
+                self.game_id.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_game_id(&mut self, v: u64) {
+                self.game_id = ::std::option::Option::Some(v);
+            }
+
+            // optional fixed64 game_server_steam_id = 5;
+
+            pub fn game_server_steam_id(&self) -> u64 {
+                self.game_server_steam_id.unwrap_or(0)
+            }
+
+            pub fn clear_game_server_steam_id(&mut self) {
+                self.game_server_steam_id = ::std::option::Option::None;
+            }
+
+            pub fn has_game_server_steam_id(&self) -> bool {
+                self.game_server_steam_id.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_game_server_steam_id(&mut self, v: u64) {
+                self.game_server_steam_id = ::std::option::Option::Some(v);
+            }
+
+            // optional uint32 game_server_ip_address = 6;
+
+            pub fn game_server_ip_address(&self) -> u32 {
+                self.game_server_ip_address.unwrap_or(0)
+            }
+
+            pub fn clear_game_server_ip_address(&mut self) {
+                self.game_server_ip_address = ::std::option::Option::None;
+            }
+
+            pub fn has_game_server_ip_address(&self) -> bool {
+                self.game_server_ip_address.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_game_server_ip_address(&mut self, v: u32) {
+                self.game_server_ip_address = ::std::option::Option::Some(v);
+            }
+
+            // optional uint32 game_server_port = 7;
+
+            pub fn game_server_port(&self) -> u32 {
+                self.game_server_port.unwrap_or(0)
+            }
+
+            pub fn clear_game_server_port(&mut self) {
+                self.game_server_port = ::std::option::Option::None;
+            }
+
+            pub fn has_game_server_port(&self) -> bool {
+                self.game_server_port.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_game_server_port(&mut self, v: u32) {
+                self.game_server_port = ::std::option::Option::Some(v);
+            }
+
+            // optional string game_extra_info = 8;
+
+            pub fn game_extra_info(&self) -> &str {
+                match self.game_extra_info.as_ref() {
+                    Some(v) => v,
+                    None => "",
+                }
+            }
+
+            pub fn clear_game_extra_info(&mut self) {
+                self.game_extra_info = ::std::option::Option::None;
+            }
+
+            pub fn has_game_extra_info(&self) -> bool {
+                self.game_extra_info.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_game_extra_info(&mut self, v: ::std::string::String) {
+                self.game_extra_info = ::std::option::Option::Some(v);
+            }
+
+            // Mutable pointer to the field.
+            // If field is not initialized, it is initialized with default value first.
+            pub fn mut_game_extra_info(&mut self) -> &mut ::std::string::String {
+                if self.game_extra_info.is_none() {
+                    self.game_extra_info = ::std::option::Option::Some(::std::string::String::new());
+                }
+                self.game_extra_info.as_mut().unwrap()
+            }
+
+            // Take field
+            pub fn take_game_extra_info(&mut self) -> ::std::string::String {
+                self.game_extra_info.take().unwrap_or_else(|| ::std::string::String::new())
+            }
+
+            // optional string account_name = 9;
+
+            pub fn account_name(&self) -> &str {
+                match self.account_name.as_ref() {
+                    Some(v) => v,
+                    None => "",
+                }
+            }
+
+            pub fn clear_account_name(&mut self) {
+                self.account_name = ::std::option::Option::None;
+            }
+
+            pub fn has_account_name(&self) -> bool {
+                self.account_name.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_account_name(&mut self, v: ::std::string::String) {
+                self.account_name = ::std::option::Option::Some(v);
+            }
+
+            // Mutable pointer to the field.
+            // If field is not initialized, it is initialized with default value first.
+            pub fn mut_account_name(&mut self) -> &mut ::std::string::String {
+                if self.account_name.is_none() {
+                    self.account_name = ::std::option::Option::Some(::std::string::String::new());
+                }
+                self.account_name.as_mut().unwrap()
+            }
+
+            // Take field
+            pub fn take_account_name(&mut self) -> ::std::string::String {
+                self.account_name.take().unwrap_or_else(|| ::std::string::String::new())
+            }
+
+            // optional fixed64 lobby_steam_id = 10;
+
+            pub fn lobby_steam_id(&self) -> u64 {
+                self.lobby_steam_id.unwrap_or(0)
+            }
+
+            pub fn clear_lobby_steam_id(&mut self) {
+                self.lobby_steam_id = ::std::option::Option::None;
+            }
+
+            pub fn has_lobby_steam_id(&self) -> bool {
+                self.lobby_steam_id.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_lobby_steam_id(&mut self, v: u64) {
+                self.lobby_steam_id = ::std::option::Option::Some(v);
+            }
+
+            // optional string rich_presence_kv = 11;
+
+            pub fn rich_presence_kv(&self) -> &str {
+                match self.rich_presence_kv.as_ref() {
+                    Some(v) => v,
+                    None => "",
+                }
+            }
+
+            pub fn clear_rich_presence_kv(&mut self) {
+                self.rich_presence_kv = ::std::option::Option::None;
+            }
+
+            pub fn has_rich_presence_kv(&self) -> bool {
+                self.rich_presence_kv.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_rich_presence_kv(&mut self, v: ::std::string::String) {
+                self.rich_presence_kv = ::std::option::Option::Some(v);
+            }
+
+            // Mutable pointer to the field.
+            // If field is not initialized, it is initialized with default value first.
+            pub fn mut_rich_presence_kv(&mut self) -> &mut ::std::string::String {
+                if self.rich_presence_kv.is_none() {
+                    self.rich_presence_kv = ::std::option::Option::Some(::std::string::String::new());
+                }
+                self.rich_presence_kv.as_mut().unwrap()
+            }
+
+            // Take field
+            pub fn take_rich_presence_kv(&mut self) -> ::std::string::String {
+                self.rich_presence_kv.take().unwrap_or_else(|| ::std::string::String::new())
+            }
+
+            // optional fixed64 broadcast_session_id = 12;
+
+            pub fn broadcast_session_id(&self) -> u64 {
+                self.broadcast_session_id.unwrap_or(0)
+            }
+
+            pub fn clear_broadcast_session_id(&mut self) {
+                self.broadcast_session_id = ::std::option::Option::None;
+            }
+
+            pub fn has_broadcast_session_id(&self) -> bool {
+                self.broadcast_session_id.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_broadcast_session_id(&mut self, v: u64) {
+                self.broadcast_session_id = ::std::option::Option::Some(v);
+            }
+
+            // optional uint32 watching_broadcast_accountid = 13;
+
+            pub fn watching_broadcast_accountid(&self) -> u32 {
+                self.watching_broadcast_accountid.unwrap_or(0)
+            }
+
+            pub fn clear_watching_broadcast_accountid(&mut self) {
+                self.watching_broadcast_accountid = ::std::option::Option::None;
+            }
+
+            pub fn has_watching_broadcast_accountid(&self) -> bool {
+                self.watching_broadcast_accountid.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_watching_broadcast_accountid(&mut self, v: u32) {
+                self.watching_broadcast_accountid = ::std::option::Option::Some(v);
+            }
+
+            // optional uint32 watching_broadcast_appid = 14;
+
+            pub fn watching_broadcast_appid(&self) -> u32 {
+                self.watching_broadcast_appid.unwrap_or(0)
+            }
+
+            pub fn clear_watching_broadcast_appid(&mut self) {
+                self.watching_broadcast_appid = ::std::option::Option::None;
+            }
+
+            pub fn has_watching_broadcast_appid(&self) -> bool {
+                self.watching_broadcast_appid.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_watching_broadcast_appid(&mut self, v: u32) {
+                self.watching_broadcast_appid = ::std::option::Option::Some(v);
+            }
+
+            // optional uint32 watching_broadcast_viewers = 15;
+
+            pub fn watching_broadcast_viewers(&self) -> u32 {
+                self.watching_broadcast_viewers.unwrap_or(0)
+            }
+
+            pub fn clear_watching_broadcast_viewers(&mut self) {
+                self.watching_broadcast_viewers = ::std::option::Option::None;
+            }
+
+            pub fn has_watching_broadcast_viewers(&self) -> bool {
+                self.watching_broadcast_viewers.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_watching_broadcast_viewers(&mut self, v: u32) {
+                self.watching_broadcast_viewers = ::std::option::Option::Some(v);
+            }
+
+            // optional string watching_broadcast_title = 16;
+
+            pub fn watching_broadcast_title(&self) -> &str {
+                match self.watching_broadcast_title.as_ref() {
+                    Some(v) => v,
+                    None => "",
+                }
+            }
+
+            pub fn clear_watching_broadcast_title(&mut self) {
+                self.watching_broadcast_title = ::std::option::Option::None;
+            }
+
+            pub fn has_watching_broadcast_title(&self) -> bool {
+                self.watching_broadcast_title.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_watching_broadcast_title(&mut self, v: ::std::string::String) {
+                self.watching_broadcast_title = ::std::option::Option::Some(v);
+            }
+
+            // Mutable pointer to the field.
+            // If field is not initialized, it is initialized with default value first.
+            pub fn mut_watching_broadcast_title(&mut self) -> &mut ::std::string::String {
+                if self.watching_broadcast_title.is_none() {
+                    self.watching_broadcast_title = ::std::option::Option::Some(::std::string::String::new());
+                }
+                self.watching_broadcast_title.as_mut().unwrap()
+            }
+
+            // Take field
+            pub fn take_watching_broadcast_title(&mut self) -> ::std::string::String {
+                self.watching_broadcast_title.take().unwrap_or_else(|| ::std::string::String::new())
+            }
+
+            // optional uint32 last_logoff_time = 17;
+
+            pub fn last_logoff_time(&self) -> u32 {
+                self.last_logoff_time.unwrap_or(0)
+            }
+
+            pub fn clear_last_logoff_time(&mut self) {
+                self.last_logoff_time = ::std::option::Option::None;
+            }
+
+            pub fn has_last_logoff_time(&self) -> bool {
+                self.last_logoff_time.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_last_logoff_time(&mut self, v: u32) {
+                self.last_logoff_time = ::std::option::Option::Some(v);
+            }
+
+            // optional uint32 last_seen_online = 18;
+
+            pub fn last_seen_online(&self) -> u32 {
+                self.last_seen_online.unwrap_or(0)
+            }
+
+            pub fn clear_last_seen_online(&mut self) {
+                self.last_seen_online = ::std::option::Option::None;
+            }
+
+            pub fn has_last_seen_online(&self) -> bool {
+                self.last_seen_online.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_last_seen_online(&mut self, v: u32) {
+                self.last_seen_online = ::std::option::Option::Some(v);
+            }
+
+            // optional int32 game_os_type = 19;
+
+            pub fn game_os_type(&self) -> i32 {
+                self.game_os_type.unwrap_or(0)
+            }
+
+            pub fn clear_game_os_type(&mut self) {
+                self.game_os_type = ::std::option::Option::None;
+            }
+
+            pub fn has_game_os_type(&self) -> bool {
+                self.game_os_type.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_game_os_type(&mut self, v: i32) {
+                self.game_os_type = ::std::option::Option::Some(v);
+            }
+
+            // optional int32 game_device_type = 20;
+
+            pub fn game_device_type(&self) -> i32 {
+                self.game_device_type.unwrap_or(0)
+            }
+
+            pub fn clear_game_device_type(&mut self) {
+                self.game_device_type = ::std::option::Option::None;
+            }
+
+            pub fn has_game_device_type(&self) -> bool {
+                self.game_device_type.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_game_device_type(&mut self, v: i32) {
+                self.game_device_type = ::std::option::Option::Some(v);
+            }
+
+            // optional string game_device_name = 21;
+
+            pub fn game_device_name(&self) -> &str {
+                match self.game_device_name.as_ref() {
+                    Some(v) => v,
+                    None => "",
+                }
+            }
+
+            pub fn clear_game_device_name(&mut self) {
+                self.game_device_name = ::std::option::Option::None;
+            }
+
+            pub fn has_game_device_name(&self) -> bool {
+                self.game_device_name.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_game_device_name(&mut self, v: ::std::string::String) {
+                self.game_device_name = ::std::option::Option::Some(v);
+            }
+
+            // Mutable pointer to the field.
+            // If field is not initialized, it is initialized with default value first.
+            pub fn mut_game_device_name(&mut self) -> &mut ::std::string::String {
+                if self.game_device_name.is_none() {
+                    self.game_device_name = ::std::option::Option::Some(::std::string::String::new());
+                }
+                self.game_device_name.as_mut().unwrap()
+            }
+
+            // Take field
+            pub fn take_game_device_name(&mut self) -> ::std::string::String {
+                self.game_device_name.take().unwrap_or_else(|| ::std::string::String::new())
+            }
+
+            // optional bool game_is_private = 22;
+
+            pub fn game_is_private(&self) -> bool {
+                self.game_is_private.unwrap_or(false)
+            }
+
+            pub fn clear_game_is_private(&mut self) {
+                self.game_is_private = ::std::option::Option::None;
+            }
+
+            pub fn has_game_is_private(&self) -> bool {
+                self.game_is_private.is_some()
+            }
+
+            // Param is passed by value, moved
+            pub fn set_game_is_private(&mut self, v: bool) {
+                self.game_is_private = ::std::option::Option::Some(v);
+            }
+        }
+
+        impl ::steam_vent_proto_common::protobuf::Message for AccountPrivateData {
+            const NAME: &'static str = "AccountPrivateData";
+
+            fn is_initialized(&self) -> bool {
+                true
+            }
+
+            fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+                while let Some(tag) = is.read_raw_tag_or_eof()? {
+                    match tag {
+                        8 => {
+                            self.persona_state = ::std::option::Option::Some(is.read_int32()?);
+                        },
+                        16 => {
+                            self.persona_state_flags = ::std::option::Option::Some(is.read_uint32()?);
+                        },
+                        24 => {
+                            self.time_created = ::std::option::Option::Some(is.read_uint32()?);
+                        },
+                        33 => {
+                            self.game_id = ::std::option::Option::Some(is.read_fixed64()?);
+                        },
+                        41 => {
+                            self.game_server_steam_id = ::std::option::Option::Some(is.read_fixed64()?);
+                        },
+                        48 => {
+                            self.game_server_ip_address = ::std::option::Option::Some(is.read_uint32()?);
+                        },
+                        56 => {
+                            self.game_server_port = ::std::option::Option::Some(is.read_uint32()?);
+                        },
+                        66 => {
+                            self.game_extra_info = ::std::option::Option::Some(is.read_string()?);
+                        },
+                        74 => {
+                            self.account_name = ::std::option::Option::Some(is.read_string()?);
+                        },
+                        81 => {
+                            self.lobby_steam_id = ::std::option::Option::Some(is.read_fixed64()?);
+                        },
+                        90 => {
+                            self.rich_presence_kv = ::std::option::Option::Some(is.read_string()?);
+                        },
+                        97 => {
+                            self.broadcast_session_id = ::std::option::Option::Some(is.read_fixed64()?);
+                        },
+                        104 => {
+                            self.watching_broadcast_accountid = ::std::option::Option::Some(is.read_uint32()?);
+                        },
+                        112 => {
+                            self.watching_broadcast_appid = ::std::option::Option::Some(is.read_uint32()?);
+                        },
+                        120 => {
+                            self.watching_broadcast_viewers = ::std::option::Option::Some(is.read_uint32()?);
+                        },
+                        130 => {
+                            self.watching_broadcast_title = ::std::option::Option::Some(is.read_string()?);
+                        },
+                        136 => {
+                            self.last_logoff_time = ::std::option::Option::Some(is.read_uint32()?);
+                        },
+                        144 => {
+                            self.last_seen_online = ::std::option::Option::Some(is.read_uint32()?);
+                        },
+                        152 => {
+                            self.game_os_type = ::std::option::Option::Some(is.read_int32()?);
+                        },
+                        160 => {
+                            self.game_device_type = ::std::option::Option::Some(is.read_int32()?);
+                        },
+                        170 => {
+                            self.game_device_name = ::std::option::Option::Some(is.read_string()?);
+                        },
+                        176 => {
+                            self.game_is_private = ::std::option::Option::Some(is.read_bool()?);
+                        },
+                        tag => {
+                            ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                        },
+                    };
+                }
+                ::std::result::Result::Ok(())
+            }
+
+            // Compute sizes of nested messages
+            #[allow(unused_variables)]
+            fn compute_size(&self) -> u64 {
+                let mut my_size = 0;
+                if let Some(v) = self.persona_state {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(1, v);
+                }
+                if let Some(v) = self.persona_state_flags {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+                }
+                if let Some(v) = self.time_created {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
+                }
+                if let Some(v) = self.game_id {
+                    my_size += 1 + 8;
+                }
+                if let Some(v) = self.game_server_steam_id {
+                    my_size += 1 + 8;
+                }
+                if let Some(v) = self.game_server_ip_address {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(6, v);
+                }
+                if let Some(v) = self.game_server_port {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(7, v);
+                }
+                if let Some(v) = self.game_extra_info.as_ref() {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::string_size(8, &v);
+                }
+                if let Some(v) = self.account_name.as_ref() {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::string_size(9, &v);
+                }
+                if let Some(v) = self.lobby_steam_id {
+                    my_size += 1 + 8;
+                }
+                if let Some(v) = self.rich_presence_kv.as_ref() {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::string_size(11, &v);
+                }
+                if let Some(v) = self.broadcast_session_id {
+                    my_size += 1 + 8;
+                }
+                if let Some(v) = self.watching_broadcast_accountid {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(13, v);
+                }
+                if let Some(v) = self.watching_broadcast_appid {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(14, v);
+                }
+                if let Some(v) = self.watching_broadcast_viewers {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(15, v);
+                }
+                if let Some(v) = self.watching_broadcast_title.as_ref() {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::string_size(16, &v);
+                }
+                if let Some(v) = self.last_logoff_time {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(17, v);
+                }
+                if let Some(v) = self.last_seen_online {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(18, v);
+                }
+                if let Some(v) = self.game_os_type {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(19, v);
+                }
+                if let Some(v) = self.game_device_type {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(20, v);
+                }
+                if let Some(v) = self.game_device_name.as_ref() {
+                    my_size += ::steam_vent_proto_common::protobuf::rt::string_size(21, &v);
+                }
+                if let Some(v) = self.game_is_private {
+                    my_size += 2 + 1;
+                }
+                my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+                self.special_fields.cached_size().set(my_size as u32);
+                my_size
+            }
+
+            fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+                if let Some(v) = self.persona_state {
+                    os.write_int32(1, v)?;
+                }
+                if let Some(v) = self.persona_state_flags {
+                    os.write_uint32(2, v)?;
+                }
+                if let Some(v) = self.time_created {
+                    os.write_uint32(3, v)?;
+                }
+                if let Some(v) = self.game_id {
+                    os.write_fixed64(4, v)?;
+                }
+                if let Some(v) = self.game_server_steam_id {
+                    os.write_fixed64(5, v)?;
+                }
+                if let Some(v) = self.game_server_ip_address {
+                    os.write_uint32(6, v)?;
+                }
+                if let Some(v) = self.game_server_port {
+                    os.write_uint32(7, v)?;
+                }
+                if let Some(v) = self.game_extra_info.as_ref() {
+                    os.write_string(8, v)?;
+                }
+                if let Some(v) = self.account_name.as_ref() {
+                    os.write_string(9, v)?;
+                }
+                if let Some(v) = self.lobby_steam_id {
+                    os.write_fixed64(10, v)?;
+                }
+                if let Some(v) = self.rich_presence_kv.as_ref() {
+                    os.write_string(11, v)?;
+                }
+                if let Some(v) = self.broadcast_session_id {
+                    os.write_fixed64(12, v)?;
+                }
+                if let Some(v) = self.watching_broadcast_accountid {
+                    os.write_uint32(13, v)?;
+                }
+                if let Some(v) = self.watching_broadcast_appid {
+                    os.write_uint32(14, v)?;
+                }
+                if let Some(v) = self.watching_broadcast_viewers {
+                    os.write_uint32(15, v)?;
+                }
+                if let Some(v) = self.watching_broadcast_title.as_ref() {
+                    os.write_string(16, v)?;
+                }
+                if let Some(v) = self.last_logoff_time {
+                    os.write_uint32(17, v)?;
+                }
+                if let Some(v) = self.last_seen_online {
+                    os.write_uint32(18, v)?;
+                }
+                if let Some(v) = self.game_os_type {
+                    os.write_int32(19, v)?;
+                }
+                if let Some(v) = self.game_device_type {
+                    os.write_int32(20, v)?;
+                }
+                if let Some(v) = self.game_device_name.as_ref() {
+                    os.write_string(21, v)?;
+                }
+                if let Some(v) = self.game_is_private {
+                    os.write_bool(22, v)?;
+                }
+                os.write_unknown_fields(self.special_fields.unknown_fields())?;
+                ::std::result::Result::Ok(())
+            }
+
+            fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+                &self.special_fields
+            }
+
+            fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+                &mut self.special_fields
+            }
+
+            fn new() -> AccountPrivateData {
+                AccountPrivateData::new()
+            }
+
+            fn clear(&mut self) {
+                self.persona_state = ::std::option::Option::None;
+                self.persona_state_flags = ::std::option::Option::None;
+                self.time_created = ::std::option::Option::None;
+                self.game_id = ::std::option::Option::None;
+                self.game_server_steam_id = ::std::option::Option::None;
+                self.game_server_ip_address = ::std::option::Option::None;
+                self.game_server_port = ::std::option::Option::None;
+                self.game_extra_info = ::std::option::Option::None;
+                self.account_name = ::std::option::Option::None;
+                self.lobby_steam_id = ::std::option::Option::None;
+                self.rich_presence_kv = ::std::option::Option::None;
+                self.broadcast_session_id = ::std::option::Option::None;
+                self.watching_broadcast_accountid = ::std::option::Option::None;
+                self.watching_broadcast_appid = ::std::option::Option::None;
+                self.watching_broadcast_viewers = ::std::option::Option::None;
+                self.watching_broadcast_title = ::std::option::Option::None;
+                self.last_logoff_time = ::std::option::Option::None;
+                self.last_seen_online = ::std::option::Option::None;
+                self.game_os_type = ::std::option::Option::None;
+                self.game_device_type = ::std::option::Option::None;
+                self.game_device_name = ::std::option::Option::None;
+                self.game_is_private = ::std::option::Option::None;
+                self.special_fields.clear();
+            }
+
+            fn default_instance() -> &'static AccountPrivateData {
+                static instance: AccountPrivateData = AccountPrivateData {
+                    persona_state: ::std::option::Option::None,
+                    persona_state_flags: ::std::option::Option::None,
+                    time_created: ::std::option::Option::None,
+                    game_id: ::std::option::Option::None,
+                    game_server_steam_id: ::std::option::Option::None,
+                    game_server_ip_address: ::std::option::Option::None,
+                    game_server_port: ::std::option::Option::None,
+                    game_extra_info: ::std::option::Option::None,
+                    account_name: ::std::option::Option::None,
+                    lobby_steam_id: ::std::option::Option::None,
+                    rich_presence_kv: ::std::option::Option::None,
+                    broadcast_session_id: ::std::option::Option::None,
+                    watching_broadcast_accountid: ::std::option::Option::None,
+                    watching_broadcast_appid: ::std::option::Option::None,
+                    watching_broadcast_viewers: ::std::option::Option::None,
+                    watching_broadcast_title: ::std::option::Option::None,
+                    last_logoff_time: ::std::option::Option::None,
+                    last_seen_online: ::std::option::Option::None,
+                    game_os_type: ::std::option::Option::None,
+                    game_device_type: ::std::option::Option::None,
+                    game_device_name: ::std::option::Option::None,
+                    game_is_private: ::std::option::Option::None,
+                    special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+                };
+                &instance
+            }
+        }
+    }
+}
+
 // @@protoc_insertion_point(message:CPlayer_GetMutualFriendsForIncomingInvites_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetMutualFriendsForIncomingInvites_Request {
@@ -319,7 +2385,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetMutualFriendsFo
     }
 }
 
-#[doc = "Return a list of games owned by the player"]
 // @@protoc_insertion_point(message:CPlayer_GetOwnedGames_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetOwnedGames_Request {
@@ -801,6 +2866,8 @@ pub mod cplayer_get_owned_games_response {
         pub playtime_mac_forever: ::std::option::Option<i32>,
         // @@protoc_insertion_point(field:CPlayer_GetOwnedGames_Response.Game.playtime_linux_forever)
         pub playtime_linux_forever: ::std::option::Option<i32>,
+        // @@protoc_insertion_point(field:CPlayer_GetOwnedGames_Response.Game.playtime_deck_forever)
+        pub playtime_deck_forever: ::std::option::Option<i32>,
         // @@protoc_insertion_point(field:CPlayer_GetOwnedGames_Response.Game.rtime_last_played)
         pub rtime_last_played: ::std::option::Option<u32>,
         // @@protoc_insertion_point(field:CPlayer_GetOwnedGames_Response.Game.capsule_filename)
@@ -1040,6 +3107,25 @@ pub mod cplayer_get_owned_games_response {
             self.playtime_linux_forever = ::std::option::Option::Some(v);
         }
 
+        // optional int32 playtime_deck_forever = 20;
+
+        pub fn playtime_deck_forever(&self) -> i32 {
+            self.playtime_deck_forever.unwrap_or(0)
+        }
+
+        pub fn clear_playtime_deck_forever(&mut self) {
+            self.playtime_deck_forever = ::std::option::Option::None;
+        }
+
+        pub fn has_playtime_deck_forever(&self) -> bool {
+            self.playtime_deck_forever.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_playtime_deck_forever(&mut self, v: i32) {
+            self.playtime_deck_forever = ::std::option::Option::Some(v);
+        }
+
         // optional uint32 rtime_last_played = 11;
 
         pub fn rtime_last_played(&self) -> u32 {
@@ -1264,6 +3350,9 @@ pub mod cplayer_get_owned_games_response {
                     80 => {
                         self.playtime_linux_forever = ::std::option::Option::Some(is.read_int32()?);
                     },
+                    160 => {
+                        self.playtime_deck_forever = ::std::option::Option::Some(is.read_int32()?);
+                    },
                     88 => {
                         self.rtime_last_played = ::std::option::Option::Some(is.read_uint32()?);
                     },
@@ -1333,6 +3422,9 @@ pub mod cplayer_get_owned_games_response {
             if let Some(v) = self.playtime_linux_forever {
                 my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(10, v);
             }
+            if let Some(v) = self.playtime_deck_forever {
+                my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(20, v);
+            }
             if let Some(v) = self.rtime_last_played {
                 my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(11, v);
             }
@@ -1393,6 +3485,9 @@ pub mod cplayer_get_owned_games_response {
             if let Some(v) = self.playtime_linux_forever {
                 os.write_int32(10, v)?;
             }
+            if let Some(v) = self.playtime_deck_forever {
+                os.write_int32(20, v)?;
+            }
             if let Some(v) = self.rtime_last_played {
                 os.write_uint32(11, v)?;
             }
@@ -1446,6 +3541,7 @@ pub mod cplayer_get_owned_games_response {
             self.playtime_windows_forever = ::std::option::Option::None;
             self.playtime_mac_forever = ::std::option::Option::None;
             self.playtime_linux_forever = ::std::option::Option::None;
+            self.playtime_deck_forever = ::std::option::Option::None;
             self.rtime_last_played = ::std::option::Option::None;
             self.capsule_filename = ::std::option::Option::None;
             self.sort_as = ::std::option::Option::None;
@@ -1469,6 +3565,7 @@ pub mod cplayer_get_owned_games_response {
                 playtime_windows_forever: ::std::option::Option::None,
                 playtime_mac_forever: ::std::option::Option::None,
                 playtime_linux_forever: ::std::option::Option::None,
+                playtime_deck_forever: ::std::option::Option::None,
                 rtime_last_played: ::std::option::Option::None,
                 capsule_filename: ::std::option::Option::None,
                 sort_as: ::std::option::Option::None,
@@ -1485,7 +3582,6 @@ pub mod cplayer_get_owned_games_response {
     }
 }
 
-#[doc = "Return suggested games for player to play next."]
 // @@protoc_insertion_point(message:CPlayer_GetPlayNext_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetPlayNext_Request {
@@ -1736,7 +3832,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetPlayNext_Respon
     }
 }
 
-#[doc = "Get a list of friends who are playing, have played, own, or want a game"]
 // @@protoc_insertion_point(message:CPlayer_GetFriendsGameplayInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetFriendsGameplayInfo_Request {
@@ -2420,7 +4515,6 @@ pub mod cplayer_get_friends_gameplay_info_response {
     }
 }
 
-#[doc = "Returns the Steam Level of a user, the Badge level for the game, and if it's foil"]
 // @@protoc_insertion_point(message:CPlayer_GetGameBadgeLevels_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetGameBadgeLevels_Request {
@@ -2829,7 +4923,6 @@ pub mod cplayer_get_game_badge_levels_response {
     }
 }
 
-#[doc = "Gets which profile background is active for a specific user"]
 // @@protoc_insertion_point(message:CPlayer_GetProfileBackground_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetProfileBackground_Request {
@@ -3949,7 +6042,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetProfileBackgrou
     }
 }
 
-#[doc = "Sets the user's profile background"]
 // @@protoc_insertion_point(message:CPlayer_SetProfileBackground_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_SetProfileBackground_Request {
@@ -4135,7 +6227,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_SetProfileBackgrou
     }
 }
 
-#[doc = "Gets which mini profile background is active for a specific user"]
 // @@protoc_insertion_point(message:CPlayer_GetMiniProfileBackground_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetMiniProfileBackground_Request {
@@ -4385,7 +6476,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetMiniProfileBack
     }
 }
 
-#[doc = "Sets the user's mini profile background"]
 // @@protoc_insertion_point(message:CPlayer_SetMiniProfileBackground_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_SetMiniProfileBackground_Request {
@@ -4571,7 +6661,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_SetMiniProfileBack
     }
 }
 
-#[doc = "Gets which avatar frame is active for a specific user"]
 // @@protoc_insertion_point(message:CPlayer_GetAvatarFrame_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetAvatarFrame_Request {
@@ -4821,7 +6910,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetAvatarFrame_Res
     }
 }
 
-#[doc = "Sets the user's avatar frame for their profile"]
 // @@protoc_insertion_point(message:CPlayer_SetAvatarFrame_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_SetAvatarFrame_Request {
@@ -5007,7 +7095,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_SetAvatarFrame_Res
     }
 }
 
-#[doc = "Gets which animated avatar is active for a specific user"]
 // @@protoc_insertion_point(message:CPlayer_GetAnimatedAvatar_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetAnimatedAvatar_Request {
@@ -5257,7 +7344,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetAnimatedAvatar_
     }
 }
 
-#[doc = "Sets the user's animated avatar for their profile"]
 // @@protoc_insertion_point(message:CPlayer_SetAnimatedAvatar_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_SetAnimatedAvatar_Request {
@@ -5443,7 +7529,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_SetAnimatedAvatar_
     }
 }
 
-#[doc = "Gets which Steam Deck keyboard skin is active for a specific user"]
 // @@protoc_insertion_point(message:CPlayer_GetSteamDeckKeyboardSkin_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetSteamDeckKeyboardSkin_Request {
@@ -5693,7 +7778,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetSteamDeckKeyboa
     }
 }
 
-#[doc = "Sets the user's current Steam Deck keyboard skin"]
 // @@protoc_insertion_point(message:CPlayer_SetSteamDeckKeyboardSkin_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_SetSteamDeckKeyboardSkin_Request {
@@ -5879,7 +7963,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_SetSteamDeckKeyboa
     }
 }
 
-#[doc = "Returns the items the user can equip on their profile"]
 // @@protoc_insertion_point(message:CPlayer_GetProfileItemsOwned_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetProfileItemsOwned_Request {
@@ -6197,7 +8280,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetProfileItemsOwn
     }
 }
 
-#[doc = "Returns the items the user has equipped on their profile"]
 // @@protoc_insertion_point(message:CPlayer_GetProfileItemsEquipped_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetProfileItemsEquipped_Request {
@@ -6517,7 +8599,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetProfileItemsEqu
     }
 }
 
-#[doc = "Sets special flags on the equipped item"]
 // @@protoc_insertion_point(message:CPlayer_SetEquippedProfileItemFlags_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_SetEquippedProfileItemFlags_Request {
@@ -6735,7 +8816,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_SetEquippedProfile
     }
 }
 
-#[doc = "Gets a list of the emoticons a user has with metadata"]
 // @@protoc_insertion_point(message:CPlayer_GetEmoticonList_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetEmoticonList_Request {
@@ -7192,7 +9272,382 @@ pub mod cplayer_get_emoticon_list_response {
     }
 }
 
-#[doc = "Gets the best achievements the user has gotten for the specified list of apps."]
+// @@protoc_insertion_point(message:CPlayer_GetCommunityBadgeProgress_Request)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CPlayer_GetCommunityBadgeProgress_Request {
+    // message fields
+    // @@protoc_insertion_point(field:CPlayer_GetCommunityBadgeProgress_Request.steamid)
+    pub steamid: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:CPlayer_GetCommunityBadgeProgress_Request.badgeid)
+    pub badgeid: ::std::option::Option<i32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CPlayer_GetCommunityBadgeProgress_Request.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CPlayer_GetCommunityBadgeProgress_Request {
+    fn default() -> &'a CPlayer_GetCommunityBadgeProgress_Request {
+        <CPlayer_GetCommunityBadgeProgress_Request as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CPlayer_GetCommunityBadgeProgress_Request {
+    pub fn new() -> CPlayer_GetCommunityBadgeProgress_Request {
+        ::std::default::Default::default()
+    }
+
+    // optional uint64 steamid = 1;
+
+    pub fn steamid(&self) -> u64 {
+        self.steamid.unwrap_or(0)
+    }
+
+    pub fn clear_steamid(&mut self) {
+        self.steamid = ::std::option::Option::None;
+    }
+
+    pub fn has_steamid(&self) -> bool {
+        self.steamid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_steamid(&mut self, v: u64) {
+        self.steamid = ::std::option::Option::Some(v);
+    }
+
+    // optional int32 badgeid = 2;
+
+    pub fn badgeid(&self) -> i32 {
+        self.badgeid.unwrap_or(0)
+    }
+
+    pub fn clear_badgeid(&mut self) {
+        self.badgeid = ::std::option::Option::None;
+    }
+
+    pub fn has_badgeid(&self) -> bool {
+        self.badgeid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_badgeid(&mut self, v: i32) {
+        self.badgeid = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetCommunityBadgeProgress_Request {
+    const NAME: &'static str = "CPlayer_GetCommunityBadgeProgress_Request";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.steamid = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                16 => {
+                    self.badgeid = ::std::option::Option::Some(is.read_int32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.steamid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(1, v);
+        }
+        if let Some(v) = self.badgeid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(2, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.steamid {
+            os.write_uint64(1, v)?;
+        }
+        if let Some(v) = self.badgeid {
+            os.write_int32(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CPlayer_GetCommunityBadgeProgress_Request {
+        CPlayer_GetCommunityBadgeProgress_Request::new()
+    }
+
+    fn clear(&mut self) {
+        self.steamid = ::std::option::Option::None;
+        self.badgeid = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CPlayer_GetCommunityBadgeProgress_Request {
+        static instance: CPlayer_GetCommunityBadgeProgress_Request = CPlayer_GetCommunityBadgeProgress_Request {
+            steamid: ::std::option::Option::None,
+            badgeid: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CPlayer_GetCommunityBadgeProgress_Response)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CPlayer_GetCommunityBadgeProgress_Response {
+    // message fields
+    // @@protoc_insertion_point(field:CPlayer_GetCommunityBadgeProgress_Response.quests)
+    pub quests: ::std::vec::Vec<cplayer_get_community_badge_progress_response::Quest>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CPlayer_GetCommunityBadgeProgress_Response.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CPlayer_GetCommunityBadgeProgress_Response {
+    fn default() -> &'a CPlayer_GetCommunityBadgeProgress_Response {
+        <CPlayer_GetCommunityBadgeProgress_Response as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CPlayer_GetCommunityBadgeProgress_Response {
+    pub fn new() -> CPlayer_GetCommunityBadgeProgress_Response {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetCommunityBadgeProgress_Response {
+    const NAME: &'static str = "CPlayer_GetCommunityBadgeProgress_Response";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.quests.push(is.read_message()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.quests {
+            let len = value.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.quests {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CPlayer_GetCommunityBadgeProgress_Response {
+        CPlayer_GetCommunityBadgeProgress_Response::new()
+    }
+
+    fn clear(&mut self) {
+        self.quests.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CPlayer_GetCommunityBadgeProgress_Response {
+        static instance: CPlayer_GetCommunityBadgeProgress_Response = CPlayer_GetCommunityBadgeProgress_Response {
+            quests: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+/// Nested message and enums of message `CPlayer_GetCommunityBadgeProgress_Response`
+pub mod cplayer_get_community_badge_progress_response {
+    // @@protoc_insertion_point(message:CPlayer_GetCommunityBadgeProgress_Response.Quest)
+    #[derive(PartialEq,Clone,Default,Debug)]
+    pub struct Quest {
+        // message fields
+        // @@protoc_insertion_point(field:CPlayer_GetCommunityBadgeProgress_Response.Quest.questid)
+        pub questid: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CPlayer_GetCommunityBadgeProgress_Response.Quest.completed)
+        pub completed: ::std::option::Option<bool>,
+        // special fields
+        // @@protoc_insertion_point(special_field:CPlayer_GetCommunityBadgeProgress_Response.Quest.special_fields)
+        pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+    }
+
+    impl<'a> ::std::default::Default for &'a Quest {
+        fn default() -> &'a Quest {
+            <Quest as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+        }
+    }
+
+    impl Quest {
+        pub fn new() -> Quest {
+            ::std::default::Default::default()
+        }
+
+        // optional uint32 questid = 1;
+
+        pub fn questid(&self) -> u32 {
+            self.questid.unwrap_or(0)
+        }
+
+        pub fn clear_questid(&mut self) {
+            self.questid = ::std::option::Option::None;
+        }
+
+        pub fn has_questid(&self) -> bool {
+            self.questid.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_questid(&mut self, v: u32) {
+            self.questid = ::std::option::Option::Some(v);
+        }
+
+        // optional bool completed = 2;
+
+        pub fn completed(&self) -> bool {
+            self.completed.unwrap_or(false)
+        }
+
+        pub fn clear_completed(&mut self) {
+            self.completed = ::std::option::Option::None;
+        }
+
+        pub fn has_completed(&self) -> bool {
+            self.completed.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_completed(&mut self, v: bool) {
+            self.completed = ::std::option::Option::Some(v);
+        }
+    }
+
+    impl ::steam_vent_proto_common::protobuf::Message for Quest {
+        const NAME: &'static str = "Quest";
+
+        fn is_initialized(&self) -> bool {
+            true
+        }
+
+        fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+            while let Some(tag) = is.read_raw_tag_or_eof()? {
+                match tag {
+                    8 => {
+                        self.questid = ::std::option::Option::Some(is.read_uint32()?);
+                    },
+                    16 => {
+                        self.completed = ::std::option::Option::Some(is.read_bool()?);
+                    },
+                    tag => {
+                        ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                    },
+                };
+            }
+            ::std::result::Result::Ok(())
+        }
+
+        // Compute sizes of nested messages
+        #[allow(unused_variables)]
+        fn compute_size(&self) -> u64 {
+            let mut my_size = 0;
+            if let Some(v) = self.questid {
+                my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+            }
+            if let Some(v) = self.completed {
+                my_size += 1 + 1;
+            }
+            my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+            self.special_fields.cached_size().set(my_size as u32);
+            my_size
+        }
+
+        fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+            if let Some(v) = self.questid {
+                os.write_uint32(1, v)?;
+            }
+            if let Some(v) = self.completed {
+                os.write_bool(2, v)?;
+            }
+            os.write_unknown_fields(self.special_fields.unknown_fields())?;
+            ::std::result::Result::Ok(())
+        }
+
+        fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+            &self.special_fields
+        }
+
+        fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+            &mut self.special_fields
+        }
+
+        fn new() -> Quest {
+            Quest::new()
+        }
+
+        fn clear(&mut self) {
+            self.questid = ::std::option::Option::None;
+            self.completed = ::std::option::Option::None;
+            self.special_fields.clear();
+        }
+
+        fn default_instance() -> &'static Quest {
+            static instance: Quest = Quest {
+                questid: ::std::option::Option::None,
+                completed: ::std::option::Option::None,
+                special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+            };
+            &instance
+        }
+    }
+}
+
 // @@protoc_insertion_point(message:CPlayer_GetTopAchievementsForGames_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetTopAchievementsForGames_Request {
@@ -8066,7 +10521,6 @@ pub mod cplayer_get_top_achievements_for_games_response {
     }
 }
 
-#[doc = "Gets the achievement completion stats for the specified list of apps."]
 // @@protoc_insertion_point(message:CPlayer_GetAchievementsProgress_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetAchievementsProgress_Request {
@@ -8077,6 +10531,8 @@ pub struct CPlayer_GetAchievementsProgress_Request {
     pub language: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CPlayer_GetAchievementsProgress_Request.appids)
     pub appids: ::std::vec::Vec<u32>,
+    // @@protoc_insertion_point(field:CPlayer_GetAchievementsProgress_Request.include_unvetted_apps)
+    pub include_unvetted_apps: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:CPlayer_GetAchievementsProgress_Request.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -8147,6 +10603,25 @@ impl CPlayer_GetAchievementsProgress_Request {
     pub fn take_language(&mut self) -> ::std::string::String {
         self.language.take().unwrap_or_else(|| ::std::string::String::new())
     }
+
+    // optional bool include_unvetted_apps = 4;
+
+    pub fn include_unvetted_apps(&self) -> bool {
+        self.include_unvetted_apps.unwrap_or(false)
+    }
+
+    pub fn clear_include_unvetted_apps(&mut self) {
+        self.include_unvetted_apps = ::std::option::Option::None;
+    }
+
+    pub fn has_include_unvetted_apps(&self) -> bool {
+        self.include_unvetted_apps.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_include_unvetted_apps(&mut self, v: bool) {
+        self.include_unvetted_apps = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetAchievementsProgress_Request {
@@ -8171,6 +10646,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetAchievementsPro
                 24 => {
                     self.appids.push(is.read_uint32()?);
                 },
+                32 => {
+                    self.include_unvetted_apps = ::std::option::Option::Some(is.read_bool()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -8192,6 +10670,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetAchievementsPro
         for value in &self.appids {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, *value);
         };
+        if let Some(v) = self.include_unvetted_apps {
+            my_size += 1 + 1;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -8207,6 +10688,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetAchievementsPro
         for v in &self.appids {
             os.write_uint32(3, *v)?;
         };
+        if let Some(v) = self.include_unvetted_apps {
+            os.write_bool(4, v)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -8227,6 +10711,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetAchievementsPro
         self.steamid = ::std::option::Option::None;
         self.language = ::std::option::Option::None;
         self.appids.clear();
+        self.include_unvetted_apps = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -8235,6 +10720,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetAchievementsPro
             steamid: ::std::option::Option::None,
             language: ::std::option::Option::None,
             appids: ::std::vec::Vec::new(),
+            include_unvetted_apps: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -8350,6 +10836,8 @@ pub mod cplayer_get_achievements_progress_response {
         pub all_unlocked: ::std::option::Option<bool>,
         // @@protoc_insertion_point(field:CPlayer_GetAchievementsProgress_Response.AchievementProgress.cache_time)
         pub cache_time: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CPlayer_GetAchievementsProgress_Response.AchievementProgress.vetted)
+        pub vetted: ::std::option::Option<bool>,
         // special fields
         // @@protoc_insertion_point(special_field:CPlayer_GetAchievementsProgress_Response.AchievementProgress.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -8479,6 +10967,25 @@ pub mod cplayer_get_achievements_progress_response {
         pub fn set_cache_time(&mut self, v: u32) {
             self.cache_time = ::std::option::Option::Some(v);
         }
+
+        // optional bool vetted = 7;
+
+        pub fn vetted(&self) -> bool {
+            self.vetted.unwrap_or(false)
+        }
+
+        pub fn clear_vetted(&mut self) {
+            self.vetted = ::std::option::Option::None;
+        }
+
+        pub fn has_vetted(&self) -> bool {
+            self.vetted.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_vetted(&mut self, v: bool) {
+            self.vetted = ::std::option::Option::Some(v);
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for AchievementProgress {
@@ -8508,6 +11015,9 @@ pub mod cplayer_get_achievements_progress_response {
                     },
                     48 => {
                         self.cache_time = ::std::option::Option::Some(is.read_uint32()?);
+                    },
+                    56 => {
+                        self.vetted = ::std::option::Option::Some(is.read_bool()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -8539,6 +11049,9 @@ pub mod cplayer_get_achievements_progress_response {
             if let Some(v) = self.cache_time {
                 my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(6, v);
             }
+            if let Some(v) = self.vetted {
+                my_size += 1 + 1;
+            }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -8563,6 +11076,9 @@ pub mod cplayer_get_achievements_progress_response {
             if let Some(v) = self.cache_time {
                 os.write_uint32(6, v)?;
             }
+            if let Some(v) = self.vetted {
+                os.write_bool(7, v)?;
+            }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
         }
@@ -8586,6 +11102,7 @@ pub mod cplayer_get_achievements_progress_response {
             self.percentage = ::std::option::Option::None;
             self.all_unlocked = ::std::option::Option::None;
             self.cache_time = ::std::option::Option::None;
+            self.vetted = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -8597,6 +11114,7 @@ pub mod cplayer_get_achievements_progress_response {
                 percentage: ::std::option::Option::None,
                 all_unlocked: ::std::option::Option::None,
                 cache_time: ::std::option::Option::None,
+                vetted: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -8604,7 +11122,6 @@ pub mod cplayer_get_achievements_progress_response {
     }
 }
 
-#[doc = "Get a games available achievements for display purposes."]
 // @@protoc_insertion_point(message:CPlayer_GetGameAchievements_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetGameAchievements_Request {
@@ -9260,7 +11777,6 @@ pub mod cplayer_get_game_achievements_response {
     }
 }
 
-#[doc = "Gets the badge the user has set as their favorite"]
 // @@protoc_insertion_point(message:CPlayer_GetFavoriteBadge_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetFavoriteBadge_Request {
@@ -9671,7 +12187,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetFavoriteBadge_R
     }
 }
 
-#[doc = "Sets the badge  as the users favorite"]
 // @@protoc_insertion_point(message:CPlayer_SetFavoriteBadge_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_SetFavoriteBadge_Request {
@@ -9889,7 +12404,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_SetFavoriteBadge_R
     }
 }
 
-#[doc = "Returns the customizations (if any) for a profile"]
 // @@protoc_insertion_point(message:CPlayer_GetProfileCustomization_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetProfileCustomization_Request {
@@ -11542,7 +14056,6 @@ pub mod cplayer_get_profile_customization_response {
     }
 }
 
-#[doc = "Returns the purchased profile customizations"]
 // @@protoc_insertion_point(message:CPlayer_GetPurchasedProfileCustomizations_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetPurchasedProfileCustomizations_Request {
@@ -11890,7 +14403,6 @@ pub mod cplayer_get_purchased_profile_customizations_response {
     }
 }
 
-#[doc = "Returns the purchased and upgraded profile customizations"]
 // @@protoc_insertion_point(message:CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request {
@@ -12396,7 +14908,6 @@ pub mod cplayer_get_purchased_and_upgraded_profile_customizations_response {
     }
 }
 
-#[doc = "Gets themes available for the user."]
 // @@protoc_insertion_point(message:CPlayer_GetProfileThemesAvailable_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetProfileThemesAvailable_Request {
@@ -12564,7 +15075,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetProfileThemesAv
     }
 }
 
-#[doc = "Selects a theme for the profile"]
 // @@protoc_insertion_point(message:CPlayer_SetProfileTheme_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_SetProfileTheme_Request {
@@ -12767,7 +15277,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_SetProfileTheme_Re
     }
 }
 
-#[doc = "Sets profile preferences"]
 // @@protoc_insertion_point(message:CPlayer_SetProfilePreferences_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_SetProfilePreferences_Request {
@@ -12935,7 +15444,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_SetProfilePreferen
     }
 }
 
-#[doc = "Posts custom status text into the blotter"]
 // @@protoc_insertion_point(message:CPlayer_PostStatusToFriends_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_PostStatusToFriends_Request {
@@ -13170,7 +15678,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_PostStatusToFriend
     }
 }
 
-#[doc = "Gets a posted status text for a user by id"]
 // @@protoc_insertion_point(message:CPlayer_GetPostedStatus_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetPostedStatus_Request {
@@ -13566,7 +16073,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetPostedStatus_Re
     }
 }
 
-#[doc = "Deletes a posted status text for a user by id"]
 // @@protoc_insertion_point(message:CPlayer_DeletePostedStatus_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_DeletePostedStatus_Request {
@@ -13752,7 +16258,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_DeletePostedStatus
     }
 }
 
-#[doc = "Gets the last-played times for the account"]
 // @@protoc_insertion_point(message:CPlayer_GetLastPlayedTimes_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetLastPlayedTimes_Request {
@@ -13975,18 +16480,24 @@ pub mod cplayer_get_last_played_times_response {
         pub playtime_mac_forever: ::std::option::Option<i32>,
         // @@protoc_insertion_point(field:CPlayer_GetLastPlayedTimes_Response.Game.playtime_linux_forever)
         pub playtime_linux_forever: ::std::option::Option<i32>,
+        // @@protoc_insertion_point(field:CPlayer_GetLastPlayedTimes_Response.Game.playtime_deck_forever)
+        pub playtime_deck_forever: ::std::option::Option<i32>,
         // @@protoc_insertion_point(field:CPlayer_GetLastPlayedTimes_Response.Game.first_windows_playtime)
         pub first_windows_playtime: ::std::option::Option<u32>,
         // @@protoc_insertion_point(field:CPlayer_GetLastPlayedTimes_Response.Game.first_mac_playtime)
         pub first_mac_playtime: ::std::option::Option<u32>,
         // @@protoc_insertion_point(field:CPlayer_GetLastPlayedTimes_Response.Game.first_linux_playtime)
         pub first_linux_playtime: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CPlayer_GetLastPlayedTimes_Response.Game.first_deck_playtime)
+        pub first_deck_playtime: ::std::option::Option<u32>,
         // @@protoc_insertion_point(field:CPlayer_GetLastPlayedTimes_Response.Game.last_windows_playtime)
         pub last_windows_playtime: ::std::option::Option<u32>,
         // @@protoc_insertion_point(field:CPlayer_GetLastPlayedTimes_Response.Game.last_mac_playtime)
         pub last_mac_playtime: ::std::option::Option<u32>,
         // @@protoc_insertion_point(field:CPlayer_GetLastPlayedTimes_Response.Game.last_linux_playtime)
         pub last_linux_playtime: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CPlayer_GetLastPlayedTimes_Response.Game.last_deck_playtime)
+        pub last_deck_playtime: ::std::option::Option<u32>,
         // @@protoc_insertion_point(field:CPlayer_GetLastPlayedTimes_Response.Game.playtime_disconnected)
         pub playtime_disconnected: ::std::option::Option<u32>,
         // special fields
@@ -14157,6 +16668,25 @@ pub mod cplayer_get_last_played_times_response {
             self.playtime_linux_forever = ::std::option::Option::Some(v);
         }
 
+        // optional int32 playtime_deck_forever = 16;
+
+        pub fn playtime_deck_forever(&self) -> i32 {
+            self.playtime_deck_forever.unwrap_or(0)
+        }
+
+        pub fn clear_playtime_deck_forever(&mut self) {
+            self.playtime_deck_forever = ::std::option::Option::None;
+        }
+
+        pub fn has_playtime_deck_forever(&self) -> bool {
+            self.playtime_deck_forever.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_playtime_deck_forever(&mut self, v: i32) {
+            self.playtime_deck_forever = ::std::option::Option::Some(v);
+        }
+
         // optional uint32 first_windows_playtime = 9;
 
         pub fn first_windows_playtime(&self) -> u32 {
@@ -14212,6 +16742,25 @@ pub mod cplayer_get_last_played_times_response {
         // Param is passed by value, moved
         pub fn set_first_linux_playtime(&mut self, v: u32) {
             self.first_linux_playtime = ::std::option::Option::Some(v);
+        }
+
+        // optional uint32 first_deck_playtime = 17;
+
+        pub fn first_deck_playtime(&self) -> u32 {
+            self.first_deck_playtime.unwrap_or(0)
+        }
+
+        pub fn clear_first_deck_playtime(&mut self) {
+            self.first_deck_playtime = ::std::option::Option::None;
+        }
+
+        pub fn has_first_deck_playtime(&self) -> bool {
+            self.first_deck_playtime.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_first_deck_playtime(&mut self, v: u32) {
+            self.first_deck_playtime = ::std::option::Option::Some(v);
         }
 
         // optional uint32 last_windows_playtime = 12;
@@ -14271,6 +16820,25 @@ pub mod cplayer_get_last_played_times_response {
             self.last_linux_playtime = ::std::option::Option::Some(v);
         }
 
+        // optional uint32 last_deck_playtime = 18;
+
+        pub fn last_deck_playtime(&self) -> u32 {
+            self.last_deck_playtime.unwrap_or(0)
+        }
+
+        pub fn clear_last_deck_playtime(&mut self) {
+            self.last_deck_playtime = ::std::option::Option::None;
+        }
+
+        pub fn has_last_deck_playtime(&self) -> bool {
+            self.last_deck_playtime.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_last_deck_playtime(&mut self, v: u32) {
+            self.last_deck_playtime = ::std::option::Option::Some(v);
+        }
+
         // optional uint32 playtime_disconnected = 15;
 
         pub fn playtime_disconnected(&self) -> u32 {
@@ -14325,6 +16893,9 @@ pub mod cplayer_get_last_played_times_response {
                     64 => {
                         self.playtime_linux_forever = ::std::option::Option::Some(is.read_int32()?);
                     },
+                    128 => {
+                        self.playtime_deck_forever = ::std::option::Option::Some(is.read_int32()?);
+                    },
                     72 => {
                         self.first_windows_playtime = ::std::option::Option::Some(is.read_uint32()?);
                     },
@@ -14334,6 +16905,9 @@ pub mod cplayer_get_last_played_times_response {
                     88 => {
                         self.first_linux_playtime = ::std::option::Option::Some(is.read_uint32()?);
                     },
+                    136 => {
+                        self.first_deck_playtime = ::std::option::Option::Some(is.read_uint32()?);
+                    },
                     96 => {
                         self.last_windows_playtime = ::std::option::Option::Some(is.read_uint32()?);
                     },
@@ -14342,6 +16916,9 @@ pub mod cplayer_get_last_played_times_response {
                     },
                     112 => {
                         self.last_linux_playtime = ::std::option::Option::Some(is.read_uint32()?);
+                    },
+                    144 => {
+                        self.last_deck_playtime = ::std::option::Option::Some(is.read_uint32()?);
                     },
                     120 => {
                         self.playtime_disconnected = ::std::option::Option::Some(is.read_uint32()?);
@@ -14382,6 +16959,9 @@ pub mod cplayer_get_last_played_times_response {
             if let Some(v) = self.playtime_linux_forever {
                 my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(8, v);
             }
+            if let Some(v) = self.playtime_deck_forever {
+                my_size += ::steam_vent_proto_common::protobuf::rt::int32_size(16, v);
+            }
             if let Some(v) = self.first_windows_playtime {
                 my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(9, v);
             }
@@ -14391,6 +16971,9 @@ pub mod cplayer_get_last_played_times_response {
             if let Some(v) = self.first_linux_playtime {
                 my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(11, v);
             }
+            if let Some(v) = self.first_deck_playtime {
+                my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(17, v);
+            }
             if let Some(v) = self.last_windows_playtime {
                 my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(12, v);
             }
@@ -14399,6 +16982,9 @@ pub mod cplayer_get_last_played_times_response {
             }
             if let Some(v) = self.last_linux_playtime {
                 my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(14, v);
+            }
+            if let Some(v) = self.last_deck_playtime {
+                my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(18, v);
             }
             if let Some(v) = self.playtime_disconnected {
                 my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(15, v);
@@ -14433,6 +17019,9 @@ pub mod cplayer_get_last_played_times_response {
             if let Some(v) = self.playtime_linux_forever {
                 os.write_int32(8, v)?;
             }
+            if let Some(v) = self.playtime_deck_forever {
+                os.write_int32(16, v)?;
+            }
             if let Some(v) = self.first_windows_playtime {
                 os.write_uint32(9, v)?;
             }
@@ -14442,6 +17031,9 @@ pub mod cplayer_get_last_played_times_response {
             if let Some(v) = self.first_linux_playtime {
                 os.write_uint32(11, v)?;
             }
+            if let Some(v) = self.first_deck_playtime {
+                os.write_uint32(17, v)?;
+            }
             if let Some(v) = self.last_windows_playtime {
                 os.write_uint32(12, v)?;
             }
@@ -14450,6 +17042,9 @@ pub mod cplayer_get_last_played_times_response {
             }
             if let Some(v) = self.last_linux_playtime {
                 os.write_uint32(14, v)?;
+            }
+            if let Some(v) = self.last_deck_playtime {
+                os.write_uint32(18, v)?;
             }
             if let Some(v) = self.playtime_disconnected {
                 os.write_uint32(15, v)?;
@@ -14479,12 +17074,15 @@ pub mod cplayer_get_last_played_times_response {
             self.playtime_windows_forever = ::std::option::Option::None;
             self.playtime_mac_forever = ::std::option::Option::None;
             self.playtime_linux_forever = ::std::option::Option::None;
+            self.playtime_deck_forever = ::std::option::Option::None;
             self.first_windows_playtime = ::std::option::Option::None;
             self.first_mac_playtime = ::std::option::Option::None;
             self.first_linux_playtime = ::std::option::Option::None;
+            self.first_deck_playtime = ::std::option::Option::None;
             self.last_windows_playtime = ::std::option::Option::None;
             self.last_mac_playtime = ::std::option::Option::None;
             self.last_linux_playtime = ::std::option::Option::None;
+            self.last_deck_playtime = ::std::option::Option::None;
             self.playtime_disconnected = ::std::option::Option::None;
             self.special_fields.clear();
         }
@@ -14499,12 +17097,15 @@ pub mod cplayer_get_last_played_times_response {
                 playtime_windows_forever: ::std::option::Option::None,
                 playtime_mac_forever: ::std::option::Option::None,
                 playtime_linux_forever: ::std::option::Option::None,
+                playtime_deck_forever: ::std::option::Option::None,
                 first_windows_playtime: ::std::option::Option::None,
                 first_mac_playtime: ::std::option::Option::None,
                 first_linux_playtime: ::std::option::Option::None,
+                first_deck_playtime: ::std::option::Option::None,
                 last_windows_playtime: ::std::option::Option::None,
                 last_mac_playtime: ::std::option::Option::None,
                 last_linux_playtime: ::std::option::Option::None,
+                last_deck_playtime: ::std::option::Option::None,
                 playtime_disconnected: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
@@ -14513,7 +17114,6 @@ pub mod cplayer_get_last_played_times_response {
     }
 }
 
-#[doc = "Gets the time when the user accepted the SSA"]
 // @@protoc_insertion_point(message:CPlayer_GetTimeSSAAccepted_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetTimeSSAAccepted_Request {
@@ -14763,7 +17363,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetTimeSSAAccepted
     }
 }
 
-#[doc = "User is accepting the SSA"]
 // @@protoc_insertion_point(message:CPlayer_AcceptSSA_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_AcceptSSA_Request {
@@ -14984,7 +17583,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_AcceptSSA_Response
     }
 }
 
-#[doc = "Gets the list of nicknames this user has for other users"]
 // @@protoc_insertion_point(message:CPlayer_GetNicknameList_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetNicknameList_Request {
@@ -15313,7 +17911,6 @@ pub mod cplayer_get_nickname_list_response {
     }
 }
 
-#[doc = "Gets the list of per-friend preferences this user has set for other users"]
 // @@protoc_insertion_point(message:CPlayer_GetPerFriendPreferences_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetPerFriendPreferences_Request {
@@ -15884,7 +18481,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetPerFriendPrefer
     }
 }
 
-#[doc = "Sets the logged in user's per-friend preferences for the given user"]
 // @@protoc_insertion_point(message:CPlayer_SetPerFriendPreferences_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_SetPerFriendPreferences_Request {
@@ -16052,7 +18648,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_SetPerFriendPrefer
     }
 }
 
-#[doc = "Invites another Steam user to be a friend"]
 // @@protoc_insertion_point(message:CPlayer_AddFriend_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_AddFriend_Request {
@@ -16335,7 +18930,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_AddFriend_Response
     }
 }
 
-#[doc = "Removes a friend or ignores a friend suggestion"]
 // @@protoc_insertion_point(message:CPlayer_RemoveFriend_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_RemoveFriend_Request {
@@ -16554,7 +19148,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_RemoveFriend_Respo
     }
 }
 
-#[doc = "Blocks or unblocks communication with the user.  Despite name, can be a non-friend."]
 // @@protoc_insertion_point(message:CPlayer_IgnoreFriend_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_IgnoreFriend_Request {
@@ -16805,7 +19398,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_IgnoreFriend_Respo
     }
 }
 
-#[doc = "Returns the player's community preferences"]
 // @@protoc_insertion_point(message:CPlayer_GetCommunityPreferences_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetCommunityPreferences_Request {
@@ -17227,7 +19819,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetCommunityPrefer
     }
 }
 
-#[doc = "Sets the player's community preferences"]
 // @@protoc_insertion_point(message:CPlayer_SetCommunityPreferences_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_SetCommunityPreferences_Request {
@@ -17395,7 +19986,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_SetCommunityPrefer
     }
 }
 
-#[doc = "Get the custom text filtering dictionary for this user"]
 // @@protoc_insertion_point(message:CPlayer_GetTextFilterWords_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetTextFilterWords_Request {
@@ -17698,7 +20288,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetTextFilterWords
     }
 }
 
-#[doc = "Calculates and returns what to display for UI that renders new steam announcement available"]
 // @@protoc_insertion_point(message:CPlayer_GetNewSteamAnnouncementState_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetNewSteamAnnouncementState_Request {
@@ -18082,7 +20671,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetNewSteamAnnounc
     }
 }
 
-#[doc = "Marks latest announcement timestamp read by user"]
 // @@protoc_insertion_point(message:CPlayer_UpdateSteamAnnouncementLastRead_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_UpdateSteamAnnouncementLastRead_Request {
@@ -18300,7 +20888,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_UpdateSteamAnnounc
     }
 }
 
-#[doc = "Get current privacy settings."]
 // @@protoc_insertion_point(message:CPlayer_GetPrivacySettings_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetPrivacySettings_Request {
@@ -18737,7 +21324,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetPrivacySettings
     }
 }
 
-#[doc = "Get gameplay duration control settings."]
 // @@protoc_insertion_point(message:CPlayer_GetDurationControl_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_GetDurationControl_Request {
@@ -19180,7 +21766,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_GetDurationControl
     }
 }
 
-#[doc = "Submit playtime records that happened while the client was disconnected from steam (whether marked offline or not)"]
 // @@protoc_insertion_point(message:CPlayer_RecordDisconnectedPlaytime_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_RecordDisconnectedPlaytime_Request {
@@ -19286,6 +21871,8 @@ pub mod cplayer_record_disconnected_playtime_request {
         pub seconds: ::std::option::Option<u32>,
         // @@protoc_insertion_point(field:CPlayer_RecordDisconnectedPlaytime_Request.PlayHistory.offline)
         pub offline: ::std::option::Option<bool>,
+        // @@protoc_insertion_point(field:CPlayer_RecordDisconnectedPlaytime_Request.PlayHistory.owner)
+        pub owner: ::std::option::Option<u32>,
         // special fields
         // @@protoc_insertion_point(special_field:CPlayer_RecordDisconnectedPlaytime_Request.PlayHistory.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -19377,6 +21964,25 @@ pub mod cplayer_record_disconnected_playtime_request {
         pub fn set_offline(&mut self, v: bool) {
             self.offline = ::std::option::Option::Some(v);
         }
+
+        // optional uint32 owner = 5;
+
+        pub fn owner(&self) -> u32 {
+            self.owner.unwrap_or(0)
+        }
+
+        pub fn clear_owner(&mut self) {
+            self.owner = ::std::option::Option::None;
+        }
+
+        pub fn has_owner(&self) -> bool {
+            self.owner.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_owner(&mut self, v: u32) {
+            self.owner = ::std::option::Option::Some(v);
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for PlayHistory {
@@ -19400,6 +22006,9 @@ pub mod cplayer_record_disconnected_playtime_request {
                     },
                     32 => {
                         self.offline = ::std::option::Option::Some(is.read_bool()?);
+                    },
+                    40 => {
+                        self.owner = ::std::option::Option::Some(is.read_uint32()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -19425,6 +22034,9 @@ pub mod cplayer_record_disconnected_playtime_request {
             if let Some(v) = self.offline {
                 my_size += 1 + 1;
             }
+            if let Some(v) = self.owner {
+                my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(5, v);
+            }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -19442,6 +22054,9 @@ pub mod cplayer_record_disconnected_playtime_request {
             }
             if let Some(v) = self.offline {
                 os.write_bool(4, v)?;
+            }
+            if let Some(v) = self.owner {
+                os.write_uint32(5, v)?;
             }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
@@ -19464,6 +22079,7 @@ pub mod cplayer_record_disconnected_playtime_request {
             self.session_time_start = ::std::option::Option::None;
             self.seconds = ::std::option::Option::None;
             self.offline = ::std::option::Option::None;
+            self.owner = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -19473,6 +22089,7 @@ pub mod cplayer_record_disconnected_playtime_request {
                 session_time_start: ::std::option::Option::None,
                 seconds: ::std::option::Option::None,
                 offline: ::std::option::Option::None,
+                owner: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -19556,7 +22173,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_RecordDisconnected
     }
 }
 
-#[doc = "Notification from server to client of more recent play time"]
 // @@protoc_insertion_point(message:CPlayer_LastPlayedTimes_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_LastPlayedTimes_Notification {
@@ -19648,7 +22264,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_LastPlayedTimes_No
     }
 }
 
-#[doc = "Notification from server to client that a friend's nickname has changed"]
 // @@protoc_insertion_point(message:CPlayer_FriendNicknameChanged_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_FriendNicknameChanged_Notification {
@@ -19839,7 +22454,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_FriendNicknameChan
     }
 }
 
-#[doc = "Notification from server to client that a friend's equipped profile items have changed"]
 // @@protoc_insertion_point(message:CPlayer_FriendEquippedProfileItemsChanged_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_FriendEquippedProfileItemsChanged_Notification {
@@ -19949,7 +22563,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_FriendEquippedProf
     }
 }
 
-#[doc = "Notifies client of changes to steam announcement state for user"]
 // @@protoc_insertion_point(message:CPlayer_NewSteamAnnouncementState_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_NewSteamAnnouncementState_Notification {
@@ -20224,7 +22837,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_NewSteamAnnounceme
     }
 }
 
-#[doc = "Notification from server to client that their community preferences have changed"]
 // @@protoc_insertion_point(message:CPlayer_CommunityPreferencesChanged_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_CommunityPreferencesChanged_Notification {
@@ -20330,7 +22942,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_CommunityPreferenc
     }
 }
 
-#[doc = "Notification from server to client that their text filtering dictionary has changed"]
 // @@protoc_insertion_point(message:CPlayer_TextFilterWordsChanged_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_TextFilterWordsChanged_Notification {
@@ -20422,7 +23033,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_TextFilterWordsCha
     }
 }
 
-#[doc = "Notification from server that per-friend preferences have changed"]
 // @@protoc_insertion_point(message:CPlayer_PerFriendPreferencesChanged_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_PerFriendPreferencesChanged_Notification {
@@ -20546,7 +23156,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CPlayer_PerFriendPreferenc
     }
 }
 
-#[doc = "Notification from server that privacy settings changed"]
 // @@protoc_insertion_point(message:CPlayer_PrivacySettingsChanged_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CPlayer_PrivacySettingsChanged_Notification {
@@ -20868,6 +23477,60 @@ use crate::steammessages_base::*;
 use crate::steammessages_unified_base_steamclient::*;
 #[allow(unused_imports)]
 use crate::enums::*;
+impl ::steam_vent_proto_common::RpcMessage
+for CPlayer_GetRecentPlaytimeSessionsForChild_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CPlayer_GetRecentPlaytimeSessionsForChild_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CPlayer_GetPlayerLinkDetails_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CPlayer_GetPlayerLinkDetails_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CPlayer_GetMutualFriendsForIncomingInvites_Request {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -21384,6 +24047,34 @@ impl ::steam_vent_proto_common::RpcMessage for CPlayer_GetEmoticonList_Request {
     }
 }
 impl ::steam_vent_proto_common::RpcMessage for CPlayer_GetEmoticonList_Response {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CPlayer_GetCommunityBadgeProgress_Request {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage
+for CPlayer_GetCommunityBadgeProgress_Response {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }
@@ -22431,12 +25122,12 @@ for CPlayer_PrivacySettingsChanged_Notification {
         self.compute_size() as usize
     }
 }
-///A service for accessing Steam player data
+///
 struct Player {}
 impl ::steam_vent_proto_common::RpcService for Player {
     const SERVICE_NAME: &'static str = "Player";
 }
-///Steam player data client notifications
+///
 struct PlayerClient {}
 impl ::steam_vent_proto_common::RpcService for PlayerClient {
     const SERVICE_NAME: &'static str = "PlayerClient";
@@ -22479,6 +25170,10 @@ impl ::steam_vent_proto_common::RpcMethod for CPlayer_GetAnimatedAvatar_Request 
 impl ::steam_vent_proto_common::RpcMethod for CPlayer_GetAvatarFrame_Request {
     const METHOD_NAME: &'static str = "Player.GetAvatarFrame#1";
     type Response = CPlayer_GetAvatarFrame_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod for CPlayer_GetCommunityBadgeProgress_Request {
+    const METHOD_NAME: &'static str = "Player.GetCommunityBadgeProgress#1";
+    type Response = CPlayer_GetCommunityBadgeProgress_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod for CPlayer_GetCommunityPreferences_Request {
     const METHOD_NAME: &'static str = "Player.GetCommunityPreferences#1";
@@ -22542,6 +25237,10 @@ impl ::steam_vent_proto_common::RpcMethod for CPlayer_GetPlayNext_Request {
     const METHOD_NAME: &'static str = "Player.GetPlayNext#1";
     type Response = CPlayer_GetPlayNext_Response;
 }
+impl ::steam_vent_proto_common::RpcMethod for CPlayer_GetPlayerLinkDetails_Request {
+    const METHOD_NAME: &'static str = "Player.GetPlayerLinkDetails#1";
+    type Response = CPlayer_GetPlayerLinkDetails_Response;
+}
 impl ::steam_vent_proto_common::RpcMethod for CPlayer_GetPostedStatus_Request {
     const METHOD_NAME: &'static str = "Player.GetPostedStatus#1";
     type Response = CPlayer_GetPostedStatus_Response;
@@ -22579,6 +25278,11 @@ impl ::steam_vent_proto_common::RpcMethod
 for CPlayer_GetPurchasedProfileCustomizations_Request {
     const METHOD_NAME: &'static str = "Player.GetPurchasedProfileCustomizations#1";
     type Response = CPlayer_GetPurchasedProfileCustomizations_Response;
+}
+impl ::steam_vent_proto_common::RpcMethod
+for CPlayer_GetRecentPlaytimeSessionsForChild_Request {
+    const METHOD_NAME: &'static str = "Player.GetRecentPlaytimeSessionsForChild#1";
+    type Response = CPlayer_GetRecentPlaytimeSessionsForChild_Response;
 }
 impl ::steam_vent_proto_common::RpcMethod for CPlayer_GetSteamDeckKeyboardSkin_Request {
     const METHOD_NAME: &'static str = "Player.GetSteamDeckKeyboardSkin#1";

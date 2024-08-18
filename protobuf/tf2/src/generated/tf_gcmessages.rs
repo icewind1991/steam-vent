@@ -19998,8 +19998,8 @@ impl CMsgProcessMatchVoteKick {
 
     pub fn reason(&self) -> TFVoteKickReason {
         match self.reason {
-            Some(e) => e.enum_value_or(TFVoteKickReason::TFVoteKickReason_Other),
-            None => TFVoteKickReason::TFVoteKickReason_Other,
+            Some(e) => e.enum_value_or(TFVoteKickReason::TFVoteKickReason_Invalid),
+            None => TFVoteKickReason::TFVoteKickReason_Invalid,
         }
     }
 
@@ -20406,82 +20406,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgProcessMatchVoteKickRe
     fn default_instance() -> &'static CMsgProcessMatchVoteKickResponse {
         static instance: CMsgProcessMatchVoteKickResponse = CMsgProcessMatchVoteKickResponse {
             rip: ::std::option::Option::None,
-            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-// @@protoc_insertion_point(message:CMsgPlayerVoteKickedAfterLeavingMatchResponse)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct CMsgPlayerVoteKickedAfterLeavingMatchResponse {
-    // special fields
-    // @@protoc_insertion_point(special_field:CMsgPlayerVoteKickedAfterLeavingMatchResponse.special_fields)
-    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a CMsgPlayerVoteKickedAfterLeavingMatchResponse {
-    fn default() -> &'a CMsgPlayerVoteKickedAfterLeavingMatchResponse {
-        <CMsgPlayerVoteKickedAfterLeavingMatchResponse as ::steam_vent_proto_common::protobuf::Message>::default_instance()
-    }
-}
-
-impl CMsgPlayerVoteKickedAfterLeavingMatchResponse {
-    pub fn new() -> CMsgPlayerVoteKickedAfterLeavingMatchResponse {
-        ::std::default::Default::default()
-    }
-}
-
-impl ::steam_vent_proto_common::protobuf::Message for CMsgPlayerVoteKickedAfterLeavingMatchResponse {
-    const NAME: &'static str = "CMsgPlayerVoteKickedAfterLeavingMatchResponse";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                tag => {
-                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> CMsgPlayerVoteKickedAfterLeavingMatchResponse {
-        CMsgPlayerVoteKickedAfterLeavingMatchResponse::new()
-    }
-
-    fn clear(&mut self) {
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static CMsgPlayerVoteKickedAfterLeavingMatchResponse {
-        static instance: CMsgPlayerVoteKickedAfterLeavingMatchResponse = CMsgPlayerVoteKickedAfterLeavingMatchResponse {
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -29274,8 +29198,8 @@ impl CMsgGC_TFVoteKickPlayerRequest {
 
     pub fn reason(&self) -> TFVoteKickReason {
         match self.reason {
-            Some(e) => e.enum_value_or(TFVoteKickReason::TFVoteKickReason_Other),
-            None => TFVoteKickReason::TFVoteKickReason_Other,
+            Some(e) => e.enum_value_or(TFVoteKickReason::TFVoteKickReason_Invalid),
+            None => TFVoteKickReason::TFVoteKickReason_Invalid,
         }
     }
 
@@ -36397,6 +36321,363 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgSDRTicket {
     }
 }
 
+// @@protoc_insertion_point(message:CMsgAuthorizeServerItemRetrieval)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgAuthorizeServerItemRetrieval {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgAuthorizeServerItemRetrieval.item_id)
+    pub item_id: ::std::vec::Vec<u64>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgAuthorizeServerItemRetrieval.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgAuthorizeServerItemRetrieval {
+    fn default() -> &'a CMsgAuthorizeServerItemRetrieval {
+        <CMsgAuthorizeServerItemRetrieval as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgAuthorizeServerItemRetrieval {
+    pub fn new() -> CMsgAuthorizeServerItemRetrieval {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgAuthorizeServerItemRetrieval {
+    const NAME: &'static str = "CMsgAuthorizeServerItemRetrieval";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    is.read_repeated_packed_uint64_into(&mut self.item_id)?;
+                },
+                8 => {
+                    self.item_id.push(is.read_uint64()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.item_id {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint64_size(1, *value);
+        };
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        for v in &self.item_id {
+            os.write_uint64(1, *v)?;
+        };
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgAuthorizeServerItemRetrieval {
+        CMsgAuthorizeServerItemRetrieval::new()
+    }
+
+    fn clear(&mut self) {
+        self.item_id.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgAuthorizeServerItemRetrieval {
+        static instance: CMsgAuthorizeServerItemRetrieval = CMsgAuthorizeServerItemRetrieval {
+            item_id: ::std::vec::Vec::new(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMsgGCToGCSendAccountBannedNotifications)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgGCToGCSendAccountBannedNotifications {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgGCToGCSendAccountBannedNotifications.banned_accountid)
+    pub banned_accountid: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgGCToGCSendAccountBannedNotifications.report_period_begin)
+    pub report_period_begin: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgGCToGCSendAccountBannedNotifications.report_period_end)
+    pub report_period_end: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgGCToGCSendAccountBannedNotifications.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgGCToGCSendAccountBannedNotifications {
+    fn default() -> &'a CMsgGCToGCSendAccountBannedNotifications {
+        <CMsgGCToGCSendAccountBannedNotifications as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgGCToGCSendAccountBannedNotifications {
+    pub fn new() -> CMsgGCToGCSendAccountBannedNotifications {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 banned_accountid = 1;
+
+    pub fn banned_accountid(&self) -> u32 {
+        self.banned_accountid.unwrap_or(0)
+    }
+
+    pub fn clear_banned_accountid(&mut self) {
+        self.banned_accountid = ::std::option::Option::None;
+    }
+
+    pub fn has_banned_accountid(&self) -> bool {
+        self.banned_accountid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_banned_accountid(&mut self, v: u32) {
+        self.banned_accountid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 report_period_begin = 2;
+
+    pub fn report_period_begin(&self) -> u32 {
+        self.report_period_begin.unwrap_or(0)
+    }
+
+    pub fn clear_report_period_begin(&mut self) {
+        self.report_period_begin = ::std::option::Option::None;
+    }
+
+    pub fn has_report_period_begin(&self) -> bool {
+        self.report_period_begin.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_report_period_begin(&mut self, v: u32) {
+        self.report_period_begin = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 report_period_end = 3;
+
+    pub fn report_period_end(&self) -> u32 {
+        self.report_period_end.unwrap_or(0)
+    }
+
+    pub fn clear_report_period_end(&mut self) {
+        self.report_period_end = ::std::option::Option::None;
+    }
+
+    pub fn has_report_period_end(&self) -> bool {
+        self.report_period_end.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_report_period_end(&mut self, v: u32) {
+        self.report_period_end = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgGCToGCSendAccountBannedNotifications {
+    const NAME: &'static str = "CMsgGCToGCSendAccountBannedNotifications";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.banned_accountid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.report_period_begin = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                24 => {
+                    self.report_period_end = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.banned_accountid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.report_period_begin {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        if let Some(v) = self.report_period_end {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.banned_accountid {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.report_period_begin {
+            os.write_uint32(2, v)?;
+        }
+        if let Some(v) = self.report_period_end {
+            os.write_uint32(3, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgGCToGCSendAccountBannedNotifications {
+        CMsgGCToGCSendAccountBannedNotifications::new()
+    }
+
+    fn clear(&mut self) {
+        self.banned_accountid = ::std::option::Option::None;
+        self.report_period_begin = ::std::option::Option::None;
+        self.report_period_end = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgGCToGCSendAccountBannedNotifications {
+        static instance: CMsgGCToGCSendAccountBannedNotifications = CMsgGCToGCSendAccountBannedNotifications {
+            banned_accountid: ::std::option::Option::None,
+            report_period_begin: ::std::option::Option::None,
+            report_period_end: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMsgGCToGCSendNotification)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgGCToGCSendNotification {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgGCToGCSendNotification.notification)
+    pub notification: ::steam_vent_proto_common::protobuf::MessageField<CMsgGCNotification>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgGCToGCSendNotification.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgGCToGCSendNotification {
+    fn default() -> &'a CMsgGCToGCSendNotification {
+        <CMsgGCToGCSendNotification as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgGCToGCSendNotification {
+    pub fn new() -> CMsgGCToGCSendNotification {
+        ::std::default::Default::default()
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgGCToGCSendNotification {
+    const NAME: &'static str = "CMsgGCToGCSendNotification";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::steam_vent_proto_common::protobuf::rt::read_singular_message_into_field(is, &mut self.notification)?;
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.notification.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::steam_vent_proto_common::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.notification.as_ref() {
+            ::steam_vent_proto_common::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgGCToGCSendNotification {
+        CMsgGCToGCSendNotification::new()
+    }
+
+    fn clear(&mut self) {
+        self.notification.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgGCToGCSendNotification {
+        static instance: CMsgGCToGCSendNotification = CMsgGCToGCSendNotification {
+            notification: ::steam_vent_proto_common::protobuf::MessageField::none(),
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:ETFGCMsg)
 pub enum ETFGCMsg {
@@ -36728,6 +37009,10 @@ pub enum ETFGCMsg {
     k_EMsgGC_ProcessMatchVoteKick = 6581,
     // @@protoc_insertion_point(enum_value:ETFGCMsg.k_EMsgGC_ProcessMatchVoteKickResponse)
     k_EMsgGC_ProcessMatchVoteKickResponse = 6582,
+    // @@protoc_insertion_point(enum_value:ETFGCMsg.k_EMsgGCToGC_SendAccountBannedNotifications)
+    k_EMsgGCToGC_SendAccountBannedNotifications = 6584,
+    // @@protoc_insertion_point(enum_value:ETFGCMsg.k_EMsgGCToGC_SendNotification)
+    k_EMsgGCToGC_SendNotification = 6585,
     // @@protoc_insertion_point(enum_value:ETFGCMsg.k_EMsgGCDev_GrantWarKill)
     k_EMsgGCDev_GrantWarKill = 10001,
 }
@@ -36905,6 +37190,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for ETFGCMsg {
             6580 => ::std::option::Option::Some(ETFGCMsg::k_EMsgGC_SDRTicket),
             6581 => ::std::option::Option::Some(ETFGCMsg::k_EMsgGC_ProcessMatchVoteKick),
             6582 => ::std::option::Option::Some(ETFGCMsg::k_EMsgGC_ProcessMatchVoteKickResponse),
+            6584 => ::std::option::Option::Some(ETFGCMsg::k_EMsgGCToGC_SendAccountBannedNotifications),
+            6585 => ::std::option::Option::Some(ETFGCMsg::k_EMsgGCToGC_SendNotification),
             10001 => ::std::option::Option::Some(ETFGCMsg::k_EMsgGCDev_GrantWarKill),
             _ => ::std::option::Option::None
         }
@@ -37076,6 +37363,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for ETFGCMsg {
             "k_EMsgGC_SDRTicket" => ::std::option::Option::Some(ETFGCMsg::k_EMsgGC_SDRTicket),
             "k_EMsgGC_ProcessMatchVoteKick" => ::std::option::Option::Some(ETFGCMsg::k_EMsgGC_ProcessMatchVoteKick),
             "k_EMsgGC_ProcessMatchVoteKickResponse" => ::std::option::Option::Some(ETFGCMsg::k_EMsgGC_ProcessMatchVoteKickResponse),
+            "k_EMsgGCToGC_SendAccountBannedNotifications" => ::std::option::Option::Some(ETFGCMsg::k_EMsgGCToGC_SendAccountBannedNotifications),
+            "k_EMsgGCToGC_SendNotification" => ::std::option::Option::Some(ETFGCMsg::k_EMsgGCToGC_SendNotification),
             "k_EMsgGCDev_GrantWarKill" => ::std::option::Option::Some(ETFGCMsg::k_EMsgGCDev_GrantWarKill),
             _ => ::std::option::Option::None
         }
@@ -37246,6 +37535,8 @@ impl ::steam_vent_proto_common::protobuf::Enum for ETFGCMsg {
         ETFGCMsg::k_EMsgGC_SDRTicket,
         ETFGCMsg::k_EMsgGC_ProcessMatchVoteKick,
         ETFGCMsg::k_EMsgGC_ProcessMatchVoteKickResponse,
+        ETFGCMsg::k_EMsgGCToGC_SendAccountBannedNotifications,
+        ETFGCMsg::k_EMsgGCToGC_SendNotification,
         ETFGCMsg::k_EMsgGCDev_GrantWarKill,
     ];
 }
@@ -37805,6 +38096,8 @@ impl ::std::default::Default for TFMatchLeaveReason {
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:TFVoteKickReason)
 pub enum TFVoteKickReason {
+    // @@protoc_insertion_point(enum_value:TFVoteKickReason.TFVoteKickReason_Invalid)
+    TFVoteKickReason_Invalid = -1,
     // @@protoc_insertion_point(enum_value:TFVoteKickReason.TFVoteKickReason_Other)
     TFVoteKickReason_Other = 0,
     // @@protoc_insertion_point(enum_value:TFVoteKickReason.TFVoteKickReason_Cheating)
@@ -37824,6 +38117,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for TFVoteKickReason {
 
     fn from_i32(value: i32) -> ::std::option::Option<TFVoteKickReason> {
         match value {
+            -1 => ::std::option::Option::Some(TFVoteKickReason::TFVoteKickReason_Invalid),
             0 => ::std::option::Option::Some(TFVoteKickReason::TFVoteKickReason_Other),
             1 => ::std::option::Option::Some(TFVoteKickReason::TFVoteKickReason_Cheating),
             2 => ::std::option::Option::Some(TFVoteKickReason::TFVoteKickReason_Idle),
@@ -37834,6 +38128,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for TFVoteKickReason {
 
     fn from_str(str: &str) -> ::std::option::Option<TFVoteKickReason> {
         match str {
+            "TFVoteKickReason_Invalid" => ::std::option::Option::Some(TFVoteKickReason::TFVoteKickReason_Invalid),
             "TFVoteKickReason_Other" => ::std::option::Option::Some(TFVoteKickReason::TFVoteKickReason_Other),
             "TFVoteKickReason_Cheating" => ::std::option::Option::Some(TFVoteKickReason::TFVoteKickReason_Cheating),
             "TFVoteKickReason_Idle" => ::std::option::Option::Some(TFVoteKickReason::TFVoteKickReason_Idle),
@@ -37843,6 +38138,7 @@ impl ::steam_vent_proto_common::protobuf::Enum for TFVoteKickReason {
     }
 
     const VALUES: &'static [TFVoteKickReason] = &[
+        TFVoteKickReason::TFVoteKickReason_Invalid,
         TFVoteKickReason::TFVoteKickReason_Other,
         TFVoteKickReason::TFVoteKickReason_Cheating,
         TFVoteKickReason::TFVoteKickReason_Idle,
@@ -37850,9 +38146,10 @@ impl ::steam_vent_proto_common::protobuf::Enum for TFVoteKickReason {
     ];
 }
 
+// Note, `Default` is implemented although default value is not 0
 impl ::std::default::Default for TFVoteKickReason {
     fn default() -> Self {
-        TFVoteKickReason::TFVoteKickReason_Other
+        TFVoteKickReason::TFVoteKickReason_Invalid
     }
 }
 
@@ -39393,20 +39690,6 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgProcessMatchVoteKickResponse 
         self.compute_size() as usize
     }
 }
-impl ::steam_vent_proto_common::RpcMessage
-for CMsgPlayerVoteKickedAfterLeavingMatchResponse {
-    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
-        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
-    }
-    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.write_to_writer(writer)
-    }
-    fn encode_size(&self) -> usize {
-        use ::steam_vent_proto_common::protobuf::Message;
-        self.compute_size() as usize
-    }
-}
 impl ::steam_vent_proto_common::RpcMessage for CMsgHalloween_ServerBossEvent {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -40271,6 +40554,45 @@ impl ::steam_vent_proto_common::RpcMessage for GCQuestStrangeEvent {
     }
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgSDRTicket {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgAuthorizeServerItemRetrieval {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCSendAccountBannedNotifications {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCSendNotification {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
     }

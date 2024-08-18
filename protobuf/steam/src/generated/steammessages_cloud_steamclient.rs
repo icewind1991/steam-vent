@@ -26,7 +26,6 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::steam_vent_proto_common::protobuf::VERSION_3_4_0;
 
-#[doc = "Client checking for pending log upload requests."]
 // @@protoc_insertion_point(message:CCloud_ClientLogUploadCheck_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_ClientLogUploadCheck_Notification {
@@ -136,7 +135,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientLogUploadChec
     }
 }
 
-#[doc = "Client is flagging a log upload request as completed."]
 // @@protoc_insertion_point(message:CCloud_ClientLogUploadComplete_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_ClientLogUploadComplete_Notification {
@@ -278,7 +276,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientLogUploadComp
     }
 }
 
-#[doc = "Returns the URL of the proper cloud server for a user."]
 // @@protoc_insertion_point(message:CCloud_GetUploadServerInfo_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_GetUploadServerInfo_Request {
@@ -514,7 +511,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_GetUploadServerInfo
     }
 }
 
-#[doc = "Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload."]
 // @@protoc_insertion_point(message:CCloud_BeginHTTPUpload_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_BeginHTTPUpload_Request {
@@ -1320,7 +1316,6 @@ pub mod ccloud_begin_httpupload_response {
     }
 }
 
-#[doc = "Commits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT."]
 // @@protoc_insertion_point(message:CCloud_CommitHTTPUpload_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_CommitHTTPUpload_Request {
@@ -1669,7 +1664,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_CommitHTTPUpload_Re
     }
 }
 
-#[doc = "Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload."]
 // @@protoc_insertion_point(message:CCloud_BeginUGCUpload_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_BeginUGCUpload_Request {
@@ -2456,7 +2450,6 @@ pub mod ccloud_begin_ugcupload_response {
     }
 }
 
-#[doc = "Commits a file upload initiated by BeginUGCUpload and transferred via HTTP PUT."]
 // @@protoc_insertion_point(message:CCloud_CommitUGCUpload_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_CommitUGCUpload_Request {
@@ -2739,7 +2732,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_CommitUGCUpload_Res
     }
 }
 
-#[doc = "Returns details on a Cloud file."]
 // @@protoc_insertion_point(message:CCloud_GetFileDetails_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_GetFileDetails_Request {
@@ -3401,7 +3393,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_GetFileDetails_Resp
     }
 }
 
-#[doc = "Enumerates Cloud files for a user of a given app ID. Returns up to 500 files at a time."]
 // @@protoc_insertion_point(message:CCloud_EnumerateUserFiles_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_EnumerateUserFiles_Request {
@@ -3730,7 +3721,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_EnumerateUserFiles_
     }
 }
 
-#[doc = "Deletes a file from the user's cloud."]
 // @@protoc_insertion_point(message:CCloud_Delete_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_Delete_Request {
@@ -3997,7 +3987,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_Delete_Response {
     }
 }
 
-#[doc = "Gets the user's Cloud file encryption key."]
 // @@protoc_insertion_point(message:CCloud_GetClientEncryptionKey_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_GetClientEncryptionKey_Request {
@@ -4232,7 +4221,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_GetClientEncryption
     }
 }
 
-#[doc = "Reports the result of a CDN transfer."]
 // @@protoc_insertion_point(message:CCloud_CDNReport_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_CDNReport_Notification {
@@ -4551,7 +4539,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_CDNReport_Notificat
     }
 }
 
-#[doc = "Reports the result of an external Cloud storage transfer."]
 // @@protoc_insertion_point(message:CCloud_ExternalStorageTransferReport_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_ExternalStorageTransferReport_Notification {
@@ -5175,7 +5162,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ExternalStorageTran
     }
 }
 
-#[doc = "Indicate a batch of files that will be uploaded / deleted for an app."]
 // @@protoc_insertion_point(message:CCloud_BeginAppUploadBatch_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_BeginAppUploadBatch_Request {
@@ -5565,7 +5551,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_BeginAppUploadBatch
     }
 }
 
-#[doc = "Indicate that the batch is complete or being stopped for some other reason."]
 // @@protoc_insertion_point(message:CCloud_CompleteAppUploadBatch_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_CompleteAppUploadBatch_Notification {
@@ -5739,7 +5724,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_CompleteAppUploadBa
     }
 }
 
-#[doc = "Indicate that the batch is complete or being stopped for some other reason."]
 // @@protoc_insertion_point(message:CCloud_CompleteAppUploadBatch_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_CompleteAppUploadBatch_Request {
@@ -5989,7 +5973,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_CompleteAppUploadBa
     }
 }
 
-#[doc = "Initiate an upload to Cloud."]
 // @@protoc_insertion_point(message:CCloud_ClientBeginFileUpload_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_ClientBeginFileUpload_Request {
@@ -7184,7 +7167,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientBeginFileUplo
     }
 }
 
-#[doc = "Commit the file upload or indicate failure."]
 // @@protoc_insertion_point(message:CCloud_ClientCommitFileUpload_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_ClientCommitFileUpload_Request {
@@ -7533,7 +7515,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientCommitFileUpl
     }
 }
 
-#[doc = "Initiate a file download."]
 // @@protoc_insertion_point(message:CCloud_ClientFileDownload_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_ClientFileDownload_Request {
@@ -7544,6 +7525,8 @@ pub struct CCloud_ClientFileDownload_Request {
     pub filename: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CCloud_ClientFileDownload_Request.realm)
     pub realm: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CCloud_ClientFileDownload_Request.force_proxy)
+    pub force_proxy: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:CCloud_ClientFileDownload_Request.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -7633,6 +7616,25 @@ impl CCloud_ClientFileDownload_Request {
     pub fn set_realm(&mut self, v: u32) {
         self.realm = ::std::option::Option::Some(v);
     }
+
+    // optional bool force_proxy = 4;
+
+    pub fn force_proxy(&self) -> bool {
+        self.force_proxy.unwrap_or(false)
+    }
+
+    pub fn clear_force_proxy(&mut self) {
+        self.force_proxy = ::std::option::Option::None;
+    }
+
+    pub fn has_force_proxy(&self) -> bool {
+        self.force_proxy.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_force_proxy(&mut self, v: bool) {
+        self.force_proxy = ::std::option::Option::Some(v);
+    }
 }
 
 impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientFileDownload_Request {
@@ -7653,6 +7655,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientFileDownload_
                 },
                 24 => {
                     self.realm = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                32 => {
+                    self.force_proxy = ::std::option::Option::Some(is.read_bool()?);
                 },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -7675,6 +7680,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientFileDownload_
         if let Some(v) = self.realm {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
         }
+        if let Some(v) = self.force_proxy {
+            my_size += 1 + 1;
+        }
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -7689,6 +7697,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientFileDownload_
         }
         if let Some(v) = self.realm {
             os.write_uint32(3, v)?;
+        }
+        if let Some(v) = self.force_proxy {
+            os.write_bool(4, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -7710,6 +7721,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientFileDownload_
         self.appid = ::std::option::Option::None;
         self.filename = ::std::option::Option::None;
         self.realm = ::std::option::Option::None;
+        self.force_proxy = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -7718,6 +7730,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientFileDownload_
             appid: ::std::option::Option::None,
             filename: ::std::option::Option::None,
             realm: ::std::option::Option::None,
+            force_proxy: ::std::option::Option::None,
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -8364,7 +8377,6 @@ pub mod ccloud_client_file_download_response {
     }
 }
 
-#[doc = "Delete or forget a file."]
 // @@protoc_insertion_point(message:CCloud_ClientDeleteFile_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_ClientDeleteFile_Request {
@@ -8663,7 +8675,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientDeleteFile_Re
     }
 }
 
-#[doc = "User has picked a resolution for a Cloud conflict."]
 // @@protoc_insertion_point(message:CCloud_ClientConflictResolution_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_ClientConflictResolution_Notification {
@@ -8805,7 +8816,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientConflictResol
     }
 }
 
-#[doc = "Enumerates apps stroing cloud files for a user."]
 // @@protoc_insertion_point(message:CCloud_EnumerateUserApps_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_EnumerateUserApps_Request {
@@ -9149,7 +9159,6 @@ pub mod ccloud_enumerate_user_apps_response {
     }
 }
 
-#[doc = "Get a list of Cloud file changes for an app given a starting Change Number."]
 // @@protoc_insertion_point(message:CCloud_GetAppFileChangelist_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_GetAppFileChangelist_Request {
@@ -9874,7 +9883,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_GetAppFileChangelis
     }
 }
 
-#[doc = "An app session is being suspended"]
 // @@protoc_insertion_point(message:CCloud_AppSessionSuspend_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_AppSessionSuspend_Request {
@@ -10173,7 +10181,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_AppSessionSuspend_R
     }
 }
 
-#[doc = "An app session is being resumed"]
 // @@protoc_insertion_point(message:CCloud_AppSessionResume_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_AppSessionResume_Request {
@@ -10391,7 +10398,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_AppSessionResume_Re
     }
 }
 
-#[doc = "Client intends to launch an app"]
 // @@protoc_insertion_point(message:CCloud_AppLaunchIntent_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_AppLaunchIntent_Request {
@@ -10705,7 +10711,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_AppLaunchIntent_Res
     }
 }
 
-#[doc = "Client is done trying to sync after a game session"]
 // @@protoc_insertion_point(message:CCloud_AppExitSyncDone_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_AppExitSyncDone_Notification {
@@ -10911,7 +10916,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_AppExitSyncDone_Not
     }
 }
 
-#[doc = "Client is requesting quota usage for an app"]
 // @@protoc_insertion_point(message:CCloud_ClientGetAppQuotaUsage_Request)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_ClientGetAppQuotaUsage_Request {
@@ -11226,7 +11230,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_ClientGetAppQuotaUs
     }
 }
 
-#[doc = "Cloud state for the given app has changed."]
 // @@protoc_insertion_point(message:CCloud_AppCloudStateChange_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_AppCloudStateChange_Notification {
@@ -11368,7 +11371,6 @@ impl ::steam_vent_proto_common::protobuf::Message for CCloud_AppCloudStateChange
     }
 }
 
-#[doc = "Server is requesting log file uploads from the given client."]
 // @@protoc_insertion_point(message:CCloud_ClientLogUploadRequest_Notification)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CCloud_ClientLogUploadRequest_Notification {
@@ -12196,12 +12198,12 @@ for CCloud_ClientLogUploadRequest_Notification {
         self.compute_size() as usize
     }
 }
-///A service for Steam Cloud operations.
+///
 struct Cloud {}
 impl ::steam_vent_proto_common::RpcService for Cloud {
     const SERVICE_NAME: &'static str = "Cloud";
 }
-///Client notifications for Steam cloud events
+///
 struct CloudClient {}
 impl ::steam_vent_proto_common::RpcService for CloudClient {
     const SERVICE_NAME: &'static str = "CloudClient";

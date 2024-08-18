@@ -662,6 +662,8 @@ pub struct CMsgClientGetClientDetailsResponse {
     pub protocol_version: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CMsgClientGetClientDetailsResponse.clientcomm_version)
     pub clientcomm_version: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgClientGetClientDetailsResponse.local_users)
+    pub local_users: ::std::vec::Vec<u32>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgClientGetClientDetailsResponse.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -936,6 +938,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientGetClientDetails
                 72 => {
                     self.clientcomm_version = ::std::option::Option::Some(is.read_uint32()?);
                 },
+                82 => {
+                    is.read_repeated_packed_uint32_into(&mut self.local_users)?;
+                },
+                80 => {
+                    self.local_users.push(is.read_uint32()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -976,6 +984,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientGetClientDetails
         if let Some(v) = self.clientcomm_version {
             my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(9, v);
         }
+        for value in &self.local_users {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(10, *value);
+        };
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -1009,6 +1020,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientGetClientDetails
         if let Some(v) = self.clientcomm_version {
             os.write_uint32(9, v)?;
         }
+        for v in &self.local_users {
+            os.write_uint32(10, *v)?;
+        };
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -1035,6 +1049,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientGetClientDetails
         self.bytes_available = ::std::option::Option::None;
         self.protocol_version = ::std::option::Option::None;
         self.clientcomm_version = ::std::option::Option::None;
+        self.local_users.clear();
         self.special_fields.clear();
     }
 
@@ -1049,6 +1064,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientGetClientDetails
             bytes_available: ::std::option::Option::None,
             protocol_version: ::std::option::Option::None,
             clientcomm_version: ::std::option::Option::None,
+            local_users: ::std::vec::Vec::new(),
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -1266,6 +1282,8 @@ pub struct CMsgClientGetClientAppList {
     pub comics: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgClientGetClientAppList.include_client_info)
     pub include_client_info: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:CMsgClientGetClientAppList.filter_appids)
+    pub filter_appids: ::std::vec::Vec<u32>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgClientGetClientAppList.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -1447,6 +1465,12 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientGetClientAppList
                 56 => {
                     self.include_client_info = ::std::option::Option::Some(is.read_bool()?);
                 },
+                66 => {
+                    is.read_repeated_packed_uint32_into(&mut self.filter_appids)?;
+                },
+                64 => {
+                    self.filter_appids.push(is.read_uint32()?);
+                },
                 tag => {
                     ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -1480,6 +1504,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientGetClientAppList
         if let Some(v) = self.include_client_info {
             my_size += 1 + 1;
         }
+        for value in &self.filter_appids {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(8, *value);
+        };
         my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -1507,6 +1534,9 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientGetClientAppList
         if let Some(v) = self.include_client_info {
             os.write_bool(7, v)?;
         }
+        for v in &self.filter_appids {
+            os.write_uint32(8, *v)?;
+        };
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -1531,6 +1561,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientGetClientAppList
         self.only_changing = ::std::option::Option::None;
         self.comics = ::std::option::Option::None;
         self.include_client_info = ::std::option::Option::None;
+        self.filter_appids.clear();
         self.special_fields.clear();
     }
 
@@ -1543,6 +1574,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientGetClientAppList
             only_changing: ::std::option::Option::None,
             comics: ::std::option::Option::None,
             include_client_info: ::std::option::Option::None,
+            filter_appids: ::std::vec::Vec::new(),
             special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
         };
         &instance
@@ -1740,6 +1772,8 @@ pub mod cmsg_client_get_client_app_list_response {
         pub uninstalling: ::std::option::Option<bool>,
         // @@protoc_insertion_point(field:CMsgClientGetClientAppListResponse.App.rt_time_scheduled)
         pub rt_time_scheduled: ::std::option::Option<u32>,
+        // @@protoc_insertion_point(field:CMsgClientGetClientAppListResponse.App.running)
+        pub running: ::std::option::Option<bool>,
         // special fields
         // @@protoc_insertion_point(special_field:CMsgClientGetClientAppListResponse.App.special_fields)
         pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -2226,6 +2260,25 @@ pub mod cmsg_client_get_client_app_list_response {
         pub fn set_rt_time_scheduled(&mut self, v: u32) {
             self.rt_time_scheduled = ::std::option::Option::Some(v);
         }
+
+        // optional bool running = 25;
+
+        pub fn running(&self) -> bool {
+            self.running.unwrap_or(false)
+        }
+
+        pub fn clear_running(&mut self) {
+            self.running = ::std::option::Option::None;
+        }
+
+        pub fn has_running(&self) -> bool {
+            self.running.is_some()
+        }
+
+        // Param is passed by value, moved
+        pub fn set_running(&mut self, v: bool) {
+            self.running = ::std::option::Option::Some(v);
+        }
     }
 
     impl ::steam_vent_proto_common::protobuf::Message for App {
@@ -2309,6 +2362,9 @@ pub mod cmsg_client_get_client_app_list_response {
                     },
                     192 => {
                         self.rt_time_scheduled = ::std::option::Option::Some(is.read_uint32()?);
+                    },
+                    200 => {
+                        self.running = ::std::option::Option::Some(is.read_bool()?);
                     },
                     tag => {
                         ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -2395,6 +2451,9 @@ pub mod cmsg_client_get_client_app_list_response {
             if let Some(v) = self.rt_time_scheduled {
                 my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(24, v);
             }
+            if let Some(v) = self.running {
+                my_size += 2 + 1;
+            }
             my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -2473,6 +2532,9 @@ pub mod cmsg_client_get_client_app_list_response {
             if let Some(v) = self.rt_time_scheduled {
                 os.write_uint32(24, v)?;
             }
+            if let Some(v) = self.running {
+                os.write_bool(25, v)?;
+            }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
         }
@@ -2514,6 +2576,7 @@ pub mod cmsg_client_get_client_app_list_response {
             self.queue_position = ::std::option::Option::None;
             self.uninstalling = ::std::option::Option::None;
             self.rt_time_scheduled = ::std::option::Option::None;
+            self.running = ::std::option::Option::None;
             self.special_fields.clear();
         }
 
@@ -2543,6 +2606,7 @@ pub mod cmsg_client_get_client_app_list_response {
                 queue_position: ::std::option::Option::None,
                 uninstalling: ::std::option::Option::None,
                 rt_time_scheduled: ::std::option::Option::None,
+                running: ::std::option::Option::None,
                 special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
             };
             &instance
@@ -3380,6 +3444,450 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgClientSetClientAppUpda
     }
 }
 
+// @@protoc_insertion_point(message:CMsgClientLaunchClientApp)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgClientLaunchClientApp {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgClientLaunchClientApp.appid)
+    pub appid: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgClientLaunchClientApp.language)
+    pub language: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgClientLaunchClientApp.launch_option_type)
+    pub launch_option_type: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgClientLaunchClientApp.launch_option)
+    pub launch_option: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgClientLaunchClientApp.launch_source)
+    pub launch_source: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:CMsgClientLaunchClientApp.args)
+    pub args: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:CMsgClientLaunchClientApp.query_params)
+    pub query_params: ::std::option::Option<::std::string::String>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgClientLaunchClientApp.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgClientLaunchClientApp {
+    fn default() -> &'a CMsgClientLaunchClientApp {
+        <CMsgClientLaunchClientApp as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgClientLaunchClientApp {
+    pub fn new() -> CMsgClientLaunchClientApp {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 appid = 1;
+
+    pub fn appid(&self) -> u32 {
+        self.appid.unwrap_or(0)
+    }
+
+    pub fn clear_appid(&mut self) {
+        self.appid = ::std::option::Option::None;
+    }
+
+    pub fn has_appid(&self) -> bool {
+        self.appid.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_appid(&mut self, v: u32) {
+        self.appid = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 language = 2;
+
+    pub fn language(&self) -> u32 {
+        self.language.unwrap_or(0)
+    }
+
+    pub fn clear_language(&mut self) {
+        self.language = ::std::option::Option::None;
+    }
+
+    pub fn has_language(&self) -> bool {
+        self.language.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_language(&mut self, v: u32) {
+        self.language = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 launch_option_type = 3;
+
+    pub fn launch_option_type(&self) -> u32 {
+        self.launch_option_type.unwrap_or(0)
+    }
+
+    pub fn clear_launch_option_type(&mut self) {
+        self.launch_option_type = ::std::option::Option::None;
+    }
+
+    pub fn has_launch_option_type(&self) -> bool {
+        self.launch_option_type.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_launch_option_type(&mut self, v: u32) {
+        self.launch_option_type = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 launch_option = 4;
+
+    pub fn launch_option(&self) -> u32 {
+        self.launch_option.unwrap_or(0)
+    }
+
+    pub fn clear_launch_option(&mut self) {
+        self.launch_option = ::std::option::Option::None;
+    }
+
+    pub fn has_launch_option(&self) -> bool {
+        self.launch_option.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_launch_option(&mut self, v: u32) {
+        self.launch_option = ::std::option::Option::Some(v);
+    }
+
+    // optional uint32 launch_source = 5;
+
+    pub fn launch_source(&self) -> u32 {
+        self.launch_source.unwrap_or(0)
+    }
+
+    pub fn clear_launch_source(&mut self) {
+        self.launch_source = ::std::option::Option::None;
+    }
+
+    pub fn has_launch_source(&self) -> bool {
+        self.launch_source.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_launch_source(&mut self, v: u32) {
+        self.launch_source = ::std::option::Option::Some(v);
+    }
+
+    // optional string args = 6;
+
+    pub fn args(&self) -> &str {
+        match self.args.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_args(&mut self) {
+        self.args = ::std::option::Option::None;
+    }
+
+    pub fn has_args(&self) -> bool {
+        self.args.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_args(&mut self, v: ::std::string::String) {
+        self.args = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_args(&mut self) -> &mut ::std::string::String {
+        if self.args.is_none() {
+            self.args = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.args.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_args(&mut self) -> ::std::string::String {
+        self.args.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional string query_params = 7;
+
+    pub fn query_params(&self) -> &str {
+        match self.query_params.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_query_params(&mut self) {
+        self.query_params = ::std::option::Option::None;
+    }
+
+    pub fn has_query_params(&self) -> bool {
+        self.query_params.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_query_params(&mut self, v: ::std::string::String) {
+        self.query_params = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_query_params(&mut self) -> &mut ::std::string::String {
+        if self.query_params.is_none() {
+            self.query_params = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.query_params.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_query_params(&mut self) -> ::std::string::String {
+        self.query_params.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLaunchClientApp {
+    const NAME: &'static str = "CMsgClientLaunchClientApp";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.appid = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.language = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                24 => {
+                    self.launch_option_type = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                32 => {
+                    self.launch_option = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                40 => {
+                    self.launch_source = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                50 => {
+                    self.args = ::std::option::Option::Some(is.read_string()?);
+                },
+                58 => {
+                    self.query_params = ::std::option::Option::Some(is.read_string()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.appid {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.language {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(2, v);
+        }
+        if let Some(v) = self.launch_option_type {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(3, v);
+        }
+        if let Some(v) = self.launch_option {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(4, v);
+        }
+        if let Some(v) = self.launch_source {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(5, v);
+        }
+        if let Some(v) = self.args.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(6, &v);
+        }
+        if let Some(v) = self.query_params.as_ref() {
+            my_size += ::steam_vent_proto_common::protobuf::rt::string_size(7, &v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.appid {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.language {
+            os.write_uint32(2, v)?;
+        }
+        if let Some(v) = self.launch_option_type {
+            os.write_uint32(3, v)?;
+        }
+        if let Some(v) = self.launch_option {
+            os.write_uint32(4, v)?;
+        }
+        if let Some(v) = self.launch_source {
+            os.write_uint32(5, v)?;
+        }
+        if let Some(v) = self.args.as_ref() {
+            os.write_string(6, v)?;
+        }
+        if let Some(v) = self.query_params.as_ref() {
+            os.write_string(7, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgClientLaunchClientApp {
+        CMsgClientLaunchClientApp::new()
+    }
+
+    fn clear(&mut self) {
+        self.appid = ::std::option::Option::None;
+        self.language = ::std::option::Option::None;
+        self.launch_option_type = ::std::option::Option::None;
+        self.launch_option = ::std::option::Option::None;
+        self.launch_source = ::std::option::Option::None;
+        self.args = ::std::option::Option::None;
+        self.query_params = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgClientLaunchClientApp {
+        static instance: CMsgClientLaunchClientApp = CMsgClientLaunchClientApp {
+            appid: ::std::option::Option::None,
+            language: ::std::option::Option::None,
+            launch_option_type: ::std::option::Option::None,
+            launch_option: ::std::option::Option::None,
+            launch_source: ::std::option::Option::None,
+            args: ::std::option::Option::None,
+            query_params: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+// @@protoc_insertion_point(message:CMsgClientLaunchClientAppResponse)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct CMsgClientLaunchClientAppResponse {
+    // message fields
+    // @@protoc_insertion_point(field:CMsgClientLaunchClientAppResponse.result)
+    pub result: ::std::option::Option<u32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:CMsgClientLaunchClientAppResponse.special_fields)
+    pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a CMsgClientLaunchClientAppResponse {
+    fn default() -> &'a CMsgClientLaunchClientAppResponse {
+        <CMsgClientLaunchClientAppResponse as ::steam_vent_proto_common::protobuf::Message>::default_instance()
+    }
+}
+
+impl CMsgClientLaunchClientAppResponse {
+    pub fn new() -> CMsgClientLaunchClientAppResponse {
+        ::std::default::Default::default()
+    }
+
+    // optional uint32 result = 1;
+
+    pub fn result(&self) -> u32 {
+        self.result.unwrap_or(0)
+    }
+
+    pub fn clear_result(&mut self) {
+        self.result = ::std::option::Option::None;
+    }
+
+    pub fn has_result(&self) -> bool {
+        self.result.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_result(&mut self, v: u32) {
+        self.result = ::std::option::Option::Some(v);
+    }
+}
+
+impl ::steam_vent_proto_common::protobuf::Message for CMsgClientLaunchClientAppResponse {
+    const NAME: &'static str = "CMsgClientLaunchClientAppResponse";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::steam_vent_proto_common::protobuf::CodedInputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.result = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                tag => {
+                    ::steam_vent_proto_common::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.result {
+            my_size += ::steam_vent_proto_common::protobuf::rt::uint32_size(1, v);
+        }
+        my_size += ::steam_vent_proto_common::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::steam_vent_proto_common::protobuf::CodedOutputStream<'_>) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        if let Some(v) = self.result {
+            os.write_uint32(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::steam_vent_proto_common::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::steam_vent_proto_common::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> CMsgClientLaunchClientAppResponse {
+        CMsgClientLaunchClientAppResponse::new()
+    }
+
+    fn clear(&mut self) {
+        self.result = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static CMsgClientLaunchClientAppResponse {
+        static instance: CMsgClientLaunchClientAppResponse = CMsgClientLaunchClientAppResponse {
+            result: ::std::option::Option::None,
+            special_fields: ::steam_vent_proto_common::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
 // @@protoc_insertion_point(message:CMsgClientEnableOrDisableDownloads)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct CMsgClientEnableOrDisableDownloads {
@@ -3801,6 +4309,32 @@ for CMsgClientSetClientAppUpdateStateResponse {
 impl ::steam_vent_proto_common::RpcMessageWithKind
 for CMsgClientSetClientAppUpdateStateResponse {
     const KIND: ::steam_vent_proto_common::EMsg = ::steam_vent_proto_common::EMsg::k_EMsgClientSetClientAppUpdateStateResponse;
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgClientLaunchClientApp {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
+}
+impl ::steam_vent_proto_common::RpcMessage for CMsgClientLaunchClientAppResponse {
+    fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
+        <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
+    }
+    fn write(&self, writer: &mut dyn std::io::Write) -> ::steam_vent_proto_common::protobuf::Result<()> {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.write_to_writer(writer)
+    }
+    fn encode_size(&self) -> usize {
+        use ::steam_vent_proto_common::protobuf::Message;
+        self.compute_size() as usize
+    }
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientEnableOrDisableDownloads {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
