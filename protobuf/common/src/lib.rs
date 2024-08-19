@@ -57,9 +57,19 @@ impl From<MsgKind> for i32 {
     }
 }
 
+pub const PROTO_MASK: u32 = 0x80000000;
+
 pub trait MsgKindEnum: Enum + Debug {
     fn enum_value(&self) -> i32 {
         <Self as Enum>::value(self)
+    }
+
+    fn encode_kind(&self, is_protobuf: bool) -> u32 {
+        if is_protobuf {
+            self.enum_value() as u32 | PROTO_MASK
+        } else {
+            self.enum_value() as u32
+        }
     }
 }
 

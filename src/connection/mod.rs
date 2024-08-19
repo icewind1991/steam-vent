@@ -40,7 +40,7 @@ pub struct Connection {
 }
 
 impl Connection {
-    async fn connect(server_list: ServerList) -> Result<Self, ConnectionError> {
+    async fn connect(server_list: &ServerList) -> Result<Self, ConnectionError> {
         let (read, write) = connect(&server_list.pick_ws()).await?;
         let (filter, rest) = MessageFilter::new(read);
         let mut connection = Connection {
@@ -54,7 +54,7 @@ impl Connection {
         Ok(connection)
     }
 
-    pub async fn anonymous(server_list: ServerList) -> Result<Self, ConnectionError> {
+    pub async fn anonymous(server_list: &ServerList) -> Result<Self, ConnectionError> {
         let mut connection = Self::connect(server_list).await?;
         connection.session = anonymous(&mut connection, AccountType::AnonUser).await?;
         connection.setup_heartbeat();
@@ -62,7 +62,7 @@ impl Connection {
         Ok(connection)
     }
 
-    pub async fn anonymous_server(server_list: ServerList) -> Result<Self, ConnectionError> {
+    pub async fn anonymous_server(server_list: &ServerList) -> Result<Self, ConnectionError> {
         let mut connection = Self::connect(server_list).await?;
         connection.session = anonymous(&mut connection, AccountType::AnonGameServer).await?;
         connection.setup_heartbeat();
@@ -71,7 +71,7 @@ impl Connection {
     }
 
     pub async fn login<H: AuthConfirmationHandler, G: GuardDataStore>(
-        server_list: ServerList,
+        server_list: &ServerList,
         account: &str,
         password: &str,
         mut guard_data_store: G,

@@ -160,7 +160,7 @@ impl NetMessageHeader {
         } else if proto {
             trace!("writing header for {:?} protobuf message: {:?}", kind, self);
             let proto_header = self.proto_header(kind.into());
-            writer.write_u32::<LittleEndian>(kind.value() as u32 | PROTO_MASK)?;
+            writer.write_u32::<LittleEndian>(kind.encode_kind(true))?;
             writer.write_u32::<LittleEndian>(proto_header.compute_size() as u32)?;
             proto_header.write_to_writer(writer)?;
         } else {
@@ -205,7 +205,7 @@ impl NetMessageHeader {
         proto_header
     }
 
-    fn encode_size(&self, kind: MsgKind, proto: bool) -> usize {
+    pub fn encode_size(&self, kind: MsgKind, proto: bool) -> usize {
         if kind == EMsg::k_EMsgChannelEncryptResponse {
             4
         } else if proto {

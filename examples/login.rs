@@ -16,7 +16,7 @@ async fn main() -> Result<(), ConnectionError> {
 
     let server_list = ServerList::discover().await?;
     let connection = Connection::login(
-        server_list,
+        &server_list,
         &account,
         &password,
         FileGuardDataStore::user_cache(),

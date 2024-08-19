@@ -6,7 +6,7 @@ async fn main() -> Result<(), ConnectionError> {
     tracing_subscriber::fmt::init();
 
     let server_list = ServerList::discover().await?;
-    let connection = Connection::anonymous(server_list).await?;
+    let connection = Connection::anonymous(&server_list).await?;
 
     println!("requesting servers");
 

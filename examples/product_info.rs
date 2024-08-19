@@ -10,7 +10,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     tracing_subscriber::fmt::init();
 
     let server_list = ServerList::discover().await?;
-    let connection = Connection::anonymous(server_list).await?;
+    let connection = Connection::anonymous(&server_list).await?;
 
     let msg = CMsgClientPICSProductInfoRequest {
         apps: vec![cmsg_client_picsproduct_info_request::AppInfo {

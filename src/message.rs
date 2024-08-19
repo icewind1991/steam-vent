@@ -74,6 +74,10 @@ pub trait NetMessage: Sized + Debug {
     }
 
     fn process_header(&self, _header: &mut NetMessageHeader) {}
+
+    fn encode_type() -> u32 {
+        Self::KIND.encode_kind(Self::IS_PROTOBUF)
+    }
 }
 
 #[derive(Debug, BinRead)]

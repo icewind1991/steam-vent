@@ -8,6 +8,8 @@ use steam_vent::proto::steammessages_friendmessages_steamclient::{
     CFriendMessages_IncomingMessage_Notification, CFriendMessages_SendMessage_Request,
 };
 use steam_vent::{Connection, ConnectionError, ConnectionTrait, ServerList};
+use steam_vent_proto::enums::EPersonaStateFlag;
+use steam_vent_proto::steammessages_clientserver_friends::CMsgClientChangeStatus;
 use steamid_ng::SteamID;
 use tokio::spawn;
 use tokio_stream::StreamExt;
@@ -24,7 +26,7 @@ async fn main() -> Result<(), ConnectionError> {
 
     let server_list = ServerList::discover().await?;
     let connection = Connection::login(
-        server_list,
+        &server_list,
         &account,
         &password,
         FileGuardDataStore::user_cache(),
@@ -34,6 +36,16 @@ async fn main() -> Result<(), ConnectionError> {
         ),
     )
     .await?;
+
+    connection
+        .send(CMsgClientChangeStatus {
+            persona_state: Some(1),
+            persona_state_flags: Some(
+                EPersonaStateFlag::k_EPersonaStateFlag_ClientTypeMobile as u32,
+            ),
+            ..Default::default()
+        })
+        .await?;
 
     let mut incoming_messages =
         connection.on_notification::<CFriendMessages_IncomingMessage_Notification>();
