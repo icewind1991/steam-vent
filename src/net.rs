@@ -53,8 +53,14 @@ impl From<EResult> for NetworkError {
 pub type Result<T, E = NetworkError> = std::result::Result<T, E>;
 
 /// A unique (per-session) identifier that links request-response pairs
-#[derive(Debug, Copy, Clone, Eq, PartialEq, Default, Hash)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct JobId(pub(crate) u64);
+
+impl Default for JobId {
+    fn default() -> Self {
+        JobId::NONE
+    }
+}
 
 impl JobId {
     pub const NONE: JobId = JobId(u64::MAX);

@@ -113,10 +113,10 @@ impl Default for Session {
 }
 
 impl Session {
-    pub fn header(&self) -> NetMessageHeader {
+    pub fn header(&self, job: bool) -> NetMessageHeader {
         NetMessageHeader {
             session_id: self.session_id,
-            source_job_id: self.job_id.next(),
+            source_job_id: if job { self.job_id.next() } else { JobId::NONE },
             target_job_id: JobId::NONE,
             steam_id: self.steam_id,
             ..NetMessageHeader::default()

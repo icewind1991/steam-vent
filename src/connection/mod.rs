@@ -173,8 +173,19 @@ impl Connection {
         Ok(job_id)
     }
 
-    pub async fn send<Msg: NetMessage>(&self, msg: Msg) -> Result<JobId> {
-        self.raw_send(self.session.header(), msg).await
+    pub async fn job<Msg: NetMessage, Rsp: NetMessage>(&self, msg: Msg) -> Result<Rsp> {
+        let job_id = self.raw_send(self.session.header(true), msg).await?;
+        let resp = self
+            .get_filter()
+            .on_job_id(job_id)
+            .await
+            .map_err(|_| NetworkError::EOF)?;
+        resp.into_message()
+    }
+
+    pub async fn send<Msg: NetMessage>(&self, msg: Msg) -> Result<()> {
+        self.raw_send(self.session.header(false), msg).await?;
+        Ok(())
     }
 
     pub fn set_timeout(&mut self, timeout: Duration) {
@@ -185,7 +196,7 @@ impl Connection {
         &self,
         msg: Msg,
     ) -> Result<Msg::Response> {
-        let header = self.session.header();
+        let header = self.session.header(true);
         let recv = self.filter.on_job_id(header.source_job_id);
         self.raw_send(header, ServiceMethodMessage(msg)).await?;
         let message = timeout(self.timeout, recv)
@@ -200,7 +211,7 @@ impl Connection {
         &self,
         msg: Msg,
     ) -> Result<Msg::Response> {
-        let header = self.session.header();
+        let header = self.session.header(true);
         let recv = self.filter.on_job_id(header.source_job_id);
         let msg = RawNetMessage::from_message_with_kind(
             header,
@@ -263,11 +274,6 @@ pub trait ConnectionTrait {
     fn on<T: NetMessage + 'static>(&self) -> impl Stream<Item = Result<T>> + 'static {
         self.on_with_header::<T>()
             .map(|res| res.map(|(_, msg)| msg))
-    }
-
-    fn receive_by_job_id<T: NetMessage>(&self, job_id: JobId) -> impl Future<Output = Result<T>> {
-        let future = self.get_filter().on_job_id(job_id);
-        async move { future.await.map_err(|_| NetworkError::EOF)?.into_message() }
     }
 }
 
