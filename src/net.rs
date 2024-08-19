@@ -74,6 +74,7 @@ pub struct NetMessageHeader {
     pub session_id: i32,
     pub target_job_name: Option<Cow<'static, str>>,
     pub result: Option<i32>,
+    pub source_app_id: Option<u32>,
 }
 
 impl From<CMsgProtoBufHeader> for NetMessageHeader {
@@ -87,6 +88,7 @@ impl From<CMsgProtoBufHeader> for NetMessageHeader {
                 .has_target_job_name()
                 .then(|| header.target_job_name().to_string().into()),
             result: header.eresult,
+            source_app_id: header.routing_appid,
         }
     }
 }
@@ -140,6 +142,7 @@ impl NetMessageHeader {
                     session_id,
                     target_job_name: None,
                     result: None,
+                    source_app_id: None,
                 },
                 4 + 3 + 8 + 8 + 1 + 8 + 4,
             ))
@@ -198,6 +201,7 @@ impl NetMessageHeader {
         if let Some(target_job_name) = self.target_job_name.as_deref() {
             proto_header.set_target_job_name(target_job_name.into());
         }
+        proto_header.routing_appid = self.source_app_id;
         proto_header
     }
 

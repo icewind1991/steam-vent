@@ -99,6 +99,7 @@ pub struct Session {
     pub job_id: JobIdCounter,
     pub steam_id: SteamID,
     pub heartbeat_interval: Duration,
+    pub app_id: Option<u32>,
 }
 
 impl Default for Session {
@@ -108,6 +109,7 @@ impl Default for Session {
             job_id: JobIdCounter::default(),
             steam_id: SteamID::from(0),
             heartbeat_interval: Duration::from_secs(15),
+            app_id: None,
         }
     }
 }
@@ -119,6 +121,7 @@ impl Session {
             source_job_id: if job { self.job_id.next() } else { JobId::NONE },
             target_job_id: JobId::NONE,
             steam_id: self.steam_id,
+            source_app_id: self.app_id,
             ..NetMessageHeader::default()
         }
     }
@@ -126,6 +129,11 @@ impl Session {
     pub fn is_server(&self) -> bool {
         self.steam_id.account_type() == AccountType::AnonGameServer
             || self.steam_id.account_type() == AccountType::GameServer
+    }
+
+    pub fn with_app_id(mut self, app_id: u32) -> Self {
+        self.app_id = Some(app_id);
+        self
     }
 }
 
@@ -206,6 +214,7 @@ async fn send_logon(
         steam_id: header.steam_id,
         job_id: JobIdCounter::default(),
         heartbeat_interval: Duration::from_secs(response.heartbeat_seconds() as u64),
+        app_id: None,
     })
 }
 
