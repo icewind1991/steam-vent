@@ -16,6 +16,7 @@ use std::future::Future;
 use std::pin::pin;
 use std::sync::Arc;
 use std::time::Duration;
+use steam_vent_proto::MsgKindEnum;
 use steamid_ng::{AccountType, SteamID};
 use tokio::sync::{mpsc, Mutex};
 use tokio::task::spawn;
@@ -186,6 +187,18 @@ impl Connection {
     pub async fn send<Msg: NetMessage>(&self, msg: Msg) -> Result<()> {
         self.raw_send(self.session.header(false), msg).await?;
         Ok(())
+    }
+
+    pub async fn send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+        &self,
+        msg: Msg,
+        kind: K,
+    ) -> Result<JobId> {
+        let header = self.session.header(false);
+        let job_id = header.source_job_id;
+        let msg = RawNetMessage::from_message_with_kind(header, msg, kind)?;
+        self.write.lock().await.send(msg).await?;
+        Ok(job_id)
     }
 
     pub fn set_timeout(&mut self, timeout: Duration) {
