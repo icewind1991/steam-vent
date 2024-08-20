@@ -1,0 +1,120 @@
+import "google/protobuf/descriptor.proto";
+
+message CMsgIPAddress {
+  oneof ip {
+    fixed32 v4 = 1;
+    bytes v6 = 2;
+  }
+}
+
+message CMsgMulti {
+  optional uint32 size_unzipped = 1;
+  optional bytes message_body = 2;
+}
+
+message CMsgGCClient {
+  optional uint32 appid = 1;
+  optional uint32 msgtype = 2;
+  optional bytes payload = 3;
+  optional fixed64 steamid = 4;
+  optional string gcname = 5;
+  optional uint32 ip = 6;
+}
+
+message CMsgGCRoutingProtoBufHeader {
+  optional uint64 dst_gcid_queue = 1;
+  optional uint32 dst_gc_dir_index = 2;
+}
+
+message CMsgProtoBufHeader {
+  enum ESessionDisposition {
+    k_ESessionDispositionNormal = 0;
+    k_ESessionDispositionDisconnect = 1;
+  }
+
+  optional fixed64 steamid = 1;
+  optional int32 client_sessionid = 2;
+  optional uint32 routing_appid = 3;
+  optional fixed64 jobid_source = 10 [default = 18446744073709551615];
+  optional fixed64 jobid_target = 11 [default = 18446744073709551615];
+  optional string target_job_name = 12;
+  optional int32 seq_num = 24;
+  optional int32 eresult = 13 [default = 2];
+  optional string error_message = 14;
+  optional uint32 auth_account_flags = 16;
+  optional uint32 token_source = 22;
+  optional bool admin_spoofing_user = 23;
+  optional int32 transport_error = 17 [default = 1];
+  optional uint64 messageid = 18 [default = 18446744073709551615];
+  optional uint32 publisher_group_id = 19;
+  optional uint32 sysid = 20;
+  optional uint64 trace_tag = 21;
+  optional uint32 webapi_key_id = 25;
+  optional bool is_from_external_source = 26;
+  repeated uint32 forward_to_sysid = 27;
+  optional uint32 cm_sysid = 28;
+  optional uint32 launcher_type = 31 [default = 0];
+  optional uint32 realm = 32 [default = 0];
+  optional int32 timeout_ms = 33 [default = -1];
+  optional string debug_source = 34;
+  optional uint32 debug_source_string_index = 35;
+  optional uint64 token_id = 36;
+  optional .CMsgGCRoutingProtoBufHeader routing_gc = 37;
+  optional .CMsgProtoBufHeader.ESessionDisposition session_disposition = 38 [default = k_ESessionDispositionNormal];
+  optional string wg_token = 39;
+  optional string webui_auth_key = 40;
+  repeated int32 exclude_client_sessionids = 41;
+
+  oneof ip_addr {
+    uint32 ip = 15;
+    bytes ip_v6 = 29;
+  }
+}
+
+message CMsgClientGamesPlayed {
+  message ProcessInfo {
+    optional uint32 process_id = 1;
+    optional uint32 process_id_parent = 2;
+    optional bool parent_is_steam = 3;
+  }
+
+  message GamePlayed {
+    optional uint64 steam_id_gs = 1;
+    optional fixed64 game_id = 2;
+    optional uint32 deprecated_game_ip_address = 3;
+    optional uint32 game_port = 4;
+    optional bool is_secure = 5;
+    optional bytes token = 6;
+    optional string game_extra_info = 7;
+    optional bytes game_data_blob = 8;
+    optional uint32 process_id = 9;
+    optional uint32 streaming_provider_id = 10;
+    optional uint32 game_flags = 11;
+    optional uint32 owner_id = 12;
+    optional string vr_hmd_vendor = 13;
+    optional string vr_hmd_model = 14;
+    optional uint32 launch_option_type = 15 [default = 0];
+    optional int32 primary_controller_type = 16 [default = -1];
+    optional string primary_steam_controller_serial = 17;
+    optional uint32 total_steam_controller_count = 18 [default = 0];
+    optional uint32 total_non_steam_controller_count = 19 [default = 0];
+    optional uint64 controller_workshop_file_id = 20 [default = 0];
+    optional uint32 launch_source = 21 [default = 0];
+    optional uint32 vr_hmd_runtime = 22;
+    optional .CMsgIPAddress game_ip_address = 23;
+    optional uint32 controller_connection_type = 24 [default = 0];
+    optional int32 game_os_platform = 25;
+    optional uint32 game_build_id = 26;
+    optional uint32 compat_tool_id = 27 [default = 0];
+    optional string compat_tool_cmd = 28;
+    optional uint32 compat_tool_build_id = 29;
+    optional string beta_name = 30;
+    optional uint32 dlc_context = 31;
+    repeated .CMsgClientGamesPlayed.ProcessInfo process_id_list = 32;
+  }
+
+  repeated .CMsgClientGamesPlayed.GamePlayed games_played = 1;
+  optional uint32 client_os_type = 2;
+  optional uint32 cloud_gaming_platform = 3;
+  optional bool recent_reauthentication = 4;
+}
