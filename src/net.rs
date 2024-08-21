@@ -296,7 +296,7 @@ impl RawNetMessage {
         let header_buffer = buff.split();
         let mut writer = (&mut buff).writer();
         message.write_body(&mut writer)?;
-        trace!("encoded body({} bytes): {:?}", buff.len(), buff.as_ref());
+        trace!("encoded body({} bytes): {:x?}", buff.len(), buff.as_ref());
 
         Ok(RawNetMessage {
             kind: kind.into(),
