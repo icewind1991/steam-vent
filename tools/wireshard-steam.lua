@@ -4,6 +4,7 @@ do
   local msg_type_mask      = bit32.bnot(0x80000000);
 
   steam_outer_proto        = Proto("_steam", "Steam Network Protocol Outer")
+  multi_proto              = Proto("steam_multi", "Steam Network Protocol Multi")
 
   steam_proto              = Proto("steam", "Steam Network Protocol")
   f_msg_type               = ProtoField.uint32("steam.messageType", "MessageType", base.DEC, nil, msg_type_mask)
@@ -34,6 +35,8 @@ do
     end
   end
 
+  local f_gc_msg_type = Field.new("pbf.CMsgGCClient.msgtype")
+
   function steam_proto.dissector(buffer, pinfo, tree)
     local data = buffer:bytes();
     if data:len() < 8 then
@@ -57,12 +60,21 @@ do
       local msg_body_range = buffer(8 + header_length)
       if msg_is_protobuf then
         local msg_type_dec = bit32.band(msg_type, msg_type_mask);
-        if msg_type_protos[msg_type_dec] ~= nil then
-          pinfo.private["pb_msg_type"] = "message," .. msg_type_protos[msg_type_dec]
+        if msg_type_dec == 1 then
+          multi_proto.dissector:call(msg_body_range:tvb(), pinfo, tree)
         else
-          pinfo.private["pb_msg_type"] = nil
+          if msg_type_protos[msg_type_dec] ~= nil then
+            pinfo.private["pb_msg_type"] = "message," .. msg_type_protos[msg_type_dec]
+          else
+            pinfo.private["pb_msg_type"] = nil
+          end
+          protobuf_dissector:call(msg_body_range:tvb(), pinfo, tree)
+          if msg_type_protos[msg_type_dec] == "CMsgGCClient" then
+            local nested_msg_type = f_gc_msg_type();
+            tree:add(f_msg_type, nested_msg_type.range, nested_msg_type.value)
+            tree:add(f_is_proto, nested_msg_type.range, nested_msg_type.value)
+          end
         end
-        protobuf_dissector:call(msg_body_range:tvb(), pinfo, tree)
       else
         tree:add(f_header_body, msg_body_range)
       end
@@ -73,9 +85,33 @@ do
   local protobuf_field_table = DissectorTable.get("protobuf_field")
   protobuf_field_table:add("CMsgGCClient.payload", steam_proto)
 
-  msg_type_protos = {
+  msg_type_protos    = {
     [1] = "CMsgMulti",
     [5452] = "CMsgGCClient",
+    [5453] = "CMsgGCClient",
     [5410] = "CMsgClientGamesPlayed"
   }
+
+  local f_multi_len  = Field.new("pbf.CMsgMulti.size_unzipped")
+  local f_multi_body = Field.new("pbf.CMsgMulti.message_body")
+  function multi_proto.dissector(buffer, pinfo, tree)
+    pinfo.private["pb_msg_type"] = "message,CMsgMulti"
+    protobuf_dissector:call(buffer, pinfo, tree)
+    local unzipped_data
+    if f_multi_len() then
+      unzipped_data = f_multi_body().range:uncompress("message_body_decompressed")
+    else
+      unzipped_data = f_multi_body().range
+    end
+    while unzipped_data:len() > 4 do
+      local size = unzipped_data:bytes():le_uint(0, 4)
+      local chunk_data = unzipped_data(4, size)
+      local subtree = tree:add(steam_proto, buffer, "Nested")
+      steam_proto.dissector:call(chunk_data:tvb(), pinfo, subtree)
+      if 4 + size >= unzipped_data:len() then
+        break
+      end
+      unzipped_data = unzipped_data(4 + size)
+    end
+  end
 end
