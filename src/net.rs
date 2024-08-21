@@ -185,14 +185,18 @@ impl NetMessageHeader {
         if self.target_job_id != JobId::NONE {
             proto_header.set_jobid_target(self.target_job_id.0);
         }
-        proto_header.set_steamid(
-            if kind == EMsg::k_EMsgServiceMethodCallFromClientNonAuthed {
-                0
-            } else {
-                self.steam_id.into()
-            },
-        );
-        proto_header.set_client_sessionid(self.session_id);
+        if self.steam_id != SteamID::default() {
+            proto_header.set_steamid(
+                if kind == EMsg::k_EMsgServiceMethodCallFromClientNonAuthed {
+                    0
+                } else {
+                    self.steam_id.into()
+                },
+            );
+        }
+        if self.session_id != 0 {
+            proto_header.set_client_sessionid(self.session_id);
+        }
         if kind == EMsg::k_EMsgServiceMethodCallFromClientNonAuthed
             || kind == EMsg::k_EMsgServiceMethodCallFromClient
         {

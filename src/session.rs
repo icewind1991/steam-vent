@@ -203,7 +203,6 @@ async fn send_logon(
     steam_id: SteamID,
 ) -> Result<Session> {
     let header = NetMessageHeader {
-        session_id: 0,
         source_job_id: JobId::NONE,
         target_job_id: JobId::NONE,
         steam_id,
