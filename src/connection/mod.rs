@@ -19,7 +19,7 @@ use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_proto::MsgKindEnum;
 use steamid_ng::{AccountType, SteamID};
-use tokio::sync::{mpsc, Mutex};
+use tokio::sync::Mutex;
 use tokio::task::spawn;
 use tokio::time::{sleep, timeout};
 use tokio_stream::wrappers::BroadcastStream;
@@ -34,7 +34,6 @@ pub(crate) type TransportWriter =
 pub struct Connection {
     pub(crate) session: Session,
     filter: MessageFilter,
-    rest: mpsc::Receiver<Result<RawNetMessage>>,
     write: TransportWriter,
     timeout: Duration,
 }
@@ -42,11 +41,10 @@ pub struct Connection {
 impl Connection {
     async fn connect(server_list: &ServerList) -> Result<Self, ConnectionError> {
         let (read, write) = connect(&server_list.pick_ws()).await?;
-        let (filter, rest) = MessageFilter::new(read);
+        let filter = MessageFilter::new(read);
         let mut connection = Connection {
             session: Session::default(),
             filter,
-            rest,
             write: Arc::new(Mutex::new(write)),
             timeout: Duration::from_secs(10),
         };
@@ -137,8 +135,6 @@ impl Connection {
         let interval = self.session.heartbeat_interval;
         let header = NetMessageHeader {
             session_id: self.session.session_id,
-            source_job_id: JobId::NONE,
-            target_job_id: JobId::NONE,
             steam_id: self.steam_id(),
             ..NetMessageHeader::default()
         };
@@ -255,10 +251,6 @@ impl Connection {
             .map_err(|_| NetworkError::Timeout)?
             .into_message::<ServiceMethodResponseMessage>()?;
         message.into_response::<Msg>()
-    }
-
-    pub async fn next(&mut self) -> Result<RawNetMessage> {
-        self.rest.recv().await.ok_or(NetworkError::EOF)?
     }
 
     pub(crate) fn writer(&self) -> TransportWriter {

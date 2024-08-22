@@ -77,7 +77,7 @@ impl Debug for GameCoordinator {
 impl GameCoordinator {
     pub async fn new(connection: &Connection, app_id: u32) -> Result<Self, NetworkError> {
         let (tx, rx) = channel(10);
-        let (filter, _) = MessageFilter::new(ReceiverStream::new(rx));
+        let filter = MessageFilter::new(ReceiverStream::new(rx));
         let gc_messages = connection.on::<ClientFromGcMessage>();
         spawn(async move {
             let mut gc_messages = pin!(gc_messages);

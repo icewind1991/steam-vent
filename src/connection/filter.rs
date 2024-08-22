@@ -6,9 +6,9 @@ use std::sync::Arc;
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::MsgKind;
 use tokio::spawn;
-use tokio::sync::{broadcast, mpsc, oneshot};
+use tokio::sync::{broadcast, oneshot};
 use tokio_stream::StreamExt;
-use tracing::debug;
+use tracing::{debug, error};
 
 #[derive(Clone)]
 pub struct MessageFilter {
@@ -23,11 +23,7 @@ impl MessageFilter {
         Input: Stream<Item = crate::connection::Result<RawNetMessage>> + Send + Unpin + 'static,
     >(
         mut source: Input,
-    ) -> (
-        Self,
-        mpsc::Receiver<crate::connection::Result<RawNetMessage>>,
-    ) {
-        let (rest_tx, rx) = mpsc::channel(16);
+    ) -> Self {
         let filter = MessageFilter {
             job_id_filters: Default::default(),
             kind_filters: Default::default(),
@@ -38,43 +34,46 @@ impl MessageFilter {
         let filter_send = filter.clone();
         spawn(async move {
             while let Some(res) = source.next().await {
-                if let Ok(message) = res {
-                    debug!(job_id = message.header.target_job_id.0, kind = ?message.kind, "processing message");
-                    if let Some((_, tx)) = filter_send
-                        .job_id_filters
-                        .remove(&message.header.target_job_id)
-                    {
-                        tx.send(message).ok();
-                    } else if let Some((_, tx)) =
-                        filter_send.oneshot_kind_filters.remove(&message.kind)
-                    {
-                        tx.send(message).ok();
-                    } else if message.kind == EMsg::k_EMsgServiceMethod {
-                        if let Ok(notification) =
-                            message.into_message::<ServiceMethodNotification>()
+                match res {
+                    Ok(message) => {
+                        debug!(job_id = message.header.target_job_id.0, kind = ?message.kind, "processing message");
+                        if let Some((_, tx)) = filter_send
+                            .job_id_filters
+                            .remove(&message.header.target_job_id)
                         {
-                            debug!(
-                                job_name = notification.job_name.as_str(),
-                                "processing notification"
-                            );
-                            if let Some(tx) = filter_send
-                                .notification_filters
-                                .get(notification.job_name.as_str())
+                            tx.send(message).ok();
+                        } else if let Some((_, tx)) =
+                            filter_send.oneshot_kind_filters.remove(&message.kind)
+                        {
+                            tx.send(message).ok();
+                        } else if message.kind == EMsg::k_EMsgServiceMethod {
+                            if let Ok(notification) =
+                                message.into_message::<ServiceMethodNotification>()
                             {
-                                tx.send(notification).ok();
+                                debug!(
+                                    job_name = notification.job_name.as_str(),
+                                    "processing notification"
+                                );
+                                if let Some(tx) = filter_send
+                                    .notification_filters
+                                    .get(notification.job_name.as_str())
+                                {
+                                    tx.send(notification).ok();
+                                }
                             }
+                        } else if let Some(tx) = filter_send.kind_filters.get(&message.kind) {
+                            tx.send(message).ok();
+                        } else {
+                            debug!(kind = ?message.kind, "Unhandled message");
                         }
-                    } else if let Some(tx) = filter_send.kind_filters.get(&message.kind) {
-                        tx.send(message).ok();
-                    } else {
-                        rest_tx.send(Ok(message)).await.ok();
                     }
-                } else {
-                    rest_tx.send(res).await.ok();
+                    Err(err) => {
+                        error!(error = ?err, "Error while reading message");
+                    }
                 }
             }
         });
-        (filter, rx)
+        filter
     }
 
     pub fn on_job_id(&self, id: JobId) -> oneshot::Receiver<RawNetMessage> {
