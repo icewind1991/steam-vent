@@ -38294,6 +38294,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgTFGoldenWrenchBroadcast {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgTFGoldenWrenchBroadcast {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCGoldenWrenchBroadcast;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgTFSaxxyBroadcast {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -38307,6 +38311,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgTFSaxxyBroadcast {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgTFSaxxyBroadcast {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCSaxxyBroadcast;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCTFSpecificItemBroadcast {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -38319,6 +38327,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCTFSpecificItemBroadcast {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCTFSpecificItemBroadcast {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCTFSpecificItemBroadcast;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgTFWorldStatus {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {

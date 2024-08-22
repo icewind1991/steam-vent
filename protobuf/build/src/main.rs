@@ -259,7 +259,7 @@ impl ServiceGenerator {
         }
     }
 
-    fn find_kind(&self, message_type: &str, file_name: &str) -> Option<Kind> {
+    fn find_kind(&self, message_type: &str, file_name: Option<&str>) -> Option<Kind> {
         let postfix = message_type.strip_prefix('C')?;
         self.kinds
             .iter()
@@ -329,7 +329,9 @@ impl CustomizeCallback for ServiceGenerator {
             .messages()
             .map(|msg| ServiceMessage {
                 name: msg.name().into(),
-                kind: self.find_kind(msg.name(), file.name()),
+                kind: self
+                    .find_kind(msg.name(), Some(file.name()))
+                    .or_else(|| self.find_kind(msg.name(), None)),
             })
             .collect();
         let kind_enums: Vec<_> = file
@@ -432,13 +434,17 @@ fn get_kinds(base: &Path, protos: &[PathBuf]) -> Vec<Kind> {
                 .collect();
             let prefix = prefix[0..prefix.len() - 1].to_string();
             let variant_prefix = format!("k_EMsg{}", prefix);
+            let variant_prefix_alt = format!("k_E{}Msg_", prefix);
+            let enum_prefix = prefix.to_ascii_lowercase();
             let enum_name = kinds_enum.take_name();
             kinds_enum.value.iter_mut().map(move |opt| Kind {
                 mod_name: mod_name.clone(),
                 enum_name: enum_name.clone(),
-                enum_prefix: prefix.to_ascii_lowercase(),
+                enum_prefix: enum_prefix.clone(),
                 variant_prefix: variant_prefix.clone(),
+                variant_prefix_alt: variant_prefix_alt.clone(),
                 variant: opt.take_name(),
+                struct_name_prefix_alt_len: prefix.len(),
             })
         })
         .collect::<Vec<_>>();
@@ -454,16 +460,29 @@ struct Kind {
     enum_name: String,
     enum_prefix: String,
     variant_prefix: String,
+    variant_prefix_alt: String,
     variant: String,
+    struct_name_prefix_alt_len: usize,
 }
 
 impl Kind {
-    pub fn matches(&self, struct_name: &str, file_name: &str) -> bool {
+    pub fn matches(&self, struct_name: &str, file_name: Option<&str>) -> bool {
         let struct_name = struct_name.strip_prefix("Msg").unwrap_or(struct_name);
-        let Some(stripped) = self.variant.strip_prefix(&self.variant_prefix) else {
+
+        let Some(stripped) = self
+            .variant
+            .strip_prefix(&self.variant_prefix)
+            .or_else(|| self.variant.strip_prefix(&self.variant_prefix_alt))
+        else {
             return false;
         };
-        file_name.contains(&self.enum_prefix) && struct_name.eq_ignore_ascii_case(stripped)
+        if let Some(file_name) = file_name {
+            if !file_name.contains(&self.enum_prefix) {
+                return false;
+            }
+        }
+        struct_name.eq_ignore_ascii_case(stripped)
+            || struct_name[self.struct_name_prefix_alt_len..].eq_ignore_ascii_case(stripped)
     }
 
     pub fn ident(&self) -> TokenStream {

@@ -4827,6 +4827,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgSOCacheSubscribed {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgSOCacheSubscribed {
+    type KindEnum = crate::gcsystemmsgs::ESOMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::ESOMsg::k_ESOMsg_CacheSubscribed;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgSOCacheSubscribedUpToDate {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -4839,6 +4843,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgSOCacheSubscribedUpToDate {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgSOCacheSubscribedUpToDate {
+    type KindEnum = crate::gcsystemmsgs::ESOMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::ESOMsg::k_ESOMsg_CacheSubscribedUpToDate;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgSOCacheUnsubscribed {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -4853,6 +4861,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgSOCacheUnsubscribed {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgSOCacheUnsubscribed {
+    type KindEnum = crate::gcsystemmsgs::ESOMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::ESOMsg::k_ESOMsg_CacheUnsubscribed;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgSOCacheSubscriptionCheck {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -4866,6 +4878,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgSOCacheSubscriptionCheck {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgSOCacheSubscriptionCheck {
+    type KindEnum = crate::gcsystemmsgs::ESOMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::ESOMsg::k_ESOMsg_CacheSubscriptionCheck;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgSOCacheSubscriptionRefresh {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -4878,6 +4894,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgSOCacheSubscriptionRefresh {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgSOCacheSubscriptionRefresh {
+    type KindEnum = crate::gcsystemmsgs::ESOMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::ESOMsg::k_ESOMsg_CacheSubscriptionRefresh;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgSOCacheVersion {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -4983,6 +5003,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCUpdateSubGCSessionInfo {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCUpdateSubGCSessionInfo {
+    type KindEnum = crate::gcsystemmsgs::EGCToGCMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::EGCToGCMsg::k_EMsgGCUpdateSubGCSessionInfo;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCRequestSubGCSessionInfo {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -4996,6 +5020,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCRequestSubGCSessionInfo {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCRequestSubGCSessionInfo {
+    type KindEnum = crate::gcsystemmsgs::EGCToGCMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::EGCToGCMsg::k_EMsgGCRequestSubGCSessionInfo;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCRequestSubGCSessionInfoResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5008,6 +5036,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCRequestSubGCSessionInfoResp
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCRequestSubGCSessionInfoResponse {
+    type KindEnum = crate::gcsystemmsgs::EGCToGCMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::EGCToGCMsg::k_EMsgGCRequestSubGCSessionInfoResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCIncrementRecruitmentLevel {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5061,6 +5094,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCSOCacheSubscribe {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCToGCSOCacheSubscribe {
+    type KindEnum = crate::gcsystemmsgs::EGCToGCMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::EGCToGCMsg::k_EMsgGCToGCSOCacheSubscribe;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCSOCacheUnsubscribe {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5073,6 +5110,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCSOCacheUnsubscribe {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCToGCSOCacheUnsubscribe {
+    type KindEnum = crate::gcsystemmsgs::EGCToGCMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::EGCToGCMsg::k_EMsgGCToGCSOCacheUnsubscribe;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCClientPing {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {

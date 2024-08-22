@@ -5498,6 +5498,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCRequestStoreSalesData {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCRequestStoreSalesData {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCRequestStoreSalesData;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCRequestStoreSalesDataResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5510,6 +5514,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCRequestStoreSalesDataRespon
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCRequestStoreSalesDataResponse {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCRequestStoreSalesDataResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgGCRequestStoreSalesDataUpToDateResponse {
@@ -5525,6 +5534,11 @@ for CMsgGCRequestStoreSalesDataUpToDateResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCRequestStoreSalesDataUpToDateResponse {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCRequestStoreSalesDataUpToDateResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCPingRequest {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5537,6 +5551,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCPingRequest {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCToGCPingRequest {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCToGCPingRequest;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCPingResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5551,6 +5569,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCPingResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCToGCPingResponse {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCToGCPingResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCGetUserSessionServer {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5563,6 +5585,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCGetUserSessionServer {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCToGCGetUserSessionServer {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCToGCGetUserSessionServer;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCGetUserSessionServerResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5577,6 +5603,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCGetUserSessionServerRes
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToGCGetUserSessionServerResponse {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCToGCGetUserSessionServerResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCGetUserServerMembers {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5590,6 +5621,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCGetUserServerMembers {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCToGCGetUserServerMembers {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCToGCGetUserServerMembers;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCGetUserServerMembersResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5602,6 +5637,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCGetUserServerMembersRes
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToGCGetUserServerMembersResponse {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCToGCGetUserServerMembersResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgLookupMultipleAccountNames {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5651,6 +5691,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCGrantSelfMadeItemToAcco
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToGCGrantSelfMadeItemToAccount {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCToGCGrantSelfMadeItemToAccount;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCThankedByNewUser {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5663,6 +5708,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToGCThankedByNewUser {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCToGCThankedByNewUser {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCToGCThankedByNewUser;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCShuffleCrateContents {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5677,6 +5726,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCShuffleCrateContents {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCShuffleCrateContents {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCShuffleCrateContents;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCQuestObjective_Progress {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5690,6 +5743,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCQuestObjective_Progress {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCQuestObjective_Progress {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCQuestObjective_Progress;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCQuestObjective_PointsChange {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5702,6 +5759,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCQuestObjective_PointsChange
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCQuestObjective_PointsChange {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCQuestObjective_PointsChange;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCQuestComplete_Request {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5729,6 +5791,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCQuestCompleted {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCQuestCompleted {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCQuestCompleted;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCQuestObjective_RequestLoanerItems {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5741,6 +5807,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCQuestObjective_RequestLoane
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCQuestObjective_RequestLoanerItems {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCQuestObjective_RequestLoanerItems;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgGCQuestObjective_RequestLoanerResponse {
@@ -5755,6 +5826,11 @@ for CMsgGCQuestObjective_RequestLoanerResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCQuestObjective_RequestLoanerResponse {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCQuestObjective_RequestLoanerResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgCraftCollectionUpgrade {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5819,5 +5895,9 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCQuestDiscard_Request {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCQuestDiscard_Request {
+    type KindEnum = crate::econ_gcmessages::EGCItemMsg;
+    const KIND: Self::KindEnum = crate::econ_gcmessages::EGCItemMsg::k_EMsgGCQuestDiscard_Request;
 }
 impl ::steam_vent_proto_common::MsgKindEnum for EGCItemMsg {}
