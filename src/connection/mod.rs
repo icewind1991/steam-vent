@@ -13,6 +13,7 @@ pub(crate) use filter::MessageFilter;
 use futures_util::future::{select, Either};
 use futures_util::{FutureExt, Sink, SinkExt};
 use std::future::Future;
+use std::net::IpAddr;
 use std::pin::pin;
 use std::sync::Arc;
 use std::time::Duration;
@@ -161,6 +162,22 @@ impl Connection {
 
     pub fn steam_id(&self) -> SteamID {
         self.session.steam_id
+    }
+
+    pub fn session_id(&self) -> i32 {
+        self.session.session_id
+    }
+
+    pub fn cell_id(&self) -> u32 {
+        self.session.cell_id
+    }
+
+    pub fn public_ip(&self) -> Option<IpAddr> {
+        self.session.public_ip
+    }
+
+    pub fn ip_country_code(&self) -> Option<String> {
+        self.session.ip_country_code.clone()
     }
 
     pub(crate) async fn raw_send<Msg: NetMessage>(
