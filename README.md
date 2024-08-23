@@ -17,8 +17,9 @@ requests for the protobuf definitions included in the project.
 - [x] Saved machine token confirmation
 - [x] Sending and receiving raw messages
 - [x] Making RPC calls over the connection
+- [x] Communicating with the game coordinator
 - [ ] High level wrappers around the RPC calls
-- [ ] Allow using messages from protobufs not included in the project
+- [x] Allow using messages from protobufs not included in the project
 
 ## Usage
 
@@ -37,14 +38,14 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let mut req = CGameServers_GetServerList_Request::new();
     req.set_limit(16);
-    req.set_filter("\\appid\\440".into());
+    req.set_filter(r"\appid\440".into());
     let some_tf2_servers = connection.service_method(req).await?;
     for server in some_tf2_servers.servers {
         println!(
             "{}({}) playing {}",
-            String::from_utf8_lossy(server.name()),,
-            server.get_addr(),
-            server.get_map()
+            String::from_utf8_lossy(server.name()),
+            server.addr(),
+            server.map()
         );
     }
 
