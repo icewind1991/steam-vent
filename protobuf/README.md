@@ -5,4 +5,5 @@ Sourced from https://github.com/SteamDatabase/Protobufs
 ## Updating generated code
 
 - cd build
-- cargo r -- ../protos/ ../src/generated/
+- cargo r -- ../steam/{protos,src/generated}
+- cargo r -- ../tf2/{protos,src/generated}
