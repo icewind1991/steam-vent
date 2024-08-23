@@ -50,3 +50,7 @@ exclude = ["protobuf/build"]
 
 [features]
 tf2 = ["steam-vent-proto/tf2"]
+
+[[example]]
+name = "backpack"
+required-features = ["tf2"]

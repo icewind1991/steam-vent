@@ -1,5 +1,5 @@
 use crate::connection::{ConnectionTrait, MessageFilter, TransportWriter};
-use crate::net::{JobId, NetMessageHeader, RawNetMessage};
+use crate::net::{decode_kind, JobId, NetMessageHeader, RawNetMessage};
 use crate::session::Session;
 use crate::{Connection, NetMessage, NetworkError};
 use futures_util::future::select;
@@ -13,13 +13,14 @@ use steam_vent_proto::steammessages_clientserver::cmsg_client_games_played::Game
 use steam_vent_proto::steammessages_clientserver::CMsgClientGamesPlayed;
 use steam_vent_proto::steammessages_clientserver_2::CMsgGCClient;
 use steam_vent_proto::steammessages_clientserver_login::CMsgClientHello;
+use steam_vent_proto::tf2::base_gcmessages::CMsgClientGoodbye;
 use steam_vent_proto::{MsgKindEnum, RpcMessage, RpcMessageWithKind};
 use tokio::spawn;
 use tokio::sync::mpsc::channel;
 use tokio::time::sleep;
 use tokio_stream::wrappers::ReceiverStream;
 use tokio_stream::StreamExt;
-use tracing::instrument;
+use tracing::{debug, instrument};
 
 pub struct GameCoordinator {
     app_id: u32,
@@ -83,6 +84,9 @@ impl GameCoordinator {
             let mut gc_messages = pin!(gc_messages);
             while let Some(gc_message) = gc_messages.next().await {
                 if let Ok(message) = gc_message {
+                    let (kind, is_protobuf) = decode_kind(message.data.msgtype());
+                    debug!(kind = ?kind, is_protobuf, "received gc messages");
+
                     let payload = message.data.payload();
                     tx.send(RawNetMessage::read(payload.into())).await.ok();
                 }
@@ -174,6 +178,11 @@ impl GameCoordinator {
         let msg = RawNetMessage::from_message(header, ClientToGcMessage { data })?;
         self.writer.lock().await.send(msg).await?;
         Ok(job_id)
+    }
+
+    pub async fn disconnect(self) -> Result<(), NetworkError> {
+        self.send(CMsgClientGoodbye::default()).await?;
+        Ok(())
     }
 }
 

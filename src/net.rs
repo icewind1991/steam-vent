@@ -232,6 +232,12 @@ pub struct RawNetMessage {
     pub(crate) header_buffer: BytesMut,
 }
 
+pub(crate) fn decode_kind(kind: u32) -> (MsgKind, bool) {
+    let is_protobuf = kind & PROTO_MASK == PROTO_MASK;
+    let kind = MsgKind((kind & !PROTO_MASK) as i32);
+    (kind, is_protobuf)
+}
+
 impl RawNetMessage {
     pub fn read(mut value: BytesMut) -> Result<Self> {
         let mut reader = Cursor::new(&value);
