@@ -57,7 +57,5 @@ async fn main() -> Result<(), ConnectionError> {
         }
     }
 
-    game_coordinator.disconnect().await?;
-
     Ok(())
 }

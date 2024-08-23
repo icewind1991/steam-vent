@@ -13,7 +13,6 @@ use steam_vent_proto::steammessages_clientserver::cmsg_client_games_played::Game
 use steam_vent_proto::steammessages_clientserver::CMsgClientGamesPlayed;
 use steam_vent_proto::steammessages_clientserver_2::CMsgGCClient;
 use steam_vent_proto::steammessages_clientserver_login::CMsgClientHello;
-use steam_vent_proto::tf2::base_gcmessages::CMsgClientGoodbye;
 use steam_vent_proto::{MsgKindEnum, RpcMessage, RpcMessageWithKind};
 use tokio::spawn;
 use tokio::sync::mpsc::channel;
@@ -179,11 +178,6 @@ impl GameCoordinator {
         self.writer.lock().await.send(msg).await?;
         Ok(job_id)
     }
-
-    pub async fn disconnect(self) -> Result<(), NetworkError> {
-        self.send(CMsgClientGoodbye::default()).await?;
-        Ok(())
-    }
 }
 
 impl ConnectionTrait for GameCoordinator {
@@ -233,11 +227,9 @@ impl RpcMessage for ClientFromGcMessage {
         Ok(ClientFromGcMessage { data })
     }
     fn write(&self, writer: &mut dyn std::io::Write) -> protobuf::Result<()> {
-        use protobuf::Message;
         self.data.write_to_writer(writer)
     }
     fn encode_size(&self) -> usize {
-        use protobuf::Message;
         self.data.compute_size() as usize
     }
 }
