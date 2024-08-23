@@ -51,6 +51,11 @@
           // {
             mode = "check";
           });
+        all-features = naersk'.buildPackage (nearskOpt
+          // {
+            mode = "check";
+            cargoBuildOptions = x: x++ ["--all-features"];
+          });
         clippy = naersk'.buildPackage (nearskOpt
           // {
             mode = "clippy";
