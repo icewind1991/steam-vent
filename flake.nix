@@ -59,6 +59,7 @@
         clippy = naersk'.buildPackage (nearskOpt
           // {
             mode = "clippy";
+            cargoBuildOptions = x: x++ ["--all-features"];
           });
         test = naersk'.buildPackage (nearskOpt
           // {

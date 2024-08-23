@@ -42,7 +42,8 @@ struct Args {
 fn main() {
     use clap::Parser;
     let args: Args = Args::parse();
-    let protos = get_protos(&args.protos).collect::<Vec<_>>();
+    let mut protos = get_protos(&args.protos).collect::<Vec<_>>();
+    protos.sort();
 
     let kinds = get_kinds(&args.protos, &protos);
     let service_generator = ServiceGenerator::new(kinds);

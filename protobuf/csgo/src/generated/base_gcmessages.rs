@@ -274,7 +274,7 @@ pub struct CMsgGCStorePurchaseInit {
     // @@protoc_insertion_point(field:CMsgGCStorePurchaseInit.currency)
     pub currency: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CMsgGCStorePurchaseInit.line_items)
-    pub line_items: ::std::vec::Vec<super::base_gcmessages_csgo::CGCStorePurchaseInit_LineItem>,
+    pub line_items: ::std::vec::Vec<CGCStorePurchaseInit_LineItem>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgGCStorePurchaseInit.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -2595,7 +2595,7 @@ pub struct CSOItemCriteria {
     // @@protoc_insertion_point(field:CSOItemCriteria.ignore_enabled_flag)
     pub ignore_enabled_flag: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CSOItemCriteria.conditions)
-    pub conditions: ::std::vec::Vec<super::base_gcmessages_csgo::CSOItemCriteriaCondition>,
+    pub conditions: ::std::vec::Vec<CSOItemCriteriaCondition>,
     // @@protoc_insertion_point(field:CSOItemCriteria.item_rarity)
     pub item_rarity: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CSOItemCriteria.item_rarity_set)
@@ -3024,9 +3024,9 @@ pub struct CSOItemRecipe {
     // @@protoc_insertion_point(field:CSOItemRecipe.set_for_output)
     pub set_for_output: ::std::option::Option<i32>,
     // @@protoc_insertion_point(field:CSOItemRecipe.input_items_criteria)
-    pub input_items_criteria: ::std::vec::Vec<super::base_gcmessages_csgo::CSOItemCriteria>,
+    pub input_items_criteria: ::std::vec::Vec<CSOItemCriteria>,
     // @@protoc_insertion_point(field:CSOItemRecipe.output_items_criteria)
-    pub output_items_criteria: ::std::vec::Vec<super::base_gcmessages_csgo::CSOItemCriteria>,
+    pub output_items_criteria: ::std::vec::Vec<CSOItemCriteria>,
     // @@protoc_insertion_point(field:CSOItemRecipe.input_item_dupe_counts)
     pub input_item_dupe_counts: ::std::vec::Vec<u32>,
     // special fields
@@ -3797,7 +3797,7 @@ pub struct CMsgDevNewItemRequest {
     // @@protoc_insertion_point(field:CMsgDevNewItemRequest.receiver)
     pub receiver: ::std::option::Option<u64>,
     // @@protoc_insertion_point(field:CMsgDevNewItemRequest.criteria)
-    pub criteria: ::steam_vent_proto_common::protobuf::MessageField<super::base_gcmessages_csgo::CSOItemCriteria>,
+    pub criteria: ::steam_vent_proto_common::protobuf::MessageField<CSOItemCriteria>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgDevNewItemRequest.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -5642,9 +5642,9 @@ pub struct CSOEconItem {
     // @@protoc_insertion_point(field:CSOEconItem.custom_desc)
     pub custom_desc: ::std::option::Option<::std::string::String>,
     // @@protoc_insertion_point(field:CSOEconItem.attribute)
-    pub attribute: ::std::vec::Vec<super::base_gcmessages_csgo::CSOEconItemAttribute>,
+    pub attribute: ::std::vec::Vec<CSOEconItemAttribute>,
     // @@protoc_insertion_point(field:CSOEconItem.interior_item)
-    pub interior_item: ::steam_vent_proto_common::protobuf::MessageField<super::base_gcmessages_csgo::CSOEconItem>,
+    pub interior_item: ::steam_vent_proto_common::protobuf::MessageField<CSOEconItem>,
     // @@protoc_insertion_point(field:CSOEconItem.in_use)
     pub in_use: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CSOEconItem.style)
@@ -5652,7 +5652,7 @@ pub struct CSOEconItem {
     // @@protoc_insertion_point(field:CSOEconItem.original_id)
     pub original_id: ::std::option::Option<u64>,
     // @@protoc_insertion_point(field:CSOEconItem.equipped_state)
-    pub equipped_state: ::std::vec::Vec<super::base_gcmessages_csgo::CSOEconItemEquipped>,
+    pub equipped_state: ::std::vec::Vec<CSOEconItemEquipped>,
     // @@protoc_insertion_point(field:CSOEconItem.rarity)
     pub rarity: ::std::option::Option<u32>,
     // special fields
@@ -7910,7 +7910,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgConVarValue {
 pub struct CMsgReplicateConVars {
     // message fields
     // @@protoc_insertion_point(field:CMsgReplicateConVars.convars)
-    pub convars: ::std::vec::Vec<super::base_gcmessages_csgo::CMsgConVarValue>,
+    pub convars: ::std::vec::Vec<CMsgConVarValue>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgReplicateConVars.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -8839,7 +8839,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgItemAcknowledged__DEPR
 pub struct CMsgSetItemPositions {
     // message fields
     // @@protoc_insertion_point(field:CMsgSetItemPositions.item_positions)
-    pub item_positions: ::std::vec::Vec<super::base_gcmessages_csgo::cmsg_set_item_positions::ItemPosition>,
+    pub item_positions: ::std::vec::Vec<cmsg_set_item_positions::ItemPosition>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgSetItemPositions.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -12019,7 +12019,7 @@ pub struct CMsgGCBannedWord {
     // @@protoc_insertion_point(field:CMsgGCBannedWord.word_id)
     pub word_id: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CMsgGCBannedWord.word_type)
-    pub word_type: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::base_gcmessages_csgo::GC_BannedWordType>>,
+    pub word_type: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<GC_BannedWordType>>,
     // @@protoc_insertion_point(field:CMsgGCBannedWord.word)
     pub word: ::std::option::Option<::std::string::String>,
     // special fields
@@ -12059,10 +12059,10 @@ impl CMsgGCBannedWord {
 
     // optional .GC_BannedWordType word_type = 2;
 
-    pub fn word_type(&self) -> super::base_gcmessages_csgo::GC_BannedWordType {
+    pub fn word_type(&self) -> GC_BannedWordType {
         match self.word_type {
-            Some(e) => e.enum_value_or(super::base_gcmessages_csgo::GC_BannedWordType::GC_BANNED_WORD_DISABLE_WORD),
-            None => super::base_gcmessages_csgo::GC_BannedWordType::GC_BANNED_WORD_DISABLE_WORD,
+            Some(e) => e.enum_value_or(GC_BannedWordType::GC_BANNED_WORD_DISABLE_WORD),
+            None => GC_BannedWordType::GC_BANNED_WORD_DISABLE_WORD,
         }
     }
 
@@ -12075,7 +12075,7 @@ impl CMsgGCBannedWord {
     }
 
     // Param is passed by value, moved
-    pub fn set_word_type(&mut self, v: super::base_gcmessages_csgo::GC_BannedWordType) {
+    pub fn set_word_type(&mut self, v: GC_BannedWordType) {
         self.word_type = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
     }
 
@@ -12212,7 +12212,7 @@ pub struct CMsgGCBannedWordListResponse {
     // @@protoc_insertion_point(field:CMsgGCBannedWordListResponse.ban_list_group_id)
     pub ban_list_group_id: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CMsgGCBannedWordListResponse.word_list)
-    pub word_list: ::std::vec::Vec<super::base_gcmessages_csgo::CMsgGCBannedWord>,
+    pub word_list: ::std::vec::Vec<CMsgGCBannedWord>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgGCBannedWordListResponse.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -12333,7 +12333,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgGCBannedWordListRespon
 pub struct CMsgGCToGCBannedWordListBroadcast {
     // message fields
     // @@protoc_insertion_point(field:CMsgGCToGCBannedWordListBroadcast.broadcast)
-    pub broadcast: ::steam_vent_proto_common::protobuf::MessageField<super::base_gcmessages_csgo::CMsgGCBannedWordListResponse>,
+    pub broadcast: ::steam_vent_proto_common::protobuf::MessageField<CMsgGCBannedWordListResponse>,
     // special fields
     // @@protoc_insertion_point(special_field:CMsgGCToGCBannedWordListBroadcast.special_fields)
     pub special_fields: ::steam_vent_proto_common::protobuf::SpecialFields,
@@ -14170,7 +14170,7 @@ pub struct CMsgGameServerInfo {
     // @@protoc_insertion_point(field:CMsgGameServerInfo.server_hibernation)
     pub server_hibernation: ::std::option::Option<bool>,
     // @@protoc_insertion_point(field:CMsgGameServerInfo.server_type)
-    pub server_type: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<super::base_gcmessages_csgo::cmsg_game_server_info::ServerType>>,
+    pub server_type: ::std::option::Option<::steam_vent_proto_common::protobuf::EnumOrUnknown<cmsg_game_server_info::ServerType>>,
     // @@protoc_insertion_point(field:CMsgGameServerInfo.server_region)
     pub server_region: ::std::option::Option<u32>,
     // @@protoc_insertion_point(field:CMsgGameServerInfo.server_loadavg)
@@ -14342,10 +14342,10 @@ impl CMsgGameServerInfo {
 
     // optional .CMsgGameServerInfo.ServerType server_type = 7;
 
-    pub fn server_type(&self) -> super::base_gcmessages_csgo::cmsg_game_server_info::ServerType {
+    pub fn server_type(&self) -> cmsg_game_server_info::ServerType {
         match self.server_type {
-            Some(e) => e.enum_value_or(super::base_gcmessages_csgo::cmsg_game_server_info::ServerType::UNSPECIFIED),
-            None => super::base_gcmessages_csgo::cmsg_game_server_info::ServerType::UNSPECIFIED,
+            Some(e) => e.enum_value_or(cmsg_game_server_info::ServerType::UNSPECIFIED),
+            None => cmsg_game_server_info::ServerType::UNSPECIFIED,
         }
     }
 
@@ -14358,7 +14358,7 @@ impl CMsgGameServerInfo {
     }
 
     // Param is passed by value, moved
-    pub fn set_server_type(&mut self, v: super::base_gcmessages_csgo::cmsg_game_server_info::ServerType) {
+    pub fn set_server_type(&mut self, v: cmsg_game_server_info::ServerType) {
         self.server_type = ::std::option::Option::Some(::steam_vent_proto_common::protobuf::EnumOrUnknown::new(v));
     }
 
@@ -15294,7 +15294,7 @@ impl ::steam_vent_proto_common::protobuf::Message for CMsgAdjustEquipSlot {
 pub struct CMsgAdjustEquipSlots {
     // message fields
     // @@protoc_insertion_point(field:CMsgAdjustEquipSlots.slots)
-    pub slots: ::std::vec::Vec<super::base_gcmessages_csgo::CMsgAdjustEquipSlot>,
+    pub slots: ::std::vec::Vec<CMsgAdjustEquipSlot>,
     // @@protoc_insertion_point(field:CMsgAdjustEquipSlots.change_num)
     pub change_num: ::std::option::Option<u32>,
     // special fields
@@ -16238,8 +16238,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgInviteToParty {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgInviteToParty {
-    type KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg;
-    const KIND: Self::KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg::k_EMsgGCInviteToParty;
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgGCInviteToParty;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgInvitationCreated {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -16255,8 +16255,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgInvitationCreated {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgInvitationCreated {
-    type KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg;
-    const KIND: Self::KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg::k_EMsgGCInvitationCreated;
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgGCInvitationCreated;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgPartyInviteResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -16272,8 +16272,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgPartyInviteResponse {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgPartyInviteResponse {
-    type KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg;
-    const KIND: Self::KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg::k_EMsgGCPartyInviteResponse;
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgGCPartyInviteResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgKickFromParty {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -16289,8 +16289,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgKickFromParty {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgKickFromParty {
-    type KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg;
-    const KIND: Self::KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg::k_EMsgGCKickFromParty;
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgGCKickFromParty;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgLeaveParty {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -16306,8 +16306,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgLeaveParty {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgLeaveParty {
-    type KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg;
-    const KIND: Self::KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg::k_EMsgGCLeaveParty;
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgGCLeaveParty;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgServerAvailable {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -16323,8 +16323,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgServerAvailable {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgServerAvailable {
-    type KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg;
-    const KIND: Self::KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg::k_EMsgGCServerAvailable;
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgGCServerAvailable;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgLANServerAvailable {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -16340,8 +16340,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgLANServerAvailable {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgLANServerAvailable {
-    type KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg;
-    const KIND: Self::KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg::k_EMsgGCLANServerAvailable;
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgGCLANServerAvailable;
 }
 impl ::steam_vent_proto_common::RpcMessage for CSOEconGameAccountClient {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -16687,8 +16687,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCError {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCError {
-    type KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg;
-    const KIND: Self::KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg::k_EMsgGCError;
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgGCError;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgRequestInventoryRefresh {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -16730,8 +16730,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgReplicateConVars {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgReplicateConVars {
-    type KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg;
-    const KIND: Self::KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg::k_EMsgGCReplicateConVars;
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgGCReplicateConVars;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgUseItem {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -17370,8 +17370,8 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGameServerInfo {
     }
 }
 impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGameServerInfo {
-    type KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg;
-    const KIND: Self::KindEnum = crate::base_gcmessages_csgo::EGCBaseMsg::k_EMsgGCGameServerInfo;
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgGCGameServerInfo;
 }
 impl ::steam_vent_proto_common::RpcMessage for CSOEconEquipSlot {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {

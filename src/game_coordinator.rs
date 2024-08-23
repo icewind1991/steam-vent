@@ -210,11 +210,9 @@ impl RpcMessage for ClientToGcMessage {
         Ok(ClientToGcMessage { data })
     }
     fn write(&self, writer: &mut dyn std::io::Write) -> protobuf::Result<()> {
-        use protobuf::Message;
         self.data.write_to_writer(writer)
     }
     fn encode_size(&self) -> usize {
-        use protobuf::Message;
         self.data.compute_size() as usize
     }
 }
