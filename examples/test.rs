@@ -1,5 +1,5 @@
 use steam_vent::proto::steammessages_gameservers_steamclient::CGameServers_GetServerList_Request;
-use steam_vent::{Connection, ConnectionError, ServerList};
+use steam_vent::{Connection, ConnectionError, ConnectionTrait, ServerList};
 
 #[tokio::main]
 async fn main() -> Result<(), ConnectionError> {

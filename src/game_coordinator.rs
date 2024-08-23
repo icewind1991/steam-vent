@@ -1,4 +1,4 @@
-use crate::connection::{ConnectionTrait, MessageFilter, TransportWriter};
+use crate::connection::{ConnectionImplTrait, ConnectionTrait, MessageFilter, TransportWriter};
 use crate::net::{decode_kind, JobId, NetMessageHeader, RawNetMessage};
 use crate::session::Session;
 use crate::{Connection, NetMessage, NetworkError};
@@ -19,13 +19,14 @@ use tokio::sync::mpsc::channel;
 use tokio::time::sleep;
 use tokio_stream::wrappers::ReceiverStream;
 use tokio_stream::StreamExt;
-use tracing::{debug, instrument};
+use tracing::debug;
 
 pub struct GameCoordinator {
     app_id: u32,
     filter: MessageFilter,
     writer: TransportWriter,
     session: Session,
+    timeout: Duration,
 }
 
 /// While these kinds are consistent between games, they are not defined in the generic steam protos
@@ -97,6 +98,7 @@ impl GameCoordinator {
             filter,
             writer: connection.writer(),
             session: connection.session.clone().with_app_id(app_id),
+            timeout: connection.get_timeout(),
         };
 
         connection
@@ -150,39 +152,45 @@ impl GameCoordinator {
     pub async fn send<T: NetMessage>(&self, message: T) -> Result<JobId, NetworkError> {
         self.send_with_kind(message, T::KIND).await
     }
+}
 
-    #[instrument(skip(message), fields(kind = ?kind))]
-    pub async fn send_with_kind<T: NetMessage, K: MsgKindEnum>(
+impl ConnectionImplTrait for GameCoordinator {
+    fn get_timeout(&self) -> Duration {
+        self.timeout
+    }
+
+    fn get_filter(&self) -> &MessageFilter {
+        &self.filter
+    }
+
+    fn get_session(&self) -> &Session {
+        &self.session
+    }
+
+    async fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
         &self,
-        message: T,
+        header: NetMessageHeader,
+        msg: Msg,
         kind: K,
     ) -> Result<JobId, NetworkError> {
-        let header = NetMessageHeader::default();
+        let nested_header = NetMessageHeader::default();
         let mut payload: Vec<u8> = Vec::with_capacity(
-            header.encode_size(kind.into(), T::IS_PROTOBUF) + message.encode_size(),
+            nested_header.encode_size(kind.into(), Msg::IS_PROTOBUF) + msg.encode_size(),
         );
 
-        header.write(&mut payload, kind, T::IS_PROTOBUF)?;
-        message.write_body(&mut payload)?;
+        nested_header.write(&mut payload, kind, Msg::IS_PROTOBUF)?;
+        msg.write_body(&mut payload)?;
         let data = CMsgGCClient {
             appid: Some(self.app_id),
-            msgtype: Some(kind.encode_kind(T::IS_PROTOBUF)),
+            msgtype: Some(kind.encode_kind(Msg::IS_PROTOBUF)),
             payload: Some(payload),
             ..Default::default()
         };
-
-        let header = self.session.header(false);
 
         let job_id = header.source_job_id;
         let msg = RawNetMessage::from_message(header, ClientToGcMessage { data })?;
         self.writer.lock().await.send(msg).await?;
         Ok(job_id)
-    }
-}
-
-impl ConnectionTrait for GameCoordinator {
-    fn get_filter(&self) -> &MessageFilter {
-        &self.filter
     }
 }
 

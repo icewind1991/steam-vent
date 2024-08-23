@@ -56,7 +56,7 @@ impl From<String> for MessageBodyError {
     }
 }
 
-pub trait NetMessage: Sized + Debug {
+pub trait NetMessage: Sized + Debug + Send {
     type KindEnum: MsgKindEnum;
     const KIND: Self::KindEnum;
     const IS_PROTOBUF: bool = false;
@@ -331,7 +331,7 @@ impl NetMessage for ServiceMethodNotification {
     }
 }
 
-impl<ProtoMsg: RpcMessageWithKind> NetMessage for ProtoMsg {
+impl<ProtoMsg: RpcMessageWithKind + Send> NetMessage for ProtoMsg {
     type KindEnum = ProtoMsg::KindEnum;
     const KIND: Self::KindEnum = <ProtoMsg as RpcMessageWithKind>::KIND;
     const IS_PROTOBUF: bool = true;

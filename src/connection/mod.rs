@@ -9,9 +9,11 @@ use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, hello, login, ConnectionError, Session};
 use crate::transport::websocket::connect;
+pub(crate) use connection_impl::ConnectionImplTrait;
 pub(crate) use filter::MessageFilter;
 use futures_util::future::{select, Either};
 use futures_util::{FutureExt, Sink, SinkExt};
+use std::fmt::{Debug, Formatter};
 use std::future::Future;
 use std::net::IpAddr;
 use std::pin::pin;
@@ -24,7 +26,7 @@ use tokio::task::spawn;
 use tokio::time::{sleep, timeout};
 use tokio_stream::wrappers::BroadcastStream;
 use tokio_stream::{Stream, StreamExt};
-use tracing::{debug, error};
+use tracing::{debug, error, instrument};
 
 type Result<T, E = NetworkError> = std::result::Result<T, E>;
 
@@ -36,6 +38,12 @@ pub struct Connection {
     filter: MessageFilter,
     write: TransportWriter,
     timeout: Duration,
+}
+
+impl Debug for Connection {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Connection").finish_non_exhaustive()
+    }
 }
 
 impl Connection {
@@ -176,61 +184,8 @@ impl Connection {
         self.session.ip_country_code.clone()
     }
 
-    pub(crate) async fn raw_send<Msg: NetMessage>(
-        &self,
-        header: NetMessageHeader,
-        msg: Msg,
-    ) -> Result<JobId> {
-        let job_id = header.source_job_id;
-        let msg = RawNetMessage::from_message(header, msg)?;
-        self.write.lock().await.send(msg).await?;
-        Ok(job_id)
-    }
-
-    pub async fn job<Msg: NetMessage, Rsp: NetMessage>(&self, msg: Msg) -> Result<Rsp> {
-        let job_id = self.raw_send(self.session.header(true), msg).await?;
-        let resp = self
-            .get_filter()
-            .on_job_id(job_id)
-            .await
-            .map_err(|_| NetworkError::EOF)?;
-        resp.into_message()
-    }
-
-    pub async fn send<Msg: NetMessage>(&self, msg: Msg) -> Result<()> {
-        self.raw_send(self.session.header(false), msg).await?;
-        Ok(())
-    }
-
-    pub async fn send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
-        &self,
-        msg: Msg,
-        kind: K,
-    ) -> Result<JobId> {
-        let header = self.session.header(false);
-        let job_id = header.source_job_id;
-        let msg = RawNetMessage::from_message_with_kind(header, msg, kind)?;
-        self.write.lock().await.send(msg).await?;
-        Ok(job_id)
-    }
-
     pub fn set_timeout(&mut self, timeout: Duration) {
         self.timeout = timeout;
-    }
-
-    pub async fn service_method<Msg: ServiceMethodRequest>(
-        &self,
-        msg: Msg,
-    ) -> Result<Msg::Response> {
-        let header = self.session.header(true);
-        let recv = self.filter.on_job_id(header.source_job_id);
-        self.raw_send(header, ServiceMethodMessage(msg)).await?;
-        let message = timeout(self.timeout, recv)
-            .await
-            .map_err(|_| NetworkError::Timeout)?
-            .map_err(|_| NetworkError::EOF)?
-            .into_message::<ServiceMethodResponseMessage>()?;
-        message.into_response::<Msg>()
     }
 
     pub(crate) async fn service_method_un_authenticated<Msg: ServiceMethodRequest>(
@@ -258,9 +213,30 @@ impl Connection {
     }
 }
 
-pub trait ConnectionTrait {
-    fn get_filter(&self) -> &MessageFilter;
+pub(crate) mod connection_impl {
+    use crate::connection::MessageFilter;
+    use crate::net::{JobId, NetMessageHeader};
+    use crate::session::Session;
+    use crate::{NetMessage, NetworkError};
+    use std::fmt::Debug;
+    use std::future::Future;
+    use std::time::Duration;
+    use steam_vent_proto::MsgKindEnum;
 
+    pub trait ConnectionImplTrait: Debug {
+        fn get_timeout(&self) -> Duration;
+        fn get_filter(&self) -> &MessageFilter;
+        fn get_session(&self) -> &Session;
+        fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+            &self,
+            header: NetMessageHeader,
+            msg: Msg,
+            kind: K,
+        ) -> impl Future<Output = Result<JobId, NetworkError>> + Send;
+    }
+}
+
+pub trait ConnectionTrait: ConnectionImplTrait + Sync {
     fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> + 'static {
         BroadcastStream::new(self.get_filter().on_notification(T::REQ_NAME))
             .filter_map(|res| res.ok())
@@ -297,10 +273,91 @@ pub trait ConnectionTrait {
         self.on_with_header::<T>()
             .map(|res| res.map(|(_, msg)| msg))
     }
+
+    fn service_method<Msg: ServiceMethodRequest>(
+        &self,
+        msg: Msg,
+    ) -> impl Future<Output = Result<Msg::Response>> + Send {
+        async {
+            let header = self.get_session().header(true);
+            let recv = self.get_filter().on_job_id(header.source_job_id);
+            self.raw_send(header, ServiceMethodMessage(msg)).await?;
+            let message = timeout(self.get_timeout(), recv)
+                .await
+                .map_err(|_| NetworkError::Timeout)?
+                .map_err(|_| NetworkError::EOF)?
+                .into_message::<ServiceMethodResponseMessage>()?;
+            message.into_response::<Msg>()
+        }
+    }
+
+    fn job<Msg: NetMessage, Rsp: NetMessage>(
+        &self,
+        msg: Msg,
+    ) -> impl Future<Output = Result<Rsp>> + Send {
+        async {
+            let job_id = self.raw_send(self.get_session().header(true), msg).await?;
+            let resp = self
+                .get_filter()
+                .on_job_id(job_id)
+                .await
+                .map_err(|_| NetworkError::EOF)?;
+            resp.into_message()
+        }
+    }
+
+    #[instrument(skip(msg), fields(kind = ?Msg::KIND))]
+    fn send<Msg: NetMessage>(&self, msg: Msg) -> impl Future<Output = Result<()>> + Send {
+        async {
+            self.raw_send(self.get_session().header(false), msg).await?;
+            Ok(())
+        }
+    }
+
+    #[instrument(skip(msg, kind), fields(kind = ?kind))]
+    fn send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+        &self,
+        msg: Msg,
+        kind: K,
+    ) -> impl Future<Output = Result<JobId>> + Send {
+        let header = self.get_session().header(false);
+        self.raw_send_with_kind(header, msg, kind)
+    }
+
+    fn raw_send<Msg: NetMessage>(
+        &self,
+        header: NetMessageHeader,
+        msg: Msg,
+    ) -> impl Future<Output = Result<JobId>> + Send {
+        self.raw_send_with_kind(header, msg, Msg::KIND)
+    }
 }
 
-impl ConnectionTrait for Connection {
+impl<C: ConnectionImplTrait + Sync> ConnectionTrait for C {}
+
+impl ConnectionImplTrait for Connection {
+    fn get_timeout(&self) -> Duration {
+        self.timeout
+    }
+
     fn get_filter(&self) -> &MessageFilter {
         &self.filter
+    }
+
+    fn get_session(&self) -> &Session {
+        &self.session
+    }
+
+    async fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+        &self,
+        header: NetMessageHeader,
+        msg: Msg,
+        kind: K,
+    ) -> Result<JobId> {
+        let job_id = header.source_job_id;
+        let msg = RawNetMessage::from_message_with_kind(header, msg, kind)?;
+
+        self.write.lock().await.send(msg).await?;
+        Ok(job_id)
     }
 }
