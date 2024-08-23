@@ -148,10 +148,6 @@ impl GameCoordinator {
         .map_err(|_| NetworkError::EOF)?;
         Ok(())
     }
-
-    pub async fn send<T: NetMessage>(&self, message: T) -> Result<JobId, NetworkError> {
-        self.send_with_kind(message, T::KIND).await
-    }
 }
 
 impl ConnectionImplTrait for GameCoordinator {

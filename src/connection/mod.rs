@@ -296,13 +296,10 @@ pub trait ConnectionTrait: ConnectionImplTrait + Sync {
         msg: Msg,
     ) -> impl Future<Output = Result<Rsp>> + Send {
         async {
-            let job_id = self.raw_send(self.get_session().header(true), msg).await?;
-            let resp = self
-                .get_filter()
-                .on_job_id(job_id)
-                .await
-                .map_err(|_| NetworkError::EOF)?;
-            resp.into_message()
+            let header = self.get_session().header(true);
+            let resp = self.get_filter().on_job_id(header.source_job_id);
+            self.raw_send(header, msg).await?;
+            resp.await.map_err(|_| NetworkError::EOF)?.into_message()
         }
     }
 
