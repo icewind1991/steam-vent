@@ -1729,6 +1729,7 @@ dependencies = [
  "protobuf",
  "steam-vent-proto-common",
  "steam-vent-proto-csgo",
+ "steam-vent-proto-dota2",
  "steam-vent-proto-steam",
  "steam-vent-proto-tf2",
 ]
@@ -1742,6 +1743,13 @@ dependencies = [
 
 [[package]]
 name = "steam-vent-proto-csgo"
+version = "0.5.0"
+dependencies = [
+ "steam-vent-proto-common",
+]
+
+[[package]]
+name = "steam-vent-proto-dota2"
 version = "0.5.0"
 dependencies = [
  "steam-vent-proto-common",
