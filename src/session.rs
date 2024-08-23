@@ -8,10 +8,12 @@ use crate::proto::steammessages_clientserver_login::{
 };
 use crate::serverlist::ServerDiscoveryError;
 use protobuf::MessageField;
+use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_crypto::CryptError;
+use steam_vent_proto::steammessages_base::cmsg_ipaddress;
 use steamid_ng::{AccountType, Instance, SteamID, Universe};
 use thiserror::Error;
 use tracing::debug;
@@ -96,6 +98,9 @@ impl Default for JobIdCounter {
 #[derive(Debug, Clone)]
 pub struct Session {
     pub session_id: i32,
+    pub cell_id: u32,
+    pub public_ip: Option<IpAddr>,
+    pub ip_country_code: Option<String>,
     pub job_id: JobIdCounter,
     pub steam_id: SteamID,
     pub heartbeat_interval: Duration,
@@ -106,6 +111,9 @@ impl Default for Session {
     fn default() -> Self {
         Session {
             session_id: 0,
+            cell_id: 0,
+            public_ip: None,
+            ip_country_code: None,
             job_id: JobIdCounter::default(),
             steam_id: SteamID::from(0),
             heartbeat_interval: Duration::from_secs(15),
@@ -211,6 +219,17 @@ async fn send_logon(
     debug!(steam_id = u64::from(steam_id), "session started");
     Ok(Session {
         session_id: header.session_id,
+        cell_id: response.cell_id(),
+        public_ip: response.public_ip.ip.as_ref().and_then(|ip| match &ip {
+            cmsg_ipaddress::Ip::V4(bits) => Some(IpAddr::V4(Ipv4Addr::from(*bits))),
+            cmsg_ipaddress::Ip::V6(bytes) if bytes.len() == 16 => {
+                let mut bits = [0u8; 16];
+                bits.copy_from_slice(&bytes[..]);
+                Some(IpAddr::V6(Ipv6Addr::from(bits)))
+            }
+            _ => None,
+        }),
+        ip_country_code: response.ip_country_code.clone(),
         steam_id: header.steam_id,
         job_id: JobIdCounter::default(),
         heartbeat_interval: Duration::from_secs(response.heartbeat_seconds() as u64),
