@@ -1,8 +1,12 @@
 [package]
 name = "steam-vent-proto-common"
+description = "Trait for protobuf structs used by the Steam client protocol"
 version = "0.5.0"
 edition = "2021"
 rust-version = "1.75.0"
+authors = ["Robin Appelman <robin@icewind.nl>"]
+license = "MIT"
+repository = "https://github.com/icewind1991/steam-vent"
 
 [dependencies]
 protobuf = { version = "=3.5.1", features = ["with-bytes"] }
