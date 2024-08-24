@@ -1,7 +1,7 @@
 use std::env::args;
 use std::io::stdin;
 use steam_vent::auth::{
-    ConsoleAuthConfirmationHandler, DeviceConfirmationHandler, EitherConfirmationHandler,
+    AuthConfirmationHandler, ConsoleAuthConfirmationHandler, DeviceConfirmationHandler,
     FileGuardDataStore,
 };
 use steam_vent::proto::steammessages_friendmessages_steamclient::{
@@ -30,10 +30,7 @@ async fn main() -> Result<(), ConnectionError> {
         &account,
         &password,
         FileGuardDataStore::user_cache(),
-        EitherConfirmationHandler::new(
-            DeviceConfirmationHandler,
-            ConsoleAuthConfirmationHandler::default(),
-        ),
+        ConsoleAuthConfirmationHandler::default().or(DeviceConfirmationHandler),
     )
     .await?;
 

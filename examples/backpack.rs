@@ -1,7 +1,7 @@
 use std::env::args;
 use std::io::Cursor;
 use steam_vent::auth::{
-    ConsoleAuthConfirmationHandler, DeviceConfirmationHandler, EitherConfirmationHandler,
+    AuthConfirmationHandler, ConsoleAuthConfirmationHandler, DeviceConfirmationHandler,
     FileGuardDataStore,
 };
 use steam_vent::{Connection, ConnectionError, ConnectionTrait, GameCoordinator, ServerList};
@@ -25,10 +25,7 @@ async fn main() -> Result<(), ConnectionError> {
         &account,
         &password,
         FileGuardDataStore::user_cache(),
-        EitherConfirmationHandler::new(
-            DeviceConfirmationHandler,
-            ConsoleAuthConfirmationHandler::default(),
-        ),
+        ConsoleAuthConfirmationHandler::default().or(DeviceConfirmationHandler),
     )
     .await?;
 
