@@ -182,7 +182,7 @@ impl PendingAuth {
                 return Ok(Tokens {
                     access_token: Token(response.take_access_token()),
                     refresh_token: Token(response.take_refresh_token()),
-                    new_guard_data: response.take_new_guard_data(),
+                    new_guard_data: response.new_guard_data,
                 });
             }
         }
@@ -203,8 +203,7 @@ pub(crate) struct Tokens {
     #[allow(dead_code)]
     pub access_token: Token,
     pub refresh_token: Token,
-    #[allow(dead_code)]
-    pub new_guard_data: String,
+    pub new_guard_data: Option<String>,
 }
 
 async fn poll_until_info(

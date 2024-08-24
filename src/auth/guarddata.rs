@@ -105,14 +105,18 @@ impl GuardDataStore for FileGuardDataStore {
     type Err = FileStoreError;
 
     async fn store(&mut self, account: &str, machine_token: String) -> Result<(), Self::Err> {
-        let mut tokens = self.all_tokens()?;
-        tokens.insert(account.into(), machine_token);
-        self.save(tokens)
+        if !machine_token.is_empty() {
+            let mut tokens = self.all_tokens()?;
+            tokens.insert(account.into(), machine_token);
+            self.save(tokens)
+        } else {
+            Ok(())
+        }
     }
 
     async fn load(&mut self, account: &str) -> Result<Option<String>, Self::Err> {
         let mut tokens = self.all_tokens()?;
-        Ok(tokens.remove(account))
+        Ok(tokens.remove(account).filter(|token| !token.is_empty()))
     }
 }
 
