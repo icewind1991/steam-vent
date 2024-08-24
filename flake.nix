@@ -75,6 +75,7 @@
         msrv = naerskMsrv.buildPackage (nearskOpt
           // {
             mode = "check";
+            cargoBuildOptions = x: x++ ["--all-features"];
           });
         proto-builder = naersk'.buildPackage {
           src = lib.sources.sourceByRegex ./protobuf/build srcFilters;
