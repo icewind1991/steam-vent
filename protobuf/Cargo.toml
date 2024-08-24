@@ -8,7 +8,7 @@ license = "MIT"
 repository = "https://github.com/icewind1991/steam-vent"
 
 [dependencies]
-protobuf = { version = "=3.4.0", features = ["with-bytes"] }
+protobuf = { version = "=3.5.1", features = ["with-bytes"] }
 steam-vent-proto-common = { version = "0.5.0", path = "common" }
 steam-vent-proto-steam = { version = "0.5.0", path = "./steam" }
 steam-vent-proto-tf2 = { version = "0.5.0", path = "./tf2", optional = true }

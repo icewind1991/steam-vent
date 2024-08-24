@@ -4,9 +4,9 @@ version = "0.5.0"
 edition = "2021"
 
 [dependencies]
-protobuf-codegen = "=3.4.0"
-protobuf-parse = "=3.4.0"
-protobuf = "=3.4.0"
+protobuf-codegen = "=3.5.1"
+protobuf-parse = "=3.5.1"
+protobuf = "=3.5.1"
 walkdir = "2.3.3"
 clap = { version = "4.3.19", features = ["derive"] }
 quote = "1.0.32"
