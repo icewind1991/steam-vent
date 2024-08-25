@@ -244,7 +244,7 @@ pub trait ConnectionTrait: Sync + Debug {
         let fut = self.filter().one_kind(T::KIND);
         async move {
             let raw = fut.await.map_err(|_| NetworkError::EOF)?;
-            Ok((raw.header.clone(), raw.into_message()?))
+            raw.into_header_and_message()
         }
     }
 
@@ -258,7 +258,7 @@ pub trait ConnectionTrait: Sync + Debug {
     ) -> impl Stream<Item = Result<(NetMessageHeader, T)>> + 'static {
         BroadcastStream::new(self.filter().on_kind(T::KIND)).map(|raw| {
             let raw = raw.map_err(|_| NetworkError::EOF)?;
-            Ok((raw.header.clone(), raw.into_message()?))
+            raw.into_header_and_message()
         })
     }
 

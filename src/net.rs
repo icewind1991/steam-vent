@@ -321,7 +321,7 @@ impl RawNetMessage {
 }
 
 impl RawNetMessage {
-    pub fn into_message<T: NetMessage>(self) -> Result<T> {
+    pub fn into_header_and_message<T: NetMessage>(self) -> Result<(NetMessageHeader, T)> {
         if let Some(result) = self.header.result {
             EResult::from_result(result)?;
         }
@@ -332,9 +332,13 @@ impl RawNetMessage {
                 self.data.len()
             );
             let body = T::read_body(self.data, &self.header)?;
-            Ok(body)
+            Ok((self.header, body))
         } else {
             Err(NetworkError::DifferentMessage(T::KIND.into(), self.kind))
         }
+    }
+
+    pub fn into_message<T: NetMessage>(self) -> Result<T> {
+        self.into_header_and_message().map(|(_, msg)| msg)
     }
 }
