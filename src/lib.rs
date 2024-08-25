@@ -1,5 +1,5 @@
 pub mod auth;
-mod connection;
+pub mod connection;
 mod eresult;
 mod game_coordinator;
 mod message;

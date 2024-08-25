@@ -1,9 +1,8 @@
-use crate::connection::{ConnectionImplTrait, ConnectionTrait, MessageFilter, TransportWriter};
-use crate::net::{decode_kind, JobId, NetMessageHeader, RawNetMessage};
+use crate::connection::{ConnectionTrait, MessageFilter, MessageSender};
+use crate::net::{decode_kind, NetMessageHeader, RawNetMessage};
 use crate::session::Session;
 use crate::{Connection, NetMessage, NetworkError};
 use futures_util::future::select;
-use futures_util::SinkExt;
 use protobuf::Message;
 use std::fmt::{Debug, Formatter};
 use std::pin::pin;
@@ -24,7 +23,7 @@ use tracing::debug;
 pub struct GameCoordinator {
     app_id: u32,
     filter: MessageFilter,
-    writer: TransportWriter,
+    sender: MessageSender,
     session: Session,
     timeout: Duration,
 }
@@ -96,9 +95,9 @@ impl GameCoordinator {
         let gc = GameCoordinator {
             app_id,
             filter,
-            writer: connection.writer(),
+            sender: connection.sender().clone(),
             session: connection.session.clone().with_app_id(app_id),
-            timeout: connection.get_timeout(),
+            timeout: connection.timeout(),
         };
 
         connection
@@ -150,16 +149,16 @@ impl GameCoordinator {
     }
 }
 
-impl ConnectionImplTrait for GameCoordinator {
-    fn get_timeout(&self) -> Duration {
+impl ConnectionTrait for GameCoordinator {
+    fn timeout(&self) -> Duration {
         self.timeout
     }
 
-    fn get_filter(&self) -> &MessageFilter {
+    fn filter(&self) -> &MessageFilter {
         &self.filter
     }
 
-    fn get_session(&self) -> &Session {
+    fn session(&self) -> &Session {
         &self.session
     }
 
@@ -168,7 +167,7 @@ impl ConnectionImplTrait for GameCoordinator {
         header: NetMessageHeader,
         msg: Msg,
         kind: K,
-    ) -> Result<JobId, NetworkError> {
+    ) -> Result<(), NetworkError> {
         let nested_header = NetMessageHeader::default();
         let mut payload: Vec<u8> = Vec::with_capacity(
             nested_header.encode_size(kind.into(), Msg::IS_PROTOBUF) + msg.encode_size(),
@@ -183,10 +182,12 @@ impl ConnectionImplTrait for GameCoordinator {
             ..Default::default()
         };
 
-        let job_id = header.source_job_id;
         let msg = RawNetMessage::from_message(header, ClientToGcMessage { data })?;
-        self.writer.lock().await.send(msg).await?;
-        Ok(job_id)
+        self.sender.send_raw(msg).await
+    }
+
+    fn sender(&self) -> &MessageSender {
+        &self.sender
     }
 }
 
