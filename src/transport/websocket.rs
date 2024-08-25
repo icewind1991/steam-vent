@@ -21,7 +21,7 @@ pub async fn connect(
 )> {
     rustls::crypto::aws_lc_rs::default_provider()
         .install_default()
-        .expect("failed to setup crypto provider");
+        .ok(); // can only be once called
     let mut root_store = RootCertStore::empty();
     root_store.extend(webpki_roots::TLS_SERVER_ROOTS.iter().cloned());
     let mut tls_config = ClientConfig::builder()
