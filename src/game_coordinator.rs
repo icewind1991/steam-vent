@@ -28,8 +28,8 @@ pub struct GameCoordinator {
     timeout: Duration,
 }
 
-/// While these kinds are consistent between games, they are not defined in the generic steam protos
-/// so we define them here so we can implement the game coordinator without requiring the protos from a game
+/// While these kinds are consistent between games, they are not defined in the generic steam protobufs.
+/// We define them here, so we can implement the game coordinator without requiring the protobufs from a game
 #[repr(i32)]
 #[allow(non_camel_case_types)]
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Default)]
@@ -116,12 +116,11 @@ impl GameCoordinator {
         let welcome = gc.wait_welcome();
         let hello_sender = async {
             loop {
-                gc.send_hello().await?;
+                if let Err(e) = gc.send_hello().await {
+                    return Result::<(), _>::Err(e);
+                };
                 sleep(Duration::from_secs(5)).await;
             }
-            // used to make the async block return a Result
-            #[allow(unreachable_code)]
-            Result::<(), NetworkError>::Ok(())
         };
         select(pin!(welcome), pin!(hello_sender)).await;
         Ok(gc)
@@ -162,6 +161,10 @@ impl ConnectionTrait for GameCoordinator {
         &self.session
     }
 
+    fn sender(&self) -> &MessageSender {
+        &self.sender
+    }
+
     async fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
         &self,
         header: NetMessageHeader,
@@ -184,10 +187,6 @@ impl ConnectionTrait for GameCoordinator {
 
         let msg = RawNetMessage::from_message(header, ClientToGcMessage { data })?;
         self.sender.send_raw(msg).await
-    }
-
-    fn sender(&self) -> &MessageSender {
-        &self.sender
     }
 }
 

@@ -239,7 +239,7 @@ pub trait ConnectionTrait: Sync + Debug {
     fn one_with_header<T: NetMessage + 'static>(
         &self,
     ) -> impl Future<Output = Result<(NetMessageHeader, T)>> + 'static {
-        // async block instead of async fn so we don't have to tie the lifetime of the returned future
+        // async block instead of async fn, so we don't have to tie the lifetime of the returned future
         // to the lifetime of &self
         let fut = self.filter().one_kind(T::KIND);
         async move {

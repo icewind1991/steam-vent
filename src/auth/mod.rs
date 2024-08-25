@@ -1,5 +1,5 @@
 mod confirmation;
-mod guarddata;
+mod guard_data;
 
 use crate::connection::Connection;
 use crate::message::NetMessage;
@@ -18,7 +18,7 @@ use crate::session::{ConnectionError, LoginError};
 use base64::prelude::BASE64_STANDARD;
 use base64::Engine;
 pub use confirmation::*;
-pub use guarddata::*;
+pub use guard_data::*;
 use num_bigint_dig::BigUint;
 use num_traits::Num;
 use protobuf::{EnumOrUnknown, MessageField};

@@ -187,7 +187,7 @@ where
     Read: AsyncRead + Unpin + Send + Sync,
     Write: AsyncWrite + Unpin + Send + Sync,
 {
-    /// Create an confirmation handling using the provided I/O
+    /// Create a confirmation handling using the provided I/O
     ///
     /// The handler will write details about the required tokens to the output
     /// and expect the newline terminated token from the input

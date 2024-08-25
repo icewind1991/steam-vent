@@ -1,5 +1,5 @@
 use crate::eresult::EResult;
-use crate::message::NetMessage;
+use crate::message::{MalformedBody, NetMessage};
 use crate::proto::steammessages_base::CMsgProtoBufHeader;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::{Buf, BufMut, BytesMut};
@@ -33,7 +33,7 @@ pub enum NetworkError {
     #[error("Different service method expected, expected {0:?}, got {1:?}")]
     DifferentServiceMethod(&'static str, String),
     #[error("{0}")]
-    MalformedBody(#[from] crate::message::MalformedBody),
+    MalformedBody(#[from] MalformedBody),
     #[error("Crypto error: {0}")]
     CryptoError(#[from] CryptError),
     #[error("Unexpected end of stream")]
