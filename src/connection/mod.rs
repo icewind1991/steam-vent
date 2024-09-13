@@ -18,7 +18,7 @@ use std::net::IpAddr;
 use std::pin::pin;
 use std::sync::Arc;
 use std::time::Duration;
-use steam_vent_proto::MsgKindEnum;
+use steam_vent_proto::{JobMultiple, MsgKindEnum};
 use steamid_ng::{AccountType, SteamID};
 use tokio::sync::Mutex;
 use tokio::task::spawn;
@@ -297,6 +297,36 @@ pub trait ConnectionTrait: Sync + Debug {
                 .map_err(|_| NetworkError::Timeout)?
                 .map_err(|_| NetworkError::EOF)?
                 .into_message()
+        }
+    }
+
+    fn job_multi<Msg: NetMessage, Rsp: NetMessage + JobMultiple>(
+        &self,
+        msg: Msg,
+    ) -> impl Future<Output = Result<Vec<Rsp>>> + Send {
+        async {
+            let header = self.session().header(true);
+            let source_job_id = header.source_job_id;
+            let mut recv = self.filter().on_job_id_multi(source_job_id);
+            let messages = {
+                self.raw_send(header, msg).await?;
+                let mut messages = vec![];
+                loop {
+                    let msg: Rsp = timeout(self.timeout(), recv.recv())
+                        .await
+                        .map_err(|_| NetworkError::Timeout)?
+                        .map_err(|_| NetworkError::EOF)?
+                        .into_message()?;
+                    let completed = msg.completed();
+                    messages.push(msg);
+                    if completed {
+                        break;
+                    }
+                }
+                Ok(messages)
+            };
+            self.filter().complete_job_id_multi(source_job_id);
+            messages
         }
     }
 

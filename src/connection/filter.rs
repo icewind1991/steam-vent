@@ -13,6 +13,7 @@ use tracing::{debug, error};
 #[derive(Clone)]
 pub struct MessageFilter {
     job_id_filters: Arc<DashMap<JobId, oneshot::Sender<RawNetMessage>>>,
+    job_id_multi_filters: Arc<DashMap<JobId, broadcast::Sender<RawNetMessage>>>,
     notification_filters: Arc<DashMap<&'static str, broadcast::Sender<ServiceMethodNotification>>>,
     kind_filters: Arc<DashMap<MsgKind, broadcast::Sender<RawNetMessage>>>,
     oneshot_kind_filters: Arc<DashMap<MsgKind, oneshot::Sender<RawNetMessage>>>,
@@ -26,6 +27,7 @@ impl MessageFilter {
     ) -> Self {
         let filter = MessageFilter {
             job_id_filters: Default::default(),
+            job_id_multi_filters: Default::default(),
             kind_filters: Default::default(),
             notification_filters: Default::default(),
             oneshot_kind_filters: Default::default(),
@@ -41,6 +43,12 @@ impl MessageFilter {
                             .job_id_filters
                             .remove(&message.header.target_job_id)
                         {
+                            tx.send(message).ok();
+                        } else if let Some(map_ref) = filter_send
+                            .job_id_multi_filters
+                            .get(&message.header.target_job_id)
+                        {
+                            let tx = map_ref.value();
                             tx.send(message).ok();
                         } else if let Some((_, tx)) =
                             filter_send.oneshot_kind_filters.remove(&message.kind)
@@ -80,6 +88,18 @@ impl MessageFilter {
         let (tx, rx) = oneshot::channel();
         self.job_id_filters.insert(id, tx);
         rx
+    }
+
+    pub fn on_job_id_multi(&self, id: JobId) -> broadcast::Receiver<RawNetMessage> {
+        let map_ref = self
+            .job_id_multi_filters
+            .entry(id)
+            .or_insert_with(|| broadcast::channel(16).0);
+        map_ref.subscribe()
+    }
+
+    pub fn complete_job_id_multi(&self, id: JobId) {
+        self.job_id_multi_filters.remove(&id);
     }
 
     pub fn on_notification(

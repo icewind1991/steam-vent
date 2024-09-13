@@ -84,3 +84,9 @@ impl<T: MsgKindEnum> PartialEq<T> for MsgKind {
         self.0.eq(&other.enum_value())
     }
 }
+
+/// Trait for implementing a check for completion of a job that returns a response stream
+pub trait JobMultiple {
+    /// If the job has completed
+    fn completed(&self) -> bool;
+}
