@@ -215,14 +215,27 @@ pub fn symmetric_encrypt(input: BytesMut, key: &[u8; 32]) -> BytesMut {
     symmetric_encrypt_with_iv_buffer(BytesMut::from(&[0; 16][..]), input, key)
 }
 
-/// Decrypt the IV stored in the first 16 bytes of `input`
-/// and use it to decrypt the remaining bytes.
-pub fn symmetric_decrypt(mut input: BytesMut, key: &[u8; 32]) -> Result<BytesMut> {
+fn symmetric_decrypt_impl(mut input: BytesMut, key: &[u8; 32]) -> Result<([u8; 16], BytesMut)> {
     let message = input.split_off(16);
     let encrypted_iv = input.as_ref().try_into().unwrap();
     let plain_iv = decrypt_iv(encrypted_iv, key);
 
     let message = decrypt_message(message, key, &plain_iv)?;
+
+    Ok((plain_iv, message))
+}
+
+/// Decrypt the IV stored in the first 16 bytes of `input`
+/// and use it to decrypt the remaining bytes, skipping HMAC validation.
+pub fn symmetric_decrypt_without_hmac(input: BytesMut, key: &[u8; 32]) -> Result<BytesMut> {
+    let (_, message) = symmetric_decrypt_impl(input, key)?;
+    Ok(message)
+}
+
+/// Decrypt the IV stored in the first 16 bytes of `input`
+/// and use it to decrypt the remaining bytes.
+pub fn symmetric_decrypt(input: BytesMut, key: &[u8; 32]) -> Result<BytesMut> {
+    let (plain_iv, message) = symmetric_decrypt_impl(input, key)?;
     // let padding = *message.last().unwrap();
     // message.resize(message.len() - padding as usize, 0);
 
@@ -240,7 +253,6 @@ pub fn symmetric_decrypt(mut input: BytesMut, key: &[u8; 32]) -> Result<BytesMut
     if hmac[0..13] != plain_iv[0..13] {
         return Err(CryptError::InvalidHmac);
     }
-
     Ok(message)
 }
 
