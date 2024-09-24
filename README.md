@@ -57,4 +57,4 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
 This is in large parts inspired by and based of [@DoctorMcKay's](https://github.com/DoctorMcKay) work
 on [SteamUser](https://github.com/DoctorMcKay/node-steam-user/),
-massive credits go to all who worked on that. 
+massive credits go to all who worked on that.

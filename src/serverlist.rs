@@ -57,7 +57,7 @@ impl ServerList {
         let cell = options.cell;
 
         let response: ServerListResponse = client
-            .get(&format!(
+            .get(format!(
                 "https://api.steampowered.com/ISteamDirectory/GetCMList/v1/?cellid={cell}"
             ))
             .send()
