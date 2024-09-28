@@ -6,14 +6,14 @@ use std::sync::Arc;
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::MsgKind;
 use tokio::spawn;
-use tokio::sync::{broadcast, oneshot};
+use tokio::sync::{broadcast, mpsc, oneshot};
 use tokio_stream::StreamExt;
 use tracing::{debug, error};
 
 #[derive(Clone)]
 pub struct MessageFilter {
     job_id_filters: Arc<DashMap<JobId, oneshot::Sender<RawNetMessage>>>,
-    job_id_multi_filters: Arc<DashMap<JobId, broadcast::Sender<RawNetMessage>>>,
+    job_id_multi_filters: Arc<DashMap<JobId, mpsc::Sender<RawNetMessage>>>,
     notification_filters: Arc<DashMap<&'static str, broadcast::Sender<ServiceMethodNotification>>>,
     kind_filters: Arc<DashMap<MsgKind, broadcast::Sender<RawNetMessage>>>,
     oneshot_kind_filters: Arc<DashMap<MsgKind, oneshot::Sender<RawNetMessage>>>,
@@ -49,7 +49,7 @@ impl MessageFilter {
                             .get(&message.header.target_job_id)
                         {
                             let tx = map_ref.value();
-                            tx.send(message).ok();
+                            tx.send(message).await.ok();
                         } else if let Some((_, tx)) =
                             filter_send.oneshot_kind_filters.remove(&message.kind)
                         {
@@ -90,12 +90,10 @@ impl MessageFilter {
         rx
     }
 
-    pub fn on_job_id_multi(&self, id: JobId) -> broadcast::Receiver<RawNetMessage> {
-        let map_ref = self
-            .job_id_multi_filters
-            .entry(id)
-            .or_insert_with(|| broadcast::channel(16).0);
-        map_ref.subscribe()
+    pub fn on_job_id_multi(&self, id: JobId) -> mpsc::Receiver<RawNetMessage> {
+        let (tx, rx) = mpsc::channel(16);
+        self.job_id_multi_filters.insert(id, tx);
+        rx
     }
 
     pub fn complete_job_id_multi(&self, id: JobId) {

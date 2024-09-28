@@ -315,7 +315,7 @@ pub trait ConnectionTrait: Sync + Debug {
                     let msg: Rsp = timeout(self.timeout(), recv.recv())
                         .await
                         .map_err(|_| NetworkError::Timeout)?
-                        .map_err(|_| NetworkError::EOF)?
+                        .ok_or(NetworkError::EOF)?
                         .into_message()?;
                     let completed = msg.completed();
                     messages.push(msg);
