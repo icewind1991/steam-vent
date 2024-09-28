@@ -9,6 +9,7 @@ use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, hello, login, ConnectionError, Session};
 use crate::transport::websocket::connect;
+use async_stream::try_stream;
 pub(crate) use connection_impl::ConnectionImpl;
 pub use filter::MessageFilter;
 use futures_util::future::{select, Either};
@@ -313,34 +314,29 @@ pub trait ConnectionTrait: ConnectionImpl {
         }
     }
 
-    /// Send a message to steam, collecting multiple responses until the response marks that the response is complete
+    /// Send a message to steam, receiving responses until the response marks that the response is complete
     fn job_multi<Msg: NetMessage, Rsp: NetMessage + JobMultiple>(
         &self,
         msg: Msg,
-    ) -> impl Future<Output = Result<Vec<Rsp>>> + Send {
-        async {
+    ) -> impl Stream<Item = Result<Rsp>> + Send {
+        try_stream! {
             let header = self.session().header(true);
             let source_job_id = header.source_job_id;
             let mut recv = self.filter().on_job_id_multi(source_job_id);
-            let messages = {
-                self.raw_send(header, msg).await?;
-                let mut messages = vec![];
-                loop {
-                    let msg: Rsp = timeout(self.timeout(), recv.recv())
-                        .await
-                        .map_err(|_| NetworkError::Timeout)?
-                        .ok_or(NetworkError::EOF)?
-                        .into_message()?;
-                    let completed = msg.completed();
-                    messages.push(msg);
-                    if completed {
-                        break;
-                    }
+            self.raw_send(header, msg).await?;
+            loop {
+                let msg: Rsp = timeout(self.timeout(), recv.recv())
+                    .await
+                    .map_err(|_| NetworkError::Timeout)?
+                    .ok_or(NetworkError::EOF)?
+                    .into_message()?;
+                let completed = msg.completed();
+                yield msg;
+                if completed {
+                    break;
                 }
-                Ok(messages)
-            };
+            }
             self.filter().complete_job_id_multi(source_job_id);
-            messages
         }
     }
 
