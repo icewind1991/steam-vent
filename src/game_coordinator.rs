@@ -1,4 +1,4 @@
-use crate::connection::{ConnectionTrait, MessageFilter, MessageSender};
+use crate::connection::{ConnectionImpl, ConnectionTrait, MessageFilter, MessageSender};
 use crate::net::{decode_kind, NetMessageHeader, RawNetMessage};
 use crate::session::Session;
 use crate::{Connection, NetMessage, NetworkError};
@@ -148,7 +148,7 @@ impl GameCoordinator {
     }
 }
 
-impl ConnectionTrait for GameCoordinator {
+impl ConnectionImpl for GameCoordinator {
     fn timeout(&self) -> Duration {
         self.timeout
     }
@@ -164,7 +164,9 @@ impl ConnectionTrait for GameCoordinator {
     fn sender(&self) -> &MessageSender {
         &self.sender
     }
+}
 
+impl ConnectionTrait for GameCoordinator {
     async fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
         &self,
         header: NetMessageHeader,

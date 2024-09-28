@@ -9,6 +9,7 @@ use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, hello, login, ConnectionError, Session};
 use crate::transport::websocket::connect;
+pub(crate) use connection_impl::ConnectionImpl;
 pub use filter::MessageFilter;
 use futures_util::future::{select, Either};
 use futures_util::{FutureExt, Sink, SinkExt};
@@ -224,12 +225,18 @@ impl Connection {
     }
 }
 
-pub trait ConnectionTrait: Sync + Debug {
-    fn timeout(&self) -> Duration;
-    fn filter(&self) -> &MessageFilter;
-    fn session(&self) -> &Session;
-    fn sender(&self) -> &MessageSender;
+pub(crate) mod connection_impl {
+    use super::*;
 
+    pub trait ConnectionImpl: Sync + Debug {
+        fn timeout(&self) -> Duration;
+        fn filter(&self) -> &MessageFilter;
+        fn session(&self) -> &Session;
+        fn sender(&self) -> &MessageSender;
+    }
+}
+
+pub trait ConnectionTrait: ConnectionImpl {
     fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> + 'static {
         BroadcastStream::new(self.filter().on_notification(T::REQ_NAME))
             .filter_map(|res| res.ok())
@@ -375,7 +382,7 @@ pub trait ConnectionTrait: Sync + Debug {
     }
 }
 
-impl ConnectionTrait for Connection {
+impl ConnectionImpl for Connection {
     fn timeout(&self) -> Duration {
         self.timeout
     }
@@ -392,3 +399,5 @@ impl ConnectionTrait for Connection {
         &self.sender
     }
 }
+
+impl ConnectionTrait for Connection {}
