@@ -236,6 +236,7 @@ pub trait ConnectionTrait: Sync + Debug {
             .map(|raw| raw.into_notification())
     }
 
+    /// Wait for one message of a specific kind, also returning the header
     fn one_with_header<T: NetMessage + 'static>(
         &self,
     ) -> impl Future<Output = Result<(NetMessageHeader, T)>> + 'static {
@@ -248,11 +249,13 @@ pub trait ConnectionTrait: Sync + Debug {
         }
     }
 
+    /// Wait for one message of a specific kind
     fn one<T: NetMessage + 'static>(&self) -> impl Future<Output = Result<T>> + 'static {
         self.one_with_header::<T>()
             .map(|res| res.map(|(_, msg)| msg))
     }
 
+    /// Listen to messages of a specific kind, also returning the header
     fn on_with_header<T: NetMessage + 'static>(
         &self,
     ) -> impl Stream<Item = Result<(NetMessageHeader, T)>> + 'static {
@@ -262,11 +265,13 @@ pub trait ConnectionTrait: Sync + Debug {
         })
     }
 
+    /// Listen to messages of a specific kind
     fn on<T: NetMessage + 'static>(&self) -> impl Stream<Item = Result<T>> + 'static {
         self.on_with_header::<T>()
             .map(|res| res.map(|(_, msg)| msg))
     }
 
+    /// Send a rpc-request to steam, waiting for the matching rpc-response
     fn service_method<Msg: ServiceMethodRequest>(
         &self,
         msg: Msg,
@@ -284,6 +289,7 @@ pub trait ConnectionTrait: Sync + Debug {
         }
     }
 
+    /// Send a message to steam, waiting for a response with the same job id
     fn job<Msg: NetMessage, Rsp: NetMessage>(
         &self,
         msg: Msg,
@@ -300,6 +306,7 @@ pub trait ConnectionTrait: Sync + Debug {
         }
     }
 
+    /// Send a message to steam, collecting multiple responses until the response marks that the response is complete
     fn job_multi<Msg: NetMessage, Rsp: NetMessage + JobMultiple>(
         &self,
         msg: Msg,
@@ -330,11 +337,13 @@ pub trait ConnectionTrait: Sync + Debug {
         }
     }
 
+    /// Send a message to steam without waiting for a response
     #[instrument(skip(msg), fields(kind = ?Msg::KIND))]
     fn send<Msg: NetMessage>(&self, msg: Msg) -> impl Future<Output = Result<()>> + Send {
         self.raw_send(self.session().header(false), msg)
     }
 
+    /// Send a message to steam without waiting for a response, overwriting the kind of the message
     #[instrument(skip(msg, kind), fields(kind = ?kind))]
     fn send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
         &self,
