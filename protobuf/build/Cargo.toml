@@ -1,7 +1,11 @@
 [package]
 name = "steam-vent-proto-build"
+description = "Build steam-vent compatible protobuf bindings"
 version = "0.5.0"
 edition = "2021"
+authors = ["Robin Appelman <robin@icewind.nl>"]
+license = "MIT"
+repository = "https://github.com/icewind1991/steam-vent"
 
 [dependencies]
 protobuf-codegen = "=3.5.1"
