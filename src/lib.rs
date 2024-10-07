@@ -16,5 +16,5 @@ pub use eresult::EResult;
 pub use game_coordinator::GameCoordinator;
 pub use message::NetMessage;
 pub use net::NetworkError;
-pub use serverlist::{ServerDiscoveryError, ServerList};
+pub use serverlist::{DiscoverOptions, ServerDiscoveryError, ServerList};
 pub use session::{ConnectionError, LoginError};
