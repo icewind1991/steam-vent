@@ -22,11 +22,13 @@ use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_proto::{JobMultiple, MsgKindEnum};
 use steamid_ng::{AccountType, SteamID};
+use tokio::select;
 use tokio::sync::Mutex;
 use tokio::task::spawn;
 use tokio::time::{sleep, timeout};
 use tokio_stream::wrappers::BroadcastStream;
 use tokio_stream::{Stream, StreamExt};
+use tokio_util::sync::CancellationToken;
 use tracing::{debug, error, instrument};
 
 type Result<T, E = NetworkError> = std::result::Result<T, E>;
@@ -53,6 +55,7 @@ pub struct Connection {
     filter: MessageFilter,
     timeout: Duration,
     sender: MessageSender,
+    heartbeat_cancellation_token: CancellationToken,
 }
 
 impl Debug for Connection {
@@ -72,6 +75,7 @@ impl Connection {
                 write: Arc::new(Mutex::new(write)),
             },
             timeout: Duration::from_secs(10),
+            heartbeat_cancellation_token: CancellationToken::new(),
         };
         hello(&mut connection).await?;
         Ok(connection)
@@ -164,9 +168,17 @@ impl Connection {
             steam_id: self.steam_id(),
             ..NetMessageHeader::default()
         };
+        debug!("Setting up heartbeat with interval {:?}", interval);
+        let token = self.heartbeat_cancellation_token.clone();
         spawn(async move {
             loop {
-                sleep(interval).await;
+                select! {
+                    _ = sleep(interval) => {},
+                    _ = token.cancelled() => {
+                        break
+                    }
+                };
+                debug!("Sending heartbeat message");
                 match RawNetMessage::from_message(header.clone(), CMsgClientHeartBeat::default()) {
                     Ok(msg) => {
                         if let Err(e) = sender.send_raw(msg).await {
@@ -178,6 +190,7 @@ impl Connection {
                     }
                 }
             }
+            debug!("Heartbeat task stopping");
         });
     }
 
@@ -223,6 +236,12 @@ impl Connection {
             .map_err(|_| NetworkError::Timeout)?
             .into_message::<ServiceMethodResponseMessage>()?;
         message.into_response::<Msg>()
+    }
+}
+
+impl Drop for Connection {
+    fn drop(&mut self) {
+        self.heartbeat_cancellation_token.cancel()
     }
 }
 
