@@ -1,4 +1,5 @@
 use std::env::args;
+use std::error::Error;
 use std::io::stdin;
 use steam_vent::auth::{
     AuthConfirmationHandler, ConsoleAuthConfirmationHandler, DeviceConfirmationHandler,
@@ -7,7 +8,7 @@ use steam_vent::auth::{
 use steam_vent::proto::steammessages_friendmessages_steamclient::{
     CFriendMessages_IncomingMessage_Notification, CFriendMessages_SendMessage_Request,
 };
-use steam_vent::{Connection, ConnectionError, ConnectionTrait, ServerList};
+use steam_vent::{Connection, ConnectionTrait, ServerList};
 use steam_vent_proto::enums::EPersonaStateFlag;
 use steam_vent_proto::steammessages_clientserver_friends::CMsgClientChangeStatus;
 use steamid_ng::SteamID;
@@ -15,7 +16,7 @@ use tokio::spawn;
 use tokio_stream::StreamExt;
 
 #[tokio::main]
-async fn main() -> Result<(), ConnectionError> {
+async fn main() -> Result<(), Box<dyn Error>> {
     tracing_subscriber::fmt::init();
 
     let mut args = args().skip(1);
