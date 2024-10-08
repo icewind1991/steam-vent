@@ -1,6 +1,10 @@
+use rand::prelude::*;
 use reqwest::{Client, Error};
 use serde::Deserialize;
+use std::iter::Cycle;
 use std::net::SocketAddr;
+use std::sync::{Arc, Mutex};
+use std::vec::IntoIter;
 use thiserror::Error;
 use tracing::debug;
 
@@ -10,6 +14,8 @@ pub enum ServerDiscoveryError {
     Network(reqwest::Error),
     #[error("steam returned an empty server list")]
     NoServers,
+    #[error("steam returned an empty websocket server list")]
+    NoWsServers,
 }
 
 impl From<reqwest::Error> for ServerDiscoveryError {
@@ -39,10 +45,10 @@ impl DiscoverOptions {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct ServerList {
-    servers: Vec<SocketAddr>,
-    ws_servers: Vec<String>,
+    servers: Arc<Mutex<Cycle<IntoIter<SocketAddr>>>>,
+    ws_servers: Arc<Mutex<Cycle<IntoIter<String>>>>,
 }
 
 impl ServerList {
@@ -67,19 +73,32 @@ impl ServerList {
         if response.response.server_list.is_empty() {
             return Err(ServerDiscoveryError::NoServers);
         }
+        if response.response.server_list.is_empty() {
+            return Err(ServerDiscoveryError::NoWsServers);
+        }
         Ok(response.into())
     }
 
+    /// Pick a server from the server list, rotating them in a round-robin way for reconnects.
+    ///
+    /// # Returns
+    /// The selected `SocketAddr`
     pub fn pick(&self) -> SocketAddr {
-        // todo: something more smart than always using the first
-        let addr = *self.servers.first().unwrap();
+        // SAFETY:
+        // `lock` cannot panic as we cannot lock again within the same thread.
+        // `unwrap` is safe as `discover_with` already checks for servers being present.
+        let addr = self.servers.lock().unwrap().next().unwrap();
         debug!(addr = ?addr, "picked server from list");
         addr
     }
 
+    /// Pick a WebSocket server from the server list, rotating them in a round-robin way for reconnects.
+    ///
+    /// # Returns
+    /// A WebSocket URL to connect to, if the server list contains any servers.
     pub fn pick_ws(&self) -> String {
-        // todo: something more smart than always using the first
-        let addr = self.ws_servers.first().unwrap();
+        // SAFETY: Same as for `pick`.
+        let addr = self.ws_servers.lock().unwrap().next().unwrap();
         debug!(addr = ?addr, "picked websocket server from list");
         format!("wss://{addr}/cmsocket/")
     }
@@ -87,9 +106,16 @@ impl ServerList {
 
 impl From<ServerListResponse> for ServerList {
     fn from(value: ServerListResponse) -> Self {
+        let (mut servers, mut ws_servers) = (
+            value.response.server_list,
+            value.response.server_list_websockets,
+        );
+        servers.shuffle(&mut thread_rng());
+        ws_servers.shuffle(&mut thread_rng());
+
         ServerList {
-            servers: value.response.server_list,
-            ws_servers: value.response.server_list_websockets,
+            servers: Arc::new(Mutex::new(servers.into_iter().cycle())),
+            ws_servers: Arc::new(Mutex::new(ws_servers.into_iter().cycle())),
         }
     }
 }

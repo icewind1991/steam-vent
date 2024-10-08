@@ -6,7 +6,6 @@ use crate::proto::steammessages_base::CMsgIPAddress;
 use crate::proto::steammessages_clientserver_login::{
     CMsgClientHello, CMsgClientLogon, CMsgClientLogonResponse,
 };
-use crate::serverlist::ServerDiscoveryError;
 use protobuf::MessageField;
 use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -27,8 +26,6 @@ pub enum ConnectionError {
     Network(#[from] NetworkError),
     #[error("Login failed: {0:#}")]
     LoginError(#[from] LoginError),
-    #[error(transparent)]
-    Discovery(#[from] ServerDiscoveryError),
     #[error("Aborted")]
     Aborted,
     #[error("Unsupported confirmation action")]

@@ -1,10 +1,11 @@
 use std::env::args;
+use std::error::Error;
 use std::io::Cursor;
 use steam_vent::auth::{
     AuthConfirmationHandler, ConsoleAuthConfirmationHandler, DeviceConfirmationHandler,
     FileGuardDataStore,
 };
-use steam_vent::{Connection, ConnectionError, ConnectionTrait, GameCoordinator, ServerList};
+use steam_vent::{Connection, ConnectionTrait, GameCoordinator, ServerList};
 use steam_vent_proto::tf2::base_gcmessages::CSOEconItem;
 use steam_vent_proto::tf2::gcsdk_gcmessages::{
     CMsgSOCacheSubscribed, CMsgSOCacheSubscriptionRefresh,
@@ -12,7 +13,7 @@ use steam_vent_proto::tf2::gcsdk_gcmessages::{
 use steam_vent_proto::RpcMessage;
 
 #[tokio::main]
-async fn main() -> Result<(), ConnectionError> {
+async fn main() -> Result<(), Box<dyn Error>> {
     tracing_subscriber::fmt::init();
 
     let mut args = args().skip(1);

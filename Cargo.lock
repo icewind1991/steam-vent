@@ -1727,6 +1727,7 @@ dependencies = [
  "num-traits 0.2.19",
  "num_enum",
  "protobuf",
+ "rand",
  "reqwest",
  "rsa",
  "rustls",

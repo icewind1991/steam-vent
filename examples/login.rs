@@ -1,13 +1,14 @@
 use std::env::args;
+use std::error::Error;
 use steam_vent::auth::{
     AuthConfirmationHandler, ConsoleAuthConfirmationHandler, DeviceConfirmationHandler,
     FileGuardDataStore,
 };
 use steam_vent::proto::steammessages_player_steamclient::CPlayer_GetOwnedGames_Request;
-use steam_vent::{Connection, ConnectionError, ConnectionTrait, ServerList};
+use steam_vent::{Connection, ConnectionTrait, ServerList};
 
 #[tokio::main]
-async fn main() -> Result<(), ConnectionError> {
+async fn main() -> Result<(), Box<dyn Error>> {
     tracing_subscriber::fmt::init();
 
     let mut args = args().skip(1);
