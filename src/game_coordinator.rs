@@ -6,6 +6,7 @@ use futures_util::future::select;
 use protobuf::Message;
 use std::fmt::{Debug, Formatter};
 use std::pin::pin;
+use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::steammessages_clientserver::cmsg_client_games_played::GamePlayed;
@@ -95,7 +96,7 @@ impl GameCoordinator {
         let gc = GameCoordinator {
             app_id,
             filter,
-            sender: connection.sender().clone(),
+            sender: connection.sender().as_ref().clone(),
             session: connection.session.clone().with_app_id(app_id),
             timeout: connection.timeout(),
         };
@@ -153,16 +154,16 @@ impl ConnectionImpl for GameCoordinator {
         self.timeout
     }
 
-    fn filter(&self) -> &MessageFilter {
-        &self.filter
+    fn filter(&self) -> Arc<MessageFilter> {
+        Arc::new(self.filter.clone())
     }
 
-    fn session(&self) -> &Session {
-        &self.session
+    fn session(&self) -> Arc<Session> {
+        Arc::new(self.session.clone())
     }
 
-    fn sender(&self) -> &MessageSender {
-        &self.sender
+    fn sender(&self) -> Arc<MessageSender> {
+        Arc::new(self.sender.clone())
     }
 }
 
