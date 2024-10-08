@@ -1,3 +1,4 @@
+mod auto_reconnect;
 mod filter;
 
 use crate::auth::{begin_password_auth, AuthConfirmationHandler, GuardDataStore};
@@ -10,6 +11,7 @@ use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, hello, login, ConnectionError, Session};
 use crate::transport::websocket::connect;
 use async_stream::try_stream;
+pub use auto_reconnect::{AuthDetails, AutoReconnectSession};
 pub(crate) use connection_impl::ConnectionImpl;
 pub use filter::MessageFilter;
 use futures_util::future::{select, Either};
@@ -64,24 +66,20 @@ impl Debug for Connection {
     }
 }
 
-impl Connection {
-    async fn connect(server_list: &ServerList) -> Result<Self, ConnectionError> {
-        let (read, write) = connect(&server_list.pick_ws()).await?;
-        let filter = MessageFilter::new(read);
-        let mut connection = Connection {
-            session: Session::default(),
-            filter,
-            sender: MessageSender {
-                write: Arc::new(Mutex::new(write)),
-            },
-            timeout: Duration::from_secs(10),
-            heartbeat_cancellation_token: CancellationToken::new(),
-        };
-        hello(&mut connection).await?;
-        Ok(connection)
-    }
+pub trait ConnectionConstruction: Sized {
+    async fn anonymous(server_list: &ServerList) -> Result<Self, ConnectionError>;
+    async fn anonymous_server(server_list: &ServerList) -> Result<Self, ConnectionError>;
+    async fn login<H: AuthConfirmationHandler, G: GuardDataStore>(
+        server_list: &ServerList,
+        account: &str,
+        password: &str,
+        guard_data_store: G,
+        confirmation_handler: H,
+    ) -> Result<Self, ConnectionError>;
+}
 
-    pub async fn anonymous(server_list: &ServerList) -> Result<Self, ConnectionError> {
+impl ConnectionConstruction for Connection {
+    async fn anonymous(server_list: &ServerList) -> Result<Self, ConnectionError> {
         let mut connection = Self::connect(server_list).await?;
         connection.session = anonymous(&mut connection, AccountType::AnonUser).await?;
         connection.setup_heartbeat();
@@ -89,7 +87,7 @@ impl Connection {
         Ok(connection)
     }
 
-    pub async fn anonymous_server(server_list: &ServerList) -> Result<Self, ConnectionError> {
+    async fn anonymous_server(server_list: &ServerList) -> Result<Self, ConnectionError> {
         let mut connection = Self::connect(server_list).await?;
         connection.session = anonymous(&mut connection, AccountType::AnonGameServer).await?;
         connection.setup_heartbeat();
@@ -97,7 +95,7 @@ impl Connection {
         Ok(connection)
     }
 
-    pub async fn login<H: AuthConfirmationHandler, G: GuardDataStore>(
+    async fn login<H: AuthConfirmationHandler, G: GuardDataStore>(
         server_list: &ServerList,
         account: &str,
         password: &str,
@@ -157,6 +155,24 @@ impl Connection {
         .await?;
         connection.setup_heartbeat();
 
+        Ok(connection)
+    }
+}
+
+impl Connection {
+    async fn connect(server_list: &ServerList) -> Result<Self, ConnectionError> {
+        let (read, write) = connect(&server_list.pick_ws()).await?;
+        let filter = MessageFilter::new(read);
+        let mut connection = Connection {
+            session: Session::default(),
+            filter,
+            sender: MessageSender {
+                write: Arc::new(Mutex::new(write)),
+            },
+            timeout: Duration::from_secs(10),
+            heartbeat_cancellation_token: CancellationToken::new(),
+        };
+        hello(&mut connection).await?;
         Ok(connection)
     }
 
@@ -250,9 +266,9 @@ pub(crate) mod connection_impl {
 
     pub trait ConnectionImpl: Sync + Debug {
         fn timeout(&self) -> Duration;
-        fn filter(&self) -> &MessageFilter;
-        fn session(&self) -> &Session;
-        fn sender(&self) -> &MessageSender;
+        fn filter(&self) -> Arc<MessageFilter>;
+        fn session(&self) -> Arc<Session>;
+        fn sender(&self) -> Arc<MessageSender>;
     }
 }
 
@@ -402,16 +418,16 @@ impl ConnectionImpl for Connection {
         self.timeout
     }
 
-    fn filter(&self) -> &MessageFilter {
-        &self.filter
+    fn filter(&self) -> Arc<MessageFilter> {
+        Arc::new(self.filter.clone())
     }
 
-    fn session(&self) -> &Session {
-        &self.session
+    fn session(&self) -> Arc<Session> {
+        Arc::new(self.session.clone())
     }
 
-    fn sender(&self) -> &MessageSender {
-        &self.sender
+    fn sender(&self) -> Arc<MessageSender> {
+        Arc::new(self.sender.clone())
     }
 }
 
