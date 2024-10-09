@@ -22,11 +22,13 @@ use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_proto::{JobMultiple, MsgKindEnum};
 use steamid_ng::{AccountType, SteamID};
+use tokio::select;
 use tokio::sync::Mutex;
 use tokio::task::spawn;
 use tokio::time::{sleep, timeout};
 use tokio_stream::wrappers::BroadcastStream;
 use tokio_stream::{Stream, StreamExt};
+use tokio_util::sync::{CancellationToken, DropGuard};
 use tracing::{debug, error, instrument};
 
 type Result<T, E = NetworkError> = std::result::Result<T, E>;
@@ -53,6 +55,8 @@ pub struct Connection {
     filter: MessageFilter,
     timeout: Duration,
     sender: MessageSender,
+    heartbeat_cancellation_token: CancellationToken,
+    _heartbeat_drop_guard: Arc<DropGuard>,
 }
 
 impl Debug for Connection {
@@ -65,6 +69,7 @@ impl Connection {
     async fn connect(server_list: &ServerList) -> Result<Self, ConnectionError> {
         let (read, write) = connect(&server_list.pick_ws()).await?;
         let filter = MessageFilter::new(read);
+        let heartbeat_cancellation_token = CancellationToken::new();
         let mut connection = Connection {
             session: Session::default(),
             filter,
@@ -72,6 +77,9 @@ impl Connection {
                 write: Arc::new(Mutex::new(write)),
             },
             timeout: Duration::from_secs(10),
+            heartbeat_cancellation_token: heartbeat_cancellation_token.clone(),
+            // We just store a drop guard using an `Arc` here, so dropping the last clone of `Connection` will cancel the heartbeat task.
+            _heartbeat_drop_guard: Arc::new(heartbeat_cancellation_token.drop_guard()),
         };
         hello(&mut connection).await?;
         Ok(connection)
@@ -164,9 +172,17 @@ impl Connection {
             steam_id: self.steam_id(),
             ..NetMessageHeader::default()
         };
+        debug!("Setting up heartbeat with interval {:?}", interval);
+        let token = self.heartbeat_cancellation_token.clone();
         spawn(async move {
             loop {
-                sleep(interval).await;
+                select! {
+                    _ = sleep(interval) => {},
+                    _ = token.cancelled() => {
+                        break
+                    }
+                };
+                debug!("Sending heartbeat message");
                 match RawNetMessage::from_message(header.clone(), CMsgClientHeartBeat::default()) {
                     Ok(msg) => {
                         if let Err(e) = sender.send_raw(msg).await {
@@ -178,6 +194,7 @@ impl Connection {
                     }
                 }
             }
+            debug!("Heartbeat task stopping");
         });
     }
 
