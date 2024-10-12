@@ -329,16 +329,14 @@ impl ConnectionImpl for Connection {
         &self.session
     }
 
-    fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+    async fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
         &self,
         header: NetMessageHeader,
         msg: Msg,
         kind: K,
-    ) -> impl Future<Output = Result<()>> + Send {
-        async move {
-            let msg = RawNetMessage::from_message_with_kind(header, msg, kind)?;
-            self.sender.send_raw(msg).await
-        }
+    ) -> Result<()> {
+        let msg = RawNetMessage::from_message_with_kind(header, msg, kind)?;
+        self.sender.send_raw(msg).await
     }
 }
 
@@ -380,37 +378,27 @@ impl<C: ConnectionImpl> ConnectionTrait for C {
             .map(|res| res.map(|(_, msg)| msg))
     }
 
-    fn service_method<Msg: ServiceMethodRequest>(
-        &self,
-        msg: Msg,
-    ) -> impl Future<Output = Result<Msg::Response>> + Send {
-        async {
-            let header = self.session().header(true);
-            let recv = self.filter().on_job_id(header.source_job_id);
-            self.raw_send(header, ServiceMethodMessage(msg)).await?;
-            let message = timeout(self.timeout(), recv)
-                .await
-                .map_err(|_| NetworkError::Timeout)?
-                .map_err(|_| NetworkError::EOF)?
-                .into_message::<ServiceMethodResponseMessage>()?;
-            message.into_response::<Msg>()
-        }
+    async fn service_method<Msg: ServiceMethodRequest>(&self, msg: Msg) -> Result<Msg::Response> {
+        let header = self.session().header(true);
+        let recv = self.filter().on_job_id(header.source_job_id);
+        self.raw_send(header, ServiceMethodMessage(msg)).await?;
+        let message = timeout(self.timeout(), recv)
+            .await
+            .map_err(|_| NetworkError::Timeout)?
+            .map_err(|_| NetworkError::EOF)?
+            .into_message::<ServiceMethodResponseMessage>()?;
+        message.into_response::<Msg>()
     }
 
-    fn job<Msg: NetMessage, Rsp: NetMessage>(
-        &self,
-        msg: Msg,
-    ) -> impl Future<Output = Result<Rsp>> + Send {
-        async {
-            let header = self.session().header(true);
-            let recv = self.filter().on_job_id(header.source_job_id);
-            self.raw_send(header, msg).await?;
-            timeout(self.timeout(), recv)
-                .await
-                .map_err(|_| NetworkError::Timeout)?
-                .map_err(|_| NetworkError::EOF)?
-                .into_message()
-        }
+    async fn job<Msg: NetMessage, Rsp: NetMessage>(&self, msg: Msg) -> Result<Rsp> {
+        let header = self.session().header(true);
+        let recv = self.filter().on_job_id(header.source_job_id);
+        self.raw_send(header, msg).await?;
+        timeout(self.timeout(), recv)
+            .await
+            .map_err(|_| NetworkError::Timeout)?
+            .map_err(|_| NetworkError::EOF)?
+            .into_message()
     }
 
     fn job_multi<Msg: NetMessage, Rsp: NetMessage + JobMultiple>(
