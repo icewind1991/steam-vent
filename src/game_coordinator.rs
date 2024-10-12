@@ -95,7 +95,7 @@ impl GameCoordinator {
         let gc = GameCoordinator {
             app_id,
             filter,
-            sender: connection.sender().clone(),
+            sender: connection.sender.clone(),
             session: connection.session.clone().with_app_id(app_id),
             timeout: connection.timeout(),
         };
@@ -161,12 +161,6 @@ impl ConnectionImpl for GameCoordinator {
         &self.session
     }
 
-    fn sender(&self) -> &MessageSender {
-        &self.sender
-    }
-}
-
-impl ConnectionTrait for GameCoordinator {
     async fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
         &self,
         header: NetMessageHeader,

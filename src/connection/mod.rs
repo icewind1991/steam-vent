@@ -10,7 +10,6 @@ use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, hello, login, ConnectionError, Session};
 use crate::transport::websocket::connect;
 use async_stream::try_stream;
-pub(crate) use connection_impl::ConnectionImpl;
 pub use filter::MessageFilter;
 use futures_util::future::{select, Either};
 use futures_util::{FutureExt, Sink, SinkExt};
@@ -54,7 +53,7 @@ pub struct Connection {
     pub(crate) session: Session,
     filter: MessageFilter,
     timeout: Duration,
-    sender: MessageSender,
+    pub(crate) sender: MessageSender,
     heartbeat_cancellation_token: CancellationToken,
     _heartbeat_drop_guard: Arc<DropGuard>,
 }
@@ -243,25 +242,113 @@ impl Connection {
     }
 }
 
-pub(crate) mod connection_impl {
-    use super::*;
+pub(crate) trait ConnectionImpl: Sync + Debug {
+    fn timeout(&self) -> Duration;
+    fn filter(&self) -> &MessageFilter;
+    fn session(&self) -> &Session;
 
-    pub trait ConnectionImpl: Sync + Debug {
-        fn timeout(&self) -> Duration;
-        fn filter(&self) -> &MessageFilter;
-        fn session(&self) -> &Session;
-        fn sender(&self) -> &MessageSender;
+    fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+        &self,
+        header: NetMessageHeader,
+        msg: Msg,
+        kind: K,
+    ) -> impl Future<Output = Result<()>> + Send;
+}
+
+pub trait ConnectionTrait: Debug {
+    fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> + 'static;
+
+    /// Wait for one message of a specific kind, also returning the header
+    fn one_with_header<T: NetMessage + 'static>(
+        &self,
+    ) -> impl Future<Output = Result<(NetMessageHeader, T)>> + 'static;
+
+    /// Wait for one message of a specific kind
+    fn one<T: NetMessage + 'static>(&self) -> impl Future<Output = Result<T>> + 'static;
+
+    /// Listen to messages of a specific kind, also returning the header
+    fn on_with_header<T: NetMessage + 'static>(
+        &self,
+    ) -> impl Stream<Item = Result<(NetMessageHeader, T)>> + 'static;
+
+    /// Listen to messages of a specific kind
+    fn on<T: NetMessage + 'static>(&self) -> impl Stream<Item = Result<T>> + 'static;
+
+    /// Send a rpc-request to steam, waiting for the matching rpc-response
+    fn service_method<Msg: ServiceMethodRequest>(
+        &self,
+        msg: Msg,
+    ) -> impl Future<Output = Result<Msg::Response>> + Send;
+
+    /// Send a message to steam, waiting for a response with the same job id
+    fn job<Msg: NetMessage, Rsp: NetMessage>(
+        &self,
+        msg: Msg,
+    ) -> impl Future<Output = Result<Rsp>> + Send;
+
+    /// Send a message to steam, receiving responses until the response marks that the response is complete
+    fn job_multi<Msg: NetMessage, Rsp: NetMessage + JobMultiple>(
+        &self,
+        msg: Msg,
+    ) -> impl Stream<Item = Result<Rsp>> + Send;
+
+    /// Send a message to steam without waiting for a response
+    fn send<Msg: NetMessage>(&self, msg: Msg) -> impl Future<Output = Result<()>> + Send;
+
+    /// Send a message to steam without waiting for a response, overwriting the kind of the message
+    fn send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+        &self,
+        msg: Msg,
+        kind: K,
+    ) -> impl Future<Output = Result<()>> + Send;
+
+    fn raw_send<Msg: NetMessage>(
+        &self,
+        header: NetMessageHeader,
+        msg: Msg,
+    ) -> impl Future<Output = Result<()>> + Send;
+
+    fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+        &self,
+        header: NetMessageHeader,
+        msg: Msg,
+        kind: K,
+    ) -> impl Future<Output = Result<()>> + Send;
+}
+
+impl ConnectionImpl for Connection {
+    fn timeout(&self) -> Duration {
+        self.timeout
+    }
+
+    fn filter(&self) -> &MessageFilter {
+        &self.filter
+    }
+
+    fn session(&self) -> &Session {
+        &self.session
+    }
+
+    fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+        &self,
+        header: NetMessageHeader,
+        msg: Msg,
+        kind: K,
+    ) -> impl Future<Output = Result<()>> + Send {
+        async move {
+            let msg = RawNetMessage::from_message_with_kind(header, msg, kind)?;
+            self.sender.send_raw(msg).await
+        }
     }
 }
 
-pub trait ConnectionTrait: ConnectionImpl {
+impl<C: ConnectionImpl> ConnectionTrait for C {
     fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> + 'static {
         BroadcastStream::new(self.filter().on_notification(T::REQ_NAME))
             .filter_map(|res| res.ok())
             .map(|raw| raw.into_notification())
     }
 
-    /// Wait for one message of a specific kind, also returning the header
     fn one_with_header<T: NetMessage + 'static>(
         &self,
     ) -> impl Future<Output = Result<(NetMessageHeader, T)>> + 'static {
@@ -274,13 +361,11 @@ pub trait ConnectionTrait: ConnectionImpl {
         }
     }
 
-    /// Wait for one message of a specific kind
     fn one<T: NetMessage + 'static>(&self) -> impl Future<Output = Result<T>> + 'static {
         self.one_with_header::<T>()
             .map(|res| res.map(|(_, msg)| msg))
     }
 
-    /// Listen to messages of a specific kind, also returning the header
     fn on_with_header<T: NetMessage + 'static>(
         &self,
     ) -> impl Stream<Item = Result<(NetMessageHeader, T)>> + 'static {
@@ -290,13 +375,11 @@ pub trait ConnectionTrait: ConnectionImpl {
         })
     }
 
-    /// Listen to messages of a specific kind
     fn on<T: NetMessage + 'static>(&self) -> impl Stream<Item = Result<T>> + 'static {
         self.on_with_header::<T>()
             .map(|res| res.map(|(_, msg)| msg))
     }
 
-    /// Send a rpc-request to steam, waiting for the matching rpc-response
     fn service_method<Msg: ServiceMethodRequest>(
         &self,
         msg: Msg,
@@ -314,7 +397,6 @@ pub trait ConnectionTrait: ConnectionImpl {
         }
     }
 
-    /// Send a message to steam, waiting for a response with the same job id
     fn job<Msg: NetMessage, Rsp: NetMessage>(
         &self,
         msg: Msg,
@@ -331,7 +413,6 @@ pub trait ConnectionTrait: ConnectionImpl {
         }
     }
 
-    /// Send a message to steam, receiving responses until the response marks that the response is complete
     fn job_multi<Msg: NetMessage, Rsp: NetMessage + JobMultiple>(
         &self,
         msg: Msg,
@@ -357,13 +438,11 @@ pub trait ConnectionTrait: ConnectionImpl {
         }
     }
 
-    /// Send a message to steam without waiting for a response
     #[instrument(skip(msg), fields(kind = ?Msg::KIND))]
     fn send<Msg: NetMessage>(&self, msg: Msg) -> impl Future<Output = Result<()>> + Send {
         self.raw_send(self.session().header(false), msg)
     }
 
-    /// Send a message to steam without waiting for a response, overwriting the kind of the message
     #[instrument(skip(msg, kind), fields(kind = ?kind))]
     fn send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
         &self,
@@ -388,29 +467,6 @@ pub trait ConnectionTrait: ConnectionImpl {
         msg: Msg,
         kind: K,
     ) -> impl Future<Output = Result<()>> + Send {
-        async move {
-            let msg = RawNetMessage::from_message_with_kind(header, msg, kind)?;
-            self.sender().send_raw(msg).await
-        }
+        <Self as ConnectionImpl>::raw_send_with_kind(self, header, msg, kind)
     }
 }
-
-impl ConnectionImpl for Connection {
-    fn timeout(&self) -> Duration {
-        self.timeout
-    }
-
-    fn filter(&self) -> &MessageFilter {
-        &self.filter
-    }
-
-    fn session(&self) -> &Session {
-        &self.session
-    }
-
-    fn sender(&self) -> &MessageSender {
-        &self.sender
-    }
-}
-
-impl ConnectionTrait for Connection {}
