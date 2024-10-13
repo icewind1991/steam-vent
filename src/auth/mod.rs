@@ -102,7 +102,7 @@ impl StartedAuth {
         let encoded_password = BASE64_STANDARD.encode(encrypted_password);
         info!(data.account, "starting credentials login");
         let req = CAuthentication_BeginAuthSessionViaCredentials_Request {
-            account_name: Some(data.account.into()),
+            account_name: Some(data.account),
             encrypted_password: Some(encoded_password),
             encryption_timestamp: Some(timestamp),
             persistence: Some(EnumOrUnknown::new(if data.is_persistent {
@@ -206,13 +206,13 @@ impl StartedAuth {
         let allowed_confirmations = self.allowed_confirmations();
         let tokens = match select(
             pin!(confirmation_handler.handle_confirmation(&allowed_confirmations)),
-            pin!(self.poll().wait_for_tokens(&connection)),
+            pin!(self.poll().wait_for_tokens(connection)),
         )
         .await
         {
             Either::Left((confirmation_action, tokens_fut)) => {
                 if let Some(confirmation_action) = confirmation_action {
-                    self.submit_confirmation(&connection, confirmation_action)
+                    self.submit_confirmation(connection, confirmation_action)
                         .await?;
                     tokens_fut.await?
                 } else if self.action_required() {
