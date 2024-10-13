@@ -18,54 +18,67 @@ use crate::session::{ConnectionError, LoginError};
 use base64::prelude::BASE64_STANDARD;
 use base64::Engine;
 pub use confirmation::*;
+use futures_util::future::{select, Either};
 pub use guard_data::*;
 use num_bigint_dig::BigUint;
 use num_traits::Num;
 use protobuf::{EnumOrUnknown, MessageField};
 use rsa::RsaPublicKey;
-use std::time::Duration;
+use std::{pin::pin, time::Duration};
 use steam_vent_crypto::encrypt_with_key_pkcs1;
+use steamid_ng::SteamID;
 use thiserror::Error;
 use tokio::time::sleep;
-use tracing::{debug, info, instrument};
+use tracing::{debug, error, info, instrument};
 
-pub(crate) async fn begin_password_auth(
-    connection: &mut Connection,
-    account: &str,
-    password: &str,
-    guard_data: Option<&str>,
-) -> Result<StartedAuth, ConnectionError> {
-    let (pub_key, timestamp) = get_password_rsa(connection, account.into()).await?;
-    let encrypted_password =
-        encrypt_with_key_pkcs1(&pub_key, password.as_bytes()).map_err(LoginError::InvalidPubKey)?;
-    let encoded_password = BASE64_STANDARD.encode(encrypted_password);
-    info!(account, "starting credentials login");
-    let req = CAuthentication_BeginAuthSessionViaCredentials_Request {
-        account_name: Some(account.into()),
-        encrypted_password: Some(encoded_password),
-        encryption_timestamp: Some(timestamp),
-        persistence: Some(EnumOrUnknown::new(
-            ESessionPersistence::k_ESessionPersistence_Persistent,
-        )),
-
-        // todo: platform types
-        website_id: Some("Client".into()),
-        device_details: MessageField::some(CAuthentication_DeviceDetails {
-            device_friendly_name: Some("DESKTOP-VENT".into()),
-            platform_type: Some(EnumOrUnknown::new(
-                EAuthTokenPlatformType::k_EAuthTokenPlatformType_SteamClient,
-            )),
-            os_type: Some(1),
-            ..CAuthentication_DeviceDetails::default()
-        }),
-        guard_data: guard_data.map(String::from),
-        ..CAuthentication_BeginAuthSessionViaCredentials_Request::default()
-    };
-    let res = connection.service_method_un_authenticated(req).await?;
-    Ok(StartedAuth::Credentials(res))
+pub struct AuthData {
+    pub account: String,
+    pub password: String,
+    pub is_persistent: bool,
+    pub website_id: String,
+    pub device_friendly_name: String,
+    pub platform_type: EAuthTokenPlatformType,
+    // todo: platform types
+    pub os_type: i32,
+    pub guard_data: Option<String>,
 }
 
-pub(crate) enum StartedAuth {
+impl AuthData {
+    pub fn new(account: &str, password: &str) -> Self {
+        Self {
+            account: account.into(),
+            password: password.into(),
+            is_persistent: false,
+            website_id: "Client".to_string(),
+            device_friendly_name: "DESKTOP-VENT".to_string(),
+            platform_type: EAuthTokenPlatformType::k_EAuthTokenPlatformType_SteamClient,
+            os_type: 20,
+            guard_data: None,
+        }
+    }
+
+    pub async fn with_guard<G: GuardDataStore>(
+        account: &str,
+        password: &str,
+        guard_data_store: &mut G,
+    ) -> Self {
+        let mut data = Self::new(account, password);
+        data.is_persistent = true;
+        data.guard_data = match guard_data_store.load(account).await {
+            Ok(guard) => {
+                debug!(account, "found stored guard data");
+                guard
+            }
+            Err(e) => {
+                error!(error = ?e, "failed to retrieve guard data");
+                None
+            }
+        };
+        data
+    }
+}
+
+pub enum StartedAuth {
     Credentials(CAuthentication_BeginAuthSessionViaCredentials_Response),
 }
 
@@ -79,9 +92,41 @@ pub enum ConfirmationError {
 }
 
 impl StartedAuth {
+    pub async fn begin_via_credentials(
+        connection: &Connection,
+        data: AuthData,
+    ) -> Result<Self, ConnectionError> {
+        let (pub_key, timestamp) = get_password_rsa(connection, data.account.clone()).await?;
+        let encrypted_password = encrypt_with_key_pkcs1(&pub_key, data.password.as_bytes())
+            .map_err(LoginError::InvalidPubKey)?;
+        let encoded_password = BASE64_STANDARD.encode(encrypted_password);
+        info!(data.account, "starting credentials login");
+        let req = CAuthentication_BeginAuthSessionViaCredentials_Request {
+            account_name: Some(data.account.into()),
+            encrypted_password: Some(encoded_password),
+            encryption_timestamp: Some(timestamp),
+            persistence: Some(EnumOrUnknown::new(if data.is_persistent {
+                ESessionPersistence::k_ESessionPersistence_Persistent
+            } else {
+                ESessionPersistence::k_ESessionPersistence_Ephemeral
+            })),
+            website_id: Some(data.website_id),
+            device_details: MessageField::some(CAuthentication_DeviceDetails {
+                device_friendly_name: Some(data.device_friendly_name),
+                platform_type: Some(EnumOrUnknown::new(data.platform_type)),
+                os_type: Some(data.os_type),
+                ..CAuthentication_DeviceDetails::default()
+            }),
+            guard_data: data.guard_data,
+            ..CAuthentication_BeginAuthSessionViaCredentials_Request::default()
+        };
+        let res = connection.service_method_un_authenticated(req).await?;
+        Ok(Self::Credentials(res))
+    }
+
     fn raw_confirmations(&self) -> &[CAuthentication_AllowedConfirmation] {
         match self {
-            StartedAuth::Credentials(res) => res.allowed_confirmations.as_slice(),
+            Self::Credentials(res) => res.allowed_confirmations.as_slice(),
         }
     }
 
@@ -93,8 +138,7 @@ impl StartedAuth {
             .collect()
     }
 
-    #[allow(dead_code)]
-    pub fn action_required(&self) -> bool {
+    fn action_required(&self) -> bool {
         self.raw_confirmations().iter().any(|method| {
             method.confirmation_type() != EAuthSessionGuardType::k_EAuthSessionGuardType_None
         })
@@ -102,29 +146,29 @@ impl StartedAuth {
 
     fn client_id(&self) -> u64 {
         match self {
-            StartedAuth::Credentials(res) => res.client_id(),
+            Self::Credentials(res) => res.client_id(),
         }
     }
 
-    pub fn steam_id(&self) -> u64 {
+    pub fn steam_id(&self) -> SteamID {
         match self {
-            StartedAuth::Credentials(res) => res.steamid(),
+            Self::Credentials(res) => SteamID::from(res.steamid()),
         }
     }
 
     fn request_id(&self) -> Vec<u8> {
         match self {
-            StartedAuth::Credentials(res) => res.request_id().into(),
+            Self::Credentials(res) => res.request_id().into(),
         }
     }
 
     fn interval(&self) -> f32 {
         match self {
-            StartedAuth::Credentials(res) => res.interval(),
+            Self::Credentials(res) => res.interval(),
         }
     }
 
-    pub fn poll(&self) -> PendingAuth {
+    fn poll(&self) -> PendingAuth {
         PendingAuth {
             interval: self.interval(),
             client_id: self.client_id(),
@@ -132,7 +176,7 @@ impl StartedAuth {
         }
     }
 
-    pub async fn submit_confirmation(
+    async fn submit_confirmation(
         &self,
         connection: &Connection,
         confirmation: ConfirmationAction,
@@ -141,7 +185,7 @@ impl StartedAuth {
             ConfirmationAction::GuardToken(token, ty) => {
                 let req = CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request {
                     client_id: Some(self.client_id()),
-                    steamid: Some(self.steam_id()),
+                    steamid: Some(self.steam_id().into()),
                     code: Some(token.0),
                     code_type: Some(EnumOrUnknown::new(ty.into())),
                     ..CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request::default()
@@ -152,6 +196,36 @@ impl StartedAuth {
             ConfirmationAction::Abort => return Err(ConfirmationError::Aborted),
         };
         Ok(())
+    }
+
+    pub async fn wait_confirmation<H: AuthConfirmationHandler>(
+        &self,
+        connection: &Connection,
+        confirmation_handler: H,
+    ) -> Result<Tokens, ConnectionError> {
+        let allowed_confirmations = self.allowed_confirmations();
+        let tokens = match select(
+            pin!(confirmation_handler.handle_confirmation(&allowed_confirmations)),
+            pin!(self.poll().wait_for_tokens(&connection)),
+        )
+        .await
+        {
+            Either::Left((confirmation_action, tokens_fut)) => {
+                if let Some(confirmation_action) = confirmation_action {
+                    self.submit_confirmation(&connection, confirmation_action)
+                        .await?;
+                    tokens_fut.await?
+                } else if self.action_required() {
+                    return Err(ConnectionError::UnsupportedConfirmationAction(
+                        allowed_confirmations.clone(),
+                    ));
+                } else {
+                    tokens_fut.await?
+                }
+            }
+            Either::Right((tokens, _)) => tokens?,
+        };
+        Ok(tokens)
     }
 }
 
@@ -180,8 +254,8 @@ impl PendingAuth {
             .await?;
             if response.has_access_token() {
                 return Ok(Tokens {
-                    access_token: Token(response.take_access_token()),
-                    refresh_token: Token(response.take_refresh_token()),
+                    access_token: response.take_access_token(),
+                    refresh_token: response.take_refresh_token(),
                     new_guard_data: response.new_guard_data,
                 });
             }
@@ -190,19 +264,10 @@ impl PendingAuth {
 }
 
 #[derive(Debug, Clone)]
-pub(crate) struct Token(String);
-
-impl AsRef<str> for Token {
-    fn as_ref(&self) -> &str {
-        self.0.as_ref()
-    }
-}
-
-#[derive(Debug, Clone)]
-pub(crate) struct Tokens {
+pub struct Tokens {
     #[allow(dead_code)]
-    pub access_token: Token,
-    pub refresh_token: Token,
+    pub access_token: String,
+    pub refresh_token: String,
     pub new_guard_data: Option<String>,
 }
 
@@ -239,7 +304,7 @@ async fn poll_until_info(
 
 #[instrument(skip(connection))]
 async fn get_password_rsa(
-    connection: &mut Connection,
+    connection: &Connection,
     account: String,
 ) -> Result<(RsaPublicKey, u64), NetworkError> {
     debug!("getting password rsa");
