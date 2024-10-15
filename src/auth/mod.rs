@@ -31,6 +31,7 @@ use thiserror::Error;
 use tokio::time::sleep;
 use tracing::{debug, error, info, instrument};
 
+#[derive(Debug, Clone)]
 pub struct AuthData {
     pub account: String,
     pub password: String,
