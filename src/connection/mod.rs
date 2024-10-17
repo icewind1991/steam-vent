@@ -1,6 +1,6 @@
 mod filter;
 
-use crate::auth::{begin_password_auth, AuthConfirmationHandler, GuardDataStore};
+use crate::auth::{AuthConfirmationHandler, AuthData, GuardDataStore, StartedAuth};
 use crate::message::{NetMessage, ServiceMethodMessage, ServiceMethodResponseMessage};
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::proto::enums_clientserver::EMsg;
@@ -11,12 +11,10 @@ use crate::session::{anonymous, hello, login, ConnectionError, Session};
 use crate::transport::websocket::connect;
 use async_stream::try_stream;
 pub use filter::MessageFilter;
-use futures_util::future::{select, Either};
 use futures_util::{FutureExt, Sink, SinkExt};
 use std::fmt::{Debug, Formatter};
 use std::future::Future;
 use std::net::IpAddr;
-use std::pin::pin;
 use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_proto::{JobMultiple, MsgKindEnum};
@@ -65,7 +63,7 @@ impl Debug for Connection {
 }
 
 impl Connection {
-    async fn connect(server_list: &ServerList) -> Result<Self, ConnectionError> {
+    pub async fn connect(server_list: &ServerList) -> Result<Self, ConnectionError> {
         let (read, write) = connect(&server_list.pick_ws()).await?;
         let filter = MessageFilter::new(read);
         let heartbeat_cancellation_token = CancellationToken::new();
@@ -115,34 +113,11 @@ impl Connection {
         if guard_data.is_some() {
             debug!(account, "found stored guard data");
         }
-        let begin =
-            begin_password_auth(&mut connection, account, password, guard_data.as_deref()).await?;
-        let steam_id = SteamID::from(begin.steam_id());
-
-        let allowed_confirmations = begin.allowed_confirmations();
-
-        let tokens = match select(
-            pin!(confirmation_handler.handle_confirmation(&allowed_confirmations)),
-            pin!(begin.poll().wait_for_tokens(&connection)),
-        )
-        .await
-        {
-            Either::Left((confirmation_action, tokens_fut)) => {
-                if let Some(confirmation_action) = confirmation_action {
-                    begin
-                        .submit_confirmation(&connection, confirmation_action)
-                        .await?;
-                    tokens_fut.await?
-                } else if begin.action_required() {
-                    return Err(ConnectionError::UnsupportedConfirmationAction(
-                        allowed_confirmations.clone(),
-                    ));
-                } else {
-                    tokens_fut.await?
-                }
-            }
-            Either::Right((tokens, _)) => tokens?,
-        };
+        let data = AuthData::with_guard(account, password, &mut guard_data_store).await;
+        let begin = StartedAuth::begin_via_credentials(&connection, data).await?;
+        let tokens = begin
+            .wait_confirmation(&connection, confirmation_handler)
+            .await?;
 
         if let Some(guard_data) = tokens.new_guard_data {
             if let Err(e) = guard_data_store.store(account, guard_data).await {
@@ -153,7 +128,7 @@ impl Connection {
         connection.session = login(
             &mut connection,
             account,
-            steam_id,
+            begin.steam_id(),
             // yes we send the refresh token as access token, yes it makes no sense, yes this is actually required
             tokens.refresh_token.as_ref(),
         )
@@ -163,7 +138,17 @@ impl Connection {
         Ok(connection)
     }
 
-    fn setup_heartbeat(&self) {
+    pub async fn login_with_token(
+        &mut self,
+        account: &str,
+        access_token: &str,
+        steam_id: SteamID,
+    ) -> Result<(), ConnectionError> {
+        self.session = login(self, account, steam_id, access_token).await?;
+        Ok(())
+    }
+
+    pub fn setup_heartbeat(&self) {
         let sender = self.sender.clone();
         let interval = self.session.heartbeat_interval;
         let header = NetMessageHeader {
