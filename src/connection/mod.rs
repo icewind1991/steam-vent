@@ -119,6 +119,12 @@ impl Connection {
             .wait_confirmation(&connection, confirmation_handler)
             .await?;
 
+        if let Some(guard_data) = tokens.new_guard_data {
+            if let Err(e) = guard_data_store.store(account, guard_data).await {
+                error!(error = ?e, "failed to store guard data");
+            }
+        }
+
         connection.session = login(
             &mut connection,
             account,
