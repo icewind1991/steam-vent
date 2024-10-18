@@ -20532,3 +20532,5 @@ impl ::steam_vent_proto_common::RpcMessage for CUserMessage_PlayResponseConditio
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::MsgKindEnum for EBaseUserMessages {}
+impl ::steam_vent_proto_common::MsgKindEnum for EBaseEntityMessages {}

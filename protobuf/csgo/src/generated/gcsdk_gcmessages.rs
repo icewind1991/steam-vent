@@ -9079,6 +9079,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCUpdateSessionIP {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCUpdateSessionIP {
+    type KindEnum = crate::gcsystemmsgs::EGCToGCMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::EGCToGCMsg::k_EMsgUpdateSessionIP;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCRequestSessionIP {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -9092,6 +9096,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCRequestSessionIP {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCRequestSessionIP {
+    type KindEnum = crate::gcsystemmsgs::EGCToGCMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::EGCToGCMsg::k_EMsgRequestSessionIP;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCRequestSessionIPResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -9104,6 +9112,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCRequestSessionIPResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGCRequestSessionIPResponse {
+    type KindEnum = crate::gcsystemmsgs::EGCToGCMsg;
+    const KIND: Self::KindEnum = crate::gcsystemmsgs::EGCToGCMsg::k_EMsgRequestSessionIPResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgSOCacheHaveVersion {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {

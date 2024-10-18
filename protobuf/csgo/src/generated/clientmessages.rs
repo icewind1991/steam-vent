@@ -1403,3 +1403,4 @@ impl ::steam_vent_proto_common::RpcMessage for CClientMsg_ListenForResponseFound
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::MsgKindEnum for EBaseClientMessages {}

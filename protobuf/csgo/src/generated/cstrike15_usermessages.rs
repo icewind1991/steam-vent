@@ -16125,3 +16125,4 @@ impl ::steam_vent_proto_common::RpcMessage for CCSUsrMsg_SnapTapStats {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::MsgKindEnum for ECstrike15UserMessages {}
