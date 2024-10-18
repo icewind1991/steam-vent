@@ -338,8 +338,10 @@ impl CustomizeCallback for ServiceGenerator {
         let kind_enums: Vec<_> = file
             .enums()
             .filter_map(|enum_type| {
-                (enum_type.name().starts_with("E") && enum_type.name().ends_with("Msg"))
-                    .then(|| enum_type.name().to_string())
+                (enum_type.name().starts_with("E")
+                    && (enum_type.name().ends_with("Msg")
+                        || enum_type.name().ends_with("Messages")))
+                .then(|| enum_type.name().to_string())
             })
             .collect();
 
@@ -423,7 +425,10 @@ fn get_kinds(base: &Path, protos: &[PathBuf]) -> Vec<Kind> {
                 .iter_mut()
                 .map(move |e| (mod_name.clone(), e))
         })
-        .filter(|(_, e)| e.name().starts_with("E") && e.name().ends_with("Msg"));
+        .filter(|(_, e)| {
+            e.name().starts_with("E")
+                && (e.name().ends_with("Msg") || e.name().ends_with("Messages"))
+        });
 
     let mut kinds = kinds_enums
         .flat_map(|(mod_name, kinds_enum)| {
@@ -436,14 +441,17 @@ fn get_kinds(base: &Path, protos: &[PathBuf]) -> Vec<Kind> {
             let prefix = prefix[0..prefix.len() - 1].to_string();
             let variant_prefix = format!("k_EMsg{}", prefix);
             let variant_prefix_alt = format!("k_E{}Msg_", prefix);
+            let variant_prefix_alt2 = "k_EMsg".to_string();
             let enum_prefix = prefix.to_ascii_lowercase();
             let enum_name = kinds_enum.take_name();
+
             kinds_enum.value.iter_mut().map(move |opt| Kind {
                 mod_name: mod_name.clone(),
                 enum_name: enum_name.clone(),
                 enum_prefix: enum_prefix.clone(),
                 variant_prefix: variant_prefix.clone(),
                 variant_prefix_alt: variant_prefix_alt.clone(),
+                variant_prefix_alt2: variant_prefix_alt2.clone(),
                 variant: opt.take_name(),
                 struct_name_prefix_alt_len: prefix.len(),
             })
@@ -462,6 +470,7 @@ struct Kind {
     enum_prefix: String,
     variant_prefix: String,
     variant_prefix_alt: String,
+    variant_prefix_alt2: String,
     variant: String,
     struct_name_prefix_alt_len: usize,
 }
@@ -474,6 +483,7 @@ impl Kind {
             .variant
             .strip_prefix(&self.variant_prefix)
             .or_else(|| self.variant.strip_prefix(&self.variant_prefix_alt))
+            .or_else(|| self.variant.strip_prefix(&self.variant_prefix_alt2))
         else {
             return false;
         };
