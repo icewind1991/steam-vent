@@ -1,7 +1,8 @@
 use crate::connection::{ConnectionImpl, ConnectionTrait, MessageFilter, MessageSender};
+use crate::message::EncodableMessage;
 use crate::net::{decode_kind, NetMessageHeader, RawNetMessage};
 use crate::session::Session;
-use crate::{Connection, NetMessage, NetworkError};
+use crate::{Connection, NetworkError};
 use futures_util::future::select;
 use protobuf::Message;
 use std::fmt::{Debug, Formatter};
@@ -161,22 +162,23 @@ impl ConnectionImpl for GameCoordinator {
         &self.session
     }
 
-    async fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+    async fn raw_send_with_kind<Msg: EncodableMessage, K: MsgKindEnum>(
         &self,
         header: NetMessageHeader,
         msg: Msg,
         kind: K,
+        is_protobuf: bool,
     ) -> Result<(), NetworkError> {
         let nested_header = NetMessageHeader::default();
         let mut payload: Vec<u8> = Vec::with_capacity(
-            nested_header.encode_size(kind.into(), Msg::IS_PROTOBUF) + msg.encode_size(),
+            nested_header.encode_size(kind.into(), is_protobuf) + msg.encode_size(),
         );
 
-        nested_header.write(&mut payload, kind, Msg::IS_PROTOBUF)?;
+        nested_header.write(&mut payload, kind, is_protobuf)?;
         msg.write_body(&mut payload)?;
         let data = CMsgGCClient {
             appid: Some(self.app_id),
-            msgtype: Some(kind.encode_kind(Msg::IS_PROTOBUF)),
+            msgtype: Some(kind.encode_kind(is_protobuf)),
             payload: Some(payload),
             ..Default::default()
         };

@@ -1,7 +1,9 @@
 mod filter;
 
 use crate::auth::{begin_password_auth, AuthConfirmationHandler, GuardDataStore};
-use crate::message::{NetMessage, ServiceMethodMessage, ServiceMethodResponseMessage};
+use crate::message::{
+    EncodableMessage, NetMessage, ServiceMethodMessage, ServiceMethodResponseMessage,
+};
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
 use crate::proto::enums_clientserver::EMsg;
 use crate::proto::steammessages_clientserver_login::CMsgClientHeartBeat;
@@ -231,6 +233,7 @@ impl Connection {
             header,
             ServiceMethodMessage(msg),
             EMsg::k_EMsgServiceMethodCallFromClientNonAuthed,
+            true,
         )?;
         self.sender.send_raw(msg).await?;
         let message = timeout(self.timeout, recv)
@@ -247,11 +250,12 @@ pub(crate) trait ConnectionImpl: Sync + Debug {
     fn filter(&self) -> &MessageFilter;
     fn session(&self) -> &Session;
 
-    fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+    fn raw_send_with_kind<Msg: EncodableMessage, K: MsgKindEnum>(
         &self,
         header: NetMessageHeader,
         msg: Msg,
         kind: K,
+        is_protobuf: bool,
     ) -> impl Future<Output = Result<()>> + Send;
 }
 
@@ -308,11 +312,12 @@ pub trait ConnectionTrait: Debug {
         msg: Msg,
     ) -> impl Future<Output = Result<()>> + Send;
 
-    fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+    fn raw_send_with_kind<Msg: EncodableMessage, K: MsgKindEnum>(
         &self,
         header: NetMessageHeader,
         msg: Msg,
         kind: K,
+        is_protobuf: bool,
     ) -> impl Future<Output = Result<()>> + Send;
 }
 
@@ -329,13 +334,14 @@ impl ConnectionImpl for Connection {
         &self.session
     }
 
-    async fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+    async fn raw_send_with_kind<Msg: EncodableMessage, K: MsgKindEnum>(
         &self,
         header: NetMessageHeader,
         msg: Msg,
         kind: K,
+        is_protobuf: bool,
     ) -> Result<()> {
-        let msg = RawNetMessage::from_message_with_kind(header, msg, kind)?;
+        let msg = RawNetMessage::from_message_with_kind(header, msg, kind, is_protobuf)?;
         self.sender.send_raw(msg).await
     }
 }
@@ -438,7 +444,7 @@ impl<C: ConnectionImpl> ConnectionTrait for C {
         kind: K,
     ) -> impl Future<Output = Result<()>> + Send {
         let header = self.session().header(false);
-        self.raw_send_with_kind(header, msg, kind)
+        self.raw_send_with_kind(header, msg, kind, Msg::IS_PROTOBUF)
     }
 
     fn raw_send<Msg: NetMessage>(
@@ -446,15 +452,16 @@ impl<C: ConnectionImpl> ConnectionTrait for C {
         header: NetMessageHeader,
         msg: Msg,
     ) -> impl Future<Output = Result<()>> + Send {
-        self.raw_send_with_kind(header, msg, Msg::KIND)
+        self.raw_send_with_kind(header, msg, Msg::KIND, Msg::IS_PROTOBUF)
     }
 
-    fn raw_send_with_kind<Msg: NetMessage, K: MsgKindEnum>(
+    fn raw_send_with_kind<Msg: EncodableMessage, K: MsgKindEnum>(
         &self,
         header: NetMessageHeader,
         msg: Msg,
         kind: K,
+        is_protobuf: bool,
     ) -> impl Future<Output = Result<()>> + Send {
-        <Self as ConnectionImpl>::raw_send_with_kind(self, header, msg, kind)
+        <Self as ConnectionImpl>::raw_send_with_kind(self, header, msg, kind, is_protobuf)
     }
 }

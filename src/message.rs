@@ -74,8 +74,6 @@ pub trait NetMessage: EncodableMessage {
     type KindEnum: MsgKindEnum;
     const KIND: Self::KindEnum;
     const IS_PROTOBUF: bool = false;
-
-    fn process_header(&self, _header: &mut NetMessageHeader) {}
 }
 
 #[derive(Debug, BinRead)]

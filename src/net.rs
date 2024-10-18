@@ -1,5 +1,5 @@
 use crate::eresult::EResult;
-use crate::message::{MalformedBody, NetMessage};
+use crate::message::{EncodableMessage, MalformedBody, NetMessage};
 use crate::proto::steammessages_base::CMsgProtoBufHeader;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use bytes::{Buf, BufMut, BytesMut};
@@ -272,17 +272,16 @@ impl RawNetMessage {
     }
 
     pub fn from_message<T: NetMessage>(header: NetMessageHeader, message: T) -> Result<Self> {
-        Self::from_message_with_kind(header, message, T::KIND)
+        Self::from_message_with_kind(header, message, T::KIND, T::IS_PROTOBUF)
     }
 
-    pub fn from_message_with_kind<T: NetMessage, K: MsgKindEnum>(
-        mut header: NetMessageHeader,
+    pub fn from_message_with_kind<T: EncodableMessage, K: MsgKindEnum>(
+        header: NetMessageHeader,
         message: T,
         kind: K,
+        is_protobuf: bool,
     ) -> Result<Self> {
         debug!("writing raw {:?} message", kind);
-
-        message.process_header(&mut header);
 
         let body_size = message.encode_size();
 
@@ -292,7 +291,7 @@ impl RawNetMessage {
         //
         // 8 byte frame header, 16 byte iv, header, body, 16 byte encryption padding
         let mut buff = BytesMut::with_capacity(
-            8 + 16 + header.encode_size(kind.into(), T::IS_PROTOBUF) + body_size + 16,
+            8 + 16 + header.encode_size(kind.into(), is_protobuf) + body_size + 16,
         );
         buff.extend([0; 8 + 16]);
         let frame_header_buffer = buff.split_to(8);
@@ -300,7 +299,7 @@ impl RawNetMessage {
 
         {
             let mut writer = (&mut buff).writer();
-            header.write(&mut writer, kind, T::IS_PROTOBUF)?;
+            header.write(&mut writer, kind, is_protobuf)?;
         }
 
         let header_buffer = buff.split();
@@ -310,7 +309,7 @@ impl RawNetMessage {
 
         Ok(RawNetMessage {
             kind: kind.into(),
-            is_protobuf: T::IS_PROTOBUF,
+            is_protobuf,
             header,
             data: buff,
             frame_header_buffer: Some(frame_header_buffer),
