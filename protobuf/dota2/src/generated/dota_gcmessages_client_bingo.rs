@@ -2048,6 +2048,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoGetUserData {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientToGCBingoGetUserData {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCBingoGetUserData;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoGetUserDataResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -2060,6 +2064,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoGetUserDataRes
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCBingoGetUserDataResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCBingoGetUserDataResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgBingoIndividualStatData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2100,6 +2109,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoGetStatsData {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientToGCBingoGetStatsData {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCBingoGetStatsData;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoGetStatsDataResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -2112,6 +2125,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoGetStatsDataRe
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCBingoGetStatsDataResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCBingoGetStatsDataResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientBingoUserDataUpdated {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2126,6 +2144,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientBingoUserDataUpdate
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToClientBingoUserDataUpdated {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCToClientBingoUserDataUpdated;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoClaimRow {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -2138,6 +2161,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoClaimRow {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientToGCBingoClaimRow {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCBingoClaimRow;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoClaimRowResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -2152,6 +2179,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoClaimRowRespon
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCBingoClaimRowResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCBingoClaimRowResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoDevRerollCard {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -2165,6 +2197,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoDevRerollCard 
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientToGCBingoDevRerollCard {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCBingoDevRerollCard;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoDevRerollCardResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -2177,4 +2213,9 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCBingoDevRerollCardR
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCBingoDevRerollCardResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCBingoDevRerollCardResponse;
 }

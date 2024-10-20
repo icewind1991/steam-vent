@@ -15884,3 +15884,4 @@ impl ::steam_vent_proto_common::RpcMessage for CDOTAClientMsg_SelectOverworldID 
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::MsgKindEnum for EDotaClientMessages {}

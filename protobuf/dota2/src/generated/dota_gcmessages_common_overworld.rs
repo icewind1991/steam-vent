@@ -7201,6 +7201,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgOverworldEncounterTokenTreasu
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgOverworldEncounterTokenTreasureData {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgOverworldEncounterTokenTreasureData;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgOverworldEncounterTokenQuestData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7213,6 +7218,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgOverworldEncounterTokenQuestD
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgOverworldEncounterTokenQuestData {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgOverworldEncounterTokenQuestData;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgOverworldHeroList {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7240,6 +7250,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgOverworldEncounterChooseHeroD
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgOverworldEncounterChooseHeroData {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgOverworldEncounterChooseHeroData;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgOverworldEncounterProgressData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7252,6 +7267,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgOverworldEncounterProgressDat
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgOverworldEncounterProgressData {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgOverworldEncounterProgressData;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgOverworldEncounterData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7331,6 +7351,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldGetUserDat
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldGetUserData {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldGetUserData;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldGetUserDataResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7345,6 +7370,11 @@ for CMsgClientToGCOverworldGetUserDataResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldGetUserDataResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldGetUserDataResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientOverworldUserDataUpdated {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7358,6 +7388,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientOverworldUserDataUp
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToClientOverworldUserDataUpdated {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCToClientOverworldUserDataUpdated;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldCompletePath {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7370,6 +7405,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldCompletePa
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldCompletePath {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldCompletePath;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldCompletePathResponse {
@@ -7385,6 +7425,11 @@ for CMsgClientToGCOverworldCompletePathResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldCompletePathResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldCompletePathResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgOverworldEncounterPitFighterRewardData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7398,6 +7443,11 @@ for CMsgOverworldEncounterPitFighterRewardData {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgOverworldEncounterPitFighterRewardData {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgOverworldEncounterPitFighterRewardData;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldClaimEncounterReward {
@@ -7413,6 +7463,11 @@ for CMsgClientToGCOverworldClaimEncounterReward {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldClaimEncounterReward {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldClaimEncounterReward;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldClaimEncounterRewardResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7427,6 +7482,11 @@ for CMsgClientToGCOverworldClaimEncounterRewardResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldClaimEncounterRewardResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldClaimEncounterRewardResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldVisitEncounter {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7439,6 +7499,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldVisitEncou
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldVisitEncounter {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldVisitEncounter;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldVisitEncounterResponse {
@@ -7454,6 +7519,11 @@ for CMsgClientToGCOverworldVisitEncounterResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldVisitEncounterResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldVisitEncounterResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldMoveToNode {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7466,6 +7536,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldMoveToNode
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldMoveToNode {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldMoveToNode;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldMoveToNodeResponse {
@@ -7481,6 +7556,11 @@ for CMsgClientToGCOverworldMoveToNodeResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldMoveToNodeResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldMoveToNodeResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldTradeTokens {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7493,6 +7573,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldTradeToken
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldTradeTokens {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldTradeTokens;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldTradeTokensResponse {
@@ -7508,6 +7593,11 @@ for CMsgClientToGCOverworldTradeTokensResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldTradeTokensResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldTradeTokensResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldGiftTokens {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7520,6 +7610,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldGiftTokens
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldGiftTokens {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldGiftTokens;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldGiftTokensResponse {
@@ -7535,6 +7630,11 @@ for CMsgClientToGCOverworldGiftTokensResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldGiftTokensResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldGiftTokensResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldDevResetAll {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7547,6 +7647,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldDevResetAl
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldDevResetAll {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldDevResetAll;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldDevResetAllResponse {
@@ -7562,6 +7667,11 @@ for CMsgClientToGCOverworldDevResetAllResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldDevResetAllResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldDevResetAllResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldDevResetNode {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7574,6 +7684,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldDevResetNo
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldDevResetNode {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldDevResetNode;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldDevResetNodeResponse {
@@ -7589,6 +7704,11 @@ for CMsgClientToGCOverworldDevResetNodeResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldDevResetNodeResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldDevResetNodeResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldDevGrantTokens {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7601,6 +7721,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldDevGrantTo
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldDevGrantTokens {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldDevGrantTokens;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldDevGrantTokensResponse {
@@ -7616,6 +7741,11 @@ for CMsgClientToGCOverworldDevGrantTokensResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldDevGrantTokensResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldDevGrantTokensResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldDevClearInventory {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7628,6 +7758,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldDevClearIn
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldDevClearInventory {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldDevClearInventory;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldDevClearInventoryResponse {
@@ -7643,6 +7778,11 @@ for CMsgClientToGCOverworldDevClearInventoryResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldDevClearInventoryResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldDevClearInventoryResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldFeedback {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7655,6 +7795,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldFeedback {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientToGCOverworldFeedback {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldFeedback;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldFeedbackResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7669,6 +7813,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldFeedbackRe
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldFeedbackResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldFeedbackResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldGetDynamicImage {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -7681,6 +7830,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCOverworldGetDynamic
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldGetDynamicImage {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldGetDynamicImage;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCOverworldGetDynamicImageResponse {
@@ -7695,4 +7849,9 @@ for CMsgClientToGCOverworldGetDynamicImageResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCOverworldGetDynamicImageResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCOverworldGetDynamicImageResponse;
 }

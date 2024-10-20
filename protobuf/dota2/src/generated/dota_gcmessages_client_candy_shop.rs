@@ -5270,6 +5270,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopGetUserDat
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopGetUserData {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopGetUserData;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopGetUserDataResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5284,6 +5289,11 @@ for CMsgClientToGCCandyShopGetUserDataResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopGetUserDataResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopGetUserDataResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientCandyShopUserDataUpdated {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5297,6 +5307,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientCandyShopUserDataUp
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToClientCandyShopUserDataUpdated {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCToClientCandyShopUserDataUpdated;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopPurchaseReward {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5309,6 +5324,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopPurchaseRe
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopPurchaseReward {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopPurchaseReward;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopPurchaseRewardResponse {
@@ -5324,6 +5344,11 @@ for CMsgClientToGCCandyShopPurchaseRewardResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopPurchaseRewardResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopPurchaseRewardResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopOpenBags {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5336,6 +5361,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopOpenBags {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientToGCCandyShopOpenBags {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopOpenBags;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopOpenBagsResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5350,6 +5379,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopOpenBagsRe
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopOpenBagsResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopOpenBagsResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopDoExchange {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5362,6 +5396,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopDoExchange
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDoExchange {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDoExchange;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopDoExchangeResponse {
@@ -5377,6 +5416,11 @@ for CMsgClientToGCCandyShopDoExchangeResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDoExchangeResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDoExchangeResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopDoVariableExchange {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5390,6 +5434,11 @@ for CMsgClientToGCCandyShopDoVariableExchange {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDoVariableExchange {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDoVariableExchange;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopDoVariableExchangeResponse {
@@ -5405,6 +5454,11 @@ for CMsgClientToGCCandyShopDoVariableExchangeResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDoVariableExchangeResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDoVariableExchangeResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopRerollRewards {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5417,6 +5471,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopRerollRewa
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopRerollRewards {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopRerollRewards;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopRerollRewardsResponse {
@@ -5431,6 +5490,11 @@ for CMsgClientToGCCandyShopRerollRewardsResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopRerollRewardsResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopRerollRewardsResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CCandyShopDev {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5458,6 +5522,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopDevGrantCa
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevGrantCandy {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevGrantCandy;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopDevGrantCandyResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5472,6 +5541,11 @@ for CMsgClientToGCCandyShopDevGrantCandyResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevGrantCandyResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevGrantCandyResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopDevClearInventory {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5484,6 +5558,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopDevClearIn
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevClearInventory {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevClearInventory;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopDevClearInventoryResponse {
@@ -5499,6 +5578,11 @@ for CMsgClientToGCCandyShopDevClearInventoryResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevClearInventoryResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevClearInventoryResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopDevGrantCandyBags {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5511,6 +5595,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopDevGrantCa
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevGrantCandyBags {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevGrantCandyBags;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopDevGrantCandyBagsResponse {
@@ -5526,6 +5615,11 @@ for CMsgClientToGCCandyShopDevGrantCandyBagsResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevGrantCandyBagsResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevGrantCandyBagsResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopDevShuffleExchange {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5539,6 +5633,11 @@ for CMsgClientToGCCandyShopDevShuffleExchange {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevShuffleExchange {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevShuffleExchange;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopDevShuffleExchangeResponse {
@@ -5554,6 +5653,11 @@ for CMsgClientToGCCandyShopDevShuffleExchangeResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevShuffleExchangeResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevShuffleExchangeResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopDevGrantRerollCharges {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5567,6 +5671,11 @@ for CMsgClientToGCCandyShopDevGrantRerollCharges {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevGrantRerollCharges {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevGrantRerollCharges;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopDevGrantRerollChargesResponse {
@@ -5582,6 +5691,11 @@ for CMsgClientToGCCandyShopDevGrantRerollChargesResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevGrantRerollChargesResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevGrantRerollChargesResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopDevResetShop {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5594,6 +5708,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCCandyShopDevResetSh
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevResetShop {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevResetShop;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCCandyShopDevResetShopResponse {
@@ -5608,4 +5727,9 @@ for CMsgClientToGCCandyShopDevResetShopResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCCandyShopDevResetShopResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCCandyShopDevResetShopResponse;
 }

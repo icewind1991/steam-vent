@@ -878,3 +878,4 @@ impl ::steam_vent_proto_common::RpcMessage for CDOTABroadcastMsg_LANLobbyReply {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::MsgKindEnum for EDotaBroadcastMessages {}

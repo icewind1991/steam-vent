@@ -39487,3 +39487,5 @@ impl ::steam_vent_proto_common::RpcMessage for CDOTAUserMsg_InnatePing {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::MsgKindEnum for EDotaUserMessages {}
+impl ::steam_vent_proto_common::MsgKindEnum for EDotaEntityMessages {}

@@ -6781,6 +6781,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCGetBattleReport {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientToGCGetBattleReport {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCGetBattleReport;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgBattleReport_Game {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -6898,6 +6902,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCGetBattleReportResp
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCGetBattleReportResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCGetBattleReportResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCGetBattleReportAggregateStats {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6911,6 +6920,11 @@ for CMsgClientToGCGetBattleReportAggregateStats {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCGetBattleReportAggregateStats {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCGetBattleReportAggregateStats;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCGetBattleReportAggregateStatsResponse {
@@ -6926,6 +6940,11 @@ for CMsgClientToGCGetBattleReportAggregateStatsResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCGetBattleReportAggregateStatsResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCGetBattleReportAggregateStatsResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCGetBattleReportInfo {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -6938,6 +6957,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCGetBattleReportInfo
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCGetBattleReportInfo {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCGetBattleReportInfo;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCGetBattleReportInfoResponse {
@@ -6953,6 +6977,11 @@ for CMsgClientToGCGetBattleReportInfoResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCGetBattleReportInfoResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCGetBattleReportInfoResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCAcknowledgeBattleReport {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -6965,6 +6994,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCAcknowledgeBattleRe
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCAcknowledgeBattleReport {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCAcknowledgeBattleReport;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCAcknowledgeBattleReportResponse {
@@ -6980,6 +7014,11 @@ for CMsgClientToGCAcknowledgeBattleReportResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCAcknowledgeBattleReportResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCAcknowledgeBattleReportResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCGetBattleReportMatchHistory {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6994,6 +7033,11 @@ for CMsgClientToGCGetBattleReportMatchHistory {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCGetBattleReportMatchHistory {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCGetBattleReportMatchHistory;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCGetBattleReportMatchHistoryResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -7007,4 +7051,9 @@ for CMsgClientToGCGetBattleReportMatchHistoryResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCGetBattleReportMatchHistoryResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCGetBattleReportMatchHistoryResponse;
 }

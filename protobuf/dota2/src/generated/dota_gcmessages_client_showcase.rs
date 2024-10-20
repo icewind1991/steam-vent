@@ -11493,6 +11493,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseGetUserData
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseGetUserData {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseGetUserData;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseGetUserDataResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -11507,6 +11512,11 @@ for CMsgClientToGCShowcaseGetUserDataResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseGetUserDataResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseGetUserDataResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseSetUserData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -11519,6 +11529,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseSetUserData
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseSetUserData {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseSetUserData;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseSetUserDataResponse {
@@ -11534,6 +11549,11 @@ for CMsgClientToGCShowcaseSetUserDataResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseSetUserDataResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseSetUserDataResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseSubmitReport {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -11546,6 +11566,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseSubmitRepor
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseSubmitReport {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseSubmitReport;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseSubmitReportResponse {
@@ -11560,6 +11585,11 @@ for CMsgClientToGCShowcaseSubmitReportResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseSubmitReportResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseSubmitReportResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgShowcaseReportsRollupInfo {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -11627,6 +11657,11 @@ for CMsgClientToGCShowcaseAdminGetReportsRollupList {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminGetReportsRollupList {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminGetReportsRollupList;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseAdminGetReportsRollupListResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -11640,6 +11675,11 @@ for CMsgClientToGCShowcaseAdminGetReportsRollupListResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminGetReportsRollupListResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminGetReportsRollupListResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseAdminGetReportsRollup {
@@ -11655,6 +11695,11 @@ for CMsgClientToGCShowcaseAdminGetReportsRollup {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminGetReportsRollup {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminGetReportsRollup;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseAdminGetReportsRollupResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -11668,6 +11713,11 @@ for CMsgClientToGCShowcaseAdminGetReportsRollupResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminGetReportsRollupResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminGetReportsRollupResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgShowcaseAuditEntry {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -11722,6 +11772,11 @@ for CMsgClientToGCShowcaseAdminGetUserDetails {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminGetUserDetails {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminGetUserDetails;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseAdminGetUserDetailsResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -11736,6 +11791,11 @@ for CMsgClientToGCShowcaseAdminGetUserDetailsResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminGetUserDetailsResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminGetUserDetailsResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseAdminReset {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -11748,6 +11808,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseAdminReset 
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientToGCShowcaseAdminReset {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminReset;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseAdminResetResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -11762,6 +11826,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseAdminResetR
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminResetResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminResetResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseAdminLockAccount {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -11774,6 +11843,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseAdminLockAc
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminLockAccount {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminLockAccount;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseAdminLockAccountResponse {
@@ -11789,6 +11863,11 @@ for CMsgClientToGCShowcaseAdminLockAccountResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminLockAccountResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminLockAccountResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseAdminConvict {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -11801,6 +11880,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseAdminConvic
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminConvict {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminConvict;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseAdminConvictResponse {
@@ -11816,6 +11900,11 @@ for CMsgClientToGCShowcaseAdminConvictResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminConvictResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminConvictResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseAdminExonerate {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -11828,6 +11917,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseAdminExoner
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminExonerate {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminExonerate;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseAdminExonerateResponse {
@@ -11842,6 +11936,11 @@ for CMsgClientToGCShowcaseAdminExonerateResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseAdminExonerateResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseAdminExonerateResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgShowcaseModerationInfo {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -11869,6 +11968,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCShowcaseModerationG
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseModerationGetQueue {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseModerationGetQueue;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseModerationGetQueueResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -11882,6 +11986,11 @@ for CMsgClientToGCShowcaseModerationGetQueueResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseModerationGetQueueResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseModerationGetQueueResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseModerationApplyModeration {
@@ -11897,6 +12006,11 @@ for CMsgClientToGCShowcaseModerationApplyModeration {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseModerationApplyModeration {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseModerationApplyModeration;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCShowcaseModerationApplyModerationResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -11910,4 +12024,9 @@ for CMsgClientToGCShowcaseModerationApplyModerationResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCShowcaseModerationApplyModerationResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCShowcaseModerationApplyModerationResponse;
 }

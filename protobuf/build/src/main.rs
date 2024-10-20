@@ -493,7 +493,10 @@ impl Kind {
             }
         }
         struct_name.eq_ignore_ascii_case(stripped)
-            || struct_name[self.struct_name_prefix_alt_len..].eq_ignore_ascii_case(stripped)
+            || struct_name
+                .get(self.struct_name_prefix_alt_len..)
+                .unwrap_or_default()
+                .eq_ignore_ascii_case(stripped)
     }
 
     pub fn ident(&self) -> TokenStream {

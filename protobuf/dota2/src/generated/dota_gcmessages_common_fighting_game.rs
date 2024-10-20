@@ -1165,6 +1165,11 @@ for CMsgClientToGCFightingGameChallengeFriend {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCFightingGameChallengeFriend {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCFightingGameChallengeFriend;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCFightingGameChallengeFriendResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -1178,6 +1183,11 @@ for CMsgClientToGCFightingGameChallengeFriendResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCFightingGameChallengeFriendResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCFightingGameChallengeFriendResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCFightingGameCancelChallengeFriend {
@@ -1193,6 +1203,11 @@ for CMsgClientToGCFightingGameCancelChallengeFriend {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCFightingGameCancelChallengeFriend {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCFightingGameCancelChallengeFriend;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCFightingGameAnswerChallenge {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -1206,6 +1221,11 @@ for CMsgClientToGCFightingGameAnswerChallenge {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCFightingGameAnswerChallenge {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCFightingGameAnswerChallenge;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgClientToGCFightingGameAnswerChallengeResponse {
@@ -1221,6 +1241,11 @@ for CMsgClientToGCFightingGameAnswerChallengeResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCFightingGameAnswerChallengeResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCFightingGameAnswerChallengeResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientFightingGameChallenge {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -1233,6 +1258,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientFightingGameChallen
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToClientFightingGameChallenge {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCToClientFightingGameChallenge;
 }
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgGCToClientFightingGameChallengeCanceled {
@@ -1248,6 +1278,11 @@ for CMsgGCToClientFightingGameChallengeCanceled {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToClientFightingGameChallengeCanceled {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCToClientFightingGameChallengeCanceled;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientFightingGameStartMatch {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -1260,4 +1295,9 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientFightingGameStartMa
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToClientFightingGameStartMatch {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCToClientFightingGameStartMatch;
 }

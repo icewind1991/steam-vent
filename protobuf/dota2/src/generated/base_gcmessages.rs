@@ -10525,6 +10525,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCIntegrityStatus {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientToGCIntegrityStatus {
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgClientToGCIntegrityStatus;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCAggregateMetrics {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -10537,6 +10541,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCAggregateMetrics {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientToGCAggregateMetrics {
+    type KindEnum = crate::base_gcmessages::EGCBaseMsg;
+    const KIND: Self::KindEnum = crate::base_gcmessages::EGCBaseMsg::k_EMsgClientToGCAggregateMetrics;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientAggregateMetricsBackoff {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {

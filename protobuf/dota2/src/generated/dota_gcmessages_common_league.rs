@@ -10128,6 +10128,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgDOTALeagueInfoListAdminsReque
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgDOTALeagueInfoListAdminsRequest {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgDOTALeagueInfoListAdminsRequest;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgDOTALeagueAvailableLobbyNodesRequest {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -10141,6 +10146,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgDOTALeagueAvailableLobbyNodes
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgDOTALeagueAvailableLobbyNodesRequest {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgDOTALeagueAvailableLobbyNodesRequest;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgDOTALeagueAvailableLobbyNodes {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -10153,6 +10163,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgDOTALeagueAvailableLobbyNodes
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgDOTALeagueAvailableLobbyNodes {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgDOTALeagueAvailableLobbyNodes;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgDOTALeagueNodeResults {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {

@@ -5307,6 +5307,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCFindTopSourceTVGame
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCFindTopSourceTVGames {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCFindTopSourceTVGames;
+}
 impl ::steam_vent_proto_common::RpcMessage
 for CMsgGCToClientFindTopSourceTVGamesResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5320,6 +5325,11 @@ for CMsgGCToClientFindTopSourceTVGamesResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToClientFindTopSourceTVGamesResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCToClientFindTopSourceTVGamesResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientTopWeekendTourneyGames {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5347,6 +5357,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCTopLeagueMatchesReq
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCTopLeagueMatchesRequest {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCTopLeagueMatchesRequest;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCTopFriendMatchesRequest {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5359,6 +5374,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCTopFriendMatchesReq
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCTopFriendMatchesRequest {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCTopFriendMatchesRequest;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCMatchesMinimalRequest {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5373,6 +5393,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCMatchesMinimalReque
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCMatchesMinimalRequest {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCMatchesMinimalRequest;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCMatchesMinimalResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5385,6 +5410,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientToGCMatchesMinimalRespo
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgClientToGCMatchesMinimalResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgClientToGCMatchesMinimalResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientTopLeagueMatchesResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5399,6 +5429,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientTopLeagueMatchesRes
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToClientTopLeagueMatchesResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCToClientTopLeagueMatchesResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientTopFriendMatchesResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5411,6 +5446,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGCToClientTopFriendMatchesRes
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGCToClientTopFriendMatchesResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCToClientTopFriendMatchesResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgSpectateFriendGame {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {

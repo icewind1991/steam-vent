@@ -6369,6 +6369,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgPartyReadyCheckRequest {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgPartyReadyCheckRequest {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgPartyReadyCheckRequest;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgPartyReadyCheckResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -6381,6 +6385,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgPartyReadyCheckResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgPartyReadyCheckResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgPartyReadyCheckResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgPartyReadyCheckAcknowledge {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -6395,6 +6403,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgPartyReadyCheckAcknowledge {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgPartyReadyCheckAcknowledge {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgPartyReadyCheckAcknowledge;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgLobbyEventGameDetails {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -6408,6 +6420,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgLobbyEventGameDetails {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgLobbyEventGameDetails {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgLobbyEventGameDetails;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgMatchMatchmakingStats {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -6420,6 +6436,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgMatchMatchmakingStats {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgMatchMatchmakingStats {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgMatchMatchmakingStats;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMvpData {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
