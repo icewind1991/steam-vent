@@ -68,6 +68,8 @@ pub trait EncodableMessage: Sized + Debug + Send {
     fn encode_size(&self) -> usize {
         panic!("Writing not implemented for {}", type_name::<Self>())
     }
+
+    fn process_header(&self, _header: &mut NetMessageHeader) {}
 }
 
 pub trait NetMessage: EncodableMessage {
@@ -244,6 +246,10 @@ impl<Request: ServiceMethodRequest + Debug> EncodableMessage for ServiceMethodMe
 
     fn encode_size(&self) -> usize {
         self.0.compute_size() as usize
+    }
+
+    fn process_header(&self, header: &mut NetMessageHeader) {
+        header.target_job_name = Some(Request::REQ_NAME.into())
     }
 }
 

@@ -276,12 +276,14 @@ impl RawNetMessage {
     }
 
     pub fn from_message_with_kind<T: EncodableMessage, K: MsgKindEnum>(
-        header: NetMessageHeader,
+        mut header: NetMessageHeader,
         message: T,
         kind: K,
         is_protobuf: bool,
     ) -> Result<Self> {
         debug!("writing raw {:?} message", kind);
+
+        message.process_header(&mut header);
 
         let body_size = message.encode_size();
 
