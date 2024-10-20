@@ -44,11 +44,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1727556185,
-        "narHash": "sha256-pEUzAE5WRpPGQYeG/U2mftfHAn2q4aO1pefJNY2EoVw=",
+        "lastModified": 1729438011,
+        "narHash": "sha256-Nz4hgMjcOQDzQ9UDzRpQ7VJDFvyaxGW7y7dRLINnRk4=",
         "owner": "icewind1991",
         "repo": "mill-scale",
-        "rev": "823fb3493cb4838c81627821f383af918db33a7f",
+        "rev": "248e5485c08688a5c472787d6ced009daa08cf73",
         "type": "github"
       },
       "original": {
