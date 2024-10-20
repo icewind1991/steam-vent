@@ -2,7 +2,8 @@ use crate::message::ServiceMethodNotification;
 use crate::net::{JobId, RawNetMessage};
 use dashmap::DashMap;
 use futures_util::Stream;
-use std::sync::Arc;
+use std::collections::VecDeque;
+use std::sync::{Arc, Mutex};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::MsgKind;
 use tokio::spawn;
@@ -11,12 +12,49 @@ use tokio_stream::StreamExt;
 use tracing::{debug, error};
 
 #[derive(Clone)]
+pub struct RingBuffer<T>(Arc<Mutex<VecDeque<T>>>);
+
+impl<T> RingBuffer<T> {
+    pub fn new(capacity: usize) -> Self {
+        Self(Arc::new(Mutex::new(VecDeque::with_capacity(capacity))))
+    }
+
+    pub fn push(&self, item: T) -> Option<T> {
+        let mut deque = self.0.lock().unwrap();
+        if deque.len() == deque.capacity() {
+            let popped = deque.pop_front();
+            deque.push_back(item);
+            debug_assert!(deque.len() == deque.capacity());
+            popped
+        } else {
+            deque.push_back(item);
+            None
+        }
+    }
+
+    #[allow(dead_code)]
+    pub fn pop(&self) -> Option<T> {
+        self.0.lock().unwrap().pop_front()
+    }
+}
+
+impl<T: Clone> RingBuffer<T> {
+    pub fn take(&self) -> Vec<T> {
+        let mut dequeu = self.0.lock().unwrap();
+        let items = dequeu.make_contiguous().to_vec();
+        dequeu.clear();
+        items
+    }
+}
+
+#[derive(Clone)]
 pub struct MessageFilter {
     job_id_filters: Arc<DashMap<JobId, oneshot::Sender<RawNetMessage>>>,
     job_id_multi_filters: Arc<DashMap<JobId, mpsc::Sender<RawNetMessage>>>,
     notification_filters: Arc<DashMap<&'static str, broadcast::Sender<ServiceMethodNotification>>>,
     kind_filters: Arc<DashMap<MsgKind, broadcast::Sender<RawNetMessage>>>,
     oneshot_kind_filters: Arc<DashMap<MsgKind, oneshot::Sender<RawNetMessage>>>,
+    rest: RingBuffer<RawNetMessage>,
 }
 
 impl MessageFilter {
@@ -31,6 +69,7 @@ impl MessageFilter {
             kind_filters: Default::default(),
             notification_filters: Default::default(),
             oneshot_kind_filters: Default::default(),
+            rest: RingBuffer::new(32),
         };
 
         let filter_send = filter.clone();
@@ -71,8 +110,8 @@ impl MessageFilter {
                             }
                         } else if let Some(tx) = filter_send.kind_filters.get(&message.kind) {
                             tx.send(message).ok();
-                        } else {
-                            debug!(kind = ?message.kind, "Unhandled message");
+                        } else if let Some(popped) = filter_send.rest.push(message) {
+                            debug!(kind = ?popped.kind, "Unhandled message");
                         }
                     }
                     Err(err) => {
@@ -123,5 +162,9 @@ impl MessageFilter {
         let (tx, rx) = oneshot::channel();
         self.oneshot_kind_filters.insert(kind.into(), tx);
         rx
+    }
+
+    pub fn unprocessed(&self) -> Vec<RawNetMessage> {
+        self.rest.take()
     }
 }

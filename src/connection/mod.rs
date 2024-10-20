@@ -243,6 +243,14 @@ impl Connection {
             .into_message::<ServiceMethodResponseMessage>()?;
         message.into_response::<Msg>()
     }
+
+    /// Get all messages that haven't been filtered by any of the filters
+    ///
+    /// Note that at most 32 unprocessed connections are stored and calling
+    /// this method clears the buffer
+    pub fn take_unprocessed(&self) -> Vec<RawNetMessage> {
+        self.filter.unprocessed()
+    }
 }
 
 pub(crate) trait ConnectionImpl: Sync + Debug {
