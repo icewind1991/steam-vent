@@ -18,6 +18,7 @@ use tokio_stream::wrappers::BroadcastStream;
 use tokio_stream::StreamExt;
 use tracing::{debug, error};
 
+/// A Connection that hasn't been authentication yet
 pub struct UnAuthenticatedConnection(RawConnection);
 
 impl UnAuthenticatedConnection {

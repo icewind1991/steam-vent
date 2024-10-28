@@ -1,6 +1,6 @@
 mod filter;
-pub mod raw;
-pub mod unauthenticated;
+pub(crate) mod raw;
+pub(crate) mod unauthenticated;
 
 use crate::auth::{AuthConfirmationHandler, GuardDataStore};
 use crate::message::{
@@ -11,7 +11,7 @@ use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
 use crate::session::{ConnectionError, Session};
 use async_stream::try_stream;
-pub use filter::MessageFilter;
+pub(crate) use filter::MessageFilter;
 use futures_util::{FutureExt, Sink, SinkExt};
 use raw::RawConnection;
 use std::fmt::{Debug, Formatter};
@@ -34,7 +34,7 @@ type TransportWriter = Arc<Mutex<dyn Sink<RawNetMessage, Error = NetworkError> +
 
 /// Send raw messages to steam
 #[derive(Clone)]
-pub struct MessageSender {
+pub(crate) struct MessageSender {
     write: TransportWriter,
 }
 

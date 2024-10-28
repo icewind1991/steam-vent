@@ -47,6 +47,7 @@ impl<T: Clone> RingBuffer<T> {
     }
 }
 
+/// A filter for incoming messages, allowing listing by message type, job id and notifications
 #[derive(Clone)]
 pub struct MessageFilter {
     job_id_filters: Arc<DashMap<JobId, oneshot::Sender<RawNetMessage>>>,
