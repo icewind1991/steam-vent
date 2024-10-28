@@ -2,7 +2,7 @@ use std::env::args;
 use std::error::Error;
 use steam_vent::auth::{
     AuthConfirmationHandler, ConsoleAuthConfirmationHandler, DeviceConfirmationHandler,
-    FileGuardDataStore,
+    FileGuardDataStore, SharedSecretAuthConfirmationHandler,
 };
 use steam_vent::proto::steammessages_player_steamclient::CPlayer_GetOwnedGames_Request;
 use steam_vent::{Connection, ConnectionSender, ServerList};
@@ -14,16 +14,32 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let mut args = args().skip(1);
     let account = args.next().expect("no account");
     let password = args.next().expect("no password");
+    // base64 encoded
+    let guard_secret = args.next();
 
     let server_list = ServerList::discover().await?;
-    let connection = Connection::login(
-        &server_list,
-        &account,
-        &password,
-        FileGuardDataStore::user_cache(),
-        ConsoleAuthConfirmationHandler::default().or(DeviceConfirmationHandler),
-    )
-    .await?;
+    let connection = match guard_secret {
+        Some(secret) => {
+            Connection::login(
+                &server_list,
+                &account,
+                &password,
+                FileGuardDataStore::user_cache(),
+                SharedSecretAuthConfirmationHandler::new(&secret),
+            )
+            .await?
+        }
+        None => {
+            Connection::login(
+                &server_list,
+                &account,
+                &password,
+                FileGuardDataStore::user_cache(),
+                ConsoleAuthConfirmationHandler::default().or(DeviceConfirmationHandler),
+            )
+            .await?
+        }
+    };
 
     println!("requesting games");
 
