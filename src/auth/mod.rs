@@ -1,7 +1,8 @@
 mod confirmation;
 mod guard_data;
 
-use crate::connection::Connection;
+use crate::connection::raw::RawConnection;
+use crate::connection::unauthenticated::service_method_un_authenticated;
 use crate::message::NetMessage;
 use crate::message::{MalformedBody, ServiceMethodMessage};
 use crate::net::NetworkError;
@@ -30,7 +31,7 @@ use tokio::time::sleep;
 use tracing::{debug, info, instrument};
 
 pub(crate) async fn begin_password_auth(
-    connection: &mut Connection,
+    connection: &mut RawConnection,
     account: &str,
     password: &str,
     guard_data: Option<&str>,
@@ -61,7 +62,7 @@ pub(crate) async fn begin_password_auth(
         guard_data: guard_data.map(String::from),
         ..CAuthentication_BeginAuthSessionViaCredentials_Request::default()
     };
-    let res = connection.service_method_un_authenticated(req).await?;
+    let res = service_method_un_authenticated(connection, req).await?;
     Ok(StartedAuth::Credentials(res))
 }
 
@@ -134,7 +135,7 @@ impl StartedAuth {
 
     pub async fn submit_confirmation(
         &self,
-        connection: &Connection,
+        connection: &RawConnection,
         confirmation: ConfirmationAction,
     ) -> Result<(), ConfirmationError> {
         match confirmation {
@@ -146,7 +147,7 @@ impl StartedAuth {
                     code_type: Some(EnumOrUnknown::new(ty.into())),
                     ..CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request::default()
                 };
-                let _ = connection.service_method_un_authenticated(req).await?;
+                let _ = service_method_un_authenticated(connection, req).await?;
             }
             ConfirmationAction::None => {}
             ConfirmationAction::Abort => return Err(ConfirmationError::Aborted),
@@ -168,7 +169,7 @@ pub(crate) struct PendingAuth {
 impl PendingAuth {
     pub(crate) async fn wait_for_tokens(
         self,
-        connection: &Connection,
+        connection: &RawConnection,
     ) -> Result<Tokens, NetworkError> {
         loop {
             let mut response = poll_until_info(
@@ -207,7 +208,7 @@ pub(crate) struct Tokens {
 }
 
 async fn poll_until_info(
-    connection: &Connection,
+    connection: &RawConnection,
     client_id: u64,
     request_id: &[u8],
     interval: Duration,
@@ -219,7 +220,7 @@ async fn poll_until_info(
             ..CAuthentication_PollAuthSessionStatus_Request::default()
         };
 
-        let resp = connection.service_method_un_authenticated(req).await?;
+        let resp = service_method_un_authenticated(connection, req).await?;
         let has_data = resp.has_access_token()
             || resp.has_account_name()
             || resp.has_agreement_session_url()
@@ -239,7 +240,7 @@ async fn poll_until_info(
 
 #[instrument(skip(connection))]
 async fn get_password_rsa(
-    connection: &mut Connection,
+    connection: &mut RawConnection,
     account: String,
 ) -> Result<(RsaPublicKey, u64), NetworkError> {
     debug!("getting password rsa");
@@ -247,7 +248,7 @@ async fn get_password_rsa(
         account_name: Some(account),
         ..CAuthentication_GetPasswordRSAPublicKey_Request::default()
     };
-    let response = connection.service_method_un_authenticated(req).await?;
+    let response = service_method_un_authenticated(connection, req).await?;
 
     let key_mod =
         BigUint::from_str_radix(response.publickey_mod.as_deref().unwrap_or_default(), 16)

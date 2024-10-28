@@ -1,11 +1,13 @@
 use crate::auth::{ConfirmationError, ConfirmationMethod};
-use crate::connection::{Connection, ConnectionTrait};
+use crate::connection::raw::RawConnection;
+use crate::connection::{ConnectionImpl, ConnectionTrait};
 use crate::eresult::EResult;
 use crate::net::{JobId, NetMessageHeader, NetworkError};
 use crate::proto::steammessages_base::CMsgIPAddress;
 use crate::proto::steammessages_clientserver_login::{
     CMsgClientHello, CMsgClientLogon, CMsgClientLogonResponse,
 };
+use crate::NetMessage;
 use protobuf::MessageField;
 use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -142,7 +144,7 @@ impl Session {
     }
 }
 
-pub async fn anonymous(connection: &mut Connection, account_type: AccountType) -> Result<Session> {
+pub async fn anonymous(connection: &RawConnection, account_type: AccountType) -> Result<Session> {
     let mut ip = CMsgIPAddress::new();
     ip.set_v4(0);
 
@@ -168,7 +170,7 @@ pub async fn anonymous(connection: &mut Connection, account_type: AccountType) -
 }
 
 pub async fn login(
-    connection: &mut Connection,
+    connection: &mut RawConnection,
     account: &str,
     steam_id: SteamID,
     access_token: &str,
@@ -195,7 +197,7 @@ pub async fn login(
 }
 
 async fn send_logon(
-    connection: &mut Connection,
+    connection: &RawConnection,
     logon: CMsgClientLogon,
     steam_id: SteamID,
 ) -> Result<Session> {
@@ -206,11 +208,13 @@ async fn send_logon(
         ..NetMessageHeader::default()
     };
 
-    let fut = connection.one_with_header::<CMsgClientLogonResponse>();
+    let filter = connection.filter();
+    let fut = filter.one_kind(CMsgClientLogonResponse::KIND);
     connection.raw_send(header, logon).await?;
 
     debug!("waiting for login response");
-    let (header, response) = fut.await?;
+    let raw_response = fut.await.map_err(|_| NetworkError::EOF)?;
+    let (header, response) = raw_response.into_header_and_message::<CMsgClientLogonResponse>()?;
     EResult::from_result(response.eresult()).map_err(LoginError::from)?;
     debug!(steam_id = u64::from(steam_id), "session started");
     Ok(Session {
@@ -233,7 +237,7 @@ async fn send_logon(
     })
 }
 
-pub async fn hello(conn: &mut Connection) -> Result<(), NetworkError> {
+pub async fn hello<C: ConnectionImpl>(conn: &mut C) -> std::result::Result<(), NetworkError> {
     const PROTOCOL_VERSION: u32 = 65580;
     let req = CMsgClientHello {
         protocol_version: Some(PROTOCOL_VERSION),
@@ -248,6 +252,12 @@ pub async fn hello(conn: &mut Connection) -> Result<(), NetworkError> {
         ..NetMessageHeader::default()
     };
 
-    conn.raw_send(header, req).await?;
+    conn.raw_send_with_kind(
+        header,
+        req,
+        CMsgClientHello::KIND,
+        CMsgClientHello::IS_PROTOBUF,
+    )
+    .await?;
     Ok(())
 }

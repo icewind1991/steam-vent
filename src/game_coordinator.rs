@@ -96,8 +96,8 @@ impl GameCoordinator {
         let gc = GameCoordinator {
             app_id,
             filter,
-            sender: connection.sender.clone(),
-            session: connection.session.clone().with_app_id(app_id),
+            sender: connection.sender().clone(),
+            session: connection.session().clone().with_app_id(app_id),
             timeout: connection.timeout(),
         };
 

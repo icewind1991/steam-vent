@@ -1,38 +1,34 @@
 mod filter;
+pub mod raw;
+pub mod unauthenticated;
 
-use crate::auth::{begin_password_auth, AuthConfirmationHandler, GuardDataStore};
+use crate::auth::{AuthConfirmationHandler, GuardDataStore};
 use crate::message::{
     EncodableMessage, NetMessage, ServiceMethodMessage, ServiceMethodResponseMessage,
 };
 use crate::net::{NetMessageHeader, NetworkError, RawNetMessage};
-use crate::proto::enums_clientserver::EMsg;
-use crate::proto::steammessages_clientserver_login::CMsgClientHeartBeat;
 use crate::serverlist::ServerList;
 use crate::service_method::ServiceMethodRequest;
-use crate::session::{anonymous, hello, login, ConnectionError, Session};
-use crate::transport::websocket::connect;
+use crate::session::{ConnectionError, Session};
 use async_stream::try_stream;
 pub use filter::MessageFilter;
-use futures_util::future::{select, Either};
 use futures_util::{FutureExt, Sink, SinkExt};
+use raw::RawConnection;
 use std::fmt::{Debug, Formatter};
 use std::future::Future;
 use std::net::IpAddr;
-use std::pin::pin;
 use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_proto::{JobMultiple, MsgKindEnum};
-use steamid_ng::{AccountType, SteamID};
-use tokio::select;
+use steamid_ng::SteamID;
 use tokio::sync::Mutex;
-use tokio::task::spawn;
-use tokio::time::{sleep, timeout};
+use tokio::time::timeout;
 use tokio_stream::wrappers::BroadcastStream;
 use tokio_stream::{Stream, StreamExt};
-use tokio_util::sync::{CancellationToken, DropGuard};
-use tracing::{debug, error, instrument};
+use tracing::instrument;
+pub use unauthenticated::UnAuthenticatedConnection;
 
-type Result<T, E = NetworkError> = std::result::Result<T, E>;
+pub(crate) type Result<T, E = NetworkError> = std::result::Result<T, E>;
 
 type TransportWriter = Arc<Mutex<dyn Sink<RawNetMessage, Error = NetworkError> + Unpin + Send>>;
 
@@ -51,14 +47,7 @@ impl MessageSender {
 
 /// A connection to the steam server
 #[derive(Clone)]
-pub struct Connection {
-    pub(crate) session: Session,
-    filter: MessageFilter,
-    timeout: Duration,
-    pub(crate) sender: MessageSender,
-    heartbeat_cancellation_token: CancellationToken,
-    _heartbeat_drop_guard: Arc<DropGuard>,
-}
+pub struct Connection(RawConnection);
 
 impl Debug for Connection {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
@@ -67,181 +56,63 @@ impl Debug for Connection {
 }
 
 impl Connection {
-    async fn connect(server_list: &ServerList) -> Result<Self, ConnectionError> {
-        let (read, write) = connect(&server_list.pick_ws()).await?;
-        let filter = MessageFilter::new(read);
-        let heartbeat_cancellation_token = CancellationToken::new();
-        let mut connection = Connection {
-            session: Session::default(),
-            filter,
-            sender: MessageSender {
-                write: Arc::new(Mutex::new(write)),
-            },
-            timeout: Duration::from_secs(10),
-            heartbeat_cancellation_token: heartbeat_cancellation_token.clone(),
-            // We just store a drop guard using an `Arc` here, so dropping the last clone of `Connection` will cancel the heartbeat task.
-            _heartbeat_drop_guard: Arc::new(heartbeat_cancellation_token.drop_guard()),
-        };
-        hello(&mut connection).await?;
-        Ok(connection)
+    pub(self) fn new(raw: RawConnection) -> Self {
+        Self(raw)
     }
 
     pub async fn anonymous(server_list: &ServerList) -> Result<Self, ConnectionError> {
-        let mut connection = Self::connect(server_list).await?;
-        connection.session = anonymous(&mut connection, AccountType::AnonUser).await?;
-        connection.setup_heartbeat();
-
-        Ok(connection)
+        UnAuthenticatedConnection::connect(server_list)
+            .await?
+            .anonymous()
+            .await
     }
 
     pub async fn anonymous_server(server_list: &ServerList) -> Result<Self, ConnectionError> {
-        let mut connection = Self::connect(server_list).await?;
-        connection.session = anonymous(&mut connection, AccountType::AnonGameServer).await?;
-        connection.setup_heartbeat();
-
-        Ok(connection)
+        UnAuthenticatedConnection::connect(server_list)
+            .await?
+            .anonymous_server()
+            .await
     }
 
     pub async fn login<H: AuthConfirmationHandler, G: GuardDataStore>(
         server_list: &ServerList,
         account: &str,
         password: &str,
-        mut guard_data_store: G,
+        guard_data_store: G,
         confirmation_handler: H,
     ) -> Result<Self, ConnectionError> {
-        let mut connection = Self::connect(server_list).await?;
-        let guard_data = guard_data_store.load(account).await.unwrap_or_else(|e| {
-            error!(error = ?e, "failed to retrieve guard data");
-            None
-        });
-        if guard_data.is_some() {
-            debug!(account, "found stored guard data");
-        }
-        let begin =
-            begin_password_auth(&mut connection, account, password, guard_data.as_deref()).await?;
-        let steam_id = SteamID::from(begin.steam_id());
-
-        let allowed_confirmations = begin.allowed_confirmations();
-
-        let tokens = match select(
-            pin!(confirmation_handler.handle_confirmation(&allowed_confirmations)),
-            pin!(begin.poll().wait_for_tokens(&connection)),
-        )
-        .await
-        {
-            Either::Left((confirmation_action, tokens_fut)) => {
-                if let Some(confirmation_action) = confirmation_action {
-                    begin
-                        .submit_confirmation(&connection, confirmation_action)
-                        .await?;
-                    tokens_fut.await?
-                } else if begin.action_required() {
-                    return Err(ConnectionError::UnsupportedConfirmationAction(
-                        allowed_confirmations.clone(),
-                    ));
-                } else {
-                    tokens_fut.await?
-                }
-            }
-            Either::Right((tokens, _)) => tokens?,
-        };
-
-        if let Some(guard_data) = tokens.new_guard_data {
-            if let Err(e) = guard_data_store.store(account, guard_data).await {
-                error!(error = ?e, "failed to store guard data");
-            }
-        }
-
-        connection.session = login(
-            &mut connection,
-            account,
-            steam_id,
-            // yes we send the refresh token as access token, yes it makes no sense, yes this is actually required
-            tokens.refresh_token.as_ref(),
-        )
-        .await?;
-        connection.setup_heartbeat();
-
-        Ok(connection)
-    }
-
-    fn setup_heartbeat(&self) {
-        let sender = self.sender.clone();
-        let interval = self.session.heartbeat_interval;
-        let header = NetMessageHeader {
-            session_id: self.session.session_id,
-            steam_id: self.steam_id(),
-            ..NetMessageHeader::default()
-        };
-        debug!("Setting up heartbeat with interval {:?}", interval);
-        let token = self.heartbeat_cancellation_token.clone();
-        spawn(async move {
-            loop {
-                select! {
-                    _ = sleep(interval) => {},
-                    _ = token.cancelled() => {
-                        break
-                    }
-                };
-                debug!("Sending heartbeat message");
-                match RawNetMessage::from_message(header.clone(), CMsgClientHeartBeat::default()) {
-                    Ok(msg) => {
-                        if let Err(e) = sender.send_raw(msg).await {
-                            error!(error = ?e, "Failed to send heartbeat message");
-                        }
-                    }
-                    Err(e) => {
-                        error!(error = ?e, "Failed to prepare heartbeat message")
-                    }
-                }
-            }
-            debug!("Heartbeat task stopping");
-        });
+        UnAuthenticatedConnection::connect(server_list)
+            .await?
+            .login(account, password, guard_data_store, confirmation_handler)
+            .await
     }
 
     pub fn steam_id(&self) -> SteamID {
-        self.session.steam_id
+        self.session().steam_id
     }
 
     pub fn session_id(&self) -> i32 {
-        self.session.session_id
+        self.session().session_id
     }
 
     pub fn cell_id(&self) -> u32 {
-        self.session.cell_id
+        self.session().cell_id
     }
 
     pub fn public_ip(&self) -> Option<IpAddr> {
-        self.session.public_ip
+        self.session().public_ip
     }
 
     pub fn ip_country_code(&self) -> Option<String> {
-        self.session.ip_country_code.clone()
+        self.session().ip_country_code.clone()
     }
 
     pub fn set_timeout(&mut self, timeout: Duration) {
-        self.timeout = timeout;
+        self.0.timeout = timeout;
     }
 
-    pub(crate) async fn service_method_un_authenticated<Msg: ServiceMethodRequest>(
-        &self,
-        msg: Msg,
-    ) -> Result<Msg::Response> {
-        let header = self.session.header(true);
-        let recv = self.filter.on_job_id(header.source_job_id);
-        let msg = RawNetMessage::from_message_with_kind(
-            header,
-            ServiceMethodMessage(msg),
-            EMsg::k_EMsgServiceMethodCallFromClientNonAuthed,
-            true,
-        )?;
-        self.sender.send_raw(msg).await?;
-        let message = timeout(self.timeout, recv)
-            .await
-            .map_err(|_| NetworkError::Timeout)?
-            .map_err(|_| NetworkError::Timeout)?
-            .into_message::<ServiceMethodResponseMessage>()?;
-        message.into_response::<Msg>()
+    pub(crate) fn sender(&self) -> &MessageSender {
+        &self.0.sender
     }
 
     /// Get all messages that haven't been filtered by any of the filters
@@ -249,7 +120,7 @@ impl Connection {
     /// Note that at most 32 unprocessed connections are stored and calling
     /// this method clears the buffer
     pub fn take_unprocessed(&self) -> Vec<RawNetMessage> {
-        self.filter.unprocessed()
+        self.0.filter.unprocessed()
     }
 }
 
@@ -331,15 +202,15 @@ pub trait ConnectionTrait: Debug {
 
 impl ConnectionImpl for Connection {
     fn timeout(&self) -> Duration {
-        self.timeout
+        self.0.timeout()
     }
 
     fn filter(&self) -> &MessageFilter {
-        &self.filter
+        self.0.filter()
     }
 
     fn session(&self) -> &Session {
-        &self.session
+        self.0.session()
     }
 
     async fn raw_send_with_kind<Msg: EncodableMessage, K: MsgKindEnum>(
@@ -349,8 +220,14 @@ impl ConnectionImpl for Connection {
         kind: K,
         is_protobuf: bool,
     ) -> Result<()> {
-        let msg = RawNetMessage::from_message_with_kind(header, msg, kind, is_protobuf)?;
-        self.sender.send_raw(msg).await
+        <RawConnection as ConnectionImpl>::raw_send_with_kind(
+            &self.0,
+            header,
+            msg,
+            kind,
+            is_protobuf,
+        )
+        .await
     }
 }
 
