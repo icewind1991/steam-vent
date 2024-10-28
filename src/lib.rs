@@ -11,7 +11,7 @@ mod transport;
 
 pub use steam_vent_proto as proto;
 
-pub use connection::{Connection, ConnectionTrait};
+pub use connection::{Connection, ConnectionSender};
 pub use eresult::EResult;
 pub use game_coordinator::GameCoordinator;
 pub use message::NetMessage;

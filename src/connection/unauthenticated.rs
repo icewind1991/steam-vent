@@ -1,16 +1,21 @@
 use super::raw::RawConnection;
-use super::Result;
+use super::{ConnectionListener, Result};
 use crate::auth::{begin_password_auth, AuthConfirmationHandler, GuardDataStore};
 use crate::message::{ServiceMethodMessage, ServiceMethodResponseMessage};
-use crate::net::RawNetMessage;
+use crate::net::{NetMessageHeader, RawNetMessage};
 use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, login};
-use crate::{Connection, ConnectionError, NetworkError, ServerList};
+use crate::{Connection, ConnectionError, NetMessage, NetworkError, ServerList};
 use futures_util::future::{select, Either};
+use futures_util::FutureExt;
+use futures_util::Stream;
+use std::future::Future;
 use std::pin::pin;
 use steam_vent_proto::enums_clientserver::EMsg;
 use steamid_ng::{AccountType, SteamID};
 use tokio::time::timeout;
+use tokio_stream::wrappers::BroadcastStream;
+use tokio_stream::StreamExt;
 use tracing::{debug, error};
 
 pub struct UnAuthenticatedConnection(RawConnection);
@@ -99,6 +104,46 @@ impl UnAuthenticatedConnection {
         let connection = Connection::new(raw);
 
         Ok(connection)
+    }
+}
+
+/// Listen for messages before starting authentication
+impl ConnectionListener for UnAuthenticatedConnection {
+    fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> + 'static {
+        BroadcastStream::new(self.0.filter.on_notification(T::REQ_NAME))
+            .filter_map(|res| res.ok())
+            .map(|raw| raw.into_notification())
+    }
+
+    fn one_with_header<T: NetMessage + 'static>(
+        &self,
+    ) -> impl Future<Output = Result<(NetMessageHeader, T)>> + 'static {
+        // async block instead of async fn, so we don't have to tie the lifetime of the returned future
+        // to the lifetime of &self
+        let fut = self.0.filter.one_kind(T::KIND);
+        async move {
+            let raw = fut.await.map_err(|_| NetworkError::EOF)?;
+            raw.into_header_and_message()
+        }
+    }
+
+    fn one<T: NetMessage + 'static>(&self) -> impl Future<Output = Result<T>> + 'static {
+        self.one_with_header::<T>()
+            .map(|res| res.map(|(_, msg)| msg))
+    }
+
+    fn on_with_header<T: NetMessage + 'static>(
+        &self,
+    ) -> impl Stream<Item = Result<(NetMessageHeader, T)>> + 'static {
+        BroadcastStream::new(self.0.filter.on_kind(T::KIND)).map(|raw| {
+            let raw = raw.map_err(|_| NetworkError::EOF)?;
+            raw.into_header_and_message()
+        })
+    }
+
+    fn on<T: NetMessage + 'static>(&self) -> impl Stream<Item = Result<T>> + 'static {
+        self.on_with_header::<T>()
+            .map(|res| res.map(|(_, msg)| msg))
     }
 }
 

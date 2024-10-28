@@ -1,6 +1,6 @@
 use crate::auth::{ConfirmationError, ConfirmationMethod};
 use crate::connection::raw::RawConnection;
-use crate::connection::{ConnectionImpl, ConnectionTrait};
+use crate::connection::{ConnectionImpl, ConnectionSender};
 use crate::eresult::EResult;
 use crate::net::{JobId, NetMessageHeader, NetworkError};
 use crate::proto::steammessages_base::CMsgIPAddress;

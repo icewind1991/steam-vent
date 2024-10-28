@@ -5,7 +5,7 @@ use steam_vent::auth::{
     FileGuardDataStore,
 };
 use steam_vent::proto::steammessages_player_steamclient::CPlayer_GetOwnedGames_Request;
-use steam_vent::{Connection, ConnectionTrait, ServerList};
+use steam_vent::{Connection, ConnectionSender, ServerList};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {

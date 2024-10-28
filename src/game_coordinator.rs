@@ -1,4 +1,6 @@
-use crate::connection::{ConnectionImpl, ConnectionTrait, MessageFilter, MessageSender};
+use crate::connection::{
+    ConnectionImpl, ConnectionListener, ConnectionSender, MessageFilter, MessageSender,
+};
 use crate::message::EncodableMessage;
 use crate::net::{decode_kind, NetMessageHeader, RawNetMessage};
 use crate::session::Session;
