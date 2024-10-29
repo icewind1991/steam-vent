@@ -1,6 +1,6 @@
 [package]
 name = "steam-vent"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Robin Appelman <robin@icewind.nl>"]
 edition = "2021"
 description = "Interact with the Steam network via rust"
@@ -11,7 +11,7 @@ rust-version = "1.75.0"
 [dependencies]
 steam-vent-proto = { version = "0.5", path = "./protobuf" }
 steam-vent-crypto = { version = "0.2", path = "./crypto" }
-tokio = { version = "1.39.3", features = ["net", "io-util", "macros"] }
+tokio = { version = "1.39.3", features = ["net", "io-util", "macros", "io-std"] }
 tokio-util = { version = "0.7.11", features = ["codec"] }
 tokio-stream = { version = "0.1.15", features = ["sync"] }
 tokio-tungstenite = { version = "0.23.1", features = ["rustls-tls-webpki-roots"] }
