@@ -84,7 +84,7 @@ pub struct JobIdCounter(Arc<AtomicU64>);
 impl JobIdCounter {
     #[allow(clippy::should_implement_trait)]
     pub fn next(&self) -> JobId {
-        JobId(self.0.fetch_add(1, Ordering::SeqCst))
+        JobId(self.0.fetch_add(1, Ordering::Relaxed))
     }
 }
 
