@@ -7,7 +7,7 @@ use steam_vent::auth::{
     AuthConfirmationHandler, ConsoleAuthConfirmationHandler, DeviceConfirmationHandler,
     FileGuardDataStore,
 };
-use steam_vent::connection::{ConnectionListener, UnAuthenticatedConnection};
+use steam_vent::connection::{ReadonlyConnection, UnAuthenticatedConnection};
 use steam_vent::ServerList;
 use steam_vent_proto::steammessages_clientserver::CMsgClientGameConnectTokens;
 

@@ -1,5 +1,5 @@
 use super::raw::RawConnection;
-use super::{ConnectionListener, Result};
+use super::{ReadonlyConnection, Result};
 use crate::auth::{begin_password_auth, AuthConfirmationHandler, GuardDataStore};
 use crate::message::{ServiceMethodMessage, ServiceMethodResponseMessage};
 use crate::net::{NetMessageHeader, RawNetMessage};
@@ -109,7 +109,7 @@ impl UnAuthenticatedConnection {
 }
 
 /// Listen for messages before starting authentication
-impl ConnectionListener for UnAuthenticatedConnection {
+impl ReadonlyConnection for UnAuthenticatedConnection {
     fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> + 'static {
         BroadcastStream::new(self.0.filter.on_notification(T::REQ_NAME))
             .filter_map(|res| res.ok())

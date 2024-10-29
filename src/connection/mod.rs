@@ -138,8 +138,8 @@ pub(crate) trait ConnectionImpl: Sync + Debug {
     ) -> impl Future<Output = Result<()>> + Send;
 }
 
-/// A trait for listening for messages coming from steam
-pub trait ConnectionListener {
+/// A trait for connections that only allow listening for messages coming from steam
+pub trait ReadonlyConnection {
     fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> + 'static;
 
     /// Wait for one message of a specific kind, also returning the header
@@ -160,7 +160,25 @@ pub trait ConnectionListener {
 }
 
 /// A trait for sending messages to steam
-pub trait ConnectionSender {
+pub trait ConnectionTrait {
+    fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> + 'static;
+
+    /// Wait for one message of a specific kind, also returning the header
+    fn one_with_header<T: NetMessage + 'static>(
+        &self,
+    ) -> impl Future<Output = Result<(NetMessageHeader, T)>> + 'static;
+
+    /// Wait for one message of a specific kind
+    fn one<T: NetMessage + 'static>(&self) -> impl Future<Output = Result<T>> + 'static;
+
+    /// Listen to messages of a specific kind, also returning the header
+    fn on_with_header<T: NetMessage + 'static>(
+        &self,
+    ) -> impl Stream<Item = Result<(NetMessageHeader, T)>> + 'static;
+
+    /// Listen to messages of a specific kind
+    fn on<T: NetMessage + 'static>(&self) -> impl Stream<Item = Result<T>> + 'static;
+
     /// Send a rpc-request to steam, waiting for the matching rpc-response
     fn service_method<Msg: ServiceMethodRequest>(
         &self,
@@ -235,7 +253,7 @@ impl ConnectionImpl for Connection {
     }
 }
 
-impl<C: ConnectionImpl> ConnectionListener for C {
+impl<C: ConnectionImpl> ConnectionTrait for C {
     fn on_notification<T: ServiceMethodRequest>(&self) -> impl Stream<Item = Result<T>> + 'static {
         BroadcastStream::new(self.filter().on_notification(T::REQ_NAME))
             .filter_map(|res| res.ok())
@@ -272,9 +290,7 @@ impl<C: ConnectionImpl> ConnectionListener for C {
         self.on_with_header::<T>()
             .map(|res| res.map(|(_, msg)| msg))
     }
-}
 
-impl<C: ConnectionImpl> ConnectionSender for C {
     async fn service_method<Msg: ServiceMethodRequest>(&self, msg: Msg) -> Result<Msg::Response> {
         let header = self.session().header(true);
         let recv = self.filter().on_job_id(header.source_job_id);

@@ -5,8 +5,7 @@ use steam_vent::auth::{
     AuthConfirmationHandler, ConsoleAuthConfirmationHandler, DeviceConfirmationHandler,
     FileGuardDataStore,
 };
-use steam_vent::connection::ConnectionListener;
-use steam_vent::{Connection, ConnectionSender, GameCoordinator, ServerList};
+use steam_vent::{Connection, ConnectionTrait, GameCoordinator, ServerList};
 use steam_vent_proto::tf2::base_gcmessages::CSOEconItem;
 use steam_vent_proto::tf2::gcsdk_gcmessages::{
     CMsgSOCacheSubscribed, CMsgSOCacheSubscriptionRefresh,
