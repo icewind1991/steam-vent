@@ -17,6 +17,7 @@ use tracing::{debug, trace};
 pub const PROTO_MASK: u32 = 0x80000000;
 
 #[derive(Debug, Error)]
+#[non_exhaustive]
 pub enum NetworkError {
     #[error("{0}")]
     IO(#[from] std::io::Error),

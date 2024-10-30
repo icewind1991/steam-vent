@@ -9,6 +9,7 @@ use thiserror::Error;
 use tracing::debug;
 
 #[derive(Debug, Error)]
+#[non_exhaustive]
 pub enum ServerDiscoveryError {
     #[error("Failed send discovery request: {0:#}")]
     Network(reqwest::Error),

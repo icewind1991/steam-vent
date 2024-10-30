@@ -3,6 +3,7 @@ use std::convert::TryFrom;
 
 #[derive(TryFromPrimitive, Debug, Copy, Clone)]
 #[repr(i32)]
+#[non_exhaustive]
 pub enum EResult {
     Invalid = 0,
     OK = 1,

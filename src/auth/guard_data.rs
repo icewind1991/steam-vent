@@ -26,6 +26,7 @@ pub trait GuardDataStore {
 
 /// Error while storing or loading guard data from json file
 #[derive(Debug, Error)]
+#[non_exhaustive]
 pub enum FileStoreError {
     /// Error while reading the json file
     #[error("error while reading tokens from {}: {:#}", path.display(), err)]

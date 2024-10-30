@@ -33,6 +33,7 @@ impl MalformedBody {
 }
 
 #[derive(Error, Debug)]
+#[non_exhaustive]
 pub enum MessageBodyError {
     #[error("{0}")]
     Protobuf(#[from] protobuf::Error),
@@ -42,8 +43,6 @@ pub enum MessageBodyError {
     IO(#[from] std::io::Error),
     #[error("{0}")]
     Other(String),
-    #[error("malformed child: {0}")]
-    MalformedChild(Box<NetworkError>),
     #[error("malformed big int: {0:#}")]
     BigInt(#[from] ParseBigIntError),
     #[error("invalid rsa key: {0:#}")]
