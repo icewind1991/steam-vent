@@ -321,6 +321,13 @@ impl RawNetMessage {
             header_buffer,
         })
     }
+
+    /// Return a buffer containing the raw message bytes
+    pub fn into_bytes(self) -> BytesMut {
+        let mut body = self.header_buffer;
+        body.unsplit(self.data);
+        body
+    }
 }
 
 impl RawNetMessage {

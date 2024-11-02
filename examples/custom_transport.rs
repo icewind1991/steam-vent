@@ -1,23 +1,37 @@
-use crate::message::flatten_multi;
-use crate::net::{NetworkError, RawNetMessage};
-use futures_util::{Sink, SinkExt, StreamExt, TryStreamExt};
+use futures_util::{Sink, SinkExt, Stream, StreamExt, TryStreamExt};
 use rustls::{ClientConfig, KeyLogFile, RootCertStore};
+use std::error::Error;
 use std::future::ready;
 use std::sync::Arc;
-use tokio_stream::Stream;
+use steam_vent::connection::UnAuthenticatedConnection;
+use steam_vent::message::flatten_multi;
+use steam_vent::{NetworkError, RawNetMessage, ServerList};
 use tokio_tungstenite::tungstenite::Message as WsMessage;
 use tokio_tungstenite::{connect_async_tls_with_config, Connector};
-use tracing::{debug, instrument};
 
-type Result<T, E = NetworkError> = std::result::Result<T, E>;
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn Error>> {
+    tracing_subscriber::fmt::init();
 
-#[instrument]
+    let server_list = ServerList::discover().await?;
+    let (sender, receiver) = connect(&server_list.pick_ws()).await?;
+    let connection = UnAuthenticatedConnection::from_sender_receiver(sender, receiver).await?;
+    let _connection = connection.anonymous().await?;
+
+    Ok(())
+}
+
+// this is just a copy of the standard websocket transport implementation, functioning as an example
+// how to implement a websocket transport
 pub async fn connect(
     addr: &str,
-) -> Result<(
-    impl Sink<RawNetMessage, Error = NetworkError>,
-    impl Stream<Item = Result<RawNetMessage>>,
-)> {
+) -> Result<
+    (
+        impl Sink<RawNetMessage, Error = NetworkError>,
+        impl Stream<Item = Result<RawNetMessage, NetworkError>>,
+    ),
+    NetworkError,
+> {
     rustls::crypto::aws_lc_rs::default_provider()
         .install_default()
         .ok(); // can only be once called
@@ -29,7 +43,6 @@ pub async fn connect(
     tls_config.key_log = Arc::new(KeyLogFile::new());
     let tls_config = Connector::Rustls(Arc::new(tls_config));
     let (stream, _) = connect_async_tls_with_config(addr, None, false, Some(tls_config)).await?;
-    debug!("connected to websocket server");
     let (raw_write, raw_read) = stream.split();
 
     Ok((

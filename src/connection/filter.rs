@@ -3,6 +3,7 @@ use crate::net::{JobId, RawNetMessage};
 use dashmap::DashMap;
 use futures_util::Stream;
 use std::collections::VecDeque;
+use std::pin::pin;
 use std::sync::{Arc, Mutex};
 use steam_vent_proto::enums_clientserver::EMsg;
 use steam_vent_proto::MsgKind;
@@ -59,10 +60,8 @@ pub struct MessageFilter {
 }
 
 impl MessageFilter {
-    pub fn new<
-        Input: Stream<Item = crate::connection::Result<RawNetMessage>> + Send + Unpin + 'static,
-    >(
-        mut source: Input,
+    pub fn new<Input: Stream<Item = crate::connection::Result<RawNetMessage>> + Send + 'static>(
+        source: Input,
     ) -> Self {
         let filter = MessageFilter {
             job_id_filters: Default::default(),
@@ -75,6 +74,7 @@ impl MessageFilter {
 
         let filter_send = filter.clone();
         spawn(async move {
+            let mut source = pin!(source);
             while let Some(res) = source.next().await {
                 match res {
                     Ok(message) => {

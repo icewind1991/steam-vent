@@ -155,8 +155,8 @@ pub async fn encode_message<T: NetMessage, S: Sink<BytesMut, Error = NetworkErro
 pub async fn connect<A: ToSocketAddrs + Debug>(
     addr: A,
 ) -> Result<(
-    impl Stream<Item = Result<RawNetMessage>>,
     impl Sink<RawNetMessage, Error = NetworkError>,
+    impl Stream<Item = Result<RawNetMessage>>,
 )> {
     let stream = TcpStream::connect(addr).await?;
     debug!("connected to server");
@@ -190,6 +190,7 @@ pub async fn connect<A: ToSocketAddrs + Debug>(
     let key = key.plain;
 
     Ok((
+        FramedWrite::new(raw_writer.into_inner(), RawMessageEncoder { key }),
         flatten_multi(
             raw_reader
                 .and_then(move |encrypted| {
@@ -201,6 +202,5 @@ pub async fn connect<A: ToSocketAddrs + Debug>(
                 })
                 .and_then(|raw| ready(RawNetMessage::read(raw))),
         ),
-        FramedWrite::new(raw_writer.into_inner(), RawMessageEncoder { key }),
     ))
 }

@@ -42,6 +42,7 @@ pub trait RpcMessageWithKind: RpcMessage {
     const KIND: Self::KindEnum;
 }
 
+/// A generic wrapper for "kind" constants used by network messages
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
 pub struct MsgKind(pub i32);
 
@@ -59,6 +60,10 @@ impl From<MsgKind> for i32 {
 
 pub const PROTO_MASK: u32 = 0x80000000;
 
+/// An enum containing "kind" constants used by the network messages
+///
+/// Though it is possible to use the generic [`MsgKind`] struct. Applications shipping their own protobufs
+/// are encouraged to create their own enums containing the constants in use for ease of use.
 pub trait MsgKindEnum: Enum + Debug {
     fn enum_value(&self) -> i32 {
         <Self as Enum>::value(self)

@@ -7,8 +7,8 @@ use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, login};
 use crate::{Connection, ConnectionError, NetMessage, NetworkError, ServerList};
 use futures_util::future::{select, Either};
-use futures_util::FutureExt;
 use futures_util::Stream;
+use futures_util::{FutureExt, Sink};
 use std::future::Future;
 use std::pin::pin;
 use steam_vent_proto::enums_clientserver::EMsg;
@@ -22,12 +22,30 @@ use tracing::{debug, error};
 pub struct UnAuthenticatedConnection(RawConnection);
 
 impl UnAuthenticatedConnection {
+    /// Create a connection from a sender, receiver pair.
+    ///
+    /// This allows customizing the transport used by the connection. For example to customize the
+    /// TLS configuration, use an existing websocket client or use a proxy.
+    pub async fn from_sender_receiver<
+        Sender: Sink<RawNetMessage, Error = NetworkError> + Send + 'static,
+        Receiver: Stream<Item = Result<RawNetMessage>> + Send + 'static,
+    >(
+        sender: Sender,
+        receiver: Receiver,
+    ) -> Result<Self, ConnectionError> {
+        Ok(UnAuthenticatedConnection(
+            RawConnection::from_sender_receiver(sender, receiver).await?,
+        ))
+    }
+
+    /// Connect to a server from the server list using the default websocket transport
     pub async fn connect(server_list: &ServerList) -> Result<Self, ConnectionError> {
         Ok(UnAuthenticatedConnection(
             RawConnection::connect(server_list).await?,
         ))
     }
 
+    /// Start an anonymous client session with this connection
     pub async fn anonymous(self) -> Result<Connection, ConnectionError> {
         let mut raw = self.0;
         raw.session = anonymous(&raw, AccountType::AnonUser).await?;
@@ -37,6 +55,7 @@ impl UnAuthenticatedConnection {
         Ok(connection)
     }
 
+    /// Start an anonymous server session with this connection
     pub async fn anonymous_server(self) -> Result<Connection, ConnectionError> {
         let mut raw = self.0;
         raw.session = anonymous(&raw, AccountType::AnonGameServer).await?;
@@ -46,6 +65,7 @@ impl UnAuthenticatedConnection {
         Ok(connection)
     }
 
+    /// Start a client session with this connection
     pub async fn login<H: AuthConfirmationHandler, G: GuardDataStore>(
         self,
         account: &str,
