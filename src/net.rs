@@ -2,7 +2,7 @@ use crate::eresult::EResult;
 use crate::message::{EncodableMessage, MalformedBody, NetMessage};
 use crate::proto::steammessages_base::CMsgProtoBufHeader;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
-use bytes::{Buf, BufMut, BytesMut};
+use bytes::{Buf, BufMut, Bytes, BytesMut};
 use protobuf::Message;
 use std::borrow::Cow;
 use std::fmt::Debug;
@@ -240,7 +240,8 @@ pub(crate) fn decode_kind(kind: u32) -> (MsgKind, bool) {
 }
 
 impl RawNetMessage {
-    pub fn read(mut value: BytesMut) -> Result<Self> {
+    pub fn read<Body: Into<Bytes>>(body: Body) -> Result<Self> {
+        let mut value = BytesMut::from(body.into());
         let mut reader = Cursor::new(&value);
         let kind = reader
             .read_u32::<LittleEndian>()

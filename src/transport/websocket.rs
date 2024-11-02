@@ -1,6 +1,5 @@
 use crate::message::flatten_multi;
 use crate::net::{NetworkError, RawNetMessage};
-use crate::transport::assert_can_unsplit;
 use futures_util::{Sink, SinkExt, StreamExt, TryStreamExt};
 use rustls::{ClientConfig, KeyLogFile, RootCertStore};
 use std::future::ready;
@@ -38,12 +37,10 @@ pub async fn connect(
             raw_read
                 .map_err(NetworkError::from)
                 .map_ok(|raw| raw.into_data())
-                .map_ok(|vec| vec.into_iter().collect()) // this should be optimized to reuse the memory
                 .map(|res| res.and_then(RawNetMessage::read)),
         ),
         raw_write.with(|msg: RawNetMessage| {
             let mut body = msg.header_buffer;
-            assert_can_unsplit(&body, &msg.data);
             body.unsplit(msg.data);
             ready(Ok(WsMessage::binary(body)))
         }),
