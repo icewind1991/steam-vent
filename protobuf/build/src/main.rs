@@ -1,9 +1,11 @@
+mod kinds;
+
 use ahash::{AHashMap, AHashSet, RandomState};
+use kinds::{get_kinds, Kind};
 use proc_macro2::{Ident, Span, TokenStream};
 use protobuf::reflect::{FileDescriptor, MessageDescriptor, ServiceDescriptor};
 use protobuf::{Message, SpecialFields, UnknownValueRef};
 use protobuf_codegen::{Codegen, Customize, CustomizeCallback};
-use protobuf_parse::Parser;
 use quote::{quote, ToTokens};
 use std::cell::RefCell;
 use std::cmp::Ordering;
@@ -261,10 +263,9 @@ impl ServiceGenerator {
     }
 
     fn find_kind(&self, message_type: &str, file_name: Option<&str>) -> Option<Kind> {
-        let postfix = message_type.strip_prefix('C')?;
         self.kinds
             .iter()
-            .find(|e_kind| e_kind.matches(postfix, file_name))
+            .find(|e_kind| e_kind.matches(message_type, file_name))
             .cloned()
     }
 }
@@ -410,105 +411,4 @@ fn ident_start(c: char) -> bool {
 // Copy-pasted from libsyntax.
 fn ident_continue(c: char) -> bool {
     (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_'
-}
-
-fn get_kinds(base: &Path, protos: &[PathBuf]) -> Vec<Kind> {
-    let mut parser = Parser::new();
-    parser.pure().include(base).inputs(protos);
-    let mut parsed = parser.parse_and_typecheck().unwrap().file_descriptors;
-    let kinds_enums = parsed
-        .iter_mut()
-        .flat_map(|parsed| {
-            let mod_name = proto_path_to_rust_mod(parsed.name());
-            parsed
-                .enum_type
-                .iter_mut()
-                .map(move |e| (mod_name.clone(), e))
-        })
-        .filter(|(_, e)| {
-            e.name().starts_with("E")
-                && (e.name().ends_with("Msg") || e.name().ends_with("Messages"))
-        });
-
-    let mut kinds = kinds_enums
-        .flat_map(|(mod_name, kinds_enum)| {
-            let prefix: String = kinds_enum
-                .name()
-                .chars()
-                .skip(1)
-                .take_while(char::is_ascii_uppercase)
-                .collect();
-            let prefix = prefix[0..prefix.len() - 1].to_string();
-            let variant_prefix = format!("k_EMsg{}", prefix);
-            let variant_prefix_alt = format!("k_E{}Msg_", prefix);
-            let variant_prefix_alt2 = "k_EMsg".to_string();
-            let enum_prefix = prefix.to_ascii_lowercase();
-            let enum_name = kinds_enum.take_name();
-
-            kinds_enum.value.iter_mut().map(move |opt| Kind {
-                mod_name: mod_name.clone(),
-                enum_name: enum_name.clone(),
-                enum_prefix: enum_prefix.clone(),
-                variant_prefix: variant_prefix.clone(),
-                variant_prefix_alt: variant_prefix_alt.clone(),
-                variant_prefix_alt2: variant_prefix_alt2.clone(),
-                variant: opt.take_name(),
-                struct_name_prefix_alt_len: prefix.len(),
-            })
-        })
-        .collect::<Vec<_>>();
-
-    // sort kinds with prefix in front
-    kinds.sort_by(|a, b| a.enum_prefix.len().cmp(&b.enum_prefix.len()).reverse());
-    kinds
-}
-
-#[derive(Debug, Clone)]
-struct Kind {
-    mod_name: String,
-    enum_name: String,
-    enum_prefix: String,
-    variant_prefix: String,
-    variant_prefix_alt: String,
-    variant_prefix_alt2: String,
-    variant: String,
-    struct_name_prefix_alt_len: usize,
-}
-
-impl Kind {
-    pub fn matches(&self, struct_name: &str, file_name: Option<&str>) -> bool {
-        let struct_name = struct_name.strip_prefix("Msg").unwrap_or(struct_name);
-
-        let Some(stripped) = self
-            .variant
-            .strip_prefix(&self.variant_prefix)
-            .or_else(|| self.variant.strip_prefix(&self.variant_prefix_alt))
-            .or_else(|| self.variant.strip_prefix(&self.variant_prefix_alt2))
-        else {
-            return false;
-        };
-        if let Some(file_name) = file_name {
-            if !file_name.contains(&self.enum_prefix) {
-                return false;
-            }
-        }
-        struct_name.eq_ignore_ascii_case(stripped)
-            || struct_name
-                .get(self.struct_name_prefix_alt_len..)
-                .unwrap_or_default()
-                .eq_ignore_ascii_case(stripped)
-    }
-
-    pub fn ident(&self) -> TokenStream {
-        let path = Ident::new(&self.mod_name, Span::call_site());
-        let enum_ident = Ident::new(&self.enum_name, Span::call_site());
-        let variant_ident = Ident::new(&self.variant, Span::call_site());
-        quote!(crate::#path::#enum_ident::#variant_ident)
-    }
-
-    pub fn enum_ident(&self) -> TokenStream {
-        let path = Ident::new(&self.mod_name, Span::call_site());
-        let enum_ident = Ident::new(&self.enum_name, Span::call_site());
-        quote!(crate::#path::#enum_ident)
-    }
 }
