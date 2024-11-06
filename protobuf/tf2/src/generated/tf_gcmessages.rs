@@ -39531,6 +39531,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgExitMatchmaking {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgExitMatchmaking {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCExitMatchmaking;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgAcceptLobbyInvite {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -39596,6 +39600,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgKickedFromMatchmakingQueue {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgKickedFromMatchmakingQueue {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCKickedFromMatchmakingQueue;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGameServerMatchmakingStatus {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -39608,6 +39616,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGameServerMatchmakingStatus {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGameServerMatchmakingStatus {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCGameServerMatchmakingStatus;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgMatchmakingProgress {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -39622,6 +39634,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgMatchmakingProgress {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgMatchmakingProgress {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCMatchmakingProgress;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgMvMVictoryInfo {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -39634,6 +39650,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgMvMVictoryInfo {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgMvMVictoryInfo {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCMvMVictoryInfo;
 }
 impl ::steam_vent_proto_common::RpcMessage for CGCMsgTFHelloResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -39687,6 +39707,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgMvMVictory {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgMvMVictory {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCMvMVictory;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgMvMMannUpVictoryReply {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -39713,6 +39737,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGameServerKickingLobby {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgGameServerKickingLobby {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCGameServerKickingLobby;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgGameServerKickingLobbyResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -39725,6 +39753,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgGameServerKickingLobbyRespons
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgGameServerKickingLobbyResponse {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCGameServerKickingLobbyResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgLeaveGameAndPrepareToJoinParty {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -39739,6 +39772,11 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgLeaveGameAndPrepareToJoinPart
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind
+for CMsgLeaveGameAndPrepareToJoinParty {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCLeaveGameAndPrepareToJoinParty;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgPlayerLeftMatch {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -39752,6 +39790,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgPlayerLeftMatch {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgPlayerLeftMatch {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCPlayerLeftMatch;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgPlayerLeftMatchResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -39764,6 +39806,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgPlayerLeftMatchResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgPlayerLeftMatchResponse {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCPlayerLeftMatchResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgProcessMatchVoteKick {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -40675,6 +40721,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgQuestProgressReport {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgQuestProgressReport {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCQuestProgressReport;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgConsumePaintkit {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -40687,6 +40737,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgConsumePaintkit {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgConsumePaintkit {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCConsumePaintKit;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgPainkitDevGrant {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -40713,6 +40767,10 @@ impl ::steam_vent_proto_common::RpcMessage for GCQuestStrangeEvent {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for GCQuestStrangeEvent {
+    type KindEnum = crate::tf_gcmessages::ETFGCMsg;
+    const KIND: Self::KindEnum = crate::tf_gcmessages::ETFGCMsg::k_EMsgGCQuestStrangeEvent;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgSDRTicket {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {

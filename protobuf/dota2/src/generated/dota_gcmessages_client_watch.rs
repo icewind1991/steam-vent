@@ -5465,6 +5465,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgSpectateFriendGame {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgSpectateFriendGame {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCSpectateFriendGame;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgSpectateFriendGameResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5477,6 +5481,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgSpectateFriendGameResponse {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgSpectateFriendGameResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCSpectateFriendGameResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CDOTAReplayDownloadInfo {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5504,6 +5512,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgWatchGame {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgWatchGame {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCWatchGame;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgCancelWatchGame {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5516,6 +5528,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgCancelWatchGame {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgCancelWatchGame {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCCancelWatchGame;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgWatchGameResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -5530,6 +5546,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgWatchGameResponse {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgWatchGameResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCWatchGameResponse;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgPartyLeaderWatchGamePrompt {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -5542,6 +5562,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgPartyLeaderWatchGamePrompt {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgPartyLeaderWatchGamePrompt {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCPartyLeaderWatchGamePrompt;
 }
 impl ::steam_vent_proto_common::RpcMessage for CDOTABroadcasterInfo {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {

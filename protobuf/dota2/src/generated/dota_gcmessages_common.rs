@@ -46930,6 +46930,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgLeagueAdminList {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgLeagueAdminList {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCLeagueAdminList;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgDOTAProfileCard {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)

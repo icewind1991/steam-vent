@@ -77271,6 +77271,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgClientSuspended {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgClientSuspended {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCClientSuspended;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgBalancedShuffleLobby {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -77284,6 +77288,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgBalancedShuffleLobby {
         self.compute_size() as usize
     }
 }
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgBalancedShuffleLobby {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCBalancedShuffleLobby;
+}
 impl ::steam_vent_proto_common::RpcMessage for CMsgInitialQuestionnaireResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
         <Self as ::steam_vent_proto_common::protobuf::Message>::parse_from_reader(reader)
@@ -77296,6 +77304,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgInitialQuestionnaireResponse 
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgInitialQuestionnaireResponse {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCInitialQuestionnaireResponse;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgDOTARequestMatchesResponse {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
@@ -78003,6 +78015,10 @@ impl ::steam_vent_proto_common::RpcMessage for CMsgFlipLobbyTeams {
         use ::steam_vent_proto_common::protobuf::Message;
         self.compute_size() as usize
     }
+}
+impl ::steam_vent_proto_common::RpcMessageWithKind for CMsgFlipLobbyTeams {
+    type KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg;
+    const KIND: Self::KindEnum = crate::dota_gcmessages_msgid::EDOTAGCMsg::k_EMsgGCFlipLobbyTeams;
 }
 impl ::steam_vent_proto_common::RpcMessage for CMsgGCLobbyUpdateBroadcastChannelInfo {
     fn parse(reader: &mut dyn std::io::Read) -> ::steam_vent_proto_common::protobuf::Result<Self> {
