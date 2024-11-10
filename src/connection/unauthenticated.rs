@@ -6,6 +6,7 @@ use crate::net::{NetMessageHeader, RawNetMessage};
 use crate::service_method::ServiceMethodRequest;
 use crate::session::{anonymous, login};
 use crate::{Connection, ConnectionError, NetMessage, NetworkError, ServerList};
+use bytes::BytesMut;
 use futures_util::future::{select, Either};
 use futures_util::Stream;
 use futures_util::{FutureExt, Sink};
@@ -27,8 +28,8 @@ impl UnAuthenticatedConnection {
     /// This allows customizing the transport used by the connection. For example to customize the
     /// TLS configuration, use an existing websocket client or use a proxy.
     pub async fn from_sender_receiver<
-        Sender: Sink<RawNetMessage, Error = NetworkError> + Send + 'static,
-        Receiver: Stream<Item = Result<RawNetMessage>> + Send + 'static,
+        Sender: Sink<BytesMut, Error = NetworkError> + Send + 'static,
+        Receiver: Stream<Item = Result<BytesMut>> + Send + 'static,
     >(
         sender: Sender,
         receiver: Receiver,

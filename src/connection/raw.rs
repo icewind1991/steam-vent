@@ -1,12 +1,14 @@
 use super::Result;
 use crate::connection::{ConnectionImpl, MessageFilter, MessageSender};
-use crate::message::EncodableMessage;
+use crate::message::{flatten_multi, EncodableMessage};
 use crate::net::{NetMessageHeader, RawNetMessage};
 use crate::session::{hello, Session};
 use crate::transport::websocket::connect;
 use crate::{ConnectionError, NetworkError, ServerList};
-use futures_util::{Sink, Stream};
+use bytes::BytesMut;
+use futures_util::{Sink, SinkExt, Stream};
 use std::fmt::{Debug, Formatter};
+use std::future::ready;
 use std::sync::Arc;
 use std::time::Duration;
 use steam_vent_proto::steammessages_clientserver_login::CMsgClientHeartBeat;
@@ -14,6 +16,7 @@ use steam_vent_proto::MsgKindEnum;
 use tokio::sync::Mutex;
 use tokio::time::sleep;
 use tokio::{select, spawn};
+use tokio_stream::StreamExt;
 use tokio_util::sync::{CancellationToken, DropGuard};
 use tracing::{debug, error};
 
@@ -40,12 +43,15 @@ impl RawConnection {
     }
 
     pub async fn from_sender_receiver<
-        Sender: Sink<RawNetMessage, Error = NetworkError> + Send + 'static,
-        Receiver: Stream<Item = Result<RawNetMessage>> + Send + 'static,
+        Sender: Sink<BytesMut, Error = NetworkError> + Send + 'static,
+        Receiver: Stream<Item = Result<BytesMut>> + Send + 'static,
     >(
         sender: Sender,
         receiver: Receiver,
     ) -> Result<Self, ConnectionError> {
+        let sender = sender.with(|msg: RawNetMessage| ready(Ok(msg.into_bytes())));
+        let receiver = flatten_multi(receiver.map(|res| res.and_then(RawNetMessage::read)));
+
         let filter = MessageFilter::new(receiver);
         let heartbeat_cancellation_token = CancellationToken::new();
         let mut connection = RawConnection {

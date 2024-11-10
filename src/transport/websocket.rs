@@ -1,11 +1,11 @@
-use crate::message::flatten_multi;
-use crate::net::{NetworkError, RawNetMessage};
+use crate::net::NetworkError;
+use bytes::{Bytes, BytesMut};
 use futures_util::{Sink, SinkExt, StreamExt, TryStreamExt};
 use rustls::{ClientConfig, KeyLogFile, RootCertStore};
 use std::future::ready;
 use std::sync::Arc;
 use tokio_stream::Stream;
-use tokio_tungstenite::tungstenite::Message as WsMessage;
+use tokio_tungstenite::tungstenite::{Message as WsMessage, Message};
 use tokio_tungstenite::{connect_async_tls_with_config, Connector};
 use tracing::{debug, instrument};
 
@@ -15,8 +15,8 @@ type Result<T, E = NetworkError> = std::result::Result<T, E>;
 pub async fn connect(
     addr: &str,
 ) -> Result<(
-    impl Sink<RawNetMessage, Error = NetworkError>,
-    impl Stream<Item = Result<RawNetMessage>>,
+    impl Sink<BytesMut, Error = NetworkError>,
+    impl Stream<Item = Result<BytesMut>>,
 )> {
     rustls::crypto::aws_lc_rs::default_provider()
         .install_default()
@@ -33,12 +33,11 @@ pub async fn connect(
     let (raw_write, raw_read) = stream.split();
 
     Ok((
-        raw_write.with(|msg: RawNetMessage| ready(Ok(WsMessage::binary(msg.into_bytes())))),
-        flatten_multi(
-            raw_read
-                .map_err(NetworkError::from)
-                .map_ok(|raw| raw.into_data())
-                .map(|res| res.and_then(RawNetMessage::read)),
-        ),
+        raw_write.with(|msg: BytesMut| ready(Ok(WsMessage::binary(msg)))),
+        raw_read
+            .map_err(NetworkError::from)
+            .map_ok(Message::into_data)
+            .map_ok(Bytes::from)
+            .map_ok(BytesMut::from),
     ))
 }

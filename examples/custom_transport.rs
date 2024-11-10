@@ -1,12 +1,12 @@
+use bytes::{Bytes, BytesMut};
 use futures_util::{Sink, SinkExt, Stream, StreamExt, TryStreamExt};
 use rustls::{ClientConfig, KeyLogFile, RootCertStore};
 use std::error::Error;
 use std::future::ready;
 use std::sync::Arc;
 use steam_vent::connection::UnAuthenticatedConnection;
-use steam_vent::message::flatten_multi;
-use steam_vent::{NetworkError, RawNetMessage, ServerList};
-use tokio_tungstenite::tungstenite::Message as WsMessage;
+use steam_vent::{NetworkError, ServerList};
+use tokio_tungstenite::tungstenite::{Message as WsMessage, Message};
 use tokio_tungstenite::{connect_async_tls_with_config, Connector};
 
 #[tokio::main]
@@ -27,8 +27,8 @@ pub async fn connect(
     addr: &str,
 ) -> Result<
     (
-        impl Sink<RawNetMessage, Error = NetworkError>,
-        impl Stream<Item = Result<RawNetMessage, NetworkError>>,
+        impl Sink<BytesMut, Error = NetworkError>,
+        impl Stream<Item = Result<BytesMut, NetworkError>>,
     ),
     NetworkError,
 > {
@@ -46,12 +46,11 @@ pub async fn connect(
     let (raw_write, raw_read) = stream.split();
 
     Ok((
-        raw_write.with(|msg: RawNetMessage| ready(Ok(WsMessage::binary(msg.into_bytes())))),
-        flatten_multi(
-            raw_read
-                .map_err(NetworkError::from)
-                .map_ok(|raw| raw.into_data())
-                .map(|res| res.and_then(RawNetMessage::read)),
-        ),
+        raw_write.with(|msg: BytesMut| ready(Ok(WsMessage::binary(msg)))),
+        raw_read
+            .map_err(NetworkError::from)
+            .map_ok(Message::into_data)
+            .map_ok(Bytes::from)
+            .map_ok(BytesMut::from),
     ))
 }

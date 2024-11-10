@@ -173,7 +173,7 @@ impl Read for MaybeZipReader {
 }
 
 /// Flatten any "multi" messages in a stream of raw messages
-pub fn flatten_multi<S: Stream<Item = Result<RawNetMessage, NetworkError>>>(
+pub(crate) fn flatten_multi<S: Stream<Item = Result<RawNetMessage, NetworkError>>>(
     source: S,
 ) -> impl Stream<Item = Result<RawNetMessage, NetworkError>> {
     source.flat_map(|res| match res {
