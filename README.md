@@ -1,3 +1,5 @@
+# Moved to https://codeberg.org/icewind/steam-vent
+
 # Steam-Vent
 
 ### Interact with the Steam network via rust
